@@ -6,9 +6,9 @@ export default function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
+  <Route path="/" element={<Dashboard />} />
+  <Route path="/dashboard" element={<Dashboard />} />
+</Routes>
     </HashRouter>
   );
 }

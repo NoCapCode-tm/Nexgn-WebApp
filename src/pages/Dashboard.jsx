@@ -1,7 +1,8 @@
-import { Search, Bell, UserCircle, Upload } from "lucide-react";
+
 import Sidebar from "../components/Sidebar";
 import StatCard from "../components/StatCard";
 import DocumentRow from "../components/DocumentRow";
+import { Search, Bell, UserCircle, ArrowUpCircle } from "lucide-react";
 
 const stats = [
   { label: "Total Documents", value: "128", trend: "12%", trendUp: true },
@@ -22,56 +23,50 @@ export default function Dashboard() {
   return (
     <div className="layout">
       <Sidebar />
-
       <div className="main">
-        {/* Topbar */}
         <header className="topbar">
-          <div>
-            <h1 className="topbar__title">Dashboard</h1>
-            <p className="topbar__sub">Overview of your document signing activity</p>
-          </div>
-          <div className="topbar__actions">
-            <button className="topbar__icon-btn"><Search size={18} /></button>
-            <button className="topbar__icon-btn"><Bell size={18} /></button>
-            <button className="topbar__icon-btn"><UserCircle size={20} /></button>
-            <button className="topbar__upload">
-              <Upload size={14} />
-              Upload Document
-            </button>
-          </div>
-        </header>
-
-        {/* Stat Cards */}
+  <div className="topbar__top-row">
+    <div className="topbar__icons">
+      <button className="topbar__icon-btn"><Search size={18} color="#FF0915" strokeWidth={1.5} /></button>
+      <button className="topbar__icon-btn"><Bell size={18} color="#FF0915" strokeWidth={1.5} /></button>
+      <button className="topbar__icon-btn"><UserCircle size={20} color="#FF0915" strokeWidth={1.5} /></button>
+    </div>
+  </div>
+  <div className="topbar__bottom-row">
+    <div>
+      <h1 className="topbar__title">Dashboard</h1>
+      <p className="topbar__sub">Overview of your document signing activity</p>
+    </div>
+    <button className="topbar__upload">
+      <ArrowUpCircle size={16} />
+      Upload Document
+    </button>
+  </div>
+</header>
         <section className="stats-grid">
           {stats.map((s) => (
             <StatCard key={s.label} {...s} />
           ))}
         </section>
 
-        {/* Recent Documents */}
         <section className="docs-section">
           <h2 className="docs-section__title">Recent Documents</h2>
-          <div className="table-wrapper">
-            <table className="docs-table">
-              <thead>
-                <tr>
-                  <th>TITLE</th>
-                  <th>NOTE</th>
-                  <th>SIGNERS</th>
-                  <th>SIGNED AT</th>
-                  <th>OWNER</th>
-                  <th>STATUS</th>
-                  <th>ACTION</th>
-                </tr>
-              </thead>
-              <tbody>
-                {documents.map((doc, i) => (
-                  <DocumentRow key={i} {...doc} />
-                ))}
-              </tbody>
-            </table>
+          <div className="docs-table__header">
+            <span>Title</span>
+            <span>Note</span>
+            <span>Signers</span>
+            <span>Signed At</span>
+            <span>Owner</span>
+            <span>Status</span>
+            <span>Action</span>
+          </div>
+          <div className="docs-table">
+            {documents.map((doc, i) => (
+              <DocumentRow key={i} {...doc} />
+            ))}
           </div>
         </section>
+
       </div>
     </div>
   );

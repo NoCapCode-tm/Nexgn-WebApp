@@ -8,23 +8,23 @@ const statusClass = {
 
 export default function DocumentRow({ title, note, signers, signedAt, owner, status }) {
   return (
-    <tr className="doc-row">
-      <td className="doc-row__title">
-        <FileText size={14} className="doc-row__icon" />
+    <div className="doc-row">
+      <div className="doc-row__title">
+        <FileText size={15} className="doc-row__icon" />
         <span>{title}</span>
-      </td>
-      <td className="doc-row__note">{note || "—"}</td>
-      <td>{signers || "—"}</td>
-      <td>{signedAt || "—"}</td>
-      <td>{owner}</td>
-      <td>
+      </div>
+      <div className="doc-row__note">{note || "—"}</div>
+      <div className="doc-row__cell">{signers || "—"}</div>
+      <div className="doc-row__cell">{signedAt || "—"}</div>
+      <div className="doc-row__cell">{owner}</div>
+      <div className="doc-row__cell">
         <span className={`badge ${statusClass[status]}`}>{status}</span>
-      </td>
-      <td>
+      </div>
+      <div className="doc-row__cell">
         <button className="doc-row__menu">
           <MoreHorizontal size={16} />
         </button>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 }
