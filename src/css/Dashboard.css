@@ -29,7 +29,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    SIDEBAR
 ═══════════════════════════════════════ */
 .sidebar {
-  width: 75px;               
+  width: 60px;               
   min-height: unset;
 background: transparent;
   box-shadow: 4px 0 8px rgba(0,0,0,0.08);
@@ -58,7 +58,7 @@ background: transparent;
   border-radius: 0 38px 0 0;
 }
 
-.sidebar--expanded { width: 260px; }
+.sidebar--expanded { width: 200px; }
 
 
 .sidebar__logo {
@@ -178,8 +178,8 @@ background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 75px;
-  min-width: 75px;
+  width: 60px;
+  min-width: 60px;
   flex-shrink: 0;
   padding-left: 0;
 }
