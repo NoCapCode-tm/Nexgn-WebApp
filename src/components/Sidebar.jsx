@@ -70,7 +70,6 @@ const ToggleBtn = ({ expanded }) => (
 );
 
 const navItems = [
-  { icon: HomeIcon,      label: "Home Screen",    path: "/" },
   { icon: UsersIcon,     label: "User Dashboard", path: "/dashboard" },
   { icon: ClipboardIcon, label: "Signers",        path: "/signers" },
   { icon: FileIcon,      label: "Documents",      path: "/documents" },
