@@ -511,11 +511,14 @@ background: transparent;
   position: sticky;
   top: 0;
   z-index: 100;
+  gap: 12px;
 }
 .mobile-topbar__title {
   font-size: 16px;
   font-weight: 600;
   color: #1a1a2e;
+  flex: 1;           /* add this — pushes it left */
+  text-align: left; 
 }
 .mobile-topbar__hamburger {
   background: none;
@@ -647,4 +650,76 @@ background: transparent;
   .doc-row > *:nth-child(5) {
     display: none;
   }
+}
+
+@media (min-width: 769px) and (max-width: 1180px) {
+  .stats-grid {
+    margin-top: 0;
+  }
+  .mobile-page-header { 
+  display: block; 
+  padding: 16px 16px 40px 16px; 
+  border-bottom: 1px solid #CCCCCC;
+  margin: 0 16px;
+}
+  .mobile-topbar .topbar__icon-btn svg {
+    color: #FF0915;
+    filter: drop-shadow(0px 1px 1px rgba(255, 9, 21, 0.4));
+  }
+  /* Show mobile topbar on tablet too */
+  .mobile-topbar { display: flex; }
+  .desktop-topbar { display: none !important; }
+
+  /* Add search icon to tablet topbar */
+  .desktop-sidebar-wrapper { display: none; }
+  .mobile-sidebar-wrapper { display: block; }
+  .mobile-backdrop { display: block; }
+  
+
+  /* Hide CTA buttons on tablet */
+  .mobile-cta-row { display: none; }
+
+  /* 4-col stat grid */
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 16px;
+  }
+
+  .stat-card { min-height: 186px; }
+
+  .main { padding: 0; width: 100%; }
+
+  .docs-section { margin: 0 16px; padding: 16px; }
+
+  /* Show Title, Owner, Status, Action on tablet */
+  .doc-row {
+    grid-template-columns: 2fr 1fr 0.8fr 0.4fr;
+  }
+  .desktop-table-header {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr 0.8fr 0.4fr;
+    padding: 0 16px 8px 16px;
+  }
+  .doc-row > *:nth-child(2),
+  .doc-row > *:nth-child(3),
+  .doc-row > *:nth-child(4) {
+    display: none;
+  }
+  .doc-row > *:nth-child(5),
+  .doc-row > *:nth-child(6),
+  .doc-row > *:nth-child(7) {
+    display: block;
+  }
+  .desktop-table-header span:nth-child(2),
+  .desktop-table-header span:nth-child(3),
+  .desktop-table-header span:nth-child(4) {
+    display: none;
+  }
+  .desktop-table-header span:nth-child(5),
+  .desktop-table-header span:nth-child(6),
+  .desktop-table-header span:nth-child(7) {
+    display: block;
+  }
+
+  .layout { flex-direction: column; overflow-x: hidden; }
 }

@@ -42,15 +42,16 @@ export default function Dashboard() {
       <div className="main">
         {/* Mobile topbar */}
         <header className="mobile-topbar">
-          <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(o => !o)}>
-            <Menu size={22} color="#1a1a2e" />
-          </button>
-          <span className="mobile-topbar__title">Dashboard</span>
-          <div className="mobile-topbar__icons">
-            <button className="topbar__icon-btn"><Bell size={18} color="#000000" strokeWidth={1.5} /></button>
-<button className="topbar__icon-btn"><UserCircle size={20} color="#000000" strokeWidth={1.5} /></button>
-          </div>
-        </header>
+  <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(o => !o)}>
+    <Menu size={22} color="#1a1a2e" />
+  </button>
+  <span className="mobile-topbar__title">Dashboard</span>
+  <div className="mobile-topbar__icons">
+    <button className="topbar__icon-btn"><Search size={18} color="#FF0915" strokeWidth={1.5} /></button>
+<button className="topbar__icon-btn"><Bell size={18} color="#FF0915" strokeWidth={1.5} /></button>
+<button className="topbar__icon-btn"><UserCircle size={20} color="#FF0915" strokeWidth={1.5} /></button>
+  </div>
+</header>
 
         {/* Desktop topbar */}
         <header className="topbar desktop-topbar">
@@ -82,7 +83,6 @@ export default function Dashboard() {
             <button className="mobile-cta mobile-cta--outline">Request Signature</button>
           </div>
         </div>
-        
 
         <section className="stats-grid">
           {stats.map((s) => (
