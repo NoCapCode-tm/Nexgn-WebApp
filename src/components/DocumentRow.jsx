@@ -10,7 +10,7 @@ export default function DocumentRow({ title, note, signers, signedAt, owner, sta
   return (
     <div className="doc-row">
       <div className="doc-row__title">
-        <FileText size={15} className="doc-row__icon" />
+        <FileText size={20} className="doc-row__icon" />
         <span>{title}</span>
       </div>
       <div className="doc-row__note">{note || "—"}</div>

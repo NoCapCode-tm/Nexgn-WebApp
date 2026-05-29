@@ -70,8 +70,7 @@ const ToggleBtn = ({ expanded }) => (
 );
 
 const navItems = [
-  { icon: HomeIcon,      label: "Home Screen",    path: "/" },
-  { icon: UsersIcon,     label: "User Dashboard", path: "/dashboard" },
+  { icon: UsersIcon,     label: "User Dashboard", path: "/" },
   { icon: ClipboardIcon, label: "Signers",        path: "/signers" },
   { icon: FileIcon,      label: "Documents",      path: "/documents" },
   { icon: ContactIcon,   label: "Contact Book",   path: "/contacts" },
@@ -115,10 +114,10 @@ export default function Sidebar() {
       </div>
       <div className="sidebar__inner">
         <div className="sidebar__logo">
-          {expanded
-            ? <img src="/nexgn-logo.png" alt="Nexgn" style={{ width: '184px', height: '56px', objectFit: 'contain' }} />
-            : <NexgnLogo />}
-        </div>
+  {expanded
+    ? <img src="/nexgn-logo.png?v=1" alt="Nexgn" style={{ width: '184px', height: '56px', objectFit: 'contain' }} />
+     : <NexgnLogo />}
+</div>
         <div className="sidebar__divider" />
         <nav className="sidebar__nav">
           {navItems.map(renderItem)}

@@ -1,8 +1,8 @@
-
+import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import StatCard from "../components/StatCard";
 import DocumentRow from "../components/DocumentRow";
-import { Search, Bell, UserCircle, ArrowUpCircle } from "lucide-react";
+import { Search, Bell, UserCircle, ArrowUpCircle, Menu, X } from "lucide-react";
 
 const stats = [
   { label: "Total Documents", value: "128", trend: "12%", trendUp: true },
@@ -20,29 +20,70 @@ const documents = [
 ];
 
 export default function Dashboard() {
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
   return (
     <div className="layout">
-      <Sidebar />
+      {/* Mobile overlay backdrop */}
+      {mobileNavOpen && (
+        <div className="mobile-backdrop" onClick={() => setMobileNavOpen(false)} />
+      )}
+
+      {/* Sidebar — hidden on mobile unless open */}
+      <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? "mobile-sidebar-wrapper--open" : ""}`}>
+        <Sidebar />
+      </div>
+
+      {/* Desktop sidebar */}
+      <div className="desktop-sidebar-wrapper">
+        <Sidebar />
+      </div>
+
       <div className="main">
-        <header className="topbar">
-  <div className="topbar__top-row">
-    <div className="topbar__icons">
-      <button className="topbar__icon-btn"><Search size={18} color="#FF0915" strokeWidth={1.5} /></button>
-      <button className="topbar__icon-btn"><Bell size={18} color="#FF0915" strokeWidth={1.5} /></button>
-      <button className="topbar__icon-btn"><UserCircle size={20} color="#FF0915" strokeWidth={1.5} /></button>
-    </div>
-  </div>
-  <div className="topbar__bottom-row">
-    <div>
-      <h1 className="topbar__title">Dashboard</h1>
-      <p className="topbar__sub">Overview of your document signing activity</p>
-    </div>
-    <button className="topbar__upload">
-      <ArrowUpCircle size={16} />
-      Upload Document
-    </button>
+        {/* Mobile topbar */}
+        <header className="mobile-topbar">
+  <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(o => !o)}>
+    <Menu size={22} color="#1a1a2e" />
+  </button>
+  <span className="mobile-topbar__title">Dashboard</span>
+  <div className="mobile-topbar__icons">
+    <button className="topbar__icon-btn"><Search size={18} color="#FF0915" strokeWidth={1.5} /></button>
+<button className="topbar__icon-btn"><Bell size={18} color="#FF0915" strokeWidth={1.5} /></button>
+<button className="topbar__icon-btn"><UserCircle size={20} color="#FF0915" strokeWidth={1.5} /></button>
   </div>
 </header>
+
+        {/* Desktop topbar */}
+        <header className="topbar desktop-topbar">
+          <div className="topbar__top-row">
+            <div className="topbar__icons">
+              <button className="topbar__icon-btn"><Search size={18} color="#FF0915" strokeWidth={1.5} /></button>
+              <button className="topbar__icon-btn"><Bell size={18} color="#FF0915" strokeWidth={1.5} /></button>
+              <button className="topbar__icon-btn"><UserCircle size={20} color="#FF0915" strokeWidth={1.5} /></button>
+            </div>
+          </div>
+          <div className="topbar__bottom-row">
+            <div>
+              <h1 className="topbar__title">Dashboard</h1>
+              <p className="topbar__sub">Overview of your document signing activity</p>
+            </div>
+            <button className="topbar__upload">
+              <ArrowUpCircle size={16} />
+              Upload Document
+            </button>
+          </div>
+        </header>
+
+        {/* Mobile page title + CTA buttons */}
+        <div className="mobile-page-header">
+          <h1 className="topbar__title">Dashboard</h1>
+          <p className="topbar__sub">Overview of your document signing activity</p>
+          <div className="mobile-cta-row">
+            <button className="mobile-cta mobile-cta--primary">Sign Yourself</button>
+            <button className="mobile-cta mobile-cta--outline">Request Signature</button>
+          </div>
+        </div>
+
         <section className="stats-grid">
           {stats.map((s) => (
             <StatCard key={s.label} {...s} />
@@ -51,7 +92,7 @@ export default function Dashboard() {
 
         <section className="docs-section">
           <h2 className="docs-section__title">Recent Documents</h2>
-          <div className="docs-table__header">
+          <div className="docs-table__header desktop-table-header">
             <span>Title</span>
             <span>Note</span>
             <span>Signers</span>
@@ -66,7 +107,6 @@ export default function Dashboard() {
             ))}
           </div>
         </section>
-
       </div>
     </div>
   );
