@@ -64,7 +64,8 @@ background: transparent;
 .sidebar__logo {
   display: flex;
   align-items: center;
-  padding-left: 16px;
+  padding-left: 0;
+  justify-content: center;
   height: 110px;
   flex-shrink: 0;
   overflow: hidden;
