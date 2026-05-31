@@ -71,7 +71,7 @@ const ToggleBtn = ({ expanded }) => (
 
 const navItems = [
   { icon: UsersIcon,     label: "User Dashboard", path: "/" },
-  { icon: ClipboardIcon, label: "Signers",        path: "/signers" },
+  { icon: ClipboardIcon, label: "Signers", path: "/sign-yourself" },
   { icon: FileIcon,      label: "Documents",      path: "/documents" },
   { icon: ContactIcon,   label: "Contact Book",   path: "/contacts" },
 ];
