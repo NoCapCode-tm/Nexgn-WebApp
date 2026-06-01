@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import StatCard from "../components/StatCard";
 import DocumentRow from "../components/DocumentRow";
 import { Search, Bell, UserCircle, ArrowUpCircle, Menu, X } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
 const stats = [
   { label: "Total Documents", value: "128", trend: "12%", trendUp: true },
@@ -20,8 +21,9 @@ const documents = [
 ];
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
+ 
   return (
     <div className="layout">
       {/* Mobile overlay backdrop */}
@@ -67,7 +69,7 @@ export default function Dashboard() {
               <h1 className="topbar__title">Dashboard</h1>
               <p className="topbar__sub">Overview of your document signing activity</p>
             </div>
-            <button className="topbar__upload">
+            <button className="topbar__upload" onClick={() => navigate('/sign-yourself')}>
               <ArrowUpCircle size={16} />
               Upload Document
             </button>
