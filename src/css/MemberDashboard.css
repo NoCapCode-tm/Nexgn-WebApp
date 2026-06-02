@@ -1,0 +1,26 @@
+/* ==========================================================================
+   MEMBER THEME SCOPED OVERRIDES (1:1 CLONE OF ADMIN STYLE)
+   ========================================================================== */
+
+.member-theme {
+  --member-bg: #fffbfd; /* Same background color as Anaya's layout */
+  background-color: var(--member-bg) !important;
+}
+
+.member-theme.layout {
+  background-color: var(--member-bg) !important;
+}
+
+.member-theme .main {
+  background: var(--member-bg) !important;
+  padding: 24px 28px 24px 28px !important;
+}
+
+.member-theme .topbar {
+  gap: 8px !important;
+}
+
+.member-theme .topbar__sub {
+  margin-top: 2px !important;
+}
+
