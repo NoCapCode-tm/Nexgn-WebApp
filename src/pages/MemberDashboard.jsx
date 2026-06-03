@@ -1,20 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import MemberSidebar from "../components/MemberSidebar";
-import StatCard from "../components/StatCard";
+import MemberTopbar from "../components/MemberTopbar";
+import MemberStatCard from "../components/MemberStatCard";
 import DocumentRow from "../components/DocumentRow";
+import MemberMobileNavbar from "../components/MemberMobileNavbar";
 import { Search, Bell, UserCircle, Menu } from "lucide-react";
 import "../css/MemberDashboard.css"; // Scoped CSS Overrides
-
-const UploadIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    {/* Left half - solid arc */}
-    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-    {/* Right half - dashed arc */}
-    <path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeDasharray="3 3"/>
-    {/* Center arrow pointing up */}
-    <path d="M12 17V7M12 7L7 12M12 7L17 12" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
 
 const stats = [
   {
@@ -28,6 +20,7 @@ const stats = [
     value: "32",
     trend: "8%",
     trendUp: true,
+    trendColor: "green",
   },
   {
     label: "Signed",
@@ -88,10 +81,19 @@ const documents = [
 
 export default function MemberDashboard() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 767);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div className="layout member-theme">
-      {/* Mobile overlay backdrop */}
       {mobileNavOpen && (
         <div
           className="mobile-backdrop"
@@ -100,26 +102,24 @@ export default function MemberDashboard() {
         />
       )}
 
-      {/* Sidebar — hidden on mobile unless open */}
+      {/* Responsive Layout */}
       <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? "mobile-sidebar-wrapper--open" : ""}`}>
         <MemberSidebar />
       </div>
 
-      {/* Desktop sidebar */}
       <div className="desktop-sidebar-wrapper">
         <MemberSidebar />
       </div>
 
-      {/* Main Content Area */}
       <div className="main">
-        {/* Mobile topbar */}
+        {/* Mobile Navigation */}
         <header className="mobile-topbar">
           <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen((o) => !o)}>
             <Menu size={22} color="#1a1a2e" />
           </button>
           <span className="mobile-topbar__title">Dashboard</span>
           <div className="mobile-topbar__icons">
-            <button className="topbar__icon-btn">
+            <button className="topbar__icon-btn mobile-topbar__search-btn">
               <Search size={18} color="#FF0915" strokeWidth={1.5} />
             </button>
             <button className="topbar__icon-btn">
@@ -131,55 +131,30 @@ export default function MemberDashboard() {
           </div>
         </header>
 
-        {/* Desktop topbar */}
-        <header className="topbar desktop-topbar">
-          <div className="topbar__top-row">
-            <div className="topbar__icons">
-              <button className="topbar__icon-btn">
-                <Search size={18} color="#FF0915" strokeWidth={1.5} />
-              </button>
-              <button className="topbar__icon-btn">
-                <Bell size={18} color="#FF0915" strokeWidth={1.5} />
-              </button>
-              <button className="topbar__icon-btn">
-                <UserCircle size={20} color="#FF0915" strokeWidth={1.5} />
-              </button>
-            </div>
-          </div>
-          <div className="topbar__bottom-row">
-            <div>
-              <h1 className="topbar__title">Dashboard</h1>
-              <p className="topbar__sub">Overview of your document signing activity</p>
-            </div>
-            <button className="topbar__upload" onClick={(e) => e.preventDefault()}>
-              <UploadIcon />
-              Upload Document
-            </button>
-          </div>
-        </header>
+        <MemberTopbar />
 
-        {/* Mobile page title + CTA buttons (Identical to Admin layout) */}
         <div className="mobile-page-header">
           <h1 className="topbar__title">Dashboard</h1>
-          <p className="topbar__sub">Overview of your document signing activity</p>
-          <div className="mobile-cta-row">
-            <button className="mobile-cta mobile-cta--primary" onClick={(e) => e.preventDefault()}>
-              Sign Yourself
-            </button>
-            <button className="mobile-cta mobile-cta--outline" onClick={(e) => e.preventDefault()}>
-              Request Signature
-            </button>
-          </div>
+          <p className="topbar__sub">Overview Of your document signing activity</p>
+          <div className="mobile-page-header__divider" />
         </div>
 
-        {/* Stats cards grid */}
         <section className="stats-grid">
-          {stats.map((s) => (
-            <StatCard key={s.label} {...s} />
-          ))}
+          {stats.slice(0, isMobile ? 2 : 4).map((s, idx) => {
+            const displayTrendColor = isMobile && idx === 0 ? "red" : s.trendColor;
+            return <MemberStatCard key={s.label} {...s} trendColor={displayTrendColor} />;
+          })}
         </section>
 
-        {/* Recent Documents list */}
+        <div className="mobile-cta-row">
+          <button className="mobile-cta mobile-cta--primary" onClick={() => navigate("/member-sign-yourself")}>
+            Sign Yourself
+          </button>
+          <button className="mobile-cta mobile-cta--outline" onClick={() => navigate("/member-request-signature")}>
+            Request Signature
+          </button>
+        </div>
+
         <section className="docs-section">
           <h2 className="docs-section__title">Recent Documents</h2>
           <div className="docs-table__header desktop-table-header">
@@ -198,6 +173,7 @@ export default function MemberDashboard() {
           </div>
         </section>
       </div>
+      <MemberMobileNavbar />
     </div>
   );
 }

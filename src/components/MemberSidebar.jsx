@@ -7,14 +7,7 @@ const HomeIcon = ({ color }) => (
   </svg>
 );
 
-const UsersIcon = ({ color }) => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17 21V19C17 17.343 15.657 16 14 16H6C4.343 16 3 17.343 3 19V21" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <circle cx="10" cy="10" r="4" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M23 21V19C22.999 17.657 22.014 16.52 20.7 16.13" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M17 7.13C18.314 7.52 19.3 8.657 19.3 10C19.3 11.343 18.314 12.48 17 12.87" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
+
 
 const ClipboardIcon = ({ color }) => (
   <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,27 +62,38 @@ const ToggleBtn = ({ expanded }) => (
   </svg>
 );
 
+const navItems = [
+  { label: "Dashboard", path: "/member-dashboard", icon: HomeIcon },
+  { label: "Signers", path: "/member-sign-yourself", icon: ClipboardIcon },
+  { label: "Documents", path: "/documents", icon: FileIcon },
+  { label: "Contact Book", path: "/contacts", icon: ContactIcon },
+];
+
+const bottomItems = [
+  { label: "Settings", path: "/settings", icon: SettingsIcon },
+  { label: "Help", path: "/help", icon: HelpIcon },
+];
+
 export default function MemberSidebar() {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(() => {
+    const saved = localStorage.getItem("memberSidebarExpanded");
+    return saved === "true";
+  });
   const location = useLocation();
 
-  const navItems = [
-    { label: "Dashboard", path: "/member-dashboard", icon: HomeIcon },
-    { label: "Signers", path: "/sign-yourself", icon: ClipboardIcon },
-    { label: "Documents", path: "/documents", icon: FileIcon },
-    { label: "Contact Book", path: "/contacts", icon: ContactIcon },
-  ];
-
-  const bottomItems = [
-    { label: "Settings", path: "/settings", icon: SettingsIcon },
-    { label: "Help", path: "/help", icon: HelpIcon },
-  ];
+  const toggleSidebar = () => {
+    setExpanded((prev) => {
+      const next = !prev;
+      localStorage.setItem("memberSidebarExpanded", next);
+      return next;
+    });
+  };
 
   const renderItem = ({ icon: Icon, label, path }) => {
-    const active = location.pathname === path;
+    const active = location.pathname === path || (path === "/member-sign-yourself" && location.pathname === "/member-request-signature");
 
     const handleClick = (e) => {
-      if (path !== "/member-dashboard") {
+      if (path !== "/member-dashboard" && path !== "/member-sign-yourself") {
         e.preventDefault();
       }
     };
@@ -97,7 +101,7 @@ export default function MemberSidebar() {
     return (
       <Link
         key={path}
-        to={path === "/member-dashboard" ? "/member-dashboard" : "#"}
+        to={(path === "/member-dashboard" || path === "/member-sign-yourself") ? path : "#"}
         onClick={handleClick}
         className={`sidebar__item${active ? " sidebar__item--active" : ""}`}
         title={!expanded ? label : undefined}
@@ -117,7 +121,7 @@ export default function MemberSidebar() {
 
   return (
     <aside className={`sidebar ${expanded ? "sidebar--expanded" : ""}`}>
-      <div className="sidebar__toggle" onClick={() => setExpanded(e => !e)}>
+      <div className="sidebar__toggle" onClick={toggleSidebar}>
         <ToggleBtn expanded={expanded} />
       </div>
       <div className="sidebar__inner">
