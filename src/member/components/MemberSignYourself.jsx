@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import MemberSidebar from './MemberSidebar'; 
 import MemberMobileNavbar from './MemberMobileNavbar';
-import '../css/Dashboard.css';
+import '../../admin/css/Dashboard.css';
 import '../css/MemberSignYourself.css';
 
 export default function MemberSignYourself() {
@@ -17,6 +17,7 @@ export default function MemberSignYourself() {
   const [note, setNote] = useState('');
   const [required, setRequired] = useState(true);
   const [fieldType, setFieldType] = useState('Signature');
+  const [assignedTo, setAssignedTo] = useState('You');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -29,14 +30,6 @@ export default function MemberSignYourself() {
   ]);
   const [fieldAssignedTo, setFieldAssignedTo] = useState("Fresher / Freelancer / Intern");
 
-  // iPad Pro 11" Responsive Modals & Editor States
-  const [showSelectModal, setShowSelectModal] = useState(false);
-  const [activeDocSize, setActiveDocSize] = useState('NDA');
-  const [activeDocType, setActiveDocType] = useState('NDA');
-  const [isEditing, setIsEditing] = useState(false);
-  const [showSignatureModal, setShowSignatureModal] = useState(false);
-  const [signatureApplied, setSignatureApplied] = useState(false);
-  const [activeSigTab, setActiveSigTab] = useState('Draw');
 
   const handleTabChange = (tab) => {
     navigate(tab === 'request' ? '/member-request-signature' : '/member-sign-yourself');
@@ -74,7 +67,7 @@ export default function MemberSignYourself() {
       <div className="section-label">Upload Document (PDF Only)</div>
       <div
         className="upload-zone"
-        onClick={() => setShowSelectModal(true)}
+        onClick={() => fileInputRef.current.click()}
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => {
           e.preventDefault();
@@ -514,6 +507,8 @@ export default function MemberSignYourself() {
                   <input
                     type="text"
                     className="assigned-input"
+                    value={assignedTo}
+                    onChange={e => setAssignedTo(e.target.value)}
                     placeholder="You"
                   />
                 </div>

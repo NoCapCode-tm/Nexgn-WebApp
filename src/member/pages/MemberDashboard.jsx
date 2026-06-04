@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MemberSidebar from "../components/MemberSidebar";
 import MemberTopbar from "../components/MemberTopbar";
 import MemberStatCard from "../components/MemberStatCard";
-import DocumentRow from "../components/DocumentRow";
+import DocumentRow from "../../admin/components/DocumentRow";
 import MemberMobileNavbar from "../components/MemberMobileNavbar";
 import { Search, Bell, UserCircle, Menu } from "lucide-react";
 import "../css/MemberDashboard.css"; // Scoped CSS Overrides
