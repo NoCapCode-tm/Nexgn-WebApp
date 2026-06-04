@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.nexgn.com/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/features</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/pricing</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/security</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/api</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/help-center</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/about</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/contact</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/early-access</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/login</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/signup</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/blog</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/digital-signature-platform</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/sign-documents-online</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/e-signature-software</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/compare/adobe-sign</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/compare/docu-sign</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.nexgn.com/compare/opensign</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>
