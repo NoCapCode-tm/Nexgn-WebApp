@@ -44,7 +44,7 @@
 }
 
 .tab-btn--active {
-  background: linear-gradient(to bottom, #FF0915, #960101);
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   color: #ffffff;
 }
 
@@ -108,7 +108,7 @@
 .btn-create {
   height: 38px;
   padding: 0 22px;
-  background: linear-gradient(to bottom, #FF0915, #960101);
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   color: #fff;
   border-radius: 8px;
   font-size: 13px;
@@ -121,7 +121,7 @@
 }
 
 .btn-create:hover {
-  background: linear-gradient(to bottom, #960101, #960101);
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
 
 /* ── OR DIVIDER ── */
@@ -400,7 +400,7 @@
 }
 
 .toggle input:checked + .toggle-slider {
-  background: #FF0915;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
 
 .toggle input:checked + .toggle-slider::before {
@@ -433,7 +433,7 @@
 .btn-share {
   width: 100%;
   height: 36px;
-  background: linear-gradient(to bottom, #FF0915, #960101);
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   color: #fff;
   border-radius: 8px;
   font-size: 13px;
@@ -446,7 +446,7 @@
 }
 
 .btn-share:hover {
-  background: linear-gradient(to bottom, #960101, #960101);
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
 
 /* ── RESPONSIVE ── */
@@ -516,7 +516,7 @@
 
 /* Active/Inactive tab solid red matching Figma */
 .member-theme .tab-btn--active {
-  background: #E30613 !important;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
   color: #ffffff !important;
 }
 
@@ -539,13 +539,12 @@
 
 .roles-row .btn-create {
   height: 38px;
-  background: #E30613 !important;
-  transition: opacity 0.15s;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
+  transition: background 0.15s;
 }
 
 .roles-row .btn-create:hover {
-  opacity: 0.9;
-  background: #E30613 !important;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
 }
 
 /* Input calendar icons */
@@ -620,8 +619,8 @@
 }
 
 .btn-add-signer:hover {
-  border-color: #E30613;
-  color: #E30613;
+  border-color: #FF0915;
+  color: #FF0915;
 }
 
 /* Read only properties inputs */
@@ -642,12 +641,12 @@
 }
 
 .field-props .btn-share {
-  background: #E30613 !important;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
+  transition: background 0.15s;
 }
 
 .field-props .btn-share:hover {
-  opacity: 0.9;
-  background: #E30613 !important;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
 }
 
 /* Bottom section desktop scaling to match Figma */
@@ -708,16 +707,16 @@
   background: #FFEBEB;
   border: 1px solid #FFD1D1;
   border-radius: 50%;
-  color: #E30613;
+  color: #FF0915;
   cursor: pointer;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
   padding: 0;
 }
 
 .btn-remove-signer:hover {
-  background: #E30613;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   color: #FFFFFF;
-  border-color: #E30613;
+  border-color: #FF0915;
 }
 
 .remove-placeholder {

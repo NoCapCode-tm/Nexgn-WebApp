@@ -108,7 +108,7 @@ export default function MemberSignYourself() {
       <div className="main">
         {/* Mobile Navigation */}
         <header className="mobile-topbar">
-          <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(o => !o)}>
+          <button className="mobile-topbar__hamburger" onClick={() => {}}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" strokeWidth="2" strokeLinecap="round">
               <line x1="3" y1="6" x2="21" y2="6"/>
               <line x1="3" y1="12" x2="21" y2="12"/>
