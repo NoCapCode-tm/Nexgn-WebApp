@@ -1,0 +1,336 @@
+/* CreateSignatureRequest.css
+   Only styles new to this page — 
+   shared styles come from Dashboard.css + SignYourself.css */
+
+/* ── ROLES ROW: System Roles + Assigned To + Create ── */
+.csr-roles-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 152px;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.csr-roles-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* shared select wrapper */
+.csr-select-wrap {
+  position: relative;
+}
+
+.csr-select {
+  width: 100%;
+  height: 38px;
+  border: 1px solid #CCCCCC;
+  border-radius: 7px;
+  padding: 0 32px 0 12px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  color: #8A949F;
+  background: #fff;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.csr-select:focus {
+  border-color: #FF0915;
+}
+
+.csr-select-chevron {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #8A949F;
+}
+
+/* Create CTA button — 152×35px, radius 7px, padding 10px 26px */
+.csr-create-btn {
+  height: 35px;
+  padding: 0 26px;
+  background: linear-gradient(to bottom, #FF0915, #960101);
+  color: #fff;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+  align-self: flex-end;
+}
+
+.csr-create-btn:hover {
+  background: linear-gradient(to bottom, #960101, #960101);
+}
+
+/* ── UPLOAD ZONE — 1221×92px, border 1px #CCCCCC, radius 7px ── */
+.csr-upload-zone {
+  width: 100%;
+  height: 92px;
+  border: 1px dashed #CCCCCC;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #8A949F;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.csr-upload-zone:hover {
+  border-color: #FF0915;
+  background: #fff5f5;
+  color: #FF0915;
+}
+
+/* ── DOCUMENT TITLE + EXPIRES IN ROW ── */
+/* Doc title: 861×60, Expires In: 312×60 */
+.csr-title-row {
+  display: grid;
+  grid-template-columns: 1fr 312px;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.csr-title-field {
+  flex: 1;
+}
+
+.csr-expires-field {
+  width: 312px;
+  flex-shrink: 0;
+}
+
+/* Shared input for this page — height 60px, border #CCCCCC, radius 7px */
+.csr-input {
+  height: 38px;
+  width: 100%;
+  border: 1px solid #CCCCCC;
+  border-radius: 7px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  color: #8A949F;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.csr-input:focus {
+  border-color: #FF0915;
+  color: #1a1a2e;
+}
+
+.csr-input::placeholder {
+  color: #C4C9CE;
+}
+
+/* Expires In wrapper with calendar icon */
+.csr-expires-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  border: 1px solid #CCCCCC;
+  border-radius: 7px;
+  padding: 0 12px;
+  background: #fff;
+  transition: border-color 0.15s;
+}
+
+.csr-expires-wrap:focus-within {
+  border-color: #FF0915;
+}
+
+.csr-expires-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  color: #8A949F;
+  background: transparent;
+}
+
+.csr-expires-input::placeholder {
+  color: #C4C9CE;
+}
+
+/* ── SIGNER DETAILS BOX — border 1px #CCCCCC, radius 7px ── */
+.csr-signer-box {
+  border: 1px solid #CCCCCC;
+  border-radius: 7px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #fff;
+}
+
+.csr-signer-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.csr-signer-name,
+.csr-signer-email {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.csr-sub-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+/* Signer N badge */
+.csr-signer-badge {
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid #CCCCCC;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8A949F;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  background: #fff;
+  align-self: flex-end;
+}
+
+/* + Add Another Signer */
+.csr-add-signer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8A949F;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.15s;
+  align-self: flex-start;
+}
+
+.csr-add-signer:hover {
+  color: #FF0915;
+}
+
+/* ── NOTE TEXTAREA ── */
+.csr-textarea {
+  width: 100%;
+  height: 72px;
+  border: 1px solid #CCCCCC;
+  border-radius: 7px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  color: #8A949F;
+  background: #fff;
+  outline: none;
+  resize: none;
+  transition: border-color 0.15s;
+}
+
+.csr-textarea:focus {
+  border-color: #FF0915;
+  color: #1a1a2e;
+}
+
+.csr-textarea::placeholder {
+  color: #C4C9CE;
+}
+
+/* ── ASSIGNED TO dropdown in Field Properties ── */
+.csr-assigned-wrap {
+  position: relative;
+}
+
+.csr-assigned-select {
+  width: 100%;
+  height: 32px;
+  border: 1px solid #E4E4E4;
+  border-radius: 7px;
+  padding: 0 28px 0 10px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  color: #8A949F;
+  background: #fff;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.csr-assigned-select:focus {
+  border-color: #FF0915;
+}
+
+.csr-assigned-chevron {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #8A949F;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .csr-roles-row {
+    grid-template-columns: 1fr;
+  }
+
+  .csr-create-btn {
+    width: 100%;
+    height: 38px;
+  }
+
+  .csr-title-row {
+    grid-template-columns: 1fr;
+  }
+
+  .csr-expires-field {
+    width: 100%;
+  }
+
+  .csr-signer-row {
+    grid-template-columns: 1fr;
+  }
+
+  .csr-signer-badge {
+    align-self: flex-start;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1180px) {
+  .csr-roles-row {
+    grid-template-columns: 1fr 1fr auto;
+  }
+
+  .csr-title-row {
+    grid-template-columns: 1fr 240px;
+  }
+
+  .csr-expires-field {
+    width: 240px;
+  }
+}
