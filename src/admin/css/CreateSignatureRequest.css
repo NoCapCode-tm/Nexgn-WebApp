@@ -334,3 +334,13 @@
     width: 240px;
   }
 }
+.csr-input,
+.csr-expires-wrap,
+.csr-textarea,
+.csr-signer-box,
+.assigned-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: 0 4px 8px rgba(204, 204, 204, 0.4);
+}
