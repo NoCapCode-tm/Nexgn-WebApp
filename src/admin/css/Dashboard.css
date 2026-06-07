@@ -362,10 +362,10 @@ background: transparent;
 }
 
 .docs-section {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 20px 24px;
-  border: 1px solid #f0f0f0;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  border: none;
   flex: 1;
 }
 

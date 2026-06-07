@@ -97,7 +97,7 @@ export default function Documents() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
-                Add Document
+                Add Contact
               </button>
             </div>
           </div>
@@ -111,16 +111,16 @@ export default function Documents() {
         </div>
 
         {/* Table */}
+        <div className="docs-table__header">
+          <span>TITLE</span>
+          <span>NOTE</span>
+          <span>SIGNERS</span>
+          <span>SIGNED AT</span>
+          <span>OWNER</span>
+          <span>STATUS</span>
+          <span>Action</span>
+        </div>
         <div className="docs-section">
-          <div className="docs-table__header">
-            <span>TITLE</span>
-            <span>NOTE</span>
-            <span>SIGNERS</span>
-            <span>SIGNED AT</span>
-            <span>OWNER</span>
-            <span>STATUS</span>
-            <span>Action</span>
-          </div>
           <div className="docs-table">
             {filtered.map(doc => (
               <div className="doc-row" key={doc.id}>
@@ -139,7 +139,9 @@ export default function Documents() {
                 </div>
                 <div className="doc-row__menu">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/>
+                    <circle cx="5" cy="12" r="1"/>
+<circle cx="12" cy="12" r="1"/>
+<circle cx="19" cy="12" r="1"/>
                   </svg>
                 </div>
               </div>
