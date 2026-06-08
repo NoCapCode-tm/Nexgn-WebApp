@@ -1,31 +1,74 @@
+// App.jsx
+
 import { HashRouter, Routes, Route } from "react-router-dom";
 
-// Admin
+/* =========================
+   ADMIN MODULE
+========================= */
 import Dashboard from "./admin/pages/Dashboard";
 import SignYourself from "./admin/components/SignYourself";
-import "./admin/css/Dashboard.css";
 
-// Member
+/* =========================
+   MEMBER MODULE
+========================= */
 import MemberDashboard from "./member/pages/MemberDashboard";
 import MemberSignYourself from "./member/components/MemberSignYourself";
+
+/* =========================
+   COMING SOON MODULE
+========================= */
+import ComingSoonPage from "./comingSoon/pages/ComingSoonPage";
 
 export default function App() {
   return (
     <HashRouter>
       <Routes>
 
-        {/* ================= ADMIN ROUTES ================= */}
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/sign-yourself" element={<SignYourself />} />
+        {/* =====================================
+            COMING SOON (PUBLIC LANDING PAGE)
+        ===================================== */}
 
-        {/* ================= MEMBER ROUTES ================= */}
-        <Route path="/member-dashboard" element={<MemberDashboard />} />
-        <Route path="/member-sign-yourself" element={<MemberSignYourself />} />
+        {/* Change this to Dashboard if needed */}
+        <Route path="/" element={<ComingSoonPage />} />
+
+        <Route path="/coming-soon" element={<ComingSoonPage />} />
+
+        {/* =====================================
+            ADMIN ROUTES
+        ===================================== */}
+
+        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route
+          path="/sign-yourself"
+          element={<SignYourself />}
+        />
+
+        {/* =====================================
+            MEMBER ROUTES
+        ===================================== */}
+
+        <Route
+          path="/member-dashboard"
+          element={<MemberDashboard />}
+        />
+
+        <Route
+          path="/member-sign-yourself"
+          element={<MemberSignYourself />}
+        />
+
         <Route
           path="/member-request-signature"
           element={<MemberSignYourself />}
         />
+
+        {/* =====================================
+            FALLBACK ROUTE
+        ===================================== */}
+
+        {/* Optional */}
+        <Route path="*" element={<ComingSoonPage />} />
 
       </Routes>
     </HashRouter>
