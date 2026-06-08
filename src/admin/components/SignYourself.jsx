@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import Sidebar from './Sidebar'; 
 import '../css/Dashboard.css';
 import '../css/SignYourself.css';
-
+import { useNavigate } from 'react-router-dom';
 export default function SignYourself() {
   const [activeTab, setActiveTab] = useState('sign');
   const [zoom, setZoom] = useState(100);
@@ -13,7 +13,7 @@ export default function SignYourself() {
   const [fieldType, setFieldType] = useState('Signature');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const fileInputRef = useRef(null);
-  
+  const navigate = useNavigate();
   function handleFile(e) {
     const file = e.target.files[0];
     if (file) setUploadedFile(file.name);
@@ -314,7 +314,48 @@ export default function SignYourself() {
         </div>{/* /setup-card */}
 
       </div>{/* /main */}
-    </div>
-
+{/* Mobile Bottom Nav */}
+<nav className="mobile-bottom-nav">
+  <button className="mobile-bottom-nav__item" onClick={() => navigate('/')}>
+    <span className="mobile-bottom-nav__icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 12 15 12 15 21"/>
+      </svg>
+    </span>
+    <span>Dashboard</span>
+  </button>
+  <button className="mobile-bottom-nav__item" onClick={() => navigate('/sign-yourself')}>
+    <svg width="22" height="22" viewBox="0 0 24 25" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M15 2.06641H9C8.44772 2.06641 8 2.52905 8 3.09974V5.16641C8 5.7371 8.44772 6.19974 9 6.19974H15C15.5523 6.19974 16 5.7371 16 5.16641V3.09974C16 2.52905 15.5523 2.06641 15 2.06641Z"/>
+      <path d="M16 4.13281H18C18.5304 4.13281 19.0391 4.35055 19.4142 4.73813C19.7893 5.1257 20 5.65137 20 6.19948V20.6661C20 21.2143 19.7893 21.7399 19.4142 22.1275C19.0391 22.5151 18.5304 22.7328 18 22.7328H6C5.46957 22.7328 4.96086 22.5151 4.58579 22.1275C4.21071 21.7399 4 21.2143 4 20.6661V6.19948C4 5.65137 4.21071 5.1257 4.58579 4.73813C4.96086 4.35055 5.46957 4.13281 6 4.13281H8"/>
+    </svg>
+    <span>Signers</span>
+  </button>
+  <button className="mobile-bottom-nav__item mobile-bottom-nav__item--active" onClick={() => navigate('/sign-yourself')}>
+    <span className="mobile-bottom-nav__icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 22C5.46957 22 4.96086 21.7893 4.58579 21.4142C4.21071 21.0391 4 20.5304 4 20V4C4 3.46957 4.21071 2.96086 4.58579 2.58579C4.96086 2.21072 5.46957 2 6 2H14C14.3166 1.99949 14.6301 2.06161 14.9225 2.18277C15.215 2.30394 15.4806 2.48176 15.704 2.706L19.292 6.294C19.5168 6.51751 19.6952 6.78335 19.8167 7.07616C19.9382 7.36898 20.0005 7.68297 20 8V20C20 20.5304 19.7893 21.0391 19.4142 21.4142C19.0391 21.7893 18.5304 22 18 22H6Z"/>
+        <path d="M14 2V7C14 7.26522 14.1054 7.51957 14.2929 7.70711C14.4804 7.89464 14.7348 8 15 8H20"/>
+      </svg>
+    </span>
+    <span>Documents</span>
+  </button>
+  <button className="mobile-bottom-nav__item" onClick={() => navigate('/contacts')}>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 2V4"/><path d="M7 22V20C7 19.4696 7.21071 18.9609 7.58579 18.5858C7.96086 18.2107 8.46957 18 9 18H15C15.5304 18 16.0391 18.2107 16.4142 18.5858C16.7893 18.9609 17 19.4696 17 20V22"/>
+      <path d="M8 2V4"/>
+      <path d="M12 14C13.6569 14 15 12.6569 15 11C15 9.34315 13.6569 8 12 8C10.3431 8 9 9.34315 9 11C9 12.6569 10.3431 14 12 14Z"/>
+      <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z"/>
+    </svg>
+    <span>Contacts</span>
+  </button>
+  <button className="mobile-bottom-nav__item" onClick={() => navigate('/settings')}>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+    </svg>
+    <span>Settings</span>
+  </button>
+</nav>
+</div>
   );
 }
