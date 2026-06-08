@@ -14,24 +14,15 @@ import SignYourself from "./admin/components/SignYourself";
 import MemberDashboard from "./member/pages/MemberDashboard";
 import MemberSignYourself from "./member/components/MemberSignYourself";
 
-/* =========================
-   COMING SOON MODULE
-========================= */
-import ComingSoonPage from "./comingSoon/pages/ComingSoonPage";
+
 
 export default function App() {
   return (
     <HashRouter>
       <Routes>
 
-        {/* =====================================
-            COMING SOON (PUBLIC LANDING PAGE)
-        ===================================== */}
-
         {/* Change this to Dashboard if needed */}
-        <Route path="/" element={<ComingSoonPage />} />
-
-        <Route path="/coming-soon" element={<ComingSoonPage />} />
+        <Route path="/" element={<Dashboard />} />
 
         {/* =====================================
             ADMIN ROUTES
@@ -68,7 +59,7 @@ export default function App() {
         ===================================== */}
 
         {/* Optional */}
-        <Route path="*" element={<ComingSoonPage />} />
+        <Route path="*" element={<Dashboard />} />
 
       </Routes>
     </HashRouter>
