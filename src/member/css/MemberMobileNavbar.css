@@ -51,7 +51,7 @@
   .member-mobile-navbar__item--active .member-mobile-navbar__icon-wrap {
     width: 64px;
     height: 64px;
-    background: linear-gradient(135deg, #FF0915, #960101);
+    background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
     color: #ffffff;
     box-shadow: 0 4px 12px rgba(255, 9, 21, 0.2);
     transform: translateY(-22px); /* Shift up to pop out of the top of the navbar */

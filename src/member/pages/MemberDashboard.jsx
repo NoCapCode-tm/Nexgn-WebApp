@@ -114,7 +114,7 @@ export default function MemberDashboard() {
       <div className="main">
         {/* Mobile Navigation */}
         <header className="mobile-topbar">
-          <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen((o) => !o)}>
+          <button className="mobile-topbar__hamburger" onClick={() => {}}>
             <Menu size={22} color="#1a1a2e" />
           </button>
           <span className="mobile-topbar__title">Dashboard</span>
