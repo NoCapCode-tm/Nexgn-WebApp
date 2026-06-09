@@ -10,6 +10,7 @@ import "./admin/css/Dashboard.css";
 /* MEMBER MODULE */
 import MemberDashboard from "./member/pages/MemberDashboard";
 import MemberSignYourself from "./member/components/MemberSignYourself";
+import MemberDocuments from "./member/pages/MemberDocuments";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
 
         {/* MEMBER ROUTES */}
         <Route path="/member-dashboard" element={<MemberDashboard />} />
+        <Route path="/member-documents" element={<MemberDocuments />} />
         <Route path="/member-sign-yourself" element={<MemberSignYourself />} />
         <Route
           path="/member-request-signature"
