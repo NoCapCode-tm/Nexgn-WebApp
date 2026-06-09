@@ -41,7 +41,7 @@ const SettingsIcon = ({ color, size = 22 }) => (
 const navItems = [
   { label: "Dashboard", path: "/member-dashboard", icon: HomeIcon },
   { label: "Signers", path: "/member-sign-yourself", icon: ClipboardIcon },
-  { label: "Documents", path: "/documents", icon: FileIcon },
+  { label: "Documents", path: "/member-documents", icon: FileIcon },
   { label: "Contacts", path: "/contacts", icon: ContactIcon },
   { label: "Settings", path: "/settings", icon: SettingsIcon },
 ];
@@ -59,7 +59,7 @@ export default function MemberMobileNavbar() {
         const Icon = item.icon;
 
         const handleClick = (e) => {
-          if (item.path !== "/member-dashboard" && item.path !== "/member-sign-yourself") {
+          if (item.path !== "/member-dashboard" && item.path !== "/member-sign-yourself" && item.path !== "/member-documents") {
             e.preventDefault();
           }
         };
@@ -69,7 +69,7 @@ export default function MemberMobileNavbar() {
         return (
           <Link
             key={item.path}
-            to={(item.path === "/member-dashboard" || item.path === "/member-sign-yourself") ? item.path : "#"}
+            to={(item.path === "/member-dashboard" || item.path === "/member-sign-yourself" || item.path === "/member-documents") ? item.path : "#"}
             onClick={handleClick}
             className={`member-mobile-navbar__item ${isActive ? "member-mobile-navbar__item--active" : ""}`}
           >

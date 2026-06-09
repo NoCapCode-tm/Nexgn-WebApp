@@ -6,6 +6,9 @@ const HomeIcon = ({ color }) => (
     <path d="M3 9.5L12 3L21 9.5V20C21 20.552 20.552 21 20 21H15V15H9V21H4C3.448 21 3 20.552 3 20V9.5Z" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
+
+
+
 const ClipboardIcon = ({ color }) => (
   <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M20 4.166H12.5C11.81 4.166 11.25 4.745 11.25 5.458V8.041C11.25 8.755 11.81 9.333 12.5 9.333H20C20.69 9.333 21.25 8.755 21.25 8.041V5.458C21.25 4.745 20.69 4.166 20 4.166Z" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -62,7 +65,7 @@ const ToggleBtn = ({ expanded }) => (
 const navItems = [
   { label: "Dashboard", path: "/member-dashboard", icon: HomeIcon },
   { label: "Signers", path: "/member-sign-yourself", icon: ClipboardIcon },
-  { label: "Documents", path: "/documents", icon: FileIcon },
+  { label: "Documents", path: "/member-documents", icon: FileIcon },
   { label: "Contact Book", path: "/contacts", icon: ContactIcon },
 ];
 
@@ -90,7 +93,7 @@ export default function MemberSidebar() {
     const active = location.pathname === path || (path === "/member-sign-yourself" && location.pathname === "/member-request-signature");
 
     const handleClick = (e) => {
-      if (path !== "/member-dashboard" && path !== "/member-sign-yourself") {
+      if (path !== "/member-dashboard" && path !== "/member-sign-yourself" && path !== "/member-documents") {
         e.preventDefault();
       }
     };
@@ -98,7 +101,7 @@ export default function MemberSidebar() {
     return (
       <Link
         key={path}
-        to={(path === "/member-dashboard" || path === "/member-sign-yourself") ? path : "#"}
+        to={(path === "/member-dashboard" || path === "/member-sign-yourself" || path === "/member-documents") ? path : "#"}
         onClick={handleClick}
         className={`sidebar__item${active ? " sidebar__item--active" : ""}`}
         title={!expanded ? label : undefined}
