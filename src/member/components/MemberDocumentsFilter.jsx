@@ -1,5 +1,3 @@
-import { Search } from "lucide-react";
-
 export default function MemberDocumentsFilter({ search, setSearch }) {
   return (
     <div className="member-docs-topbar-actions">
