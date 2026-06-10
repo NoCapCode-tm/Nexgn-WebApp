@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 /* ADMIN MODULE */
 import Dashboard from "./admin/pages/Dashboard";
@@ -14,7 +14,7 @@ import MemberDocuments from "./member/pages/MemberDocuments";
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dashboard />} />
 
@@ -35,6 +35,6 @@ export default function App() {
 
         <Route path="*" element={<Dashboard />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }

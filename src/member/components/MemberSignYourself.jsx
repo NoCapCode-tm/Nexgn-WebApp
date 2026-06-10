@@ -94,7 +94,7 @@ export default function MemberSignYourself() {
   );
 
   return (
-    <div className="layout member-theme">
+    <div className="layout member-theme member-sign-yourself-page">
       {mobileNavOpen && (
         <div className="mobile-backdrop" onClick={() => setMobileNavOpen(false)} />
       )}
@@ -108,14 +108,18 @@ export default function MemberSignYourself() {
       <div className="main">
         {/* Mobile Navigation */}
         <header className="mobile-topbar">
-          <button className="mobile-topbar__hamburger" onClick={() => {}}>
+          <button className="mobile-topbar__hamburger" onClick={() => {
+            if (window.innerWidth >= 768) {
+              setMobileNavOpen(true);
+            }
+          }}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" strokeWidth="2" strokeLinecap="round">
               <line x1="3" y1="6" x2="21" y2="6"/>
               <line x1="3" y1="12" x2="21" y2="12"/>
               <line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
           </button>
-          <span className="mobile-topbar__title">Dashboard</span>
+          <span className="mobile-topbar__title">Signers</span>
           <div className="mobile-topbar__icons">
             <button className="topbar__icon-btn mobile-topbar__search-btn" onClick={(e) => e.preventDefault()}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF0915" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -145,6 +149,7 @@ export default function MemberSignYourself() {
             {activeTab === 'sign' ? 'Create and sign a document where you are the signer' : 'Send a document for signing or sign it yourself'}
           </p>
         </div>
+        <hr className="mobile-header-divider" />
 
         <div className="topbar desktop-topbar">
           <div className="topbar__top-row">
@@ -183,10 +188,27 @@ export default function MemberSignYourself() {
           </div>
         </div>
 
+        {/* MOBILE TABS */}
+        <div className="mobile-tabs-container">
+          <button
+            className={`tab-btn ${activeTab === 'sign' ? 'tab-btn--active' : 'tab-btn--inactive'}`}
+            onClick={() => handleTabChange('sign')}
+          >
+            Sign Yourself
+          </button>
+          <button
+            className={`tab-btn ${activeTab === 'request' ? 'tab-btn--active' : 'tab-btn--inactive'}`}
+            onClick={() => handleTabChange('request')}
+          >
+            Request Signature
+          </button>
+        </div>
+
         <div className="setup-card">
+          <div className="setup-card-top">
           <div className="setup-card__header">
             <span className="setup-card__title">Document Setup</span>
-            <div className="setup-card__tabs">
+            <div className="setup-card__tabs setup-card__tabs--desktop-only">
               <button
                 className={`tab-btn ${activeTab === 'sign' ? 'tab-btn--active' : 'tab-btn--inactive'}`}
                 onClick={() => handleTabChange('sign')}
@@ -221,7 +243,14 @@ export default function MemberSignYourself() {
                       <polyline points="9 18 15 12 9 6"/>
                     </svg>
                   </div>
-                  <button className="btn-create" onClick={(e) => e.preventDefault()}>Create</button>
+                  <button className="btn-create" onClick={(e) => e.preventDefault()}>
+                    <span className="btn-create-text">Create</span>
+                    <svg className="btn-create-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="17 8 12 3 7 8"/>
+                      <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                  </button>
                 </div>
               </div>
 
@@ -302,7 +331,14 @@ export default function MemberSignYourself() {
                     </svg>
                   </div>
                 </div>
-                <button className="btn-create" onClick={(e) => e.preventDefault()}>Create</button>
+                <button className="btn-create" onClick={(e) => e.preventDefault()}>
+                  <span className="btn-create-text">Create</span>
+                  <svg className="btn-create-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                </button>
               </div>
 
               <div className="or-divider">OR</div>
@@ -425,6 +461,7 @@ export default function MemberSignYourself() {
               </div>
             </>
           )}
+          </div>
 
           <div className="bottom-section">
             <div className="doc-preview">
