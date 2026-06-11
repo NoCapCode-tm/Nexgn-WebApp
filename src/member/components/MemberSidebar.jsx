@@ -66,7 +66,7 @@ const navItems = [
   { label: "Dashboard", path: "/member-dashboard", icon: HomeIcon },
   { label: "Signers", path: "/member-sign-yourself", icon: ClipboardIcon },
   { label: "Documents", path: "/member-documents", icon: FileIcon },
-  { label: "Contact Book", path: "/contacts", icon: ContactIcon },
+  { label: "Contact Book", path: "/member-contact-book", icon: ContactIcon },
 ];
 
 const bottomItems = [
@@ -93,7 +93,7 @@ export default function MemberSidebar() {
     const active = location.pathname === path || (path === "/member-sign-yourself" && location.pathname === "/member-request-signature");
 
     const handleClick = (e) => {
-      if (path !== "/member-dashboard" && path !== "/member-sign-yourself" && path !== "/member-documents") {
+      if (path !== "/member-dashboard" && path !== "/member-sign-yourself" && path !== "/member-documents" && path !== "/member-contact-book") {
         e.preventDefault();
       }
     };
@@ -101,7 +101,7 @@ export default function MemberSidebar() {
     return (
       <Link
         key={path}
-        to={(path === "/member-dashboard" || path === "/member-sign-yourself" || path === "/member-documents") ? path : "#"}
+        to={(path === "/member-dashboard" || path === "/member-sign-yourself" || path === "/member-documents" || path === "/member-contact-book") ? path : "#"}
         onClick={handleClick}
         className={`sidebar__item${active ? " sidebar__item--active" : ""}`}
         title={!expanded ? label : undefined}

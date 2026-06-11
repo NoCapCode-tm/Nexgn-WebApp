@@ -11,6 +11,7 @@ import "./admin/css/Dashboard.css";
 import MemberDashboard from "./member/pages/MemberDashboard";
 import MemberSignYourself from "./member/components/MemberSignYourself";
 import MemberDocuments from "./member/pages/MemberDocuments";
+import MemberContactBook from "./member/pages/MemberContactBook";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/documents" element={<Documents />} />
 
         {/* MEMBER ROUTES */}
+        <Route path="/member" element={<MemberDashboard />} />
         <Route path="/member-dashboard" element={<MemberDashboard />} />
         <Route path="/member-documents" element={<MemberDocuments />} />
         <Route path="/member-sign-yourself" element={<MemberSignYourself />} />
@@ -32,6 +34,7 @@ export default function App() {
           path="/member-request-signature"
           element={<MemberSignYourself />}
         />
+        <Route path="/member-contact-book" element={<MemberContactBook />} />
 
         <Route path="*" element={<Dashboard />} />
       </Routes>

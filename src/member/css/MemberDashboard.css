@@ -357,4 +357,7 @@
   .member-theme .mobile-cta-row {
     display: none !important;
   }
+  .member-theme .topbar__icons {
+    gap: 24px !important;
+  }
 }
