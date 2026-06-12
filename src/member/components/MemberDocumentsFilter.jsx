@@ -1,10 +1,13 @@
+import { Search } from "lucide-react";
+
 export default function MemberDocumentsFilter({ search, setSearch }) {
   return (
     <div className="member-docs-topbar-actions">
       <div className="member-docs-search-wrap">
+        <Search size={16} color="#9ca3af" strokeWidth={2} />
         <input
           className="member-docs-search-input"
-          placeholder="Search"
+          placeholder="Search Documents"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />

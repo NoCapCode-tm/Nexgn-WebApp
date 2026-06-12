@@ -14,7 +14,7 @@
   height: 36px;
   border: 1px solid #E4E4E4;
   border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(138,148,159,0.4), 0 2px 4px rgba(138,148,159,0.2);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.2s, transform 0.2s;
   padding: 0 12px;
   background: #fff;
@@ -22,7 +22,7 @@
 }
 
 .member-docs-search-wrap:hover {
-  box-shadow: 0 6px 16px rgba(138,148,159,0.5), 0 3px 6px rgba(138,148,159,0.3);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
 
@@ -52,7 +52,7 @@
   padding: 0 14px;
   border: 1px solid #E4E4E4;
   border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(138, 148, 159, 0.5), 0 2px 4px rgba(138, 148, 159, 0.3);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.2s, transform 0.2s;
   background: #fff;
   font-size: 12px;
@@ -63,7 +63,7 @@
 }
 
 .member-docs-filter-btn:hover {
-  box-shadow: 0 6px 16px rgba(138, 148, 159, 0.6), 0 3px 6px rgba(138, 148, 159, 0.4);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
 
@@ -78,10 +78,10 @@
   gap: 6px;
   height: 36px;
   padding: 0 16px;
-  background: linear-gradient(to bottom, #FF0915, #960101);
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   color: #fff;
   border-radius: 20px;
-  box-shadow: 0 6px 16px rgba(255,9,21,0.45), 0 3px 6px rgba(255,9,21,0.3), 0 1px 0px rgba(255,255,255,0.15) inset;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.2s, transform 0.2s;
   font-size: 12px;
   font-weight: 600;
@@ -92,13 +92,13 @@
 }
 
 .member-docs-add-btn:hover {
-  background: linear-gradient(to bottom, #960101, #960101);
-  box-shadow: 0 8px 20px rgba(255,9,21,0.55), 0 4px 8px rgba(255,9,21,0.35);
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
 
 .member-docs-add-btn:active {
-  box-shadow: 0 2px 6px rgba(255,9,21,0.3);
+  box-shadow: none;
   transform: translateY(1px);
 }
 
@@ -593,7 +593,7 @@
     height: 42px !important;
     border-radius: 21px !important;
     padding: 0 14px !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.10) !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
   }
   .member-docs-search-input {
     font-size: 13px !important;
@@ -608,7 +608,7 @@
     justify-content: center !important;
     align-items: center !important;
     border-radius: 50% !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.10) !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
   }
   .filter-text {
     display: none !important;
@@ -723,6 +723,9 @@
   .member-docs-table__header span:nth-child(2) {
     display: none !important;
   }
+  .member-docs-table__header span:last-child {
+    justify-self: center !important;
+  }
 
   /* ─────────────────────────────────────────────────────────────────
      8. TABLE ROWS — taller, properly padded cards
@@ -794,6 +797,227 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    border-radius: 6px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    justify-self: center !important;
+    position: static !important;
+    transform: none !important;
+  }
+  .member-doc-row__menu:hover {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    border-radius: 6px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    justify-self: center !important;
+    position: static !important;
+    transform: none !important;
+  }
+
+  /* Hide mobile-only elements */
+  .mobile-status-corner,
+  .mobile-only-icon,
+  .mobile-lbl,
+  .mobile-owner-badge {
+    display: none !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     11. STATUS BADGES
+     ───────────────────────────────────────────────────────────────── */
+  .member-badge {
+    padding: 6px 14px !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    width: auto !important;
+    height: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    text-align: center !important;
+    color: #8A949F !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    border: none !important;
+    /* Underline sits only under the tab's own 1/3 section — not wider */
+    border-bottom: 2px solid transparent !important;
+    padding: 14px 0 16px 0 !important;
+    height: auto !important;
+    transition: color 0.15s !important;
+    /* Prevent underline from bleeding — each tab is exactly 1/3 */
+    box-sizing: border-box !important;
+  }
+  .member-docs-tab--active {
+    color: #E22A2A !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #E22A2A !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     6. TABLE SECTION WRAPPER
+        — aligned with header/tabs (40px side margins)
+        — extra top gap from tabs to header row
+     ───────────────────────────────────────────────────────────────── */
+  .member-docs-section {
+    width: auto !important;
+    padding: 0 40px !important;
+    flex: 1 !important;
+    margin: 0 !important;
+  }
+  .member-docs-table {
+    width: 100% !important;
+    /* Increased breathing room between tabs and header row */
+    padding: 40px 0 32px 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     7. TABLE HEADER — rebalanced columns per Figma
+        TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
+     ───────────────────────────────────────────────────────────────── */
+  .member-docs-table__header {
+    width: 100% !important;
+    display: grid !important;
+    /*
+     * SAME grid as .member-doc-row — guarantees column alignment.
+     * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
+     */
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
+    /*
+     * ROOT CAUSE FIX: .member-docs-table__header is OUTSIDE .member-docs-section.
+     * .member-docs-section has padding: 0 40px
+     * .member-doc-row (inside section) has padding: 0 20px
+     * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
+     * Header must use 60px padding to match that exact X position.
+     */
+    padding: 0 60px 14px 60px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.7px !important;
+    color: #374151 !important;
+    text-transform: uppercase !important;
+    margin: 0 !important;
+    background: transparent !important;
+    box-sizing: border-box !important;
+  }
+  /* Hide the NOTE column header */
+  .member-docs-table__header span:nth-child(2) {
+    display: none !important;
+  }
+  .member-docs-table__header span:last-child {
+    justify-self: center !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     8. TABLE ROWS — taller, properly padded cards
+     ───────────────────────────────────────────────────────────────── */
+  .member-doc-row {
+    width: 100% !important;
+    min-height: 72px !important;
+    height: auto !important;
+    display: grid !important;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
+    grid-template-rows: 1fr !important;
+    margin: 0 0 14px 0 !important;
+    padding: 0 20px !important;
+    border-radius: 14px !important;
+    border: 1px solid #E4E4E4 !important;
+    background: #ffffff !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+  .member-doc-row:hover {
+    background: #fafafa !important;
+  }
+
+  /* Hide NOTE cell — not in Figma tablet view */
+  .member-doc-row__note {
+    display: none !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     9. TITLE COLUMN — ellipsis on overflow
+     ───────────────────────────────────────────────────────────────── */
+  .member-doc-row__title {
+    min-width: 0 !important;
+    max-width: none !important;
+    padding-left: 0 !important;
+    gap: 10px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .member-doc-row__title span {
+    display: block !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #111827 !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     10. ROW CELLS — restore desktop-style rendering
+     ───────────────────────────────────────────────────────────────── */
+  .member-doc-row__cell {
+    font-size: 13px !important;
+    color: #8A949F !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    min-width: 0 !important;
+  }
+
+  /* Show desktop elements */
+  .desktop-val { display: block !important; }
+  .desktop-status { display: flex !important; }
+  .member-doc-row__menu {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    border-radius: 6px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    justify-self: center !important;
+    position: static !important;
+    transform: none !important;
+  }
+  .member-doc-row__menu:hover {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    border-radius: 6px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    justify-self: center !important;
+    position: static !important;
+    transform: none !important;
   }
 
   /* Hide mobile-only elements */
@@ -821,4 +1045,35 @@
   }
 }
 
+/* Desktop-only overrides for Action Button alignment */
+@media (min-width: 1181px) {
+  /* Center the ACTION header to align perfectly with the button below it */
+  .member-docs-page .member-docs-table__header span:last-child {
+    justify-self: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
 
+  .member-docs-page .member-doc-row__menu {
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    justify-self: center !important; /* Centers the button in the ACTION column */
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
+  }
+
+  /* Dropdown/hover menu positioning relative to action button */
+  .member-docs-page .member-doc-row__menu .action-menu,
+  .member-docs-page .member-doc-row__menu .dropdown-menu {
+    position: absolute !important;
+    right: 0 !important;
+    left: auto !important;
+    top: 100% !important;
+  }
+}

@@ -1,0 +1,902 @@
+
+/* ── TOPBAR ACTIONS (search + filter + add) ── */
+.member-contact-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.member-contact-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
+  padding: 0 12px;
+  background: #fff;
+  width: 200px;
+}
+
+.member-contact-search-wrap:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.member-contact-search-wrap:focus-within {
+  border-color: #FF0915;
+}
+
+.member-contact-search-input {
+  border: none;
+  outline: none;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  color: #1a1a2e;
+  background: transparent;
+  width: 100%;
+}
+
+.member-contact-search-input::placeholder {
+  color: #9ca3af;
+}
+
+.member-contact-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+}
+
+.member-contact-filter-btn:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.member-contact-filter-btn:active {
+  box-shadow: 0 1px 4px rgba(138, 148, 159, 0.3);
+  transform: translateY(1px);
+}
+
+.member-contact-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.member-contact-add-btn:hover {
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.member-contact-add-btn:active {
+  box-shadow: none;
+  transform: translateY(1px);
+}
+
+.add-btn-short {
+  display: none;
+}
+
+
+/* ── TABLE SECTION ── */
+.member-contact-section {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.member-contact-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+
+/* Contact Card Layout */
+.member-contact-card {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: 0 20px;
+  border: 1px solid #E4E4E4;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  gap: 16px;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+}
+
+.member-contact-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.member-contact-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #F9F5F3;
+  flex-shrink: 0;
+}
+
+.member-contact-card__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.member-contact-card__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.member-contact-card__email {
+  font-size: 14px;
+  color: #6B7280;
+  line-height: 1.4;
+}
+
+/* Hide mobile-specific elements on desktop by default */
+.member-contact-card__more {
+  display: none;
+}
+.mobile-total-contacts-card {
+  display: none;
+}
+
+/* ── RESPONSIVE OVERRIDES (Exact match to MemberDocuments) ── */
+
+@media (max-width: 768px) {
+  /* Action row mobile */
+  .member-contact-topbar-actions { 
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .member-contact-search-wrap {
+    flex: 1;
+    max-width: none;
+    border-radius: 20px;
+    border: 1px solid #E4E4E4;
+    padding-left: 12px;
+  }
+  .member-contact-search-input::placeholder {
+    font-size: 13px;
+  }
+  
+  /* Mobile Header Spacing */
+  .mobile-page-header {
+    padding: 16px 16px 0 16px;
+  }
+  .mobile-page-header .topbar__bottom-row {
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  .mobile-page-header .topbar__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 4px;
+  }
+  .mobile-page-header .topbar__sub {
+    font-size: 12px;
+    color: #6B7280;
+  }
+  .mobile-header-divider {
+    border: none;
+    border-top: 1px solid #E4E4E4;
+    margin: 12px 0 16px 0;
+  }
+  .mobile-filter-row {
+    margin-bottom: 16px;
+  }
+  .member-contact-filter-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #E4E4E4;
+    background: #fff;
+    padding: 0;
+    justify-content: center;
+  }
+  .member-contact-filter-btn .filter-text { display: none; }
+  .member-contact-add-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #E22A2A !important;
+    color: #fff;
+    padding: 0;
+    justify-content: center;
+    border: none;
+  }
+  .member-contact-add-btn .add-btn-full { display: none; }
+
+  /* Mobile section spacing */
+  .member-contact-table {
+    padding: 0 16px 120px 16px; /* 120px to clear bottom nav */
+    gap: 12px;
+  }
+
+  /* Override contact card for mobile */
+  .member-contact-card {
+    height: auto;
+    padding: 16px;
+    gap: 14px;
+    border-radius: 8px;
+    justify-content: space-between;
+  }
+  .member-contact-card__avatar {
+    width: 36px;
+    height: 36px;
+  }
+  .member-contact-card__info {
+    flex: 1;
+    gap: 2px;
+  }
+  .member-contact-card__name {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+  .member-contact-card__email {
+    font-size: 12px;
+  }
+  .member-contact-card__more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Total Contacts Summary Card */
+  .mobile-total-contacts-card {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    gap: 16px;
+    margin-top: 4px;
+  }
+  .mobile-total-contacts-card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #E22A2A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .mobile-total-contacts-card__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .mobile-total-contacts-card__label {
+    font-size: 12px;
+    color: #9ca3af;
+    font-weight: 500;
+  }
+  .mobile-total-contacts-card__value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+  }
+  .mobile-total-contacts-card__chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+}
+
+@media (min-width: 1181px) {
+
+
+  /* Desktop section spacing */
+  .member-contact-section {
+    width: auto !important;
+    padding: 0 !important;
+    flex: 1 !important;
+    margin: 0 !important;
+  }
+  .member-contact-table {
+    width: 100% !important;
+    /* Member Documents table uses 40px 0 32px 0 */
+    padding: 40px 0 32px 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important; /* using 14px gap to match Member Documents gap exactly */
+  }
+
+  .member-contact-card {
+    max-width: calc(100% - 250px) !important;
+  }
+}
+
+/* ── ADD CONTACT MODAL ── */
+.add-contact-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-right: 40px;
+  padding-top: 60px; /* Move both modals slightly upward */
+}
+
+.add-contact-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 700px;
+  padding: 36px 56px 200px 56px; /* Intermediate padding */
+  max-height: 85vh;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.add-contact-heading {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #E4E4E4;
+  margin-bottom: 12px;
+}
+
+.add-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 40px;
+}
+
+.add-contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.add-contact-field label {
+  font-size: 13px;
+  color: #505050;
+  font-weight: 500;
+}
+
+.add-contact-field input {
+  height: 32px;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #1a1a2e;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.add-contact-field input:focus {
+  border-color: #FF0915;
+}
+
+.add-contact-field.empty-cell {
+  visibility: hidden;
+}
+
+/* Hide mobile-specific add-contact elements on desktop by default */
+.mobile-add-contact-back {
+  display: none;
+}
+.mobile-add-contact-save {
+  display: none;
+}
+.mobile-contact-links {
+  display: none;
+}
+
+/* ── CONTACT DETAILS MODAL ── */
+.contact-details-modal {
+  padding-top: 20px;
+  overflow: hidden;
+  max-height: 88vh;
+}
+
+.contact-details-header {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.contact-details-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+  background: #E4E4E4;
+  flex-shrink: 0;
+}
+
+.contact-details-info-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-details-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.contact-details-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.contact-details-edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: #FFDCDC;
+  color: #e11d48;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.contact-details-status-row {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.contact-status-badge {
+  padding: 4px 12px;
+  background: #E6F7EC;
+  color: #55a86a;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.contact-role {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.contact-quick-info {
+  display: flex;
+  gap: 80px;
+}
+
+.quick-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quick-info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.quick-info-label {
+  font-weight: 600;
+  color: #1a1a2e;
+  width: 120px; /* Increased width to add horizontal spacing */
+}
+
+.quick-info-val {
+  color: #6b7280;
+}
+
+.contact-details-card {
+  border: 1px solid #E4E4E4;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.contact-details-card-header {
+  padding: 8px 16px;
+  border-bottom: 1px solid #E4E4E4;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.contact-details-card-body {
+  padding: 12px 16px;
+}
+
+.contact-detail-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-detail-field label {
+  font-size: 10px;
+  font-weight: 500;
+  color: #505050;
+}
+
+.contact-detail-field .detail-val {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 8px;
+}
+
+.skills-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.skill-pill {
+  padding: 4px 10px;
+  background: #f3f4f6;
+  color: #9ca3af;
+  font-size: 10px;
+  border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+  .add-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .add-contact-field.empty-cell {
+    display: none;
+  }
+
+  /* ── MOBILE ADD CONTACT FORM OVERRIDES ── */
+  .add-contact-modal-overlay {
+    background: #FAFAFA !important;
+    padding: 0 !important;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .add-contact-modal {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    border-radius: 0;
+    padding: 16px !important;
+    background: #FAFAFA;
+    box-shadow: none;
+    overflow-y: auto;
+  }
+
+  .mobile-add-contact-back {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+
+  .add-contact-section {
+    background: #ffffff;
+    border: 1px solid #E4E4E4;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  }
+
+  .add-contact-section--prof {
+    margin-top: 0 !important;
+  }
+
+  .add-contact-heading {
+    border-bottom: 1px solid #E4E4E4;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    font-size: 13px;
+  }
+
+  .add-contact-field-full {
+    grid-column: 1 / -1;
+  }
+
+  .add-contact-field label {
+    font-size: 12px;
+  }
+
+  .add-contact-field input {
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .mobile-add-contact-save {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+    margin-bottom: 40px;
+  }
+
+  .mobile-add-contact-save-btn {
+    width: 80%;
+    max-width: 300px;
+    height: 48px;
+    background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* ── MOBILE CONTACT DETAILS MODAL OVERRIDES ── */
+  .contact-details-modal {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    border-radius: 0;
+    padding: 16px !important;
+    background: #FAFAFA !important;
+    box-shadow: none;
+    overflow-y: auto;
+  }
+
+  .contact-details-header {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .contact-details-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .contact-details-title-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .contact-details-status-row {
+    margin-bottom: 8px;
+    gap: 12px;
+  }
+
+  .contact-quick-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .desktop-quick-info-col {
+    display: none;
+  }
+
+  .mobile-contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .contact-details-card {
+    background: #ffffff;
+    border: 1px solid #E4E4E4;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  }
+
+  .contact-details-card-header {
+    padding: 12px 16px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1180px) {
+
+  /* ─────────────────────────────────────────────────────────────────
+     1. HIDE DESKTOP TOPBAR ON TABLET
+     ───────────────────────────────────────────────────────────────── */
+  .member-contact-page .desktop-topbar {
+    display: none !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     2. HEADER LAYOUT (mobile-page-header)
+     ───────────────────────────────────────────────────────────────── */
+  .member-contact-page .mobile-page-header {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    padding: 24px 40px 0 40px !important;
+    gap: 0 24px !important;
+    border-bottom: none !important;
+    margin: 0 !important;
+  }
+
+  .member-contact-page .mobile-page-header .topbar__bottom-row {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+    margin: 0 !important;
+  }
+
+  .member-contact-page .mobile-page-header .mobile-filter-row {
+    grid-row: 1 !important;
+    grid-column: 2 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .member-contact-page .mobile-header-divider {
+    grid-row: 2 !important;
+    grid-column: 1 / -1 !important;
+    display: block !important;
+    width: calc(100% + 80px) !important;
+    margin: 20px -40px 0 -40px !important;
+    border: none !important;
+    border-bottom: 1px solid #E4E4E4 !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     3. TITLE TYPOGRAPHY (Match Figma)
+     ───────────────────────────────────────────────────────────────── */
+  .member-contact-page .topbar__title {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+  }
+  .member-contact-page .topbar__sub {
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: #8A949F !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     4. ACTION CONTROLS
+     ───────────────────────────────────────────────────────────────── */
+  .member-contact-topbar-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .member-contact-search-wrap {
+    width: 210px !important;
+    height: 42px !important;
+    border-radius: 21px !important;
+    padding: 0 14px !important;
+    border: none !important;
+    background: #fff !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+  }
+  .member-contact-search-input {
+    font-size: 13px !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .member-contact-filter-btn {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    border: none !important;
+    background: #fff !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+  }
+  .member-contact-filter-btn .filter-text {
+    display: none !important;
+  }
+
+  .member-contact-add-btn {
+    width: 88px !important;
+    height: 44px !important;
+    border-radius: 22px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    border: none !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+  }
+  .member-contact-add-btn .add-btn-short {
+    display: inline !important;
+  }
+  .member-contact-add-btn .add-btn-full {
+    display: none !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     5. TABLE AND CARDS
+     ───────────────────────────────────────────────────────────────── */
+  .member-contact-table {
+    padding: 32px 40px !important;
+    gap: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .member-contact-card {
+    height: auto !important;
+    padding: 20px 24px !important;
+    max-width: 100% !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     6. MODAL OVERRIDES
+     ───────────────────────────────────────────────────────────────── */
+  .add-contact-modal-overlay {
+    justify-content: center !important;
+    padding: 60px 24px 24px 24px !important;
+  }
+
+  .add-contact-modal {
+    padding-bottom: 36px !important;
+  }
+
+}
