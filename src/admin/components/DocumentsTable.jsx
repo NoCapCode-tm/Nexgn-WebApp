@@ -1,9 +1,9 @@
-import MemberDocumentsRow from "./MemberDocumentsRow";
+import DocumentsRow from "./DocumentsRow";
 
-export default function MemberDocumentsTable({ documents }) {
+export default function DocumentsTable({ documents }) {
   return (
     <>
-      <div className="member-docs-table__header">
+      <div className="admin-docs-table__header">
         <span>TITLE</span>
         <span>NOTE</span>
         <span>SIGNERS</span>
@@ -13,13 +13,13 @@ export default function MemberDocumentsTable({ documents }) {
         <span>Action</span>
       </div>
       
-      <div className="member-docs-section">
-        <div className="member-docs-table">
+      <div className="admin-docs-section">
+        <div className="admin-docs-table">
           {documents.map((doc, idx) => (
-            <MemberDocumentsRow key={idx} {...doc} />
+            <DocumentsRow key={idx} {...doc} />
           ))}
           {documents.length === 0 && (
-            <div className="member-docs-empty-state">
+            <div className="admin-docs-empty-state">
               No documents found.
             </div>
           )}

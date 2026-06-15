@@ -1,6 +1,6 @@
 import React from "react";
 import { Mail, Phone, Pencil, ChevronLeft } from "lucide-react";
-import "../css/MemberContactBook.css";
+import "../css/ContactBook.css";
 
 export default function ContactDetailsModal({ contact, onClose }) {
   if (!contact) return null;
@@ -69,7 +69,7 @@ export default function ContactDetailsModal({ contact, onClose }) {
         <div className="contact-details-card">
           <div className="contact-details-card-header">Personal Information</div>
           <div className="contact-details-card-body">
-            <div className="add-contact-grid member-add-contact-grid--gap">
+            <div className="add-contact-grid admin-add-contact-grid--gap">
               <div className="contact-detail-field">
                 <label>Full Name</label>
                 <div className="detail-val">{contact.name}</div>
@@ -95,10 +95,10 @@ export default function ContactDetailsModal({ contact, onClose }) {
         </div>
 
         {/* Professional Information */}
-        <div className="contact-details-card member-contact-details-card--mt">
+        <div className="contact-details-card admin-contact-details-card--mt">
           <div className="contact-details-card-header">Professional Information</div>
           <div className="contact-details-card-body">
-            <div className="add-contact-grid member-add-contact-grid--gap">
+            <div className="add-contact-grid admin-add-contact-grid--gap">
               <div className="contact-detail-field">
                 <label>Company Name</label>
                 <div className="detail-val">Acme Corp</div>
@@ -121,7 +121,7 @@ export default function ContactDetailsModal({ contact, onClose }) {
               </div>
             </div>
             
-            <div className="contact-detail-field add-contact-field-full member-contact-field-full--mt">
+            <div className="contact-detail-field add-contact-field-full admin-contact-field-full--mt">
               <label>Skills</label>
               <div className="skills-row">
                 <span className="skill-pill">Contract Review</span>

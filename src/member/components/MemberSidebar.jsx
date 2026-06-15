@@ -54,7 +54,7 @@ const NexgnLogo = () => (
 
 const ToggleBtn = ({ expanded }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-    style={{ transform: expanded ? "none" : "rotate(180deg)", transition: "transform 0.22s" }}>
+    className={`member-sidebar__toggle-icon ${expanded ? '' : 'member-sidebar__toggle-icon--collapsed'}`}>
     <rect width="24" height="24" rx="12" fill="white"/>
     <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" stroke="#8A949F" strokeOpacity="0.58"/>
     <path d="M14.679 17.212L9.345 11.878L14.679 6.545" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -111,7 +111,7 @@ export default function MemberSidebar() {
           <Icon color={active ? "#FF0915" : "#8A949F"} />
         </span>
         {expanded && (
-          <span className="sidebar__item-label" style={{ color: active ? "#FF0915" : "#8A949F" }}>
+          <span className={`sidebar__item-label ${active ? 'member-sidebar__item-label--active' : 'member-sidebar__item-label--inactive'}`}>
             {label}
           </span>
         )}
@@ -130,7 +130,7 @@ export default function MemberSidebar() {
             <img
               src="/nexgn-logo.png?v=1"
               alt="Nexgn"
-              style={{ width: '184px', height: '56px', objectFit: 'contain' }}
+              className="member-sidebar__logo-img"
             />
           ) : (
             <NexgnLogo />

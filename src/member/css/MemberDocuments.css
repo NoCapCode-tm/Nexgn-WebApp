@@ -1,6 +1,6 @@
 /* src/member/css/MemberDocuments.css */
 
-/* ── TOPBAR ACTIONS (search + filter + add) ── */
+/* â”€â”€ TOPBAR ACTIONS (search + filter + add) â”€â”€ */
 .member-docs-topbar-actions {
   display: flex;
   align-items: center;
@@ -11,14 +11,14 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 200px;
   height: 36px;
+  padding: 0 12px;
+  background: #fff;
   border: 1px solid #E4E4E4;
   border-radius: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.2s, transform 0.2s;
-  padding: 0 12px;
-  background: #fff;
-  width: 200px;
 }
 
 .member-docs-search-wrap:hover {
@@ -31,13 +31,13 @@
 }
 
 .member-docs-search-input {
-  border: none;
-  outline: none;
-  font-size: 12px;
+  width: 100%;
   font-family: 'Inter', sans-serif;
+  font-size: 12px;
   color: #1a1a2e;
   background: transparent;
-  width: 100%;
+  border: none;
+  outline: none;
 }
 
 .member-docs-search-input::placeholder {
@@ -50,15 +50,15 @@
   gap: 6px;
   height: 36px;
   padding: 0 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  background: #fff;
   border: 1px solid #E4E4E4;
   border-radius: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.2s, transform 0.2s;
-  background: #fff;
-  font-size: 12px;
-  font-weight: 500;
-  color: #6b7280;
-  font-family: 'Inter', sans-serif;
   cursor: pointer;
 }
 
@@ -78,17 +78,17 @@
   gap: 6px;
   height: 36px;
   padding: 0 16px;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
   color: #fff;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  border: none;
   border-radius: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.2s, transform 0.2s;
-  font-size: 12px;
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  border: none;
   cursor: pointer;
-  white-space: nowrap;
 }
 
 .member-docs-add-btn:hover {
@@ -102,11 +102,11 @@
   transform: translateY(1px);
 }
 
-.add-btn-short {
+.member-docs-add-btn-short {
   display: none;
 }
 
-/* ── TABS ── */
+/* â”€â”€ TABS â”€â”€ */
 .member-docs-tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -116,19 +116,19 @@
 
 .member-docs-tab {
   height: 37px;
-  text-align: center;
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
   color: #9ca3af;
   background: none;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-  transition: color 0.15s, border-color 0.15s;
-  white-space: nowrap;
-  
-  /* Apply full-width bottom border to each individual section */
   border: none;
   border-bottom: 2px solid #E4E4E4;
+  transition: color 0.15s, border-color 0.15s;
+  cursor: pointer;
+
+  /* Apply full-width bottom border to each individual section */
 }
 
 .member-docs-tab:hover {
@@ -136,17 +136,17 @@
 }
 
 .member-docs-tab--active {
-  color: #FF0915;
   font-weight: 600;
+  color: #FF0915;
   border-bottom-color: #FF0915;
 }
 
-/* ── TABLE ── */
+/* â”€â”€ TABLE â”€â”€ */
 .member-docs-section {
+  flex: 1;
+  padding: 0;
   background: transparent;
   border-radius: 0;
-  padding: 0;
-  flex: 1;
 }
 
 .member-docs-table__header {
@@ -155,12 +155,12 @@
   padding: 10px 16px;
   font-size: 11px;
   font-weight: 600;
-  color: #1a1a2e;
-  letter-spacing: 0.5px;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #1a1a2e;
+  background: transparent;
   border: none;
   border-bottom: none;
-  background: transparent;
 }
 
 .member-docs-table {
@@ -172,13 +172,13 @@
 
 .member-doc-row {
   display: grid;
-  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
   align-items: center;
-  padding: 0 16px;
+  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
   height: 60px;
-  background: #ffffff;
+  padding: 0 16px;
   font-size: 13px;
   color: #8A949F;
+  background: #ffffff;
   border: 1px solid #E4E4E4;
   border-radius: 16px;
   transition: background 0.12s;
@@ -197,52 +197,52 @@
 }
 
 .member-doc-row__icon {
-  flex-shrink: 0;
   color: #FF0915;
+  flex-shrink: 0;
 }
 
 .member-doc-row__note {
+  padding-right: 12px;
+  font-size: 12px;
+  white-space: nowrap;
   color: #8A949F;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-right: 12px;
-  font-size: 12px;
 }
 
 .member-doc-row__cell {
-  color: #8A949F;
   font-size: 12px;
+  color: #8A949F;
 }
 
 .member-doc-row__menu {
-  color: #9ca3af;
-  padding: 4px;
-  border-radius: 4px;
   display: flex;
   align-items: center;
+  padding: 4px;
+  color: #9ca3af;
+  border-radius: 4px;
   cursor: pointer;
 }
 
 .member-doc-row__menu:hover {
-  background: #f3f4f6;
   color: #374151;
+  background: #f3f4f6;
 }
 
-/* ── BADGES ── */
+/* â”€â”€ BADGES â”€â”€ */
 .member-badge {
   display: inline-block;
   padding: 3px 12px;
-  border-radius: 4px;
   font-size: 11px;
   font-weight: 400;
+  border-radius: 4px;
 }
 
-.member-badge--pending  { background: #FEF5E0; color: #D28E56; }
-.member-badge--signed   { background: #E6F7EC; color: #559B6F; }
-.member-badge--expired  { background: #FFDCDC; color: #E22A2A; }
+.member-badge--pending  { color: #D28E56; background: #FEF5E0; }
+.member-badge--signed   { color: #559B6F; background: #E6F7EC; }
+.member-badge--expired  { color: #E22A2A; background: #FFDCDC; }
 
-/* ── FIGMA MOBILE OVERRIDES (Hidden on Desktop/Tablet) ── */
+/* â”€â”€ FIGMA MOBILE OVERRIDES (Hidden on Desktop/Tablet) â”€â”€ */
 .mobile-status-corner,
 .mobile-only-icon,
 .mobile-lbl,
@@ -255,14 +255,14 @@
   display: block;
 }
 
-/* ── RESPONSIVE ── */
+/* â”€â”€ RESPONSIVE â”€â”€ */
 @media (max-width: 768px) {
   .member-docs-page .mobile-page-header .topbar__bottom-row {
     flex-direction: column;
     align-items: stretch;
     gap: 16px;
   }
-  .member-docs-topbar-actions { 
+  .member-docs-topbar-actions {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -271,72 +271,72 @@
   .member-docs-search-wrap {
     flex: 1;
     max-width: none;
-    border-radius: 20px;
-    border: 1px solid #E4E4E4;
     padding-left: 12px;
+    border: 1px solid #E4E4E4;
+    border-radius: 20px;
   }
   .member-docs-search-input::placeholder {
     font-size: 13px;
   }
   .member-docs-filter-btn {
+    justify-content: center;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    border: 1px solid #E4E4E4;
-    background: #fff;
     padding: 0;
-    justify-content: center;
+    background: #fff;
+    border: 1px solid #E4E4E4;
+    border-radius: 50%;
   }
   .member-docs-filter-btn .filter-text { display: none; }
   .member-docs-add-btn {
+    justify-content: center;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    background: #E22A2A;
-    color: #fff;
     padding: 0;
-    justify-content: center;
+    color: #fff;
+    background: #E22A2A;
     border: none;
+    border-radius: 50%;
   }
   .member-docs-add-btn .add-btn-full { display: none; }
 
   /* --- Tabs Styling (Figma) --- */
   .member-docs-tabs {
-    padding: 0 16px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    border-bottom: none;
     gap: 16px;
     margin-bottom: 16px;
+    padding: 0 16px;
+    border-bottom: none;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
   .member-docs-tab {
     padding: 8px 24px;
-    border-radius: 12px;
     font-size: 13px;
     color: #8A949F;
     border: none !important;
+    border-radius: 12px;
   }
   .member-docs-tab--active {
-    background: #E22A2A;
-    color: #ffffff !important;
     font-weight: 500;
+    color: #ffffff !important;
+    background: #E22A2A;
   }
 
   /* --- Section Title --- */
   .member-docs-mobile-section-title {
     display: block;
+    margin-bottom: 24px;
+    padding: 0 16px;
     font-size: 14px;
     font-weight: 600;
     color: #111827;
-    padding: 0 16px;
-    margin-bottom: 24px;
   }
-  
+
   .mobile-header-divider {
+    width: 100%;
+    margin: 16px 0;
     border: none;
     border-bottom: 1px solid #e5e7eb;
-    margin: 16px 0;
-    width: 100%;
   }
 
   /* --- Table Header --- */
@@ -344,27 +344,27 @@
     display: none;
   }
   .member-docs-table {
-    padding: 0 16px 20px 16px;
     gap: 12px;
+    padding: 0 16px 20px 16px;
   }
 
   /* --- Document Card Overhaul (Figma) --- */
   .member-doc-row {
-    position: relative;
     display: grid;
+    position: relative;
     grid-template-columns: 1fr 1fr 0.8fr; /* Signer, Date, Owner */
-    grid-template-rows: auto auto;
-    row-gap: 20px;
-    column-gap: 8px;
     align-items: start;
+    grid-template-rows: auto auto;
     height: auto;
     padding: 20px 16px;
-    border-radius: 12px;
-    border: none;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
     background: #ffffff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    column-gap: 8px;
+    row-gap: 20px;
   }
-  
+
   /* Hide Desktop Elements */
   .desktop-val,
   .desktop-status,
@@ -385,18 +385,18 @@
 
   /* Title Row */
   .member-doc-row__title {
-    grid-column: 1 / -1;
+    align-items: center;
     width: 90%;
+    margin: 0;
     font-size: 15px;
     font-weight: 500;
     color: #111827;
-    margin: 0;
-    align-items: center;
+    grid-column: 1 / -1;
   }
   .member-doc-row__title span {
     display: block;
-    overflow: hidden;
     white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
   }
   .member-doc-row__icon {
@@ -410,9 +410,9 @@
     position: absolute;
     top: -6px;
     right: -6px;
+    padding: 2px;
     background: #fff;
     border-radius: 50%;
-    padding: 2px;
   }
   .status-circle-icon {
     width: 18px;
@@ -446,13 +446,13 @@
     gap: 6px;
   }
   .mobile-val {
+    max-width: 80px;
     font-size: 12px;
     font-weight: 400;
-    color: #686868;
     white-space: nowrap;
+    color: #686868;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 80px;
   }
   .mobile-lbl {
     font-size: 10px;
@@ -463,124 +463,124 @@
   .mobile-owner-badge {
     display: flex;
     flex-direction: column;
-    border-radius: 6px;
-    overflow: hidden;
     width: 100px;
     text-align: center;
+    border-radius: 6px;
+    overflow: hidden;
   }
   .mobile-owner-badge__top {
-    background: #ffffff;
-    color: #4b5563;
-    font-size: 9px;
     padding: 2px 0;
+    font-size: 9px;
     font-weight: 500;
+    color: #4b5563;
+    background: #ffffff;
   }
   .mobile-owner-badge__bot {
-    color: #ffffff;
-    font-size: 10px;
     padding: 2px 0;
+    font-size: 10px;
     font-weight: 600;
+    color: #ffffff;
   }
 
   /* Dynamic Owner Badge Colors */
-  .badge-pending { border: 1px solid #F59E0B; }
-  .badge-pending .mobile-owner-badge__bot { background: #F59E0B; }
-  
-  .badge-signed { border: 1px solid #559B6F; }
-  .badge-signed .mobile-owner-badge__bot { background: #559B6F; }
-  
-  .badge-expired { border: 1px solid #E22A2A; }
-  .badge-expired .mobile-owner-badge__bot { background: #E22A2A; }
+  .member-docs-page .badge-pending { border: 1px solid #F59E0B; }
+  .member-docs-page .badge-pending .mobile-owner-badge__bot { background: #F59E0B; }
+
+  .member-docs-page .badge-signed { border: 1px solid #559B6F; }
+  .member-docs-page .badge-signed .mobile-owner-badge__bot { background: #559B6F; }
+
+  .member-docs-page .badge-expired { border: 1px solid #E22A2A; }
+  .member-docs-page .badge-expired .mobile-owner-badge__bot { background: #E22A2A; }
 }
 
-@media (min-width: 769px) and (max-width: 1180px) {
+@media (min-width: 769px) and (max-width: 1179px) {
 
-  /* ─────────────────────────────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      1. HIDE THINGS THAT MUST NOT SHOW ON TABLET
-     ───────────────────────────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
-  /* The desktop topbar is not used on tablet — hide it */
+  /* The desktop topbar is not used on tablet â€” hide it */
   .member-docs-page .desktop-topbar {
     display: none !important;
   }
 
-  /* The mobile-topbar (hamburger bar) IS shown on tablet — keep it visible */
-  /* (no rule needed — default shared CSS handles this) */
+  /* The mobile-topbar (hamburger bar) IS shown on tablet â€” keep it visible */
+  /* (no rule needed â€” default shared CSS handles this) */
 
-  /* ─────────────────────────────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      2. HEADER LAYOUT  (mobile-page-header)
         Structure inside JSX:
           .mobile-page-header
-            .topbar__bottom-row   ← title + subtitle (col 1)
-            hr.mobile-header-divider  ← full-width divider (col 1/-1)
-            .mobile-filter-row    ← search/filter/add (col 2, row 1)
+            .topbar__bottom-row   â† title + subtitle (col 1)
+            hr.mobile-header-divider  â† full-width divider (col 1/-1)
+            .mobile-filter-row    â† search/filter/add (col 2, row 1)
         We use a 2-col grid with explicit row placement.
-     ───────────────────────────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-docs-page .mobile-page-header {
     display: grid !important;
+    align-items: center !important;
+    gap: 0 24px !important;
     grid-template-columns: 1fr auto !important;
     grid-template-rows: auto auto !important;
-    align-items: center !important;
     /* Figma: ~40px side padding, 32px top gap from hamburger bar */
-    padding: 24px 40px 0 40px !important;
-    gap: 0 24px !important; /* row-gap=0, col-gap=24px */
-    border-bottom: none !important;
+    padding: 24px 40px 0 40px !important; /* row-gap=0, col-gap=24px */
     margin: 0 !important;
+    border-bottom: none !important;
   }
 
-  /* Title+subtitle block → row 1, col 1 */
+  /* Title+subtitle block â†’ row 1, col 1 */
   .member-docs-page .mobile-page-header .topbar__bottom-row {
-    grid-row: 1 !important;
-    grid-column: 1 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 4px !important;
     margin: 0 !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
   }
 
-  /* Filter/action row → row 1, col 2 (sits beside title) */
+  /* Filter/action row â†’ row 1, col 2 (sits beside title) */
   .member-docs-page .mobile-page-header .mobile-filter-row {
-    grid-row: 1 !important;
-    grid-column: 2 !important;
-    margin: 0 !important;
     display: flex !important;
     align-items: center !important;
+    margin: 0 !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
   }
 
-  /* Divider → row 2, spans both cols, bleeds to edges */
+  /* Divider â†’ row 2, spans both cols, bleeds to edges */
   .member-docs-page .mobile-header-divider {
-    grid-row: 2 !important;
-    grid-column: 1 / -1 !important;
     display: block !important;
     width: calc(100% + 80px) !important;
     margin: 20px -40px 0 -40px !important;
     border: none !important;
     border-bottom: 1px solid #E4E4E4 !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     3. TITLE TYPOGRAPHY  — match Figma bold heading
-     ───────────────────────────────────────────────────────────────── */
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     3. TITLE TYPOGRAPHY  â€” match Figma bold heading
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-docs-page .topbar__title {
+    margin: 0 !important;
     font-size: 24px !important;
     font-weight: 700 !important;
-    color: #111827 !important;
     line-height: 1.2 !important;
-    margin: 0 !important;
+    color: #111827 !important;
   }
   .member-docs-page .topbar__sub {
+    margin: 0 !important;
     font-size: 13px !important;
     font-weight: 400 !important;
-    color: #8A949F !important;
-    margin: 0 !important;
     line-height: 1.4 !important;
+    color: #8A949F !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     4. ACTION CONTROLS  — Search, Filter, + Add
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     4. ACTION CONTROLS  â€” Search, Filter, + Add
         Figma: search ~210px pill, filter ~44px circle, add ~88px pill
-     ───────────────────────────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-docs-topbar-actions {
     display: flex !important;
     align-items: center !important;
@@ -591,8 +591,8 @@
   .member-docs-search-wrap {
     width: 210px !important;
     height: 42px !important;
-    border-radius: 21px !important;
     padding: 0 14px !important;
+    border-radius: 21px !important;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
   }
   .member-docs-search-input {
@@ -601,12 +601,12 @@
 
   /* Filter circle */
   .member-docs-filter-btn {
-    width: 44px !important;
-    height: 44px !important;
-    padding: 0 !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    padding: 0 !important;
     border-radius: 50% !important;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
   }
@@ -616,92 +616,92 @@
 
   /* + Add pill */
   .member-docs-add-btn {
-    height: 42px !important;
-    width: 88px !important;
-    padding: 0 !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    border-radius: 21px !important;
+    gap: 6px !important;
+    width: 88px !important;
+    height: 42px !important;
+    padding: 0 !important;
     font-size: 14px !important;
     font-weight: 600 !important;
-    gap: 6px !important;
+    border-radius: 21px !important;
   }
   .add-btn-full {
     display: none !important;
   }
-  .add-btn-short {
+  .member-docs-add-btn-short {
     display: inline-block !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     5. TABS  — Figma: generous top margin, full-width strip, larger text
-     ───────────────────────────────────────────────────────────────── */
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     5. TABS  â€” Figma: generous top margin, full-width strip, larger text
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-docs-tabs {
     display: flex !important;
+    gap: 0 !important;
     width: auto !important;
     /* Tabs must align with the section content:
        section has 40px padding, so tabs use same 40px side margin */
-    margin: 40px 40px 0 40px !important;
-    border-bottom: 1px solid #E6E6E6 !important;
-    padding: 0 !important;
-    gap: 0 !important;
     height: auto !important;
+    margin: 40px 40px 0 40px !important;
+    padding: 0 !important;
+    border-bottom: 1px solid #E6E6E6 !important;
   }
   .member-docs-tab {
     flex: 1 !important;
-    text-align: center !important;
-    color: #8A949F !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+    padding: 14px 0 16px 0 !important;
     font-size: 15px !important;
     font-weight: 400 !important;
+    text-align: center !important;
+    color: #8A949F !important;
     border: none !important;
-    /* Underline sits only under the tab's own 1/3 section — not wider */
+    /* Underline sits only under the tab's own 1/3 section â€” not wider */
     border-bottom: 2px solid transparent !important;
-    padding: 14px 0 16px 0 !important;
-    height: auto !important;
     transition: color 0.15s !important;
-    /* Prevent underline from bleeding — each tab is exactly 1/3 */
-    box-sizing: border-box !important;
+    /* Prevent underline from bleeding â€” each tab is exactly 1/3 */
   }
   .member-docs-tab--active {
-    color: #E22A2A !important;
     font-weight: 600 !important;
+    color: #E22A2A !important;
     border-bottom: 2px solid #E22A2A !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      6. TABLE SECTION WRAPPER
-        — aligned with header/tabs (40px side margins)
-        — extra top gap from tabs to header row
-     ───────────────────────────────────────────────────────────────── */
+        â€” aligned with header/tabs (40px side margins)
+        â€” extra top gap from tabs to header row
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-docs-section {
-    width: auto !important;
-    padding: 0 40px !important;
     flex: 1 !important;
+    width: auto !important;
     margin: 0 !important;
+    padding: 0 40px !important;
   }
   .member-docs-table {
     width: 100% !important;
     /* Increased breathing room between tabs and header row */
-    padding: 40px 0 32px 0 !important;
-    margin: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 0 !important;
+    margin: 0 !important;
+    padding: 40px 0 32px 0 !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     7. TABLE HEADER — rebalanced columns per Figma
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     7. TABLE HEADER â€” rebalanced columns per Figma
         TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
-     ───────────────────────────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-docs-table__header {
-    width: 100% !important;
     display: grid !important;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
+    width: 100% !important;
     /*
-     * SAME grid as .member-doc-row — guarantees column alignment.
+     * SAME grid as .member-doc-row â€” guarantees column alignment.
      * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
      */
-    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
     /*
      * ROOT CAUSE FIX: .member-docs-table__header is OUTSIDE .member-docs-section.
      * .member-docs-section has padding: 0 40px
@@ -709,15 +709,15 @@
      * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
      * Header must use 60px padding to match that exact X position.
      */
+    box-sizing: border-box !important;
+    margin: 0 !important;
     padding: 0 60px 14px 60px !important;
     font-size: 12px !important;
     font-weight: 700 !important;
+    text-transform: uppercase !important;
     letter-spacing: 0.7px !important;
     color: #374151 !important;
-    text-transform: uppercase !important;
-    margin: 0 !important;
     background: transparent !important;
-    box-sizing: border-box !important;
   }
   /* Hide the NOTE column header */
   .member-docs-table__header span:nth-child(2) {
@@ -727,67 +727,67 @@
     justify-self: center !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     8. TABLE ROWS — taller, properly padded cards
-     ───────────────────────────────────────────────────────────────── */
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     8. TABLE ROWS â€” taller, properly padded cards
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-doc-row {
-    width: 100% !important;
-    min-height: 72px !important;
-    height: auto !important;
     display: grid !important;
+    align-items: center !important;
     grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
     grid-template-rows: 1fr !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 72px !important;
+    box-sizing: border-box !important;
     margin: 0 0 14px 0 !important;
     padding: 0 20px !important;
-    border-radius: 14px !important;
-    border: 1px solid #E4E4E4 !important;
     background: #ffffff !important;
-    align-items: center !important;
-    box-sizing: border-box !important;
+    border: 1px solid #E4E4E4 !important;
+    border-radius: 14px !important;
   }
   .member-doc-row:hover {
     background: #fafafa !important;
   }
 
-  /* Hide NOTE cell — not in Figma tablet view */
+  /* Hide NOTE cell â€” not in Figma tablet view */
   .member-doc-row__note {
     display: none !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     9. TITLE COLUMN — ellipsis on overflow
-     ───────────────────────────────────────────────────────────────── */
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     9. TITLE COLUMN â€” ellipsis on overflow
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-doc-row__title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
     min-width: 0 !important;
     max-width: none !important;
     padding-left: 0 !important;
-    gap: 10px !important;
     overflow: hidden !important;
-    display: flex !important;
-    align-items: center !important;
   }
   .member-doc-row__title span {
     display: block !important;
-    overflow: hidden !important;
-    white-space: nowrap !important;
-    text-overflow: ellipsis !important;
     font-size: 14px !important;
     font-weight: 500 !important;
+    white-space: nowrap !important;
     color: #111827 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     10. ROW CELLS — restore desktop-style rendering
-     ───────────────────────────────────────────────────────────────── */
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     10. ROW CELLS â€” restore desktop-style rendering
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-doc-row__cell {
-    font-size: 13px !important;
-    color: #8A949F !important;
     display: flex !important;
     align-items: center !important;
-    overflow: hidden !important;
-    white-space: nowrap !important;
-    text-overflow: ellipsis !important;
     min-width: 0 !important;
+    font-size: 13px !important;
+    white-space: nowrap !important;
+    color: #8A949F !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
   /* Show desktop elements */
@@ -795,34 +795,34 @@
   .desktop-status { display: flex !important; }
   .member-doc-row__menu {
     display: flex !important;
-    align-items: center !important;
+    position: static !important;
     justify-content: center !important;
+    align-items: center !important;
     width: 40px !important;
     min-width: 40px !important;
     max-width: 40px !important;
     height: 36px !important;
     min-height: 36px !important;
     max-height: 36px !important;
-    border-radius: 6px !important;
-    padding: 0 !important;
     margin: 0 auto !important;
-    justify-self: center !important;
-    position: static !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
     transform: none !important;
+    justify-self: center !important;
   }
   .member-doc-row__menu:hover {
+    position: static !important;
     width: 40px !important;
     min-width: 40px !important;
     max-width: 40px !important;
     height: 36px !important;
     min-height: 36px !important;
     max-height: 36px !important;
-    border-radius: 6px !important;
-    padding: 0 !important;
     margin: 0 auto !important;
-    justify-self: center !important;
-    position: static !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
     transform: none !important;
+    justify-self: center !important;
   }
 
   /* Hide mobile-only elements */
@@ -833,70 +833,58 @@
     display: none !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     11. STATUS BADGES
-     ───────────────────────────────────────────────────────────────── */
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     11. STATUS â€” colored dot matching Dashboard mobile reference
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-badge {
-    padding: 6px 14px !important;
-    border-radius: 6px !important;
-    font-size: 12px !important;
-    font-weight: 400 !important;
-    width: auto !important;
-    height: auto !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    text-align: center !important;
-    color: #8A949F !important;
-    font-size: 15px !important;
-    font-weight: 400 !important;
+    display: inline-block !important;
+    width: 10px !important;
+    min-width: 0 !important;
+    height: 10px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    color: transparent !important;
     border: none !important;
-    /* Underline sits only under the tab's own 1/3 section — not wider */
-    border-bottom: 2px solid transparent !important;
-    padding: 14px 0 16px 0 !important;
-    height: auto !important;
-    transition: color 0.15s !important;
-    /* Prevent underline from bleeding — each tab is exactly 1/3 */
-    box-sizing: border-box !important;
+    border-radius: 50% !important;
   }
-  .member-docs-tab--active {
-    color: #E22A2A !important;
-    font-weight: 600 !important;
-    border-bottom: 2px solid #E22A2A !important;
-  }
+  .member-badge--pending { background-color: #D28E56 !important; }
+  .member-badge--signed  { background-color: #559B6F !important; }
+  .member-badge--expired { background-color: #E22A2A !important; }
 
-  /* ─────────────────────────────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      6. TABLE SECTION WRAPPER
-        — aligned with header/tabs (40px side margins)
-        — extra top gap from tabs to header row
-     ───────────────────────────────────────────────────────────────── */
+        â€” aligned with header/tabs (40px side margins)
+        â€” extra top gap from tabs to header row
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-docs-section {
-    width: auto !important;
-    padding: 0 40px !important;
     flex: 1 !important;
+    width: auto !important;
     margin: 0 !important;
+    padding: 0 40px !important;
   }
   .member-docs-table {
     width: 100% !important;
     /* Increased breathing room between tabs and header row */
-    padding: 40px 0 32px 0 !important;
-    margin: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 0 !important;
+    margin: 0 !important;
+    padding: 40px 0 32px 0 !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     7. TABLE HEADER — rebalanced columns per Figma
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     7. TABLE HEADER â€” rebalanced columns per Figma
         TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
-     ───────────────────────────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-docs-table__header {
-    width: 100% !important;
     display: grid !important;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
+    width: 100% !important;
     /*
-     * SAME grid as .member-doc-row — guarantees column alignment.
+     * SAME grid as .member-doc-row â€” guarantees column alignment.
      * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
      */
-    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
     /*
      * ROOT CAUSE FIX: .member-docs-table__header is OUTSIDE .member-docs-section.
      * .member-docs-section has padding: 0 40px
@@ -904,15 +892,15 @@
      * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
      * Header must use 60px padding to match that exact X position.
      */
+    box-sizing: border-box !important;
+    margin: 0 !important;
     padding: 0 60px 14px 60px !important;
     font-size: 12px !important;
     font-weight: 700 !important;
+    text-transform: uppercase !important;
     letter-spacing: 0.7px !important;
     color: #374151 !important;
-    text-transform: uppercase !important;
-    margin: 0 !important;
     background: transparent !important;
-    box-sizing: border-box !important;
   }
   /* Hide the NOTE column header */
   .member-docs-table__header span:nth-child(2) {
@@ -921,68 +909,73 @@
   .member-docs-table__header span:last-child {
     justify-self: center !important;
   }
+  /* Center the STATUS column header to align with the status dot below */
+  .member-docs-table__header span:nth-child(6) {
+    text-align: center !important;
+    justify-self: center !important;
+  }
 
-  /* ─────────────────────────────────────────────────────────────────
-     8. TABLE ROWS — taller, properly padded cards
-     ───────────────────────────────────────────────────────────────── */
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     8. TABLE ROWS â€” taller, properly padded cards
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-doc-row {
-    width: 100% !important;
-    min-height: 72px !important;
-    height: auto !important;
     display: grid !important;
+    align-items: center !important;
     grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
     grid-template-rows: 1fr !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 72px !important;
+    box-sizing: border-box !important;
     margin: 0 0 14px 0 !important;
     padding: 0 20px !important;
-    border-radius: 14px !important;
-    border: 1px solid #E4E4E4 !important;
     background: #ffffff !important;
-    align-items: center !important;
-    box-sizing: border-box !important;
+    border: 1px solid #E4E4E4 !important;
+    border-radius: 14px !important;
   }
   .member-doc-row:hover {
     background: #fafafa !important;
   }
 
-  /* Hide NOTE cell — not in Figma tablet view */
+  /* Hide NOTE cell â€” not in Figma tablet view */
   .member-doc-row__note {
     display: none !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     9. TITLE COLUMN — ellipsis on overflow
-     ───────────────────────────────────────────────────────────────── */
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     9. TITLE COLUMN â€” ellipsis on overflow
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-doc-row__title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
     min-width: 0 !important;
     max-width: none !important;
     padding-left: 0 !important;
-    gap: 10px !important;
     overflow: hidden !important;
-    display: flex !important;
-    align-items: center !important;
   }
   .member-doc-row__title span {
     display: block !important;
-    overflow: hidden !important;
-    white-space: nowrap !important;
-    text-overflow: ellipsis !important;
     font-size: 14px !important;
     font-weight: 500 !important;
+    white-space: nowrap !important;
     color: #111827 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     10. ROW CELLS — restore desktop-style rendering
-     ───────────────────────────────────────────────────────────────── */
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     10. ROW CELLS â€” restore desktop-style rendering
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .member-doc-row__cell {
-    font-size: 13px !important;
-    color: #8A949F !important;
     display: flex !important;
     align-items: center !important;
-    overflow: hidden !important;
-    white-space: nowrap !important;
-    text-overflow: ellipsis !important;
     min-width: 0 !important;
+    font-size: 13px !important;
+    white-space: nowrap !important;
+    color: #8A949F !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
   /* Show desktop elements */
@@ -990,34 +983,34 @@
   .desktop-status { display: flex !important; }
   .member-doc-row__menu {
     display: flex !important;
-    align-items: center !important;
+    position: static !important;
     justify-content: center !important;
+    align-items: center !important;
     width: 40px !important;
     min-width: 40px !important;
     max-width: 40px !important;
     height: 36px !important;
     min-height: 36px !important;
     max-height: 36px !important;
-    border-radius: 6px !important;
-    padding: 0 !important;
     margin: 0 auto !important;
-    justify-self: center !important;
-    position: static !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
     transform: none !important;
+    justify-self: center !important;
   }
   .member-doc-row__menu:hover {
+    position: static !important;
     width: 40px !important;
     min-width: 40px !important;
     max-width: 40px !important;
     height: 36px !important;
     min-height: 36px !important;
     max-height: 36px !important;
-    border-radius: 6px !important;
-    padding: 0 !important;
     margin: 0 auto !important;
-    justify-self: center !important;
-    position: static !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
     transform: none !important;
+    justify-self: center !important;
   }
 
   /* Hide mobile-only elements */
@@ -1028,52 +1021,67 @@
     display: none !important;
   }
 
-  /* ─────────────────────────────────────────────────────────────────
-     11. STATUS BADGES
-     ───────────────────────────────────────────────────────────────── */
-  .member-badge {
-    padding: 6px 14px !important;
-    border-radius: 6px !important;
-    font-size: 12px !important;
-    font-weight: 400 !important;
-    width: auto !important;
-    height: auto !important;
-    display: inline-flex !important;
-    align-items: center !important;
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     11. STATUS â€” colored dot matching Dashboard mobile reference
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .desktop-status {
+    display: flex !important;
     justify-content: center !important;
-    white-space: nowrap !important;
+    align-items: center !important;
   }
+  .member-badge {
+    display: inline-block !important;
+    width: 10px !important;
+    min-width: 0 !important;
+    height: 10px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    color: transparent !important;
+    border: none !important;
+    border-radius: 50% !important;
+  }
+  .member-badge--pending { background-color: #D28E56 !important; }
+  .member-badge--signed  { background-color: #559B6F !important; }
+  .member-badge--expired { background-color: #E22A2A !important; }
 }
 
 /* Desktop-only overrides for Action Button alignment */
-@media (min-width: 1181px) {
+@media (min-width: 1180px) {
   /* Center the ACTION header to align perfectly with the button below it */
   .member-docs-page .member-docs-table__header span:last-child {
-    justify-self: center !important;
-    text-align: center !important;
-    padding: 0 !important;
     margin: 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+    justify-self: center !important;
   }
 
   .member-docs-page .member-doc-row__menu {
-    position: relative !important;
     display: flex !important;
+    position: relative !important;
     justify-content: center !important;
     align-items: center !important;
     width: 36px !important;
     height: 36px !important;
-    justify-self: center !important; /* Centers the button in the ACTION column */
     margin: 0 !important;
     padding: 0 !important;
     border-radius: 6px !important;
+    justify-self: center !important; /* Centers the button in the ACTION column */
   }
 
   /* Dropdown/hover menu positioning relative to action button */
   .member-docs-page .member-doc-row__menu .action-menu,
   .member-docs-page .member-doc-row__menu .dropdown-menu {
     position: absolute !important;
+    top: 100% !important;
     right: 0 !important;
     left: auto !important;
-    top: 100% !important;
   }
+}
+
+.member-docs-empty-state {
+  padding: 40px;
+  font-size: 13px;
+  text-align: center;
+  color: #9ca3af;
 }

@@ -1,13 +1,13 @@
 import { useState } from "react";
-import MemberSidebar from "../components/MemberSidebar";
-import MemberMobileNavbar from "../components/MemberMobileNavbar";
-import MemberContactCard from "../components/MemberContactCard";
+import Sidebar from "../components/Sidebar";
+import MobileNavbar from "../components/MobileNavbar";
+import ContactCard from "../components/ContactCard";
 import ContactDetailsModal from "../components/ContactDetailsModal";
 import { Search, Bell, UserCircle, Menu } from "lucide-react";
 import AddContactForm from "../components/AddContactForm";
 
-import "../css/MemberBaseLayout.css";
-import "../css/MemberContactBook.css";
+import "../css/AdminBaseLayout.css";
+import "../css/ContactBook.css";
 
 const CONTACTS = [
   { name: "Alice Smith", email: "alice.smith@example.com" },
@@ -17,36 +17,36 @@ const CONTACTS = [
   { name: "Blair Croft", email: "blair.croft@example.com" }
 ];
 
-function MemberContactActions({ search, setSearch, onAddClick }) {
+function ContactActions({ search, setSearch, onAddClick }) {
   return (
-    <div className="member-contact-topbar-actions">
-      <div className="member-contact-search-wrap">
+    <div className="admin-contact-topbar-actions">
+      <div className="admin-contact-search-wrap">
         <Search size={16} color="#9ca3af" strokeWidth={2} />
         <input
-          className="member-contact-search-input"
+          className="admin-contact-search-input"
           placeholder="Search Documents"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <button className="member-contact-filter-btn">
+      <button className="admin-contact-filter-btn">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/>
         </svg>
         <span className="filter-text">Filter</span>
       </button>
-      <button className="member-contact-add-btn" onClick={onAddClick}>
+      <button className="admin-contact-add-btn" onClick={onAddClick}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/>
         </svg>
         <span className="add-btn-full">Add Contact</span>
-        <span className="member-contact-add-btn-short">Add</span>
+        <span className="admin-contact-add-btn-short">Add</span>
       </button>
     </div>
   );
 }
 
-export default function MemberContactBook() {
+export default function ContactBook() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -59,7 +59,7 @@ export default function MemberContactBook() {
   );
 
   return (
-    <div className="layout member-theme member-contact-page">
+    <div className="layout admin-theme admin-contact-page">
       {mobileNavOpen && (
         <div
           className="mobile-backdrop"
@@ -70,11 +70,11 @@ export default function MemberContactBook() {
 
       {/* Responsive Sidebar Layout */}
       <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? "mobile-sidebar-wrapper--open" : ""}`}>
-        <MemberSidebar />
+        <Sidebar />
       </div>
 
       <div className="desktop-sidebar-wrapper">
-        <MemberSidebar />
+        <Sidebar />
       </div>
 
       <div className="main">
@@ -113,7 +113,7 @@ export default function MemberContactBook() {
             </div>
             
             {/* Top Right Actions */}
-            <MemberContactActions search={search} setSearch={setSearch} onAddClick={() => setIsAddModalOpen(true)} />
+            <ContactActions search={search} setSearch={setSearch} onAddClick={() => setIsAddModalOpen(true)} />
           </div>
         </div>
 
@@ -127,18 +127,18 @@ export default function MemberContactBook() {
           </div>
           <hr className="mobile-header-divider" />
           <div className="mobile-filter-row">
-            <MemberContactActions search={search} setSearch={setSearch} onAddClick={() => setIsAddModalOpen(true)} />
+            <ContactActions search={search} setSearch={setSearch} onAddClick={() => setIsAddModalOpen(true)} />
           </div>
         </div>
 
         {/* Table Section */}
-        <div className="member-contact-section">
-          <div className="member-contact-table">
+        <div className="admin-contact-section">
+          <div className="admin-contact-table">
             {filteredContacts.map((c, i) => (
-              <MemberContactCard key={i} name={c.name} email={c.email} onClick={() => setSelectedContact(c)} />
+              <ContactCard key={i} name={c.name} email={c.email} onClick={() => setSelectedContact(c)} />
             ))}
             {filteredContacts.length === 0 && (
-              <div className="member-contact-empty-state">
+              <div className="admin-contact-empty-state">
                 No contacts found.
               </div>
             )}
@@ -165,7 +165,7 @@ export default function MemberContactBook() {
 
       </div>
       
-      <MemberMobileNavbar />
+      <MobileNavbar />
 
       {isAddModalOpen && (
         <AddContactForm onClose={() => setIsAddModalOpen(false)} />

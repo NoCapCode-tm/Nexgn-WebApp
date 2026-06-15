@@ -2,14 +2,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 /* ADMIN MODULE */
 import Dashboard from "./admin/pages/Dashboard";
-import SignYourself from "./admin/components/SignYourself";
-import CreateSignatureRequest from "./admin/pages/CreateSignatureRequest";
+import SignYourself from "./admin/pages/SignYourself";
 import Documents from "./admin/pages/Documents";
-import "./admin/css/Dashboard.css";
+import ContactBook from "./admin/pages/ContactBook";
+
 
 /* MEMBER MODULE */
 import MemberDashboard from "./member/pages/MemberDashboard";
-import MemberSignYourself from "./member/components/MemberSignYourself";
+import MemberSignYourself from "./member/pages/MemberSignYourself";
 import MemberDocuments from "./member/pages/MemberDocuments";
 import MemberContactBook from "./member/pages/MemberContactBook";
 
@@ -21,9 +21,10 @@ export default function App() {
 
         {/* ADMIN ROUTES */}
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/sign-yourself" element={<SignYourself />} />
-        <Route path="/create-signature" element={<CreateSignatureRequest />} />
         <Route path="/documents" element={<Documents />} />
+        <Route path="/contact-book" element={<ContactBook />} />
+        <Route path="/sign-yourself" element={<SignYourself />} />
+        <Route path="/request-signature" element={<SignYourself />} />
 
         {/* MEMBER ROUTES */}
         <Route path="/member" element={<MemberDashboard />} />
