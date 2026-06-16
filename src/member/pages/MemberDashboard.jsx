@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import MemberSidebar from "../components/MemberSidebar";
 import MemberTopbar from "../components/MemberTopbar";
 import MemberStatCard from "../components/MemberStatCard";
-import DocumentRow from "../../admin/components/DocumentRow";
+import MemberDocumentRow from "../components/MemberDocumentRow";
 import MemberMobileNavbar from "../components/MemberMobileNavbar";
+import useWindowWidth from "../components/useWindowWidth";
 import { Search, Bell, UserCircle, Menu } from "lucide-react";
+import "../css/MemberBaseLayout.css";
 import "../css/MemberDashboard.css"; // Scoped CSS Overrides
 
 const stats = [
@@ -81,19 +83,12 @@ const documents = [
 
 export default function MemberDashboard() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 767);
+  const width = useWindowWidth();
+  const isMobile = width <= 768;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 767);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
-    <div className="layout member-theme">
+    <div className="layout member-theme member-dashboard-page">
       {mobileNavOpen && (
         <div
           className="mobile-backdrop"
@@ -115,13 +110,13 @@ export default function MemberDashboard() {
         {/* Mobile Navigation */}
         <header className="mobile-topbar">
           <button className="mobile-topbar__hamburger" onClick={() => {
-            if (window.innerWidth >= 768) {
+            if (width >= 769) {
               setMobileNavOpen(true);
             }
           }}>
             <Menu size={22} color="#1a1a2e" />
           </button>
-          <span className="mobile-topbar__title">Dashboard</span>
+
           <div className="mobile-topbar__icons">
             <button className="topbar__icon-btn mobile-topbar__search-btn">
               <Search size={18} color="#FF0915" strokeWidth={1.5} />
@@ -172,7 +167,7 @@ export default function MemberDashboard() {
           </div>
           <div className="docs-table">
             {documents.map((doc, idx) => (
-              <DocumentRow key={idx} {...doc} />
+              <MemberDocumentRow key={idx} {...doc} />
             ))}
           </div>
         </section>

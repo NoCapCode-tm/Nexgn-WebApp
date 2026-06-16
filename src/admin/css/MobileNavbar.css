@@ -1,9 +1,9 @@
-.member-mobile-navbar {
+.admin-mobile-navbar {
   display: none;
 }
 
 @media (max-width: 768px) {
-  .member-mobile-navbar {
+  .admin-mobile-navbar {
     display: flex;
     position: fixed;
     right: 0;
@@ -20,7 +20,7 @@
     overflow: visible !important;
   }
 
-  .member-mobile-navbar__item {
+  .admin-mobile-navbar__item {
     display: flex;
     position: relative;
     flex: 1;
@@ -36,7 +36,7 @@
     cursor: pointer;
   }
 
-  .member-mobile-navbar__icon-wrap {
+  .admin-mobile-navbar__icon-wrap {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +48,7 @@
     transition: all 0.2s ease;
   }
 
-  .member-mobile-navbar__item--active .member-mobile-navbar__icon-wrap {
+  .admin-mobile-navbar__item--active .admin-mobile-navbar__icon-wrap {
     width: 64px;
     height: 64px;
     color: #ffffff;
@@ -57,18 +57,18 @@
     transform: translateY(-22px); /* Shift up to pop out of the top of the navbar */
   }
 
-  .member-mobile-navbar__item--active svg {
+  .admin-mobile-navbar__item--active svg {
     stroke: #ffffff !important;
   }
 
   /* Specific stroke fixes for custom SVGs inside active tab */
-  .member-mobile-navbar__item--active svg path,
-  .member-mobile-navbar__item--active svg circle,
-  .member-mobile-navbar__item--active svg rect {
+  .admin-mobile-navbar__item--active svg path,
+  .admin-mobile-navbar__item--active svg circle,
+  .admin-mobile-navbar__item--active svg rect {
     stroke: #ffffff !important;
   }
 
-  .member-mobile-navbar__label {
+  .admin-mobile-navbar__label {
     position: absolute;
     bottom: 8px;
     margin-top: 2px;

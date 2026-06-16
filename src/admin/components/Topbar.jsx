@@ -9,7 +9,7 @@ const UploadIcon = () => (
   </svg>
 );
 
-export default function MemberTopbar() {
+export default function Topbar() {
   const navigate = useNavigate();
 
   return (
@@ -32,7 +32,7 @@ export default function MemberTopbar() {
           <h1 className="topbar__title">Dashboard</h1>
           <p className="topbar__sub">Overview of your document signing activity</p>
         </div>
-        <button className="topbar__upload" onClick={() => navigate("/member-sign-yourself")}>
+        <button className="topbar__upload" onClick={() => navigate("/admin-sign-yourself")}>
           <UploadIcon />
           Upload Document
         </button>

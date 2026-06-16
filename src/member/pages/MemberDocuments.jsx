@@ -6,6 +6,7 @@ import MemberDocumentsFilter from "../components/MemberDocumentsFilter";
 import MemberDocumentsTable from "../components/MemberDocumentsTable";
 import { Search, Bell, UserCircle, Menu } from "lucide-react";
 
+import "../css/MemberBaseLayout.css";
 import "../css/MemberDocuments.css";    // Specific Document Styles
 
 const ALL_DOCS = [
@@ -60,7 +61,7 @@ export default function MemberDocuments() {
           <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(true)}>
             <Menu size={22} color="#1a1a2e" />
           </button>
-          <span className="mobile-topbar__title">Documents</span>
+
           <div className="mobile-topbar__icons">
             <button className="topbar__icon-btn mobile-topbar__search-btn">
               <Search size={18} color="#FF0915" strokeWidth={1.5} />
@@ -78,8 +79,8 @@ export default function MemberDocuments() {
         <div className="topbar desktop-topbar">
           <div className="topbar__top-row">
             <div className="topbar__icons">
-              <button className="topbar__icon-btn"><Search size={22} color="#FF0915" strokeWidth={1.5} /></button>
-              <button className="topbar__icon-btn"><Bell size={22} color="#FF0915" strokeWidth={1.5} /></button>
+              <button className="topbar__icon-btn"><Search size={24} color="#FF0915" strokeWidth={1.5} /></button>
+              <button className="topbar__icon-btn"><Bell size={24} color="#FF0915" strokeWidth={1.5} /></button>
               <button className="topbar__icon-btn"><UserCircle size={24} color="#FF0915" strokeWidth={1.5} /></button>
             </div>
           </div>

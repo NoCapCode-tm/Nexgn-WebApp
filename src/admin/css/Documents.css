@@ -1,203 +1,194 @@
-/* Documents.css — page-specific styles only */
+/* src/member/css/Documents.css */
 
-/* ── TOPBAR ACTIONS (search + filter + add) ── */
-.docs-topbar-actions {
+/* â”€â”€ TOPBAR ACTIONS (search + filter + add) â”€â”€ */
+.admin-docs-topbar-actions {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.docs-search-wrap {
+.admin-docs-search-wrap {
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 200px;
   height: 36px;
-  border: 1px solid #E4E4E4;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(138,148,159,0.4), 0 2px 4px rgba(138,148,159,0.2);
-transition: box-shadow 0.2s, transform 0.2s;
-transform: translateY(0);
   padding: 0 12px;
   background: #fff;
-  width: 200px;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
 }
-.docs-search-wrap:hover {
-  box-shadow: 0 6px 16px rgba(138,148,159,0.5), 0 3px 6px rgba(138,148,159,0.3);
+
+.admin-docs-search-wrap:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
 
-.docs-search-wrap:focus-within {
+.admin-docs-search-wrap:focus-within {
   border-color: #FF0915;
 }
 
-.docs-search-input {
-  border: none;
-  outline: none;
-  font-size: 12px;
+.admin-docs-search-input {
+  width: 100%;
   font-family: 'Inter', sans-serif;
+  font-size: 12px;
   color: #1a1a2e;
   background: transparent;
-  width: 100%;
+  border: none;
+  outline: none;
 }
 
-.docs-search-input::placeholder {
+.admin-docs-search-input::placeholder {
   color: #9ca3af;
 }
 
-.docs-filter-btn {
+.admin-docs-filter-btn {
   display: flex;
   align-items: center;
   gap: 6px;
   height: 36px;
   padding: 0 14px;
-  border: 1px solid #E4E4E4;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(138, 148, 159, 0.5), 0 2px 4px rgba(138, 148, 159, 0.3);
-  transform: translateY(0);
-  transition: box-shadow 0.2s, transform 0.2s;
-  background: #fff;
+  font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 500;
   color: #6b7280;
-  font-family: 'Inter', sans-serif;
+  background: #fff;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
-
 }
 
-.docs-filter-btn:hover {
-  box-shadow: 0 6px 16px rgba(138, 148, 159, 0.6), 0 3px 6px rgba(138, 148, 159, 0.4);
+.admin-docs-filter-btn:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
-.docs-filter-btn:active {
+
+.admin-docs-filter-btn:active {
   box-shadow: 0 1px 4px rgba(138, 148, 159, 0.3);
   transform: translateY(1px);
 }
 
-.docs-add-btn {
+.admin-docs-add-btn {
   display: flex;
   align-items: center;
   gap: 6px;
   height: 36px;
   padding: 0 16px;
-  background: linear-gradient(to bottom, #FF0915, #960101);
-  color: #fff;
-   border-radius: 20px;
-  box-shadow: 0 6px 16px rgba(255,9,21,0.45), 0 3px 6px rgba(255,9,21,0.3), 0 1px 0px rgba(255,255,255,0.15) inset;
-transform: translateY(0);
-transition: box-shadow 0.2s, transform 0.2s;
+  font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  border: none;
-  cursor: pointer;
   white-space: nowrap;
+  color: #fff;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
 }
 
-.docs-add-btn:hover {
-  background: linear-gradient(to bottom, #960101, #960101);
-  box-shadow: 0 8px 20px rgba(255,9,21,0.55), 0 4px 8px rgba(255,9,21,0.35);
+.admin-docs-add-btn:hover {
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
 
-.docs-add-btn:active {
-  box-shadow: 0 2px 6px rgba(255,9,21,0.3);
+.admin-docs-add-btn:active {
+  box-shadow: none;
   transform: translateY(1px);
 }
 
-/* ── TABS — 1282×37px ── */
-.docs-tabs {
-  display: flex;
-  align-items: flex-end;
-  gap: 0;
-  border-bottom: 1.5px solid #E4E4E4;
+.admin-docs-add-btn-short {
+  display: none;
+}
+
+/* â”€â”€ TABS â”€â”€ */
+.admin-docs-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
   height: 37px;
 }
 
-.docs-tab {
+.admin-docs-tab {
   height: 37px;
-  padding: 0 24px;
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
   color: #9ca3af;
   background: none;
   border: none;
+  border-bottom: 2px solid #E4E4E4;
+  transition: color 0.15s, border-color 0.15s;
   cursor: pointer;
-  font-family: 'Inter', sans-serif;
-  position: relative;
-  transition: color 0.15s;
-  white-space: nowrap;
+
+  /* Apply full-width bottom border to each individual section */
 }
 
-.docs-tab:hover {
+.admin-docs-tab:hover {
   color: #FF0915;
 }
 
-.docs-tab--active {
-  color: #FF0915;
+.admin-docs-tab--active {
   font-weight: 600;
+  color: #FF0915;
+  border-bottom-color: #FF0915;
 }
 
-.docs-tab--active::after {
-  content: '';
-  position: absolute;
-  bottom: -1.5px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: #FF0915;
-  border-radius: 2px 2px 0 0;
-}
-
-/* ── TABLE ── */
-.docs-section {
+/* â”€â”€ TABLE â”€â”€ */
+.admin-docs-section {
+  flex: 1;
+  padding: 0;
   background: transparent;
   border-radius: 0;
-  padding: 0;
-  flex: 1;
 }
 
-.docs-table__header {
+.admin-docs-table__header {
   display: grid;
   grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
   padding: 10px 16px;
   font-size: 11px;
   font-weight: 600;
-  color: #1a1a2e;
-  letter-spacing: 0.5px;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #1a1a2e;
+  background: transparent;
   border: none;
   border-bottom: none;
-  background: transparent;
 }
 
-.docs-table {
+.admin-docs-table {
   display: flex;
   flex-direction: column;
   gap: 8px;
   width: 100%;
 }
 
-.doc-row {
+.admin-doc-row {
   display: grid;
-  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
   align-items: center;
-  padding: 0 16px;
+  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
   height: 60px;
-  background: #ffffff;
+  padding: 0 16px;
   font-size: 13px;
   color: #8A949F;
+  background: #ffffff;
   border: 1px solid #E4E4E4;
   border-radius: 16px;
   transition: background 0.12s;
 }
 
-.doc-row:hover {
+.admin-doc-row:hover {
   background: #fafafa;
 }
 
-
-
-.doc-row__title {
+.admin-doc-row__title {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -205,110 +196,892 @@ transition: box-shadow 0.2s, transform 0.2s;
   color: #111827;
 }
 
-.doc-row__icon {
-  flex-shrink: 0;
+.admin-doc-row__icon {
   color: #FF0915;
+  flex-shrink: 0;
 }
 
-.doc-row__note {
+.admin-doc-row__note {
+  padding-right: 12px;
+  font-size: 12px;
+  white-space: nowrap;
   color: #8A949F;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-right: 12px;
-  font-size: 12px;
 }
 
-.doc-row__cell {
+.admin-doc-row__cell {
+  font-size: 12px;
   color: #8A949F;
-  font-size: 12px;
 }
 
-.doc-row__menu {
-  color: #9ca3af;
-  padding: 4px;
-  border-radius: 4px;
+.admin-doc-row__menu {
   display: flex;
   align-items: center;
+  padding: 4px;
+  color: #9ca3af;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.doc-row__menu:hover {
-  background: #f3f4f6;
+.admin-doc-row__menu:hover {
   color: #374151;
+  background: #f3f4f6;
 }
 
-/* ── BADGES ── */
-.badge {
+/* â”€â”€ BADGES â”€â”€ */
+.admin-badge {
   display: inline-block;
   padding: 3px 12px;
-  border-radius: 4px;
   font-size: 11px;
   font-weight: 400;
+  border-radius: 4px;
 }
 
-.badge--pending  { background: #FEF5E0; color: #D28E56; }
-.badge--signed   { background: #E6F7EC; color: #559B6F; }
-.badge--expired  { background: #FFDCDC; color: #E22A2A; }
+.admin-badge--pending  { color: #D28E56; background: #FEF5E0; }
+.admin-badge--signed   { color: #559B6F; background: #E6F7EC; }
+.admin-badge--expired  { color: #E22A2A; background: #FFDCDC; }
 
-/* ── RESPONSIVE ── */
+/* â”€â”€ FIGMA MOBILE OVERRIDES (Hidden on Desktop/Tablet) â”€â”€ */
+.mobile-status-corner,
+.mobile-only-icon,
+.mobile-lbl,
+.mobile-owner-badge,
+.admin-docs-mobile-section-title {
+  display: none;
+}
+.desktop-val,
+.desktop-status {
+  display: block;
+}
+
+/* â”€â”€ RESPONSIVE â”€â”€ */
 @media (max-width: 768px) {
-  .docs-topbar-actions { display: none; }
+  .admin-docs-page .mobile-page-header .topbar__bottom-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .admin-docs-topbar-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  /* --- Action Controls Styling (Figma) --- */
+  .admin-docs-search-wrap {
+    flex: 1;
+    max-width: none;
+    padding-left: 12px;
+    border: 1px solid #E4E4E4;
+    border-radius: 20px;
+  }
+  .admin-docs-search-input::placeholder {
+    font-size: 13px;
+  }
+  .admin-docs-filter-btn {
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: #fff;
+    border: 1px solid #E4E4E4;
+    border-radius: 50%;
+  }
+  .admin-docs-filter-btn .filter-text { display: none; }
+  .admin-docs-add-btn {
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    color: #fff;
+    background: #E22A2A;
+    border: none;
+    border-radius: 50%;
+  }
+  .admin-docs-add-btn .add-btn-full { display: none; }
 
-  .docs-tabs {
+  /* --- Tabs Styling (Figma) --- */
+  .admin-docs-tabs {
+    gap: 16px;
+    margin-bottom: 16px;
     padding: 0 16px;
+    border-bottom: none;
     overflow-x: auto;
     scrollbar-width: none;
   }
-  .docs-tabs::-webkit-scrollbar { display: none; }
-
-  .docs-section { margin: 0 16px; }
-
-  .docs-table__header {
-    grid-template-columns: 1fr auto auto;
+  .admin-docs-tab {
+    padding: 8px 24px;
+    font-size: 13px;
+    color: #8A949F;
+    border: none !important;
+    border-radius: 12px;
   }
-  .docs-table__header span:nth-child(2),
-  .docs-table__header span:nth-child(3),
-  .docs-table__header span:nth-child(4),
-  .docs-table__header span:nth-child(5) {
+  .admin-docs-tab--active {
+    font-weight: 500;
+    color: #ffffff !important;
+    background: #E22A2A;
+  }
+
+  /* --- Section Title --- */
+  .admin-docs-mobile-section-title {
+    display: block;
+    margin-bottom: 24px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .mobile-header-divider {
+    width: 100%;
+    margin: 16px 0;
+    border: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  /* --- Table Header --- */
+  .admin-docs-table__header {
     display: none;
   }
-
-  .doc-row {
-    grid-template-columns: 1fr auto auto;
-  }
-  .doc-row > *:nth-child(2),
-  .doc-row > *:nth-child(3),
-  .doc-row > *:nth-child(4),
-  .doc-row > *:nth-child(5) {
-    display: none;
+  .admin-docs-table {
+    gap: 12px;
+    padding: 0 16px 20px 16px;
   }
 
-  .badge {
-    padding: 5px 16px;
+  /* --- Document Card Overhaul (Figma) --- */
+  .admin-doc-row {
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 1fr 0.8fr; /* Signer, Date, Owner */
+    align-items: start;
+    grid-template-rows: auto auto;
+    height: auto;
+    padding: 20px 16px;
+    background: #ffffff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    column-gap: 8px;
+    row-gap: 20px;
+  }
+
+  /* Hide Desktop Elements */
+  .desktop-val,
+  .desktop-status,
+  .admin-doc-row__menu,
+  .admin-doc-row__note {
+    display: none !important;
+  }
+
+  /* Show Mobile Elements */
+  .mobile-status-corner,
+  .mobile-only-icon,
+  .mobile-owner-badge {
+    display: flex;
+  }
+  .mobile-lbl {
+    display: block;
+  }
+
+  /* Title Row */
+  .admin-doc-row__title {
+    align-items: center;
+    width: 90%;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: #111827;
+    grid-column: 1 / -1;
+  }
+  .admin-doc-row__title span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .admin-doc-row__icon {
+    width: 18px;
+    height: 18px;
+    color: #111827;
+  }
+
+  /* Top Right Status Corner */
+  .mobile-status-corner {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    padding: 2px;
+    background: #fff;
+    border-radius: 50%;
+  }
+  .status-circle-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .status-green { color: #559B6F; }
+  .status-red { color: #E22A2A; }
+  .status-yellow { color: #F59E0B; }
+
+  /* Grid Layout for Meta Columns */
+  .admin-doc-row__cell {
+    display: none; /* Hide any default wrapper cell styles */
+  }
+  .admin-doc-row__cell.mobile-col {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .admin-doc-row__cell.mobile-col-owner {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .mobile-only-icon {
+    margin-top: 1px;
+    color: #686868;
+  }
+  .mobile-col-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .mobile-val {
+    max-width: 80px;
     font-size: 12px;
-    border-radius: 20px;
+    font-weight: 400;
+    white-space: nowrap;
+    color: #686868;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mobile-lbl {
+    font-size: 10px;
+    color: #686868;
+  }
+
+  /* Owner Stacked Badge Base */
+  .mobile-owner-badge {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    text-align: center;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .mobile-owner-badge__top {
+    padding: 2px 0;
+    font-size: 9px;
+    font-weight: 500;
+    color: #4b5563;
+    background: #ffffff;
+  }
+  .mobile-owner-badge__bot {
+    padding: 2px 0;
+    font-size: 10px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  /* Dynamic Owner Badge Colors */
+  .admin-docs-page .badge-pending { border: 1px solid #F59E0B; }
+  .admin-docs-page .badge-pending .mobile-owner-badge__bot { background: #F59E0B; }
+
+  .admin-docs-page .badge-signed { border: 1px solid #559B6F; }
+  .admin-docs-page .badge-signed .mobile-owner-badge__bot { background: #559B6F; }
+
+  .admin-docs-page .badge-expired { border: 1px solid #E22A2A; }
+  .admin-docs-page .badge-expired .mobile-owner-badge__bot { background: #E22A2A; }
+}
+
+@media (min-width: 769px) and (max-width: 1179px) {
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     1. HIDE THINGS THAT MUST NOT SHOW ON TABLET
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  /* The desktop topbar is not used on tablet â€” hide it */
+  .admin-docs-page .desktop-topbar {
+    display: none !important;
+  }
+
+  /* The mobile-topbar (hamburger bar) IS shown on tablet â€” keep it visible */
+  /* (no rule needed â€” default shared CSS handles this) */
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     2. HEADER LAYOUT  (mobile-page-header)
+        Structure inside JSX:
+          .mobile-page-header
+            .topbar__bottom-row   â† title + subtitle (col 1)
+            hr.mobile-header-divider  â† full-width divider (col 1/-1)
+            .mobile-filter-row    â† search/filter/add (col 2, row 1)
+        We use a 2-col grid with explicit row placement.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-docs-page .mobile-page-header {
+    display: grid !important;
+    align-items: center !important;
+    gap: 0 24px !important;
+    grid-template-columns: 1fr auto !important;
+    grid-template-rows: auto auto !important;
+    /* Figma: ~40px side padding, 32px top gap from hamburger bar */
+    padding: 24px 40px 0 40px !important; /* row-gap=0, col-gap=24px */
+    margin: 0 !important;
+    border-bottom: none !important;
+  }
+
+  /* Title+subtitle block â†’ row 1, col 1 */
+  .admin-docs-page .mobile-page-header .topbar__bottom-row {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+    margin: 0 !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  /* Filter/action row â†’ row 1, col 2 (sits beside title) */
+  .admin-docs-page .mobile-page-header .mobile-filter-row {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+
+  /* Divider â†’ row 2, spans both cols, bleeds to edges */
+  .admin-docs-page .mobile-header-divider {
+    display: block !important;
+    width: calc(100% + 80px) !important;
+    margin: 20px -40px 0 -40px !important;
+    border: none !important;
+    border-bottom: 1px solid #E4E4E4 !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     3. TITLE TYPOGRAPHY  â€” match Figma bold heading
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-docs-page .topbar__title {
+    margin: 0 !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    color: #111827 !important;
+  }
+  .admin-docs-page .topbar__sub {
+    margin: 0 !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    color: #8A949F !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     4. ACTION CONTROLS  â€” Search, Filter, + Add
+        Figma: search ~210px pill, filter ~44px circle, add ~88px pill
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-docs-topbar-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  /* Search pill */
+  .admin-docs-search-wrap {
+    width: 210px !important;
+    height: 42px !important;
+    padding: 0 14px !important;
+    border-radius: 21px !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+  }
+  .admin-docs-search-input {
+    font-size: 13px !important;
+  }
+
+  /* Filter circle */
+  .admin-docs-filter-btn {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+  }
+  .filter-text {
+    display: none !important;
+  }
+
+  /* + Add pill */
+  .admin-docs-add-btn {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 6px !important;
+    width: 88px !important;
+    height: 42px !important;
+    padding: 0 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    border-radius: 21px !important;
+  }
+  .add-btn-full {
+    display: none !important;
+  }
+  .admin-docs-add-btn-short {
+    display: inline-block !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     5. TABS  â€” Figma: generous top margin, full-width strip, larger text
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-docs-tabs {
+    display: flex !important;
+    gap: 0 !important;
+    width: auto !important;
+    /* Tabs must align with the section content:
+       section has 40px padding, so tabs use same 40px side margin */
+    height: auto !important;
+    margin: 40px 40px 0 40px !important;
+    padding: 0 !important;
+    border-bottom: 1px solid #E6E6E6 !important;
+  }
+  .admin-docs-tab {
+    flex: 1 !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+    padding: 14px 0 16px 0 !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    text-align: center !important;
+    color: #8A949F !important;
+    border: none !important;
+    /* Underline sits only under the tab's own 1/3 section â€” not wider */
+    border-bottom: 2px solid transparent !important;
+    transition: color 0.15s !important;
+    /* Prevent underline from bleeding â€” each tab is exactly 1/3 */
+  }
+  .admin-docs-tab--active {
+    font-weight: 600 !important;
+    color: #E22A2A !important;
+    border-bottom: 2px solid #E22A2A !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     6. TABLE SECTION WRAPPER
+        â€” aligned with header/tabs (40px side margins)
+        â€” extra top gap from tabs to header row
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-docs-section {
+    flex: 1 !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 40px !important;
+  }
+  .admin-docs-table {
+    width: 100% !important;
+    /* Increased breathing room between tabs and header row */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 40px 0 32px 0 !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     7. TABLE HEADER â€” rebalanced columns per Figma
+        TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-docs-table__header {
+    display: grid !important;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
+    width: 100% !important;
+    /*
+     * SAME grid as .admin-doc-row â€” guarantees column alignment.
+     * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
+     */
+    /*
+     * ROOT CAUSE FIX: .admin-docs-table__header is OUTSIDE .admin-docs-section.
+     * .admin-docs-section has padding: 0 40px
+     * .admin-doc-row (inside section) has padding: 0 20px
+     * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
+     * Header must use 60px padding to match that exact X position.
+     */
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 60px 14px 60px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.7px !important;
+    color: #374151 !important;
+    background: transparent !important;
+  }
+  /* Hide the NOTE column header */
+  .admin-docs-table__header span:nth-child(2) {
+    display: none !important;
+  }
+  .admin-docs-table__header span:last-child {
+    justify-self: center !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     8. TABLE ROWS â€” taller, properly padded cards
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-doc-row {
+    display: grid !important;
+    align-items: center !important;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
+    grid-template-rows: 1fr !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 72px !important;
+    box-sizing: border-box !important;
+    margin: 0 0 14px 0 !important;
+    padding: 0 20px !important;
+    background: #ffffff !important;
+    border: 1px solid #E4E4E4 !important;
+    border-radius: 14px !important;
+  }
+  .admin-doc-row:hover {
+    background: #fafafa !important;
+  }
+
+  /* Hide NOTE cell â€” not in Figma tablet view */
+  .admin-doc-row__note {
+    display: none !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     9. TITLE COLUMN â€” ellipsis on overflow
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-doc-row__title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    padding-left: 0 !important;
+    overflow: hidden !important;
+  }
+  .admin-doc-row__title span {
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+    color: #111827 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     10. ROW CELLS â€” restore desktop-style rendering
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-doc-row__cell {
+    display: flex !important;
+    align-items: center !important;
+    min-width: 0 !important;
+    font-size: 13px !important;
+    white-space: nowrap !important;
+    color: #8A949F !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* Show desktop elements */
+  .desktop-val { display: block !important; }
+  .desktop-status { display: flex !important; }
+  .admin-doc-row__menu {
+    display: flex !important;
+    position: static !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
+    transform: none !important;
+    justify-self: center !important;
+  }
+  .admin-doc-row__menu:hover {
+    position: static !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
+    transform: none !important;
+    justify-self: center !important;
+  }
+
+  /* Hide mobile-only elements */
+  .mobile-status-corner,
+  .mobile-only-icon,
+  .mobile-lbl,
+  .mobile-owner-badge {
+    display: none !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     11. STATUS â€” colored dot matching Dashboard mobile reference
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-badge {
+    display: inline-block !important;
+    width: 10px !important;
+    min-width: 0 !important;
+    height: 10px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    color: transparent !important;
+    border: none !important;
+    border-radius: 50% !important;
+  }
+  .admin-badge--pending { background-color: #D28E56 !important; }
+  .admin-badge--signed  { background-color: #559B6F !important; }
+  .admin-badge--expired { background-color: #E22A2A !important; }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     6. TABLE SECTION WRAPPER
+        â€” aligned with header/tabs (40px side margins)
+        â€” extra top gap from tabs to header row
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-docs-section {
+    flex: 1 !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 40px !important;
+  }
+  .admin-docs-table {
+    width: 100% !important;
+    /* Increased breathing room between tabs and header row */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 40px 0 32px 0 !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     7. TABLE HEADER â€” rebalanced columns per Figma
+        TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-docs-table__header {
+    display: grid !important;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
+    width: 100% !important;
+    /*
+     * SAME grid as .admin-doc-row â€” guarantees column alignment.
+     * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
+     */
+    /*
+     * ROOT CAUSE FIX: .admin-docs-table__header is OUTSIDE .admin-docs-section.
+     * .admin-docs-section has padding: 0 40px
+     * .admin-doc-row (inside section) has padding: 0 20px
+     * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
+     * Header must use 60px padding to match that exact X position.
+     */
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 60px 14px 60px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.7px !important;
+    color: #374151 !important;
+    background: transparent !important;
+  }
+  /* Hide the NOTE column header */
+  .admin-docs-table__header span:nth-child(2) {
+    display: none !important;
+  }
+  .admin-docs-table__header span:last-child {
+    justify-self: center !important;
+  }
+  /* Center the STATUS column header to align with the status dot below */
+  .admin-docs-table__header span:nth-child(6) {
+    text-align: center !important;
+    justify-self: center !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     8. TABLE ROWS â€” taller, properly padded cards
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-doc-row {
+    display: grid !important;
+    align-items: center !important;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
+    grid-template-rows: 1fr !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 72px !important;
+    box-sizing: border-box !important;
+    margin: 0 0 14px 0 !important;
+    padding: 0 20px !important;
+    background: #ffffff !important;
+    border: 1px solid #E4E4E4 !important;
+    border-radius: 14px !important;
+  }
+  .admin-doc-row:hover {
+    background: #fafafa !important;
+  }
+
+  /* Hide NOTE cell â€” not in Figma tablet view */
+  .admin-doc-row__note {
+    display: none !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     9. TITLE COLUMN â€” ellipsis on overflow
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-doc-row__title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    padding-left: 0 !important;
+    overflow: hidden !important;
+  }
+  .admin-doc-row__title span {
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+    color: #111827 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     10. ROW CELLS â€” restore desktop-style rendering
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-doc-row__cell {
+    display: flex !important;
+    align-items: center !important;
+    min-width: 0 !important;
+    font-size: 13px !important;
+    white-space: nowrap !important;
+    color: #8A949F !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* Show desktop elements */
+  .desktop-val { display: block !important; }
+  .desktop-status { display: flex !important; }
+  .admin-doc-row__menu {
+    display: flex !important;
+    position: static !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
+    transform: none !important;
+    justify-self: center !important;
+  }
+  .admin-doc-row__menu:hover {
+    position: static !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
+    transform: none !important;
+    justify-self: center !important;
+  }
+
+  /* Hide mobile-only elements */
+  .mobile-status-corner,
+  .mobile-only-icon,
+  .mobile-lbl,
+  .mobile-owner-badge {
+    display: none !important;
+  }
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     11. STATUS â€” colored dot matching Dashboard mobile reference
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .desktop-status {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .admin-badge {
+    display: inline-block !important;
+    width: 10px !important;
+    min-width: 0 !important;
+    height: 10px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    color: transparent !important;
+    border: none !important;
+    border-radius: 50% !important;
+  }
+  .admin-badge--pending { background-color: #D28E56 !important; }
+  .admin-badge--signed  { background-color: #559B6F !important; }
+  .admin-badge--expired { background-color: #E22A2A !important; }
+}
+
+/* Desktop-only overrides for Action Button alignment */
+@media (min-width: 1180px) {
+  /* Center the ACTION header to align perfectly with the button below it */
+  .admin-docs-page .admin-docs-table__header span:last-child {
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+    justify-self: center !important;
+  }
+
+  .admin-docs-page .admin-doc-row__menu {
+    display: flex !important;
+    position: relative !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
+    justify-self: center !important; /* Centers the button in the ACTION column */
+  }
+
+  /* Dropdown/hover menu positioning relative to action button */
+  .admin-docs-page .admin-doc-row__menu .action-menu,
+  .admin-docs-page .admin-doc-row__menu .dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
   }
 }
 
-@media (min-width: 769px) and (max-width: 1180px) {
-  .docs-section { margin: 0 16px; }
-
-  .docs-table__header {
-    grid-template-columns: 2fr 1fr 0.8fr 0.4fr;
-  }
-  .docs-table__header span:nth-child(2),
-  .docs-table__header span:nth-child(3),
-  .docs-table__header span:nth-child(4) {
-    display: none;
-  }
-
-  .doc-row {
-    grid-template-columns: 2fr 1fr 0.8fr 0.4fr;
-  }
-  .doc-row > *:nth-child(2),
-  .doc-row > *:nth-child(3),
-  .doc-row > *:nth-child(4) {
-    display: none;
-  }
+.admin-docs-empty-state {
+  padding: 40px;
+  font-size: 13px;
+  text-align: center;
+  color: #9ca3af;
 }

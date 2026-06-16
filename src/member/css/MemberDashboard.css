@@ -2,30 +2,30 @@
    Root Variables
    ========================================================================== */
 .member-theme {
-  --member-bg: #fffbfd;
   background-color: var(--member-bg) !important;
+  --member-bg: #fffbfd;
 }
 
 /* ==========================================================================
    Layout
    ========================================================================== */
 .member-theme.layout {
-  background-color: var(--member-bg) !important;
-  height: 100vh !important;
   max-width: 100vw !important;
+  height: 100vh !important;
+  background-color: var(--member-bg) !important;
   overflow: hidden !important;
 }
 
 .member-theme .sidebar {
+  z-index: 1000 !important;
   height: 100vh !important;
   overflow: visible !important;
-  z-index: 1000 !important;
 }
 
 .member-theme .sidebar__inner {
   height: 100vh !important;
-  overflow-y: auto !important;
   overflow-x: hidden !important;
+  overflow-y: auto !important;
   scrollbar-width: none !important;
 }
 .member-theme .sidebar__inner::-webkit-scrollbar {
@@ -37,10 +37,10 @@
 }
 
 .member-theme .main {
-  background: var(--member-bg) !important;
   height: 100vh !important;
-  overflow-y: auto !important;
+  background: var(--member-bg) !important;
   overflow-x: hidden !important;
+  overflow-y: auto !important;
   scrollbar-width: none !important;
 }
 .member-theme .main::-webkit-scrollbar {
@@ -55,7 +55,7 @@
   display: none !important;
 }
 
-@media (min-width: 1181px) {
+@media (min-width: 1180px) {
   .member-theme .main {
     padding: 24px 28px 24px 28px !important;
   }
@@ -67,12 +67,12 @@
 .mobile-page-header__divider {
   width: 100%;
   height: 1px;
-  background-color: #E4E4E4;
   margin-top: 14px;
   margin-bottom: 8px;
+  background-color: #E4E4E4;
 }
 
-@media (min-width: 1181px) {
+@media (min-width: 1180px) {
   .member-theme .topbar {
     gap: 8px !important;
   }
@@ -106,10 +106,10 @@
 }
 
 .member-theme .badge {
-  border-radius: 4px !important;
   padding: 3px 12px !important;
   font-size: 11px !important;
   font-weight: 400 !important;
+  border-radius: 4px !important;
 }
 
 /* ==========================================================================
@@ -117,37 +117,37 @@
    ========================================================================== */
 .member-theme .mobile-cta-row {
   display: flex !important;
+  gap: 0 !important;
+  box-sizing: border-box;
+  margin: 0 16px !important;
+  padding: 5px;
   background: #ffffff;
   border: 1px solid #E4E4E4;
   border-radius: 10px;
-  padding: 5px;
-  gap: 0 !important;
-  margin: 0 16px !important;
-  box-sizing: border-box;
 }
 
 .member-theme .mobile-cta {
+  display: flex;
   flex: 1;
+  justify-content: center;
+  align-items: center;
   height: 40px !important;
-  border: none !important;
   font-size: 13px;
   font-weight: 600;
-  cursor: pointer;
+  border: none !important;
   border-radius: 6px !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: all 0.15s ease;
+  cursor: pointer;
 }
 
 .member-theme .mobile-cta--primary {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
   color: #ffffff !important;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
 }
 
 .member-theme .mobile-cta--outline {
-  background: transparent !important;
   color: #1a1a2e !important;
+  background: transparent !important;
 }
 
 .member-theme .topbar__upload {
@@ -161,7 +161,7 @@
 /* ==========================================================================
    Responsive Breakpoints
    ========================================================================== */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   /* Hide all sidebars on mobile */
   .member-theme .desktop-sidebar-wrapper,
   .member-theme .mobile-sidebar-wrapper,
@@ -171,8 +171,8 @@
 
   /* 6. Overall Layout */
   .member-theme .main {
-    padding-bottom: 100px !important;
     gap: 8px !important;
+    padding-bottom: 100px !important;
   }
 
   /* 1. Dashboard Section */
@@ -212,16 +212,13 @@
     padding: 8px 16px !important;
   }
 
-  .member-theme .mobile-topbar__search-btn {
-    display: none !important;
-  }
 
   /* Reduce Mobile Font Sizes */
   .member-theme .topbar__title,
   .member-theme .docs-section__title,
   .member-theme .mobile-topbar__title {
-    font-size: 16px !important;
     margin-bottom: 4px !important;
+    font-size: 16px !important;
   }
   .member-theme .docs-section__title {
     margin-bottom: 16px !important;
@@ -239,15 +236,15 @@
 
   /* 5. Document Rows */
   .member-theme .doc-row {
-    padding: 10px 12px !important;
     gap: 16px !important;
+    padding: 10px 12px !important;
     overflow-x: hidden !important;
   }
 
   .member-theme .desktop-table-header {
     gap: 16px !important;
-    padding: 0 12px 6px 12px !important;
     margin-bottom: 4px !important;
+    padding: 0 12px 6px 12px !important;
   }
 
   /* Center Status Dot and Action Menu vertically and horizontally */
@@ -256,8 +253,8 @@
   .member-theme .desktop-table-header span:nth-child(6),
   .member-theme .desktop-table-header span:nth-child(7) {
     display: flex !important;
-    align-items: center !important;
     justify-content: center !important;
+    align-items: center !important;
     text-align: center;
   }
 
@@ -267,17 +264,17 @@
     transform: translateX(10px) !important;
   }
 
-  /* Status Column – Dot Only */
+  /* Status Column â€“ Dot Only */
   .member-theme .badge {
-    color: transparent !important;
-    font-size: 0 !important;
-    width: 10px !important;
-    height: 10px !important;
-    border-radius: 50% !important;
-    padding: 0 !important;
     display: inline-block !important;
+    width: 10px !important;
     min-width: 0 !important;
+    height: 10px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
     line-height: 0 !important;
+    color: transparent !important;
+    border-radius: 50% !important;
   }
   .member-theme .badge--pending { background-color: #D28E56 !important; }
   .member-theme .badge--signed { background-color: #559B6F !important; }
@@ -295,14 +292,34 @@
 
   /* Topbar Icon Spacing */
   .member-theme .mobile-topbar__icons {
-    gap: 16px !important;
+    gap: 18px !important;
+  }
+
+  /* Icon size: slightly larger on mobile/tablet */
+  .member-theme .mobile-topbar__icons .topbar__icon-btn svg {
+    width: 22px !important;
+    height: 22px !important;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1180px) {
+/* ── Mobile (<769px): hide Search icon, show Bell + Profile only ── */
+@media (max-width: 768px) {
+  .member-theme .mobile-topbar__search-btn {
+    display: none !important;
+  }
+}
+
+/* ── Tablet (769px–1179px): show all three icons ── */
+@media (min-width: 769px) and (max-width: 1179px) {
+  .member-theme .mobile-topbar__search-btn {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1179px) {
   .member-theme .main {
-    padding-bottom: 0 !important;
     gap: 20px !important;
+    padding-bottom: 0 !important;
   }
 
   .member-theme .mobile-cta-row {
@@ -320,8 +337,8 @@
 
   .member-theme .doc-row,
   .member-theme .desktop-table-header {
-    grid-template-columns: 2fr 1fr 0.8fr 0.4fr !important;
     display: grid !important;
+    grid-template-columns: 2fr 1fr 0.8fr 0.4fr !important;
   }
 
   .member-theme .doc-row > *:nth-child(2),
@@ -353,11 +370,25 @@
   }
 }
 
-@media (min-width: 1181px) {
+@media (min-width: 1180px) {
   .member-theme .mobile-cta-row {
     display: none !important;
   }
   .member-theme .topbar__icons {
     gap: 24px !important;
   }
+}
+
+/* Fix mobile layout order on Member Dashboard (<768px) */
+@media (max-width: 768px) {
+  .member-dashboard-page .main {
+    display: flex;
+    flex-direction: column;
+  }
+  .member-dashboard-page .mobile-topbar { order: 1; }
+  .member-dashboard-page .desktop-topbar { order: 2; }
+  .member-dashboard-page .mobile-page-header { order: 3; }
+  .member-dashboard-page .mobile-cta-row { order: 4; }
+  .member-dashboard-page .stats-grid { order: 5; }
+  .member-dashboard-page .docs-section { order: 6; }
 }

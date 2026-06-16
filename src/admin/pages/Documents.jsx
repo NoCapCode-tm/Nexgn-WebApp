@@ -1,9 +1,13 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Sidebar from '../components/Sidebar';
-import '../css/Dashboard.css';
-import '../css/Documents.css';
-import { Search, Bell, UserCircle } from "lucide-react";
+import { useState } from "react";
+import Sidebar from "../components/Sidebar";
+import Topbar from "../components/Topbar";
+import MobileNavbar from "../components/MobileNavbar";
+import DocumentsFilter from "../components/DocumentsFilter";
+import DocumentsTable from "../components/DocumentsTable";
+import { Search, Bell, UserCircle, Menu } from "lucide-react";
+
+import "../css/AdminBaseLayout.css";
+import "../css/Documents.css";    // Specific Document Styles
 
 const ALL_DOCS = [
   { id: 1, title: 'Project Proposal',           note: 'Send it to client',       signers: 'Jane Doe',       signedAt: '-',              owner: 'Me', status: 'Pending' },
@@ -19,45 +23,55 @@ const ALL_DOCS = [
 ];
 
 export default function Documents() {
-  const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('all');
-  const [search, setSearch] = useState('');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("all");
+  const [search, setSearch] = useState("");
 
-  const filtered = ALL_DOCS.filter(d => {
-    const matchSearch = d.title.toLowerCase().includes(search.toLowerCase()) ||
-                        d.signers.toLowerCase().includes(search.toLowerCase());
-    if (activeTab === 'created') return matchSearch && d.owner === 'Me';
-    if (activeTab === 'assigned') return matchSearch;
+  const filteredDocs = ALL_DOCS.filter(doc => {
+    const matchSearch = doc.title.toLowerCase().includes(search.toLowerCase()) || 
+                        doc.signers.toLowerCase().includes(search.toLowerCase());
+    if (activeTab === "created") return matchSearch && doc.owner === "Me";
+    // "assigned" could check if owner != "Me" or some other logic, assuming all match for mock data right now
+    if (activeTab === "assigned") return matchSearch; 
     return matchSearch;
   });
 
   return (
-    <div className="layout">
+    <div className="layout admin-theme admin-docs-page">
       {mobileNavOpen && (
-        <div className="mobile-backdrop" onClick={() => setMobileNavOpen(false)} />
+        <div
+          className="mobile-backdrop"
+          onClick={() => setMobileNavOpen(false)}
+          aria-hidden="true"
+        />
       )}
-      <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? 'mobile-sidebar-wrapper--open' : ''}`}>
+
+      {/* Responsive Sidebar Layout */}
+      <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? "mobile-sidebar-wrapper--open" : ""}`}>
         <Sidebar />
       </div>
+
       <div className="desktop-sidebar-wrapper">
         <Sidebar />
       </div>
 
       <div className="main">
-
-        {/* Mobile topbar */}
+        {/* Mobile Navigation */}
         <header className="mobile-topbar">
-          <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(o => !o)}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" strokeWidth="2" strokeLinecap="round">
-              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
+          <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(true)}>
+            <Menu size={22} color="#1a1a2e" />
           </button>
-          <span className="mobile-topbar__title">Documents</span>
+
           <div className="mobile-topbar__icons">
-            <button className="topbar__icon-btn"><Search size={18} color="#FF0915" strokeWidth={1.5} /></button>
-            <button className="topbar__icon-btn"><Bell size={18} color="#FF0915" strokeWidth={1.5} /></button>
-            <button className="topbar__icon-btn"><UserCircle size={20} color="#FF0915" strokeWidth={1.5} /></button>
+            <button className="topbar__icon-btn mobile-topbar__search-btn">
+              <Search size={18} color="#FF0915" strokeWidth={1.5} />
+            </button>
+            <button className="topbar__icon-btn">
+              <Bell size={18} color="#FF0915" strokeWidth={1.5} />
+            </button>
+            <button className="topbar__icon-btn">
+              <UserCircle size={20} color="#FF0915" strokeWidth={1.5} />
+            </button>
           </div>
         </header>
 
@@ -65,9 +79,9 @@ export default function Documents() {
         <div className="topbar desktop-topbar">
           <div className="topbar__top-row">
             <div className="topbar__icons">
-              <button className="topbar__icon-btn"><Search size={18} color="#FF0915" strokeWidth={1.5} /></button>
-              <button className="topbar__icon-btn"><Bell size={18} color="#FF0915" strokeWidth={1.5} /></button>
-              <button className="topbar__icon-btn"><UserCircle size={20} color="#FF0915" strokeWidth={1.5} /></button>
+              <button className="topbar__icon-btn"><Search size={24} color="#FF0915" strokeWidth={1.5} /></button>
+              <button className="topbar__icon-btn"><Bell size={24} color="#FF0915" strokeWidth={1.5} /></button>
+              <button className="topbar__icon-btn"><UserCircle size={24} color="#FF0915" strokeWidth={1.5} /></button>
             </div>
           </div>
           <div className="topbar__bottom-row">
@@ -75,86 +89,58 @@ export default function Documents() {
               <div className="topbar__title">Documents</div>
               <div className="topbar__sub">Manage and track all your signed and pending document</div>
             </div>
-            <div className="docs-topbar-actions">
-              <div className="docs-search-wrap">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-                <input
-                  className="docs-search-input"
-                  placeholder="Search Documents"
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
-                />
-              </div>
-              <button className="docs-filter-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/>
-                </svg>
-                Filter
-              </button>
-              <button className="docs-add-btn" onClick={() => navigate('/sign-yourself')}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
-                Add Contact
-              </button>
+            
+            {/* Top Right Actions */}
+            <DocumentsFilter search={search} setSearch={setSearch} />
+          </div>
+        </div>
+
+        {/* Mobile Page Header (Under Topbar) */}
+        <div className="mobile-page-header">
+          <div className="topbar__bottom-row">
+            <div>
+              <div className="topbar__title">Documents</div>
+              <div className="topbar__sub">Manage and track all your signed and pending document</div>
             </div>
           </div>
-        </div>
-
-        {/* Tabs */}
-        <div className="docs-tabs">
-          <button className={`docs-tab ${activeTab === 'all' ? 'docs-tab--active' : ''}`} onClick={() => setActiveTab('all')}>All</button>
-          <button className={`docs-tab ${activeTab === 'created' ? 'docs-tab--active' : ''}`} onClick={() => setActiveTab('created')}>Created by me</button>
-          <button className={`docs-tab ${activeTab === 'assigned' ? 'docs-tab--active' : ''}`} onClick={() => setActiveTab('assigned')}>Assigned by me</button>
-        </div>
-
-        {/* Table */}
-        <div className="docs-table__header">
-          <span>TITLE</span>
-          <span>NOTE</span>
-          <span>SIGNERS</span>
-          <span>SIGNED AT</span>
-          <span>OWNER</span>
-          <span>STATUS</span>
-          <span>Action</span>
-        </div>
-        <div className="docs-section">
-          <div className="docs-table">
-            {filtered.map(doc => (
-              <div className="doc-row" key={doc.id}>
-                <div className="doc-row__title">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF0915" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="doc-row__icon">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-                  </svg>
-                  {doc.title}
-                </div>
-                <div className="doc-row__note">{doc.note}</div>
-                <div className="doc-row__cell">{doc.signers}</div>
-                <div className="doc-row__cell">{doc.signedAt}</div>
-                <div className="doc-row__cell">{doc.owner}</div>
-                <div className="doc-row__cell">
-                  <span className={`badge badge--${doc.status.toLowerCase()}`}>{doc.status}</span>
-                </div>
-                <div className="doc-row__menu">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="5" cy="12" r="1"/>
-<circle cx="12" cy="12" r="1"/>
-<circle cx="19" cy="12" r="1"/>
-                  </svg>
-                </div>
-              </div>
-            ))}
-            {filtered.length === 0 && (
-              <div style={{ textAlign: 'center', padding: '40px', color: '#9ca3af', fontSize: '13px' }}>
-                No documents found.
-              </div>
-            )}
+          <hr className="mobile-header-divider" />
+          <div className="mobile-filter-row">
+            <DocumentsFilter search={search} setSearch={setSearch} />
           </div>
         </div>
 
+        {/* Tabs Section */}
+        <div className="admin-docs-tabs">
+          <button 
+            className={`admin-docs-tab ${activeTab === 'all' ? 'admin-docs-tab--active' : ''}`} 
+            onClick={() => setActiveTab('all')}
+          >
+            All
+          </button>
+          <button 
+            className={`admin-docs-tab ${activeTab === 'created' ? 'admin-docs-tab--active' : ''}`} 
+            onClick={() => setActiveTab('created')}
+          >
+            Created by me
+          </button>
+          <button 
+            className={`admin-docs-tab ${activeTab === 'assigned' ? 'admin-docs-tab--active' : ''}`} 
+            onClick={() => setActiveTab('assigned')}
+          >
+            Assigned to me
+          </button>
+        </div>
+
+        {/* Mobile "Need My Sign" Section Title */}
+        <div className="admin-docs-mobile-section-title">
+          Need My Sign
+        </div>
+
+        {/* Table Section */}
+        <DocumentsTable documents={filteredDocs} />
+
       </div>
+      <MobileNavbar />
     </div>
   );
 }

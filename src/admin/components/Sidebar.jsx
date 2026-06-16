@@ -1,16 +1,13 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-
-
-const UsersIcon = ({ color }) => (
+const HomeIcon = ({ color }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17 21V19C17 17.343 15.657 16 14 16H6C4.343 16 3 17.343 3 19V21" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <circle cx="10" cy="10" r="4" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M23 21V19C22.999 17.657 22.014 16.52 20.7 16.13" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M17 7.13C18.314 7.52 19.3 8.657 19.3 10C19.3 11.343 18.314 12.48 17 12.87" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M3 9.5L12 3L21 9.5V20C21 20.552 20.552 21 20 21H15V15H9V21H4C3.448 21 3 20.552 3 20V9.5Z" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
+
+
 
 const ClipboardIcon = ({ color }) => (
   <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +54,7 @@ const NexgnLogo = () => (
 
 const ToggleBtn = ({ expanded }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-    style={{ transform: expanded ? "rotate(180deg)" : "none", transition: "transform 0.22s" }}>
+    className={`admin-sidebar__toggle-icon ${expanded ? '' : 'admin-sidebar__toggle-icon--collapsed'}`}>
     <rect width="24" height="24" rx="12" fill="white"/>
     <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" stroke="#8A949F" strokeOpacity="0.58"/>
     <path d="M14.679 17.212L9.345 11.878L14.679 6.545" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -66,27 +63,46 @@ const ToggleBtn = ({ expanded }) => (
 );
 
 const navItems = [
-  { icon: UsersIcon,     label: "User Dashboard", path: "/" },
-  { icon: ClipboardIcon, label: "Signers", path: "/sign-yourself" },
-  { icon: FileIcon,      label: "Documents",      path: "/documents" },
-  { icon: ContactIcon,   label: "Contact Book",   path: "/contacts" },
+  { label: "Dashboard", path: "/dashboard", icon: HomeIcon },
+  { label: "Signers", path: "/sign-yourself", icon: ClipboardIcon },
+  { label: "Documents", path: "/documents", icon: FileIcon },
+  { label: "Contact Book", path: "/contact-book", icon: ContactIcon },
 ];
 
 const bottomItems = [
-  { icon: SettingsIcon, label: "Settings", path: "/settings" },
-  { icon: HelpIcon,     label: "Help",     path: "/help" },
+  { label: "Settings", path: "/settings", icon: SettingsIcon },
+  { label: "Help", path: "/help", icon: HelpIcon },
 ];
 
 export default function Sidebar() {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(() => {
+    const saved = localStorage.getItem("adminSidebarExpanded");
+    return saved === "true";
+  });
   const location = useLocation();
 
+  const toggleSidebar = () => {
+    setExpanded((prev) => {
+      const next = !prev;
+      localStorage.setItem("adminSidebarExpanded", next);
+      return next;
+    });
+  };
+
   const renderItem = ({ icon: Icon, label, path }) => {
-    const active = location.pathname === path;
+    const active = location.pathname === path || (path === "/sign-yourself" && location.pathname === "/request-signature");
+
+    const handleClick = (e) => {
+      if (path !== "/dashboard" && path !== "/sign-yourself" && path !== "/documents" && path !== "/contact-book") {
+        e.preventDefault();
+      }
+    };
+
     return (
       <Link
         key={path}
-        to={path}
+        to={(path === "/dashboard" || path === "/sign-yourself" || path === "/documents" || path === "/contact-book") ? path : "#"}
+        onClick={handleClick}
         className={`sidebar__item${active ? " sidebar__item--active" : ""}`}
         title={!expanded ? label : undefined}
       >
@@ -95,7 +111,7 @@ export default function Sidebar() {
           <Icon color={active ? "#FF0915" : "#8A949F"} />
         </span>
         {expanded && (
-          <span className="sidebar__item-label" style={{ color: active ? "#FF0915" : "#8A949F" }}>
+          <span className={`sidebar__item-label ${active ? 'admin-sidebar__item-label--active' : 'admin-sidebar__item-label--inactive'}`}>
             {label}
           </span>
         )}
@@ -105,15 +121,21 @@ export default function Sidebar() {
 
   return (
     <aside className={`sidebar ${expanded ? "sidebar--expanded" : ""}`}>
-      <div className="sidebar__toggle" onClick={() => setExpanded(e => !e)}>
+      <div className="sidebar__toggle" onClick={toggleSidebar}>
         <ToggleBtn expanded={expanded} />
       </div>
       <div className="sidebar__inner">
         <div className="sidebar__logo">
-  {expanded
-    ? <img src="/nexgn-logo.png?v=1" alt="Nexgn" style={{ width: '184px', height: '56px', objectFit: 'contain' }} />
-     : <NexgnLogo />}
-</div>
+          {expanded ? (
+            <img
+              src="/nexgn-logo.png?v=1"
+              alt="Nexgn"
+              className="admin-sidebar__logo-img"
+            />
+          ) : (
+            <NexgnLogo />
+          )}
+        </div>
         <div className="sidebar__divider" />
         <nav className="sidebar__nav">
           {navItems.map(renderItem)}
