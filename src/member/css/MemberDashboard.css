@@ -281,9 +281,12 @@
   .member-theme .badge--expired { background-color: #E22A2A !important; }
 
   /* Long Document Names */
+  .member-theme .doc-row__title {
+    min-width: 0 !important;
+  }
   .member-theme .doc-row__title span {
     display: inline-block !important;
-    max-width: 130px !important;
+    width: 120px !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;

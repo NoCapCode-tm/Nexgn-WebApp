@@ -1,0 +1,369 @@
+/* Page layout */
+.settings-body {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.settings-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Header & Topbar */
+.settings-topbar__bottom-row {
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.8);
+}
+
+.settings-topbar__bottom-row .topbar__sub {
+  font-size: 15px;
+}
+
+.settings-topbar-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: #ffffff;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
+  min-width: 200px;
+}
+
+.settings-topbar-search:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.settings-topbar-search__input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #1a1a2e;
+  width: 100%;
+}
+
+.settings-topbar-search__input::placeholder {
+  color: #8A949F;
+}
+
+/* Sidebar & Navigation */
+.settings-nav {
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+  width: 260px;
+  flex-shrink: 0;
+  background: transparent;
+  gap: 16px;
+}
+
+.settings-nav__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 9px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1a1a2e;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.settings-nav__item:hover:not(.settings-nav__item--disabled) {
+  background: #FFF0F0;
+  color: #FF0915;
+}
+
+.settings-nav__item--active {
+  background: #FFDCDC !important;
+  color: #FF0915 !important;
+  font-weight: 500;
+}
+
+.settings-nav__item--disabled {
+  color: #1a1a2e;
+  cursor: default;
+  opacity: 0.7;
+}
+
+/* Cards & Sections */
+.settings-card {
+  background: #ffffff;
+  border: 1px solid #E4E4E4;
+  border-radius: 12px;
+  box-shadow: 0 0 14.5px 1px rgba(131, 131, 131, 0.10);
+  padding: 24px 28px 20px 28px;
+  max-width: 1000px;
+}
+
+.settings-card__title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+}
+
+.settings-card__divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(204, 204, 204, 0.8);
+  margin-bottom: 24px;
+}
+
+.settings-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 24px;
+}
+
+.settings-avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #FFDCDC;
+  flex-shrink: 0;
+  border: 2px solid #f3dede;
+  position: relative;
+}
+
+.settings-avatar__img {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.settings-avatar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Forms & Inputs */
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.settings-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settings-form__label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.settings-form__input {
+  width: 100%;
+  max-width: 560px;
+  padding: 8px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #1a1a2e;
+  background: #ffffff;
+  border: 1px solid #CCCCCC;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+}
+
+.settings-form__input:focus {
+  border-color: #FF0915;
+  box-shadow: 0 0 0 3px rgba(255, 9, 21, 0.08);
+}
+
+.settings-form__input--readonly {
+  background: #F9FAFB;
+  color: #6B7280;
+  cursor: not-allowed;
+}
+
+.settings-form__input--readonly:focus {
+  border-color: #D1D5DB;
+  box-shadow: none;
+}
+
+.settings-form__helper {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #8A949F;
+  margin: 0;
+}
+
+.settings-form__success {
+  padding: 10px 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #179747;
+  background: #E6F7EC;
+  border: 1px solid #B7E4C7;
+  border-radius: 8px;
+  max-width: 100%;
+}
+
+.settings-form__footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 12px;
+}
+
+/* Tables & Rows */
+
+/* Buttons & Actions */
+.settings-avatar__file-input {
+  display: none;
+}
+
+.settings-avatar__upload-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 28px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666666;
+  background: linear-gradient(#ffffff, #ffffff) padding-box,
+              linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) border-box;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.settings-avatar__upload-btn:hover {
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) padding-box,
+              linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) border-box;
+  color: #ffffff;
+}
+
+.settings-avatar__helper {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #8A949F;
+  margin: 0;
+}
+
+.settings-form__submit {
+  width: auto;
+  min-width: 200px;
+  padding: 12px 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  letter-spacing: 0.2px;
+}
+
+.settings-form__submit:hover {
+  background: linear-gradient(90deg, #D10008 0%, #B30000 55%, #960101 100%);
+  box-shadow: 0 4px 12px rgba(255, 9, 21, 0.25);
+}
+
+/* Modals & Dropdowns */
+
+/* Utility States */
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1179px) {
+  .settings-body {
+    padding: 0 16px 16px 16px;
+    gap: 20px;
+  }
+
+  .settings-nav {
+    min-width: 148px;
+    width: 148px;
+  }
+
+  .settings-card {
+    padding: 20px 20px 24px 20px;
+  }
+
+  .settings-form__input {
+    max-width: 100%;
+  }
+
+  .settings-form__footer {
+    max-width: 100%;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .settings-body {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px 16px 16px;
+  }
+
+  .settings-nav {
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .settings-nav__item {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .settings-card {
+    padding: 18px 16px 20px 16px;
+  }
+
+  .settings-card__title {
+    font-size: 17px;
+  }
+
+  .settings-form__input {
+    max-width: 100%;
+  }
+
+  .settings-form__footer {
+    max-width: 100%;
+  }
+
+  .settings-avatar-row {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+}

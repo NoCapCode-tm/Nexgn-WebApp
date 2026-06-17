@@ -115,6 +115,14 @@ background: transparent;
   flex-shrink: 0;
 }
 
+.member-sidebar__toggle-icon {
+  transition: transform 0.3s ease;
+}
+
+.member-sidebar__toggle-icon--collapsed {
+  transform: rotate(180deg);
+}
+
 .sidebar__nav {
   display: flex;
   flex: 1;

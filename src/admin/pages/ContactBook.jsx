@@ -10,31 +10,94 @@ import "../css/AdminBaseLayout.css";
 import "../css/ContactBook.css";
 
 const CONTACTS = [
-  { name: "Alice Smith", email: "alice.smith@example.com" },
-  { name: "Bob Jones", email: "bob.jones@example.com" },
-  { name: "Charlie Brown", email: "charlie.brown@example.com" },
-  { name: "Diana Prince", email: "diana.prince@example.com" },
-  { name: "Blair Croft", email: "blair.croft@example.com" }
+  { name: "Alice Smith", email: "alice.smith@example.com", department: "Legal", status: "Active" },
+  { name: "Bob Jones", email: "bob.jones@example.com", department: "Engineering", status: "Active" },
+  { name: "Charlie Brown", email: "charlie.brown@example.com", department: "Marketing", status: "Inactive" },
+  { name: "Diana Prince", email: "diana.prince@example.com", department: "Finance", status: "Active" },
+  { name: "Blair Croft", email: "blair.croft@example.com", department: "HR", status: "Active" }
 ];
 
-function ContactActions({ search, setSearch, onAddClick }) {
+function ContactActions({
+  search,
+  setSearch,
+  selectedStatus,
+  setSelectedStatus,
+  selectedDepartment,
+  setSelectedDepartment,
+  onAddClick
+}) {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const departments = ["All", ...new Set(CONTACTS.map(c => c.department).filter(Boolean))];
+  const statuses = ["All", ...new Set(CONTACTS.map(c => c.status).filter(Boolean))];
+
+  const hasActiveFilter = selectedStatus !== "All" || selectedDepartment !== "All";
+
   return (
     <div className="admin-contact-topbar-actions">
       <div className="admin-contact-search-wrap">
         <Search size={16} color="#9ca3af" strokeWidth={2} />
         <input
           className="admin-contact-search-input"
-          placeholder="Search Documents"
+          placeholder="Search Contacts"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <button className="admin-contact-filter-btn">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/>
-        </svg>
-        <span className="filter-text">Filter</span>
-      </button>
+      <div className="admin-contact-filter-wrapper">
+        <button
+          className="admin-contact-filter-btn"
+          onClick={() => setIsFilterOpen(!isFilterOpen)}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/>
+          </svg>
+          <span className="filter-text">{hasActiveFilter ? "Filter (Active)" : "Filter"}</span>
+        </button>
+
+        {isFilterOpen && (
+          <div className="admin-contact-filter-dropdown">
+            <div className="admin-contact-filter-dropdown-group">
+              <label className="admin-contact-filter-dropdown-label">Status</label>
+              <select
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+                className="admin-contact-filter-dropdown-select"
+              >
+                {statuses.map(st => (
+                  <option key={st} value={st}>{st}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="admin-contact-filter-dropdown-group">
+              <label className="admin-contact-filter-dropdown-label">Department</label>
+              <select
+                value={selectedDepartment}
+                onChange={(e) => setSelectedDepartment(e.target.value)}
+                className="admin-contact-filter-dropdown-select"
+              >
+                {departments.map(dept => (
+                  <option key={dept} value={dept}>{dept}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="admin-contact-filter-dropdown-divider" />
+
+            <button
+              onClick={() => {
+                setSelectedStatus("All");
+                setSelectedDepartment("All");
+                setIsFilterOpen(false);
+              }}
+              className="admin-contact-filter-dropdown-reset"
+            >
+              Reset Filters
+            </button>
+          </div>
+        )}
+      </div>
       <button className="admin-contact-add-btn" onClick={onAddClick}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/>
@@ -49,14 +112,29 @@ function ContactActions({ search, setSearch, onAddClick }) {
 export default function ContactBook() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("All");
+  const [selectedDepartment, setSelectedDepartment] = useState("All");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
 
-  const filteredContacts = CONTACTS.filter(
-    c =>
-      c.name.toLowerCase().includes(search.toLowerCase()) ||
-      c.email.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredContacts = CONTACTS.filter(c => {
+    const cleanSearch = search.trim().toLowerCase();
+    const matchesSearch = c.name.toLowerCase().includes(cleanSearch) ||
+                          c.email.toLowerCase().includes(cleanSearch);
+    const matchesStatus = selectedStatus === "All" || c.status === selectedStatus;
+    const matchesDept = selectedDepartment === "All" || c.department === selectedDepartment;
+    return matchesSearch && matchesStatus && matchesDept;
+  });
+
+  const focusSearchInput = () => {
+    const inputs = document.querySelectorAll(".admin-contact-search-input, .member-contact-search-input");
+    for (const input of inputs) {
+      if (input.offsetWidth > 0 || input.offsetHeight > 0) {
+        input.focus();
+        break;
+      }
+    }
+  };
 
   return (
     <div className="layout admin-theme admin-contact-page">
@@ -85,7 +163,7 @@ export default function ContactBook() {
           </button>
 
           <div className="mobile-topbar__icons">
-            <button className="topbar__icon-btn mobile-topbar__search-btn">
+            <button className="topbar__icon-btn mobile-topbar__search-btn" onClick={focusSearchInput}>
               <Search size={18} color="#FF0915" strokeWidth={1.5} />
             </button>
             <button className="topbar__icon-btn">
@@ -101,7 +179,7 @@ export default function ContactBook() {
         <div className="topbar desktop-topbar">
           <div className="topbar__top-row">
             <div className="topbar__icons">
-              <button className="topbar__icon-btn"><Search size={24} color="#FF0915" strokeWidth={1.5} /></button>
+              <button className="topbar__icon-btn" onClick={focusSearchInput}><Search size={24} color="#FF0915" strokeWidth={1.5} /></button>
               <button className="topbar__icon-btn"><Bell size={24} color="#FF0915" strokeWidth={1.5} /></button>
               <button className="topbar__icon-btn"><UserCircle size={24} color="#FF0915" strokeWidth={1.5} /></button>
             </div>
@@ -113,7 +191,15 @@ export default function ContactBook() {
             </div>
             
             {/* Top Right Actions */}
-            <ContactActions search={search} setSearch={setSearch} onAddClick={() => setIsAddModalOpen(true)} />
+            <ContactActions
+              search={search}
+              setSearch={setSearch}
+              selectedStatus={selectedStatus}
+              setSelectedStatus={setSelectedStatus}
+              selectedDepartment={selectedDepartment}
+              setSelectedDepartment={setSelectedDepartment}
+              onAddClick={() => setIsAddModalOpen(true)}
+            />
           </div>
         </div>
 
@@ -127,7 +213,15 @@ export default function ContactBook() {
           </div>
           <hr className="mobile-header-divider" />
           <div className="mobile-filter-row">
-            <ContactActions search={search} setSearch={setSearch} onAddClick={() => setIsAddModalOpen(true)} />
+            <ContactActions
+              search={search}
+              setSearch={setSearch}
+              selectedStatus={selectedStatus}
+              setSelectedStatus={setSelectedStatus}
+              selectedDepartment={selectedDepartment}
+              setSelectedDepartment={setSelectedDepartment}
+              onAddClick={() => setIsAddModalOpen(true)}
+            />
           </div>
         </div>
 

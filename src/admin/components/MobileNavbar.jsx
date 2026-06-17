@@ -59,7 +59,7 @@ export default function MobileNavbar() {
         const Icon = item.icon;
 
         const handleClick = (e) => {
-          if (item.path !== "/admin-dashboard" && item.path !== "/admin-sign-yourself" && item.path !== "/admin-documents" && item.path !== "/admin-contact-book") {
+          if (item.path !== "/admin-dashboard" && item.path !== "/admin-sign-yourself" && item.path !== "/admin-documents" && item.path !== "/admin-contact-book" && item.path !== "/settings") {
             e.preventDefault();
           }
         };
@@ -69,7 +69,7 @@ export default function MobileNavbar() {
         return (
           <Link
             key={item.path}
-            to={(item.path === "/admin-dashboard" || item.path === "/admin-sign-yourself" || item.path === "/admin-documents" || item.path === "/admin-contact-book") ? item.path : "#"}
+            to={(item.path === "/admin-dashboard" || item.path === "/admin-sign-yourself" || item.path === "/admin-documents" || item.path === "/admin-contact-book" || item.path === "/settings") ? item.path : "#"}
             onClick={handleClick}
             className={`admin-mobile-navbar__item ${isActive ? "admin-mobile-navbar__item--active" : ""}`}
           >

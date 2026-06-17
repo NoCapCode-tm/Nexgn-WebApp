@@ -1,5 +1,5 @@
 
-/* â”€â”€ TOPBAR ACTIONS (search + filter + add) â”€â”€ */
+/* TOPBAR ACTIONS (search + filter + add)  */
 .admin-contact-topbar-actions {
   display: flex;
   align-items: center;
@@ -105,7 +105,7 @@
   display: none;
 }
 
-/* â”€â”€ TABLE SECTION â”€â”€ */
+/* TABLE SECTION  */
 .admin-contact-section {
   flex: 1;
   padding: 0;
@@ -176,7 +176,7 @@
   display: none;
 }
 
-/* â”€â”€ RESPONSIVE OVERRIDES (Exact match to Documents) â”€â”€ */
+/*  RESPONSIVE OVERRIDES (Exact match to Documents) */
 
 @media (max-width: 768px) {
   /* Action row mobile */
@@ -349,7 +349,7 @@
   }
 }
 
-/* â”€â”€ ADD CONTACT MODAL â”€â”€ */
+/*  ADD CONTACT MODAL  */
 .add-contact-modal-overlay {
   display: flex;
   position: fixed;
@@ -572,6 +572,14 @@
   margin-top: 8px;
   font-size: 11px;
   color: #9ca3af;
+  background-color: #FFFFFF;
+  border: 1px solid #E6E6E6;
+  border-radius: 8px;
+  height: 32px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .skills-row {
@@ -746,16 +754,12 @@
 
 @media (min-width: 769px) and (max-width: 1179px) {
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     1. HIDE DESKTOP TOPBAR ON TABLET
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /*  HIDE DESKTOP TOPBAR ON TABLET */
   .admin-contact-page .desktop-topbar {
     display: none !important;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     2. HEADER LAYOUT (mobile-page-header)
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /*  2. HEADER LAYOUT (mobile-page-header) */
   .admin-contact-page .mobile-page-header {
     display: grid !important;
     align-items: center !important;
@@ -795,9 +799,8 @@
     grid-row: 2 !important;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     3. TITLE TYPOGRAPHY (Match Figma)
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* 
+     3. TITLE TYPOGRAPHY (Match Figma) */
   .admin-contact-page .topbar__title {
     margin: 0 !important;
     font-size: 24px !important;
@@ -813,9 +816,7 @@
     color: #8A949F !important;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     4. ACTION CONTROLS
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /*   4. ACTION CONTROLS */
   .admin-contact-topbar-actions {
     display: flex !important;
     align-items: center !important;
@@ -867,9 +868,7 @@
     display: none !important;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     5. TABLE AND CARDS
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* 5. TABLE AND CARDS */
   .admin-contact-table {
     display: flex !important;
     flex-direction: column !important;
@@ -884,9 +883,7 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     6. MODAL OVERRIDES
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* 6. MODAL OVERRIDES */
   .add-contact-modal-overlay {
     justify-content: center !important;
     padding: 60px 24px 24px 24px !important;
@@ -915,4 +912,84 @@
 
 .admin-contact-field-full--mt {
   margin-top: 20px !important;
+}
+
+/* Filter Popup styling */
+.admin-contact-filter-wrapper {
+  position: relative;
+}
+
+.admin-contact-filter-dropdown {
+  position: absolute;
+  top: 48px; /* Desktop default */
+  right: 0;
+  z-index: 1000;
+  width: 220px;
+  background-color: #FFFFFF;
+  border: 1px solid #E4E4E4;
+  border-radius: 12px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 12px;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-contact-filter-dropdown-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-contact-filter-dropdown-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+}
+
+.admin-contact-filter-dropdown-select {
+  width: 100%;
+  height: 32px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: 1px solid #E4E4E4;
+  padding: 0 8px;
+  background-color: #fff;
+  color: #374151;
+  outline: none;
+  cursor: pointer;
+}
+
+.admin-contact-filter-dropdown-divider {
+  border-top: 1px solid #F3F4F6;
+  margin: 4px 0;
+}
+
+.admin-contact-filter-dropdown-reset {
+  width: 100%;
+  padding: 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  color: #FF0915;
+  cursor: pointer;
+}
+
+/* Positioning overrides based on viewport */
+@media (max-width: 768px) {
+  .admin-contact-filter-dropdown {
+    top: 46px !important;
+  }
+}
+@media (min-width: 769px) and (max-width: 1179px) {
+  .admin-contact-filter-dropdown {
+    top: 46px !important;
+  }
 }
