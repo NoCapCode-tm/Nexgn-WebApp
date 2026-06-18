@@ -26,14 +26,18 @@ export default function MemberDocuments() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
   const [search, setSearch] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("All");
 
   const filteredDocs = ALL_DOCS.filter(doc => {
     const matchSearch = doc.title.toLowerCase().includes(search.toLowerCase()) || 
                         doc.signers.toLowerCase().includes(search.toLowerCase());
-    if (activeTab === "created") return matchSearch && doc.owner === "Me";
+    const matchesStatus = selectedStatus === "All" || 
+                          (doc.status && doc.status.toLowerCase() === selectedStatus.toLowerCase());
+    let matchesTab = true;
+    if (activeTab === "created") matchesTab = doc.owner === "Me";
     // "assigned" could check if owner != "Me" or some other logic, assuming all match for mock data right now
-    if (activeTab === "assigned") return matchSearch; 
-    return matchSearch;
+    if (activeTab === "assigned") matchesTab = true; 
+    return matchSearch && matchesStatus && matchesTab;
   });
 
   return (
@@ -91,7 +95,12 @@ export default function MemberDocuments() {
             </div>
             
             {/* Top Right Actions */}
-            <MemberDocumentsFilter search={search} setSearch={setSearch} />
+            <MemberDocumentsFilter 
+              search={search} 
+              setSearch={setSearch} 
+              selectedStatus={selectedStatus}
+              setSelectedStatus={setSelectedStatus}
+            />
           </div>
         </div>
 
@@ -105,7 +114,12 @@ export default function MemberDocuments() {
           </div>
           <hr className="mobile-header-divider" />
           <div className="mobile-filter-row">
-            <MemberDocumentsFilter search={search} setSearch={setSearch} />
+            <MemberDocumentsFilter 
+              search={search} 
+              setSearch={setSearch} 
+              selectedStatus={selectedStatus}
+              setSelectedStatus={setSelectedStatus}
+            />
           </div>
         </div>
 

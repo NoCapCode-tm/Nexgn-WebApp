@@ -63,10 +63,10 @@ const ToggleBtn = ({ expanded }) => (
 );
 
 const navItems = [
-  { label: "Dashboard", path: "/dashboard", icon: HomeIcon },
-  { label: "Signers", path: "/sign-yourself", icon: ClipboardIcon },
-  { label: "Documents", path: "/documents", icon: FileIcon },
-  { label: "Contact Book", path: "/contact-book", icon: ContactIcon },
+  { label: "Dashboard", path: "/admin-dashboard", icon: HomeIcon },
+  { label: "Signers", path: "/admin-sign-yourself", icon: ClipboardIcon },
+  { label: "Documents", path: "/admin-documents", icon: FileIcon },
+  { label: "Contact Book", path: "/admin-contact-book", icon: ContactIcon },
 ];
 
 const bottomItems = [
@@ -90,10 +90,10 @@ export default function Sidebar() {
   };
 
   const renderItem = ({ icon: Icon, label, path }) => {
-    const active = location.pathname === path || (path === "/sign-yourself" && location.pathname === "/request-signature");
+    const active = location.pathname === path || (path === "/admin-sign-yourself" && location.pathname === "/admin-request-signature");
 
     const handleClick = (e) => {
-      if (path !== "/dashboard" && path !== "/sign-yourself" && path !== "/documents" && path !== "/contact-book") {
+      if (path !== "/admin-dashboard" && path !== "/admin-sign-yourself" && path !== "/admin-documents" && path !== "/admin-contact-book" && path !== "/settings") {
         e.preventDefault();
       }
     };
@@ -101,7 +101,7 @@ export default function Sidebar() {
     return (
       <Link
         key={path}
-        to={(path === "/dashboard" || path === "/sign-yourself" || path === "/documents" || path === "/contact-book") ? path : "#"}
+        to={(path === "/admin-dashboard" || path === "/admin-sign-yourself" || path === "/admin-documents" || path === "/admin-contact-book" || path === "/settings") ? path : "#"}
         onClick={handleClick}
         className={`sidebar__item${active ? " sidebar__item--active" : ""}`}
         title={!expanded ? label : undefined}

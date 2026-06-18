@@ -43,7 +43,7 @@ const navItems = [
   { label: "Signers", path: "/member-sign-yourself", icon: ClipboardIcon },
   { label: "Documents", path: "/member-documents", icon: FileIcon },
   { label: "Contact Book", path: "/member-contact-book", icon: ContactIcon },
-  { label: "Settings", path: "/settings", icon: SettingsIcon },
+  { label: "Settings", path: "/member-settings", icon: SettingsIcon },
 ];
 
 export default function MemberMobileNavbar() {
@@ -59,7 +59,7 @@ export default function MemberMobileNavbar() {
         const Icon = item.icon;
 
         const handleClick = (e) => {
-          if (item.path !== "/member-dashboard" && item.path !== "/member-sign-yourself" && item.path !== "/member-documents" && item.path !== "/member-contact-book") {
+          if (item.path !== "/member-dashboard" && item.path !== "/member-sign-yourself" && item.path !== "/member-documents" && item.path !== "/member-contact-book" && item.path !== "/member-settings") {
             e.preventDefault();
           }
         };
@@ -69,7 +69,7 @@ export default function MemberMobileNavbar() {
         return (
           <Link
             key={item.path}
-            to={(item.path === "/member-dashboard" || item.path === "/member-sign-yourself" || item.path === "/member-documents" || item.path === "/member-contact-book") ? item.path : "#"}
+            to={(item.path === "/member-dashboard" || item.path === "/member-sign-yourself" || item.path === "/member-documents" || item.path === "/member-contact-book" || item.path === "/member-settings") ? item.path : "#"}
             onClick={handleClick}
             className={`member-mobile-navbar__item ${isActive ? "member-mobile-navbar__item--active" : ""}`}
           >
