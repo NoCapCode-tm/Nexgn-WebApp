@@ -1,0 +1,379 @@
+/* Layout */
+.landing-layout {
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+}
+
+.landing-background-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 50%;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* Navigation */
+.landing-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 2%;
+  background: transparent;
+}
+
+.landing-nav__left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.landing-nav__logo {
+  height: 44px;
+  width: auto;
+  margin-left: 24px;
+}
+
+.landing-nav__center {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.landing-nav__link,
+.landing-nav__login {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+  color: #000000;
+  letter-spacing: 0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.landing-nav__link:hover,
+.landing-nav__login:hover {
+  color: #E80000;
+}
+
+.landing-nav__right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+/* Hero */
+.hero-section {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 0 0 8%;
+  gap: 40px;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 540px;
+}
+
+.hero-content__title {
+  font-size: 58px;
+  line-height: 1.1;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 32px 0;
+  letter-spacing: 0;
+}
+
+.hero-content__description {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000000;
+  margin: 0 0 32px 0;
+  max-width: 480px;
+  letter-spacing: 0;
+}
+
+.hero-content__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-content__actions .btn-primary,
+.hero-content__actions .btn-secondary {
+  min-width: 196px;
+  box-sizing: border-box;
+}
+
+.hero-preview {
+  flex: 1.2;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.hero-preview__image {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Sections */
+.features-section {
+  position: relative;
+  padding: 200px 8% 80px;
+  background-color: #FFFFFF;
+  min-height: 1033px;
+}
+
+.features-background {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1440px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 120px 0px 0px 0px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.features-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.features-intro {
+  text-align: center;
+  max-width: 1020px;
+  margin: 20px auto 160px;
+}
+
+.features-subtitle {
+  color: #E22A2A;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 24px 0;
+}
+
+.features-column-title {
+  color: #E22A2A;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 64px 0;
+}
+
+.features-description {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 100%;
+  color: #000000;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 60px;
+  max-width: 1080px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.how-it-works {
+  padding-right: 20px;
+  margin-left: -90px;
+}
+
+.how-it-works .features-column-title {
+  margin-left: 0;
+  font-size: 16px;
+  margin-bottom: 64px;
+}
+
+.key-benefits {
+  text-align: left;
+  position: relative;
+  left: 160px;
+}
+
+/* Cards */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.benefit-card {
+  background: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.benefit-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 18px;
+  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.benefit-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.benefit-card h4 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+  color: #000000;
+  margin: 0;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 16px;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-step::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  bottom: -64px;
+  left: 5px;
+  width: 1px;
+  background-color: #E22A2A;
+  z-index: 1;
+}
+
+.timeline-step:last-child::before {
+  display: none;
+}
+
+.timeline-number {
+  color: #E22A2A;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+  width: 60px;
+  margin-right: 0;
+  flex-shrink: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.timeline-content h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 10px 0;
+  line-height: 100%;
+}
+
+.timeline-content p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  margin: 0;
+  line-height: 100%;
+  max-width: 410px;
+}
+
+/* Forms & Inputs */
+
+/* Tables */
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: #ffffff;
+  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  border: 0.9px solid transparent;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #000000;
+  border: 0.9px solid #000000;
+}
+
+.btn-secondary:hover {
+  background: #f5f5f5;
+}
+
+.landing-nav .btn-primary {
+  font-size: 13px;
+  padding: 10px 20px;
+}
+
+/* Modals & Dropdowns */
+
+/* Utility States */
+
+/* Tablet */
+
+/* Mobile */

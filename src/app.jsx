@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./landing_page/LandingPage";
 
 /* ADMIN MODULE */
 import Dashboard from "./admin/pages/Dashboard";
@@ -19,6 +20,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* LANDING PAGE */}
+        <Route path="/landing" element={<LandingPage />} />
+
         {/* ADMIN ROUTES */}
         <Route path="/" element={<Dashboard />} />
         <Route path="/admin-dashboard" element={<Dashboard />} />
