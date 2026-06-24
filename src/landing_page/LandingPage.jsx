@@ -38,7 +38,7 @@ export default function LandingPage() {
             scanning, no delays.
           </p>
           <div className="hero-content__actions">
-            <button className="btn-primary btn-primary--hero">Get Started</button>
+            <button className="btn-primary">Get Started</button>
             <button className="btn-secondary">See how it works</button>
           </div>
         </div>
@@ -132,6 +132,119 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Extended Features Section */}
+      <section className="extended-section">
+        <div className="extended-bg-group">
+          <div className="extended-background"></div>
+          <div className="extended-fade-top"></div>
+          <div className="extended-fade-bottom"></div>
+        </div>
+
+        {/* Lock Graphic - behind all content */}
+        <div className="lock-graphic-container">
+          <img src="/Gemini.png" alt="" className="lock-graphic-img" />
+          <div className="lock-fade-bottom"></div>
+          <div className="lock-fade-right"></div>
+        </div>
+
+        <div className="extended-container">
+          
+          <div className="paperless-block">
+            <h3 className="extended-subtitle">FEATURES</h3>
+            <h2 className="extended-title">Everything you need to go paperless</h2>
+            
+            <div className="paperless-grid">
+              <div className="paperless-item">
+                <div className="paperless-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                </div>
+                <p>Document Upload &<br/>Management</p>
+              </div>
+              <div className="paperless-item">
+                <div className="paperless-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                  </svg>
+                </div>
+                <p>Multi-Signer<br/>Workflows</p>
+              </div>
+              <div className="paperless-item">
+                <div className="paperless-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    <line x1="12" y1="19" x2="20" y2="19"></line>
+                  </svg>
+                </div>
+                <p>Digital Signatures</p>
+              </div>
+              <div className="paperless-item">
+                <div className="paperless-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    <line x1="12" y1="11" x2="16" y2="11"></line>
+                    <line x1="12" y1="15" x2="16" y2="15"></line>
+                    <line x1="8" y1="11" x2="8.01" y2="11"></line>
+                    <line x1="8" y1="15" x2="8.01" y2="15"></line>
+                  </svg>
+                </div>
+                <p>Audit Trail & PDF<br/>Download</p>
+              </div>
+
+            
+            <div className="paperless-line-1"></div>
+            <div className="paperless-line-2"></div>
+            <div className="paperless-line-3"></div>
+          </div>
+          </div>
+
+          <div className="security-block">
+            <h3 className="extended-subtitle">TRUST & SECURITY</h3>
+            <h2 className="extended-title">Your documents are in safe hands</h2>
+            
+            <div className="security-grid">
+              <div className="security-card">
+                <div className="security-icon">
+                  <svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                </div>
+                <h4>Secure Signing</h4>
+                <p>End-to-end encryption for<br/>documents and signature exchanges.</p>
+              </div>
+              <div className="security-card">
+                <div className="security-icon">
+                  <svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M 17 5 H 5 a 2 2 0 0 0 -2 2 a 2 2 0 0 0 2 2 H 7 V 19 H 19 a 2 2 0 0 0 2 -2 a 2 2 0 0 0 -2 -2 H 17 V 5 z" />
+                    <line x1="9" y1="10" x2="15" y2="10" />
+                    <line x1="9" y1="14" x2="15" y2="14" />
+                  </svg>
+                </div>
+                <h4>Audit Logs</h4>
+                <p>Timestamped activity logs for every<br/>document and user action.</p>
+              </div>
+              <div className="security-card">
+                <div className="security-icon">
+                  <svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="4" width="20" height="6" rx="2" ry="2" />
+                    <rect x="2" y="14" width="20" height="6" rx="2" ry="2" />
+                    <circle cx="6" cy="7" r="1" fill="white" stroke="none" />
+                    <circle cx="6" cy="17" r="1" fill="white" stroke="none" />
+                  </svg>
+                </div>
+                <h4>Reliable Infrastructure</h4>
+                <p>High uptime with secure cloud<br/>backups.</p>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </section>
     </div>

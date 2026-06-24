@@ -1,9 +1,23 @@
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+
+
 /* Layout */
 .landing-layout {
   min-height: 100vh;
   background-color: #ffffff;
   font-family: 'Inter', sans-serif;
   position: relative;
+  overflow: visible;
 }
 
 .landing-background-left {
@@ -206,7 +220,6 @@
 
 .how-it-works {
   padding-right: 20px;
-  margin-left: -90px;
 }
 
 .how-it-works .features-column-title {
@@ -217,8 +230,6 @@
 
 .key-benefits {
   text-align: left;
-  position: relative;
-  left: 160px;
 }
 
 /* Cards */
@@ -377,3 +388,281 @@
 /* Tablet */
 
 /* Mobile */
+
+/* Extended Features Section */
+.extended-section {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 8% 120px;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.extended-bg-group {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: -1px;
+  top: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.extended-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/image 62.png') no-repeat center center;
+  background-size: cover;
+  border-radius: 0px 0px 0px 561px;
+}
+
+.extended-fade-top {
+  position: absolute;
+  width: 1438px;
+  height: 200px;
+  right: -1px;
+  top: 0;
+  background: linear-gradient(to bottom, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Fades ONLY the bottom of Image 62 to erase diagonal lines — sits ABOVE img62 but BELOW lock image and cards */
+.extended-fade-bottom {
+  position: absolute;
+  width: 100%;
+  height: 450px;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.82) 78%,
+    rgba(255, 255, 255, 0.95) 95%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.extended-container {
+  position: relative;
+  z-index: 3;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.extended-subtitle {
+  color: #E22A2A;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 8px 0;
+}
+
+.extended-title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 90px 0;
+  line-height: 32px;
+}
+
+/* Paperless Block */
+.paperless-block {
+  margin-bottom: 120px;
+}
+
+.paperless-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  height: 230px;
+}
+
+.paperless-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.paperless-item:nth-child(2),
+.paperless-item:nth-child(3) {
+  margin-top: 55px;
+}
+
+.paperless-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 40px;
+  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.paperless-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.4px;
+}
+
+.paperless-item p {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  color: #000000;
+  margin: 0;
+}
+
+.paperless-line-1,
+.paperless-line-2,
+.paperless-line-3 {
+  position: absolute;
+  width: 1.4px;
+  background-color: #CCCCCC;
+}
+
+.paperless-line-1 {
+  left: 25%;
+  top: 0;
+  height: 184px;
+}
+
+.paperless-line-2 {
+  left: 50%;
+  top: 0;
+  height: 230px;
+}
+
+.paperless-line-3 {
+  left: 75%;
+  top: 0;
+  height: 184px;
+}
+
+/* Security Block */
+.security-block {
+  width: 100%;
+  margin-bottom: 0;
+  position: relative;
+  overflow: visible;
+}
+
+.security-block .extended-subtitle {
+  padding-top: 40px;
+}
+
+.security-block .extended-title {
+  margin-bottom: 50px;
+}
+
+.security-grid {
+  width: 100%;
+  display: flex;
+  gap: 28px;
+  justify-content: flex-end;
+  transform: translate(40px, 15px);
+}
+
+.security-card {
+  flex: 1;
+  max-width: 330px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.security-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.security-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.security-card h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+}
+
+.security-card p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 18px;
+  margin: 0;
+  text-align: center;
+  max-width: 280px;
+}
+
+/* Lock Graphic */
+.lock-graphic-container {
+  position: absolute;
+  left: 0;
+  top: 620px;
+  width: 491px;
+  height: 344px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.lock-graphic-img {
+  position: absolute;
+  top: 75px;
+  left: 0;
+  width: 479px;
+  height: 230px;
+  object-fit: contain;
+}
+
+.lock-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: -1px;
+  width: 491px;
+  height: 75px;
+  background: linear-gradient(37.82deg, rgba(255, 255, 255, 0.82) 60.87%, rgba(255, 255, 255, 0) 102.76%);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.lock-fade-right {
+  position: absolute;
+  top: 0;
+  left: 77px;
+  width: 413px;
+  height: 344px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 61.79%, rgba(255, 255, 255, 0) 100%);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
