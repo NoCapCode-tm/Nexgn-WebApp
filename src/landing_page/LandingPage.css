@@ -156,10 +156,8 @@ html, body {
 .features-background {
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 100%;
-  max-width: 1440px;
   height: 100%;
   object-fit: cover;
   border-radius: 120px 0px 0px 0px;
@@ -184,9 +182,9 @@ html, body {
   color: #E22A2A;
   font-size: 16px;
   font-weight: 600;
-  line-height: 100%;
+  line-height: 1.2;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.15em;
   margin: 0 0 24px 0;
 }
 
@@ -194,16 +192,16 @@ html, body {
   color: #E22A2A;
   font-size: 16px;
   font-weight: 600;
-  line-height: 100%;
+  line-height: 1.2;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.15em;
   margin: 0 0 64px 0;
 }
 
 .features-description {
   font-size: 20px;
   font-weight: 400;
-  line-height: 100%;
+  line-height: 1.2;
   color: #000000;
   max-width: 1020px;
   margin: 0 auto;
@@ -642,6 +640,201 @@ html, body {
   position: absolute;
   top: 75px;
   left: 0;
+}
+
+.extended-container {
+  position: relative;
+  z-index: 3;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.extended-subtitle {
+  color: #E22A2A;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 8px 0;
+}
+
+.extended-title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 90px 0;
+  line-height: 32px;
+}
+
+/* Paperless Block */
+.paperless-block {
+  margin-bottom: 120px;
+}
+
+.paperless-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  height: 230px;
+}
+
+.paperless-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.paperless-item:nth-child(2),
+.paperless-item:nth-child(3) {
+  margin-top: 55px;
+}
+
+.paperless-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 40px;
+  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.paperless-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.4px;
+}
+
+.paperless-item p {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  color: #000000;
+  margin: 0;
+}
+
+.paperless-line-1,
+.paperless-line-2,
+.paperless-line-3 {
+  position: absolute;
+  width: 1.4px;
+  background-color: #CCCCCC;
+}
+
+.paperless-line-1 {
+  left: 25%;
+  top: 0;
+  height: 184px;
+}
+
+.paperless-line-2 {
+  left: 50%;
+  top: 0;
+  height: 230px;
+}
+
+.paperless-line-3 {
+  left: 75%;
+  top: 0;
+  height: 184px;
+}
+
+/* Security Block */
+.security-block {
+  width: 100%;
+  margin-bottom: 0;
+  position: relative;
+  overflow: visible;
+}
+
+.security-block .extended-subtitle {
+  padding-top: 40px;
+}
+
+.security-block .extended-title {
+  margin-bottom: 50px;
+}
+
+.security-grid {
+  width: 100%;
+  display: flex;
+  gap: 28px;
+  justify-content: flex-end;
+  transform: translate(0px, 15px);
+}
+
+.security-card {
+  flex: 1;
+  max-width: 300px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.security-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.security-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.security-card h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+}
+
+.security-card p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 18px;
+  margin: 0;
+  text-align: center;
+  max-width: 280px;
+}
+
+/* Lock Graphic */
+.lock-graphic-container {
+  position: absolute;
+  left: 0;
+  top: 620px;
+  width: 491px;
+  height: 344px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.lock-graphic-img {
+  position: absolute;
+  top: 75px;
+  left: 0;
   width: 479px;
   height: 230px;
   object-fit: contain;
@@ -665,4 +858,194 @@ html, body {
   height: 344px;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 61.79%, rgba(255, 255, 255, 0) 100%);
   transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+/* Pricing Section */
+.pricing-section {
+  position: relative;
+  width: 100%;
+  margin-top: -10px;
+  padding: 0px 8% 40px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.pricing-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-header {
+  margin-bottom: 60px;
+}
+
+.pricing-header .extended-subtitle {
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: 8px;
+}
+
+.pricing-header .extended-title {
+  font-size: 28px;
+  line-height: 34px;
+  margin-bottom: 10px;
+}
+
+.pricing-description {
+  font-size: 16px;
+  color: #666666;
+  font-weight: 400;
+  line-height: 19px;
+  margin: 0;
+  text-align: left;
+}
+
+.pricing-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.pricing-card {
+  width: 285px;
+  height: 415px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 40px 25px 25px 30px;
+  box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.1);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.pricing-card--highlighted {
+  border: 1px solid transparent;
+  border-image: linear-gradient(180deg, #960101 0%, #FF0915 100%) 1;
+  position: relative;
+}
+/* Note: border-image won't respect border-radius properly natively. 
+   Using pseudo element for gradient border with radius */
+.pricing-card--highlighted {
+  border: none;
+  background-clip: padding-box;
+}
+.pricing-card--highlighted::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  padding: 1px;
+  background: linear-gradient(180deg, #960101 0%, #FF0915 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -10px;
+  left: 24px;
+  width: 77.29px;
+  height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  color: #ffffff;
+  font-family: 'Inter';
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 13px;
+  border-radius: 7px;
+  z-index: 2;
+}
+
+.pricing-price {
+  font-size: 32px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 16px 0;
+  line-height: 39px;
+}
+
+.pricing-card:last-child .pricing-price {
+  font-size: 28px;
+  line-height: 34px;
+  margin: 4px 0 17px 0;
+}
+
+.pricing-period {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.pricing-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 14px 0;
+  line-height: 22px;
+  letter-spacing: 0.05em;
+}
+
+.pricing-target {
+  font-family: 'Inter';
+  font-size: 14px;
+  color: #666666;
+  line-height: 17px;
+  margin: 0 0 14px 0;
+  min-height: 51px;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pricing-features li {
+  font-family: 'Inter';
+  font-size: 12px;
+  color: #666666;
+  line-height: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.pricing-check {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  margin-top: 0px;
+}
+
+.pricing-btn {
+  width: 220px;
+  height: 40px;
+  margin-top: auto;
+  align-self: center;
+  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  border-radius: 7.2px;
+  border: none;
+  color: #FFFFFF;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
