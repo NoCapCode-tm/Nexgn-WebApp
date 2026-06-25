@@ -247,6 +247,83 @@ export default function LandingPage() {
           
         </div>
       </section>
+
+      {/* Pricing Section */}
+      <section className="pricing-section" id="pricing">
+        <div className="pricing-container">
+          <div className="pricing-header">
+            <h3 className="extended-subtitle">FEATURES</h3>
+            <h2 className="extended-title">Plans for every stage</h2>
+            <p className="pricing-description">Simple, transparent plans designed around usage and team size.</p>
+          </div>
+
+          <div className="pricing-grid">
+            {/* Free Plan */}
+            <div className="pricing-card">
+              <h3 className="pricing-price">$0</h3>
+              <h4 className="pricing-name">Free</h4>
+              <p className="pricing-target">Perfect for individuals and early exploration.</p>
+              <ul className="pricing-features">
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> 25 documents per month</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Basic signing workflow</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Limited templates</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> No credit card required</li>
+              </ul>
+              <button className="btn-primary pricing-btn">Choose Starter</button>
+            </div>
+
+            {/* Starter Plan (Highlighted) */}
+            <div className="pricing-card pricing-card--highlighted">
+              <div className="pricing-badge">Popular</div>
+              <h3 className="pricing-price">$9<span className="pricing-period">/month</span></h3>
+              <h4 className="pricing-name">Starter</h4>
+              <p className="pricing-target">Built for freelancers and small businesses.</p>
+              <ul className="pricing-features">
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> 100 documents per month</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Professional signing tools</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Templates and reminders</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> SETU integration</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Basic automation support</li>
+              </ul>
+              <button className="btn-primary pricing-btn">Choose Starter</button>
+            </div>
+
+            {/* Business Plan */}
+            <div className="pricing-card">
+              <h3 className="pricing-price">$19<span className="pricing-period">/month</span></h3>
+              <h4 className="pricing-name">Business</h4>
+              <p className="pricing-target">Designed for growing teams and operational workflows.</p>
+              <ul className="pricing-features">
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Unlimited documents</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Bulk sending</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Team collaboration</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> API access</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Aadhaar verification credits</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Custom branding</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority support</li>
+              </ul>
+              <button className="btn-primary pricing-btn">Choose Business</button>
+            </div>
+
+            {/* Enterprise Plan */}
+            <div className="pricing-card">
+              <h3 className="pricing-price">Custom</h3>
+              <h4 className="pricing-name">Enterprise</h4>
+              <p className="pricing-target">Tailored for organizations requiring advanced scale and control.</p>
+              <ul className="pricing-features">
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Everything in Business</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Unlimited users</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Full API ecosystem</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Dedicated onboarding</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> SLA and enterprise support</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Advanced security and compliance</li>
+                <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Custom infrastructure support</li>
+              </ul>
+              <button className="btn-primary pricing-btn">Choose Enterprise</button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
