@@ -4,17 +4,17 @@ import './LandingPage.css';
 export default function LandingPage() {
   return (
     <div className="landing-layout">
-      {/* Background Graphic */}
+
+      {/* Background Decoration */}
       <img src="/image 46.png" alt="" className="landing-background-left" />
 
-      {/* Navigation */}
+      {/* ── Navigation ────────────────────────────────────────────── */}
       <nav className="landing-nav">
         <div className="landing-nav__left">
-          {/* Using a placeholder for the logo, assuming it exists in public folder */}
           <img src="/nexgn-logo.png" alt="Nexgn" className="landing-nav__logo" />
         </div>
         <div className="landing-nav__center">
-          <a href="#home" className="landing-nav__link">Home</a>
+          <a href="#home"    className="landing-nav__link">Home</a>
           <a href="#product" className="landing-nav__link">Product</a>
           <a href="#pricing" className="landing-nav__link">Pricing</a>
         </div>
@@ -24,18 +24,18 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero */}
+      {/* ── Hero ──────────────────────────────────────────────────── */}
       <section className="hero-section">
         <div className="hero-content">
           <h1 className="hero-content__title">
-            Fast & Secure<br />
+            Fast &amp; Secure<br />
             Digital Document<br />
             Signing
           </h1>
           <p className="hero-content__description">
-            Nexgn makes it effortless to send, sign and manage<br />
-            documents - all in one secure platform. No printing, no<br />
-            scanning, no delays.
+            <span className="mobile-line">Nexgn makes it effortless to send, sign and manage</span>{' '}
+            <span className="mobile-line">documents _ all in one secure platform. No printing, no</span>{' '}
+            <span className="mobile-line">scanning, no delays.</span>
           </p>
           <div className="hero-content__actions">
             <button className="btn-primary">Get Started</button>
@@ -43,30 +43,36 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Dashboard Preview */}
+        {/* Dashboard Preview Image */}
         <div className="hero-preview">
-          {/* Based on feedback, the static HTML construction is omitted. Using a placeholder image wrapper. */}
           <img src="/image 53.png" alt="Dashboard Preview" className="hero-preview__image" />
         </div>
       </section>
-      {/* Features Section */}
+
+      {/* ── Features Section ──────────────────────────────────────── */}
       <section className="features-section" id="product">
-        <img src="/Gemini_Generated_Image_m9pyvam9pyvam9py 3.png" alt="Network Background" className="features-background" />
-        
+        <img
+          src="/Gemini_Generated_Image_m9pyvam9pyvam9py 3.png"
+          alt="Network Background"
+          className="features-background"
+        />
+
         <div className="features-container">
           {/* Intro */}
           <div className="features-intro">
             <h3 className="features-subtitle">WHAT IS NEXGN</h3>
             <p className="features-description">
-              Nexgn is a digital signature platform built to simplify document signing while maintaining security, trust,<br />
-              and compliance. It is designed for modern, India-first digital workflows and built to scale for growing<br />
-              teams and businesses.
+              <span className="mobile-line">Nexgn is a digital signature platform built to simplify document</span>{' '}
+              <span className="mobile-line">signing while maintaining security, trust, and compliance. It is</span>{' '}
+              <span className="mobile-line">designed for modern, India-first digital workflows and built to</span>{' '}
+              <span className="mobile-line">scale for growing teams and businesses.</span>
             </p>
           </div>
 
-          {/* Grid */}
+          {/* Two-column grid: How it Works + Key Benefits */}
           <div className="features-grid">
-            {/* How it works */}
+
+            {/* How It Works – numbered timeline */}
             <div className="how-it-works">
               <h3 className="features-column-title">HOW IT WORKS</h3>
               <div className="timeline">
@@ -74,45 +80,61 @@ export default function LandingPage() {
                   <span className="timeline-number">01</span>
                   <div className="timeline-content">
                     <h4>Upload document</h4>
-                    <p>Drag and drop your PDF or document into Nexgn- ready in<br />seconds</p>
+                    <p>
+                      <span className="mobile-line">Drag and drop your PDF or document into Nexgn- ready in</span>{' '}
+                      <span className="mobile-line">seconds</span>
+                    </p>
                   </div>
                 </div>
                 <div className="timeline-step">
                   <span className="timeline-number">02</span>
                   <div className="timeline-content">
                     <h4>Add signers</h4>
-                    <p>Invite one or multiple signers by email with custom signing<br />order</p>
+                    <p>
+                      <span className="mobile-line">Invite one or multiple signers by email with custom signing</span>{' '}
+                      <span className="mobile-line">order</span>
+                    </p>
                   </div>
                 </div>
                 <div className="timeline-step">
                   <span className="timeline-number">03</span>
                   <div className="timeline-content">
-                    <h4>Sign & Complete</h4>
-                    <p>Signers receive a link, sign digitally and the sealed document<br />is delivered instantly</p>
+                    <h4>Sign &amp; Complete</h4>
+                    <p>
+                      <span className="mobile-line">Signers receive a link, sign digitally and the sealed document</span>{' '}
+                      <span className="mobile-line">is delivered instantly</span>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Key Benefits */}
+            {/* Key Benefits – 2×2 card grid */}
             <div className="key-benefits">
               <h3 className="features-column-title">KEY BENEFITS</h3>
               <div className="benefits-grid">
                 <div className="benefit-card">
                   <span className="benefit-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                    </svg>
                   </span>
                   <h4>Paperless Workflow</h4>
                 </div>
                 <div className="benefit-card">
                   <span className="benefit-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
                   </span>
-                  <h4>Secured & Trusted</h4>
+                  <h4>Secured &amp; Trusted</h4>
                 </div>
                 <div className="benefit-card">
                   <span className="benefit-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
                   </span>
                   <h4>Simple and Fast</h4>
                 </div>
@@ -131,19 +153,22 @@ export default function LandingPage() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* Extended Features Section */}
+      {/* ── Extended Features (Paperless + Trust & Security) ──────── */}
       <section className="extended-section">
+
+        {/* Background: image 62 + fade overlays (mobile only) */}
         <div className="extended-bg-group">
           <div className="extended-background"></div>
           <div className="extended-fade-top"></div>
           <div className="extended-fade-bottom"></div>
         </div>
 
-        {/* Lock Graphic - behind all content */}
+        {/* Decorative lock graphic */}
         <div className="lock-graphic-container">
           <img src="/Gemini.png" alt="" className="lock-graphic-img" />
           <div className="lock-fade-bottom"></div>
@@ -151,17 +176,21 @@ export default function LandingPage() {
         </div>
 
         <div className="extended-container">
-          
+
+          {/* Paperless Block */}
           <div className="paperless-block">
             <h3 className="extended-subtitle">FEATURES</h3>
             <h2 className="extended-title">Everything you need to go paperless</h2>
-            
+
             <div className="paperless-grid">
               <div className="paperless-item">
                 <div className="paperless-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                  </svg>
                 </div>
-                <p>Document Upload &<br/>Management</p>
+                <p>Document Upload &amp;<br/>Management</p>
               </div>
               <div className="paperless-item">
                 <div className="paperless-icon">
@@ -194,21 +223,23 @@ export default function LandingPage() {
                     <line x1="8" y1="15" x2="8.01" y2="15"></line>
                   </svg>
                 </div>
-                <p>Audit Trail & PDF<br/>Download</p>
+                <p>Audit Trail &amp; PDF<br/>Download</p>
               </div>
 
-            
-            <div className="paperless-line-1"></div>
-            <div className="paperless-line-2"></div>
-            <div className="paperless-line-3"></div>
-          </div>
+              {/* Decorative connecting lines (desktop only) */}
+              <div className="paperless-line-1"></div>
+              <div className="paperless-line-2"></div>
+              <div className="paperless-line-3"></div>
+            </div>
           </div>
 
+          {/* Trust & Security Block */}
           <div className="security-block">
-            <h3 className="extended-subtitle">TRUST & SECURITY</h3>
+            <h3 className="extended-subtitle">TRUST &amp; SECURITY</h3>
             <h2 className="extended-title">Your documents are in safe hands</h2>
-            
+
             <div className="security-grid">
+              {/* Secure Signing */}
               <div className="security-card">
                 <div className="security-icon">
                   <svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -216,9 +247,16 @@ export default function LandingPage() {
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                   </svg>
                 </div>
-                <h4>Secure Signing</h4>
-                <p>End-to-end encryption for<br/>documents and signature exchanges.</p>
+                <div className="security-text">
+                  <h4>Secure Signing</h4>
+                  <p>
+                    <span className="mobile-line">End-to-end encryption for documents</span>{' '}
+                    <span className="mobile-line">and signature exchanges.</span>
+                  </p>
+                </div>
               </div>
+
+              {/* Audit Logs */}
               <div className="security-card">
                 <div className="security-icon">
                   <svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -227,37 +265,53 @@ export default function LandingPage() {
                     <line x1="9" y1="14" x2="15" y2="14" />
                   </svg>
                 </div>
-                <h4>Audit Logs</h4>
-                <p>Timestamped activity logs for every<br/>document and user action.</p>
+                <div className="security-text">
+                  <h4>Audit Logs</h4>
+                  <p>
+                    <span className="mobile-line">Timestamped activity logs for every</span>{' '}
+                    <span className="mobile-line">document and user action.</span>
+                  </p>
+                </div>
               </div>
+
+              {/* Reliable Infrastructure */}
               <div className="security-card">
                 <div className="security-icon">
                   <svg width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="4" width="20" height="6" rx="2" ry="2" />
+                    <rect x="2" y="4"  width="20" height="6" rx="2" ry="2" />
                     <rect x="2" y="14" width="20" height="6" rx="2" ry="2" />
-                    <circle cx="6" cy="7" r="1" fill="white" stroke="none" />
+                    <circle cx="6" cy="7"  r="1" fill="white" stroke="none" />
                     <circle cx="6" cy="17" r="1" fill="white" stroke="none" />
                   </svg>
                 </div>
-                <h4>Reliable Infrastructure</h4>
-                <p>High uptime with secure cloud<br/>backups.</p>
+                <div className="security-text">
+                  <h4>Reliable Infrastructure</h4>
+                  <p>
+                    <span className="mobile-line">High uptime with secure cloud</span>{' '}
+                    <span className="mobile-line">backups.</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-          
+
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* ── Pricing Section ───────────────────────────────────────── */}
       <section className="pricing-section" id="pricing">
         <div className="pricing-container">
           <div className="pricing-header">
             <h3 className="extended-subtitle">FEATURES</h3>
             <h2 className="extended-title">Plans for every stage</h2>
-            <p className="pricing-description">Simple, transparent plans designed around usage and team size.</p>
+            <p className="pricing-description">
+              <span className="mobile-line">Simple, transparent plans designed around</span>{' '}
+              <span className="mobile-line">usage and team size.</span>
+            </p>
           </div>
 
           <div className="pricing-grid">
+
             {/* Free Plan */}
             <div className="pricing-card">
               <h3 className="pricing-price">$0</h3>
@@ -269,10 +323,10 @@ export default function LandingPage() {
                 <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> Limited templates</li>
                 <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E22A2A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="pricing-check"><polyline points="20 6 9 17 4 12"></polyline></svg> No credit card required</li>
               </ul>
-              <button className="btn-primary pricing-btn">Choose Starter</button>
+              <button className="btn-primary pricing-btn">Choose Free</button>
             </div>
 
-            {/* Starter Plan (Highlighted) */}
+            {/* Starter Plan (Popular) */}
             <div className="pricing-card pricing-card--highlighted">
               <div className="pricing-badge">Popular</div>
               <h3 className="pricing-price">$9<span className="pricing-period">/month</span></h3>
@@ -321,9 +375,84 @@ export default function LandingPage() {
               </ul>
               <button className="btn-primary pricing-btn">Choose Enterprise</button>
             </div>
+
           </div>
         </div>
       </section>
+
+      {/* ── CTA Section ───────────────────────────────────────────── */}
+      <section className="cta-section">
+        <div className="cta-bg-layer"></div>
+        <div className="cta-content">
+          <h2 className="cta-title">Start signing documents the simpler way</h2>
+          <p className="cta-description">
+            Join modern businesses sending and signing documents securely with Nexgn.
+          </p>
+          <button className="btn-primary cta-btn">Create your free account</button>
+        </div>
+      </section>
+
+      {/* ── Footer ────────────────────────────────────────────────── */}
+      <footer className="landing-footer">
+        <div className="footer-content">
+          <div className="footer-top">
+
+            {/* Brand + Contact */}
+            <div className="footer-brand">
+              <img src="/nexgn-logo.png" alt="Nexgn" className="footer-logo" />
+              <p className="footer-tagline">The Next Generation of Document<br />Signature</p>
+              <p className="footer-email">gateway@nexgn.cloud</p>
+              <div className="footer-socials">
+                <a href="#" className="social-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="#666666">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                </a>
+                <a href="#" className="social-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="#666666">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                  </svg>
+                </a>
+              </div>
+              <div className="footer-copyright">
+                © 2026 Nexgn. All rights reserved.
+              </div>
+            </div>
+
+            {/* Link Columns */}
+            <div className="footer-links-container">
+              <div className="footer-link-column">
+                <h4>COMPANY</h4>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Blog</a>
+              </div>
+              <div className="footer-link-column">
+                <h4>RESOURCES</h4>
+                <a href="#">Help center</a>
+                <a href="#">System Status</a>
+                <a href="#">Security</a>
+              </div>
+              <div className="footer-link-column">
+                <h4>LEGAL &amp; TRUST</h4>
+                <a href="#">Trust &amp; Compliance</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms &amp; Services</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Large decorative "NEXGN" text at the bottom */}
+        <div className="footer-huge-text-wrapper">
+          <div className="footer-blurry-bg-container">
+            <div className="footer-blurry-bg"></div>
+          </div>
+          <div className="footer-huge-text-overlay">NEXGN</div>
+        </div>
+      </footer>
+
     </div>
   );
 }
