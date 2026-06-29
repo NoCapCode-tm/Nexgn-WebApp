@@ -1,17 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './LandingPage.css';
 
 export default function LandingPage() {
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      
+      const handleChange = (e) => {
+        setIsDarkMode(e.matches);
+      };
+      
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', handleChange);
+      } else {
+        mediaQuery.addListener(handleChange);
+      }
+      
+      return () => {
+        if (mediaQuery.removeEventListener) {
+          mediaQuery.removeEventListener('change', handleChange);
+        } else {
+          mediaQuery.removeListener(handleChange);
+        }
+      };
+    }
+  }, []);
+
   return (
     <div className="landing-layout">
 
       {/* Background Decoration */}
-      <img src="/image 46.png" alt="" className="landing-background-left" />
+      <img src={isDarkMode ? "/dark2.png" : "/image 46.png"} alt="" className="landing-background-left" />
 
       {/* ── Navigation ────────────────────────────────────────────── */}
       <nav className="landing-nav">
         <div className="landing-nav__left">
-          <img src="/nexgn-logo.png" alt="Nexgn" className="landing-nav__logo" />
+          <img src={isDarkMode ? "/logo.png" : "/nexgn-logo.png"} alt="Nexgn" className="landing-nav__logo" />
         </div>
         <div className="landing-nav__center">
           <a href="#home"    className="landing-nav__link">Home</a>
@@ -45,14 +76,14 @@ export default function LandingPage() {
 
         {/* Dashboard Preview Image */}
         <div className="hero-preview">
-          <img src="/image 53.png" alt="Dashboard Preview" className="hero-preview__image" />
+          <img src={isDarkMode ? "/dark1.png" : "/image 53.png"} alt="Dashboard Preview" className="hero-preview__image" />
         </div>
       </section>
 
       {/* ── Features Section ──────────────────────────────────────── */}
       <section className="features-section" id="product">
         <img
-          src="/Gemini_Generated_Image_m9pyvam9pyvam9py 3.png"
+          src={isDarkMode ? "/dark 3.png" : "/Gemini_Generated_Image_m9pyvam9pyvam9py 3.png"}
           alt="Network Background"
           className="features-background"
         />
@@ -170,7 +201,7 @@ export default function LandingPage() {
 
         {/* Decorative lock graphic */}
         <div className="lock-graphic-container">
-          <img src="/Gemini.png" alt="" className="lock-graphic-img" />
+          <img src={isDarkMode ? "/dark4.png" : "/Gemini.png"} alt="" className="lock-graphic-img" />
           <div className="lock-fade-bottom"></div>
           <div className="lock-fade-right"></div>
         </div>
@@ -399,7 +430,7 @@ export default function LandingPage() {
 
             {/* Brand + Contact */}
             <div className="footer-brand">
-              <img src="/nexgn-logo.png" alt="Nexgn" className="footer-logo" />
+              <img src={isDarkMode ? "/logo.png" : "/nexgn-logo.png"} alt="Nexgn" className="footer-logo" />
               <p className="footer-tagline">The Next Generation of Document<br />Signature</p>
               <p className="footer-email">gateway@nexgn.cloud</p>
               <div className="footer-socials">
