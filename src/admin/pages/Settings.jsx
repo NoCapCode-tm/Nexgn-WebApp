@@ -16,7 +16,9 @@ const settingsNavItems = [
   { key: "audit", label: "Audit Logs", active: false },
 ];
 
-const DEFAULT_AVATAR = "/Avatar.png";
+import AvatarImg from "../../assets/Avatar.png";
+
+const DEFAULT_AVATAR = AvatarImg;
 
 export default function Settings() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
