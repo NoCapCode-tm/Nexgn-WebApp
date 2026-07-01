@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MemberSidebar from "../components/MemberSidebar";
 import MemberTopbar from "../components/MemberTopbar";
+import MemberTopbarIcons from "../components/MemberTopbarIcons";
 import MemberStatCard from "../components/MemberStatCard";
 import MemberDocumentRow from "../components/MemberDocumentRow";
 import MemberMobileNavbar from "../components/MemberMobileNavbar";
 import useWindowWidth from "../components/useWindowWidth";
-import { Search, Bell, UserCircle, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import "../css/MemberBaseLayout.css";
 import "../css/MemberDashboard.css"; // Scoped CSS Overrides
 
@@ -117,17 +118,7 @@ export default function MemberDashboard() {
             <Menu size={22} color="#1a1a2e" />
           </button>
 
-          <div className="mobile-topbar__icons">
-            <button className="topbar__icon-btn mobile-topbar__search-btn">
-              <Search size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <Bell size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <UserCircle size={20} color="#FF0915" strokeWidth={1.5} />
-            </button>
-          </div>
+          <MemberTopbarIcons iconSize={18} className="mobile-topbar__icons" />
         </header>
 
         <MemberTopbar />

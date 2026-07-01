@@ -5,6 +5,7 @@
 /*  SETUP CARD  */
 .setup-card {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 18px;
   padding: 20px 24px;
@@ -232,6 +233,7 @@
 /*  BOTTOM SECTION  */
 .bottom-section {
   display: grid;
+  flex: 1;
   grid-template-columns: 1fr 200px;
   min-height: 220px;
   border: 1px solid #E4E4E4;
@@ -1091,5 +1093,130 @@
 @media (min-width: 769px) and (max-width: 1179px) {
   .member-theme .mobile-topbar__search-btn {
     display: flex !important;
+  }
+}
+
+/* Fluid Desktop Scaling (1180px and above)
+   Preserves the 1366-1440px design, but scales it up fluidly for larger monitors using clamp(). */
+@media (min-width: 1180px) {
+  .setup-card {
+    gap: clamp(18px, 1.25vw, 32px);
+    padding: clamp(20px, 1.38vw, 35px) clamp(24px, 1.66vw, 43px);
+    border-radius: clamp(12px, 0.83vw, 21px);
+  }
+  .setup-card__title { font-size: clamp(15px, 1.04vw, 26px); }
+  .setup-card__tabs { border-radius: clamp(8px, 0.55vw, 14px); }
+  .tab-btn {
+    padding: clamp(8px, 0.55vw, 14px) clamp(22px, 1.52vw, 39px);
+    font-size: clamp(13px, 0.9vw, 23px);
+  }
+  
+  .section-label {
+    margin-bottom: clamp(8px, 0.55vw, 14px);
+    font-size: clamp(12px, 0.83vw, 21px);
+  }
+  
+  .template-row { gap: clamp(12px, 0.83vw, 21px); }
+  .template-select {
+    height: clamp(38px, 2.63vw, 67px);
+    padding: 0 clamp(36px, 2.5vw, 64px) 0 clamp(12px, 0.83vw, 21px);
+    font-size: clamp(13px, 0.9vw, 23px);
+    border-radius: clamp(8px, 0.55vw, 14px);
+  }
+  .btn-create {
+    height: clamp(38px, 2.63vw, 67px);
+    padding: 0 clamp(22px, 1.52vw, 39px);
+    font-size: clamp(13px, 0.9vw, 23px);
+    border-radius: clamp(8px, 0.55vw, 14px);
+  }
+  
+  .or-divider {
+    gap: clamp(10px, 0.69vw, 17px);
+    font-size: clamp(11px, 0.76vw, 19px);
+  }
+  
+  .upload-zone {
+    gap: clamp(8px, 0.55vw, 14px);
+    height: clamp(72px, 5vw, 128px);
+    font-size: clamp(13px, 0.9vw, 23px);
+    border-radius: clamp(10px, 0.69vw, 17px);
+  }
+  
+  .form-row { gap: clamp(16px, 1.11vw, 28px); }
+  .form-group { gap: clamp(6px, 0.41vw, 10px); }
+  .form-label { font-size: clamp(12px, 0.83vw, 21px); }
+  .form-input {
+    height: clamp(38px, 2.63vw, 67px);
+    padding: 0 clamp(12px, 0.83vw, 21px);
+    font-size: clamp(13px, 0.9vw, 23px);
+    border-radius: clamp(8px, 0.55vw, 14px);
+  }
+  .form-textarea {
+    height: clamp(72px, 5vw, 128px);
+    padding: clamp(10px, 0.69vw, 17px) clamp(12px, 0.83vw, 21px);
+    font-size: clamp(13px, 0.9vw, 23px);
+    border-radius: clamp(8px, 0.55vw, 14px);
+  }
+  
+  .bottom-section {
+    min-height: clamp(220px, 15.27vw, 390px);
+    border-radius: clamp(10px, 0.69vw, 17px);
+  }
+  
+  .doc-preview {
+    gap: clamp(10px, 0.69vw, 17px);
+    padding: clamp(14px, 0.97vw, 25px) clamp(16px, 1.11vw, 28px);
+  }
+  .doc-preview__title { font-size: clamp(12px, 0.83vw, 21px); }
+  .doc-preview__zoom {
+    gap: clamp(6px, 0.41vw, 10px);
+    font-size: clamp(12px, 0.83vw, 21px);
+  }
+  .doc-preview__canvas {
+    min-height: clamp(160px, 11.11vw, 284px);
+    border-radius: clamp(6px, 0.41vw, 10px);
+  }
+  .doc-preview__filename { gap: clamp(8px, 0.55vw, 14px); }
+  .doc-preview__filename span { font-size: clamp(12px, 0.83vw, 21px); }
+  
+  .field-props {
+    gap: clamp(14px, 0.97vw, 25px);
+    padding: clamp(16px, 1.11vw, 28px) clamp(14px, 0.97vw, 25px);
+  }
+  .field-props__title { font-size: clamp(12px, 0.83vw, 21px); }
+  .field-props__label {
+    margin-bottom: clamp(5px, 0.34vw, 9px);
+    font-size: clamp(10px, 0.69vw, 17px);
+  }
+  
+  .field-type-select,
+  .assigned-input {
+    height: clamp(32px, 2.22vw, 56px);
+    padding: 0 clamp(10px, 0.69vw, 17px);
+    font-size: clamp(12px, 0.83vw, 21px);
+    border-radius: clamp(7px, 0.48vw, 12px);
+  }
+  
+  .required-label { font-size: clamp(12px, 0.83vw, 21px); }
+  .toggle {
+    width: clamp(36px, 2.5vw, 64px);
+    height: clamp(20px, 1.38vw, 35px);
+  }
+  .toggle-slider { border-radius: clamp(20px, 1.38vw, 35px); }
+  .toggle-slider::before {
+    top: clamp(3px, 0.2vw, 5px);
+    left: clamp(3px, 0.2vw, 5px);
+    width: clamp(14px, 0.97vw, 25px);
+    height: clamp(14px, 0.97vw, 25px);
+  }
+  
+  .toggle input:checked + .toggle-slider::before {
+    transform: translateX(clamp(16px, 1.11vw, 28px));
+  }
+  
+  .btn-share {
+    height: clamp(36px, 2.5vw, 64px);
+    font-size: clamp(13px, 0.9vw, 23px);
+    border-radius: clamp(8px, 0.55vw, 14px);
   }
 }

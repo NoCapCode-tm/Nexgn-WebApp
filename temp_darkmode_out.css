@@ -1,0 +1,221 @@
+
+
+.dark-mode .landing-layout {
+    background: #000000;
+    color: white;
+  }
+
+.dark-mode .landing-background-left {
+    max-width: 58%;
+    transform: translate(clamp(13.33px, 1.042vw, 26.67px), clamp(-17.78px, -0.694vw, -8.89px)) rotate(5deg);
+    -webkit-mask-image: linear-gradient(to bottom right, black 40%, transparent 100%);
+    mask-image: linear-gradient(to bottom right, black 40%, transparent 100%);
+  }
+
+.dark-mode .landing-nav__logo,
+.dark-mode .footer-logo {
+    filter: none;
+  }
+
+.dark-mode .features-section {
+    background: #000000;
+  }
+
+.dark-mode .features-background {
+    opacity: 0.5;
+  }
+
+.dark-mode .extended-background {
+    background-image: url('../assets/extended-bg-dark.png');
+  }
+
+.dark-mode .extended-fade-top {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0) 100%);
+  }
+
+.dark-mode .extended-fade-bottom {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.82) 78%,
+      rgba(0, 0, 0, 0.95) 95%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  }
+
+.dark-mode .lock-fade-bottom {
+    background: linear-gradient(37.82deg, rgba(0, 0, 0, 0.82) 60.87%, rgba(0, 0, 0, 0) 102.76%);
+  }
+
+.dark-mode .lock-fade-right {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.82) 61.79%, rgba(0, 0, 0, 0) 100%);
+  }
+
+.dark-mode .pricing-section,
+.dark-mode .landing-footer {
+    background: #000000;
+  }
+
+.dark-mode .features-subtitle,
+.dark-mode .features-column-title,
+.dark-mode .timeline-number {
+    color: #E22A2A;
+  }
+
+.dark-mode .timeline-content p {
+    color: #CCCCCC;
+  }
+
+.dark-mode .hero-content__title,
+.dark-mode .features-description,
+.dark-mode .timeline-content h4,
+.dark-mode .benefit-card h4,
+.dark-mode .extended-title,
+.dark-mode .paperless-item p,
+.dark-mode .pricing-price,
+.dark-mode .pricing-name,
+.dark-mode .cta-title,
+.dark-mode .cta-description {
+    color: white;
+  }
+
+.dark-mode .pricing-target,
+.dark-mode .pricing-period,
+.dark-mode .pricing-features li {
+    color: #B7B7B7;
+  }
+
+.dark-mode .hero-content__description {
+    color: #B7B7B7;
+  }
+
+.dark-mode .benefit-card {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: clamp(7.11px, 0.556vw, 14.22px);
+    padding: clamp(13.33px, 1.042vw, 26.67px) clamp(17.78px, 1.389vw, 35.56px);
+    gap: clamp(17.78px, 1.389vw, 35.56px);
+    backdrop-filter: blur(clamp(8.89px, 0.694vw, 17.78px));
+    -webkit-backdrop-filter: blur(clamp(8.89px, 0.694vw, 17.78px));
+    color: white;
+  }
+
+.dark-mode .security-card {
+    background: transparent;
+    border: 2px solid rgba(102, 102, 102, 0.4);
+    border-radius: clamp(7.11px, 0.556vw, 14.22px);
+    backdrop-filter: blur(clamp(8.89px, 0.694vw, 17.78px));
+    -webkit-backdrop-filter: blur(clamp(8.89px, 0.694vw, 17.78px));
+    box-shadow: none;
+    color: white;
+  }
+
+.dark-mode .security-card p {
+    color: #CCCCCC;
+  }
+
+.dark-mode .security-card h4 {
+    color: white;
+  }
+
+.dark-mode .pricing-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: none;
+    backdrop-filter: blur(clamp(8.89px, 0.694vw, 17.78px));
+    -webkit-backdrop-filter: blur(clamp(8.89px, 0.694vw, 17.78px));
+    color: white;
+  }
+
+.dark-mode .pricing-card--highlighted::before {
+    display: none;
+  }
+
+.dark-mode .cta-bg-layer {
+    background-image: url('../assets/cta-bg-dark.png');
+    background-position: center top;
+    background-size: cover;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+.dark-mode .landing-nav__link,
+.dark-mode .landing-nav__login {
+    color: #999999;
+  }
+
+.dark-mode .btn-secondary {
+    color: #999999;
+    border-color: #999999;
+  }
+
+.dark-mode .footer-tagline,
+.dark-mode .footer-link-column a {
+    color: #F5F5F5;
+  }
+
+.dark-mode .footer-email,
+.dark-mode .footer-copyright,
+.dark-mode .footer-link-column h4 {
+    color: #999999;
+  }
+
+.dark-mode .footer-socials {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+.dark-mode .footer-socials svg {
+    color: #FFFFFF;
+    fill: #FFFFFF;
+  }
+
+.dark-mode .footer-blurry-bg {
+    opacity: 0.7;
+    background-image: url('../assets/footer-bg-dark.png');
+  }
+
+.dark-mode .footer-blurry-bg-container::after {
+    background: linear-gradient(180.23deg, rgba(160, 0, 15, 0.95) -50%, rgba(10, 0, 0, 0.98) 87.04%);
+  }
+
+  /* Black wrapper — only letters glow red, not the surrounding area */
+.dark-mode .footer-huge-text-wrapper {
+    background: #000000;
+  }
+
+  /* Hide the blurry bg inside text wrapper — background must be black like Figma */
+.dark-mode .footer-huge-text-wrapper .footer-blurry-bg-container {
+    display: none;
+  }
+
+.dark-mode .footer-huge-text-overlay {
+    background: transparent;
+    /* Use dark7.png image as letter fill — shows texture/highlights inside letters
+       Dark overlay layer darkens it to deep maroon matching Figma */
+    color: transparent;
+    background-image:
+      linear-gradient(rgba(10, 0, 0, 0.2), rgba(10, 0, 0, 0.2)),
+      url('../assets/footer-bg-dark.png');
+    background-size: 150% auto;
+    background-position: 25% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    mix-blend-mode: normal;
+  }
+
+  @media (min-width: 769px) and (max-width: 1179px) {
+    .landing-background-left {
+      display: none;
+    }
+    .landing-layout::before {
+      display: block;
+      background: url('../assets/bg-left-dark.png') no-repeat top left;
+      background-size: 80% auto;
+      width: 100%;
+      height: 80vw;
+    }
+    /* Same gradient structure as Gemini.png (light mode) but with black instead of white */
+    .lock-fade-bottom {
+      display: none;
+

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import nexgnLogo from "../../assets/logo-light.png";
 
 const HomeIcon = ({ color }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,8 +71,8 @@ const navItems = [
 ];
 
 const bottomItems = [
-  { label: "Settings", path: "/member-settings", icon: SettingsIcon },
   { label: "Help", path: "/help", icon: HelpIcon },
+  { label: "Settings", path: "/member-settings", icon: SettingsIcon },
 ];
 
 export default function MemberSidebar() {
@@ -128,7 +129,7 @@ export default function MemberSidebar() {
         <div className="sidebar__logo">
           {expanded ? (
             <img
-              src="/nexgn-logo.png?v=1"
+              src={nexgnLogo}
               alt="Nexgn"
               className="member-sidebar__logo-img"
             />

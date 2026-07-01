@@ -1,20 +1,34 @@
 import React, { useState, useEffect } from 'react';
+import { Sun, Moon } from 'lucide-react';
 import './LandingPage.css';
 
+import bgLeftDark from '../assets/bg-left-dark.png';
+import bgLeftLight from '../assets/bg-left-light.png';
+import logoDark from '../assets/logo-dark.png';
+import logoLight from '../assets/logo-light.png';
+import heroPreviewDark from '../assets/hero-preview-dark.png';
+import heroPreviewLight from '../assets/hero-preview-light.png';
+import featuresBgDark from '../assets/features-bg-dark.png';
+import featuresBgLight from '../assets/features-bg-light.png';
+import lockGraphicDark from '../assets/lock-graphic-dark.png';
+import lockGraphicLight from '../assets/lock-graphic-light.png';
+
 export default function LandingPage() {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
+  const [isSystemDark, setIsSystemDark] = useState(() => {
     if (typeof window !== 'undefined' && window.matchMedia) {
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
     return false;
   });
 
+  const [manualTheme, setManualTheme] = useState(null);
+
   useEffect(() => {
     if (typeof window !== 'undefined' && window.matchMedia) {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
       
       const handleChange = (e) => {
-        setIsDarkMode(e.matches);
+        setIsSystemDark(e.matches);
       };
       
       if (mediaQuery.addEventListener) {
@@ -33,16 +47,30 @@ export default function LandingPage() {
     }
   }, []);
 
+  const isDarkMode = manualTheme !== null ? manualTheme === 'dark' : isSystemDark;
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setManualTheme(isDarkMode ? 'light' : 'dark');
+  };
+
   return (
     <div className="landing-layout">
 
       {/* Background Decoration */}
-      <img src={isDarkMode ? "/dark2.png" : "/image 46.png"} alt="" className="landing-background-left" />
+      <img src={isDarkMode ? bgLeftDark : bgLeftLight} alt="" className="landing-background-left" />
 
       {/* ── Navigation ────────────────────────────────────────────── */}
       <nav className="landing-nav">
         <div className="landing-nav__left">
-          <img src={isDarkMode ? "/logo.png" : "/nexgn-logo.png"} alt="Nexgn" className="landing-nav__logo" />
+          <img src={isDarkMode ? logoDark : logoLight} alt="Nexgn" className="landing-nav__logo" />
         </div>
         <div className="landing-nav__center">
           <a href="#home"    className="landing-nav__link">Home</a>
@@ -50,6 +78,9 @@ export default function LandingPage() {
           <a href="#pricing" className="landing-nav__link">Pricing</a>
         </div>
         <div className="landing-nav__right">
+          <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle theme">
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
           <a href="#login" className="landing-nav__login">Log in</a>
           <button className="btn-primary">Get Started</button>
         </div>
@@ -76,14 +107,14 @@ export default function LandingPage() {
 
         {/* Dashboard Preview Image */}
         <div className="hero-preview">
-          <img src={isDarkMode ? "/dark1.png" : "/image 53.png"} alt="Dashboard Preview" className="hero-preview__image" />
+          <img src={isDarkMode ? heroPreviewDark : heroPreviewLight} alt="Dashboard Preview" className="hero-preview__image" />
         </div>
       </section>
 
       {/* ── Features Section ──────────────────────────────────────── */}
       <section className="features-section" id="product">
         <img
-          src={isDarkMode ? "/dark 3.png" : "/Gemini_Generated_Image_m9pyvam9pyvam9py 3.png"}
+          src={isDarkMode ? featuresBgDark : featuresBgLight}
           alt="Network Background"
           className="features-background"
         />
@@ -201,7 +232,7 @@ export default function LandingPage() {
 
         {/* Decorative lock graphic */}
         <div className="lock-graphic-container">
-          <img src={isDarkMode ? "/dark4.png" : "/Gemini.png"} alt="" className="lock-graphic-img" />
+          <img src={isDarkMode ? lockGraphicDark : lockGraphicLight} alt="" className="lock-graphic-img" />
           <div className="lock-fade-bottom"></div>
           <div className="lock-fade-right"></div>
         </div>
@@ -430,7 +461,7 @@ export default function LandingPage() {
 
             {/* Brand + Contact */}
             <div className="footer-brand">
-              <img src={isDarkMode ? "/logo.png" : "/nexgn-logo.png"} alt="Nexgn" className="footer-logo" />
+              <img src={isDarkMode ? logoDark : logoLight} alt="Nexgn" className="footer-logo" />
               <p className="footer-tagline">The Next Generation of Document<br />Signature</p>
               <p className="footer-email">gateway@nexgn.cloud</p>
               <div className="footer-socials">

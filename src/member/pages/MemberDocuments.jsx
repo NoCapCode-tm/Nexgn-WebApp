@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MemberSidebar from "../components/MemberSidebar";
 import MemberTopbar from "../components/MemberTopbar";
+import MemberTopbarIcons from "../components/MemberTopbarIcons";
 import MemberMobileNavbar from "../components/MemberMobileNavbar";
 import MemberDocumentsFilter from "../components/MemberDocumentsFilter";
 import MemberDocumentsTable from "../components/MemberDocumentsTable";
@@ -66,27 +67,13 @@ export default function MemberDocuments() {
             <Menu size={22} color="#1a1a2e" />
           </button>
 
-          <div className="mobile-topbar__icons">
-            <button className="topbar__icon-btn mobile-topbar__search-btn">
-              <Search size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <Bell size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <UserCircle size={20} color="#FF0915" strokeWidth={1.5} />
-            </button>
-          </div>
+          <MemberTopbarIcons iconSize={18} className="mobile-topbar__icons" />
         </header>
 
         {/* Desktop Topbar */}
         <div className="topbar desktop-topbar">
           <div className="topbar__top-row">
-            <div className="topbar__icons">
-              <button className="topbar__icon-btn"><Search size={24} color="#FF0915" strokeWidth={1.5} /></button>
-              <button className="topbar__icon-btn"><Bell size={24} color="#FF0915" strokeWidth={1.5} /></button>
-              <button className="topbar__icon-btn"><UserCircle size={24} color="#FF0915" strokeWidth={1.5} /></button>
-            </div>
+            <MemberTopbarIcons iconSize={24} className="topbar__icons" />
           </div>
           <div className="topbar__bottom-row">
             <div>

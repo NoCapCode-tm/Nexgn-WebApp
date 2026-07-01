@@ -2,12 +2,13 @@ import { useState, useRef } from "react";
 import MemberSidebar from "../components/MemberSidebar";
 import MemberMobileNavbar from "../components/MemberMobileNavbar";
 import { Search, Bell, UserCircle, Menu } from "lucide-react";
+import MemberTopbarIcons from "../components/MemberTopbarIcons";
 import "../css/MemberBaseLayout.css";
 import "../css/MemberSettings.css";
 
 const settingsNavItems = [
   { key: "profile", label: "Profile", active: true },
-  { key: "account", label: "Account", active: false },
+  { key: "account", label: "Account", active: true },
   { key: "security", label: "Security", active: false },
   { key: "team", label: "Team Management", active: false },
   { key: "notifications", label: "Notifications", active: false },
@@ -16,7 +17,9 @@ const settingsNavItems = [
   { key: "audit", label: "Audit Logs", active: false },
 ];
 
-const DEFAULT_AVATAR = "/Avatar.png";
+import AvatarImg from "../../assets/Avatar.png";
+
+const DEFAULT_AVATAR = AvatarImg;
 
 export default function MemberSettings() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -27,7 +30,12 @@ export default function MemberSettings() {
     email: "John.doe@example.com",
     phone: "+1 (555) 123-4567",
   });
-  const [successMsg, setSuccessMsg] = useState("");
+  const [accountData, setAccountData] = useState({
+    companyName: "Acme Corp",
+    organizationId: "org-123abc456",
+    timeZone: "Pacific Time (US & Canada)",
+    language: "English (united States)",
+  });
   const fileInputRef = useRef(null);
 
   const handleTabClick = (item) => {
@@ -80,38 +88,28 @@ export default function MemberSettings() {
           >
             <Menu size={22} color="#1a1a2e" />
           </button>
-          <div className="mobile-topbar__icons">
-            <button className="topbar__icon-btn">
-              <Search size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <Bell size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <UserCircle size={20} color="#FF0915" strokeWidth={1.5} />
-            </button>
-          </div>
+          <MemberTopbarIcons 
+            iconSize={18} 
+            className="mobile-topbar__icons" 
+            fullName={formData.fullName || "Jane Doe"} 
+            email={formData.email || "jane.doe@example.com"} 
+          />
         </header>
 
         {/* Desktop Topbar */}
         <header className="topbar desktop-topbar">
           <div className="topbar__top-row">
-            <div className="topbar__icons">
-              <button className="topbar__icon-btn">
-                <Search size={24} color="#FF0915" strokeWidth={1.5} />
-              </button>
-              <button className="topbar__icon-btn">
-                <Bell size={24} color="#FF0915" strokeWidth={1.5} />
-              </button>
-              <button className="topbar__icon-btn">
-                <UserCircle size={24} color="#FF0915" strokeWidth={1.5} />
-              </button>
-            </div>
+            <MemberTopbarIcons 
+              iconSize={24} 
+              className="topbar__icons" 
+              fullName={formData.fullName || "Jane Doe"} 
+              email={formData.email || "jane.doe@example.com"} 
+            />
           </div>
           <div className="topbar__bottom-row member-settings-topbar__bottom-row">
             <div>
-              <h1 className="topbar__title">Settings</h1>
-              <p className="topbar__sub">Manage your account preferences and configurations</p>
+              <div className="topbar__title">Settings</div>
+              <div className="topbar__sub">Manage your account preferences and configurations</div>
             </div>
             
             <div className="member-settings-topbar-search">
@@ -127,10 +125,21 @@ export default function MemberSettings() {
         </header>
 
         {/* Mobile Page Header */}
-        <div className="mobile-page-header">
-          <h1 className="topbar__title">Settings</h1>
-          <p className="topbar__sub">Manage your account preferences and configurations</p>
-          <div className="mobile-page-header__divider" />
+        <div className="mobile-page-header member-settings-mobile-header">
+          <div className="member-settings-mobile-header__top-row">
+            <div className="member-settings-mobile-header__titles">
+              <div className="topbar__title">Settings</div>
+              <div className="topbar__sub">Manage your account preferences and configurations</div>
+            </div>
+            <div className="member-settings-topbar-search member-settings-mobile-search">
+              <Search size={16} color="#8A949F" strokeWidth={1.5} />
+              <input
+                type="text"
+                className="member-settings-topbar-search__input"
+                placeholder="Search"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Settings Body */}
@@ -254,9 +263,86 @@ export default function MemberSettings() {
                 </form>
               </div>
             )}
+              {activeTab === "account" && (
+                <div className="member-settings-card">
+                  <h2 className="member-settings-card__title">Account</h2>
+                  <div className="member-settings-card__divider" />
+
+                  <form
+                    className="member-settings-form"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                    }}
+                  >
+                    <div className="member-settings-form__group">
+                      <label className="member-settings-form__label" htmlFor="member-settings-company">
+                        Company Name
+                      </label>
+                      <input
+                        type="text"
+                        id="member-settings-company"
+                        className="member-settings-form__input"
+                        value={accountData.companyName}
+                        onChange={(e) => setAccountData({ ...accountData, companyName: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="member-settings-form__group">
+                      <label className="member-settings-form__label" htmlFor="member-settings-org-id">
+                        Organization ID
+                      </label>
+                      <input
+                        type="text"
+                        id="member-settings-org-id"
+                        className="member-settings-form__input member-settings-form__input--readonly"
+                        value={accountData.organizationId}
+                        readOnly
+                      />
+                      <p className="member-settings-form__helper">
+                        Used for API integrations
+                      </p>
+                    </div>
+
+                    <div className="member-settings-form__group">
+                      <label className="member-settings-form__label" htmlFor="member-settings-timezone">
+                        Time Zone
+                      </label>
+                      <input
+                        type="text"
+                        id="member-settings-timezone"
+                        className="member-settings-form__input"
+                        value={accountData.timeZone}
+                        onChange={(e) => setAccountData({ ...accountData, timeZone: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="member-settings-form__group">
+                      <label className="member-settings-form__label" htmlFor="member-settings-language">
+                        Language
+                      </label>
+                      <input
+                        type="text"
+                        id="member-settings-language"
+                        className="member-settings-form__input"
+                        value={accountData.language}
+                        onChange={(e) => setAccountData({ ...accountData, language: e.target.value })}
+                      />
+                    </div>
+                    
+                    <div className="member-settings-form__footer" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '24px' }}>
+                      <button
+                        type="submit"
+                        className="member-settings-form__submit"
+                      >
+                        Update Account
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
       <MemberMobileNavbar />
     </div>

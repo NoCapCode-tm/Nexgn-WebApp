@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Search, Bell, UserCircle } from "lucide-react";
+import MemberTopbarIcons from "./MemberTopbarIcons";
 
 const UploadIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -15,17 +15,7 @@ export default function MemberTopbar() {
   return (
     <header className="topbar desktop-topbar">
       <div className="topbar__top-row">
-        <div className="topbar__icons">
-          <button className="topbar__icon-btn">
-            <Search size={24} color="#FF0915" strokeWidth={1.5} />
-          </button>
-          <button className="topbar__icon-btn">
-            <Bell size={24} color="#FF0915" strokeWidth={1.5} />
-          </button>
-          <button className="topbar__icon-btn">
-            <UserCircle size={24} color="#FF0915" strokeWidth={1.5} />
-          </button>
-        </div>
+        <MemberTopbarIcons />
       </div>
       <div className="topbar__bottom-row">
         <div>

@@ -78,6 +78,24 @@ html, body {
   gap: clamp(21.33px, 1.667vw, 42.67px);
   min-width: 0;
 }
+
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: clamp(4px, 0.4vw, 8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
 /* HERO */
 .hero-section {
   position: relative;
@@ -188,7 +206,8 @@ html, body {
   color: #000000;
   font-size: clamp(17.78px, 1.389vw, 35.56px);
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.6;
+  word-spacing: 0.1em;
 }
 .features-grid {
   display: grid;
@@ -285,11 +304,11 @@ html, body {
   letter-spacing: 0.05em;
 }
 .timeline-content h4 {
-  margin: 0 0 clamp(8.89px, 0.694vw, 17.78px) 0;
+  margin: 0 0 clamp(12px, 1vw, 24px) 0;
   color: #000000;
   font-size: clamp(16px, 1.25vw, 32px);
   font-weight: 600;
-  line-height: 100%;
+  line-height: 1.2;
 }
 .timeline-content p {
   min-width: clamp(426.67px, 33.333vw, 853.33px);
@@ -297,7 +316,7 @@ html, body {
   color: #000000;
   font-size: clamp(12.44px, 0.972vw, 24.89px);
   font-weight: 400;
-  line-height: 100%;
+  line-height: 1.6;
 }
 /* Forms & Inputs */
 
@@ -364,7 +383,7 @@ html, body {
   width: 100%;
   height: 100%;
   border-radius: 0px 0px 0px clamp(498.67px, 38.958vw, 997.33px);
-  background: url('/image 63.png') no-repeat center center;
+  background: url('../assets/extended-bg-light.png') no-repeat center center;
   background-size: cover;
   display: block;
 }
@@ -868,7 +887,7 @@ html, body {
   z-index: 1;
   width: 100%;
   height: 100%;
-  background-image: url('/Gemini2.png');
+  background-image: url('../assets/cta-bg-light.png');
   background-position: center top;
   background-size: cover;
 }
@@ -1118,7 +1137,7 @@ html, body {
   z-index: 1;
   width: calc(clamp(120px, 45.9vw, 661px) + 40px);
   height: calc(clamp(250px, 100vw, 1440px) + 40px);
-  background: url('/image75.png') center/cover no-repeat;
+  background: url('../assets/footer-bg-light.png') center/cover no-repeat;
   opacity: 1;
   filter: blur(clamp(12.71px, 0.993vw, 25.42px));
   transform: translate(-50%, -50%) rotate(-90deg);
@@ -1208,7 +1227,7 @@ html, body {
 }
 
   .timeline-content h4 {
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   font-size: 14px;
 }
 
@@ -1217,7 +1236,7 @@ html, body {
   min-width: 0;
   max-width: 340px;
   font-size: clamp(9px, 1.3vw, 11px);
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
   .benefits-grid {
@@ -1313,7 +1332,7 @@ html, body {
   gap: 0.3vw;
   font-size: 1.15vw;
   line-height: 1.3;
-  white-space: nowrap;
+  white-space: normal;
 }
 
   .pricing-check {
@@ -1416,7 +1435,7 @@ html, body {
   z-index: 0;
   width: 645px;
   height: 719px;
-  background: url('/Vector.png') no-repeat left top;
+  background: url('../assets/landing-layout-bg-light.png') no-repeat left top;
   content: '';
   pointer-events: none;
 }
@@ -1553,7 +1572,8 @@ html, body {
   color: #000;
   font-size: 14px;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 1.6;
+  word-spacing: 0.1em;
   text-align: center;
 }
 
@@ -1602,6 +1622,15 @@ html, body {
   font-size: 1.1vw;
 }
 
+  .landing-footer {
+  min-height: 450px;
+}
+
+  .footer-link-column h4,
+  .footer-link-column a {
+  font-size: clamp(10px, 1.3vw, 20px);
+  white-space: nowrap;
+}
   
 }
 
@@ -1688,7 +1717,7 @@ html, body {
   gap: 0.5vw;
   font-size: 1.7vw;
   line-height: 1.3;
-  white-space: nowrap;
+  white-space: normal;
 }
 
   .pricing-check {
@@ -1734,17 +1763,23 @@ html, body {
 }
 
   .timeline-number {
-  font-size: 11px;
+  font-size: 2.8vw;
 }
 
   .timeline-content h4 {
-  margin-bottom: 4px;
-  font-size: 12px;
+  margin-bottom: 2vw;
+  font-size: 3vw;
 }
 
   .timeline-content p {
   min-width: auto;
-  font-size: 10px;
+  font-size: 2.5vw;
+  line-height: 1.6;
+}
+
+  .timeline-content .mobile-line {
+  font-size: inherit;
+  line-height: inherit;
 }
 
   .benefit-card h4 {
@@ -1765,7 +1800,7 @@ html, body {
   z-index: 0;
   width: 100vw;
   height: 111vw;
-  background: url('/Vector.png') no-repeat left top;
+  background: url('../assets/landing-layout-bg-light.png') no-repeat left top;
   background-size: 100% auto;
   content: '';
   opacity: 1;
@@ -1901,7 +1936,7 @@ html, body {
   .mobile-line {
   display: block;
   font-size: clamp(8px, 2.7vw, 14px);
-  line-height: 1.5;
+  line-height: 1.6;
   white-space: nowrap;
 }
 
@@ -1909,32 +1944,32 @@ html, body {
   /* Benefits */
   .benefits-grid {
   display: grid;
-  gap: 16px;
+  gap: 4vw;
   grid-template-columns: 1fr 1fr;
   width: 100%;
 }
 
   .benefit-card {
   justify-content: flex-start;
-  gap: 10px;
+  gap: 2.5vw;
   width: 100%;
-  padding: 12px 16px;
+  padding: 3vw 4vw;
 }
 
   .benefit-card h4 {
-  font-size: clamp(10px, 3vw, 14px);
+  font-size: 2.5vw;
   white-space: nowrap;
 }
 
   .benefit-card .benefit-icon {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+  width: 7vw;
+  height: 7vw;
 }
 
   .benefit-card .benefit-icon svg {
-  width: 14px;
-  height: 14px;
+  width: 3.5vw;
+  height: 3.5vw;
 }
 
   
@@ -2022,55 +2057,60 @@ html, body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 12px;
-  width: 74%;
+  gap: 3vw;
+  width: 70%;
   max-width: none;
-  padding: 14px 18px;
+  padding: 3vw 4vw;
   text-align: left;
 }
 
   .security-card:nth-child(2) {
   /* Audit Logs */
   order: 1;
-  margin-left: 8%;
+  margin-left: 15%;
 }
 
   .security-card:nth-child(3) {
   /* Reliable Infrastructure */
   order: 2;
-  margin-left: 17%;
+  margin-left: 24%;
 }
 
   .security-card:nth-child(1) {
   /* Secure Signing */
   order: 3;
-  margin-left: 26%;
+  margin-left: 33%;
 }
 
   .security-card .security-icon {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 8vw;
+  height: 8vw;
   margin-bottom: 0;
 }
 
   .security-card .security-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 4vw;
+  height: 4vw;
 }
 
   .security-card h4 {
-  margin-bottom: 4px;
-  font-size: 14px;
+  margin-bottom: 1vw;
+  font-size: 2.8vw;
   font-weight: 700;
   white-space: nowrap;
 }
 
   .security-card p {
   /* Override desktop center alignment */
-  font-size: 11px;
+  font-size: 2.2vw;
   line-height: 1.3;
   text-align: left;
+}
+
+  .security-card .mobile-line {
+  font-size: inherit;
+  line-height: inherit;
 }
 
   
@@ -2165,7 +2205,7 @@ html, body {
   /* CTA */
   .cta-section {
   margin-top: 0;
-  padding: 30vw 5vw 10vw;
+  padding: 15vw 5vw 10vw;
 }
 
   .cta-title {
@@ -2242,12 +2282,14 @@ html, body {
 
   .footer-link-column h4 {
   margin-bottom: 12px;
-  font-size: 11px;
+  font-size: clamp(7px, 2.6vw, 11px);
+  white-space: nowrap;
 }
 
   .footer-link-column a {
   margin-bottom: 10px;
-  font-size: 12px;
+  font-size: clamp(8px, 2.8vw, 12px);
+  white-space: nowrap;
 }
 
   .footer-copyright {
@@ -2285,7 +2327,7 @@ html, body {
 /* =====================================================
    DARK THEME
 ===================================================== */
-@media (prefers-color-scheme: dark) {
+[data-theme="dark"] {
 
   .landing-layout {
     background: #000000;
@@ -2313,7 +2355,7 @@ html, body {
   }
 
   .extended-background {
-    background-image: url('/dark5.png');
+    background-image: url('../assets/extended-bg-dark.png');
   }
 
   .extended-fade-top {
@@ -2419,7 +2461,7 @@ html, body {
   }
 
   .cta-bg-layer {
-    background-image: url('/dark6.png');
+    background-image: url('../assets/cta-bg-dark.png');
     background-position: center top;
     background-size: cover;
     -webkit-mask-image: none;
@@ -2459,7 +2501,7 @@ html, body {
 
   .footer-blurry-bg {
     opacity: 0.7;
-    background-image: url('/dark7.png');
+    background-image: url('../assets/footer-bg-dark.png');
   }
 
   .footer-blurry-bg-container::after {
@@ -2483,7 +2525,7 @@ html, body {
     color: transparent;
     background-image:
       linear-gradient(rgba(10, 0, 0, 0.2), rgba(10, 0, 0, 0.2)),
-      url('/dark7.png');
+      url('../assets/footer-bg-dark.png');
     background-size: 150% auto;
     background-position: 25% 50%;
     -webkit-background-clip: text;
@@ -2497,7 +2539,7 @@ html, body {
     }
     .landing-layout::before {
       display: block;
-      background: url('/dark2.png') no-repeat top left;
+      background: url('../assets/bg-left-dark.png') no-repeat top left;
       background-size: 80% auto;
       width: 100%;
       height: 80vw;
@@ -2522,7 +2564,7 @@ html, body {
     }
     .landing-layout::before {
       display: block;
-      background: url('/dark2.png') no-repeat top left;
+      background: url('../assets/bg-left-dark.png') no-repeat top left;
       background-size: 140% auto;
       height: 130vw;
     }

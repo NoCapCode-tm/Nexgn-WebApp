@@ -57,7 +57,7 @@
 
 @media (min-width: 1180px) {
   .member-theme .main {
-    padding: 24px 28px 24px 28px !important;
+    padding: clamp(24px, 1.66vw, 43px) clamp(28px, 1.94vw, 50px) !important;
   }
 }
 
@@ -74,11 +74,11 @@
 
 @media (min-width: 1180px) {
   .member-theme .topbar {
-    gap: 8px !important;
+    gap: clamp(8px, 0.55vw, 14px) !important;
   }
 
   .member-theme .topbar__sub {
-    margin-top: 2px !important;
+    margin-top: clamp(2px, 0.13vw, 4px) !important;
   }
 }
 
@@ -378,7 +378,7 @@
     display: none !important;
   }
   .member-theme .topbar__icons {
-    gap: 24px !important;
+    gap: clamp(24px, 1.66vw, 43px) !important;
   }
 }
 
