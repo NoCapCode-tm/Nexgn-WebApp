@@ -20,13 +20,16 @@ button { font-family: inherit; background: none; border: none; cursor: pointer; 
 .layout {
   display: flex;
   align-items: flex-start;
+  width: 100%;
   min-height: 100vh;
   background: #fffbfd;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+
+/*
    SIDEBAR
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+*/
 .sidebar {
   display: flex;
   position: sticky;
@@ -138,6 +141,13 @@ background: transparent;
   padding-bottom: 16px;
 }
 
+.sidebar__divider {
+  width: calc(100% - 32px);
+  margin: 0 16px 16px 16px;
+  height: 1px;
+  background: #E8302A;
+}
+
 .sidebar__item {
   display: flex;
   position: relative;
@@ -157,29 +167,17 @@ background: transparent;
 }
 
 .sidebar__item:hover::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: #FF0915;
-  border-radius: 0 2px 2px 0;
-  content: "";
+  display: none;
 }
 
 .sidebar__item--active {
-  background: #FFDCDC;
+  background: #C7000B;
+  border-radius: 0 12px 12px 0;
+  margin-right: 16px;
 }
 
 .sidebar__active-pill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: #FF0915;
-  border-radius: 0 2px 2px 0;
-  flex-shrink: 0;
+  display: none;
 }
 
 .sidebar__icon-wrap {
@@ -195,7 +193,13 @@ background: transparent;
 .sidebar__icon-wrap:hover svg path,
 .sidebar__icon-wrap:hover svg circle,
 .sidebar__icon-wrap:hover svg rect {
-  stroke: #FF0915;
+  stroke: #C7000B;
+}
+
+.sidebar__item--active .sidebar__icon-wrap svg path,
+.sidebar__item--active .sidebar__icon-wrap svg circle,
+.sidebar__item--active .sidebar__icon-wrap svg rect {
+  stroke: #ffffff;
 }
 
 .sidebar__item-label {
@@ -207,19 +211,19 @@ background: transparent;
 }
 
 .sidebar__item:hover .sidebar__item-label {
-  color: #FF0915;
+  color: #C7000B;
 }
 .sidebar__item--active .sidebar__item-label {
   font-weight: 500;
-  color: #8A949F;
+  color: #ffffff;
 }
 .sidebar__item-label {
   font-family: 'Inter', sans-serif;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/*
    MAIN CONTENT
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+*/
 .main {
   display: flex;
   flex: 1;
@@ -286,6 +290,194 @@ background: transparent;
 
 .topbar__icon-btn:hover { background: #f3f4f6; }
 
+.topbar__icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content; /* Ensure it never expands beyond the icon */
+}
+
+/* Remove the gray background on hover for the bell icon to match Figma exactly */
+.topbar__icon-wrapper .topbar__icon-btn:hover {
+  background: transparent;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%;
+  right: -40px; /* Slightly adjusted to align with user profile */
+  margin-top: 14px;
+  width: 320px;
+  background: #D9D9D9;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+}
+
+/* Caret pointing up to the bell - attached to wrapper to ensure perfect centering */
+.topbar__icon-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  margin-left: -10px; /* 10px is half of the 20px caret width. 100% foolproof centering */
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #D10008;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+.topbar__icon-wrapper:hover .notification-dropdown,
+.notification-dropdown:hover,
+.topbar__icon-wrapper:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.notification-dropdown__header {
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  color: #FFFFFF;
+  padding: 10px 14px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.notification-dropdown__body {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px;
+  gap: 12px;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.notification-item__avatar {
+  width: 32px;
+  height: 32px;
+  background: #999999;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.notification-item__icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.notification-item__text {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #000000;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.notification-item__text--red {
+  color: #FF0915;
+}
+
+.notification-dropdown__footer {
+  text-align: center;
+  padding: 0 14px 14px 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #FF0915;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.notification-dropdown__footer:hover {
+  text-decoration: underline;
+}
+
+/* Profile Dropdown Specifics */
+.profile-dropdown {
+  width: 270px;
+  right: -20px;
+}
+
+.profile-dropdown__body {
+  padding: 4px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-dropdown__info {
+  margin-bottom: 2px;
+  padding: 0 4px;
+}
+
+.profile-dropdown__name {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.profile-dropdown__email {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: #666666;
+  margin-top: 0;
+}
+
+.profile-dropdown__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.profile-dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #000000;
+  transition: background 0.15s;
+}
+
+.profile-dropdown__item:hover {
+  background: #C4C4C4; /* Darker gray from figma screenshot */
+}
+
+.profile-dropdown__divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  margin: 2px 0;
+  width: 100%;
+}
 .topbar__upload {
   display: flex;
   align-items: center;
@@ -491,7 +683,7 @@ background: transparent;
   display: none;
   position: fixed;
   top: 0;
-  left: -260px;
+  left: -320px;
   z-index: 999;
   height: 100vh;
   transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -667,18 +859,48 @@ background: transparent;
   .stats-grid {
     margin-top: 0;
   }
+
+  /* Fluid Sidebar Adjustments */
+  .sidebar {
+    width: clamp(220px, 28.6vw, 300px);
+  }
+  .sidebar__item {
+    height: clamp(48px, 6.25vw, 64px);
+  }
+  .sidebar__icon-wrap {
+    width: clamp(50px, 6.5vw, 70px);
+    min-width: clamp(50px, 6.5vw, 70px);
+  }
+  .sidebar__item-label {
+    font-size: clamp(14px, 1.8vw, 16px);
+  }
+  .sidebar__logo {
+    height: clamp(90px, 11.7vw, 130px);
+  }
   .mobile-page-header {
   display: block;
   margin: 0 16px;
   padding: 16px 16px 40px 16px;
-  border-bottom: 1px solid #CCCCCC;
 }
+  .mobile-topbar { 
+    display: flex; 
+    padding: clamp(16px, 2.08vw, 24px) clamp(24px, 3.12vw, 32px);
+  }
   .mobile-topbar .topbar__icon-btn svg {
     color: #FF0915;
     filter: drop-shadow(0px 1px 1px rgba(255, 9, 21, 0.4));
+    width: clamp(24px, 3.2vw, 28px) !important;
+    height: clamp(24px, 3.2vw, 28px) !important;
+    stroke-width: 1.5;
   }
-  /* Show mobile topbar on tablet too */
-  .mobile-topbar { display: flex; }
+  .mobile-topbar__hamburger svg {
+    width: clamp(24px, 3.2vw, 28px) !important;
+    height: clamp(24px, 3.2vw, 28px) !important;
+    stroke-width: 1.5;
+  }
+  .mobile-topbar__icons {
+    gap: clamp(16px, 2.08vw, 24px);
+  }
   .desktop-topbar { display: none !important; }
 
   /* Add search icon to tablet topbar */
@@ -810,4 +1032,79 @@ background: transparent;
     display: flex !important;
   }
 
+}
+
+/* Fluid Desktop Scaling (1180px and above)
+   Preserves the 1366-1440px design, but scales it up fluidly for larger monitors using clamp(). */
+@media (min-width: 1180px) {
+  /* Sidebar */
+  .sidebar { width: clamp(60px, 4.16vw, 106px); }
+  .sidebar--expanded { width: clamp(200px, 13.88vw, 355px); }
+  .sidebar__inner { border-radius: 0 clamp(38px, 2.63vw, 67px) 0 0; }
+  .sidebar__logo { height: clamp(110px, 7.63vw, 195px); }
+  .sidebar__logo-name { font-size: clamp(20px, 1.38vw, 35px); }
+  .sidebar__logo-sub { font-size: clamp(10px, 0.69vw, 17px); }
+  .sidebar__item { height: clamp(55px, 3.81vw, 97px); }
+  .sidebar__icon-wrap { width: clamp(60px, 4.16vw, 106px); min-width: clamp(60px, 4.16vw, 106px); }
+  .sidebar__item-label { font-size: clamp(13px, 0.9vw, 23px); padding-right: clamp(16px, 1.11vw, 28px); }
+  
+  /* Main */
+  .main { gap: clamp(20px, 1.38vw, 35px); padding: clamp(24px, 1.66vw, 43px) clamp(28px, 1.94vw, 50px); }
+  
+  /* Topbar */
+  .topbar { gap: clamp(8px, 0.55vw, 14px); }
+  .topbar__title { font-size: clamp(24px, 1.66vw, 43px); }
+  .topbar__sub { font-size: clamp(12px, 0.83vw, 21px); margin-top: clamp(2px, 0.13vw, 4px); }
+  .topbar__icons { gap: clamp(24px, 1.66vw, 43px); }
+  .topbar__upload {
+    padding: clamp(9px, 0.62vw, 16px) clamp(18px, 1.25vw, 32px);
+    font-size: clamp(13px, 0.9vw, 23px);
+    border-radius: clamp(8px, 0.55vw, 14px);
+    gap: clamp(6px, 0.41vw, 10px);
+  }
+  
+  /* Stats Grid */
+  .stats-grid { gap: clamp(16px, 1.11vw, 28px); }
+  .stat-card {
+    min-height: clamp(160px, 11.11vw, 284px);
+    padding: clamp(24px, 1.66vw, 43px) clamp(26px, 1.8vw, 46px);
+    border-radius: clamp(16px, 1.11vw, 28px);
+  }
+  .stat-card__label {
+    margin-bottom: clamp(14px, 0.97vw, 25px);
+    font-size: clamp(12px, 0.83vw, 21px);
+  }
+  .stat-card__value {
+    margin-bottom: clamp(18px, 1.25vw, 32px);
+    font-size: clamp(40px, 2.77vw, 71px);
+  }
+  .stat-card__trend { font-size: clamp(12px, 0.83vw, 21px); gap: clamp(4px, 0.27vw, 7px); }
+  
+  /* Tables */
+  .docs-section__title { margin-bottom: clamp(16px, 1.11vw, 28px); font-size: clamp(14px, 0.97vw, 25px); }
+  .docs-table { gap: clamp(10px, 0.69vw, 17px); }
+  .docs-table__header {
+    padding: 0 clamp(16px, 1.11vw, 28px) clamp(8px, 0.55vw, 14px) clamp(16px, 1.11vw, 28px);
+    font-size: clamp(11px, 0.76vw, 19px);
+  }
+  .docs-table th {
+    padding: 0 clamp(12px, 0.83vw, 21px) clamp(10px, 0.69vw, 17px) clamp(12px, 0.83vw, 21px);
+    font-size: clamp(11px, 0.76vw, 19px);
+  }
+  
+  .doc-row {
+    padding: clamp(14px, 0.97vw, 25px) clamp(16px, 1.11vw, 28px);
+    font-size: clamp(13px, 0.9vw, 23px);
+    border-radius: clamp(10px, 0.69vw, 17px);
+  }
+  .doc-row td { padding: clamp(13px, 0.9vw, 23px) clamp(12px, 0.83vw, 21px); }
+  .doc-row__title { gap: clamp(10px, 0.69vw, 17px); }
+  .doc-row__note { padding-right: clamp(12px, 0.83vw, 21px); }
+  .doc-row__menu { padding: clamp(4px, 0.27vw, 7px); border-radius: clamp(4px, 0.27vw, 7px); }
+  
+  .badge {
+    padding: clamp(3px, 0.2vw, 5px) clamp(12px, 0.83vw, 21px);
+    font-size: clamp(11px, 0.76vw, 19px);
+    border-radius: clamp(4px, 0.27vw, 7px);
+  }
 }

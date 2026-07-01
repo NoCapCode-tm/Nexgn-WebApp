@@ -71,8 +71,8 @@ const navItems = [
 ];
 
 const bottomItems = [
-  { label: "Settings", path: "/member-settings", icon: SettingsIcon },
   { label: "Help", path: "/help", icon: HelpIcon },
+  { label: "Settings", path: "/member-settings", icon: SettingsIcon },
 ];
 
 export default function MemberSidebar() {
