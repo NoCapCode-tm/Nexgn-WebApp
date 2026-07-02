@@ -11,7 +11,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 200px;
+  width: 100%;
+  max-width: 300px;
   height: 36px;
   padding: 0 12px;
   background: #fff;
@@ -238,11 +239,11 @@
   border-radius: 4px;
 }
 
-.member-badge--pending  { color: #D28E56; background: #FEF5E0; }
-.member-badge--signed   { color: #559B6F; background: #E6F7EC; }
-.member-badge--expired  { color: #E22A2A; background: #FFDCDC; }
+.member-badge--pending  { color: #F59E0B; background: #FEF3C7; }
+.member-badge--signed   { color: #10B981; background: #D1FAE5; }
+.member-badge--expired, .member-badge--failed { color: #EF4444; background: #FEE2E2; }
 
-/* â”€â”€ FIGMA MOBILE OVERRIDES (Hidden on Desktop/Tablet) â”€â”€ */
+/* ── FIGMA MOBILE OVERRIDES (Hidden on Desktop/Tablet) ── */
 .mobile-status-corner,
 .mobile-only-icon,
 .mobile-lbl,
@@ -255,88 +256,127 @@
   display: block;
 }
 
-/* â”€â”€ RESPONSIVE â”€â”€ */
+/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .member-docs-page .mobile-page-header .topbar__bottom-row {
     flex-direction: column;
     align-items: stretch;
-    gap: 16px;
+    gap: var(--space-xs);
   }
   .member-docs-topbar-actions {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
+    gap: var(--space-sm);
   }
   /* --- Action Controls Styling (Figma) --- */
   .member-docs-search-wrap {
     flex: 1;
     max-width: none;
-    padding-left: 12px;
-    border: 1px solid #E4E4E4;
-    border-radius: 20px;
+    height: 10.667vw;
+    padding: 0 var(--space-md);
+    background: #fff;
+    border: none;
+    border-radius: var(--space-2xl);
+    box-shadow: 0 0.533vw 2.667vw rgba(0, 0, 0, 0.06);
   }
   .member-docs-search-input::placeholder {
-    font-size: 13px;
+    font-size: var(--font-sm);
   }
   .member-docs-filter-btn {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 10.667vw;
+    height: 10.667vw;
     padding: 0;
     background: #fff;
-    border: 1px solid #E4E4E4;
+    border: none;
     border-radius: 50%;
+    box-shadow: 0 0.533vw 2.667vw rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
   }
   .member-docs-filter-btn .filter-text { display: none; }
   .member-docs-add-btn {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 10.667vw;
+    height: 10.667vw;
     padding: 0;
     color: #fff;
     background: #E22A2A;
     border: none;
     border-radius: 50%;
+    box-shadow: 0 1.067vw 3.2vw rgba(226, 42, 42, 0.2);
+    flex-shrink: 0;
   }
   .member-docs-add-btn .add-btn-full { display: none; }
 
   /* --- Tabs Styling (Figma) --- */
   .member-docs-tabs {
-    gap: 16px;
-    margin-bottom: 16px;
-    padding: 0 16px;
-    border-bottom: none;
-    overflow-x: auto;
-    scrollbar-width: none;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin: var(--space-md) var(--mobile-gutter) var(--space-md) var(--mobile-gutter) !important;
+    padding: 0 !important;
+    height: 12.267vw !important;
+    min-height: 12.267vw !important;
+    border-bottom: none !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    box-sizing: border-box !important;
+    width: auto !important;
   }
   .member-docs-tab {
-    padding: 8px 24px;
-    font-size: 13px;
-    color: #8A949F;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 0 var(--space-sm) !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: var(--font-sm) !important;
+    font-weight: 500 !important;
+    color: #8A949F !important;
     border: none !important;
-    border-radius: 12px;
+    border-radius: var(--space-sm) !important;
+    background: transparent !important;
   }
   .member-docs-tab--active {
-    font-weight: 500;
     color: #ffffff !important;
-    background: #E22A2A;
+    background: #E22A2A !important;
   }
 
   /* --- Section Title --- */
   .member-docs-mobile-section-title {
     display: block;
-    margin-bottom: 24px;
-    padding: 0 16px;
-    font-size: 14px;
+    margin-bottom: var(--space-md);
+    padding: 0 var(--mobile-gutter);
+    font-size: var(--font-md);
     font-weight: 600;
     color: #111827;
   }
 
   .mobile-header-divider {
-    width: 100%;
-    margin: 16px 0;
-    border: none;
-    border-bottom: 1px solid #e5e7eb;
+    display: block !important;
+    width: 100% !important;
+    margin: var(--space-md) 0 !important;
+    border: none !important;
+    border-bottom: 1px solid #E5E7EB !important;
+  }
+
+  /* Title for "Need My Sign" */
+  .member-docs-mobile-section-title {
+    font-size: var(--font-xl) !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+    margin-bottom: var(--space-lg) !important;
+  }
+  
+  .mobile-hidden-search {
+    display: none !important;
   }
 
   /* --- Table Header --- */
@@ -344,8 +384,8 @@
     display: none;
   }
   .member-docs-table {
-    gap: 12px;
-    padding: 0 16px 20px 16px;
+    gap: var(--space-md) !important;
+    padding: 0 var(--mobile-gutter) var(--space-xl) var(--mobile-gutter) !important;
   }
 
   /* --- Document Card Overhaul (Figma) --- */
@@ -356,28 +396,28 @@
     align-items: start;
     grid-template-rows: auto auto;
     height: auto;
-    padding: 20px 16px;
+    padding: var(--space-md) !important;
     background: #ffffff;
     border: none;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-    column-gap: 8px;
-    row-gap: 20px;
+    border-radius: var(--space-md) !important;
+    box-shadow: 0 1.067vw 5.333vw rgba(0,0,0,0.04);
+    column-gap: var(--space-xs) !important;
+    row-gap: var(--space-lg) !important;
   }
 
   /* Hide Desktop Elements */
   .desktop-val,
-  .desktop-status,
   .member-doc-row__menu,
   .member-doc-row__note {
     display: none !important;
   }
 
   /* Show Mobile Elements */
-  .mobile-status-corner,
-  .mobile-only-icon,
-  .mobile-owner-badge {
+  .mobile-only-icon {
     display: flex;
+    color: #686868;
+    width: 4.8vw !important;
+    height: 4.8vw !important;
   }
   .mobile-lbl {
     display: block;
@@ -385,13 +425,15 @@
 
   /* Title Row */
   .member-doc-row__title {
+    display: flex;
     align-items: center;
-    width: 90%;
+    width: 100%;
     margin: 0;
-    font-size: 15px;
-    font-weight: 500;
-    color: #111827;
-    grid-column: 1 / -1;
+    font-size: var(--font-lg) !important;
+    font-weight: 600 !important;
+    color: #111827 !important;
+    grid-column: 1 / 3; /* Take up first two cols */
+    gap: var(--space-xs) !important;
   }
   .member-doc-row__title span {
     display: block;
@@ -400,27 +442,31 @@
     text-overflow: ellipsis;
   }
   .member-doc-row__icon {
-    width: 18px;
-    height: 18px;
+    width: var(--font-lg) !important;
+    height: var(--font-lg) !important;
     color: #111827;
   }
 
-  /* Top Right Status Corner */
+  /* Top Right Status Pill (Desktop style but positioned for Mobile grid) */
   .mobile-status-corner {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    padding: 2px;
-    background: #fff;
-    border-radius: 50%;
+    display: none !important; /* Hide corner dot */
   }
-  .status-circle-icon {
-    width: 18px;
-    height: 18px;
+  
+  .desktop-status {
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: center;
+    grid-column: 3 / 4; /* Put in 3rd column of first row */
+    grid-row: 1;
   }
-  .status-green { color: #559B6F; }
-  .status-red { color: #E22A2A; }
-  .status-yellow { color: #F59E0B; }
+  .desktop-status .member-badge {
+    font-size: var(--font-xs) !important;
+    padding: var(--space-xs) var(--space-sm) !important;
+    border-radius: var(--space-2xl) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: var(--space-xs) !important;
+  }
 
   /* Grid Layout for Meta Columns */
   .member-doc-row__cell {
@@ -429,60 +475,50 @@
   .member-doc-row__cell.mobile-col {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--space-xs) !important;
   }
   .member-doc-row__cell.mobile-col-owner {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-xs) !important;
   }
 
-  .mobile-only-icon {
-    margin-top: 1px;
-    color: #686868;
-  }
   .mobile-col-text {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.533vw !important;
   }
   .mobile-val {
-    max-width: 80px;
-    font-size: 12px;
-    font-weight: 400;
+    max-width: 29.333vw !important;
+    font-size: var(--font-sm) !important;
+    font-weight: 500 !important;
     white-space: nowrap;
-    color: #686868;
+    color: #4b5563 !important;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .mobile-lbl {
-    font-size: 10px;
+    font-size: var(--font-xs) !important;
+    color: #9ca3af !important;
+  }
+
+  /* Owner text formatting */
+  .mobile-owner-badge {
+    display: none !important; /* Hide the stacked colored badge */
+  }
+  .member-doc-row__cell.mobile-col-owner .desktop-val {
+    display: block !important;
+    font-size: var(--font-sm) !important;
+    font-weight: 600;
+    color: #111827;
+  }
+  .member-doc-row__cell.mobile-col-owner::after {
+    content: "Owner";
+    font-size: var(--font-xs);
     color: #686868;
   }
-
-  /* Owner Stacked Badge Base */
-  .mobile-owner-badge {
-    display: flex;
-    flex-direction: column;
-    width: 100px;
-    text-align: center;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .mobile-owner-badge__top {
-    padding: 2px 0;
-    font-size: 9px;
-    font-weight: 500;
-    color: #4b5563;
-    background: #ffffff;
-  }
-  .mobile-owner-badge__bot {
-    padding: 2px 0;
-    font-size: 10px;
-    font-weight: 600;
-    color: #ffffff;
-  }
-
-  /* Dynamic Owner Badge Colors */
   .member-docs-page .badge-pending { border: 1px solid #F59E0B; }
   .member-docs-page .badge-pending .mobile-owner-badge__bot { background: #F59E0B; }
 
@@ -687,7 +723,7 @@
     flex-direction: column !important;
     gap: 0 !important;
     margin: 0 !important;
-    padding: 40px 0 32px 0 !important;
+    padding: 0 0 32px 0 !important;
   }
 
   /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

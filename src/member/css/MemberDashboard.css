@@ -82,6 +82,10 @@
   }
 }
 
+.member-theme .tablet-upload-btn {
+  display: none !important;
+}
+
 /* ==========================================================================
    Cards
    ========================================================================== */
@@ -172,44 +176,79 @@
   /* 6. Overall Layout */
   .member-theme .main {
     gap: 8px !important;
-    padding-bottom: 100px !important;
+    padding-bottom: 80px !important;
   }
 
   /* 1. Dashboard Section */
   .member-theme .mobile-page-header {
-    margin-bottom: 4px !important;
+    margin-bottom: var(--space-md) !important;
+    padding: var(--space-md) var(--mobile-gutter) 0 var(--mobile-gutter) !important;
   }
   .member-theme .mobile-page-header__divider {
-    margin-top: 8px !important;
-    margin-bottom: 4px !important;
+    margin-top: var(--space-sm) !important;
+    margin-bottom: 0 !important;
+    border-top: 1px solid #E5E7EB !important;
+    height: 0 !important;
   }
   .member-theme .topbar__sub {
     margin-bottom: 0 !important;
+    font-size: var(--font-sm) !important;
+    color: #6B7280 !important;
   }
 
   /* 2. Stat Cards */
   .member-theme .stat-card {
-    min-height: 90px !important;
-    padding: 15px 12px !important;
+    min-height: auto !important;
+    padding: var(--mobile-gutter) !important;
+    border-radius: var(--space-sm) !important;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid #F9FAFB !important;
   }
   .member-theme .stat-card__label {
-    margin-bottom: 4px !important;
-    font-size: 11px !important;
+    margin-bottom: var(--space-xs) !important;
+    font-size: var(--font-sm) !important;
+    color: #6B7280 !important;
   }
   .member-theme .stat-card__value {
-    margin-bottom: 4px !important;
-    font-size: 24px !important;
+    margin-bottom: var(--space-xs) !important;
+    font-size: var(--font-metric) !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+  }
+  .member-theme .stat-card__trend {
+    font-size: var(--font-xs) !important;
+    gap: var(--space-xs) !important;
   }
 
-  /* 3. Buttons */
+  /* 3. Buttons (Segmented Control exactly like Figma) */
   .member-theme .mobile-cta-row {
-    margin: 8px 16px !important;
+    display: flex !important;
+    gap: 0 !important;
+    margin: var(--space-xs) var(--mobile-gutter) !important;
+    padding: var(--space-xs) !important;
+    background: #ffffff !important;
+    border: 1px solid #E5E7EB !important;
+    border-radius: var(--space-sm) !important;
+  }
+  .member-theme .mobile-cta {
+    border-radius: var(--space-xs) !important;
+    font-size: var(--font-sm) !important;
+    height: 10.667vw !important;
+  }
+  .member-theme .mobile-cta--primary {
+    background: #C7000B !important;
+    color: #ffffff !important;
+  }
+  .member-theme .mobile-cta--outline {
+    background: transparent !important;
+    color: #6B7280 !important;
+    border: none !important;
   }
 
   /* 4. Recent Documents Section */
   .member-theme .docs-section {
-    margin-top: 4px !important;
-    padding: 8px 16px !important;
+    margin-top: var(--space-xs) !important;
+    padding: var(--space-xs) var(--mobile-gutter) !important;
   }
 
 
@@ -217,34 +256,39 @@
   .member-theme .topbar__title,
   .member-theme .docs-section__title,
   .member-theme .mobile-topbar__title {
-    margin-bottom: 4px !important;
-    font-size: 16px !important;
+    margin-bottom: var(--space-xs) !important;
+    font-size: var(--font-title) !important;
+    color: #111827 !important;
   }
   .member-theme .docs-section__title {
-    margin-bottom: 16px !important;
+    margin-bottom: var(--space-sm) !important;
+    font-size: var(--font-lg) !important;
   }
   .member-theme .doc-row span,
   .member-theme .doc-row__title {
-    font-size: 13px !important;
+    font-size: var(--font-sm) !important;
   }
 
   /* Table Optimization for Mobile */
   .member-theme .doc-row,
   .member-theme .desktop-table-header {
-    grid-template-columns: 1fr 60px 55px !important;
+    grid-template-columns: 1fr 16vw 14.667vw !important;
   }
 
   /* 5. Document Rows */
   .member-theme .doc-row {
-    gap: 16px !important;
-    padding: 10px 12px !important;
+    gap: var(--space-sm) !important;
+    padding: var(--space-sm) var(--space-md) !important;
+    border-radius: var(--space-sm) !important;
     overflow-x: hidden !important;
+    margin-bottom: var(--space-xs) !important; 
   }
 
   .member-theme .desktop-table-header {
-    gap: 16px !important;
-    margin-bottom: 4px !important;
-    padding: 0 12px 6px 12px !important;
+    gap: var(--space-sm) !important;
+    margin-bottom: var(--space-xs) !important;
+    padding: 0 var(--space-md) var(--space-xs) var(--space-md) !important;
+    font-size: var(--font-xs) !important;
   }
 
   /* Center Status Dot and Action Menu vertically and horizontally */
@@ -258,10 +302,10 @@
     text-align: center;
   }
 
-  /* Visually shift Status column closer to Action column */
+  /* Visually shift Status column further left to separate it from Action */
   .member-theme .doc-row > *:nth-child(6),
   .member-theme .desktop-table-header span:nth-child(6) {
-    transform: translateX(10px) !important;
+    transform: translateX(-10px) !important;
   }
 
   /* Status Column â€“ Dot Only */
@@ -321,8 +365,22 @@
 
 @media (min-width: 769px) and (max-width: 1179px) {
   .member-theme .main {
-    gap: 20px !important;
-    padding-bottom: 0 !important;
+    gap: 24px !important;
+    padding-bottom: 24px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .member-theme .mobile-topbar {
+    padding: 24px 32px !important;
+  }
+
+  .member-dashboard-page .mobile-page-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 16px 32px 24px 32px !important;
   }
 
   .member-theme .mobile-cta-row {
@@ -331,7 +389,14 @@
 
   .member-theme .stats-grid {
     grid-template-columns: repeat(4, 1fr) !important;
-    padding: 0 16px !important;
+    margin: 0 !important;
+    padding: 0 32px !important;
+    gap: clamp(16px, 2vw, 24px) !important;
+  }
+
+  .member-theme .docs-section {
+    margin: 0 !important;
+    padding: 0 32px 24px 32px !important;
   }
 
   .member-theme .stat-card {
@@ -350,9 +415,20 @@
     display: none !important;
   }
 
-  .member-theme .doc-row > *:nth-child(5),
-  .member-theme .doc-row > *:nth-child(6),
+  .member-theme .doc-row > *:nth-child(5) {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    transform: translateX(-15px) !important;
+  }
   .member-theme .doc-row > *:nth-child(7) {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .member-theme .doc-row > *:nth-child(6) {
     display: block !important;
   }
 
@@ -362,13 +438,27 @@
     display: none !important;
   }
 
-  .member-theme .desktop-table-header span:nth-child(5),
-  .member-theme .desktop-table-header span:nth-child(6),
+  .member-theme .desktop-table-header span:nth-child(5) {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    transform: translateX(-15px) !important;
+  }
   .member-theme .desktop-table-header span:nth-child(7) {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .member-theme .desktop-table-header span:nth-child(6) {
     display: block !important;
   }
 
   .member-theme .mobile-topbar__search-btn {
+    display: flex !important;
+  }
+  .member-theme .tablet-upload-btn {
     display: flex !important;
   }
 }

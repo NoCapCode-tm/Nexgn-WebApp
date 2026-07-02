@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import nexgnLogo from "../../assets/logo-light.png";
 
@@ -71,8 +71,8 @@ const navItems = [
 ];
 
 const bottomItems = [
-  { label: "Help", path: "/help", icon: HelpIcon },
   { label: "Settings", path: "/member-settings", icon: SettingsIcon },
+  { label: "Help", path: "/help", icon: HelpIcon },
 ];
 
 export default function MemberSidebar() {
@@ -80,6 +80,16 @@ export default function MemberSidebar() {
     const saved = localStorage.getItem("memberSidebarExpanded");
     return saved === "true";
   });
+  
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1180);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1180);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const effectiveExpanded = isMobile ? true : expanded;
+  
   const location = useLocation();
 
   const toggleSidebar = () => {
@@ -111,7 +121,7 @@ export default function MemberSidebar() {
         <span className="sidebar__icon-wrap">
           <Icon color={active ? "#FF0915" : "#8A949F"} />
         </span>
-        {expanded && (
+        {effectiveExpanded && (
           <span className={`sidebar__item-label ${active ? 'member-sidebar__item-label--active' : 'member-sidebar__item-label--inactive'}`}>
             {label}
           </span>
@@ -121,13 +131,13 @@ export default function MemberSidebar() {
   };
 
   return (
-    <aside className={`sidebar ${expanded ? "sidebar--expanded" : ""}`}>
+    <aside className={`sidebar ${effectiveExpanded ? "sidebar--expanded" : ""}`}>
       <div className="sidebar__toggle" onClick={toggleSidebar}>
         <ToggleBtn expanded={expanded} />
       </div>
       <div className="sidebar__inner">
         <div className="sidebar__logo">
-          {expanded ? (
+          {effectiveExpanded ? (
             <img
               src={nexgnLogo}
               alt="Nexgn"

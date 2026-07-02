@@ -10,7 +10,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 200px;
+  width: 100%;
+  max-width: 300px;
   height: 36px;
   padding: 0 12px;
   background: #fff;
@@ -188,54 +189,54 @@
   .member-contact-search-wrap {
     flex: 1;
     max-width: none;
-    padding-left: 12px;
-    border: 1px solid #E4E4E4;
-    border-radius: 20px;
+    padding-left: var(--space-sm);
+    border: 0.267vw solid #E4E4E4;
+    border-radius: var(--space-2xl);
   }
   .member-contact-search-input::placeholder {
-    font-size: 13px;
+    font-size: var(--font-sm);
   }
 
   /* Mobile Header Spacing */
   .mobile-page-header {
-    padding: 16px 16px 0 16px;
+    padding: var(--space-md) var(--mobile-gutter) 0 var(--mobile-gutter);
   }
   .member-contact-page .mobile-page-header .topbar__bottom-row {
-    margin-bottom: 12px;
+    margin-bottom: var(--space-sm);
     padding: 0;
   }
   .member-contact-page .mobile-page-header .topbar__title {
-    margin-bottom: 4px;
-    font-size: 16px;
+    margin-bottom: var(--space-xs);
+    font-size: var(--font-lg);
     font-weight: 700;
     color: #000;
   }
   .member-contact-page .mobile-page-header .topbar__sub {
-    font-size: 12px;
+    font-size: var(--font-sm);
     color: #6B7280;
   }
   .mobile-header-divider {
-    margin: 12px 0 16px 0;
+    margin: var(--space-sm) 0 var(--space-md) 0;
     border: none;
-    border-top: 1px solid #E4E4E4;
+    border-top: 0.267vw solid #E4E4E4;
   }
   .mobile-filter-row {
-    margin-bottom: 16px;
+    margin-bottom: var(--space-md);
   }
   .member-contact-filter-btn {
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 10.667vw;
+    height: 10.667vw;
     padding: 0;
     background: #fff;
-    border: 1px solid #E4E4E4;
+    border: 0.267vw solid #E4E4E4;
     border-radius: 50%;
   }
   .member-contact-filter-btn .filter-text { display: none; }
   .member-contact-add-btn {
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 10.667vw;
+    height: 10.667vw;
     padding: 0;
     color: #fff;
     background: #E22A2A !important;
@@ -246,32 +247,32 @@
 
   /* Mobile section spacing */
   .member-contact-table {
-    padding: 0 16px 120px 16px; /* 120px to clear bottom nav */
-    gap: 12px;
+    padding: 0 var(--mobile-gutter) 32vw var(--mobile-gutter); /* 32vw to clear bottom nav */
+    gap: var(--space-sm);
   }
 
   /* Override contact card for mobile */
   .member-contact-card {
     justify-content: space-between;
-    gap: 14px;
+    gap: var(--space-sm);
     height: auto;
-    padding: 16px;
-    border-radius: 8px;
+    padding: var(--mobile-gutter);
+    border-radius: var(--space-sm);
   }
   .member-contact-card__avatar {
-    width: 36px;
-    height: 36px;
+    width: 9.6vw;
+    height: 9.6vw;
   }
   .member-contact-card__info {
     flex: 1;
-    gap: 2px;
+    gap: 0.533vw;
   }
   .member-contact-card__name {
     margin-bottom: 0;
-    font-size: 14px;
+    font-size: var(--font-sm);
   }
   .member-contact-card__email {
-    font-size: 12px;
+    font-size: var(--font-xs);
   }
   .member-contact-card__more {
     display: flex;
@@ -283,20 +284,20 @@
   .mobile-total-contacts-card {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin-top: 4px;
-    padding: 16px;
+    gap: var(--space-md);
+    margin-top: var(--space-xs);
+    padding: var(--mobile-gutter);
     background: #ffffff;
-    border: 1px solid #E4E4E4;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 0.267vw solid #E4E4E4;
+    border-radius: var(--space-sm);
+    box-shadow: 0 0.533vw 2.133vw rgba(0, 0, 0, 0.04);
   }
   .mobile-total-contacts-card__icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    width: 10.667vw;
+    height: 10.667vw;
     background: #E22A2A;
     border-radius: 50%;
     flex-shrink: 0;
@@ -305,15 +306,15 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: 2px;
+    gap: 0.533vw;
   }
   .mobile-total-contacts-card__label {
-    font-size: 12px;
+    font-size: var(--font-xs);
     font-weight: 500;
     color: #9ca3af;
   }
   .mobile-total-contacts-card__value {
-    font-size: 15px;
+    font-size: var(--font-md);
     font-weight: 600;
     color: #111827;
   }
@@ -342,10 +343,6 @@
     gap: 14px !important;
     margin: 0 !important;
     padding: 40px 0 32px 0 !important; /* using 14px gap to match Member Documents gap exactly */
-  }
-
-  .member-contact-card {
-    max-width: calc(100% - 250px) !important;
   }
 }
 

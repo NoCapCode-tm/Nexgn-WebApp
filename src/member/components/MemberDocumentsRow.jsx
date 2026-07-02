@@ -75,7 +75,27 @@ export default function MemberDocumentsRow({ title, note, signers, signedAt, own
       </div>
       
       <div className="member-doc-row__cell desktop-status" data-label="STATUS">
-        <span className={`member-badge member-badge--${status.toLowerCase()}`}>{status}</span>
+        <span className={`member-badge member-badge--${status.toLowerCase()}`}>
+          {status}
+          {status.toLowerCase() === 'signed' && (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginLeft: 2, verticalAlign: 'middle'}}>
+              <circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/>
+            </svg>
+          )}
+          {status.toLowerCase() === 'pending' && (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginLeft: 2, verticalAlign: 'middle'}}>
+              <path d="M16 22h2a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3"/>
+              <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+              <circle cx="8" cy="16" r="6"/>
+              <path d="M9.5 17.5 8 16.25V14"/>
+            </svg>
+          )}
+          {(status.toLowerCase() === 'expired' || status.toLowerCase() === 'failed') && (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginLeft: 2, verticalAlign: 'middle'}}>
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          )}
+        </span>
       </div>
       
       <div className="member-doc-row__menu">

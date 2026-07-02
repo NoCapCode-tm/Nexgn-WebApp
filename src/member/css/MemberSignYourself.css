@@ -454,13 +454,13 @@
 /*  RESPONSIVE  */
 @media (max-width: 768px) {
   .setup-card {
-    padding: 16px;
+    padding: var(--mobile-gutter);
   }
 
   .setup-card__header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: var(--space-sm);
   }
 
   .template-row {
@@ -667,13 +667,13 @@
 
   .roles-row .btn-create {
     width: 100%;
-    margin-top: 8px;
+    margin-top: var(--space-xs);
   }
 
   .signer-row {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
+    gap: var(--space-sm);
   }
 
   .signer-badge {
@@ -742,7 +742,7 @@
   .member-theme .signer-row {
     flex-direction: column !important;
     align-items: stretch !important;
-    gap: 12px !important;
+    gap: var(--space-sm) !important;
   }
 
   .member-theme .signer-badge-wrap {
@@ -761,11 +761,11 @@
 
   .member-theme .roles-row .btn-create {
     width: 100% !important;
-    margin-top: 8px !important;
+    margin-top: var(--space-xs) !important;
   }
 
   .member-theme .main {
-    padding-bottom: 100px !important;
+    padding-bottom: 26.667vw !important;
   }
 }
 
@@ -853,10 +853,10 @@
   }
 
   .member-sign-yourself-page .setup-card {
-    gap: 20px !important;
+    gap: var(--space-md) !important;
     width: 100% !important;
     margin: 0 !important;
-    padding: 24px 20px !important; /* 7. Internal Padding */
+    padding: var(--space-lg) var(--mobile-gutter) !important; /* 7. Internal Padding */
     /* 2. Card Border (Neutral light-gray, no blue outline) */
     border: 1px solid #E4E4E4 !important;
     outline: none !important;
@@ -867,7 +867,7 @@
     display: block !important;
     width: 100%;
     height: 1px;
-    margin: 16px 0 20px 0;
+    margin: var(--space-md) 0 var(--space-lg) 0;
     background: #E4E4E4;
     border: none;
   }
@@ -1041,18 +1041,13 @@
   .member-sign-yourself-page .mobile-tabs-container {
     display: flex !important;
     visibility: visible !important;
-
     width: 100% !important;
-    height: 48px !important;
-
-    min-height: 48px !important;
-
-    margin: 0 0 20px 0 !important;
-
+    height: 12.8vw !important;
+    min-height: 12.8vw !important;
+    margin: 0 0 var(--space-md) 0 !important;
     background: #FFFFFF !important;
-
-    border: 1px solid #E4E4E4 !important;
-    border-radius: 8px !important;
+    border: 0.267vw solid #E4E4E4 !important;
+    border-radius: var(--space-xs) !important;
     opacity: 1 !important;
     overflow: hidden !important;
   }
@@ -1062,10 +1057,10 @@
     flex: 1 1 50% !important;
     justify-content: center !important;
     align-items: center !important;
-    height: 48px !important;
-    min-height: 48px !important;
-    padding: 0 12px !important;
-    font-size: 13px !important;
+    height: 12.8vw !important;
+    min-height: 12.8vw !important;
+    padding: 0 var(--space-sm) !important;
+    font-size: var(--font-md) !important;
     font-weight: 600 !important;
     line-height: normal !important;
     white-space: nowrap !important;
@@ -1080,10 +1075,7 @@
     color: #1A1A2E !important;
     background: #FFFFFF !important;
   }
-}
 
-/*  Mobile (<425px): hide Search on Sign Yourself page */
-@media (max-width: 768px) {
   .member-theme .mobile-topbar__search-btn {
     display: none !important;
   }

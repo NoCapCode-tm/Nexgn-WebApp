@@ -53,8 +53,7 @@
 .member-settings-nav {
   display: flex;
   flex-direction: column;
-  min-width: 220px;
-  width: 220px;
+  width: clamp(180px, 15vw, 250px);
   flex-shrink: 0;
   background: transparent;
   gap: 8px;
@@ -102,7 +101,8 @@
   border-radius: 12px;
   box-shadow: 0 0 14.5px 1px rgba(131, 131, 131, 0.10);
   padding: 20px 28px 20px 28px;
-  max-width: 800px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .member-settings-card__title {
@@ -177,8 +177,9 @@
 }
 
 .member-settings-form__input {
+  flex: 1 1 300px;
   width: 100%;
-  max-width: 460px;
+  max-width: 100%;
   padding: 8px 12px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
@@ -230,7 +231,7 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  max-width: 460px;
+  max-width: 100%;
   margin-top: 12px;
 }
 
@@ -430,28 +431,28 @@
 
   .member-settings-body {
     flex-direction: column;
-    gap: 16px;
-    padding: 0 16px 16px 16px;
+    gap: var(--space-md);
+    padding: 0 var(--mobile-gutter) var(--mobile-gutter) var(--mobile-gutter);
   }
 
   .member-settings-nav {
     width: 100%;
     min-width: 0;
     flex-direction: column;
-    gap: 2px;
+    gap: 0.533vw;
   }
 
   .member-settings-nav__item {
-    font-size: 14px;
-    padding: 10px 14px;
+    font-size: var(--font-sm);
+    padding: 2.667vw 3.733vw;
   }
 
   .member-settings-card {
-    padding: 18px 16px 20px 16px;
+    padding: 4.8vw var(--mobile-gutter) 5.333vw var(--mobile-gutter);
   }
 
   .member-settings-card__title {
-    font-size: 17px;
+    font-size: var(--font-xl);
   }
 
   .member-settings-form__input {
@@ -464,7 +465,7 @@
 
   .member-settings-avatar-row {
     flex-wrap: wrap;
-    gap: 14px;
+    gap: var(--space-md);
   }
 }
 

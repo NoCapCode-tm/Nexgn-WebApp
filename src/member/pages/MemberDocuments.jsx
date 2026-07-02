@@ -128,7 +128,7 @@ export default function MemberDocuments() {
             className={`member-docs-tab ${activeTab === 'assigned' ? 'member-docs-tab--active' : ''}`} 
             onClick={() => setActiveTab('assigned')}
           >
-            Assigned to me
+            Assigned by me
           </button>
         </div>
 
