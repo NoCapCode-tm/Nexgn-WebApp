@@ -9,23 +9,32 @@ const UploadIcon = () => (
   </svg>
 );
 
-export default function MemberTopbar() {
+export default function MemberTopbar({ 
+  title = "Dashboard", 
+  subtitle = "Overview of your document signing activity",
+  actionButton,
+  onSearchClick
+}) {
   const navigate = useNavigate();
+
+  const defaultActionButton = (
+    <button className="topbar__upload" onClick={() => navigate("/member-sign-yourself")}>
+      <UploadIcon />
+      Upload Document
+    </button>
+  );
 
   return (
     <header className="topbar desktop-topbar">
       <div className="topbar__top-row">
-        <MemberTopbarIcons />
+        <MemberTopbarIcons onSearchClick={onSearchClick} />
       </div>
       <div className="topbar__bottom-row">
         <div>
-          <h1 className="topbar__title">Dashboard</h1>
-          <p className="topbar__sub">Overview of your document signing activity</p>
+          <h1 className="topbar__title">{title}</h1>
+          <p className="topbar__sub">{subtitle}</p>
         </div>
-        <button className="topbar__upload" onClick={() => navigate("/member-sign-yourself")}>
-          <UploadIcon />
-          Upload Document
-        </button>
+        {actionButton !== undefined ? actionButton : defaultActionButton}
       </div>
     </header>
   );

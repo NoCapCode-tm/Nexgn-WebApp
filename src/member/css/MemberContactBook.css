@@ -1,11 +1,9 @@
-
-/* â”€â”€ TOPBAR ACTIONS (search + filter + add) â”€â”€ */
+/* == TOPBAR ACTIONS (search + filter + add) == */
 .member-contact-topbar-actions {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
 .member-contact-search-wrap {
   display: flex;
   align-items: center;
@@ -14,161 +12,141 @@
   max-width: 300px;
   height: 36px;
   padding: 0 12px;
-  background: #fff;
   border: 1px solid #E4E4E4;
   border-radius: 20px;
+  background: #fff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.2s, transform 0.2s;
 }
-
 .member-contact-search-wrap:hover {
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
-
 .member-contact-search-wrap:focus-within {
   border-color: #FF0915;
 }
-
 .member-contact-search-input {
   width: 100%;
+  border: none;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   color: #1a1a2e;
   background: transparent;
-  border: none;
   outline: none;
 }
-
 .member-contact-search-input::placeholder {
   color: #9ca3af;
 }
-
 .member-contact-filter-btn {
   display: flex;
   align-items: center;
   gap: 6px;
   height: 36px;
   padding: 0 14px;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 500;
   color: #6b7280;
   background: #fff;
-  border: 1px solid #E4E4E4;
-  border-radius: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
-
 .member-contact-filter-btn:hover {
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
-
 .member-contact-filter-btn:active {
   box-shadow: 0 1px 4px rgba(138, 148, 159, 0.3);
   transform: translateY(1px);
 }
-
 .member-contact-add-btn {
   display: flex;
   align-items: center;
   gap: 6px;
   height: 36px;
   padding: 0 16px;
+  border: none;
+  border-radius: 20px;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
   color: #fff;
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  border: none;
-  border-radius: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
-
 .member-contact-add-btn:hover {
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
-
 .member-contact-add-btn:active {
   box-shadow: none;
   transform: translateY(1px);
 }
-
 .member-contact-add-btn-short {
   display: none;
 }
-
-/* â”€â”€ TABLE SECTION â”€â”€ */
+/* == TABLE SECTION == */
 .member-contact-section {
   flex: 1;
   padding: 0;
-  background: transparent;
   border-radius: 0;
+  background: transparent;
 }
-
 .member-contact-table {
   display: flex;
   flex-direction: column;
   gap: 8px;
   width: 100%;
 }
-
 /* Contact Card Layout */
 .member-contact-card {
   display: flex;
   align-items: center;
   gap: 16px;
-  height: 64px;
   box-sizing: border-box;
+  height: 64px;
   padding: 0 20px;
-  background: #ffffff;
   border: 1px solid #E4E4E4;
   border-radius: 18px;
+  background: #ffffff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
   transition: box-shadow 0.2s;
   cursor: pointer;
 }
-
 .member-contact-card:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
-
 .member-contact-card__avatar {
+  flex-shrink: 0;
   width: 40px;
   height: 40px;
-  background: #F9F5F3;
   border-radius: 50%;
-  flex-shrink: 0;
+  background: #F9F5F3;
 }
-
 .member-contact-card__info {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 .member-contact-card__name {
   font-size: 16px;
   font-weight: 600;
   line-height: 1.2;
   color: #111827;
 }
-
 .member-contact-card__email {
   font-size: 14px;
   line-height: 1.4;
   color: #6B7280;
 }
-
 /* Hide mobile-specific elements on desktop by default */
 .member-contact-card__more {
   display: none;
@@ -176,9 +154,7 @@
 .mobile-total-contacts-card {
   display: none;
 }
-
-/* â”€â”€ RESPONSIVE OVERRIDES (Exact match to MemberDocuments) â”€â”€ */
-
+/* == RESPONSIVE OVERRIDES (Exact match to MemberDocuments) == */
 @media (max-width: 768px) {
   /* Action row mobile */
   .member-contact-topbar-actions {
@@ -196,7 +172,6 @@
   .member-contact-search-input::placeholder {
     font-size: var(--font-sm);
   }
-
   /* Mobile Header Spacing */
   .mobile-page-header {
     padding: var(--space-md) var(--mobile-gutter) 0 var(--mobile-gutter);
@@ -228,29 +203,32 @@
     width: 10.667vw;
     height: 10.667vw;
     padding: 0;
-    background: #fff;
     border: 0.267vw solid #E4E4E4;
     border-radius: 50%;
+    background: #fff;
   }
-  .member-contact-filter-btn .filter-text { display: none; }
+  .member-contact-filter-btn .filter-text {
+    display: none;
+  }
   .member-contact-add-btn {
     justify-content: center;
     width: 10.667vw;
     height: 10.667vw;
     padding: 0;
-    color: #fff;
-    background: #E22A2A !important;
     border: none;
     border-radius: 50%;
+    color: #fff;
+    background: #E22A2A;
   }
-  .member-contact-add-btn .add-btn-full { display: none; }
-
+  .member-contact-add-btn .add-btn-full {
+    display: none;
+  }
   /* Mobile section spacing */
   .member-contact-table {
-    padding: 0 var(--mobile-gutter) 32vw var(--mobile-gutter); /* 32vw to clear bottom nav */
-    gap: var(--space-sm);
+    padding: 0 var(--mobile-gutter) 32vw var(--mobile-gutter);
+    /* 32vw to clear bottom nav */
+      gap: var(--space-sm);
   }
-
   /* Override contact card for mobile */
   .member-contact-card {
     justify-content: space-between;
@@ -279,7 +257,6 @@
     justify-content: center;
     align-items: center;
   }
-
   /* Total Contacts Summary Card */
   .mobile-total-contacts-card {
     display: flex;
@@ -287,20 +264,20 @@
     gap: var(--space-md);
     margin-top: var(--space-xs);
     padding: var(--mobile-gutter);
-    background: #ffffff;
     border: 0.267vw solid #E4E4E4;
     border-radius: var(--space-sm);
+    background: #ffffff;
     box-shadow: 0 0.533vw 2.133vw rgba(0, 0, 0, 0.04);
   }
   .mobile-total-contacts-card__icon {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
     width: 10.667vw;
     height: 10.667vw;
-    background: #E22A2A;
     border-radius: 50%;
-    flex-shrink: 0;
+    background: #E22A2A;
   }
   .mobile-total-contacts-card__info {
     display: flex;
@@ -323,103 +300,93 @@
     justify-content: center;
     align-items: center;
   }
-
 }
-
 @media (min-width: 1180px) {
-
   /* Desktop section spacing */
   .member-contact-section {
-    flex: 1 !important;
-    width: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    flex: 1;
+    width: auto;
+    margin: 0;
+    padding: 0;
   }
   .member-contact-table {
-    width: 100% !important;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    margin: 0;
+    padding: 40px 0 32px 0;
     /* Member Documents table uses 40px 0 32px 0 */
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 14px !important;
-    margin: 0 !important;
-    padding: 40px 0 32px 0 !important; /* using 14px gap to match Member Documents gap exactly */
+      display: flex;
+  /* using 14px gap to match Member Documents gap exactly */
   }
 }
-
-/* â”€â”€ ADD CONTACT MODAL â”€â”€ */
+/* == ADD CONTACT MODAL == */
 .add-contact-modal-overlay {
-  display: flex;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 1000;
+  display: flex;
   justify-content: flex-end;
   align-items: flex-start;
   padding-top: 60px;
   padding-right: 40px;
-  background: rgba(0, 0, 0, 0.4); /* Move both modals slightly upward */
+  background: rgba(0, 0, 0, 0.4);
+/* Move both modals slightly upward */
 }
-
 .add-contact-modal {
   width: 100%;
   max-width: 700px;
   max-height: 85vh;
   padding: 36px 56px 200px 56px;
-  background: #ffffff;
-  border-radius: 16px; /* Intermediate padding */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
   overflow: hidden;
+  background: #ffffff;
+  /* Intermediate padding */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
-
 .add-contact-heading {
   margin: 0;
   margin-bottom: 12px;
   padding-bottom: 6px;
+  border-bottom: 1px solid #E4E4E4;
   font-size: 14px;
   font-weight: 600;
   color: #1a1a2e;
-  border-bottom: 1px solid #E4E4E4;
 }
-
 .add-contact-grid {
   display: grid;
-  gap: 8px 40px;
   grid-template-columns: 1fr 1fr;
+  gap: 8px 40px;
 }
-
 .add-contact-field {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-
 .add-contact-field label {
   font-size: 13px;
   font-weight: 500;
   color: #505050;
 }
-
 .add-contact-field input {
   height: 32px;
   padding: 0 10px;
-  font-size: 12px;
-  color: #1a1a2e;
   border: 1px solid #E4E4E4;
   border-radius: 8px;
-  outline: none;
+  font-size: 12px;
+  color: #1a1a2e;
   transition: border-color 0.2s;
+  outline: none;
 }
-
 .add-contact-field input:focus {
   border-color: #FF0915;
 }
-
 .add-contact-field.empty-cell {
   visibility: hidden;
 }
-
 /* Hide mobile-specific add-contact elements on desktop by default */
 .mobile-add-contact-back {
   display: none;
@@ -430,199 +397,173 @@
 .mobile-contact-links {
   display: none;
 }
-
-/* â”€â”€ CONTACT DETAILS MODAL â”€â”€ */
+/* == CONTACT DETAILS MODAL == */
 .contact-details-modal {
   max-height: 88vh;
   padding-top: 20px;
   overflow: hidden;
 }
-
 .contact-details-header {
   display: flex;
   gap: 16px;
   margin-bottom: 16px;
 }
-
 .contact-details-avatar {
+  flex-shrink: 0;
   width: 100px;
   height: 100px;
-  background: #E4E4E4;
   border-radius: 16px;
-  flex-shrink: 0;
+  background: #E4E4E4;
 }
-
 .contact-details-info-wrap {
   display: flex;
   flex: 1;
   flex-direction: column;
 }
-
 .contact-details-title-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 4px;
 }
-
 .contact-details-name {
   margin: 0;
   font-size: 16px;
   font-weight: 600;
   color: #1a1a2e;
 }
-
 .contact-details-edit-btn {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 500;
   color: #e11d48;
   background: #FFDCDC;
-  border: none;
-  border-radius: 8px;
   cursor: pointer;
 }
-
 .contact-details-status-row {
   display: flex;
   align-items: center;
   gap: 40px;
   margin-bottom: 12px;
 }
-
 .contact-status-badge {
   padding: 4px 12px;
+  border-radius: 6px;
   font-size: 12px;
   font-weight: 500;
   color: #55a86a;
   background: #E6F7EC;
-  border-radius: 6px;
 }
-
 .contact-role {
   font-size: 12px;
   font-weight: 600;
   color: #1a1a2e;
 }
-
 .contact-quick-info {
   display: flex;
   gap: 80px;
 }
-
 .quick-info-col {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-
 .quick-info-item {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 11px;
 }
-
 .quick-info-label {
   width: 120px;
   font-weight: 600;
-  color: #1a1a2e; /* Increased width to add horizontal spacing */
+  color: #1a1a2e;
+/* Increased width to add horizontal spacing */
 }
-
 .quick-info-val {
   color: #6b7280;
 }
-
 .contact-details-card {
   border: 1px solid #E4E4E4;
   border-radius: 16px;
   overflow: hidden;
 }
-
 .contact-details-card-header {
   padding: 8px 16px;
+  border-bottom: 1px solid #E4E4E4;
   font-size: 12px;
   font-weight: 600;
   color: #1a1a2e;
-  border-bottom: 1px solid #E4E4E4;
 }
-
 .contact-details-card-body {
   padding: 12px 16px;
 }
-
 .contact-detail-field {
   display: flex;
   flex-direction: column;
 }
-
 .contact-detail-field label {
   font-size: 10px;
   font-weight: 500;
   color: #505050;
 }
-
 .contact-detail-field .detail-val {
-  margin-top: 8px;
-  font-size: 11px;
-  color: #9ca3af;
-  background-color: #FFFFFF;
-  border: 1px solid #E6E6E6;
-  border-radius: 8px;
-  height: 32px;
-  padding: 0 10px;
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  height: 32px;
+  margin-top: 8px;
+  padding: 0 10px;
+  border: 1px solid #E6E6E6;
+  border-radius: 8px;
+  font-size: 11px;
+  color: #9ca3af;
+  background-color: #FFFFFF;
 }
-
 .skills-row {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 16px;
 }
-
 .skill-pill {
   padding: 4px 10px;
+  border-radius: 16px;
   font-size: 10px;
   color: #9ca3af;
   background: #f3f4f6;
-  border-radius: 16px;
 }
-
 @media (max-width: 768px) {
   .add-contact-grid {
-    gap: 16px;
     grid-template-columns: 1fr;
+    gap: 16px;
   }
   .add-contact-field.empty-cell {
     display: none;
   }
-
-  /* â”€â”€ MOBILE ADD CONTACT FORM OVERRIDES â”€â”€ */
+  /* == MOBILE ADD CONTACT FORM OVERRIDES == */
   .add-contact-modal-overlay {
     justify-content: center;
     align-items: flex-start;
-    padding: 0 !important;
-    background: #FAFAFA !important;
+    padding: 0;
+    background: #FAFAFA;
   }
-
   .add-contact-modal {
     width: 100%;
     max-width: none;
     height: 100%;
     max-height: none;
-    padding: 16px !important;
-    background: #FAFAFA;
+    padding: 16px;
     border-radius: 0;
-    box-shadow: none;
     overflow-y: auto;
+    background: #FAFAFA;
+    box-shadow: none;
   }
-
   .mobile-add-contact-back {
     display: flex;
     align-items: center;
@@ -630,423 +571,386 @@
     margin-bottom: 24px;
     cursor: pointer;
   }
-
   .add-contact-section {
     margin-bottom: 16px;
     padding: 16px;
-    background: #ffffff;
     border: 1px solid #E4E4E4;
     border-radius: 8px;
+    background: #ffffff;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
   }
-
   .add-contact-section--prof {
-    margin-top: 0 !important;
+    margin-top: 0;
   }
-
   .add-contact-heading {
     margin-bottom: 16px;
     padding-bottom: 12px;
-    font-size: 13px;
     border-bottom: 1px solid #E4E4E4;
+    font-size: 13px;
   }
-
   .add-contact-field-full {
     grid-column: 1 / -1;
   }
-
   .add-contact-field label {
     font-size: 12px;
   }
-
   .add-contact-field input {
     height: 36px;
     font-size: 14px;
   }
-
   .mobile-add-contact-save {
     display: flex;
     justify-content: center;
     margin-top: 32px;
     margin-bottom: 40px;
   }
-
   .mobile-add-contact-save-btn {
     width: 80%;
     max-width: 300px;
     height: 48px;
+    border: none;
+    border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
     color: #fff;
     background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-    border: none;
-    border-radius: 8px;
     cursor: pointer;
   }
-
-  /* â”€â”€ MOBILE CONTACT DETAILS MODAL OVERRIDES â”€â”€ */
+  /* == MOBILE CONTACT DETAILS MODAL OVERRIDES == */
   .contact-details-modal {
     width: 100%;
     max-width: none;
     height: 100%;
     max-height: none;
-    padding: 16px !important;
-    background: #FAFAFA !important;
+    padding: 16px;
     border-radius: 0;
-    box-shadow: none;
     overflow-y: auto;
+    background: #FAFAFA;
+    box-shadow: none;
   }
-
   .contact-details-header {
     flex-direction: row;
     align-items: flex-start;
     gap: 16px;
     margin-bottom: 24px;
   }
-
   .contact-details-avatar {
     width: 80px;
     height: 80px;
   }
-
   .contact-details-title-row {
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 8px;
   }
-
   .contact-details-status-row {
     gap: 12px;
     margin-bottom: 8px;
   }
-
   .contact-quick-info {
     flex-direction: column;
     gap: 10px;
   }
-
   .desktop-quick-info-col {
     display: none;
   }
-
   .mobile-contact-links {
     display: flex;
     flex-direction: column;
     gap: 8px;
     margin-bottom: 24px;
   }
-
   .contact-details-card {
     margin-bottom: 16px;
-    background: #ffffff;
     border: 1px solid #E4E4E4;
     border-radius: 8px;
+    background: #ffffff;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
   }
-
   .contact-details-card-header {
     padding: 12px 16px;
   }
 }
-
 @media (min-width: 769px) and (max-width: 1179px) {
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* =================================================================
      1. HIDE DESKTOP TOPBAR ON TABLET
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ================================================================= */
   .member-contact-page .desktop-topbar {
-    display: none !important;
+    display: none;
   }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* =================================================================
      2. HEADER LAYOUT (mobile-page-header)
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ================================================================= */
   .member-contact-page .mobile-page-header {
-    display: grid !important;
-    align-items: center !important;
-    gap: 0 24px !important;
-    grid-template-columns: 1fr auto !important;
-    grid-template-rows: auto auto !important;
-    margin: 0 !important;
-    padding: 24px 40px 0 40px !important;
-    border-bottom: none !important;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0 24px;
+    margin: 0;
+    padding: 24px 40px 0 40px;
+    border-bottom: none;
   }
-
   .member-contact-page .mobile-page-header .topbar__bottom-row {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 4px !important;
-    margin: 0 !important;
-    grid-column: 1 !important;
-    grid-row: 1 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    grid-column: 1;
+    grid-row: 1;
+    gap: 4px;
+    margin: 0;
   }
-
   .member-contact-page .mobile-page-header .mobile-filter-row {
-    display: flex !important;
-    align-items: center !important;
-    margin: 0 !important;
-    grid-column: 2 !important;
-    grid-row: 1 !important;
+    display: flex;
+    align-items: center;
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
   }
-
   .member-contact-page .mobile-header-divider {
-    display: block !important;
-    width: calc(100% + 80px) !important;
-    margin: 20px -40px 0 -40px !important;
-    border: none !important;
-    border-bottom: 1px solid #E4E4E4 !important;
-    grid-column: 1 / -1 !important;
-    grid-row: 2 !important;
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: calc(100% + 80px);
+    margin: 20px -40px 0 -40px;
+    border: none;
+    border-bottom: 1px solid #E4E4E4;
   }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* =================================================================
      3. TITLE TYPOGRAPHY (Match Figma)
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ================================================================= */
   .member-contact-page .topbar__title {
-    margin: 0 !important;
-    font-size: 24px !important;
-    font-weight: 700 !important;
-    line-height: 1.2 !important;
-    color: #111827 !important;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #111827;
   }
   .member-contact-page .topbar__sub {
-    margin: 0 !important;
-    font-size: 13px !important;
-    font-weight: 400 !important;
-    line-height: 1.4 !important;
-    color: #8A949F !important;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #8A949F;
   }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* =================================================================
      4. ACTION CONTROLS
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ================================================================= */
   .member-contact-topbar-actions {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
-
   .member-contact-search-wrap {
-    width: 210px !important;
-    height: 42px !important;
-    padding: 0 14px !important;
-    background: #fff !important;
-    border: none !important;
-    border-radius: 21px !important;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+    width: 210px;
+    height: 42px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 21px;
+    background: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
   .member-contact-search-input {
-    font-size: 13px !important;
-    background: transparent !important;
-    border: none !important;
+    border: none;
+    font-size: 13px;
+    background: transparent;
   }
-
   .member-contact-filter-btn {
-    justify-content: center !important;
-    width: 44px !important;
-    height: 44px !important;
-    padding: 0 !important;
-    background: #fff !important;
-    border: none !important;
-    border-radius: 50% !important;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
   .member-contact-filter-btn .filter-text {
-    display: none !important;
+    display: none;
   }
-
   .member-contact-add-btn {
-    justify-content: center !important;
-    width: 88px !important;
-    height: 44px !important;
-    padding: 0 !important;
-    border: none !important;
-    border-radius: 22px !important;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+    justify-content: center;
+    width: 88px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    border-radius: 22px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
   .member-contact-add-btn .member-contact-add-btn-short {
-    display: inline !important;
+    display: inline;
   }
   .member-contact-add-btn .add-btn-full {
-    display: none !important;
+    display: none;
   }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* =================================================================
      5. TABLE AND CARDS
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ================================================================= */
   .member-contact-table {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-    padding: 32px 40px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px 40px;
   }
-
   .member-contact-card {
-    max-width: 100% !important;
-    height: auto !important;
-    padding: 20px 24px !important;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+    max-width: 100%;
+    height: auto;
+    padding: 20px 24px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* =================================================================
      6. MODAL OVERRIDES
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ================================================================= */
   .add-contact-modal-overlay {
-    justify-content: center !important;
-    padding: 60px 24px 24px 24px !important;
+    justify-content: center;
+    padding: 60px 24px 24px 24px;
   }
-
   .add-contact-modal {
-    padding-bottom: 36px !important;
+    padding-bottom: 36px;
   }
-
 }
-
 .member-contact-empty-state {
   padding: 40px;
   font-size: 14px;
   text-align: center;
   color: #9ca3af;
 }
-
 .member-add-contact-grid--gap {
-  gap: 20px 60px !important;
+  gap: 20px 60px;
 }
-
 .member-contact-details-card--mt {
-  margin-top: 20px !important;
+  margin-top: 20px;
 }
-
 .member-contact-field-full--mt {
-  margin-top: 20px !important;
+  margin-top: 20px;
 }
-
 /* Filter Popup styling */
 .member-contact-filter-wrapper {
   position: relative;
 }
-
 .member-contact-filter-dropdown {
   position: absolute;
-  top: 48px; /* Desktop default */
-  right: 0;
+  top: 48px;
   z-index: 1000;
-  width: 220px;
-  background-color: #FFFFFF;
-  border: 1px solid #E4E4E4;
-  border-radius: 12px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 12px;
-  font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 220px;
+  padding: 12px;
+  border: 1px solid #E4E4E4;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  /* Desktop default */
+  right: 0;
 }
-
 .member-contact-filter-dropdown-group {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-
 .member-contact-filter-dropdown-label {
   display: block;
   font-size: 10px;
   font-weight: 500;
-  color: #6B7280;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
   text-align: left;
+  text-transform: uppercase;
+  color: #6B7280;
 }
-
 .member-contact-filter-dropdown-select {
   width: 100%;
   height: 32px;
-  font-size: 13px;
-  border-radius: 8px;
-  border: 1px solid #E4E4E4;
   padding: 0 8px;
-  background-color: #fff;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
+  font-size: 13px;
   color: #374151;
-  outline: none;
+  background-color: #fff;
   cursor: pointer;
+  outline: none;
 }
-
 .member-contact-filter-dropdown-divider {
-  border-top: 1px solid #F3F4F6;
   margin: 4px 0;
+  border-top: 1px solid #F3F4F6;
 }
-
 .member-contact-filter-dropdown-reset {
   width: 100%;
   padding: 8px 0;
+  border: none;
   font-size: 12px;
   font-weight: 600;
   text-align: center;
-  border: none;
-  background-color: transparent;
   color: #FF0915;
+  background-color: transparent;
   cursor: pointer;
 }
-
 /* Positioning overrides based on viewport */
 @media (max-width: 768px) {
   .member-contact-filter-dropdown {
-    top: 46px !important;
+    top: 46px;
   }
 }
 @media (min-width: 769px) and (max-width: 1179px) {
   .member-contact-filter-dropdown {
-    top: 46px !important;
+    top: 46px;
   }
 }
-
 /* Fluid Desktop Scaling (1180px and above)
    Preserves the 1366-1440px design, but scales it up fluidly for larger monitors using clamp(). */
 @media (min-width: 1180px) {
   /* Actions */
-  .member-contact-page .member-contact-topbar-actions { gap: clamp(10px, 0.69vw, 17px); }
+  .member-contact-page .member-contact-topbar-actions {
+    gap: clamp(10px, 0.69vw, 17px);
+  }
   .member-contact-page .member-contact-search-wrap {
+    gap: clamp(8px, 0.55vw, 14px);
     width: clamp(200px, 13.88vw, 355px);
     height: clamp(36px, 2.5vw, 64px);
     padding: 0 clamp(12px, 0.83vw, 21px);
     border-radius: clamp(20px, 1.38vw, 35px);
-    gap: clamp(8px, 0.55vw, 14px);
   }
-  .member-contact-page .member-contact-search-input { font-size: clamp(12px, 0.83vw, 21px); }
-  
-  .member-contact-page .member-contact-filter-btn,
-  .member-contact-page .member-contact-add-btn {
-    height: clamp(36px, 2.5vw, 64px);
-    border-radius: clamp(20px, 1.38vw, 35px);
-    gap: clamp(6px, 0.41vw, 10px);
+  .member-contact-page .member-contact-search-input {
     font-size: clamp(12px, 0.83vw, 21px);
   }
-  .member-contact-page .member-contact-filter-btn { padding: 0 clamp(14px, 0.97vw, 25px); }
-  .member-contact-page .member-contact-add-btn { padding: 0 clamp(16px, 1.11vw, 28px); }
-  
+  .member-contact-page .member-contact-filter-btn,
+  .member-contact-page .member-contact-add-btn {
+    gap: clamp(6px, 0.41vw, 10px);
+    height: clamp(36px, 2.5vw, 64px);
+    border-radius: clamp(20px, 1.38vw, 35px);
+    font-size: clamp(12px, 0.83vw, 21px);
+  }
+  .member-contact-page .member-contact-filter-btn {
+    padding: 0 clamp(14px, 0.97vw, 25px);
+  }
+  .member-contact-page .member-contact-add-btn {
+    padding: 0 clamp(16px, 1.11vw, 28px);
+  }
   /* Table & Cards */
   .member-contact-page .member-contact-table {
-    gap: clamp(14px, 0.97vw, 25px) !important;
-    padding: clamp(40px, 2.77vw, 71px) 0 clamp(32px, 2.22vw, 56px) 0 !important;
+    gap: clamp(14px, 0.97vw, 25px);
+    padding: clamp(40px, 2.77vw, 71px) 0 clamp(32px, 2.22vw, 56px) 0;
   }
   .member-contact-page .member-contact-card {
+    gap: clamp(16px, 1.11vw, 28px);
     height: clamp(64px, 4.44vw, 113px);
     padding: 0 clamp(20px, 1.38vw, 35px);
     border-radius: clamp(18px, 1.25vw, 32px);
-    gap: clamp(16px, 1.11vw, 28px);
   }
   .member-contact-page .member-contact-card__avatar {
     width: clamp(40px, 2.77vw, 71px);
     height: clamp(40px, 2.77vw, 71px);
   }
-  .member-contact-page .member-contact-card__name { font-size: clamp(16px, 1.11vw, 28px); }
-  .member-contact-page .member-contact-card__email { font-size: clamp(14px, 0.97vw, 25px); }
-
+  .member-contact-page .member-contact-card__name {
+    font-size: clamp(16px, 1.11vw, 28px);
+  }
+  .member-contact-page .member-contact-card__email {
+    font-size: clamp(14px, 0.97vw, 25px);
+  }
   /* Modals */
   .member-contact-page .add-contact-modal {
-    max-width: clamp(700px, 48.61vw, 1244px);
+    max-width: 1244px;
     padding: clamp(36px, 2.5vw, 64px) clamp(56px, 3.88vw, 99px) clamp(200px, 13.88vw, 355px) clamp(56px, 3.88vw, 99px);
     border-radius: clamp(16px, 1.11vw, 28px);
   }
@@ -1055,60 +959,94 @@
     padding-bottom: clamp(6px, 0.41vw, 10px);
     font-size: clamp(14px, 0.97vw, 25px);
   }
-  .member-contact-page .add-contact-grid { gap: clamp(8px, 0.55vw, 14px) clamp(40px, 2.77vw, 71px); }
-  .member-contact-page .add-contact-field { gap: clamp(4px, 0.27vw, 7px); }
-  .member-contact-page .add-contact-field label { font-size: clamp(13px, 0.9vw, 23px); }
+  .member-contact-page .add-contact-grid {
+    gap: clamp(8px, 0.55vw, 14px) clamp(40px, 2.77vw, 71px);
+  }
+  .member-contact-page .add-contact-field {
+    gap: clamp(4px, 0.27vw, 7px);
+  }
+  .member-contact-page .add-contact-field label {
+    font-size: clamp(13px, 0.9vw, 23px);
+  }
   .member-contact-page .add-contact-field input {
     height: clamp(32px, 2.22vw, 56px);
     padding: 0 clamp(10px, 0.69vw, 17px);
-    font-size: clamp(12px, 0.83vw, 21px);
     border-radius: clamp(8px, 0.55vw, 14px);
+    font-size: clamp(12px, 0.83vw, 21px);
   }
-
-  .member-contact-page .contact-details-header { gap: clamp(16px, 1.11vw, 28px); margin-bottom: clamp(16px, 1.11vw, 28px); }
+  .member-contact-page .contact-details-header {
+    gap: clamp(16px, 1.11vw, 28px);
+    margin-bottom: clamp(16px, 1.11vw, 28px);
+  }
   .member-contact-page .contact-details-avatar {
     width: clamp(100px, 6.94vw, 177px);
     height: clamp(100px, 6.94vw, 177px);
     border-radius: clamp(16px, 1.11vw, 28px);
   }
-  .member-contact-page .contact-details-title-row { margin-bottom: clamp(4px, 0.27vw, 7px); }
-  .member-contact-page .contact-details-name { font-size: clamp(16px, 1.11vw, 28px); }
+  .member-contact-page .contact-details-title-row {
+    margin-bottom: clamp(4px, 0.27vw, 7px);
+  }
+  .member-contact-page .contact-details-name {
+    font-size: clamp(16px, 1.11vw, 28px);
+  }
   .member-contact-page .contact-details-edit-btn {
     gap: clamp(6px, 0.41vw, 10px);
     padding: clamp(6px, 0.41vw, 10px) clamp(14px, 0.97vw, 25px);
-    font-size: clamp(12px, 0.83vw, 21px);
     border-radius: clamp(8px, 0.55vw, 14px);
+    font-size: clamp(12px, 0.83vw, 21px);
   }
-  .member-contact-page .contact-details-status-row { gap: clamp(40px, 2.77vw, 71px); margin-bottom: clamp(12px, 0.83vw, 21px); }
+  .member-contact-page .contact-details-status-row {
+    gap: clamp(40px, 2.77vw, 71px);
+    margin-bottom: clamp(12px, 0.83vw, 21px);
+  }
   .member-contact-page .contact-status-badge {
     padding: clamp(4px, 0.27vw, 7px) clamp(12px, 0.83vw, 21px);
-    font-size: clamp(12px, 0.83vw, 21px);
     border-radius: clamp(6px, 0.41vw, 10px);
+    font-size: clamp(12px, 0.83vw, 21px);
   }
-  .member-contact-page .contact-role { font-size: clamp(12px, 0.83vw, 21px); }
-  .member-contact-page .contact-quick-info { gap: clamp(80px, 5.55vw, 142px); }
-  .member-contact-page .quick-info-col { gap: clamp(8px, 0.55vw, 14px); }
-  .member-contact-page .quick-info-item { gap: clamp(8px, 0.55vw, 14px); font-size: clamp(11px, 0.76vw, 19px); }
-  .member-contact-page .quick-info-label { width: clamp(120px, 8.33vw, 213px); }
-  
-  .member-contact-page .contact-details-card { border-radius: clamp(16px, 1.11vw, 28px); }
+  .member-contact-page .contact-role {
+    font-size: clamp(12px, 0.83vw, 21px);
+  }
+  .member-contact-page .contact-quick-info {
+    gap: clamp(80px, 5.55vw, 142px);
+  }
+  .member-contact-page .quick-info-col {
+    gap: clamp(8px, 0.55vw, 14px);
+  }
+  .member-contact-page .quick-info-item {
+    gap: clamp(8px, 0.55vw, 14px);
+    font-size: clamp(11px, 0.76vw, 19px);
+  }
+  .member-contact-page .quick-info-label {
+    width: clamp(120px, 8.33vw, 213px);
+  }
+  .member-contact-page .contact-details-card {
+    border-radius: clamp(16px, 1.11vw, 28px);
+  }
   .member-contact-page .contact-details-card-header {
     padding: clamp(8px, 0.55vw, 14px) clamp(16px, 1.11vw, 28px);
     font-size: clamp(12px, 0.83vw, 21px);
   }
-  .member-contact-page .contact-details-card-body { padding: clamp(12px, 0.83vw, 21px) clamp(16px, 1.11vw, 28px); }
-  .member-contact-page .contact-detail-field label { font-size: clamp(10px, 0.69vw, 17px); }
-  .member-contact-page .contact-detail-field .detail-val {
-    margin-top: clamp(8px, 0.55vw, 14px);
-    font-size: clamp(11px, 0.76vw, 19px);
-    border-radius: clamp(8px, 0.55vw, 14px);
-    height: clamp(32px, 2.22vw, 56px);
-    padding: 0 clamp(10px, 0.69vw, 17px);
+  .member-contact-page .contact-details-card-body {
+    padding: clamp(12px, 0.83vw, 21px) clamp(16px, 1.11vw, 28px);
   }
-  .member-contact-page .skills-row { gap: clamp(8px, 0.55vw, 14px); margin-top: clamp(16px, 1.11vw, 28px); }
+  .member-contact-page .contact-detail-field label {
+    font-size: clamp(10px, 0.69vw, 17px);
+  }
+  .member-contact-page .contact-detail-field .detail-val {
+    height: clamp(32px, 2.22vw, 56px);
+    margin-top: clamp(8px, 0.55vw, 14px);
+    padding: 0 clamp(10px, 0.69vw, 17px);
+    border-radius: clamp(8px, 0.55vw, 14px);
+    font-size: clamp(11px, 0.76vw, 19px);
+  }
+  .member-contact-page .skills-row {
+    gap: clamp(8px, 0.55vw, 14px);
+    margin-top: clamp(16px, 1.11vw, 28px);
+  }
   .member-contact-page .skill-pill {
     padding: clamp(4px, 0.27vw, 7px) clamp(10px, 0.69vw, 17px);
-    font-size: clamp(10px, 0.69vw, 17px);
     border-radius: clamp(16px, 1.11vw, 28px);
+    font-size: clamp(10px, 0.69vw, 17px);
   }
 }

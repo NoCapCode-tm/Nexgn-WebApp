@@ -1,513 +1,436 @@
 /* Page layout */
 .member-settings-body {
   display: flex;
-  gap: 24px;
   align-items: flex-start;
+  gap: 24px;
   width: 100%;
 }
-
 .member-settings-content {
   flex: 1;
   min-width: 0;
 }
-
 /* Header & Topbar */
 .member-settings-topbar__bottom-row {
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(204, 204, 204, 0.8);
 }
-
 .member-settings-topbar-search {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 200px;
   padding: 8px 14px;
-  background: #ffffff;
   border: 1px solid #E4E4E4;
   border-radius: 20px;
+  background: #ffffff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.2s, transform 0.2s;
-  min-width: 200px;
 }
-
 .member-settings-topbar-search:hover {
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
-
 .member-settings-topbar-search__input {
+  width: 100%;
   border: none;
-  outline: none;
-  background: transparent;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   color: #1a1a2e;
-  width: 100%;
+  background: transparent;
+  outline: none;
 }
-
 .member-settings-topbar-search__input::placeholder {
   color: #8A949F;
 }
-
 /* Sidebar & Navigation */
 .member-settings-nav {
   display: flex;
   flex-direction: column;
-  width: clamp(180px, 15vw, 250px);
   flex-shrink: 0;
-  background: transparent;
   gap: 8px;
+  width: clamp(180px, 15vw, 250px);
+  background: transparent;
 }
-
 .member-settings-nav__item {
   display: flex;
   align-items: center;
   width: 100%;
   padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
+  text-align: left;
+  white-space: nowrap;
   color: #1a1a2e;
   background: transparent;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: left;
   transition: background 0.15s, color 0.15s;
-  white-space: nowrap;
+  cursor: pointer;
 }
-
 .member-settings-nav__item:hover:not(.member-settings-nav__item--disabled) {
-  background: #FFF0F0;
   color: #FF0915;
+  background: #FFF0F0;
 }
-
 .member-settings-nav__item--active {
-  background: #FFDCDC !important;
-  color: #FF0915 !important;
   font-weight: 500;
+  color: #FF0915;
+  background: #FFDCDC;
 }
-
 .member-settings-nav__item--disabled {
   color: #1a1a2e;
-  cursor: default;
   opacity: 0.7;
+  cursor: default;
 }
-
 /* Cards & Sections */
 .member-settings-card {
-  background: #ffffff;
-  border: 1px solid #E4E4E4;
-  border-radius: 12px;
-  box-shadow: 0 0 14.5px 1px rgba(131, 131, 131, 0.10);
-  padding: 20px 28px 20px 28px;
   width: 100%;
   max-width: 100%;
+  padding: 20px 28px 20px 28px;
+  border: 1px solid #E4E4E4;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 0 14.5px 1px rgba(131, 131, 131, 0.10);
 }
-
 .member-settings-card__title {
+  margin-bottom: 16px;
   font-family: 'Inter', sans-serif;
   font-size: 20px;
   font-weight: 600;
   color: #1a1a2e;
-  margin-bottom: 16px;
 }
-
 .member-settings-card__divider {
   width: 100%;
   height: 1px;
-  background: rgba(204, 204, 204, 0.8);
   margin-bottom: 20px;
+  background: rgba(204, 204, 204, 0.8);
 }
-
 .member-settings-avatar-row {
   display: flex;
   align-items: center;
   gap: 40px;
   margin-bottom: 20px;
 }
-
 .member-settings-avatar {
+  position: relative;
+  flex-shrink: 0;
   width: 84px;
   height: 84px;
+  border: 2px solid #f3dede;
   border-radius: 50%;
   overflow: hidden;
   background: #FFDCDC;
-  flex-shrink: 0;
-  border: 2px solid #f3dede;
-  position: relative;
 }
-
 .member-settings-avatar__img {
   position: absolute;
-  left: 0%;
-  right: 0%;
   top: 0%;
+  right: 0%;
   bottom: 0%;
+  left: 0%;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
-
 .member-settings-avatar-info {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
 /* Forms & Inputs */
 .member-settings-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-
 .member-settings-form__group {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
 .member-settings-form__label {
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: #1a1a2e;
 }
-
 .member-settings-form__input {
-  flex: 1 1 300px;
+  box-sizing: border-box;
   width: 100%;
   max-width: 100%;
-  padding: 8px 12px;
+  padding: 10px 14px;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   color: #1a1a2e;
   background: #ffffff;
-  border: 1px solid #CCCCCC;
-  border-radius: 6px;
-  outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
-  box-sizing: border-box;
+  outline: none;
 }
-
 .member-settings-form__input:focus {
   border-color: #FF0915;
   box-shadow: 0 0 0 3px rgba(255, 9, 21, 0.08);
 }
-
 .member-settings-form__input--readonly {
+  border-color: #E4E4E4;
+  color: #8A949F;
   background: #F9FAFB;
-  color: #6B7280;
   cursor: not-allowed;
 }
-
 .member-settings-form__input--readonly:focus {
-  border-color: #D1D5DB;
+  border-color: #E4E4E4;
   box-shadow: none;
 }
-
 .member-settings-form__helper {
+  margin: 4px 0 0 0;
   font-family: 'Inter', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   color: #8A949F;
-  margin: 0;
 }
-
 .member-settings-form__success {
+  max-width: 100%;
   padding: 10px 16px;
+  border: 1px solid #B7E4C7;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: #179747;
   background: #E6F7EC;
-  border: 1px solid #B7E4C7;
-  border-radius: 8px;
-  max-width: 100%;
 }
-
 .member-settings-form__footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   width: 100%;
   max-width: 100%;
-  margin-top: 12px;
+  margin-top: 24px;
 }
-
 /* Tables & Rows */
-
 /* Buttons & Actions */
 .member-settings-avatar__file-input {
   display: none;
 }
-
 .member-settings-avatar__upload-btn {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  align-self: flex-start;
   padding: 6px 28px;
+  border: 1px solid transparent;
+  border-radius: 4px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
+  white-space: nowrap;
   color: #666666;
   background: linear-gradient(#ffffff, #ffffff) padding-box,
               linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) border-box;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  cursor: pointer;
   transition: all 0.15s;
-  white-space: nowrap;
-  align-self: flex-start;
+  cursor: pointer;
 }
-
 .member-settings-avatar__upload-btn:hover {
+  color: #ffffff;
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) padding-box,
               linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) border-box;
-  color: #ffffff;
 }
-
 .member-settings-avatar__helper {
+  margin: 0;
   font-family: 'Inter', sans-serif;
   font-size: 11px;
   color: #8A949F;
-  margin: 0;
 }
-
 .member-settings-form__submit {
   width: auto;
   min-width: 200px;
   padding: 12px 40px;
+  border: none;
+  border-radius: 6px;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 500;
+  letter-spacing: 0.2px;
   color: #ffffff;
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
   transition: background 0.15s, box-shadow 0.15s;
-  letter-spacing: 0.2px;
+  cursor: pointer;
 }
-
 .member-settings-form__submit:hover {
   background: linear-gradient(90deg, #D10008 0%, #B30000 55%, #960101 100%);
   box-shadow: 0 4px 12px rgba(255, 9, 21, 0.25);
 }
-
 /* Modals & Dropdowns */
-
 /* Utility States */
-
 /* Tablet adjustments (Fluid) */
 @media (min-width: 769px) and (max-width: 1179px) {
   .member-settings-body {
-    padding: 0 clamp(24px, 3.12vw, 36px) clamp(24px, 3.12vw, 36px) clamp(24px, 3.12vw, 36px);
     gap: clamp(24px, 3.12vw, 40px);
+    padding: 0 clamp(24px, 3.12vw, 36px) clamp(24px, 3.12vw, 36px) clamp(24px, 3.12vw, 36px);
   }
-
   /* Header adjustments for Tablet */
   .member-settings-page .member-settings-mobile-header {
     padding: clamp(24px, 3.12vw, 32px) clamp(24px, 3.12vw, 36px) clamp(12px, 1.5vw, 20px) clamp(24px, 3.12vw, 36px);
   }
-
   .member-settings-page .member-settings-mobile-header__top-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-bottom: clamp(24px, 3.12vw, 32px);
   }
-  
   .member-settings-page .member-settings-mobile-search {
     display: flex;
     min-width: clamp(220px, 28vw, 300px);
     height: clamp(40px, 5vw, 48px);
   }
-
   .member-settings-page .mobile-page-header,
   .member-settings-page .member-settings-mobile-header,
   .member-settings-page .member-settings-mobile-header__top-row {
-    border-bottom: none !important;
-    border: none !important;
-    box-shadow: none !important;
+    border: none;
+    border-bottom: none;
+    box-shadow: none;
   }
-
   .member-settings-page .desktop-topbar,
   .member-settings-page .member-settings-topbar__bottom-row {
-    display: none !important;
+    display: none;
   }
-
   .member-settings-page .mobile-page-header__divider {
-    display: none !important;
+    display: none;
   }
-
   .member-settings-page .member-settings-mobile-header__titles .topbar__title {
     font-size: clamp(24px, 3vw, 32px);
   }
-
   .member-settings-page .member-settings-mobile-header__titles .topbar__sub {
-    font-size: clamp(12px, 1.5vw, 15px);
     margin-top: clamp(10px, 1.4vw, 14px);
+    font-size: clamp(12px, 1.5vw, 15px);
   }
-
   .member-settings-nav {
-    min-width: clamp(180px, 23vw, 240px);
-    width: clamp(180px, 23vw, 240px);
     gap: clamp(16px, 2vw, 24px);
+    width: clamp(180px, 23vw, 240px);
+    min-width: clamp(180px, 23vw, 240px);
   }
-  
   .member-settings-nav__item {
-    font-size: clamp(14px, 1.8vw, 16px);
     padding: clamp(10px, 1.3vw, 14px) clamp(16px, 2vw, 24px);
+    font-size: clamp(14px, 1.8vw, 16px);
   }
-
   .member-settings-card {
     padding: clamp(24px, 3.12vw, 40px) clamp(24px, 3.12vw, 40px);
   }
-  
   .member-settings-card__title {
-    font-size: clamp(20px, 2.6vw, 24px);
     margin-bottom: clamp(16px, 2vw, 24px);
+    font-size: clamp(20px, 2.6vw, 24px);
   }
-
   .member-settings-avatar-row {
     gap: clamp(24px, 3vw, 36px);
     margin-bottom: clamp(24px, 3.12vw, 32px);
   }
-
   .member-settings-avatar {
     width: clamp(80px, 10vw, 120px);
     height: clamp(80px, 10vw, 120px);
   }
-
   .member-settings-avatar-info {
     gap: clamp(8px, 1vw, 12px);
   }
-
   .member-settings-avatar__upload-btn {
     padding: clamp(8px, 1vw, 10px) clamp(20px, 2.6vw, 28px);
     font-size: clamp(13px, 1.6vw, 15px);
   }
-
   .member-settings-form {
     gap: clamp(24px, 3.12vw, 32px);
   }
-  
   .member-settings-form__group {
     gap: clamp(8px, 1vw, 12px);
   }
-  
   .member-settings-form__label {
     font-size: clamp(13px, 1.6vw, 15px);
     font-weight: 600;
   }
-
   .member-settings-form__input {
     max-width: 100%;
     padding: clamp(10px, 1.3vw, 14px) clamp(12px, 1.5vw, 16px);
     font-size: clamp(13px, 1.6vw, 15px);
   }
-
   .member-settings-form__footer {
-    max-width: 100%;
     justify-content: center;
+    max-width: 100%;
     margin-top: clamp(24px, 3.12vw, 32px);
   }
-  
   .member-settings-form__submit {
-    min-width: clamp(160px, 20vw, 220px);
     width: clamp(160px, 20vw, 220px);
+    min-width: clamp(160px, 20vw, 220px);
     padding: clamp(12px, 1.5vw, 16px);
     font-size: clamp(14px, 1.8vw, 16px);
   }
 }
-
 /* Mobile adjustments */
 @media (max-width: 768px) {
   /* Hide search bar on mobile if needed to avoid clutter */
   .member-settings-page .member-settings-mobile-search {
     display: none;
   }
-
   .member-settings-body {
     flex-direction: column;
     gap: var(--space-md);
     padding: 0 var(--mobile-gutter) var(--mobile-gutter) var(--mobile-gutter);
   }
-
   .member-settings-nav {
-    width: 100%;
-    min-width: 0;
     flex-direction: column;
     gap: 0.533vw;
+    width: 100%;
+    min-width: 0;
   }
-
   .member-settings-nav__item {
-    font-size: var(--font-sm);
     padding: 2.667vw 3.733vw;
+    font-size: var(--font-sm);
   }
-
   .member-settings-card {
     padding: 4.8vw var(--mobile-gutter) 5.333vw var(--mobile-gutter);
   }
-
   .member-settings-card__title {
     font-size: var(--font-xl);
   }
-
   .member-settings-form__input {
     max-width: 100%;
   }
-
   .member-settings-form__footer {
     max-width: 100%;
   }
-
   .member-settings-avatar-row {
     flex-wrap: wrap;
     gap: var(--space-md);
   }
 }
-
 /* Fluid Desktop Scaling (1180px and above)
    Preserves the 1366-1440px design, but scales it up fluidly for larger monitors using clamp(). 
    All fluid values are scoped to .member-settings-page to prevent affecting other pages. */
 @media (min-width: 1180px) {
   /* Layout & Spacing */
   .member-settings-page .main {
-    padding: clamp(24px, 1.66vw, 43px) clamp(28px, 1.94vw, 50px);
     gap: clamp(20px, 1.38vw, 35px);
+    padding: clamp(24px, 1.66vw, 43px) clamp(28px, 1.94vw, 50px);
   }
-  
   .member-settings-page .member-settings-body {
     gap: clamp(24px, 1.66vw, 43px);
   }
-
   /* Topbar */
   .member-settings-page .topbar__title {
     font-size: clamp(24px, 1.66vw, 43px);
   }
-  
   .member-settings-page .topbar__sub,
   .member-settings-page .member-settings-topbar__bottom-row .topbar__sub {
     font-size: clamp(12px, 0.83vw, 21px);
   }
-  
   .member-settings-page .member-settings-topbar__bottom-row {
     padding-bottom: clamp(16px, 1.11vw, 28px);
   }
-  
   .member-settings-page .member-settings-topbar-search {
     gap: clamp(8px, 0.55vw, 14px);
+    min-width: clamp(200px, 13.88vw, 355px);
     padding: clamp(8px, 0.55vw, 14px) clamp(14px, 0.97vw, 25px);
     border-radius: clamp(20px, 1.38vw, 35px);
-    min-width: clamp(200px, 13.88vw, 355px);
   }
-  
   .member-settings-page .member-settings-topbar-search__input {
     font-size: clamp(13px, 0.9vw, 23px);
   }
-
   /* Sidebar Base Components (scoped) */
   .member-settings-page .sidebar {
     width: clamp(60px, 4.16vw, 106px);
@@ -534,33 +457,30 @@
   .member-settings-page .sidebar__logo-sub {
     font-size: clamp(10px, 0.69vw, 17px);
   }
-
   /* Settings Navigation */
   .member-settings-page .member-settings-nav {
-    min-width: clamp(220px, 15.27vw, 391px);
-    width: clamp(220px, 15.27vw, 391px);
     gap: clamp(8px, 0.55vw, 14px);
+    width: clamp(220px, 15.27vw, 391px);
+    min-width: clamp(220px, 15.27vw, 391px);
   }
   .member-settings-page .member-settings-nav__item {
     padding: clamp(8px, 0.55vw, 14px) clamp(16px, 1.11vw, 28px);
-    font-size: clamp(14px, 0.97vw, 25px);
     border-radius: clamp(8px, 0.55vw, 14px);
+    font-size: clamp(14px, 0.97vw, 25px);
   }
-
   /* Content Card */
   .member-settings-page .member-settings-card {
+    max-width: 1422px;
     padding: clamp(20px, 1.38vw, 35px) clamp(28px, 1.94vw, 50px) clamp(20px, 1.38vw, 35px) clamp(28px, 1.94vw, 50px);
-    max-width: clamp(800px, 55.55vw, 1422px);
     border-radius: clamp(12px, 0.83vw, 21px);
   }
   .member-settings-page .member-settings-card__title {
-    font-size: clamp(20px, 1.38vw, 35px);
     margin-bottom: clamp(16px, 1.11vw, 28px);
+    font-size: clamp(20px, 1.38vw, 35px);
   }
   .member-settings-page .member-settings-card__divider {
     margin-bottom: clamp(20px, 1.38vw, 35px);
   }
-
   /* Avatar Section */
   .member-settings-page .member-settings-avatar-row {
     gap: clamp(40px, 2.77vw, 71px);
@@ -575,13 +495,12 @@
   }
   .member-settings-page .member-settings-avatar__upload-btn {
     padding: clamp(6px, 0.41vw, 10px) clamp(28px, 1.94vw, 50px);
-    font-size: clamp(13px, 0.9vw, 23px);
     border-radius: clamp(4px, 0.27vw, 7px);
+    font-size: clamp(13px, 0.9vw, 23px);
   }
   .member-settings-page .member-settings-avatar__helper {
     font-size: clamp(11px, 0.76vw, 19px);
   }
-
   /* Forms */
   .member-settings-page .member-settings-form {
     gap: clamp(16px, 1.11vw, 28px);
@@ -593,27 +512,29 @@
     font-size: clamp(13px, 0.9vw, 23px);
   }
   .member-settings-page .member-settings-form__input {
-    max-width: clamp(460px, 31.94vw, 818px);
-    padding: clamp(8px, 0.55vw, 14px) clamp(12px, 0.83vw, 21px);
-    font-size: clamp(13px, 0.9vw, 23px);
-    border-radius: clamp(6px, 0.41vw, 10px);
+    max-width: 818px;
+    padding: clamp(10px, 0.7vw, 16px) clamp(14px, 1vw, 24px);
+    border-radius: clamp(8px, 0.55vw, 14px);
+    font-size: clamp(14px, 0.97vw, 25px);
   }
   .member-settings-page .member-settings-form__helper {
     font-size: clamp(11px, 0.76vw, 19px);
   }
   .member-settings-page .member-settings-form__success {
     padding: clamp(10px, 0.69vw, 17px) clamp(16px, 1.11vw, 28px);
-    font-size: clamp(13px, 0.9vw, 23px);
     border-radius: clamp(8px, 0.55vw, 14px);
+    font-size: clamp(13px, 0.9vw, 23px);
   }
   .member-settings-page .member-settings-form__footer {
-    max-width: clamp(460px, 31.94vw, 818px);
-    margin-top: clamp(12px, 0.83vw, 21px);
+    display: flex;
+    justify-content: center;
+    max-width: 818px;
+    margin-top: clamp(24px, 1.66vw, 42px);
   }
   .member-settings-page .member-settings-form__submit {
     min-width: clamp(200px, 13.88vw, 355px);
     padding: clamp(12px, 0.83vw, 21px) clamp(40px, 2.77vw, 71px);
-    font-size: clamp(14px, 0.97vw, 25px);
     border-radius: clamp(6px, 0.41vw, 10px);
+    font-size: clamp(14px, 0.97vw, 25px);
   }
 }
