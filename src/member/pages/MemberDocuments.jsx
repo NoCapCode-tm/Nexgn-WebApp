@@ -1,14 +1,11 @@
 import { useState } from "react";
-import MemberSidebar from "../components/MemberSidebar";
+import MemberLayout from "../components/MemberLayout";
 import MemberTopbar from "../components/MemberTopbar";
-import MemberTopbarIcons from "../components/MemberTopbarIcons";
-import MemberMobileNavbar from "../components/MemberMobileNavbar";
 import MemberDocumentsFilter from "../components/MemberDocumentsFilter";
 import MemberDocumentsTable from "../components/MemberDocumentsTable";
-import { Search, Bell, UserCircle, Menu } from "lucide-react";
 
 import "../css/MemberBaseLayout.css";
-import "../css/MemberDocuments.css";    // Specific Document Styles
+import "../css/MemberDocuments.css";
 
 const ALL_DOCS = [
   { id: 1, title: 'Project Proposal',           note: 'Send it to client',       signers: 'Jane Doe',       signedAt: '-',              owner: 'Me', status: 'Pending' },
@@ -20,11 +17,10 @@ const ALL_DOCS = [
   { id: 7, title: 'Vendor Contract',             note: 'Contract pending...',     signers: 'Emma Wilson',     signedAt: '-',              owner: 'Me', status: 'Pending' },
   { id: 8, title: 'Freelancer Agreement',        note: 'Yearly freelance...',     signers: 'Daniel Brown',    signedAt: 'March 8, 2026',  owner: 'Me', status: 'Signed'  },
   { id: 9, title: 'Shareholder Resolution',      note: 'Internal resolution...',  signers: '-',               signedAt: 'March 7, 2026',  owner: 'Me', status: 'Signed'  },
-  { id:10, title: 'Vendor Contract',             note: 'Contract pending...',     signers: 'Emma Wilson',     signedAt: '-',              owner: 'Me', status: 'Expired' },
+  { id: 10, title: 'Vendor Contract',            note: 'Contract pending...',     signers: 'Emma Wilson',     signedAt: '-',              owner: 'Me', status: 'Expired' },
 ];
 
 export default function MemberDocuments() {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
@@ -36,77 +32,40 @@ export default function MemberDocuments() {
                           (doc.status && doc.status.toLowerCase() === selectedStatus.toLowerCase());
     let matchesTab = true;
     if (activeTab === "created") matchesTab = doc.owner === "Me";
-    // "assigned" could check if owner != "Me" or some other logic, assuming all match for mock data right now
     if (activeTab === "assigned") matchesTab = true; 
     return matchSearch && matchesStatus && matchesTab;
   });
 
+  const filterComponent = (
+    <MemberDocumentsFilter 
+      search={search} 
+      setSearch={setSearch} 
+      selectedStatus={selectedStatus}
+      setSelectedStatus={setSelectedStatus}
+    />
+  );
+
   return (
-    <div className="layout member-theme member-docs-page">
-      {mobileNavOpen && (
-        <div
-          className="mobile-backdrop"
-          onClick={() => setMobileNavOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Responsive Sidebar Layout */}
-      <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? "mobile-sidebar-wrapper--open" : ""}`}>
-        <MemberSidebar />
-      </div>
-
-      <div className="desktop-sidebar-wrapper">
-        <MemberSidebar />
-      </div>
-
-      <div className="main">
-        {/* Mobile Navigation */}
-        <header className="mobile-topbar">
-          <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(true)}>
-            <Menu size={22} color="#1a1a2e" />
-          </button>
-
-          <MemberTopbarIcons iconSize={18} className="mobile-topbar__icons" />
-        </header>
-
+    <MemberLayout className="member-docs-page">
+      <>
         {/* Desktop Topbar */}
-        <div className="topbar desktop-topbar">
-          <div className="topbar__top-row">
-            <MemberTopbarIcons iconSize={24} className="topbar__icons" />
-          </div>
-          <div className="topbar__bottom-row">
-            <div>
-              <div className="topbar__title">Documents</div>
-              <div className="topbar__sub">Manage and track all your signed and pending document</div>
-            </div>
-            
-            {/* Top Right Actions */}
-            <MemberDocumentsFilter 
-              search={search} 
-              setSearch={setSearch} 
-              selectedStatus={selectedStatus}
-              setSelectedStatus={setSelectedStatus}
-            />
-          </div>
-        </div>
+        <MemberTopbar 
+          title="Documents" 
+          subtitle="Manage and track all your signed and pending documents"
+          actionButton={filterComponent}
+        />
 
         {/* Mobile Page Header (Under Topbar) */}
         <div className="mobile-page-header">
           <div className="topbar__bottom-row">
             <div>
               <div className="topbar__title">Documents</div>
-              <div className="topbar__sub">Manage and track all your signed and pending document</div>
+              <div className="topbar__sub">Manage and track all your signed and pending documents</div>
             </div>
           </div>
           <hr className="mobile-header-divider" />
           <div className="mobile-filter-row">
-            <MemberDocumentsFilter 
-              search={search} 
-              setSearch={setSearch} 
-              selectedStatus={selectedStatus}
-              setSelectedStatus={setSelectedStatus}
-            />
+            {filterComponent}
           </div>
         </div>
 
@@ -128,7 +87,7 @@ export default function MemberDocuments() {
             className={`member-docs-tab ${activeTab === 'assigned' ? 'member-docs-tab--active' : ''}`} 
             onClick={() => setActiveTab('assigned')}
           >
-            Assigned to me
+            Assigned by me
           </button>
         </div>
 
@@ -140,8 +99,7 @@ export default function MemberDocuments() {
         {/* Table Section */}
         <MemberDocumentsTable documents={filteredDocs} />
 
-      </div>
-      <MemberMobileNavbar />
-    </div>
+      </>
+    </MemberLayout>
   );
 }

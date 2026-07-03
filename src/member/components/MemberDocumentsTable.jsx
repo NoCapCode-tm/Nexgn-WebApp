@@ -2,7 +2,7 @@ import MemberDocumentsRow from "./MemberDocumentsRow";
 
 export default function MemberDocumentsTable({ documents }) {
   return (
-    <>
+    <div className="member-docs-table-wrapper">
       <div className="member-docs-table__header">
         <span>TITLE</span>
         <span>NOTE</span>
@@ -25,6 +25,6 @@ export default function MemberDocumentsTable({ documents }) {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

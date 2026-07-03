@@ -1,11 +1,9 @@
 import { useState } from "react";
-import MemberSidebar from "../components/MemberSidebar";
+import MemberLayout from "../components/MemberLayout";
 import MemberTopbar from "../components/MemberTopbar";
-import MemberTopbarIcons from "../components/MemberTopbarIcons";
-import MemberMobileNavbar from "../components/MemberMobileNavbar";
 import MemberContactCard from "../components/MemberContactCard";
 import ContactDetailsModal from "../components/ContactDetailsModal";
-import { Search, Bell, UserCircle, Menu } from "lucide-react";
+import { Search } from "lucide-react";
 import AddContactForm from "../components/AddContactForm";
 
 import "../css/MemberBaseLayout.css";
@@ -112,7 +110,6 @@ function MemberContactActions({
 }
 
 export default function MemberContactBook() {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [selectedDepartment, setSelectedDepartment] = useState("All");
@@ -138,66 +135,28 @@ export default function MemberContactBook() {
     }
   };
 
+  const contactActions = (
+    <MemberContactActions
+      search={search}
+      setSearch={setSearch}
+      selectedStatus={selectedStatus}
+      setSelectedStatus={setSelectedStatus}
+      selectedDepartment={selectedDepartment}
+      setSelectedDepartment={setSelectedDepartment}
+      onAddClick={() => setIsAddModalOpen(true)}
+    />
+  );
+
   return (
-    <div className="layout member-theme member-contact-page">
-      {mobileNavOpen && (
-        <div
-          className="mobile-backdrop"
-          onClick={() => setMobileNavOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Responsive Sidebar Layout */}
-      <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? "mobile-sidebar-wrapper--open" : ""}`}>
-        <MemberSidebar />
-      </div>
-
-      <div className="desktop-sidebar-wrapper">
-        <MemberSidebar />
-      </div>
-
-      <div className="main">
-        {/* Mobile Navigation */}
-        <header className="mobile-topbar">
-          <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(true)}>
-            <Menu size={22} color="#1a1a2e" />
-          </button>
-
-          <MemberTopbarIcons 
-            iconSize={18} 
-            className="mobile-topbar__icons" 
-            onSearchClick={focusSearchInput} 
-          />
-        </header>
-
+    <MemberLayout className="member-contact-page" onSearchClick={focusSearchInput}>
+      <>
         {/* Desktop Topbar */}
-        <div className="topbar desktop-topbar">
-          <div className="topbar__top-row">
-            <div className="topbar__icons">
-              <button className="topbar__icon-btn" onClick={focusSearchInput}><Search size={24} color="#FF0915" strokeWidth={1.5} /></button>
-              <button className="topbar__icon-btn"><Bell size={24} color="#FF0915" strokeWidth={1.5} /></button>
-              <button className="topbar__icon-btn"><UserCircle size={24} color="#FF0915" strokeWidth={1.5} /></button>
-            </div>
-          </div>
-          <div className="topbar__bottom-row">
-            <div>
-              <div className="topbar__title">Contact Book</div>
-              <div className="topbar__sub">Manage all company contacts</div>
-            </div>
-            
-            {/* Top Right Actions */}
-            <MemberContactActions
-              search={search}
-              setSearch={setSearch}
-              selectedStatus={selectedStatus}
-              setSelectedStatus={setSelectedStatus}
-              selectedDepartment={selectedDepartment}
-              setSelectedDepartment={setSelectedDepartment}
-              onAddClick={() => setIsAddModalOpen(true)}
-            />
-          </div>
-        </div>
+        <MemberTopbar 
+          title="Contact Book" 
+          subtitle="Manage all company contacts"
+          actionButton={contactActions}
+          onSearchClick={focusSearchInput}
+        />
 
         {/* Mobile Page Header (Under Topbar) */}
         <div className="mobile-page-header">
@@ -209,15 +168,7 @@ export default function MemberContactBook() {
           </div>
           <hr className="mobile-header-divider" />
           <div className="mobile-filter-row">
-            <MemberContactActions
-              search={search}
-              setSearch={setSearch}
-              selectedStatus={selectedStatus}
-              setSelectedStatus={setSelectedStatus}
-              selectedDepartment={selectedDepartment}
-              setSelectedDepartment={setSelectedDepartment}
-              onAddClick={() => setIsAddModalOpen(true)}
-            />
+            {contactActions}
           </div>
         </div>
 
@@ -253,9 +204,7 @@ export default function MemberContactBook() {
           </div>
         </div>
 
-      </div>
-      
-      <MemberMobileNavbar />
+      </>
 
       {isAddModalOpen && (
         <AddContactForm onClose={() => setIsAddModalOpen(false)} />
@@ -264,6 +213,6 @@ export default function MemberContactBook() {
       {selectedContact && (
         <ContactDetailsModal contact={selectedContact} onClose={() => setSelectedContact(null)} />
       )}
-    </div>
+    </MemberLayout>
   );
 }
