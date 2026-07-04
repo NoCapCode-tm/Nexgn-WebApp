@@ -149,9 +149,12 @@ html, body {
 }
 .hero-preview__image {
   display: block;
-  width: auto;
+  width: 100%;
   max-width: 100%;
   height: auto;
+  aspect-ratio: 774 / 595;
+  object-fit: contain;
+  object-position: right center;
 }
 /* FEATURES */
 .features-section {
@@ -1741,7 +1744,12 @@ html, body {
 
   
   /* Required Overrides */
-  .how-it-works,
+  .how-it-works {
+  width: 100%;
+  transform: none;
+  margin-top: 45px;
+}
+
   .security-grid {
   width: 100%;
   transform: none;
@@ -1795,7 +1803,7 @@ html, body {
   
   .landing-layout::before {
   position: absolute;
-  top: 0px;
+  top: 100px;
   left: 0px;
   z-index: 0;
   width: 100vw;
@@ -1996,7 +2004,7 @@ html, body {
   gap: 32px 16px;
   grid-template-columns: 1fr 1fr;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 85px;
 }
 
   .paperless-item:nth-child(1) {
@@ -2042,7 +2050,10 @@ html, body {
   white-space: nowrap;
 }
 
-  
+  .security-block {
+  padding-top: 80px;
+}
+
   /* Security */  .security-grid {
   /* Left align */
   display: flex;
@@ -2050,6 +2061,7 @@ html, body {
   align-items: flex-start;
   gap: 2.2vw;
   width: 100%;
+  margin-top: 45px;
 }
 
   .security-card {
@@ -2334,12 +2346,7 @@ html, body {
     color: white;
   }
 
-  .landing-background-left {
-    max-width: 58%;
-    transform: translate(clamp(13.33px, 1.042vw, 26.67px), clamp(-17.78px, -0.694vw, -8.89px)) rotate(5deg);
-    -webkit-mask-image: linear-gradient(to bottom right, black 40%, transparent 100%);
-    mask-image: linear-gradient(to bottom right, black 40%, transparent 100%);
-  }
+
 
   .landing-nav__logo,
   .footer-logo {
@@ -2422,8 +2429,6 @@ html, body {
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.08);
     border-radius: clamp(7.11px, 0.556vw, 14.22px);
-    padding: clamp(13.33px, 1.042vw, 26.67px) clamp(17.78px, 1.389vw, 35.56px);
-    gap: clamp(17.78px, 1.389vw, 35.56px);
     backdrop-filter: blur(clamp(8.89px, 0.694vw, 17.78px));
     -webkit-backdrop-filter: blur(clamp(8.89px, 0.694vw, 17.78px));
     color: white;
@@ -2489,10 +2494,7 @@ html, body {
     color: #999999;
   }
 
-  .footer-socials {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-  }
+
 
   .footer-socials svg {
     color: #FFFFFF;
@@ -2534,39 +2536,14 @@ html, body {
   }
 
   @media (min-width: 769px) and (max-width: 1179px) {
-    .landing-background-left {
-      display: none;
-    }
     .landing-layout::before {
-      display: block;
-      background: url('../assets/bg-left-dark.png') no-repeat top left;
-      background-size: 80% auto;
-      width: 100%;
-      height: 80vw;
-    }
-    /* Same gradient structure as Gemini.png (light mode) but with black instead of white */
-    .lock-fade-bottom {
-      display: none;
-    }
-    .lock-fade-right {
-      top: 0;
-      left: 15.6%;
-      width: 84.4%;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(0, 0, 0, 0.82) 61.79%, rgba(0, 0, 0, 0) 100%);
-      transform: matrix(-1, 0, 0, 1, 0, 0);
+      background-image: url('../assets/bg-left-dark.png');
     }
   }
 
   @media (max-width: 768px) {
-    .landing-background-left {
-      display: none;
-    }
     .landing-layout::before {
-      display: block;
-      background: url('../assets/bg-left-dark.png') no-repeat top left;
-      background-size: 140% auto;
-      height: 130vw;
+      background-image: url('../assets/bg-left-dark.png');
     }
   }
 }
