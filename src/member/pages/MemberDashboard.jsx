@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import MemberSidebar from "../components/MemberSidebar";
+import MemberLayout from "../components/MemberLayout";
 import MemberTopbar from "../components/MemberTopbar";
 import MemberStatCard from "../components/MemberStatCard";
-import DocumentRow from "../../admin/components/DocumentRow";
-import MemberMobileNavbar from "../components/MemberMobileNavbar";
-import { Search, Bell, UserCircle, Menu } from "lucide-react";
-import "../css/MemberDashboard.css"; // Scoped CSS Overrides
+import MemberDocumentRow from "../components/MemberDocumentRow";
+import useWindowWidth from "../components/useWindowWidth";
+import "../css/MemberBaseLayout.css";
+import "../css/MemberDashboard.css";
 
 const stats = [
   {
@@ -80,62 +79,35 @@ const documents = [
 ];
 
 export default function MemberDashboard() {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 767);
+  const width = useWindowWidth();
+  const isMobile = width <= 768;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 767);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
-    <div className="layout member-theme">
-      {mobileNavOpen && (
-        <div
-          className="mobile-backdrop"
-          onClick={() => setMobileNavOpen(false)}
-          aria-hidden="true"
+    <MemberLayout className="member-dashboard-page">
+      <>
+        <MemberTopbar 
+          title="Dashboard" 
+          subtitle="Overview of your document signing activity" 
         />
-      )}
-
-      {/* Responsive Layout */}
-      <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? "mobile-sidebar-wrapper--open" : ""}`}>
-        <MemberSidebar />
-      </div>
-
-      <div className="desktop-sidebar-wrapper">
-        <MemberSidebar />
-      </div>
-
-      <div className="main">
-        {/* Mobile Navigation */}
-        <header className="mobile-topbar">
-          <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen((o) => !o)}>
-            <Menu size={22} color="#1a1a2e" />
-          </button>
-          <span className="mobile-topbar__title">Dashboard</span>
-          <div className="mobile-topbar__icons">
-            <button className="topbar__icon-btn mobile-topbar__search-btn">
-              <Search size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <Bell size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <UserCircle size={20} color="#FF0915" strokeWidth={1.5} />
-            </button>
-          </div>
-        </header>
-
-        <MemberTopbar />
 
         <div className="mobile-page-header">
-          <h1 className="topbar__title">Dashboard</h1>
-          <p className="topbar__sub">Overview Of your document signing activity</p>
+          <div className="mobile-page-header__container">
+            <div className="mobile-page-header__titles">
+              <h1 className="topbar__title">Dashboard</h1>
+              <p className="topbar__sub">Overview of your document signing activity</p>
+            </div>
+            <button className="mobile-page-header__upload-btn" aria-label="Upload document">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Left half - Solid */}
+                <path d="M 12 2 A 10 10 0 0 0 12 22" stroke="#FF0915" strokeWidth="2" strokeLinecap="round" />
+                {/* Right half - Dashed */}
+                <path d="M 12 2 A 10 10 0 0 1 12 22" stroke="#FF0915" strokeWidth="2" strokeDasharray="4 3" strokeLinecap="round" />
+                {/* Up Arrow */}
+                <path d="M 12 16 V 8 M 12 8 L 8 12 M 12 8 L 16 12" stroke="#FF0915" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
           <div className="mobile-page-header__divider" />
         </div>
 
@@ -168,12 +140,11 @@ export default function MemberDashboard() {
           </div>
           <div className="docs-table">
             {documents.map((doc, idx) => (
-              <DocumentRow key={idx} {...doc} />
+              <MemberDocumentRow key={idx} {...doc} />
             ))}
           </div>
         </section>
-      </div>
-      <MemberMobileNavbar />
-    </div>
+      </>
+    </MemberLayout>
   );
 }

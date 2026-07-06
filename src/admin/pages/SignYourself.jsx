@@ -1,15 +1,20 @@
 import { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import MemberSidebar from './MemberSidebar'; 
-import MemberMobileNavbar from './MemberMobileNavbar';
-import '../../admin/css/Dashboard.css';
-import '../css/MemberSignYourself.css';
+import { Search, Bell, UserCircle } from 'lucide-react';
+import Sidebar from '../components/Sidebar'; 
+import MobileNavbar from '../components/MobileNavbar';
+import useWindowWidth from '../components/useWindowWidth';
 
-export default function MemberSignYourself() {
+import '../css/AdminBaseLayout.css';
+import '../css/Dashboard.css';
+import '../css/SignYourself.css';
+
+export default function SignYourself() {
   const location = useLocation();
   const navigate = useNavigate();
+  const width = useWindowWidth();
 
-  const activeTab = location.pathname === '/member-request-signature' ? 'request' : 'sign';
+  const activeTab = location.pathname === '/admin-request-signature' ? 'request' : 'sign';
 
   const [zoom, setZoom] = useState(100);
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -22,7 +27,7 @@ export default function MemberSignYourself() {
   const fileInputRef = useRef(null);
 
   // Request Signature specific states
-  const [systemRole, setSystemRole] = useState("Member / Employee");
+  const [systemRole, setSystemRole] = useState("Admin");
   const [assignedToRole, setAssignedToRole] = useState("Client / External signer");
   const [expiresIn, setExpiresIn] = useState("");
   const [signers, setSigners] = useState([
@@ -32,7 +37,7 @@ export default function MemberSignYourself() {
 
 
   const handleTabChange = (tab) => {
-    navigate(tab === 'request' ? '/member-request-signature' : '/member-sign-yourself');
+    navigate(tab === 'request' ? '/admin-request-signature' : '/admin-sign-yourself');
     if (tab === 'request') {
       setDocTitle('');
       setNote('');
@@ -86,7 +91,7 @@ export default function MemberSignYourself() {
           ref={fileInputRef}
           type="file"
           accept=".pdf"
-          style={{ display: 'none' }}
+          className="admin-file-input-hidden"
           onChange={handleFile}
         />
       </div>
@@ -94,28 +99,32 @@ export default function MemberSignYourself() {
   );
 
   return (
-    <div className="layout member-theme">
+    <div className="layout admin-theme admin-sign-yourself-page">
       {mobileNavOpen && (
         <div className="mobile-backdrop" onClick={() => setMobileNavOpen(false)} />
       )}
       <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? "mobile-sidebar-wrapper--open" : ""}`}>
-        <MemberSidebar />
+        <Sidebar />
       </div>
       <div className="desktop-sidebar-wrapper">
-        <MemberSidebar />
+        <Sidebar />
       </div>
 
       <div className="main">
         {/* Mobile Navigation */}
         <header className="mobile-topbar">
-          <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(o => !o)}>
+          <button className="mobile-topbar__hamburger" onClick={() => {
+            if (width >= 769) {
+              setMobileNavOpen(true);
+            }
+          }}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" strokeWidth="2" strokeLinecap="round">
               <line x1="3" y1="6" x2="21" y2="6"/>
               <line x1="3" y1="12" x2="21" y2="12"/>
               <line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
           </button>
-          <span className="mobile-topbar__title">Dashboard</span>
+
           <div className="mobile-topbar__icons">
             <button className="topbar__icon-btn mobile-topbar__search-btn" onClick={(e) => e.preventDefault()}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF0915" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -145,29 +154,19 @@ export default function MemberSignYourself() {
             {activeTab === 'sign' ? 'Create and sign a document where you are the signer' : 'Send a document for signing or sign it yourself'}
           </p>
         </div>
+        <hr className="mobile-header-divider" />
 
         <div className="topbar desktop-topbar">
           <div className="topbar__top-row">
             <div className="topbar__icons">
               <button className="topbar__icon-btn" aria-label="Search" onClick={(e) => e.preventDefault()}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
+                <Search size={24} color="#FF0915" strokeWidth={1.5} />
               </button>
               <button className="topbar__icon-btn" aria-label="Notifications" onClick={(e) => e.preventDefault()}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                  <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                </svg>
+                <Bell size={24} color="#FF0915" strokeWidth={1.5} />
               </button>
               <button className="topbar__icon-btn" aria-label="Profile" onClick={(e) => e.preventDefault()}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                  <circle cx="12" cy="7" r="4"/>
-                </svg>
+                <UserCircle size={24} color="#FF0915" strokeWidth={1.5} />
               </button>
             </div>
           </div>
@@ -183,10 +182,27 @@ export default function MemberSignYourself() {
           </div>
         </div>
 
+        {/* MOBILE TABS */}
+        <div className="mobile-tabs-container">
+          <button
+            className={`tab-btn ${activeTab === 'sign' ? 'tab-btn--active' : 'tab-btn--inactive'}`}
+            onClick={() => handleTabChange('sign')}
+          >
+            Sign Yourself
+          </button>
+          <button
+            className={`tab-btn ${activeTab === 'request' ? 'tab-btn--active' : 'tab-btn--inactive'}`}
+            onClick={() => handleTabChange('request')}
+          >
+            Request Signature
+          </button>
+        </div>
+
         <div className="setup-card">
+          <div className="setup-card-top">
           <div className="setup-card__header">
             <span className="setup-card__title">Document Setup</span>
-            <div className="setup-card__tabs">
+            <div className="setup-card__tabs setup-card__tabs--desktop-only">
               <button
                 className={`tab-btn ${activeTab === 'sign' ? 'tab-btn--active' : 'tab-btn--inactive'}`}
                 onClick={() => handleTabChange('sign')}
@@ -221,7 +237,14 @@ export default function MemberSignYourself() {
                       <polyline points="9 18 15 12 9 6"/>
                     </svg>
                   </div>
-                  <button className="btn-create" onClick={(e) => e.preventDefault()}>Create</button>
+                  <button className="btn-create" onClick={(e) => e.preventDefault()}>
+                    <span className="btn-create-text">Create</span>
+                    <svg className="btn-create-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="17 8 12 3 7 8"/>
+                      <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                  </button>
                 </div>
               </div>
 
@@ -272,8 +295,8 @@ export default function MemberSignYourself() {
                       value={systemRole}
                       onChange={e => setSystemRole(e.target.value)}
                     >
-                      <option>Member / Employee</option>
                       <option>Admin</option>
+                      <option>Member / Employee</option>
                       <option>Guest</option>
                     </select>
                     <svg className="template-chevron" width="14" height="14" viewBox="0 0 24 24"
@@ -302,7 +325,14 @@ export default function MemberSignYourself() {
                     </svg>
                   </div>
                 </div>
-                <button className="btn-create" onClick={(e) => e.preventDefault()}>Create</button>
+                <button className="btn-create" onClick={(e) => { e.preventDefault(); navigate('/documents'); }}>
+                  <span className="btn-create-text">Create</span>
+                  <svg className="btn-create-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                </button>
               </div>
 
               <div className="or-divider">OR</div>
@@ -317,7 +347,7 @@ export default function MemberSignYourself() {
                     className="form-input"
                     value={docTitle}
                     onChange={e => setDocTitle(e.target.value)}
-                    placeholder="NDA - Blair Croft"
+                    placeholder="Name"
                   />
                 </div>
                 <div className="form-group">
@@ -335,7 +365,7 @@ export default function MemberSignYourself() {
                       className="form-input"
                       value={expiresIn}
                       onChange={e => setExpiresIn(e.target.value)}
-                      placeholder="7 days"
+                      placeholder="14 Days"
                     />
                   </div>
                 </div>
@@ -347,7 +377,7 @@ export default function MemberSignYourself() {
                 <div className="signer-box">
                   {signers.map((signer, index) => (
                     <div className="signer-row" key={index}>
-                      <div className="form-group" style={{ flex: 1 }}>
+                      <div className="form-group admin-form-group-flex">
                         <label className="form-label">Signer</label>
                         <input
                           type="text"
@@ -358,10 +388,10 @@ export default function MemberSignYourself() {
                             newSigners[index].name = e.target.value;
                             setSigners(newSigners);
                           }}
-                          placeholder={index === 0 ? "Blair Croft" : "Signer Name"}
+                          placeholder={index === 0 ? "Name" : "Signer Name"}
                         />
                       </div>
-                      <div className="form-group" style={{ flex: 1 }}>
+                      <div className="form-group admin-form-group-flex">
                         <label className="form-label">Signer Email</label>
                         <input
                           type="text"
@@ -372,7 +402,7 @@ export default function MemberSignYourself() {
                             newSigners[index].email = e.target.value;
                             setSigners(newSigners);
                           }}
-                          placeholder={index === 0 ? "blair.croft@example.com" : "Signer Email"}
+                          placeholder={index === 0 ? "example@gmail.com" : "Signer Email"}
                         />
                       </div>
                       <div className="signer-badge-wrap">
@@ -425,6 +455,7 @@ export default function MemberSignYourself() {
               </div>
             </>
           )}
+          </div>
 
           <div className="bottom-section">
             <div className="doc-preview">
@@ -513,7 +544,7 @@ export default function MemberSignYourself() {
                   />
                 </div>
 
-                <button className="btn-share" onClick={(e) => e.preventDefault()}>Share</button>
+                <button className="btn-share" onClick={(e) => { e.preventDefault(); navigate('/documents'); }}>Share</button>
               </div>
             ) : (
               <div className="field-props">
@@ -562,13 +593,13 @@ export default function MemberSignYourself() {
                   </div>
                 </div>
 
-                <button className="btn-share" onClick={(e) => e.preventDefault()}>Share</button>
+                <button className="btn-share" onClick={(e) => { e.preventDefault(); navigate('/documents'); }}>Share</button>
               </div>
             )}
           </div>
         </div>
       </div>
-      <MemberMobileNavbar />
+      <MobileNavbar />
     </div>
   );
 }

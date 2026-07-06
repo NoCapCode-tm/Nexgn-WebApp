@@ -6,7 +6,7 @@ const statusClass = {
   Expired: "badge--expired",
 };
 
-export default function DocumentRow({ title, note, signers, signedAt, owner, status }) {
+export default function MemberDocumentRow({ title, note, signers, signedAt, owner, status }) {
   return (
     <div className="doc-row">
       <div className="doc-row__title">

@@ -1,73 +1,79 @@
-.member-mobile-navbar {
+.admin-mobile-navbar {
   display: none;
 }
+
 @media (max-width: 768px) {
-  .member-mobile-navbar {
+  .admin-mobile-navbar {
+    display: flex;
     position: fixed;
     right: 0;
     bottom: 0;
     left: 0;
     z-index: 1000;
-    display: flex;
     justify-content: space-around;
     align-items: center;
     height: 80px;
     padding-bottom: calc(env(safe-area-inset-bottom) / 2);
-    border-top: 1px solid #E4E4E4;
-    overflow: visible;
     background: #ffffff;
+    border-top: 1px solid #E4E4E4;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    overflow: visible !important;
   }
-  .member-mobile-navbar__item {
-    position: relative;
+
+  .admin-mobile-navbar__item {
     display: flex;
+    position: relative;
     flex: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
     padding: 0;
-    border: none;
     text-decoration: none;
     color: #8A949F;
     background: none;
+    border: none;
     cursor: pointer;
   }
-  .member-mobile-navbar__icon-wrap {
+
+  .admin-mobile-navbar__icon-wrap {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 44px;
     height: 44px;
-    border-radius: 50%;
     color: #8A949F;
     background: transparent;
+    border-radius: 50%;
     transition: all 0.2s ease;
   }
-  .member-mobile-navbar__item--active .member-mobile-navbar__icon-wrap {
+
+  .admin-mobile-navbar__item--active .admin-mobile-navbar__icon-wrap {
     width: 64px;
     height: 64px;
     color: #ffffff;
     background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-    box-shadow: 0 8px 16px rgba(255, 9, 21, 0.3);
-    transform: translateY(-28px);
-  /* Shift up more to pop out of the top of the navbar */
+    box-shadow: 0 4px 12px rgba(255, 9, 21, 0.2);
+    transform: translateY(-22px); /* Shift up to pop out of the top of the navbar */
   }
-  .member-mobile-navbar__item--active svg {
-    stroke: #ffffff;
+
+  .admin-mobile-navbar__item--active svg {
+    stroke: #ffffff !important;
   }
+
   /* Specific stroke fixes for custom SVGs inside active tab */
-  .member-mobile-navbar__item--active svg path,
-  .member-mobile-navbar__item--active svg circle,
-  .member-mobile-navbar__item--active svg rect {
-    stroke: #ffffff;
+  .admin-mobile-navbar__item--active svg path,
+  .admin-mobile-navbar__item--active svg circle,
+  .admin-mobile-navbar__item--active svg rect {
+    stroke: #ffffff !important;
   }
-  .member-mobile-navbar__label {
+
+  .admin-mobile-navbar__label {
     position: absolute;
-    bottom: 10px;
-    font-size: 11px;
-    font-weight: 700;
-    color: #1a1a2e;
-  /* Position label at the bottom of the white bar */
+    bottom: 8px;
+    margin-top: 2px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #1a1a2e; /* Position label at the bottom of the white bar */
   }
 }

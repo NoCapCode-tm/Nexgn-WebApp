@@ -1,0 +1,1219 @@
+/* src/member/css/MemberDocuments.css */
+/* == TOPBAR ACTIONS (search + filter + add) == */
+.member-docs-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.member-docs-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 300px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.member-docs-search-wrap:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+.member-docs-search-wrap:focus-within {
+  border-color: #FF0915;
+}
+.member-docs-search-input {
+  width: 100%;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #1a1a2e;
+  background: transparent;
+  outline: none;
+}
+.member-docs-search-input::placeholder {
+  color: #9ca3af;
+}
+.member-docs-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  background: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.member-docs-filter-btn:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+.member-docs-filter-btn:active {
+  box-shadow: 0 1px 4px rgba(138, 148, 159, 0.3);
+  transform: translateY(1px);
+}
+.member-docs-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #fff;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.member-docs-add-btn:hover {
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+.member-docs-add-btn:active {
+  box-shadow: none;
+  transform: translateY(1px);
+}
+.member-docs-add-btn-short {
+  display: none;
+}
+/* == TABS == */
+.member-docs-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  height: 37px;
+}
+.member-docs-tab {
+  height: 37px;
+  border: none;
+  border-bottom: 2px solid #E4E4E4;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  color: #9ca3af;
+  background: none;
+  transition: color 0.15s, border-color 0.15s;
+  cursor: pointer;
+/* Apply full-width bottom border to each individual section */
+}
+.member-docs-tab:hover {
+  color: #FF0915;
+}
+.member-docs-tab--active {
+  font-weight: 600;
+  color: #FF0915;
+  border-bottom-color: #FF0915;
+}
+/* == TABLE == */
+.member-docs-section {
+  flex: 1;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.member-docs-table__header {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
+  padding: 10px 16px;
+  border: none;
+  border-bottom: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #1a1a2e;
+  background: transparent;
+}
+.member-docs-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.member-doc-row {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
+  height: 60px;
+  padding: 0 16px;
+  border: 1px solid #E4E4E4;
+  border-radius: 16px;
+  font-size: 13px;
+  color: #8A949F;
+  background: #ffffff;
+  transition: background 0.12s;
+}
+.member-doc-row:hover {
+  background: #fafafa;
+}
+.member-doc-row__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: #111827;
+}
+.member-doc-row__icon {
+  flex-shrink: 0;
+  color: #FF0915;
+}
+.member-doc-row__note {
+  padding-right: 12px;
+  overflow: hidden;
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #8A949F;
+}
+.member-doc-row__cell {
+  font-size: 12px;
+  color: #8A949F;
+}
+.member-doc-row__menu {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+  color: #9ca3af;
+  cursor: pointer;
+}
+.member-doc-row__menu:hover {
+  color: #374151;
+  background: #f3f4f6;
+}
+/* == BADGES == */
+.member-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 400;
+}
+.member-badge--pending {
+  color: #F59E0B;
+  background: #FEF3C7;
+}
+.member-badge--signed {
+  color: #10B981;
+  background: #D1FAE5;
+}
+.member-badge--expired, .member-badge--failed {
+  color: #EF4444;
+  background: #FEE2E2;
+}
+/* ── FIGMA MOBILE OVERRIDES (Hidden on Desktop/Tablet) ── */
+.mobile-status-corner,
+.mobile-only-icon,
+.mobile-lbl,
+.mobile-owner-badge,
+.member-docs-mobile-section-title {
+  display: none;
+}
+.desktop-val,
+.desktop-status {
+  display: block;
+}
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .member-docs-page .mobile-page-header .topbar__bottom-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-xs);
+  }
+  .member-docs-topbar-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+  }
+  /* --- Action Controls Styling (Figma) --- */
+  .member-docs-search-wrap {
+    flex: 1;
+    max-width: none;
+    height: 10.667vw;
+    padding: 0 var(--space-md);
+    border: none;
+    border-radius: var(--space-2xl);
+    background: #fff;
+    box-shadow: 0 0.533vw 2.667vw rgba(0, 0, 0, 0.06);
+  }
+  .member-docs-search-input::placeholder {
+    font-size: var(--font-sm);
+  }
+  .member-docs-filter-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 10.667vw;
+    height: 10.667vw;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0.533vw 2.667vw rgba(0, 0, 0, 0.08);
+  }
+  .member-docs-filter-btn .filter-text {
+    display: none;
+  }
+  .member-docs-add-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 10.667vw;
+    height: 10.667vw;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    background: #E22A2A;
+    box-shadow: 0 1.067vw 3.2vw rgba(226, 42, 42, 0.2);
+  }
+  .member-docs-add-btn .add-btn-full {
+    display: none;
+  }
+  /* --- Tabs Styling (Figma) --- */
+  .member-docs-tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    width: auto;
+    height: 12.267vw;
+    min-height: 12.267vw;
+    margin: var(--space-md) var(--mobile-gutter) var(--space-md) var(--mobile-gutter);
+    padding: 0;
+    border-bottom: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .member-docs-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    height: 100%;
+    padding: 0 var(--space-sm);
+    border: none;
+    border-radius: var(--space-sm);
+    font-size: var(--font-sm);
+    font-weight: 500;
+    white-space: nowrap;
+    color: #8A949F;
+    background: transparent;
+  }
+  .member-docs-tab--active {
+    color: #ffffff;
+    background: #E22A2A;
+  }
+  /* --- Section Title --- */
+  .member-docs-mobile-section-title {
+    display: block;
+    margin-bottom: var(--space-md);
+    padding: 0 var(--mobile-gutter);
+    font-size: var(--font-md);
+    font-weight: 600;
+    color: #111827;
+  }
+  .mobile-header-divider {
+    display: block;
+    width: 100%;
+    margin: var(--space-md) 0;
+    border: none;
+    border-bottom: 1px solid #E5E7EB;
+  }
+  /* Title for "Need My Sign" */
+  .member-docs-mobile-section-title {
+    margin-bottom: var(--space-lg);
+    font-size: var(--font-xl);
+    font-weight: 700;
+    color: #111827;
+  }
+  .mobile-hidden-search {
+    display: none;
+  }
+  /* --- Table Header --- */
+  .member-docs-table__header {
+    display: none;
+  }
+  .member-docs-table {
+    gap: var(--space-md);
+    padding: 0 var(--mobile-gutter) var(--space-xl) var(--mobile-gutter);
+  }
+  /* --- Document Card Overhaul (Figma) --- */
+  .member-doc-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.8fr;
+    grid-template-rows: auto auto;
+    column-gap: var(--space-xs);
+    row-gap: var(--space-lg);
+    height: auto;
+    padding: var(--space-md);
+    border: none;
+    border-radius: var(--space-md);
+    background: #ffffff;
+    box-shadow: 0 1.067vw 5.333vw rgba(0,0,0,0.04);
+    /* Signer, Date, Owner */
+      align-items: start;
+  }
+  /* Hide Desktop Elements */
+  .desktop-val,
+  .member-doc-row__menu,
+  .member-doc-row__note {
+    display: none;
+  }
+  /* Show Mobile Elements */
+  .mobile-only-icon {
+    display: flex;
+    width: 4.8vw;
+    height: 4.8vw;
+    color: #686868;
+  }
+  .mobile-lbl {
+    display: block;
+  }
+  /* Title Row */
+  .member-doc-row__title {
+    display: flex;
+    align-items: center;
+    grid-column: 1 / 3;
+    width: 100%;
+    margin: 0;
+    font-size: var(--font-lg);
+    font-weight: 600;
+    color: #111827;
+    /* Take up first two cols */
+      gap: var(--space-xs);
+  }
+  .member-doc-row__title span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .member-doc-row__icon {
+    width: var(--font-lg);
+    height: var(--font-lg);
+    color: #111827;
+  }
+  /* Top Right Status Pill (Desktop style but positioned for Mobile grid) */
+  .mobile-status-corner {
+    display: none;
+  /* Hide corner dot */
+  }
+  .desktop-status {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    grid-column: 3 / 4;
+    /* Put in 3rd column of first row */
+      grid-row: 1;
+  }
+  .desktop-status .member-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--space-2xl);
+    font-size: var(--font-xs);
+  }
+  /* Grid Layout for Meta Columns */
+  .member-doc-row__cell {
+    display: none;
+  /* Hide any default wrapper cell styles */
+  }
+  .member-doc-row__cell.mobile-col {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+  .member-doc-row__cell.mobile-col-owner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+  .mobile-col-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.533vw;
+  }
+  .mobile-val {
+    max-width: 29.333vw;
+    overflow: hidden;
+    font-size: var(--font-sm);
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #4b5563;
+  }
+  .mobile-lbl {
+    font-size: var(--font-xs);
+    color: #9ca3af;
+  }
+  /* Owner text formatting */
+  .mobile-owner-badge {
+    display: none;
+  /* Hide the stacked colored badge */
+  }
+  .member-doc-row__cell.mobile-col-owner .desktop-val {
+    display: block;
+    font-size: var(--font-sm);
+    font-weight: 600;
+    color: #111827;
+  }
+  .member-doc-row__cell.mobile-col-owner::after {
+    font-size: var(--font-xs);
+    color: #686868;
+    content: "Owner";
+  }
+  .member-docs-page .badge-pending {
+    border: 1px solid #F59E0B;
+  }
+  .member-docs-page .badge-pending .mobile-owner-badge__bot {
+    background: #F59E0B;
+  }
+  .member-docs-page .badge-signed {
+    border: 1px solid #559B6F;
+  }
+  .member-docs-page .badge-signed .mobile-owner-badge__bot {
+    background: #559B6F;
+  }
+  .member-docs-page .badge-expired {
+    border: 1px solid #E22A2A;
+  }
+  .member-docs-page .badge-expired .mobile-owner-badge__bot {
+    background: #E22A2A;
+  }
+}
+@media (min-width: 769px) and (max-width: 1179px) {
+  /* =================================================================
+     1. HIDE THINGS THAT MUST NOT SHOW ON TABLET
+     ================================================================= */
+  /* The desktop topbar is not used on tablet =€” hide it */
+  .member-docs-page .desktop-topbar {
+    display: none;
+  }
+  /* The mobile-topbar (hamburger bar) IS shown on tablet =€” keep it visible */
+  /* (no rule needed =€” default shared CSS handles this) */
+  /* =================================================================
+     2. HEADER LAYOUT  (mobile-page-header)
+        Structure inside JSX:
+          .mobile-page-header
+            .topbar__bottom-row   =† title + subtitle (col 1)
+            hr.mobile-header-divider  =† full-width divider (col 1/-1)
+            .mobile-filter-row    =† search/filter/add (col 2, row 1)
+        We use a 2-col grid with explicit row placement.
+     ================================================================= */
+  .member-docs-page .mobile-page-header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0 24px;
+    border-bottom: none;
+    /* Figma: ~40px side padding, 32px top gap from hamburger bar */
+      padding: 24px 40px 0 40px;
+    /* row-gap=0, col-gap=24px */
+      margin: 0;
+  }
+  /* Title+subtitle block =†’ row 1, col 1 */
+  .member-docs-page .mobile-page-header .topbar__bottom-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    grid-column: 1;
+    grid-row: 1;
+    gap: 4px;
+    margin: 0;
+  }
+  /* Filter/action row =†’ row 1, col 2 (sits beside title) */
+  .member-docs-page .mobile-page-header .mobile-filter-row {
+    display: flex;
+    align-items: center;
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+  }
+  /* Divider =†’ row 2, spans both cols, bleeds to edges */
+  .member-docs-page .mobile-header-divider {
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: calc(100% + 80px);
+    margin: 20px -40px 0 -40px;
+    border: none;
+    border-bottom: 1px solid #E4E4E4;
+  }
+  /* =================================================================
+     3. TITLE TYPOGRAPHY  =€” match Figma bold heading
+     ================================================================= */
+  .member-docs-page .topbar__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #111827;
+  }
+  .member-docs-page .topbar__sub {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #8A949F;
+  }
+  /* =================================================================
+     4. ACTION CONTROLS  =€” Search, Filter, + Add
+        Figma: search ~210px pill, filter ~44px circle, add ~88px pill
+     ================================================================= */
+  .member-docs-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  /* Search pill */
+  .member-docs-search-wrap {
+    width: 210px;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 21px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  .member-docs-search-input {
+    font-size: 13px;
+  }
+  /* Filter circle */
+  .member-docs-filter-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  .filter-text {
+    display: none;
+  }
+  /* + Add pill */
+  .member-docs-add-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 88px;
+    height: 42px;
+    padding: 0;
+    border-radius: 21px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .add-btn-full {
+    display: none;
+  }
+  .member-docs-add-btn-short {
+    display: inline-block;
+  }
+  /* =================================================================
+     5. TABS  =€” Figma: generous top margin, full-width strip, larger text
+     ================================================================= */
+  .member-docs-tabs {
+    display: flex;
+    gap: 0;
+    width: auto;
+    margin: 40px 40px 0 40px;
+    padding: 0;
+    border-bottom: 1px solid #E6E6E6;
+    /* Tabs must align with the section content: section has 40px padding, so tabs use same 40px side margin */
+      height: auto;
+  }
+  .member-docs-tab {
+    flex: 1;
+    box-sizing: border-box;
+    height: auto;
+    padding: 14px 0 16px 0;
+    border: none;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+    color: #8A949F;
+    transition: color 0.15s;
+    /* Underline sits only under the tab's own 1/3 section =€” not wider */
+      border-bottom: 2px solid transparent;
+  /* Prevent underline from bleeding =€” each tab is exactly 1/3 */
+  }
+  .member-docs-tab--active {
+    border-bottom: 2px solid #E22A2A;
+    font-weight: 600;
+    color: #E22A2A;
+  }
+  /* =================================================================
+     6. TABLE SECTION WRAPPER
+        =€” aligned with header/tabs (40px side margins)
+        =€” extra top gap from tabs to header row
+     ================================================================= */
+  .member-docs-section {
+    flex: 1;
+    width: auto;
+    margin: 0;
+    padding: 0 40px;
+  }
+  .member-docs-table {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 32px 0;
+    /* Increased breathing room between tabs and header row */
+      display: flex;
+  }
+  /* =================================================================
+     7. TABLE HEADER =€” rebalanced columns per Figma
+        TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
+     ================================================================= */
+  .member-docs-table__header {
+    display: grid;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
+    width: 100%;
+    margin: 0;
+    padding: 0 60px 14px 60px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    color: #374151;
+    background: transparent;
+    /*
+       * SAME grid as .member-doc-row =€” guarantees column alignment.
+       * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
+       */
+      /*
+       * ROOT CAUSE FIX: .member-docs-table__header is OUTSIDE .member-docs-section.
+       * .member-docs-section has padding: 0 40px
+       * .member-doc-row (inside section) has padding: 0 20px
+       * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
+       * Header must use 60px padding to match that exact X position.
+       */
+      box-sizing: border-box;
+  }
+  /* Hide the NOTE column header */
+  .member-docs-table__header span:nth-child(2) {
+    display: none;
+  }
+  .member-docs-table__header span:last-child {
+    justify-self: center;
+  }
+  /* =================================================================
+     8. TABLE ROWS =€” taller, properly padded cards
+     ================================================================= */
+  .member-doc-row {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
+    grid-template-rows: 1fr;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    min-height: 72px;
+    margin: 0 0 14px 0;
+    padding: 0 20px;
+    border: 1px solid #E4E4E4;
+    border-radius: 14px;
+    background: #ffffff;
+  }
+  .member-doc-row:hover {
+    background: #fafafa;
+  }
+  /* Hide NOTE cell =€” not in Figma tablet view */
+  .member-doc-row__note {
+    display: none;
+  }
+  /* =================================================================
+     9. TITLE COLUMN =€” ellipsis on overflow
+     ================================================================= */
+  .member-doc-row__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    max-width: none;
+    padding-left: 0;
+    overflow: hidden;
+  }
+  .member-doc-row__title span {
+    display: block;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #111827;
+  }
+  /* =================================================================
+     10. ROW CELLS =€” restore desktop-style rendering
+     ================================================================= */
+  .member-doc-row__cell {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #8A949F;
+  }
+  /* Show desktop elements */
+  .desktop-val {
+    display: block;
+  }
+  .desktop-status {
+    display: flex;
+  }
+  .member-doc-row__menu {
+    position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    height: 36px;
+    min-height: 36px;
+    max-height: 36px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 6px;
+    transform: none;
+    justify-self: center;
+  }
+  .member-doc-row__menu:hover {
+    position: static;
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    height: 36px;
+    min-height: 36px;
+    max-height: 36px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 6px;
+    transform: none;
+    justify-self: center;
+  }
+  /* Hide mobile-only elements */
+  .mobile-status-corner,
+  .mobile-only-icon,
+  .mobile-lbl,
+  .mobile-owner-badge {
+    display: none;
+  }
+  /* =================================================================
+     11. STATUS =€” colored dot matching Dashboard mobile reference
+     ================================================================= */
+  .member-badge {
+    display: inline-block;
+    width: 10px;
+    min-width: 0;
+    height: 10px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+  }
+  .member-badge--pending {
+    background-color: #D28E56;
+  }
+  .member-badge--signed {
+    background-color: #559B6F;
+  }
+  .member-badge--expired {
+    background-color: #E22A2A;
+  }
+  /* =================================================================
+     6. TABLE SECTION WRAPPER
+        =€” aligned with header/tabs (40px side margins)
+        =€” extra top gap from tabs to header row
+     ================================================================= */
+  .member-docs-section {
+    flex: 1;
+    width: auto;
+    margin: 0;
+    padding: 0 40px;
+  }
+  .member-docs-table {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    margin: 0;
+    padding: 40px 0 32px 0;
+    /* Increased breathing room between tabs and header row */
+      display: flex;
+  }
+  /* =================================================================
+     7. TABLE HEADER =€” rebalanced columns per Figma
+        TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
+     ================================================================= */
+  .member-docs-table__header {
+    display: grid;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
+    width: 100%;
+    margin: 0;
+    padding: 0 60px 14px 60px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    color: #374151;
+    background: transparent;
+    /*
+       * SAME grid as .member-doc-row =€” guarantees column alignment.
+       * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
+       */
+      /*
+       * ROOT CAUSE FIX: .member-docs-table__header is OUTSIDE .member-docs-section.
+       * .member-docs-section has padding: 0 40px
+       * .member-doc-row (inside section) has padding: 0 20px
+       * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
+       * Header must use 60px padding to match that exact X position.
+       */
+      box-sizing: border-box;
+  }
+  /* Hide the NOTE column header */
+  .member-docs-table__header span:nth-child(2) {
+    display: none;
+  }
+  .member-docs-table__header span:last-child {
+    justify-self: center;
+  }
+  /* Center the STATUS column header to align with the status dot below */
+  .member-docs-table__header span:nth-child(6) {
+    text-align: center;
+    justify-self: center;
+  }
+  /* =================================================================
+     8. TABLE ROWS =€” taller, properly padded cards
+     ================================================================= */
+  .member-doc-row {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
+    grid-template-rows: 1fr;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    min-height: 72px;
+    margin: 0 0 14px 0;
+    padding: 0 20px;
+    border: 1px solid #E4E4E4;
+    border-radius: 14px;
+    background: #ffffff;
+  }
+  .member-doc-row:hover {
+    background: #fafafa;
+  }
+  /* Hide NOTE cell =€” not in Figma tablet view */
+  .member-doc-row__note {
+    display: none;
+  }
+  /* =================================================================
+     9. TITLE COLUMN =€” ellipsis on overflow
+     ================================================================= */
+  .member-doc-row__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    max-width: none;
+    padding-left: 0;
+    overflow: hidden;
+  }
+  .member-doc-row__title span {
+    display: block;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #111827;
+  }
+  /* =================================================================
+     10. ROW CELLS =€” restore desktop-style rendering
+     ================================================================= */
+  .member-doc-row__cell {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #8A949F;
+  }
+  /* Show desktop elements */
+  .desktop-val {
+    display: block;
+  }
+  .desktop-status {
+    display: flex;
+  }
+  .member-doc-row__menu {
+    position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    height: 36px;
+    min-height: 36px;
+    max-height: 36px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 6px;
+    transform: none;
+    justify-self: center;
+  }
+  .member-doc-row__menu:hover {
+    position: static;
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    height: 36px;
+    min-height: 36px;
+    max-height: 36px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 6px;
+    transform: none;
+    justify-self: center;
+  }
+  /* Hide mobile-only elements */
+  .mobile-status-corner,
+  .mobile-only-icon,
+  .mobile-lbl,
+  .mobile-owner-badge {
+    display: none;
+  }
+  /* =================================================================
+     11. STATUS =€” colored dot matching Dashboard mobile reference
+     ================================================================= */
+  .desktop-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .member-badge {
+    display: inline-block;
+    width: 10px;
+    min-width: 0;
+    height: 10px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+  }
+  .member-badge--pending {
+    background-color: #D28E56;
+  }
+  .member-badge--signed {
+    background-color: #559B6F;
+  }
+  .member-badge--expired {
+    background-color: #E22A2A;
+  }
+}
+/* Desktop-only overrides for Action Button alignment */
+@media (min-width: 1180px) {
+  /* Center the ACTION header to align perfectly with the button below it */
+  .member-docs-page .member-docs-table__header span:last-child {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    justify-self: center;
+  }
+  .member-docs-page .member-doc-row__menu {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    padding: 0;
+    border-radius: 6px;
+    justify-self: center;
+  /* Centers the button in the ACTION column */
+  }
+  /* Dropdown/hover menu positioning relative to action button */
+  .member-docs-page .member-doc-row__menu .action-menu,
+  .member-docs-page .member-doc-row__menu .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
+  }
+}
+.member-docs-empty-state {
+  padding: 40px;
+  font-size: 13px;
+  text-align: center;
+  color: #9ca3af;
+}
+/* Member documents filter popover styling */
+.member-docs-filter-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.member-docs-filter-dropdown {
+  position: absolute;
+  top: 48px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 220px;
+  padding: 12px;
+  border: 1px solid #E4E4E4;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  /* Desktop default */
+  right: 0;
+}
+.member-docs-filter-dropdown-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.member-docs-filter-dropdown-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-align: left;
+  text-transform: uppercase;
+  color: #6B7280;
+}
+.member-docs-filter-dropdown-select {
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #374151;
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+.member-docs-filter-dropdown-divider {
+  margin: 4px 0;
+  border-top: 1px solid #F3F4F6;
+}
+.member-docs-filter-dropdown-reset {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  color: #FF0915;
+  background-color: transparent;
+  cursor: pointer;
+}
+/* Positioning overrides based on viewport */
+@media (max-width: 768px) {
+  .member-docs-filter-dropdown {
+    top: 46px;
+  }
+}
+@media (min-width: 769px) and (max-width: 1179px) {
+  .member-docs-filter-dropdown {
+    top: 46px;
+  }
+}
+/* Fluid Desktop Scaling (1180px and above)
+   Preserves the 1366-1440px design, but scales it up fluidly for larger monitors using clamp(). */
+@media (min-width: 1180px) {
+  /* Actions */
+  .member-docs-page .member-docs-topbar-actions {
+    gap: clamp(10px, 0.69vw, 17px);
+  }
+  .member-docs-page .member-docs-search-wrap {
+    gap: clamp(8px, 0.55vw, 14px);
+    width: clamp(200px, 13.88vw, 355px);
+    height: clamp(36px, 2.5vw, 64px);
+    padding: 0 clamp(12px, 0.83vw, 21px);
+    border-radius: clamp(20px, 1.38vw, 35px);
+  }
+  .member-docs-page .member-docs-search-input {
+    font-size: clamp(12px, 0.83vw, 21px);
+  }
+  .member-docs-page .member-docs-filter-btn,
+  .member-docs-page .member-docs-add-btn {
+    gap: clamp(6px, 0.41vw, 10px);
+    height: clamp(36px, 2.5vw, 64px);
+    border-radius: clamp(20px, 1.38vw, 35px);
+    font-size: clamp(12px, 0.83vw, 21px);
+  }
+  .member-docs-page .member-docs-filter-btn {
+    padding: 0 clamp(14px, 0.97vw, 25px);
+  }
+  .member-docs-page .member-docs-add-btn {
+    padding: 0 clamp(16px, 1.11vw, 28px);
+  }
+  /* Tabs */
+  .member-docs-page .member-docs-tabs {
+    height: clamp(37px, 2.56vw, 65px);
+  }
+  .member-docs-page .member-docs-tab {
+    height: clamp(37px, 2.56vw, 65px);
+    font-size: clamp(13px, 0.9vw, 23px);
+  }
+  /* Table */
+  .member-docs-page .member-docs-table__header {
+    padding: clamp(10px, 0.69vw, 17px) clamp(16px, 1.11vw, 28px);
+    font-size: clamp(11px, 0.76vw, 19px);
+  }
+  .member-docs-page .member-docs-table {
+    gap: clamp(8px, 0.55vw, 14px);
+  }
+  .member-docs-page .member-doc-row {
+    height: clamp(60px, 4.16vw, 106px);
+    padding: 0 clamp(16px, 1.11vw, 28px);
+    border-radius: clamp(16px, 1.11vw, 28px);
+    font-size: clamp(13px, 0.9vw, 23px);
+  }
+  .member-docs-page .member-doc-row__title {
+    gap: clamp(10px, 0.69vw, 17px);
+  }
+}
