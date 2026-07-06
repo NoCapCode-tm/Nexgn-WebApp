@@ -30,7 +30,6 @@ export default function MemberSidebar() {
     const saved = localStorage.getItem("memberSidebarExpanded");
     return saved === "true";
   });
-  
   const width = useWindowWidth();
   const isMobile = width < 1180;
 
