@@ -1058,7 +1058,7 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
     padding-bottom: 86px;
   }
   .mobile-topbar {
-    padding: 24px 24px 12px 24px;
+    padding: 24px 16px 12px 16px;
   }
   .mobile-topbar__hamburger svg,
   .mobile-topbar__icons svg {
