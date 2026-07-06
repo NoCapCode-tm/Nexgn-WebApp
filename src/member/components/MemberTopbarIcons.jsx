@@ -13,12 +13,12 @@ export default function MemberTopbarIcons({
   return (
     <div className={className}>
       <button className="topbar__icon-btn" onClick={onSearchClick}>
-        <Search size={iconSize} color="#111827" strokeWidth={1.5} className="mobile-hidden-search" />
+        <Search size={iconSize} color="#FF0915" strokeWidth={1.5} className="mobile-hidden-search" />
       </button>
       
       <div className="topbar__icon-wrapper">
         <button className="topbar__icon-btn">
-          <Bell size={iconSize} color="#111827" strokeWidth={1.5} />
+          <Bell size={iconSize} color="#FF0915" strokeWidth={1.5} />
         </button>
         <div className="notification-dropdown">
           <div className="notification-dropdown__header">
@@ -46,7 +46,7 @@ export default function MemberTopbarIcons({
 
       <div className="topbar__icon-wrapper">
         <button className="topbar__icon-btn">
-          <UserCircle size={iconSize} color="#111827" strokeWidth={1.5} />
+          <UserCircle size={iconSize} color="#FF0915" strokeWidth={1.5} />
         </button>
         <div className="notification-dropdown profile-dropdown">
           <div className="notification-dropdown__header">

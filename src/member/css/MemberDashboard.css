@@ -60,6 +60,20 @@
 }
 .member-theme .tablet-upload-btn {
   display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 164px;
+  height: 48px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  cursor: pointer;
 }
 /* ==========================================================================
    Cards
@@ -190,12 +204,12 @@
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
   }
   .member-theme .stat-card__label {
-    margin-bottom: 0;
+    margin-bottom: 10px;
     font-size: var(--font-sm);
     color: #6B7280;
   }
   .member-theme .stat-card__value {
-    margin-bottom: 0;
+    margin-bottom: 10px;
     font-size: var(--font-metric);
     font-weight: 700;
     color: #111827;
@@ -204,28 +218,29 @@
     gap: var(--space-xs);
     font-size: var(--font-xs);
   }
-  /* 3. Buttons (Segmented Control exactly like Figma) */
+  /* 3. Buttons */
   .member-theme .mobile-cta-row {
     display: flex;
-    gap: 0;
+    gap: 3px;
     margin: var(--space-xs) var(--mobile-gutter);
-    padding: var(--space-xs);
-    border: 1px solid #E5E7EB;
-    border-radius: var(--space-sm);
+    padding: 2.33px 4.58px;
+    border: 1px solid #D9D9D9;
+    border-radius: 6.5px;
     background: #ffffff;
   }
   .member-theme .mobile-cta {
-    height: 10.667vw;
-    border-radius: var(--space-xs);
-    font-size: var(--font-sm);
+    height: 38.35px;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 700;
   }
   .member-theme .mobile-cta--primary {
     color: #ffffff;
-    background: #C7000B;
+    background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
   }
   .member-theme .mobile-cta--outline {
     border: none;
-    color: #6B7280;
+    color: #666666;
     background: transparent;
   }
   /* 4. Recent Documents Section */
@@ -348,12 +363,27 @@
   .member-theme .mobile-topbar {
     padding: 24px 32px;
   }
+  .member-theme .topbar__title {
+    font-size: 28px;
+  }
+  .member-theme .mobile-page-header__divider {
+    display: none;
+  }
   .member-dashboard-page .mobile-page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0;
     padding: 16px 32px 24px 32px;
+  }
+  .member-theme .mobile-page-header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .member-theme .mobile-page-header__upload-btn {
+    display: none;
   }
   .member-theme .mobile-cta-row {
     display: none;

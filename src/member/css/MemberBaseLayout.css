@@ -293,7 +293,7 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
   gap: 24px;
 }
 .topbar__icon-btn svg {
-  color: #960101;
+  color: #FF0915;
   filter: drop-shadow(0px 1px 1px rgba(255, 9, 21, 0.4));
 }
 .topbar__icon-btn:hover {
@@ -1064,6 +1064,7 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
 /* Fluid Desktop Scaling (1180px and above)
    Preserves the 1366-1440px design, but scales it up fluidly for larger monitors using clamp(). */
 @media (min-width: 1180px) {
+  
   /* Sidebar */
   .sidebar__divider {
     flex-shrink: 0;

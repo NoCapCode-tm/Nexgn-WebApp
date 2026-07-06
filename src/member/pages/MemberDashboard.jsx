@@ -107,6 +107,14 @@ export default function MemberDashboard() {
                 <path d="M 12 16 V 8 M 12 8 L 8 12 M 12 8 L 16 12" stroke="#FF0915" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
+            <button className="tablet-upload-btn" onClick={() => navigate("/member-sign-yourself")}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 12 2 A 10 10 0 0 0 12 22" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+                <path d="M 12 2 A 10 10 0 0 1 12 22" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="3 3" strokeLinecap="round" />
+                <path d="M 12 16 V 8 M 12 8 L 8 12 M 12 8 L 16 12" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Upload Doc
+            </button>
           </div>
           <div className="mobile-page-header__divider" />
         </div>
