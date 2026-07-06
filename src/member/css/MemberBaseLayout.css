@@ -1057,6 +1057,14 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
   .main {
     padding-bottom: 86px;
   }
+  .mobile-topbar {
+    padding: 24px 24px 12px 24px;
+  }
+  .mobile-topbar__hamburger svg,
+  .mobile-topbar__icons svg {
+    width: 26px !important;
+    height: 26px !important;
+  }
   .mobile-topbar__hamburger {
     display: flex;
   }
