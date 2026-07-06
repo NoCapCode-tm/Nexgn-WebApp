@@ -165,9 +165,14 @@
   .member-contact-search-wrap {
     flex: 1;
     max-width: none;
+    height: 10.667vw;
     padding-left: var(--space-sm);
     border: 0.267vw solid #E4E4E4;
     border-radius: var(--space-2xl);
+  }
+  .member-contact-search-input {
+    height: 100%;
+    line-height: normal;
   }
   .member-contact-search-input::placeholder {
     font-size: var(--font-sm);
