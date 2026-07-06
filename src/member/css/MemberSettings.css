@@ -1,4 +1,49 @@
 /* Page layout */
+.member-settings-page {
+  /* Enforce no wrapping and scale down font-size dynamically on smaller screens */
+  white-space: nowrap;
+}
+
+.member-settings-page * {
+  white-space: nowrap;
+}
+
+@media (max-width: 1179px) {
+  /* Fluid scaling for text to prevent overflow when nowrap is enforced */
+  .member-settings-page h1,
+  .member-settings-page h2,
+  .member-settings-page .topbar__title,
+  .member-settings-page .ms-mobile-detail-header__title,
+  .member-settings-page .member-settings-card__title {
+    font-size: clamp(20px, 6vw, 28px) !important;
+  }
+  
+  .member-settings-page h3,
+  .member-settings-page h4,
+  .member-settings-page .member-settings-nav__item,
+  .member-settings-page .member-settings-form__label,
+  .member-settings-page label,
+  .member-settings-page button,
+  .member-settings-page input,
+  .member-settings-page .ms-mobile-menu-item__label,
+  .member-settings-page .ms-mobile-group-title,
+  .member-settings-page .ms-mobile-profile-card__name {
+    font-size: clamp(16px, 5vw, 18px) !important;
+  }
+  
+  .member-settings-page p,
+  .member-settings-page span,
+  .member-settings-page .topbar__sub,
+  .member-settings-page .ms-mobile-detail-header__sub,
+  .member-settings-page .member-settings-avatar__helper,
+  .member-settings-page .ms-mobile-profile-card__email,
+  .member-settings-page .ms-mobile-profile-card__role {
+    font-size: clamp(14px, 4vw, 16px) !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
 .member-settings-body {
   display: flex;
   align-items: flex-start;
@@ -1079,6 +1124,207 @@
     width: 537px;
     max-width: 537px;
     height: 40px;
+    gap: 6px;
+  }
+
+  .member-settings-page .member-settings-card--security .member-settings-form__label {
+    color: #666666;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  .member-settings-page .member-settings-card--security .member-settings-form__input {
+    width: 537px;
+    max-width: 537px;
+    height: 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background: #FBFBFB;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: #666666;
+  }
+
+  .member-settings-page .member-settings-card--security .member-settings-form__input::placeholder {
+    color: #666666;
+  }
+
+  .member-settings-page .member-settings-card--security .member-settings-2fa-row {
+    max-width: 537px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .member-settings-page .member-settings-card--security .member-settings-2fa-info {
+    gap: 8px;
+  }
+
+  .member-settings-page .member-settings-card--security .member-settings-2fa-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+  }
+
+  .member-settings-page .member-settings-card--security .member-settings-2fa-helper {
+    font-size: 11px;
+    font-weight: 500;
+    color: #666666;
+    max-width: 370px;
+    line-height: 15px;
+  }
+
+  .member-settings-page .member-settings-card--security .member-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+  }
+
+  .member-settings-page .member-settings-card--security .member-settings-form__submit {
+    min-width: 160px;
+    height: 38px;
+    padding: 0 24px;
+    font-size: 13.5px;
+    border-radius: 6px;
+  }
+
+  /* Profile, Team & Notifications Tab Desktop Spacing & Styles */
+  .member-settings-page .member-settings-card--profile,
+  .member-settings-page .member-settings-card--team,
+  .member-settings-page .member-settings-card--notifications {
+    padding: 20px 32px;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-card__title,
+  .member-settings-page .member-settings-card--team .member-settings-card__title,
+  .member-settings-page .member-settings-card--notifications .member-settings-card__title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #111111;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-card__divider,
+  .member-settings-page .member-settings-card--team .member-settings-card__divider,
+  .member-settings-page .member-settings-card--notifications .member-settings-card__divider {
+    margin-bottom: 20px;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-avatar-row {
+    margin-bottom: 20px;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-avatar__upload-btn {
+    padding: 6px 20px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-avatar__helper {
+    font-size: 11px;
+    margin-top: 6px;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-form {
+    gap: 0;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-form__group {
+    max-width: 537px;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-form__label {
+    color: #666666;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-form__input {
+    width: 537px;
+    max-width: 537px;
+    height: 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background: #FBFBFB;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: #666666;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-form__input::placeholder {
+    color: #666666;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-form__input--readonly {
+    background: #F9FAFB;
+    border: 1px solid #E4E4E4;
+    color: #8A949F;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-form__helper {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  .member-settings-page .member-settings-card--profile .member-settings-form__submit {
+    min-width: 160px;
+    height: 38px;
+    padding: 0 24px;
+    font-size: 13.5px;
+    border-radius: 6px;
+  }
+
+  /* Account Tab Desktop Spacing & Styles to Match Profile Page */
+  .member-settings-page .member-settings-card--account {
+    padding: 20px 32px;
+  }
+
+  .member-settings-page .member-settings-card--account .member-settings-card__title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #111111;
+  }
+
+  .member-settings-page .member-settings-card--account .member-settings-card__divider {
+    margin-bottom: 20px;
+  }
+
+  .member-settings-page .member-settings-card--account .member-settings-form {
+    gap: 0;
+  }
+
+  .member-settings-page .member-settings-card--account .member-settings-form__group {
+    max-width: 537px;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+
+  .member-settings-page .member-settings-card--account .member-settings-form__label {
+    color: #666666;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  .member-settings-page .member-settings-card--account .member-settings-form__input {
+    width: 537px;
+    max-width: 537px;
+    height: 40px;
     padding: 0 20px;
     box-sizing: border-box;
     background: #FBFBFB;
@@ -1117,6 +1363,66 @@
     padding: 0 24px;
     font-size: 13.5px;
     border-radius: 6px;
+  }
+
+  /* Notifications Tab Styles */
+  .member-notification-section {
+    margin-bottom: 24px;
+  }
+  .member-notification-section-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    margin-bottom: 12px;
+    font-family: 'Inter', sans-serif;
+  }
+  .member-notification-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .member-notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    background: #FBFBFB;
+    cursor: pointer;
+  }
+  .member-notification-item:hover {
+    border-color: #999999;
+  }
+  .member-notification-item-text h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666666;
+    font-family: 'Inter', sans-serif;
+  }
+  .member-notification-item-text p {
+    margin: 0;
+    font-size: 10px;
+    color: #A1A1A1;
+    font-family: 'Inter', sans-serif;
+  }
+  .member-settings-page .member-settings-card--notifications .member-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 0;
+  }
+  .member-settings-page .member-settings-card--notifications .member-settings-form__submit {
+    min-width: 190px;
+    height: 44px;
+    padding: 0 28px;
+    font-size: 14px;
+    border-radius: 6px;
+    transform: translateX(40px);
   }
 }
 
@@ -1578,6 +1884,11 @@
     font-weight: 500;
     color: #6B7280;
   }
+  
+  .member-settings-page .member-settings-card--team,
+  .member-settings-page .member-settings-card--notifications {
+    max-width: 1050px;
+  }
 }
 
 .team-col-name { flex: 2; text-align: left; }
@@ -1587,6 +1898,71 @@
 
 .team-right-controls {
   display: contents;
+}
+
+@media (max-width: 768px) {
+  .member-settings-team-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+  }
+  .team-col-name {
+    flex: 1;
+    min-width: 0; /* allows text truncation */
+  }
+  .team-right-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .team-col-role,
+  .team-col-status,
+  .team-col-action {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .team-role-badge {
+    height: 26px;
+    min-width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #E4E4E4;
+    border-radius: 6px;
+    padding: 0 8px;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  .team-status-badge {
+    height: 26px;
+    min-width: 85px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    line-height: 1;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  .team-action-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
 }
 
 .member-settings-team-list {
@@ -1846,4 +2222,114 @@
   justify-content: center;
   margin-top: 48px;
   padding-bottom: 40px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TABLET & MOBILE NOTIFICATIONS (Figma Match)
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 1179px) {
+  .member-notification-section {
+    margin-bottom: 24px;
+  }
+  .member-notification-section-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    margin-bottom: 12px;
+    font-family: 'Inter', sans-serif;
+  }
+  .member-notification-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .member-notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    background: #FBFBFB;
+    cursor: pointer;
+    gap: 12px;
+  }
+  .member-notification-item-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .member-notification-item-text h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .member-notification-item-text p {
+    margin: 0;
+    font-size: 12px;
+    color: #8A949F;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .member-settings-page .member-settings-card--notifications .member-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 0;
+  }
+  .member-settings-page .member-settings-card--notifications .member-settings-form__submit {
+    min-width: 190px;
+    height: 44px;
+    padding: 0 28px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* Toggle Switches */
+  .member-settings-card--notifications .member-permission-custom-checkbox {
+    width: 36px !important;
+    height: 20px !important;
+    border-radius: 20px !important;
+    background: #999999 !important;
+    border: none !important;
+    position: relative;
+    transition: background-color 0.3s;
+    display: block !important;
+  }
+  .member-settings-card--notifications .member-permission-custom-checkbox::before {
+    display: none !important;
+  }
+  .member-settings-card--notifications .member-permission-custom-checkbox::after {
+    content: '';
+    display: block !important;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    border: none !important;
+    transform: none !important;
+    transition: transform 0.3s;
+  }
+  .member-settings-card--notifications .member-permission-checkbox-input:checked + .member-permission-custom-checkbox {
+    background: #DC2626 !important;
+  }
+  .member-settings-card--notifications .member-permission-checkbox-input:checked + .member-permission-custom-checkbox::after {
+    transform: translateX(16px) !important;
+  }
 }

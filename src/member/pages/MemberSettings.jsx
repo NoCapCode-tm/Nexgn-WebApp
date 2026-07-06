@@ -33,7 +33,7 @@ const settingsNavItems = [
   { key: "account", label: "Account", active: true },
   { key: "security", label: "Security", active: true },
   { key: "team", label: "Team Management", active: true },
-  { key: "notifications", label: "Notifications", active: false },
+  { key: "notifications", label: "Notifications", active: true },
   { key: "billing", label: "Billing", active: false },
   { key: "integrations", label: "Integrations", active: false },
   { key: "audit", label: "Audit Logs", active: false },
@@ -92,6 +92,18 @@ export default function MemberSettings() {
   ]);
   const [teamActionOpen, setTeamActionOpen] = useState(null);
   const teamActionRef = useRef(null);
+
+  const [notificationData, setNotificationData] = useState({
+    email_document_signed: false,
+    email_signature_request: false,
+    email_document_expired: false,
+    system_updates: false,
+    system_security: false,
+  });
+
+  const handleNotificationChange = (key) => {
+    setNotificationData((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -484,6 +496,69 @@ export default function MemberSettings() {
     </div>
   );
 
+  const notificationCard = (
+    <div className="member-settings-card member-settings-card--notifications">
+      <h2 className="member-settings-card__title">Notification</h2>
+      <div className="member-settings-card__divider" />
+      
+      <div className="member-notification-section">
+        <h3 className="member-notification-section-title">Email Notification</h3>
+        <div className="member-notification-list">
+          <label className="member-notification-item">
+            <div className="member-notification-item-text">
+              <h4>Document Signed</h4>
+              <p>Receive an email when someone signs your document</p>
+            </div>
+            <input type="checkbox" checked={notificationData.email_document_signed} onChange={() => handleNotificationChange('email_document_signed')} className="member-permission-checkbox-input" />
+            <span className="member-permission-custom-checkbox"></span>
+          </label>
+          <label className="member-notification-item">
+            <div className="member-notification-item-text">
+              <h4>Signature Request Received</h4>
+              <p>Get notified when you receive a new signature request</p>
+            </div>
+            <input type="checkbox" checked={notificationData.email_signature_request} onChange={() => handleNotificationChange('email_signature_request')} className="member-permission-checkbox-input" />
+            <span className="member-permission-custom-checkbox"></span>
+          </label>
+          <label className="member-notification-item">
+            <div className="member-notification-item-text">
+              <h4>Document Expired</h4>
+              <p>Alert me when a pending document passes its expiration date</p>
+            </div>
+            <input type="checkbox" checked={notificationData.email_document_expired} onChange={() => handleNotificationChange('email_document_expired')} className="member-permission-checkbox-input" />
+            <span className="member-permission-custom-checkbox"></span>
+          </label>
+        </div>
+      </div>
+
+      <div className="member-notification-section">
+        <h3 className="member-notification-section-title">System Alert</h3>
+        <div className="member-notification-list">
+          <label className="member-notification-item">
+            <div className="member-notification-item-text">
+              <h4>System Updates</h4>
+              <p>News about product and feature updates</p>
+            </div>
+            <input type="checkbox" checked={notificationData.system_updates} onChange={() => handleNotificationChange('system_updates')} className="member-permission-checkbox-input" />
+            <span className="member-permission-custom-checkbox"></span>
+          </label>
+          <label className="member-notification-item">
+            <div className="member-notification-item-text">
+              <h4>Security Alerts</h4>
+              <p>Important notifications about your account security</p>
+            </div>
+            <input type="checkbox" checked={notificationData.system_security} onChange={() => handleNotificationChange('system_security')} className="member-permission-checkbox-input" />
+            <span className="member-permission-custom-checkbox"></span>
+          </label>
+        </div>
+      </div>
+
+      <div className="member-settings-form__footer">
+        <button className="member-settings-form__submit">Save</button>
+      </div>
+    </div>
+  );
+
   /* ════════════════════════════════════════════════════════════════════════
      MOBILE — completely separate render tree.
      hideMobileTopbar suppresses the global mobile-topbar from MemberLayout.
@@ -580,13 +655,17 @@ export default function MemberSettings() {
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
               </button>
-              <div className="ms-mobile-menu-item ms-mobile-menu-item--disabled">
+              <button
+                type="button"
+                className="ms-mobile-menu-item"
+                onClick={() => setMobileView("notifications")}
+              >
                 <div className="ms-mobile-menu-item__left">
                   <span className="ms-mobile-menu-item__icon"><Bell size={18} /></span>
                   <span className="ms-mobile-menu-item__label">Notification</span>
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
-              </div>
+              </button>
               <div className="ms-mobile-menu-item ms-mobile-menu-item--disabled">
                 <div className="ms-mobile-menu-item__left">
                   <span className="ms-mobile-menu-item__icon"><CreditCard size={18} /></span>
@@ -680,6 +759,9 @@ export default function MemberSettings() {
         {mobileView === "account" && (
           <div className="ms-mobile-detail">{accountCard}</div>
         )}
+        {mobileView === "notifications" && (
+          <div className="ms-mobile-detail">{notificationCard}</div>
+        )}
         {mobileView === "security" && (
           <div className="ms-mobile-detail">{securityCard}</div>
         )}
@@ -770,8 +852,10 @@ export default function MemberSettings() {
           <div className="member-settings-content">
             {activeTab === "profile" && profileCard}
             {activeTab === "account" && accountCard}
+            {activeTab === "notifications" && notificationCard}
             {activeTab === "security" && securityCard}
-            {activeTab === "team" && teamCard}
+            {activeTab === "team" && !viewingPermissions && teamCard}
+            {activeTab === "team" && viewingPermissions && permissionsViewComponent}
           </div>
         </div>
         )}
