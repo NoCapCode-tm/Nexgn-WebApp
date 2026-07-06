@@ -383,6 +383,7 @@
   border-radius: 8px;
   font-size: 12px;
   color: #1a1a2e;
+  background: #FFFFFF;
   transition: border-color 0.2s;
   outline: none;
 }
