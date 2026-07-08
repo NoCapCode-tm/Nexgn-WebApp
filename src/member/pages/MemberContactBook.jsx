@@ -3,7 +3,7 @@ import MemberLayout from "../components/MemberLayout";
 import MemberTopbar from "../components/MemberTopbar";
 import MemberContactCard from "../components/MemberContactCard";
 import ContactDetailsModal from "../components/ContactDetailsModal";
-import { Search } from "lucide-react";
+
 import AddContactForm from "../components/AddContactForm";
 
 import "../css/MemberBaseLayout.css";
@@ -36,10 +36,9 @@ function MemberContactActions({
   return (
     <div className="member-contact-topbar-actions">
       <div className="member-contact-search-wrap">
-        <Search size={16} color="#9ca3af" strokeWidth={2} />
         <input
           className="member-contact-search-input"
-          placeholder="Search Contacts"
+          placeholder="Search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
