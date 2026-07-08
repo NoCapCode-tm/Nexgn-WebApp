@@ -1998,7 +1998,6 @@
   font-size: 13px;
   color: #6B7280;
 }
-
 .team-role-badge {
   padding: 6px 12px;
   border: 1px solid #E4E4E4;
@@ -2332,4 +2331,1446 @@
   .member-settings-card--notifications .member-permission-checkbox-input:checked + .member-permission-custom-checkbox::after {
     transform: translateX(16px) !important;
   }
+}/* Billing Section Styles */
+.member-billing-section {
+  max-width: 580px;
+  margin: 0 auto;
+  margin-top: 16px;
 }
+.member-billing-section + .member-billing-section {
+  margin-top: 16px;
+}
+.member-billing-section-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 8px;
+}
+.member-billing-plan-card,
+.member-billing-payment-card,
+.member-billing-address-card {
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  padding: 16px 20px;
+  background: #ffffff;
+}
+.member-billing-plan-card {
+  background: #FBFBFB;
+}
+.member-billing-plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.member-billing-plan-info {
+  display: flex;
+  flex-direction: column;
+}
+.member-billing-plan-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111111;
+  margin: 0 0 2px 0;
+}
+.member-billing-plan-billed {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #8A949F;
+  margin: 0;
+}
+.member-billing-plan-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+}
+.member-billing-plan-price .price-amount {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111111;
+  line-height: 1;
+}
+.member-billing-plan-price .price-period {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #8A949F;
+  margin-left: 2px;
+}
+.member-billing-plan-divider {
+  height: 1px;
+  background: #666666;
+  margin: 12px 0;
+}
+.member-billing-plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+}
+.member-billing-plan-features li {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.member-billing-plan-features li:last-child {
+  margin-bottom: 0;
+}
+.member-billing-plan-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+.member-billing-next-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #111111;
+}
+.member-billing-upgrade-btn {
+  background: #CC0000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  height: 32px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.member-billing-upgrade-btn:hover {
+  background: #A30000;
+}
+.member-billing-payment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+.member-billing-card-info {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.member-billing-card-icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  padding: 4px 8px;
+  background: #F9FAFB;
+}
+.member-billing-card-brand {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #8A949F;
+}
+.member-billing-card-details {
+  display: flex;
+  flex-direction: column;
+}
+.member-billing-card-details .card-number {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #111111;
+  font-weight: 500;
+}
+.member-billing-card-details .card-expiry {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #8A949F;
+  margin-top: 2px;
+}
+.member-billing-edit-btn {
+  background: white;
+  border: 1px solid #FCA5A5;
+  color: #4B5563;
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  height: 28px;
+  cursor: pointer;
+}
+.member-billing-address-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+.member-billing-invoice-info {
+  display: flex;
+  flex-direction: column;
+}
+.member-billing-invoice-info .invoice-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111111;
+}
+.member-billing-invoice-info .invoice-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #8A949F;
+  margin-top: 2px;
+}
+.member-billing-invoice-actions {
+  display: flex;
+  gap: 8px;
+}
+.member-billing-invoice-actions .icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 1180px) {
+  .member-settings-page .member-settings-card--billing {
+    max-width: 1050px;
+  }
+}
+.member-settings-page .member-settings-card--billing {
+  padding: 20px 24px !important;
+  height: max-content !important;
+  min-height: 0 !important;
+  margin-bottom: auto !important;
+}
+.tooltip-container {
+  position: relative;
+  display: flex;
+}
+.invoice-error-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: -10px;
+  background: white;
+  border: 1px solid #E57373;
+  border-radius: 4px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  width: max-content;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 10;
+}
+.tooltip-container:hover .invoice-error-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+.invoice-error-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 18px;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-top: 1px solid #E57373;
+  border-left: 1px solid #E57373;
+  transform: rotate(45deg);
+}
+.invoice-error-tooltip span {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #4B5563;
+}
+/* ===========================
+   BILLING - TABLET ONLY
+   769px - 1179px
+   =========================== */
+@media (min-width: 769px) and (max-width: 1179px) {
+
+  /* Billing Card wrapper */
+  .member-settings-page .member-settings-card--billing {
+    padding: 24px 28px !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  /* Billing Heading */
+  .member-settings-page .member-settings-card--billing > .member-settings-card__title {
+    font-size: 32px !important;
+    font-weight: 600 !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* Sections */
+  .member-settings-page .member-billing-section {
+    margin-top: 28px !important;
+  }
+
+  .member-settings-page .member-billing-section:first-child {
+    margin-top: 0 !important;
+  }
+
+  /* Section Titles */
+  .member-settings-page .member-settings-card--billing .member-billing-section-title {
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Make all billing blocks taller & Internal Padding */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-card {
+    min-height: 340px !important;
+    padding: 28px 32px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Current Plan Card - Typography */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-name {
+    font-size: 26px !important;
+    font-weight: 600 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-plan-billed {
+    font-size: 18px !important;
+    color: #8A949F !important;
+  }
+
+  /* Price */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-price {
+    align-items: baseline !important;
+  }
+  .member-settings-page .member-settings-card--billing .member-billing-plan-price .price-amount {
+    font-size: 60px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: #111111 !important;
+  }
+  .member-settings-page .member-settings-card--billing .member-billing-plan-price .price-period {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 400 !important;
+    line-height: 1 !important;
+    color: #666666 !important;
+    margin-left: 4px !important;
+  }
+
+  /* Divider inside plan card */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-divider {
+    margin: 24px 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Feature List */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-features li {
+    font-size: 18px !important;
+    line-height: 26px !important;
+    margin-bottom: 12px !important;
+    padding-left: 8px !important;
+  }
+
+  /* Bottom Row */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-footer {
+    margin-top: auto !important;
+    align-items: center !important;
+    padding-top: 16px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-next-date {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-upgrade-btn {
+    height: 52px !important;
+    width: 190px !important;
+    font-size: 18px !important;
+    border-radius: 8px !important;
+    padding: 0 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Payment Method Card */
+  .member-settings-page .member-settings-card--billing .member-billing-payment-card {
+    min-height: 92px !important;
+    padding: 16px 24px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-card-info {
+    gap: 32px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-card-icon-wrapper {
+    padding: 8px 16px !important;
+  }
+  
+  .member-settings-page .member-settings-card--billing .member-billing-card-icon-wrapper svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-card-brand {
+    font-size: 14px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-card-details .card-number {
+    font-size: 18px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-card-details .card-expiry {
+    font-size: 16px !important;
+    margin-top: 6px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-edit-btn {
+    height: 46px !important;
+    width: 120px !important;
+    font-size: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Billing Address Card */
+  .member-settings-page .member-settings-card--billing .member-billing-address-card {
+    min-height: 92px !important;
+    padding: 16px 24px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-invoice-info .invoice-title {
+    font-size: 20px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-invoice-info .invoice-date {
+    font-size: 16px !important;
+    margin-top: 6px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-invoice-actions {
+    gap: 16px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-invoice-actions .icon-btn svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+/* ===========================
+   BILLING - MOBILE ONLY
+   max-width: 768px
+   =========================== */
+@media (max-width: 768px) {
+  /* 1. Billing Card */
+  .member-settings-page .member-settings-card--billing {
+    padding: 24px !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  /* 2. Billing Heading */
+  .member-settings-page .member-settings-card--billing > .member-settings-card__title {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    margin-bottom: 24px !important;
+  }
+
+  /* 3. Section Titles */
+  .member-settings-page .member-settings-card--billing .member-billing-section-title {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    margin-top: 32px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-section {
+    margin-top: 40px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-section:first-child {
+    margin-top: 0 !important;
+  }
+  
+  .member-settings-page .member-settings-card--billing .member-billing-section:first-child .member-billing-section-title {
+    margin-top: 0 !important;
+  }
+
+  /* 4. Current Plan Card */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-card {
+    padding: 32px !important;
+    min-height: auto !important;
+    border-radius: 8px !important;
+  }
+
+  /* 5. Plan Header */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-name {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .member-settings-page .member-settings-card--billing .member-billing-plan-billed {
+    font-size: 14px !important;
+    color: #8A949F !important;
+  }
+
+  /* 6. Price */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-price {
+    align-items: baseline !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-plan-price .price-amount {
+    font-size: 50px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: #111111 !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-plan-price .price-period {
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    color: #666666 !important;
+    margin-left: 4px !important;
+  }
+
+  /* 7. Divider */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-divider {
+    margin: 32px 0 !important;
+    width: 100% !important;
+  }
+
+  /* 8. Features */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-features li {
+    font-size: 16px !important;
+    margin-bottom: 16px !important;
+    line-height: 24px !important;
+    padding-left: 8px !important;
+  }
+
+  /* Footer layout */
+  .member-settings-page .member-settings-card--billing .member-billing-plan-footer {
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-top: 32px !important;
+    padding-top: 0 !important;
+  }
+
+  /* 9. Next Billing Date */
+  .member-settings-page .member-settings-card--billing .member-billing-next-date {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    width: 100% !important;
+    text-align: left !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* 10. Upgrade Button */
+  .member-settings-page .member-settings-card--billing .member-billing-upgrade-btn {
+    width: 90% !important;
+    height: 50px !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    margin-top: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+  }
+
+  /* 11. Payment Method Card */
+  .member-settings-page .member-settings-card--billing .member-billing-payment-card {
+    padding: 24px !important;
+    min-height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-card-info {
+    gap: 20px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-card-icon-wrapper {
+    padding: 10px 18px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-card-icon-wrapper svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-card-brand {
+    font-size: 14px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-card-details .card-number {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-card-details .card-expiry {
+    font-size: 14px !important;
+    margin-top: 6px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-edit-btn {
+    height: 42px !important;
+    width: 90px !important;
+    font-size: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* 12. Billing Address Card */
+  .member-settings-page .member-settings-card--billing .member-billing-address-card {
+    padding: 24px !important;
+    min-height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-invoice-info {
+    gap: 8px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-invoice-info .invoice-title {
+    font-size: 18px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-invoice-info .invoice-date {
+    font-size: 14px !important;
+    margin-top: 0 !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-invoice-actions {
+    gap: 16px !important;
+  }
+
+  .member-settings-page .member-settings-card--billing .member-billing-invoice-actions .icon-btn svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   AUDIT LOGS TAB — Desktop (1180px+) only
+   All selectors are scoped to avoid leakage into any other settings tab.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Outer Card ─────────────────────────────────────────────────────────── */
+.member-settings-card--audit {
+  padding: 24px 28px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.10);
+  white-space: normal;
+  max-width: 1020px !important;
+  width: 100%;
+}
+
+.member-settings-card--audit * {
+  white-space: normal;
+}
+
+/* ── Header row ─────────────────────────────────────────────────────────── */
+.member-audit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.member-audit-header .member-settings-card__title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 0;
+}
+
+/* ── Divider ────────────────────────────────────────────────────────────── */
+.member-settings-card--audit .member-settings-card__divider {
+  height: 1px;
+  background: #CCCCCC;
+  margin-top: 18px;
+  margin-bottom: 24px;
+}
+
+/* ── Search box ─────────────────────────────────────────────────────────── */
+.member-audit-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 220px;
+  height: 38px;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.member-audit-search-input {
+  flex: 1;
+  height: 100%;
+  padding: 0 36px 0 12px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #111111;
+}
+
+.member-audit-search-input::placeholder {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #888888;
+}
+
+.member-audit-search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888888;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+/* ── Table container ────────────────────────────────────────────────────── */
+.member-audit-table {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Shared grid columns ────────────────────────────────────────────────── */
+.member-audit-table-header,
+.member-audit-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.2fr 1.5fr 1.4fr 0.8fr;
+  align-items: center;
+}
+
+/* ── Table header row ───────────────────────────────────────────────────── */
+.member-audit-table-header {
+  height: 48px;
+  padding: 0 28px;
+  background: #ffffff;
+  border-radius: 23px 23px 0 0;
+  box-shadow: 0 0 14.5px 1px rgba(131, 131, 131, 0.10);
+}
+
+.member-audit-table-header .audit-col {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #666666;
+  letter-spacing: 0.02em;
+}
+
+/* ── Table body ─────────────────────────────────────────────────────────── */
+.member-audit-table-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* ── Individual data row ─────────────────────────────────────────────────── */
+.member-audit-row {
+  height: 64px;
+  padding: 0 28px;
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.10);
+}
+
+/* ── Cell typography ─────────────────────────────────────────────────────── */
+.member-audit-row .audit-col-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #666666;
+}
+
+.member-audit-row .audit-col-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111;
+}
+
+.member-audit-row .audit-col-action {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+}
+
+.member-audit-row .audit-col-document {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+}
+
+.member-audit-row .audit-col-status {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Status badges ──────────────────────────────────────────────────────── */
+.audit-status-badge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.audit-status-badge.audit-status-success {
+  background: #DFF5E7;
+  color: #4B9B66;
+}
+
+.audit-status-badge.audit-status-failed {
+  background: #FFDCDC;
+  color: #FF3B30;
+}
+
+/* ── Sub-1180 guard: allow horizontal scroll on smaller viewports ────────── */
+@media (max-width: 1179px) {
+  .member-settings-card--audit {
+    overflow-x: auto;
+  }
+
+  .member-audit-table-header,
+  .member-audit-row {
+    min-width: 600px;
+  }
+}
+
+/* ── Tablet View (769px - 1179px): Hide Action column and search box, fit fluidly ── */
+@media (min-width: 769px) and (max-width: 1179px) {
+  .member-settings-card--audit .member-audit-search {
+    display: none;
+  }
+
+  .member-settings-card--audit {
+    max-width: 100% !important;
+    border: 1px solid #E4E4E4 !important;
+  }
+
+  .member-settings-card--audit .member-audit-table-header,
+  .member-settings-card--audit .member-audit-row {
+    grid-template-columns: 1.4fr 1.1fr 1.4fr 0.9fr;
+    min-width: unset; /* override the 600px min-width to fit fluidly on tablet */
+    padding: 0 16px; /* give columns more breathing room */
+  }
+
+  .member-settings-card--audit .member-settings-card__title {
+    font-size: 20px !important;
+  }
+
+  .member-settings-card--audit .member-audit-table-header .audit-col {
+    font-size: 14px !important;
+    white-space: nowrap !important; /* prevent wrapping */
+    line-height: 1.2;
+  }
+
+  .member-settings-card--audit .member-audit-row .audit-col-date {
+    font-size: 13px !important;
+  }
+
+  .member-settings-card--audit .member-audit-row .audit-col-name {
+    font-size: 14px !important;
+  }
+
+  .member-settings-card--audit .member-audit-row .audit-col-document {
+    font-size: 14px !important;
+  }
+
+  .member-settings-card--audit .member-audit-row .audit-status-badge {
+    font-size: 12px !important;
+  }
+
+  .member-settings-card--audit .audit-col-action {
+    display: none;
+  }
+}
+
+/* ── Desktop vs Mobile layout toggle ── */
+.member-audit-desktop-layout {
+  display: block;
+}
+
+.member-audit-mobile-layout {
+  display: none;
+}
+
+/* ── Mobile Layout (<= 768px) ── */
+@media (max-width: 768px) {
+  .member-audit-desktop-layout {
+    display: none !important;
+  }
+
+  .member-audit-mobile-layout {
+    display: block !important;
+  }
+
+  .member-settings-card--audit {
+    padding: 16px !important;
+    border: 1px solid #E4E4E4 !important;
+    max-width: 100% !important;
+  }
+
+  /* Search and Filter Controls */
+  .member-audit-mobile-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .member-audit-mobile-search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    height: 38px;
+    border: 1px solid #CCCCCC;
+    border-radius: 20px;
+    background: #FFFFFF;
+  }
+
+  .member-audit-mobile-search-input {
+    padding-left: 38px;
+    padding-right: 12px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #111111;
+  }
+
+  .member-audit-mobile-search-input::placeholder {
+    color: #888888;
+  }
+
+  .member-audit-mobile-search-icon {
+    position: absolute;
+    left: 14px;
+    color: #888888;
+    pointer-events: none;
+  }
+
+  .member-audit-mobile-filter-btn {
+    width: 38px;
+    height: 38px;
+    border: 1px solid #CCCCCC;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    color: #4B5563;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* Filter Tabs */
+  .member-audit-mobile-tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+
+  .member-audit-mobile-tab {
+    flex: 1;
+    height: 42px;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #6B7280;
+    padding: 0;
+  }
+
+  .member-audit-mobile-tab--active {
+    background: #E5252A !important;
+    border-color: #E5252A !important;
+    color: #FFFFFF !important;
+  }
+
+  /* Mobile Cards List */
+  .member-audit-mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .member-audit-mobile-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.10);
+    border: 1px solid rgba(228, 228, 228, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .member-audit-mobile-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .member-audit-mobile-file {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .member-audit-mobile-icon-file {
+    color: #6B7280;
+    flex-shrink: 0;
+  }
+
+  .member-audit-mobile-filename {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111111;
+  }
+
+  .member-audit-mobile-user {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .member-audit-mobile-icon-user {
+    color: #9CA3AF;
+    flex-shrink: 0;
+  }
+
+  .member-audit-mobile-username {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #6B7280;
+  }
+
+  .member-audit-mobile-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #9CA3AF;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   INTEGRATIONS TAB — Scoped page styling
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.member-settings-card--integrations,
+.member-settings-card--integrations * {
+  white-space: normal !important;
+}
+
+.member-settings-card--integrations {
+  padding: 24px 28px;
+  background: #ffffff;
+  border: 1px solid #E4E4E4;
+  border-radius: 12px;
+  box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.10);
+  max-width: 1110px !important;
+  width: 100%;
+}
+
+.member-settings-card--integrations .member-settings-card__title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 0;
+}
+
+.member-settings-card--integrations .member-settings-card__divider {
+  height: 1px;
+  background: #CCCCCC;
+  margin-top: 18px;
+  margin-bottom: 24px;
+}
+
+.member-integrations-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+.member-integrations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.member-integration-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #E4E4E4;
+  border-radius: 12px;
+  padding: 48px 24px;
+  background: #FFFFFF;
+}
+
+.member-integration-item-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-right: 24px;
+}
+
+.member-integration-item-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  margin-top: -4px;
+}
+
+.member-integration-logo {
+  width: 52px;
+  height: 46px;
+  flex-shrink: 0;
+}
+
+.member-integration-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.member-integration-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111111;
+  margin: 0;
+}
+
+.member-integration-status {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #666666;
+  letter-spacing: 0.05em;
+}
+
+.member-integration-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #666666;
+  margin: 0;
+  margin-top: 16px;
+}
+
+.member-integration-item-right {
+  flex-shrink: 0;
+}
+
+.member-integration-action-btn.disconnect {
+  border: 1px solid #E5252A;
+  color: #E5252A;
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 10px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: all 0.2s;
+  width: 170px;
+  height: 38px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.member-integration-action-btn.disconnect:hover {
+  background: #FFF0F0;
+}
+
+.member-integration-action-btn.connect {
+  border: none;
+  color: #FFFFFF;
+  background: #E5252A;
+  border-radius: 24px;
+  padding: 10px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: all 0.2s;
+  width: 170px;
+  height: 38px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.member-integration-action-btn.connect:hover {
+  background: #C41C20;
+}
+
+.member-integration-desc--tablet {
+  display: none !important;
+}
+
+.member-integration-desc--desktop {
+  display: block !important;
+}
+
+@media (max-width: 1179px) {
+  .member-integration-desc--desktop {
+    display: none !important;
+  }
+  .member-integration-desc--tablet {
+    display: block !important;
+  }
+  .desktop-only-br {
+    display: none !important;
+  }
+  .member-integration-description {
+    font-size: 7px !important;
+  }
+}
+
+/* Tablet/Mobile responsiveness for integrations tab */
+@media (max-width: 768px) {
+  .member-integration-item {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 16px 12px !important;
+  }
+  .member-integration-item-left {
+    margin-right: 12px !important;
+  }
+  .member-integration-item-right {
+    width: auto !important;
+    flex-shrink: 0 !important;
+  }
+  .member-integration-action-btn.disconnect,
+  .member-integration-action-btn.connect {
+    width: 110px !important;
+    height: 34px !important;
+    font-size: 9px !important;
+    padding: 6px 12px !important;
+    border-radius: 24px !important;
+  }
+  .member-settings-page .ms-mobile-detail {
+    padding: 16px 8px !important;
+  }
+  .member-settings-page .ms-mobile-detail .member-settings-card {
+    padding: 16px 12px !important;
+  }
+  .member-settings-card--integrations {
+    padding: 16px 12px !important;
+  }
+  .member-settings-page p.member-integration-description {
+    font-size: 8px !important;
+    line-height: 1.4 !important;
+    margin-top: 8px !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+  }
+  .member-integration-logo {
+    width: 36px !important;
+    height: 32px !important;
+  }
+  .member-settings-page h3.member-integration-title {
+    font-size: 14px !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+  }
+  .member-settings-page span.member-integration-status {
+    font-size: 9px !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONFIRMATION MODAL — Integrations Page
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.integration-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999 !important;
+}
+
+.integration-modal-container {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+  width: 480px;
+  max-width: 90%;
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+  white-space: normal !important;
+}
+
+.integration-modal-container * {
+  white-space: normal !important;
+}
+
+.integration-modal-content {
+  padding: 32px 36px 24px 36px;
+}
+
+.integration-modal-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.integration-modal-warning-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.integration-modal-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0;
+}
+
+.integration-modal-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #666666;
+  margin: 0 0 16px 0;
+}
+
+.integration-modal-list {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #666666;
+  margin: 0 0 8px 16px;
+  padding: 0;
+  list-style-type: disc;
+  line-height: 1.8;
+}
+
+.integration-modal-footer {
+  border-top: 1px solid #EAEAEA;
+  padding: 20px 36px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #FFFFFF;
+}
+
+.integration-modal-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  height: 38px;
+  min-width: 100px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.integration-modal-btn.cancel-btn {
+  border: 1px solid #E5252A;
+  background: #FFFFFF;
+  color: #E5252A;
+}
+
+.integration-modal-btn.cancel-btn:hover {
+  background: #FFF0F0;
+}
+
+.integration-modal-btn.disconnect-btn {
+  border: 1px solid #A80005;
+  background: #A80005;
+  color: #FFFFFF;
+}
+
+.integration-modal-btn.disconnect-btn:hover {
+  background: #8B0004;
+}
+
+@keyframes modalFadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+

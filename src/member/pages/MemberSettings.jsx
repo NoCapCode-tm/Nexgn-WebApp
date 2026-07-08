@@ -21,6 +21,11 @@ import {
   MoreVertical,
   Filter,
   Plus,
+  Download,
+  RefreshCw,
+  CheckCircle2,
+  Clock,
+  User,
 } from "lucide-react";
 import "../css/MemberBaseLayout.css";
 import "../css/MemberSettings.css";
@@ -34,9 +39,9 @@ const settingsNavItems = [
   { key: "security", label: "Security", active: true },
   { key: "team", label: "Team Management", active: true },
   { key: "notifications", label: "Notifications", active: true },
-  { key: "billing", label: "Billing", active: false },
-  { key: "integrations", label: "Integrations", active: false },
-  { key: "audit", label: "Audit Logs", active: false },
+  { key: "billing", label: "Billing", active: true },
+  { key: "integrations", label: "Integrations", active: true },
+  { key: "audit", label: "Audit Logs", active: true },
 ];
 
 /* ── Hook: true when viewport is ≤ 768 px ─────────────────────────────── */
@@ -60,6 +65,8 @@ export default function MemberSettings() {
   const [activeTab, setActiveTab] = useState("profile");
   const [viewingPermissions, setViewingPermissions] = useState(null);
   const [permissionsState, setPermissionsState] = useState({ "Documents-View Documents": true });
+  const [showDisconnectModal, setShowDisconnectModal] = useState(false);
+  const [isDriveConnected, setIsDriveConnected] = useState(true);
 
   /* Mobile only: "menu" | "profile" | "account" | "security" */
   const [mobileView, setMobileView] = useState("menu");
@@ -559,6 +566,241 @@ export default function MemberSettings() {
     </div>
   );
 
+  const billingCard = (
+    <div className="member-settings-card member-settings-card--billing">
+      <h2 className="member-settings-card__title">Billing</h2>
+      <div className="member-settings-card__divider" />
+      
+      <div className="member-billing-section">
+        <h3 className="member-billing-section-title">Current Plan</h3>
+        <div className="member-billing-plan-card">
+          <div className="member-billing-plan-header">
+            <div className="member-billing-plan-info">
+              <h4 className="member-billing-plan-name">Plans</h4>
+              <p className="member-billing-plan-billed">Billed annually</p>
+            </div>
+            <div className="member-billing-plan-price">
+              <span className="price-amount">$49</span>
+              <span className="price-period">/month</span>
+            </div>
+          </div>
+          <div className="member-billing-plan-divider" />
+          <ul className="member-billing-plan-features">
+            <li>Unlimited Document Signing</li>
+            <li>Up to 10 Team Members</li>
+            <li>Advance Templates</li>
+          </ul>
+          <div className="member-billing-plan-footer">
+            <span className="member-billing-next-date">Next billing date : 24 Jan 2027</span>
+            <button className="member-billing-upgrade-btn">Upgrade Plan</button>
+          </div>
+        </div>
+      </div>
+
+      <div className="member-billing-section">
+        <h3 className="member-billing-section-title">Payment Method</h3>
+        <div className="member-billing-payment-card">
+          <div className="member-billing-card-info">
+            <div className="member-billing-card-icon-wrapper">
+              <CreditCard size={16} color="#666" />
+              <span className="member-billing-card-brand">Visa</span>
+            </div>
+            <div className="member-billing-card-details">
+              <span className="card-number">Visa ending in 4242</span>
+              <span className="card-expiry">Expired in 2028</span>
+            </div>
+          </div>
+          <button className="member-billing-edit-btn">Edit</button>
+        </div>
+      </div>
+
+      <div className="member-billing-section">
+        <h3 className="member-billing-section-title">Billing Address</h3>
+        <div className="member-billing-address-card">
+          <div className="member-billing-invoice-info">
+            <span className="invoice-title">Invoice</span>
+            <span className="invoice-date">24 Jan 2026</span>
+          </div>
+          <div className="member-billing-invoice-actions">
+            <button className="icon-btn"><Download size={16} color="#666" /></button>
+            <div className="tooltip-container">
+              <button className="icon-btn"><RefreshCw size={16} color="#666" /></button>
+              <div className="invoice-error-tooltip">
+                <AlertCircle size={14} color="#666" />
+                <span>Unable to download. Refresh and try again</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const integrationsCard = (
+    <div className="member-settings-card member-settings-card--integrations">
+      <h2 className="member-settings-card__title">Integration</h2>
+      <div className="member-settings-card__divider" />
+      
+      <p className="member-integrations-description">
+        Connect Sign App to your favourite tools to streamline your document workflow.
+      </p>
+      
+      <div className="member-integrations-list">
+        <div className="member-integration-item">
+          <div className="member-integration-item-left">
+            <div className="member-integration-item-header">
+              <svg viewBox="0 0 87.3 78" className="member-integration-logo" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+              </svg>
+              <div className="member-integration-info">
+                <h3 className="member-integration-title">Google Drive</h3>
+                <span className="member-integration-status">
+                  {isDriveConnected ? "CONNECTED" : "DISCONNECTED"}
+                </span>
+              </div>
+            </div>
+            <p className="member-integration-description member-integration-desc--desktop">
+              Sync your signed documents directly to Sync your signed documents directly to Google Drive for instant access<br className="desktop-only-br" />and secure storage. Enjoy seamless organization, real-time backup, and effortless sharing with your team.Google<br className="desktop-only-br" />drive
+            </p>
+            <p className="member-integration-description member-integration-desc--tablet">
+              Sync your signed documents directly to Sync your signed documents directly to Google Drive for instant access and secure storage. Enjoy seamless organization, real-time backup, and effortless sharing with your team.Google drive
+            </p>
+          </div>
+          <div className="member-integration-item-right">
+            {isDriveConnected ? (
+              <button 
+                className="member-integration-action-btn disconnect" 
+                type="button"
+                onClick={() => setShowDisconnectModal(true)}
+              >
+                DISCONNECT
+              </button>
+            ) : (
+              <button 
+                className="member-integration-action-btn connect" 
+                type="button"
+                onClick={() => setIsDriveConnected(true)}
+              >
+                CONNECT
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+
+  const auditLogsData = [
+    { id: 1, date: "Mar 24, 10:45 AM", name: "Alice Smith", action: "Signed Document", document: "NDA_V2.pdf", status: "Success" },
+    { id: 2, date: "Mar 23, 2:15 PM", name: "Bob Jones", action: "Created Template", document: "Emploement_Offer", status: "Success" },
+    { id: 3, date: "Mar 23, 11:00 AM", name: "System", action: "Auto- Archieved", document: "Project_Spec.pdf", status: "Success" },
+    { id: 4, date: "Mar 23, 11:00 AM", name: "Charlie Brown", action: "Failed Logined Attempt", document: "-", status: "Failed" },
+  ];
+
+  const auditCard = (
+    <div className="member-settings-card member-settings-card--audit">
+      {/* ── Desktop & Tablet Layout (Hidden on Mobile) ── */}
+      <div className="member-audit-desktop-layout">
+        <div className="member-audit-header">
+          <h2 className="member-settings-card__title">Audit Logs</h2>
+          <div className="member-audit-search">
+            <input type="text" placeholder="Search Logs....." className="member-audit-search-input" />
+            <Search size={16} className="member-audit-search-icon" />
+          </div>
+        </div>
+        <div className="member-settings-card__divider" />
+        
+        <div className="member-audit-table">
+          <div className="member-audit-table-header">
+            <div className="audit-col audit-col-date">DATE</div>
+            <div className="audit-col audit-col-name">NAME</div>
+            <div className="audit-col audit-col-action">ACTION</div>
+            <div className="audit-col audit-col-document">DOCUMENT</div>
+            <div className="audit-col audit-col-status">STATUS</div>
+          </div>
+          <div className="member-audit-table-body">
+            {auditLogsData.map((log) => (
+              <div key={log.id} className="member-audit-row">
+                <div className="audit-col audit-col-date">{log.date}</div>
+                <div className="audit-col audit-col-name">{log.name}</div>
+                <div className="audit-col audit-col-action">{log.action}</div>
+                <div className="audit-col audit-col-document">{log.document}</div>
+                <div className="audit-col audit-col-status">
+                  <span className={`audit-status-badge audit-status-${log.status.toLowerCase()}`}>
+                    {log.status}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Mobile Layout (Hidden on Desktop & Tablet) ── */}
+      <div className="member-audit-mobile-layout">
+        <h2 className="member-settings-card__title">Audit Logs</h2>
+        <div className="member-settings-card__divider" />
+        
+        {/* Mobile Search & Filter */}
+        <div className="member-audit-mobile-controls">
+          <div className="member-audit-mobile-search-wrapper">
+            <Search size={16} className="member-audit-mobile-search-icon" />
+            <input type="text" placeholder="Search" className="member-audit-mobile-search-input" />
+          </div>
+          <button className="member-audit-mobile-filter-btn" type="button">
+            <Filter size={18} />
+          </button>
+        </div>
+
+        {/* Mobile Filter Tabs */}
+        <div className="member-audit-mobile-tabs">
+          <button className="member-audit-mobile-tab member-audit-mobile-tab--active" type="button">
+            <FileText size={18} />
+          </button>
+          <button className="member-audit-mobile-tab" type="button">
+            <CheckCircle2 size={18} />
+          </button>
+          <button className="member-audit-mobile-tab" type="button">
+            <AlertCircle size={18} />
+          </button>
+          <button className="member-audit-mobile-tab" type="button">
+            <Clock size={18} />
+          </button>
+        </div>
+
+        {/* Mobile Cards List */}
+        <div className="member-audit-mobile-list">
+          {auditLogsData.map((log) => (
+            <div key={log.id} className="member-audit-mobile-card">
+              <div className="member-audit-mobile-card-row member-audit-mobile-card-row--top">
+                <div className="member-audit-mobile-file">
+                  <FileText size={18} className="member-audit-mobile-icon-file" />
+                  <span className="member-audit-mobile-filename">{log.document}</span>
+                </div>
+                <span className={`audit-status-badge audit-status-${log.status.toLowerCase()}`}>
+                  {log.status}
+                </span>
+              </div>
+              <div className="member-audit-mobile-card-row member-audit-mobile-card-row--bottom">
+                <div className="member-audit-mobile-user">
+                  <User size={16} className="member-audit-mobile-icon-user" />
+                  <span className="member-audit-mobile-username">{log.name}</span>
+                </div>
+                <span className="member-audit-mobile-date">{log.date}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
   /* ════════════════════════════════════════════════════════════════════════
      MOBILE — completely separate render tree.
      hideMobileTopbar suppresses the global mobile-topbar from MemberLayout.
@@ -666,13 +908,17 @@ export default function MemberSettings() {
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
               </button>
-              <div className="ms-mobile-menu-item ms-mobile-menu-item--disabled">
+              <button
+                type="button"
+                className="ms-mobile-menu-item"
+                onClick={() => setMobileView("billing")}
+              >
                 <div className="ms-mobile-menu-item__left">
                   <span className="ms-mobile-menu-item__icon"><CreditCard size={18} /></span>
                   <span className="ms-mobile-menu-item__label">Billing</span>
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
-              </div>
+              </button>
             </div>
 
             {/* Security & Organization group */}
@@ -700,14 +946,21 @@ export default function MemberSettings() {
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
               </button>
-              <div className="ms-mobile-menu-item ms-mobile-menu-item--disabled">
+              <button
+                type="button"
+                className="ms-mobile-menu-item"
+                onClick={() => { setActiveTab("integrations"); setMobileView("integrations"); }}
+              >
                 <div className="ms-mobile-menu-item__left">
                   <span className="ms-mobile-menu-item__icon"><Share2 size={18} /></span>
                   <span className="ms-mobile-menu-item__label">Integrations</span>
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
-              </div>
-              <div className="ms-mobile-menu-item ms-mobile-menu-item--disabled">
+              </button>
+              <div 
+                className="ms-mobile-menu-item"
+                onClick={() => { setActiveTab("audit"); setMobileView("audit"); }}
+              >
                 <div className="ms-mobile-menu-item__left">
                   <span className="ms-mobile-menu-item__icon"><FileText size={18} /></span>
                   <span className="ms-mobile-menu-item__label">Audit Logs</span>
@@ -767,6 +1020,15 @@ export default function MemberSettings() {
         )}
         {mobileView === "team" && !viewingPermissions && (
           <div className="ms-mobile-detail">{teamCard}</div>
+        )}
+        {mobileView === "billing" && (
+          <div className="ms-mobile-detail">{billingCard}</div>
+        )}
+        {mobileView === "audit" && (
+          <div className="ms-mobile-detail">{auditCard}</div>
+        )}
+        {mobileView === "integrations" && (
+          <div className="ms-mobile-detail">{integrationsCard}</div>
         )}
         {viewingPermissions && (
           <div className="ms-mobile-detail ms-mobile-permissions">
@@ -856,10 +1118,46 @@ export default function MemberSettings() {
             {activeTab === "security" && securityCard}
             {activeTab === "team" && !viewingPermissions && teamCard}
             {activeTab === "team" && viewingPermissions && permissionsViewComponent}
+            {activeTab === "billing" && billingCard}
+            {activeTab === "integrations" && integrationsCard}
+            {activeTab === "audit" && auditCard}
           </div>
         </div>
         )}
       </>
+      {showDisconnectModal && (
+        <div className="integration-modal-backdrop" onClick={() => setShowDisconnectModal(false)}>
+          <div className="integration-modal-container" onClick={(e) => e.stopPropagation()}>
+            <div className="integration-modal-content">
+              <div className="integration-modal-header-row">
+                <svg viewBox="0 0 24 24" className="integration-modal-warning-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#E5252A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <h3 className="integration-modal-title">Disconnect Integration?</h3>
+              </div>
+              
+              <p className="integration-modal-description">
+                Disconnecting will stop data sync and disable related work flows. Existing Documents will not be affected.
+              </p>
+              
+              <ul className="integration-modal-list">
+                <li>No new document will sync</li>
+                <li>Automations using this integrations will stop</li>
+                <li>You can reconnect anytime</li>
+              </ul>
+            </div>
+            
+            <div className="integration-modal-footer">
+              <button className="integration-modal-btn cancel-btn" onClick={() => setShowDisconnectModal(false)}>
+                Cancel
+              </button>
+              <button className="integration-modal-btn disconnect-btn" onClick={() => { setIsDriveConnected(false); setShowDisconnectModal(false); }}>
+                Disconnect
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </MemberLayout>
   );
 }
