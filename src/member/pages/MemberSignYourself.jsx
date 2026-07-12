@@ -77,9 +77,9 @@ export default function MemberSignYourself() {
           if (file) setUploadedFile(file.name);
         }}
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M7.5 9.75095C7.82209 10.1815 8.23302 10.5378 8.70491 10.7957C9.17681 11.0535 9.69863 11.2068 10.235 11.2452C10.7713 11.2836 11.3097 11.2062 11.8135 11.0183C12.3173 10.8303 12.7748 10.5363 13.155 10.156L15.405 7.90595C16.0881 7.19869 16.4661 6.25143 16.4575 5.2682C16.449 4.28496 16.0546 3.34441 15.3593 2.64913C14.664 1.95385 13.7235 1.55947 12.7403 1.55092C11.757 1.54238 10.8098 1.92036 10.1025 2.60345L8.8125 3.88595" stroke="#666666" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M10.5006 8.24992C10.1785 7.81933 9.76762 7.46304 9.29573 7.20522C8.82383 6.9474 8.30201 6.79409 7.76565 6.75567C7.22929 6.71726 6.69095 6.79465 6.18713 6.98259C5.68331 7.17053 5.2258 7.46462 4.84564 7.84492L2.59564 10.0949C1.91255 10.8022 1.53457 11.7494 1.54311 12.7327C1.55165 13.7159 1.94604 14.6565 2.64132 15.3517C3.3366 16.047 4.27715 16.4414 5.26038 16.45C6.24362 16.4585 7.19088 16.0805 7.89814 15.3974L9.18064 14.1149" stroke="#666666" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
         <span>
           {uploadedFile ? uploadedFile : 'Click or drag file here to upload'}
@@ -171,15 +171,7 @@ export default function MemberSignYourself() {
                         <polyline points="9 18 15 12 9 6"/>
                       </svg>
                     </div>
-                    <button className="btn-create" onClick={(e) => e.preventDefault()}>
-                      <span className="btn-create-text">Create</span>
-                      <svg className="btn-create-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="17 8 12 3 7 8"/>
-                        <line x1="12" y1="3" x2="12" y2="15"/>
-                      </svg>
-                    </button>
-                  </div>
+                    </div>
                 </div>
 
                 <div className="or-divider">OR</div>
@@ -217,6 +209,8 @@ export default function MemberSignYourself() {
                     onChange={e => setNote(e.target.value)}
                   />
                 </div>
+
+                <button className="btn-share btn-share--compact" onClick={(e) => { e.preventDefault(); navigate('/member-documents'); }}>Share</button>
               </>
             ) : (
               <>
@@ -391,6 +385,7 @@ export default function MemberSignYourself() {
             )}
           </div>
 
+          {activeTab !== 'sign' && (
           <div className="bottom-section">
             <div className="doc-preview">
               <div className="doc-preview__header">
@@ -437,51 +432,7 @@ export default function MemberSignYourself() {
               </div>
             </div>
 
-            {activeTab === 'sign' ? (
-              <div className="field-props">
-                <div className="field-props__title">Field Properties</div>
-
-                <div>
-                  <div className="field-props__label">Field Type</div>
-                  <select
-                    className="field-type-select"
-                    value={fieldType}
-                    onChange={e => setFieldType(e.target.value)}
-                  >
-                    <option>Signature</option>
-                    <option>Initials</option>
-                    <option>Date</option>
-                    <option>Text</option>
-                  </select>
-                </div>
-
-                <div className="required-row">
-                  <span className="required-label">Required</span>
-                  <label className="toggle">
-                    <input
-                      type="checkbox"
-                      checked={required}
-                      onChange={e => setRequired(e.target.checked)}
-                    />
-                    <span className="toggle-slider"></span>
-                  </label>
-                </div>
-
-                <div>
-                  <div className="field-props__label">Assigned To</div>
-                  <input
-                    type="text"
-                    className="assigned-input"
-                    value={assignedTo}
-                    onChange={e => setAssignedTo(e.target.value)}
-                    placeholder="You"
-                  />
-                </div>
-
-                <button className="btn-share" onClick={(e) => { e.preventDefault(); navigate('/member-documents'); }}>Share</button>
-              </div>
-            ) : (
-              <div className="field-props">
+            <div className="field-props">
                 <div className="field-props__title">Field Properties</div>
 
                 <div>
@@ -529,8 +480,8 @@ export default function MemberSignYourself() {
 
                 <button className="btn-share" onClick={(e) => { e.preventDefault(); navigate('/member-documents'); }}>Share</button>
               </div>
-            )}
           </div>
+          )}
         </div>
       </>
     </MemberLayout>

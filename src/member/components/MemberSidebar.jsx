@@ -10,7 +10,8 @@ import {
   SettingsIcon,
   HelpIcon,
   NexgnLogo,
-  ToggleBtn
+  ToggleBtn,
+  ThemeToggleIcon
 } from "./memberNavItems";
 
 const navItems = [
@@ -96,6 +97,18 @@ export default function MemberSidebar() {
           {navItems.map(renderItem)}
         </nav>
         <div className="sidebar__bottom">
+          {!isMobile && (
+            <div className="sidebar__item sidebar__theme-toggle">
+              <span className="sidebar__icon-wrap">
+                <ThemeToggleIcon color="#8A949F" />
+              </span>
+              {effectiveExpanded && (
+                <span className="sidebar__item-label member-sidebar__item-label--inactive">
+                  Theme
+                </span>
+              )}
+            </div>
+          )}
           {bottomItems.map(renderItem)}
         </div>
       </div>

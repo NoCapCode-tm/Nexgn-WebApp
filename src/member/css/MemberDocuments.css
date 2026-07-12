@@ -190,6 +190,7 @@
   color: #8A949F;
 }
 .member-doc-row__menu {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 4px;
@@ -201,6 +202,61 @@
   color: #374151;
   background: #f3f4f6;
 }
+.member-doc-row__menu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.action-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  margin-top: 4px;
+  overflow: hidden;
+  border: 2.5px solid #CCCCCC;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.action-menu__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border: none;
+  border-bottom: 2.5px solid #CCCCCC;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  color: #374151;
+  background: #ffffff;
+  cursor: pointer;
+}
+.action-menu__item:last-child {
+  border-bottom: none;
+}
+.action-menu__item:hover {
+  background: #f9fafb;
+}
+.action-menu__item--danger {
+  color: #E22A2A;
+  background: #FFF1F1;
+}
+.action-menu__item--danger:hover {
+  background: #FFE2E2;
+}
 /* == BADGES == */
 .member-badge {
   display: inline-block;
@@ -210,16 +266,16 @@
   font-weight: 400;
 }
 .member-badge--pending {
-  color: #F59E0B;
-  background: #FEF3C7;
+  color: #D28E56;
+  background: #FEF5E0;
 }
 .member-badge--signed {
-  color: #10B981;
-  background: #D1FAE5;
+  color: #559B6F;
+  background: #E6F7EC;
 }
 .member-badge--expired, .member-badge--failed {
-  color: #EF4444;
-  background: #FEE2E2;
+  color: #E22A2A;
+  background: #FFDCDC;
 }
 /* ── FIGMA MOBILE OVERRIDES (Hidden on Desktop/Tablet) ── */
 .mobile-status-corner,
@@ -258,8 +314,13 @@
     background: #fff;
     box-shadow: 0 0.533vw 2.667vw rgba(0, 0, 0, 0.06);
   }
+  .member-docs-search-input {
+    height: 100%;
+    line-height: normal;
+  }
   .member-docs-search-input::placeholder {
     font-size: var(--font-sm);
+    line-height: normal;
   }
   .member-docs-filter-btn {
     display: flex;
@@ -324,7 +385,7 @@
     color: #8A949F;
     background: transparent;
   }
-  .member-docs-tab--active {
+  .member-docs-page .member-docs-tab--active {
     color: #ffffff;
     background: #E22A2A;
   }
@@ -796,7 +857,7 @@
     display: flex;
   }
   .member-doc-row__menu {
-    position: static;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -813,7 +874,7 @@
     justify-self: center;
   }
   .member-doc-row__menu:hover {
-    position: static;
+    position: relative;
     width: 40px;
     min-width: 40px;
     max-width: 40px;
@@ -985,7 +1046,7 @@
     display: flex;
   }
   .member-doc-row__menu {
-    position: static;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1002,7 +1063,7 @@
     justify-self: center;
   }
   .member-doc-row__menu:hover {
-    position: static;
+    position: relative;
     width: 40px;
     min-width: 40px;
     max-width: 40px;
