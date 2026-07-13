@@ -14,8 +14,7 @@ export default function ContactDetailsModal({ contact, onClose }) {
         </div>
 
         {/* Profile Header */}
-        <div className="contact-details-header">
-          <div className="contact-details-avatar"></div>
+        <div className="contact-details-header contact-details-header--simple">
           <div className="contact-details-info-wrap">
             <div className="contact-details-title-row">
               <h2 className="contact-details-name">{contact.name}</h2>
@@ -24,44 +23,17 @@ export default function ContactDetailsModal({ contact, onClose }) {
                 <span>Edit Profile</span>
               </button>
             </div>
-            <div className="contact-details-status-row">
-              <span className="contact-status-badge">Active</span>
-              <span className="contact-role">Legal Manager</span>
-            </div>
-            
-            <div className="contact-quick-info">
-              <div className="quick-info-col">
-                <div className="quick-info-item">
-                  <span className="quick-info-label">Department</span>
-                  <span className="quick-info-val">Legal</span>
-                </div>
-                <div className="quick-info-item">
-                  <span className="quick-info-label">Date Hired</span>
-                  <span className="quick-info-val">Mar 7, 2021</span>
-                </div>
-              </div>
-              <div className="quick-info-col desktop-quick-info-col">
-                <div className="quick-info-item">
-                  <Mail size={14} color="#6b7280" />
-                  <span className="quick-info-val">{contact.email}</span>
-                </div>
-                <div className="quick-info-item">
-                  <Phone size={14} color="#6b7280" />
-                  <span className="quick-info-val">+1 98765 43210</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div className="mobile-contact-links">
-          <div className="quick-info-item">
-            <Mail size={14} color="#6b7280" />
-            <span className="quick-info-val">{contact.email}</span>
-          </div>
-          <div className="quick-info-item">
-            <Phone size={14} color="#6b7280" />
-            <span className="quick-info-val">+1 98765 43210</span>
+            <div className="contact-links-simple">
+              <div className="quick-info-item">
+                <Mail size={14} color="#6b7280" />
+                <span className="quick-info-val">{contact.email}</span>
+              </div>
+              <div className="quick-info-item">
+                <Phone size={14} color="#6b7280" />
+                <span className="quick-info-val">+1 98765 43210</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -94,47 +66,7 @@ export default function ContactDetailsModal({ contact, onClose }) {
           </div>
         </div>
 
-        {/* Professional Information */}
-        <div className="contact-details-card member-contact-details-card--mt">
-          <div className="contact-details-card-header">Professional Information</div>
-          <div className="contact-details-card-body">
-            <div className="add-contact-grid member-add-contact-grid--gap">
-              <div className="contact-detail-field">
-                <label>Company Name</label>
-                <div className="detail-val">Acme Corp</div>
-              </div>
-              <div className="contact-detail-field">
-                <label>Department</label>
-                <div className="detail-val">Legal</div>
-              </div>
-              <div className="contact-detail-field">
-                <label>Employee ID</label>
-                <div className="detail-val">EMP-0421</div>
-              </div>
-              <div className="contact-detail-field">
-                <label>Job Title</label>
-                <div className="detail-val">Legal Manager</div>
-              </div>
-              <div className="contact-detail-field">
-                <label>Date Joined</label>
-                <div className="detail-val">March 12, 2022</div>
-              </div>
-            </div>
-            
-            <div className="contact-detail-field add-contact-field-full member-contact-field-full--mt">
-              <label>Skills</label>
-              <div className="skills-row">
-                <span className="skill-pill">Contract Review</span>
-                <span className="skill-pill">Compliance Management</span>
-                <span className="skill-pill">Risk Assessment</span>
-                <span className="skill-pill">Corporate Law</span>
-                <span className="skill-pill">Negotiation</span>
-              </div>
-            </div>
-          </div>
         </div>
-
-      </div>
     </div>
   );
 }

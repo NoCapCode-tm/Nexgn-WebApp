@@ -386,101 +386,12 @@ export default function MemberSignYourself() {
           </div>
 
           {activeTab !== 'sign' && (
-          <div className="bottom-section">
-            <div className="doc-preview">
-              <div className="doc-preview__header">
-                <span className="doc-preview__title">Document Preview</span>
-                <div className="doc-preview__zoom">
-                  <button className="doc-preview__zoom-btn" onClick={zoomOut} aria-label="Zoom out">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="11" cy="11" r="8"/>
-                      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                      <line x1="8" y1="11" x2="14" y2="11"/>
-                    </svg>
-                  </button>
-                  <span>{zoom}%</span>
-                  <button className="doc-preview__zoom-btn" onClick={zoomIn} aria-label="Zoom in">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="11" cy="11" r="8"/>
-                      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                      <line x1="11" y1="8" x2="11" y2="14"/>
-                      <line x1="8" y1="11" x2="14" y2="11"/>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div className="doc-preview__canvas">
-                {uploadedFile ? (
-                  <div className="doc-preview__filename">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
-                      stroke="#FF0915" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                      <polyline points="14 2 14 8 20 8"/>
-                    </svg>
-                    <span>{uploadedFile}</span>
-                  </div>
-                ) : (
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18.916 36.6673H9.99935C9.11529 36.6673 8.26745 36.3161 7.64233 35.691C7.0172 35.0659 6.66602 34.2181 6.66602 33.334V6.66733C6.66602 5.78327 7.0172 4.93543 7.64233 4.31031C8.26745 3.68519 9.11529 3.334 9.99935 3.334H23.3327C23.8608 3.3327 24.384 3.43601 24.872 3.63797C25.36 3.83993 25.8032 4.13653 26.176 4.51066L32.156 10.4907C32.5301 10.8634 32.8268 11.3066 33.0287 11.7947C33.2307 12.2827 33.334 12.8058 33.3327 13.334V22.2507" stroke="#CCCCCC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M23.334 3.33398V11.6673C23.334 12.1093 23.5096 12.5333 23.8221 12.8458C24.1347 13.1584 24.5586 13.334 25.0007 13.334H33.334" stroke="#CCCCCC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M23.334 31.666H33.334" stroke="#CCCCCC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M28.334 26.666V36.666" stroke="#CCCCCC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                )}
-              </div>
-            </div>
-
-            <div className="field-props">
-                <div className="field-props__title">Field Properties</div>
-
-                <div>
-                  <div className="field-props__label">Field Type</div>
-                  <input
-                    type="text"
-                    className="form-input field-props__input-read"
-                    value={fieldType}
-                    onChange={e => setFieldType(e.target.value)}
-                    placeholder="NDA"
-                  />
-                </div>
-
-                <div className="required-row">
-                  <span className="required-label">Required</span>
-                  <label className="toggle">
-                    <input
-                      type="checkbox"
-                      checked={required}
-                      onChange={e => setRequired(e.target.checked)}
-                    />
-                    <span className="toggle-slider"></span>
-                  </label>
-                </div>
-
-                <div>
-                  <div className="field-props__label">Assigned To</div>
-                  <div className="template-select-wrap">
-                    <select
-                      className="template-select select-props"
-                      value={fieldAssignedTo}
-                      onChange={e => setFieldAssignedTo(e.target.value)}
-                    >
-                      <option>Fresher / Freelancer / Intern</option>
-                      <option>Employee / Staff</option>
-                      <option>Client / External signer</option>
-                    </select>
-                    <svg className="template-chevron" width="14" height="14" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" strokeWidth="2"
-                      strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="9 18 15 12 9 6"/>
-                    </svg>
-                  </div>
-                </div>
-
-                <button className="btn-share" onClick={(e) => { e.preventDefault(); navigate('/member-documents'); }}>Share</button>
-              </div>
-          </div>
+            <button
+              className="btn-share btn-share--compact"
+              onClick={(e) => { e.preventDefault(); navigate('/member-documents'); }}
+            >
+              Share
+            </button>
           )}
         </div>
       </>

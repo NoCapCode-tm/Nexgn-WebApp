@@ -5,7 +5,7 @@ import "../css/MemberContactBook.css";
 export default function AddContactForm({ onClose }) {
   return (
     <div className="add-contact-modal-overlay" onClick={onClose}>
-      <div className="add-contact-modal" onClick={(e) => e.stopPropagation()}>
+      <div className="add-contact-modal add-contact-modal--compact" onClick={(e) => e.stopPropagation()}>
         
         <div className="mobile-add-contact-back" onClick={onClose}>
           <ChevronLeft size={24} color="#111827" />
@@ -39,6 +39,10 @@ export default function AddContactForm({ onClose }) {
               <label>Emergency Contact</label>
               <input type="text" />
             </div>
+            <div className="add-contact-field">
+              <label>Job Title</label>
+              <input type="text" />
+            </div>
             <div className="add-contact-field add-contact-field-full">
               <label>Address</label>
               <input type="text" />
@@ -46,40 +50,8 @@ export default function AddContactForm({ onClose }) {
           </div>
         </div>
 
-        {/* Professional Information */}
-        <div className="add-contact-section add-contact-section--prof">
-          <h3 className="add-contact-heading">Professional Information</h3>
-          <div className="add-contact-grid">
-            <div className="add-contact-field">
-              <label>Company Name</label>
-              <input type="text" />
-            </div>
-            <div className="add-contact-field">
-              <label>Department</label>
-              <input type="text" />
-            </div>
-            <div className="add-contact-field">
-              <label>Employee ID</label>
-              <input type="text" />
-            </div>
-            <div className="add-contact-field">
-              <label>Job Title</label>
-              <input type="text" />
-            </div>
-            <div className="add-contact-field">
-              <label>Date Joined</label>
-              <input type="text" />
-            </div>
-            <div className="add-contact-field empty-cell"></div>
-            <div className="add-contact-field add-contact-field-full">
-              <label>Skills</label>
-              <input type="text" />
-            </div>
-          </div>
-        </div>
-
-        <div className="mobile-add-contact-save">
-          <button className="mobile-add-contact-save-btn">Save</button>
+        <div className="add-contact-save-row">
+          <button className="add-contact-save-btn">Save</button>
         </div>
 
       </div>

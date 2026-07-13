@@ -55,6 +55,10 @@
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
+/* Hide Filter button on desktop Documents topbar only */
+.member-docs-page .desktop-topbar .member-docs-filter-wrapper {
+  display: none;
+}
 .member-docs-filter-btn:hover {
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
@@ -223,7 +227,7 @@
   width: 100px;
   margin-top: 4px;
   overflow: hidden;
-  border: 2.5px solid #CCCCCC;
+  border: 2px solid #CCCCCC;
   border-radius: 10px;
   background: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
@@ -235,7 +239,7 @@
   gap: 6px;
   padding: 10px 14px;
   border: none;
-  border-bottom: 2.5px solid #CCCCCC;
+  border-bottom: 2px solid #CCCCCC;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
@@ -336,6 +340,9 @@
     box-shadow: 0 0.533vw 2.667vw rgba(0, 0, 0, 0.08);
   }
   .member-docs-filter-btn .filter-text {
+    display: none;
+  }
+  .member-docs-page .member-docs-filter-wrapper {
     display: none;
   }
   .member-docs-add-btn {
@@ -679,6 +686,9 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
   .filter-text {
+    display: none;
+  }
+  .member-docs-page .member-docs-filter-wrapper {
     display: none;
   }
   /* + Add pill */
