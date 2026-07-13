@@ -104,6 +104,8 @@
   flex-direction: column;
   gap: 8px;
   width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 /* Contact Card Layout */
 .member-contact-card {
@@ -150,6 +152,19 @@
 /* Hide mobile-specific elements on desktop by default */
 .member-contact-card__more {
   display: none;
+}
+.member-contact-card__close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 .mobile-total-contacts-card {
   display: none;
@@ -258,9 +273,7 @@
     font-size: var(--font-xs);
   }
   .member-contact-card__more {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: none;
   }
   /* Total Contacts Summary Card */
   .mobile-total-contacts-card {
@@ -400,19 +413,79 @@
 .mobile-add-contact-save {
   display: none;
 }
+.add-contact-save-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+.add-contact-save-btn {
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  cursor: pointer;
+}
+.add-contact-save-btn:hover {
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+}
 .mobile-contact-links {
   display: none;
 }
 /* == CONTACT DETAILS MODAL == */
-.contact-details-modal {
+.contact-details-modal,
+.add-contact-modal--compact {
+  max-width: 560px;
   max-height: 88vh;
-  padding-top: 20px;
+  padding: 24px 32px 28px 32px;
   overflow: hidden;
+}
+.contact-details-modal .contact-details-name {
+  font-size: 15px;
+}
+.contact-details-modal .contact-details-edit-btn {
+  padding: 5px 12px;
+  font-size: 11px;
+}
+.contact-details-modal .quick-info-val {
+  font-size: 12px;
+}
+.contact-details-modal .contact-details-card-header {
+  padding: 7px 14px;
+  font-size: 11px;
+}
+.contact-details-modal .contact-details-card-body {
+  padding: 10px 14px;
+}
+.contact-details-modal .contact-detail-field label {
+  font-size: 9px;
+}
+.contact-details-modal .contact-detail-field .detail-val {
+  height: 28px;
+  margin-top: 6px;
+  padding: 0 9px;
+  font-size: 10px;
+}
+.contact-details-modal .add-contact-grid {
+  gap: 6px 32px;
 }
 .contact-details-header {
   display: flex;
   gap: 16px;
   margin-bottom: 16px;
+}
+.contact-details-header--simple {
+  margin-bottom: 20px;
+}
+.contact-links-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
 }
 .contact-details-avatar {
   flex-shrink: 0;
@@ -959,6 +1032,11 @@
     max-width: 1244px;
     padding: clamp(36px, 2.5vw, 64px) clamp(56px, 3.88vw, 99px) clamp(200px, 13.88vw, 355px) clamp(56px, 3.88vw, 99px);
     border-radius: clamp(16px, 1.11vw, 28px);
+  }
+  .member-contact-page .contact-details-modal,
+  .member-contact-page .add-contact-modal--compact {
+    max-width: 680px !important;
+    padding: 20px 28px 24px 28px !important;
   }
   .member-contact-page .add-contact-heading {
     margin-bottom: clamp(12px, 0.83vw, 21px);
