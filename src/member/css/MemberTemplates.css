@@ -1,0 +1,82 @@
+/* MemberTemplates.css
+   Dedicated Member styles following the same structure as
+   MemberDocuments.css / MemberContactBook.css:
+   - mobile (<=768px)
+   - tablet (769px-1179px)
+   - fluid desktop scaling with clamp() (>=1180px)
+
+   Reuses .setup-card / .form-input / .btn-create / .upload-zone /
+   .or-divider / .form-textarea from MemberSignYourself.css.
+*/
+.template-create-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.template-create-row .form-input {
+  flex: 1;
+  max-width: clamp(200px, 25vw, 320px);
+}
+.template-create-row .btn-create {
+  flex-shrink: 0;
+}
+.mobile-header-divider {
+  display: none;
+}
+.template-setup-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+@media (max-width: 768px) {
+  .template-setup-footer {
+    justify-content: center;
+  }
+  .template-setup-footer .btn-create {
+    width: auto;
+    padding: 10px 32px;
+  }
+}
+/* == RESPONSIVE == */
+@media (min-width: 769px) and (max-width: 1179px) {
+  .setup-card {
+    width: calc(100% - 48px);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+}
+.btn-create__icon {
+  display: none;
+}
+@media (max-width: 768px) {
+  .template-create-row {
+    flex-direction: row;
+    align-items: center;
+  }
+  .template-create-row .form-input {
+    flex: 1;
+    min-width: 0;
+    max-width: none;
+  }
+  .template-create-row .btn-create {
+    display: flex;
+    flex-shrink: 0;
+    width: auto;
+    padding: 0;
+    border-radius: 7px;
+    background: none;
+  }
+  .btn-create__text {
+    display: none;
+  }
+  .btn-create__icon {
+    display: block;
+  }
+}
+/* Fluid Desktop Scaling (1180px and above) — matches MemberSignYourself.css */
+@media (min-width: 1180px) {
+  .template-create-row {
+    gap: clamp(10px, 0.83vw, 24px);
+  }
+}

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Search, Bell, UserCircle, Settings, FileClock, UserPen, Crown, LogOut } from "lucide-react";
+import { Bell, UserCircle, Settings, FileClock, UserPen, Crown, LogOut } from "lucide-react";
 
 export default function MemberTopbarIcons({ 
   iconSize = 24, 
@@ -12,10 +12,6 @@ export default function MemberTopbarIcons({
 
   return (
     <div className={className}>
-      <button className="topbar__icon-btn" onClick={onSearchClick}>
-        <Search size={iconSize} color="#FF0915" strokeWidth={1.5} className="mobile-hidden-search" />
-      </button>
-      
       <div className="topbar__icon-wrapper">
         <button className="topbar__icon-btn">
           <Bell size={iconSize} color="#FF0915" strokeWidth={1.5} />
