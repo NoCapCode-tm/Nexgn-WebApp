@@ -1,0 +1,209 @@
+.template-editor-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+}
+.template-editor-modal {
+  display: flex;
+  flex-direction: column;
+  width: 92vw;
+  max-width: 1100px;
+  height: 88vh;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+.template-editor-topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+.template-editor-back {
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+}
+.template-editor-crumb {
+  color: #999;
+}
+.template-editor-title {
+  font-weight: 600;
+  font-size: 15px;
+  color: #111;
+}
+.template-editor-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+/* Left: page thumbnails */
+.template-editor-pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100px;
+  padding: 16px 8px;
+  border-right: 1px solid #eee;
+  overflow-y: auto;
+}
+.template-editor-page-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 96px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #888;
+  background: #fff;
+  cursor: pointer;
+}
+.template-editor-page-thumb--active {
+  border-color: #e8334a;
+  border-width: 2px;
+}
+.template-editor-add-page {
+  width: 32px;
+  height: 32px;
+  border: 1px dashed #ccc;
+  border-radius: 6px;
+  background: none;
+  font-size: 16px;
+  color: #999;
+  cursor: pointer;
+}
+/* Center: canvas */
+.template-editor-canvas-wrap {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+  background: #fafafa;
+}
+.template-editor-canvas {
+  width: 100%;
+  max-width: 400px;
+  min-height: 500px;
+  padding: 24px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.template-editor-canvas-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+}
+/* Right: sidebar */
+.template-editor-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 220px;
+  padding: 20px;
+  border-left: 1px solid #eee;
+  overflow-y: auto;
+}
+.template-editor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.template-editor-section-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+}
+.template-editor-role-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #999;
+  background: #fff;
+}
+.template-editor-add-role {
+  padding: 8px 0;
+  border: 1px solid #e8334a;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e8334a;
+  background: #fff;
+  cursor: pointer;
+}
+.template-editor-widgets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.template-editor-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 4px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+.template-editor-widget-icon {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+.template-editor-widget-label {
+  font-size: 11px;
+  color: #666;
+}
+.template-editor-share {
+  margin-top: auto;
+  padding: 10px 0;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .template-editor-modal {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+  .template-editor-body {
+    flex-direction: column;
+  }
+  .template-editor-pages {
+    flex-direction: row;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+  .template-editor-sidebar {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #eee;
+  }
+}

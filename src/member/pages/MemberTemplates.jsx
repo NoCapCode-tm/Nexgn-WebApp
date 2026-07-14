@@ -6,7 +6,7 @@ import "../css/MemberBaseLayout.css";
 import "../css/MemberSignYourself.css";
 import "../css/MemberTemplates.css";
 
-export default function MemberTemplates() {
+export default function MemberTemplates({ onCreate }) {
   const [templateName, setTemplateName] = useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
   const [docTitle, setDocTitle] = useState("");
@@ -50,7 +50,7 @@ export default function MemberTemplates() {
                 value={templateName}
                 onChange={(e) => setTemplateName(e.target.value)}
               />
-              <button className="btn-create">
+              <button className="btn-create" onClick={() => onCreate && onCreate(templateName)}>
                 <span className="btn-create__text">Create</span>
                 <svg
                   className="btn-create__icon"
