@@ -15,7 +15,7 @@ import MemberSignYourself from "./member/pages/MemberSignYourself";
 import MemberDocuments from "./member/pages/MemberDocuments";
 import MemberContactBook from "./member/pages/MemberContactBook";
 import MemberSettings from "./member/pages/MemberSettings";
-import MemberTemplates from "./member/pages/MemberTemplates";
+import MemberTemplatesPage from "./member/pages/MemberTemplatesPage";
 
 export default function App() {
   return (
@@ -41,7 +41,7 @@ export default function App() {
         <Route path="/member-request-signature" element={<MemberSignYourself />} />
         <Route path="/member-settings" element={<MemberSettings />} />
         <Route path="/member-contact-book" element={<MemberContactBook />} />
-        <Route path="/member-templates" element={<MemberTemplates />} />
+        <Route path="/member-templates" element={<MemberTemplatesPage />} />
 
         <Route path="*" element={<Dashboard />} />
       </Routes>
