@@ -323,8 +323,55 @@
 
 /* == TABLET (769px - 1179px) == */
 @media (min-width: 769px) and (max-width: 1179px) {
+  .template-editor-body {
+    position: relative;
+    flex-direction: column;
+  }
+  .template-editor-canvas-wrap {
+    order: 1;
+    justify-content: stretch;
+    width: 100%;
+    padding: 24px 24px 16px;
+  }
+  .template-editor-canvas {
+    max-width: calc(100% - 216px);
+  }
+  .template-editor-pages {
+    order: 3;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    border-right: none;
+    border-top: 1px solid #eee;
+    padding: 12px 16px;
+  }
   .template-editor-sidebar {
-    width: 280px;
+    order: 2;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 180px;
+    max-height: calc(100% - 100px);
+    gap: 14px;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+  }
+  .template-editor-sidebar .template-editor-widgets-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 6px;
+  }
+  .template-editor-sidebar .template-editor-widget {
+    width: 72px;
+    aspect-ratio: 1 / 1;
+    padding: 6px 4px;
+  }
+  .template-editor-sidebar .template-editor-widget-label {
+    font-size: 11px;
   }
   .template-editor-section-label {
     font-size: 14px;
