@@ -752,6 +752,9 @@
     padding-top: 8px;
     overflow-x: hidden;
   }
+  .member-sign-yourself-page .mobile-page-header {
+    padding-left: calc(var(--mobile-gutter) - 8px);
+  }
   .member-sign-yourself-page .mobile-topbar {
     width: calc(100% + 32px);
     margin-right: -16px;

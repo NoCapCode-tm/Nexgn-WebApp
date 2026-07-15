@@ -300,6 +300,12 @@
     align-items: stretch;
     gap: var(--space-xs);
   }
+  .member-docs-page .mobile-header-divider {
+    margin: var(--space-md) 0;
+  }
+  .member-docs-page .mobile-filter-row {
+    margin-top: var(--space-sm);
+  }
   .member-docs-topbar-actions {
     display: flex;
     justify-content: space-between;

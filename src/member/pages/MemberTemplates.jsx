@@ -13,9 +13,14 @@ export default function MemberTemplates({ onCreate }) {
   const [note, setNote] = useState("");
   const fileInputRef = useRef(null);
 
+  const [uploadedFileObj, setUploadedFileObj] = useState(null);
+
   function handleFile(e) {
     const file = e.target.files[0];
-    if (file) setUploadedFile(file.name);
+    if (file) {
+      setUploadedFile(file.name);
+      setUploadedFileObj(file);
+    }
   }
 
   return (
@@ -116,7 +121,10 @@ export default function MemberTemplates({ onCreate }) {
               onDrop={(e) => {
                 e.preventDefault();
                 const file = e.dataTransfer.files[0];
-                if (file) setUploadedFile(file.name);
+                if (file) {
+                  setUploadedFile(file.name);
+                  setUploadedFileObj(file);
+                }
               }}
             >
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -170,7 +178,15 @@ export default function MemberTemplates({ onCreate }) {
           </div>
 
           <div className="template-setup-footer">
-            <button className="btn-create">Next</button>
+            <button
+              className="btn-create"
+              onClick={() =>
+                onCreate &&
+                onCreate(docTitle || uploadedFile || "Untitled Template", uploadedFileObj)
+              }
+            >
+              Next
+            </button>
           </div>
         </div>
       </>

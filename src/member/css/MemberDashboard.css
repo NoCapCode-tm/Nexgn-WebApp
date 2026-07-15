@@ -248,15 +248,16 @@
     transition: all 0.2s ease;
     cursor: pointer;
   }
+  .member-theme .mobile-page-header__upload-btn svg {
+    width: 28px;
+    height: 28px;
+  }
   .member-theme .mobile-page-header__upload-btn:hover {
     background: rgba(255, 9, 21, 0.05);
     transform: scale(1.05);
   }
   .member-theme .mobile-page-header__divider {
-    height: 0;
-    margin-top: var(--space-sm);
-    margin-bottom: 0;
-    border-top: 1px solid #E5E7EB;
+    display: none;
   }
   .member-theme .topbar__sub {
     margin-bottom: 0;
@@ -321,7 +322,8 @@
   .member-theme .docs-section__title,
   .member-theme .mobile-topbar__title {
     margin-bottom: var(--space-xs);
-    font-size: var(--font-title);
+    font-size: var(--font-lg);
+    font-weight: 700;
     color: #111827;
   }
   .member-theme .docs-section__title {

@@ -6,11 +6,13 @@ import MemberTemplateEditor from "./MemberTemplateEditor";
 export default function MemberTemplatesPage() {
   const [view, setView] = useState("list");
   const [templateName, setTemplateName] = useState("");
+  const [templateFile, setTemplateFile] = useState(null);
 
   if (view === "editor") {
     return (
       <MemberTemplateEditor
         templateName={templateName}
+        templateFile={templateFile}
         onBack={() => setView("list")}
       />
     );
@@ -20,8 +22,9 @@ export default function MemberTemplatesPage() {
     return (
       <MemberTemplates
         onBack={() => setView("list")}
-        onCreate={(name) => {
+        onCreate={(name, file) => {
           setTemplateName(name);
+          setTemplateFile(file || null);
           setView("editor");
         }}
       />
