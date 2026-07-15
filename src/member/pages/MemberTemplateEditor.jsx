@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import * as pdfjsLib from "pdfjs-dist";
+import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import "../css/MemberBaseLayout.css";
 import "../css/MemberTemplateEditor.css";
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 const WIDGETS = [
   { id: "text", label: "Text", icon: "Aa" },
@@ -72,12 +76,90 @@ const DATE_ICON_SVG = (
   </svg>
 );
 
-export default function MemberTemplateEditor({ templateName, onBack }) {
+export default function MemberTemplateEditor({ templateName, templateFile, onBack }) {
   const [pages, setPages] = useState([1, 2]);
   const [activePage, setActivePage] = useState(1);
+  const [pdfDoc, setPdfDoc] = useState(null);
+  const canvasRef = useRef(null);
 
   function addPage() {
     setPages((p) => [...p, p.length + 1]);
+  }
+
+  useEffect(() => {
+    if (!templateFile) return;
+
+    let cancelled = false;
+
+    async function loadPdf() {
+      const arrayBuffer = await templateFile.arrayBuffer();
+      const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+      const doc = await loadingTask.promise;
+      if (cancelled) return;
+      setPdfDoc(doc);
+      setPages(Array.from({ length: doc.numPages }, (_, i) => i + 1));
+      setActivePage(1);
+    }
+
+    loadPdf();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [templateFile]);
+
+  useEffect(() => {
+    if (!pdfDoc || !canvasRef.current) return;
+
+    let cancelled = false;
+
+    async function renderPage() {
+      const page = await pdfDoc.getPage(activePage);
+      const viewport = page.getViewport({ scale: 1.2 });
+      const canvas = canvasRef.current;
+      const context = canvas.getContext("2d");
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+
+      if (cancelled) return;
+      await page.render({ canvasContext: context, viewport }).promise;
+    }
+
+    renderPage();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [pdfDoc, activePage]);
+
+  function PageThumbnail({ pageNum }) {
+    const thumbRef = useRef(null);
+
+    useEffect(() => {
+      if (!pdfDoc || !thumbRef.current) return;
+
+      let cancelled = false;
+
+      async function renderThumb() {
+        const page = await pdfDoc.getPage(pageNum);
+        const viewport = page.getViewport({ scale: 0.2 });
+        const canvas = thumbRef.current;
+        const context = canvas.getContext("2d");
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        if (cancelled) return;
+        await page.render({ canvasContext: context, viewport }).promise;
+      }
+
+      renderThumb();
+
+      return () => {
+        cancelled = true;
+      };
+    }, [pageNum]);
+
+    return <canvas ref={thumbRef} className="template-editor-page-thumb-canvas" />;
   }
 
   return (
@@ -99,7 +181,7 @@ export default function MemberTemplateEditor({ templateName, onBack }) {
                 className={`template-editor-page-thumb ${activePage === p ? "template-editor-page-thumb--active" : ""}`}
                 onClick={() => setActivePage(p)}
               >
-                Page {p}
+                {pdfDoc ? <PageThumbnail pageNum={p} /> : `Page ${p}`}
               </div>
             ))}
             <button className="template-editor-add-page" onClick={addPage}>
@@ -109,7 +191,11 @@ export default function MemberTemplateEditor({ templateName, onBack }) {
 
           <div className="template-editor-canvas-wrap">
             <div className="template-editor-canvas">
-              <h2 className="template-editor-canvas-title">Title</h2>
+              {templateFile ? (
+                <canvas ref={canvasRef} className="template-editor-pdf-canvas" />
+              ) : (
+                <h2 className="template-editor-canvas-title">Title</h2>
+              )}
             </div>
           </div>
 
