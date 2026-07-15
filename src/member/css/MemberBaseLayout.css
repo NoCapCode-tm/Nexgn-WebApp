@@ -1066,7 +1066,7 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
     height: 26px !important;
   }
   .mobile-topbar__hamburger {
-    display: flex;
+    display: none;
   }
 }
 /* Fluid Desktop Scaling (1180px and above)

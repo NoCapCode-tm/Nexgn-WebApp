@@ -23,6 +23,17 @@
 .mobile-header-divider {
   display: none;
 }
+
+@media (max-width: 768px) {
+  .member-templates-page .setup-card {
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+    margin: 0 16px;
+    border: 1px solid #E4E4E4;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  }
+}
 .template-setup-footer {
   display: flex;
   justify-content: flex-end;
@@ -165,6 +176,25 @@
 /* Spacing fix: search+add row sits directly above table on Templates list page */
 .template-toolbar-actions {
   margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .member-templates-list-page .mobile-header-divider {
+    margin: var(--space-md) 0;
+  }
+  .member-templates-list-page .mobile-filter-row {
+    margin-top: var(--space-sm);
+  }
+  .member-templates-list-page .member-docs-add-btn-short {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+  }
 }
 
 /* Align search + Add Template to the right */

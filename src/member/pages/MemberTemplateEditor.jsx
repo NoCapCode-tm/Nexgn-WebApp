@@ -80,6 +80,7 @@ export default function MemberTemplateEditor({ templateName, templateFile, onBac
   const [pages, setPages] = useState([1, 2]);
   const [activePage, setActivePage] = useState(1);
   const [pdfDoc, setPdfDoc] = useState(null);
+  const [mobileOptionsOpen, setMobileOptionsOpen] = useState(false);
   const canvasRef = useRef(null);
 
   function addPage() {
@@ -199,8 +200,38 @@ export default function MemberTemplateEditor({ templateName, templateFile, onBac
             </div>
           </div>
 
-          <div className="template-editor-sidebar">
-            
+          <div className="template-editor-mobile-actions">
+            <button
+              className="template-editor-mobile-options-btn"
+              onClick={() => setMobileOptionsOpen(true)}
+              aria-label="Options"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="#fff" strokeWidth="2"/>
+                <rect x="14" y="3" width="7" height="7" rx="1.5" stroke="#fff" strokeWidth="2"/>
+                <rect x="3" y="14" width="7" height="7" rx="1.5" stroke="#fff" strokeWidth="2"/>
+                <path d="M17.5 14V21M14 17.5H21" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </button>
+            <span className="template-editor-mobile-options-label">Options</span>
+            <button className="template-editor-mobile-share-btn">Share</button>
+          </div>
+
+          {mobileOptionsOpen && (
+            <div
+              className="template-editor-mobile-backdrop"
+              onClick={() => setMobileOptionsOpen(false)}
+            />
+          )}
+
+          <div className={`template-editor-sidebar ${mobileOptionsOpen ? "template-editor-sidebar--mobile-open" : ""}`}>
+            <button
+              className="template-editor-sidebar-close"
+              onClick={() => setMobileOptionsOpen(false)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
             <div className="template-editor-section">
               <div className="template-editor-roles-row">
                 <div className="template-editor-zoom-controls">

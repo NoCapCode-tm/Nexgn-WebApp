@@ -282,20 +282,98 @@
     border-radius: 0;
   }
   .template-editor-body {
+    position: relative;
     flex-direction: column;
   }
+  .template-editor-canvas-wrap {
+    order: 1;
+    flex: 1;
+    padding: 16px;
+  }
   .template-editor-pages {
+    order: 3;
     flex-direction: row;
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .template-editor-sidebar {
-    width: 100%;
-    border-left: none;
     border-top: 1px solid #eee;
+    border-bottom: none;
   }
+
+  /* Floating Options + Share buttons */
+  .template-editor-mobile-actions {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .template-editor-mobile-options-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+    cursor: pointer;
+  }
+  .template-editor-mobile-options-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #111;
+  }
+  .template-editor-mobile-share-btn {
+    margin-top: 8px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+    cursor: pointer;
+  }
+
+  /* Sidebar becomes a slide-up overlay, hidden until "Options" is tapped */
+  .template-editor-sidebar {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    display: none;
+    max-height: 75vh;
+    border-left: none;
+    border-top: none;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  }
+  .template-editor-sidebar--mobile-open {
+    display: flex;
+  }
+  .template-editor-sidebar-close {
+    align-self: flex-end;
+    width: 28px;
+    height: 28px;
+    margin-bottom: -8px;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    color: #666;
+    background: #f2f2f2;
+    cursor: pointer;
+  }
+  .template-editor-mobile-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
   .template-editor-section-label {
     font-size: 3.733vw;
   }
@@ -305,7 +383,6 @@
     border-radius: 2.667vw;
     font-size: 3.733vw;
   }
-  
   .template-editor-add-role {
     height: 11.733vw;
     border-radius: 5.867vw;
