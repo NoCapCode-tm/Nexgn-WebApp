@@ -170,7 +170,12 @@ export default function MemberTemplates({ onCreate }) {
           </div>
 
           <div className="template-setup-footer">
-            <button className="btn-create">Next</button>
+            <button
+              className="btn-create"
+              onClick={() => onCreate && onCreate(docTitle || uploadedFile || "Untitled Template")}
+            >
+              Next
+            </button>
           </div>
         </div>
       </>
