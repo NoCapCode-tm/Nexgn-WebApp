@@ -18,8 +18,8 @@ const navItems = [
   { label: "Dashboard", path: "/member-dashboard", icon: HomeIcon },
   { label: "Signers", path: "/member-sign-yourself", icon: ClipboardIcon },
   { label: "Documents", path: "/member-documents", icon: FileIcon },
-  { label: "Templates", path: "/member-templates", icon: TemplateIcon },
   { label: "Contact Book", path: "/member-contact-book", icon: ContactIcon },
+  { label: "Templates", path: "/member-templates", icon: TemplateIcon },
   { label: "Settings", path: "/member-settings", icon: SettingsIcon },
 ];
 
