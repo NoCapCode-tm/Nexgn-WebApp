@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+import ReactQuill from "react-quill-new";
+import "react-quill-new/dist/quill.snow.css";
 import "../css/MemberBaseLayout.css";
 import "../css/MemberTemplateEditor.css";
 
@@ -76,16 +78,99 @@ const DATE_ICON_SVG = (
   </svg>
 );
 
+const WIDGET_DEFAULT_SIZE = {
+  text: { width: 140, height: 32 },
+  number: { width: 100, height: 32 },
+  name: { width: 160, height: 32 },
+  signature: { width: 160, height: 48 },
+  email: { width: 180, height: 32 },
+  date: { width: 120, height: 32 },
+};
+
 export default function MemberTemplateEditor({ templateName, templateFile, onBack }) {
   const [pages, setPages] = useState([1, 2]);
   const [activePage, setActivePage] = useState(1);
   const [pdfDoc, setPdfDoc] = useState(null);
   const [mobileOptionsOpen, setMobileOptionsOpen] = useState(false);
+  const [docContent, setDocContent] = useState("");
+  const [placedWidgets, setPlacedWidgets] = useState([]);
+  const [draggingId, setDraggingId] = useState(null);
+  const dragOffsetRef = useRef({ x: 0, y: 0 });
   const canvasRef = useRef(null);
+  const canvasBoxRef = useRef(null);
+
+  const quillModules = {
+    toolbar: [
+      [{ header: [1, 2, 3, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
+      ["clean"],
+    ],
+  };
 
   function addPage() {
     setPages((p) => [...p, p.length + 1]);
   }
+
+  function addWidget(type) {
+    const size = WIDGET_DEFAULT_SIZE[type] || { width: 140, height: 32 };
+    const newWidget = {
+      id: `${type}-${Date.now()}`,
+      type,
+      x: 40,
+      y: 40,
+      width: size.width,
+      height: size.height,
+      page: activePage,
+    };
+    setPlacedWidgets((prev) => [...prev, newWidget]);
+  }
+
+  function handleWidgetPointerDown(e, widget) {
+    e.stopPropagation();
+    const canvasBox = canvasBoxRef.current?.getBoundingClientRect();
+    if (!canvasBox) return;
+    dragOffsetRef.current = {
+      x: e.clientX - canvasBox.left - widget.x,
+      y: e.clientY - canvasBox.top - widget.y,
+    };
+    setDraggingId(widget.id);
+  }
+
+  useEffect(() => {
+    if (!draggingId) return;
+
+    function handlePointerMove(e) {
+      const canvasBox = canvasBoxRef.current?.getBoundingClientRect();
+      if (!canvasBox) return;
+      const newX = e.clientX - canvasBox.left - dragOffsetRef.current.x;
+      const newY = e.clientY - canvasBox.top - dragOffsetRef.current.y;
+
+      setPlacedWidgets((prev) =>
+        prev.map((w) =>
+          w.id === draggingId
+            ? {
+                ...w,
+                x: Math.max(0, Math.min(newX, canvasBox.width - w.width)),
+                y: Math.max(0, Math.min(newY, canvasBox.height - w.height)),
+              }
+            : w
+        )
+      );
+    }
+
+    function handlePointerUp() {
+      setDraggingId(null);
+    }
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+    };
+  }, [draggingId]);
 
   useEffect(() => {
     if (!templateFile) return;
@@ -191,12 +276,37 @@ export default function MemberTemplateEditor({ templateName, templateFile, onBac
           </div>
 
           <div className="template-editor-canvas-wrap">
-            <div className="template-editor-canvas">
+            <div className="template-editor-canvas" ref={canvasBoxRef}>
               {templateFile ? (
                 <canvas ref={canvasRef} className="template-editor-pdf-canvas" />
               ) : (
-                <h2 className="template-editor-canvas-title">Title</h2>
+                <ReactQuill
+                  className="template-editor-quill"
+                  theme="snow"
+                  value={docContent}
+                  onChange={setDocContent}
+                  modules={quillModules}
+                  placeholder="Title"
+                />
               )}
+
+              {placedWidgets
+                .filter((w) => w.page === activePage)
+                .map((w) => (
+                  <div
+                    key={w.id}
+                    className="template-editor-placed-widget"
+                    style={{
+                      left: w.x,
+                      top: w.y,
+                      width: w.width,
+                      height: w.height,
+                    }}
+                    onPointerDown={(e) => handleWidgetPointerDown(e, w)}
+                  >
+                    {WIDGETS.find((widget) => widget.id === w.type)?.label || w.type}
+                  </div>
+                ))}
             </div>
           </div>
 
@@ -266,7 +376,11 @@ export default function MemberTemplateEditor({ templateName, templateFile, onBac
               <span className="template-editor-section-label">Widgets</span>
               <div className="template-editor-widgets-grid">
                 {WIDGETS.map((w) => (
-                  <button className="template-editor-widget" key={w.id}>
+                  <button
+                    className="template-editor-widget"
+                    key={w.id}
+                    onClick={() => addWidget(w.id)}
+                  >
                     <span className="template-editor-widget-icon">
                       {w.id === "text" && TEXT_ICON_SVG}
                       {w.id === "number" && NUMBER_ICON_SVG}

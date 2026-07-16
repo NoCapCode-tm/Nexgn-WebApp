@@ -171,37 +171,7 @@
 /* ==========================================================================
    Buttons
    ========================================================================== */
-.member-theme .mobile-cta-row {
-  display: flex;
-  gap: 0;
-  box-sizing: border-box;
-  margin: 0 16px;
-  padding: 5px;
-  border: 1px solid #E4E4E4;
-  border-radius: 10px;
-  background: #ffffff;
-}
-.member-theme .mobile-cta {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  border: none;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  transition: all 0.15s ease;
-  cursor: pointer;
-}
-.member-theme .mobile-cta--primary {
-  color: #ffffff;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-}
-.member-theme .mobile-cta--outline {
-  color: #1a1a2e;
-  background: transparent;
-}
+
 .member-theme .topbar__upload {
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
@@ -219,8 +189,10 @@
     display: none;
   }
   /* 6. Overall Layout */
-  .member-theme .main {
+  .member-dashboard-page .main {
     gap: 8px;
+    padding-right: 16px;
+    padding-left: 16px;
     padding-bottom: 80px;
   }
   /* 1. Dashboard Section */
@@ -290,18 +262,25 @@
   /* 3. Buttons */
   .member-theme .mobile-cta-row {
     display: flex;
-    gap: 3px;
-    margin: var(--space-xs) var(--mobile-gutter);
-    padding: 2.33px 4.58px;
+    gap: 0;
+    height: 9vw;
+    min-height: 9vw;
+    margin: 0 0 4vw 0;
+    padding: 0;
     border: 1px solid #D9D9D9;
-    border-radius: 6.5px;
+    border-radius: 7px;
+    overflow: hidden;
     background: #ffffff;
   }
   .member-theme .mobile-cta {
-    height: 38.35px;
+    height: 9vw;
+    min-height: 9vw;
+    padding: 0 var(--space-sm);
     border-radius: 7px;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
+    line-height: 12px;
+    white-space: nowrap;
   }
   .member-theme .mobile-cta--primary {
     color: #ffffff;
@@ -310,7 +289,7 @@
   .member-theme .mobile-cta--outline {
     border: none;
     color: #666666;
-    background: transparent;
+    background: #ffffff;
   }
   /* 4. Recent Documents Section */
   .member-theme .docs-section {
@@ -341,11 +320,20 @@
   }
   /* 5. Document Rows */
   .member-theme .doc-row {
+    position: relative;
     gap: var(--space-sm);
     margin-bottom: var(--space-xs);
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--space-sm);
-    overflow-x: hidden;
+    overflow: visible;
+  }
+  .member-theme .doc-row__dropdown {
+    top: calc(100% + 6px);
+    width: 90px;
+  }
+  .member-theme .doc-row__dropdown-item {
+    padding: 8px 10px;
+    font-size: var(--font-xs);
   }
   .member-theme .desktop-table-header {
     gap: var(--space-sm);
