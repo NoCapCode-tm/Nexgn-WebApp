@@ -23,6 +23,7 @@
   --font-title: clamp(20px, 1.6vw, 26px);
   --font-section: clamp(14px, 0.97vw, 25px);
   --font-metric: clamp(32px, 2.7vw, 40px);
+  --member-bg: #fffbfd;
 }
 body {
   font-family: 'Inter', sans-serif;
@@ -718,6 +719,7 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
   border: none;
   background: none;
   cursor: pointer;
+  color: #1a1a2e;
 }
 .mobile-topbar__icons {
   display: flex;
@@ -1225,4 +1227,170 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
     border-radius: clamp(3px, 0.27vw, 7px);
     font-size: clamp(9px, 0.76vw, 22px);
   }
+}/* ============================================
+   DARK MODE — Global background image
+   ============================================ */
+/* Dark background — image layered over a gradient fallback so it never looks broken,
+   even if the image path turns out wrong. If the image 404s, the gradient still shows. */
+body.dark-mode,
+.dark-mode .layout,
+.dark-mode .member-templates-list-page,
+.dark-mode .member-theme {
+  background-color: #0a0a0c !important;
+  background-image:
+    url('../../assets/dark-bg.png'),
+    radial-gradient(ellipse at top left, rgba(150, 1, 1, 0.25), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(255, 9, 21, 0.25), transparent 50%),
+    linear-gradient(180deg, #0a0a0c 0%, #0a0a0c 100%) !important;
+  background-repeat: no-repeat;
+  background-size: cover, cover, cover, cover;
+  background-position: center, top left, bottom right, center;
+  background-attachment: fixed;
+}
+.dark-mode .main,
+.dark-mode .member-page-container {
+  background: transparent !important;
+}
+
+/* Catch-all: transparent row/card containers regardless of which naming convention is live */
+.dark-mode .doc-row,
+.dark-mode .member-doc-row,
+.dark-mode .template-row,
+.dark-mode .template-table-card,
+.dark-mode .member-docs-table,
+.dark-mode .docs-table,
+.dark-mode .docs-section,
+.dark-mode .member-docs-section {
+  background: transparent !important;
+}
+.dark-mode .doc-row,
+.dark-mode .member-doc-row,
+.dark-mode .template-row {
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+.dark-mode .doc-row__title,
+.dark-mode .member-doc-row__title,
+.dark-mode .col-title {
+  color: #f5f5f5 !important;
+}
+.dark-mode .doc-row__note,
+.dark-mode .member-doc-row__note,
+.dark-mode .col-note {
+  color: #b8b8be !important;
+}
+
+/* ============================================
+   DARK MODE — Sidebar
+   ============================================ */
+
+/* Sidebar panel fully transparent — background image shows straight through */
+.dark-mode .sidebar__inner {
+  background: transparent;
+}
+
+.dark-mode .sidebar__divider {
+  background: #FF0915;
+}
+
+/* Nav items — base + label */
+.dark-mode .sidebar__item {
+  color: #FFFFFF;
+}
+.dark-mode .sidebar__item-label {
+  color: #FFFFFF;
+}
+
+/* Hover state — overrides the light-pink #FFDCDC hover at every breakpoint */
+.dark-mode .sidebar__item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.dark-mode .sidebar__item:hover .sidebar__item-label {
+  color: #FF6B6B;
+}
+
+/* Active nav item — overrides the light pill backgrounds (#C7000B / #FFDCDC) */
+.dark-mode .sidebar__item--active {
+  background: rgba(255, 9, 21, 0.16);
+}
+.dark-mode .sidebar__item--active .sidebar__item-label {
+  color: #ffffff;
+}
+
+/* Table rows — transparent so bg image shows through, border for definition */
+.dark-mode .doc-row {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.dark-mode .doc-row__title {
+  color: #f5f5f5;
+}
+.dark-mode .doc-row__note,
+.dark-mode .doc-row__cell,
+.dark-mode .doc-row td {
+  color: #b8b8be;
+}
+.dark-mode .doc-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: none;
+}
+.dark-mode .doc-row__menu {
+  color: #b8b8be;
+}
+.dark-mode .doc-row__menu:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f5f5f5;
+}
+
+/* Table header labels */
+.dark-mode .docs-table__header,
+.dark-mode .docs-table th {
+  color: #8A949F;
+}
+
+/* Search bar stays dark/opaque already, but confirm text is legible */
+.dark-mode .template-search-input,
+.dark-mode .member-docs-search-input {
+  color: #f5f5f5;
+}
+
+/* Bottom section: Light/Dark Mode label, Settings, Help */
+.dark-mode .sidebar__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.dark-mode .member-sidebar__item-label--inactive {
+  color: #8A949F;
+}
+/* Logo area — remove white box behind logo image */
+.dark-mode .sidebar__logo {
+  background: transparent;
+}
+.dark-mode .member-sidebar__logo-img {
+  filter: brightness(0) invert(1);
+}
+
+/* Topbar title/subtitle — currently near-invisible on dark background */
+.dark-mode .topbar__title {
+  color: #f5f5f5;
+}
+.dark-mode .topbar__sub {
+  color: #9a9a9a;
+}
+
+/* Collapse toggle button */
+.dark-mode .sidebar__toggle {
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.5));
+}
+.dark-mode .sidebar__toggle svg rect:first-child {
+  fill: #1a1a1e;
+}
+.dark-mode .sidebar__toggle svg rect:nth-child(2) {
+  stroke: #8A949F;
+}
+.dark-mode .sidebar__toggle svg path {
+  stroke: #ffffff;
+}
+/* Override the --member-bg variable so every element using it
+   (like .member-theme .main) automatically goes transparent in dark mode */
+.dark-mode {
+  --member-bg: transparent;
 }

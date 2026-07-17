@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import nexgnLogo from "../../assets/logo-light.png";
+import logoLight from "../../assets/logo-light.png";
 import useWindowWidth from "./useWindowWidth";
+import useDarkMode from "./useDarkMode";
 import {
   HomeIcon,
   ClipboardIcon,
@@ -10,9 +11,27 @@ import {
   SettingsIcon,
   HelpIcon,
   NexgnLogo,
-  ToggleBtn,
-  ThemeToggleIcon
+  ToggleBtn
 } from "./memberNavItems";
+
+function SunIcon({ color = "#8A949F" }) {
+  return (
+    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12.5" cy="12.5" r="4.5" stroke={color} strokeWidth="1.6" />
+      <path d="M12.5 2v2.5M12.5 20.5V23M23 12.5h-2.5M4.5 12.5H2M19.6 5.4l-1.77 1.77M7.17 17.83l-1.77 1.77M19.6 19.6l-1.77-1.77M7.17 7.17L5.4 5.4"
+        stroke={color} strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function MoonIcon({ color = "#8A949F" }) {
+  return (
+    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20.5 15.7A9 9 0 1 1 9.3 4.5a7 7 0 0 0 11.2 11.2Z"
+        stroke={color} strokeWidth="1.6" strokeLinejoin="round" fill="none" />
+    </svg>
+  );
+}
 
 function TemplateIcon({ color = "#8A949F" }) {
   return (
@@ -45,6 +64,7 @@ export default function MemberSidebar() {
 
   const effectiveExpanded = isMobile ? true : expanded;
   const location = useLocation();
+  const [isDark, toggleDark] = useDarkMode();
 
   const toggleSidebar = () => {
     setExpanded((prev) => {
@@ -93,7 +113,7 @@ export default function MemberSidebar() {
         <div className="sidebar__logo">
           {effectiveExpanded ? (
             <img
-              src={nexgnLogo}
+              src={logoLight}
               alt="Nexgn"
               className="member-sidebar__logo-img"
             />
@@ -107,16 +127,21 @@ export default function MemberSidebar() {
         </nav>
         <div className="sidebar__bottom">
           {!isMobile && (
-            <div className="sidebar__item sidebar__theme-toggle">
+            <button
+              type="button"
+              className="sidebar__item sidebar__theme-toggle"
+              onClick={toggleDark}
+              title={!expanded ? (isDark ? "Dark Mode" : "Light Mode") : undefined}
+            >
               <span className="sidebar__icon-wrap">
-                <ThemeToggleIcon color="#8A949F" />
+                {isDark ? <MoonIcon color="#FF0915" /> : <SunIcon color="#FF0915" />}
               </span>
               {effectiveExpanded && (
-                <span className="sidebar__item-label member-sidebar__item-label--inactive">
-                  Theme
+                <span className="sidebar__item-label sidebar__item-label--theme-active">
+                  {isDark ? "Dark Mode" : "Light Mode"}
                 </span>
               )}
-            </div>
+            </button>
           )}
           {bottomItems.map(renderItem)}
         </div>

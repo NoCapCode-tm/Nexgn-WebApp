@@ -8,6 +8,46 @@
    Reuses .setup-card / .form-input / .btn-create / .upload-zone /
    .or-divider / .form-textarea from MemberSignYourself.css.
 */
+.action-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  margin-top: 4px;
+  padding: 6px;
+  border: 1px solid #f0f0f0;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+.action-menu__item {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  color: #111827;
+  background: transparent;
+  cursor: pointer;
+}
+.action-menu__item:hover {
+  background: #f3f4f6;
+}
+.action-menu__item--danger {
+  color: #E22A2A;
+}
+.action-menu__item--danger:hover {
+  background: #FFDCDC;
+}
+.action-menu__divider {
+  height: 1px;
+  margin: 4px 0;
+  background: rgba(0, 0, 0, 0.08);
+}
 .template-create-row {
   display: flex;
   align-items: center;
@@ -429,4 +469,182 @@
     right: 0;
     left: auto;
   }
+}
+
+/* ============================================
+   DARK MODE — Templates page
+   ============================================ */
+
+/*
+.dark-mode.member-templates-page,
+.dark-mode .member-templates-list-page {
+  background: transparent;
+}
+*/
+
+/* Setup card (Create Template page) */
+.dark-mode .setup-card {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+.dark-mode .setup-card__title,
+.dark-mode .section-label,
+.dark-mode .form-label {
+  color: #eaeaea;
+}
+.dark-mode .topbar__title {
+  color: #f5f5f5;
+}
+.dark-mode .topbar__sub {
+  color: #9a9a9a;
+}
+
+/* Inputs / textarea */
+.dark-mode .form-input,
+.dark-mode .form-textarea {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e5e5e5;
+}
+.dark-mode .form-input::placeholder,
+.dark-mode .form-textarea::placeholder {
+  color: #6f6f76;
+}
+.dark-mode .or-divider {
+  color: #6f6f76;
+}
+
+/* Upload zone */
+.dark-mode .upload-zone {
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  color: #9a9a9a;
+}
+.dark-mode .upload-zone svg path {
+  stroke: #9a9a9a;
+}
+.dark-mode .member-docs-table__header {
+  color: #939393 !important;
+}
+.dark-mode .member-doc-row__menu {
+  color: #b8b8be !important;
+}
+.dark-mode .member-doc-row__menu:hover {
+  color: #f5f5f5 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.dark-mode .action-menu {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+.dark-mode .action-menu__item {
+  color: #e5e5e5 !important;
+}
+.dark-mode .action-menu__item:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.dark-mode .action-menu__item--danger {
+  color: #FF6B6B !important;
+}
+.dark-mode .action-menu__item--danger:hover {
+  background: rgba(255, 107, 107, 0.12) !important;
+}
+.dark-mode .action-menu__divider {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+/* Manage Templates list page */
+.dark-mode .template-table-card {
+  background: #17171b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.dark-mode .template-table-header {
+  color: #7a7a80;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.dark-mode .template-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.dark-mode .template-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+.dark-mode .col-title {
+  color: #eaeaea;
+}
+.dark-mode .col-note {
+  color: #8a8a90;
+}
+.dark-mode .row-action-btn {
+  color: #b0b0b6;
+}
+.dark-mode .row-action-btn:hover {
+  color: #f5f5f5;
+}
+
+/* Search bar */
+.dark-mode .template-search-wrap,
+.dark-mode .member-docs-search-wrap {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.dark-mode .template-search-input {
+  color: #e5e5e5;
+}
+.dark-mode .template-search-input::placeholder {
+  color: #6f6f76;
+}
+
+/* Mobile card border override */
+@media (max-width: 768px) {
+  .dark-mode .member-templates-page .setup-card {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+  }
+}
+
+/* Header divider on tablet */
+@media (min-width: 769px) and (max-width: 1179px) {
+  .dark-mode .member-templates-list-page .mobile-page-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+/* ============================================
+   DARK MODE — Manage Templates list page
+   ============================================ */
+.dark-mode .template-table-card {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.dark-mode .template-table-header {
+  color: #8A949F;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.dark-mode .template-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.dark-mode .template-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.dark-mode .col-title {
+  color: #f5f5f5;
+}
+.dark-mode .col-note {
+  color: #b8b8be;
+}
+.dark-mode .row-action-btn {
+  color: #b8b8be;
+}
+.dark-mode .row-action-btn:hover {
+  color: #f5f5f5;
+}
+.dark-mode .template-search-wrap {
+  background: #1a1a1e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.dark-mode .template-search-input {
+  color: #e5e5e5;
+}
+.dark-mode .template-search-input::placeholder {
+  color: #6f6f76;
 }

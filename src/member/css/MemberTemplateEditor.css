@@ -536,3 +536,95 @@
     font-size: clamp(13px, 0.9vw, 16px);
   }
 }
+/* ============================================
+   DARK MODE — Template Editor
+   ============================================ */
+.dark-mode .template-editor-modal {
+  background: #17171b;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+.dark-mode .template-editor-topbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.dark-mode .template-editor-back,
+.dark-mode .template-editor-title {
+  color: #f5f5f5;
+}
+.dark-mode .template-editor-crumb {
+  color: #7a7a80;
+}
+.dark-mode .template-editor-pages {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+.dark-mode .template-editor-page-thumb {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #9a9a9a;
+  background: #1f1f24;
+}
+.dark-mode .template-editor-add-page {
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  color: #9a9a9a;
+}
+.dark-mode .template-editor-canvas-wrap {
+  background: #0f0f12;
+}
+.dark-mode .template-editor-canvas {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #1a1a1e;
+  box-shadow: none;
+}
+.dark-mode .template-editor-canvas-title {
+  color: #f5f5f5;
+}
+.dark-mode .template-editor-sidebar {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+.dark-mode .template-editor-section-label {
+  color: #eaeaea;
+}
+.dark-mode .template-editor-role-select {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e5e5e5;
+  background: #1f1f24;
+}
+.dark-mode .template-editor-role-select::placeholder {
+  color: #6f6f76;
+}
+.dark-mode .template-editor-add-role {
+  border: 1.5px solid #FF0915;
+  color: #FF6B6B;
+  background: transparent;
+}
+.dark-mode .template-editor-add-role:hover {
+  background: rgba(255, 9, 21, 0.1);
+}
+.dark-mode .template-editor-widget {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1f1f24;
+}
+.dark-mode .template-editor-widget-icon,
+.dark-mode .template-editor-widget-label {
+  color: #b8b8be;
+}
+.dark-mode .template-editor-quill .ql-toolbar {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #1f1f24;
+}
+.dark-mode .template-editor-quill .ql-container {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .template-editor-quill .ql-editor {
+  color: #e5e5e5;
+}
+.dark-mode .template-editor-quill .ql-editor.ql-blank::before {
+  color: #6f6f76;
+}
+.dark-mode .template-editor-quill .ql-stroke {
+  stroke: #b8b8be;
+}
+.dark-mode .template-editor-quill .ql-fill {
+  fill: #b8b8be;
+}
+.dark-mode .template-editor-quill .ql-picker {
+  color: #b8b8be;
+}
