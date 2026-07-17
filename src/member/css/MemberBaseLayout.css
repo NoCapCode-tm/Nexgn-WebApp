@@ -1288,9 +1288,10 @@ body.dark-mode,
    DARK MODE — Sidebar
    ============================================ */
 
-/* Sidebar panel fully transparent — background image shows straight through */
+/* Sidebar panel translucent — lets the background graphics show through subtly */
 .dark-mode .sidebar__inner {
-  background: transparent;
+  background: rgba(17, 17, 17, 0.55);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .dark-mode .sidebar__divider {

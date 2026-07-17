@@ -439,7 +439,7 @@
     justify-content: space-between;
     align-items: center;
     margin: 0;
-    padding: 0 32px 24px 32px;
+    padding: 0 2px 24px 2px;
   }
   .member-theme .mobile-page-header__container {
     display: flex;
@@ -646,88 +646,6 @@ body.dark-mode .member-theme.member-dashboard-page .main {
   background: transparent !important;
 }
 
-/* Sidebar Styling Overrides */
-body.dark-mode .member-theme.member-dashboard-page .sidebar,
-body.dark-mode .member-theme.member-dashboard-page .sidebar__inner {
-  background-color: rgba(13, 13, 13, 0.75) !important;
-  backdrop-filter: blur(12px) !important;
-  background-image: none !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-body.dark-mode .member-theme.member-dashboard-page .sidebar__divider,
-body.dark-mode .member-theme.member-dashboard-page .sidebar__theme-divider {
-  background: rgba(255, 255, 255, 0.08) !important;
-}
-
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item {
-  color: #8A949F !important;
-  transition: background 0.15s, color 0.15s !important;
-}
-
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item svg path,
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item svg circle,
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item svg rect {
-  stroke: #8A949F !important;
-  transition: stroke 0.15s !important;
-}
-
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item-label {
-  color: #8A949F !important;
-  transition: color 0.15s !important;
-}
-
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item:hover {
-  background: rgba(255, 255, 255, 0.05) !important;
-}
-
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item:hover .sidebar__item-label {
-  color: #FFFFFF !important;
-}
-
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item:hover svg path,
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item:hover svg circle,
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item:hover svg rect {
-  stroke: #FFFFFF !important;
-}
-
-/* Active Sidebar Item & Indicator Pill */
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item--active {
-  background: transparent !important;
-  margin-right: 0 !important;
-  border-radius: 0 !important;
-}
-
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item--active .sidebar__item-label {
-  color: #FFFFFF !important;
-  font-weight: 600 !important;
-}
-
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item--active svg path,
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item--active svg circle,
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item--active svg rect {
-  stroke: #FF0915 !important;
-}
-
-body.dark-mode .member-theme.member-dashboard-page .sidebar__active-pill {
-  display: block !important;
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: #FF0915 !important;
-}
-
-/* Theme Toggle Button Highlight */
-body.dark-mode .member-theme.member-dashboard-page .sidebar__theme-toggle {
-  background: transparent !important;
-}
-
-body.dark-mode .member-theme.member-dashboard-page .sidebar__item-label--theme-active {
-  color: #FF0915 !important;
-  font-weight: 600 !important;
-}
 
 /* Mobile topbar transparent */
 body.dark-mode .member-theme.member-dashboard-page .mobile-topbar {
@@ -941,10 +859,6 @@ body.dark-mode .member-theme.member-dashboard-page .badge--expired {
 
 /* CTA & Buttons */
 
-body.dark-mode .member-theme.member-dashboard-page .mobile-cta-row {
-  background: transparent !important;
-  border: 1px solid #746b6b !important;
-}
 
 body.dark-mode .member-theme.member-dashboard-page .mobile-cta--outline {
   color: #8A949F !important;
