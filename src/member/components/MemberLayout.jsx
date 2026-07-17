@@ -41,7 +41,7 @@ export default function MemberLayout({ children, onSearchClick, className, hideM
         {!hideMobileTopbar && (
           <header className="mobile-topbar">
             <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(true)}>
-              <Menu size={22} color="#1a1a2e" />
+              <Menu size={22} />
             </button>
             <MemberTopbarIcons iconSize={18} className="mobile-topbar__icons" onSearchClick={onSearchClick} />
           </header>

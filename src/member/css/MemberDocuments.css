@@ -300,6 +300,12 @@
     align-items: stretch;
     gap: var(--space-xs);
   }
+  .member-docs-page .mobile-header-divider {
+    margin: var(--space-md) 0;
+  }
+  .member-docs-page .mobile-filter-row {
+    margin-top: var(--space-sm);
+  }
   .member-docs-topbar-actions {
     display: flex;
     justify-content: space-between;
@@ -383,9 +389,9 @@
     align-items: center;
     flex-shrink: 0;
     height: 100%;
-    padding: 0 var(--space-sm);
+    padding: 0 var(--space-md);
     border: none;
-    border-radius: var(--space-sm);
+    border-radius: 999px;
     font-size: var(--font-sm);
     font-weight: 500;
     white-space: nowrap;

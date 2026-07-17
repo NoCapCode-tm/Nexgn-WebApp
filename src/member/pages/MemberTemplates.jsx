@@ -6,16 +6,21 @@ import "../css/MemberBaseLayout.css";
 import "../css/MemberSignYourself.css";
 import "../css/MemberTemplates.css";
 
-export default function MemberTemplates() {
+export default function MemberTemplates({ onCreate }) {
   const [templateName, setTemplateName] = useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
   const [docTitle, setDocTitle] = useState("");
   const [note, setNote] = useState("");
   const fileInputRef = useRef(null);
 
+  const [uploadedFileObj, setUploadedFileObj] = useState(null);
+
   function handleFile(e) {
     const file = e.target.files[0];
-    if (file) setUploadedFile(file.name);
+    if (file) {
+      setUploadedFile(file.name);
+      setUploadedFileObj(file);
+    }
   }
 
   return (
@@ -50,7 +55,7 @@ export default function MemberTemplates() {
                 value={templateName}
                 onChange={(e) => setTemplateName(e.target.value)}
               />
-              <button className="btn-create">
+              <button className="btn-create" onClick={() => onCreate && onCreate(templateName)}>
                 <span className="btn-create__text">Create</span>
                 <svg
                   className="btn-create__icon"
@@ -116,7 +121,10 @@ export default function MemberTemplates() {
               onDrop={(e) => {
                 e.preventDefault();
                 const file = e.dataTransfer.files[0];
-                if (file) setUploadedFile(file.name);
+                if (file) {
+                  setUploadedFile(file.name);
+                  setUploadedFileObj(file);
+                }
               }}
             >
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -170,7 +178,15 @@ export default function MemberTemplates() {
           </div>
 
           <div className="template-setup-footer">
-            <button className="btn-create">Next</button>
+            <button
+              className="btn-create"
+              onClick={() =>
+                onCreate &&
+                onCreate(docTitle || uploadedFile || "Untitled Template", uploadedFileObj)
+              }
+            >
+              Next
+            </button>
           </div>
         </div>
       </>
