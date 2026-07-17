@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import nexgnLogo from "../../assets/logo-light.png";
+import logoLight from "../../assets/logo-light.png";
 import useWindowWidth from "./useWindowWidth";
 import useDarkMode from "./useDarkMode";
 import {
@@ -113,7 +113,7 @@ export default function MemberSidebar() {
         <div className="sidebar__logo">
           {effectiveExpanded ? (
             <img
-              src={nexgnLogo}
+              src={logoLight}
               alt="Nexgn"
               className="member-sidebar__logo-img"
             />
@@ -134,10 +134,10 @@ export default function MemberSidebar() {
               title={!expanded ? (isDark ? "Dark Mode" : "Light Mode") : undefined}
             >
               <span className="sidebar__icon-wrap">
-                {isDark ? <MoonIcon color="#8A949F" /> : <SunIcon color="#8A949F" />}
+                {isDark ? <MoonIcon color="#FF0915" /> : <SunIcon color="#FF0915" />}
               </span>
               {effectiveExpanded && (
-                <span className="sidebar__item-label member-sidebar__item-label--inactive">
+                <span className="sidebar__item-label sidebar__item-label--theme-active">
                   {isDark ? "Dark Mode" : "Light Mode"}
                 </span>
               )}

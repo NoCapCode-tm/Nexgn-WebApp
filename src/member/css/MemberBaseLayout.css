@@ -719,6 +719,7 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
   border: none;
   background: none;
   cursor: pointer;
+  color: #1a1a2e;
 }
 .mobile-topbar__icons {
   display: flex;
@@ -1237,7 +1238,7 @@ body.dark-mode,
 .dark-mode .member-theme {
   background-color: #0a0a0c !important;
   background-image:
-    url('../assets/dark-bg.png'),
+    url('../../assets/dark-bg.png'),
     radial-gradient(ellipse at top left, rgba(150, 1, 1, 0.25), transparent 50%),
     radial-gradient(ellipse at bottom right, rgba(255, 9, 21, 0.25), transparent 50%),
     linear-gradient(180deg, #0a0a0c 0%, #0a0a0c 100%) !important;
