@@ -192,6 +192,9 @@
   .member-theme .mobile-backdrop {
     display: none;
   }
+  .member-theme .desktop-table-header {
+    text-transform: none;
+  }
   /* 6. Overall Layout */
   .member-dashboard-page .main {
     gap: 8px;
@@ -266,32 +269,32 @@
   /* 3. Buttons */
   .member-theme .mobile-cta-row {
     display: flex;
-    gap: 0;
+    gap: var(--space-sm);
     height: 9vw;
     min-height: 9vw;
     margin: 0 0 4vw 0;
     padding: 0;
-    border: 1px solid #D9D9D9;
-    border-radius: 7px;
-    overflow: hidden;
-    background: #ffffff;
+    border: none;
+    background: transparent;
   }
   .member-theme .mobile-cta {
+    flex: 1;
     height: 9vw;
     min-height: 9vw;
     padding: 0 var(--space-sm);
-    border-radius: 7px;
+    border-radius: 999px;
     font-size: 11px;
     font-weight: 700;
     line-height: 12px;
     white-space: nowrap;
   }
   .member-theme .mobile-cta--primary {
+    border: none;
     color: #ffffff;
     background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
   }
   .member-theme .mobile-cta--outline {
-    border: none;
+    border: 1px solid #D9D9D9;
     color: #666666;
     background: #ffffff;
   }
@@ -423,7 +426,7 @@
     padding-left: 32px;
   }
   .member-theme .mobile-topbar {
-    padding: 24px 32px;
+    padding: 20px 32px 8px 32px;
   }
   .member-theme .topbar__title {
     font-size: 28px;
@@ -436,7 +439,7 @@
     justify-content: space-between;
     align-items: center;
     margin: 0;
-    padding: 16px 32px 24px 32px;
+    padding: 0 32px 24px 32px;
   }
   .member-theme .mobile-page-header__container {
     display: flex;
@@ -950,4 +953,4 @@ body.dark-mode .member-theme.member-dashboard-page .mobile-cta--outline {
 
 body.dark-mode .member-theme.member-dashboard-page .mobile-page-header__divider {
   background-color: #746b6b !important;
-}
+}

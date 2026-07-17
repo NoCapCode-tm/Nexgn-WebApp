@@ -318,11 +318,10 @@
     flex: 1;
     max-width: none;
     height: 10.667vw;
-    padding: 0 var(--space-md);
-    border: none;
+    padding-left: var(--space-sm);
+    border: 0.267vw solid #E4E4E4;
     border-radius: var(--space-2xl);
     background: #fff;
-    box-shadow: 0 0.533vw 2.667vw rgba(0, 0, 0, 0.06);
   }
   .member-docs-search-input {
     height: 100%;
@@ -1294,5 +1293,49 @@
   }
   .member-docs-page .member-doc-row__title {
     gap: clamp(10px, 0.69vw, 17px);
+  }
+}
+
+/* ============================================
+   DARK MODE — Status badges (match Dashboard)
+   ============================================ */
+body.dark-mode .member-docs-page .member-badge--pending {
+  background: transparent !important;
+  border: 1px solid #FFC107 !important;
+  color: #FFC107 !important;
+}
+body.dark-mode .member-docs-page .member-badge--signed {
+  background: transparent !important;
+  border: 1px solid #2ECC71 !important;
+  color: #2ECC71 !important;
+}
+body.dark-mode .member-docs-page .member-badge--expired,
+body.dark-mode .member-docs-page .member-badge--failed {
+  background: transparent !important;
+  border: 1px solid #E74C3C !important;
+  color: #E74C3C !important;
+}
+
+@media (max-width: 768px) {
+  body.dark-mode .member-docs-page .member-badge {
+    width: 10px !important;
+    min-width: 0 !important;
+    height: 10px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    color: transparent !important;
+    border: none !important;
+  }
+  body.dark-mode .member-docs-page .member-badge--pending {
+    background-color: #FFC107 !important;
+  }
+  body.dark-mode .member-docs-page .member-badge--signed {
+    background-color: #2ECC71 !important;
+  }
+  body.dark-mode .member-docs-page .member-badge--expired,
+  body.dark-mode .member-docs-page .member-badge--failed {
+    background-color: #E74C3C !important;
   }
 }
