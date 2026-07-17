@@ -3771,6 +3771,316 @@
   }
 }
 
+/* ============================================
+   DARK MODE — Settings / Profile page
+   ============================================ */
+body.dark-mode .member-settings-page .member-settings-card,
+body.dark-mode .member-settings-page .ms-mobile-detail .member-settings-card {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+  box-shadow: none !important;
+}
 
+body.dark-mode .member-settings-page .member-settings-card__title {
+  color: #ffffff !important;
+}
 
+body.dark-mode .member-settings-page .member-settings-card__divider,
+body.dark-mode .member-settings-page .member-settings-section-divider {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
 
+body.dark-mode .member-settings-page .member-settings-topbar-search {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: none !important;
+}
+body.dark-mode .member-settings-page .member-settings-topbar-search:hover {
+  box-shadow: none !important;
+}
+body.dark-mode .member-settings-page .member-settings-topbar-search__input {
+  color: #f5f5f5 !important;
+}
+body.dark-mode .member-settings-page .member-settings-topbar-search__input::placeholder {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .member-settings-page .member-settings-form__label,
+body.dark-mode .member-settings-page .member-settings-section-title,
+body.dark-mode .member-settings-page .member-settings-2fa-label {
+  color: #e5e5e5 !important;
+}
+
+body.dark-mode .member-settings-page .member-settings-form__helper,
+body.dark-mode .member-settings-page .member-settings-avatar__helper,
+body.dark-mode .member-settings-page .member-settings-2fa-helper {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .member-settings-page .member-settings-form__input {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #e5e5e5 !important;
+}
+body.dark-mode .member-settings-page .member-settings-form__input:focus {
+  border-color: #FF0915 !important;
+  box-shadow: 0 0 0 3px rgba(255, 9, 21, 0.15) !important;
+}
+body.dark-mode .member-settings-page .member-settings-form__input--readonly {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #8a8a90 !important;
+}
+
+body.dark-mode .member-settings-page .member-settings-avatar__upload-btn {
+  background: linear-gradient(rgb(17 17 17 / 15%), rgb(17 17 17 / 15%)) padding-box,
+    linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) border-box !important;
+  color: #d0d0d5 !important;
+}
+body.dark-mode .member-settings-page .member-settings-avatar__upload-btn:hover {
+  color: #ffffff !important;
+}
+
+body.dark-mode .member-settings-page .member-settings-nav__item {
+  color: #b8b8be !important;
+}
+body.dark-mode .member-settings-page .member-settings-nav__item:hover:not(.member-settings-nav__item--disabled) {
+  color: #FF0915 !important;
+  background: rgba(255, 9, 21, 0.08) !important;
+}
+body.dark-mode .member-settings-page .member-settings-nav__item--active {
+  color: #FF0915 !important;
+  background: rgba(255, 9, 21, 0.15) !important;
+}
+body.dark-mode .member-settings-page .member-settings-team-row {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+}
+body.dark-mode .member-settings-page .member-settings-team-row:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode .member-settings-page .team-member-name {
+  color: #ffffff !important;
+}
+body.dark-mode .member-settings-page .team-member-email {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .member-settings-page .team-role-badge {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #d0d0d5 !important;
+}
+
+body.dark-mode .member-settings-page .team-status-badge.active {
+  background: transparent !important;
+  border: 1px solid #2ECC71 !important;
+  color: #2ECC71 !important;
+}
+body.dark-mode .member-settings-page .team-status-badge.inactive {
+  background: transparent !important;
+  border: 1px solid #E74C3C !important;
+  color: #E74C3C !important;
+}
+
+body.dark-mode .member-settings-page .team-action-btn {
+  color: #b8b8be !important;
+}
+body.dark-mode .member-settings-page .team-action-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-mode .member-settings-page .member-settings-team-header {
+  color: #9a9a9a !important;
+}
+body.dark-mode .member-settings-page .member-notification-section-title {
+  color: #e5e5e5 !important;
+}
+
+body.dark-mode .member-settings-page .member-notification-item {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+}
+body.dark-mode .member-settings-page .member-notification-item:hover {
+  border-color: #999999 !important;
+}
+
+body.dark-mode .member-settings-page .member-notification-item-text h4 {
+  color: #e5e5e5 !important;
+}
+body.dark-mode .member-settings-page .member-notification-item-text p {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .member-settings-page .member-permission-custom-checkbox {
+  border-color: #E5252A !important;
+  background: transparent !important;
+}
+body.dark-mode .member-settings-page .member-permission-checkbox-input:checked + .member-permission-custom-checkbox {
+  background: #E5252A !important;
+}
+body.dark-mode .member-settings-page .member-billing-section-title {
+  color: #e5e5e5 !important;
+}
+
+body.dark-mode .member-settings-page .member-billing-plan-card,
+body.dark-mode .member-settings-page .member-billing-payment-card,
+body.dark-mode .member-settings-page .member-billing-address-card {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+}
+
+body.dark-mode .member-settings-page .member-billing-plan-name,
+body.dark-mode .member-settings-page .member-billing-plan-price .price-amount,
+body.dark-mode .member-settings-page .member-billing-next-date,
+body.dark-mode .member-settings-page .member-billing-invoice-info .invoice-title,
+body.dark-mode .member-settings-page .member-billing-card-details .card-number {
+  color: #ffffff !important;
+}
+
+body.dark-mode .member-settings-page .member-billing-plan-billed,
+body.dark-mode .member-settings-page .member-billing-plan-price .price-period,
+body.dark-mode .member-settings-page .member-billing-invoice-info .invoice-date,
+body.dark-mode .member-settings-page .member-billing-card-details .card-expiry,
+body.dark-mode .member-settings-page .member-billing-card-brand {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .member-settings-page .member-billing-plan-features li {
+  color: #d7d7d7 !important;
+}
+
+body.dark-mode .member-settings-page .member-billing-plan-divider {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .member-settings-page .member-billing-card-icon-wrapper {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .member-settings-page .member-billing-edit-btn {
+  background: transparent !important;
+  border: 1px solid #E5252A !important;
+  color: #d0d0d5 !important;
+}
+body.dark-mode .member-settings-page .member-billing-edit-btn:hover {
+  background: rgba(229, 37, 42, 0.1) !important;
+}
+
+body.dark-mode .member-settings-page .member-billing-invoice-actions .icon-btn {
+  color: #b8b8be !important;
+}
+body.dark-mode .member-settings-page .member-integrations-description {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .member-settings-page .member-integration-item {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+}
+
+body.dark-mode .member-settings-page .member-integration-title {
+  color: #ffffff !important;
+}
+
+body.dark-mode .member-settings-page .member-integration-status {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .member-settings-page .member-integration-description {
+  color: #b8b8be !important;
+}
+body.dark-mode .member-settings-page .member-integration-action-btn.disconnect {
+  background: transparent !important;
+  border: 1px solid #E5252A !important;
+  color: #E5252A !important;
+}
+body.dark-mode .member-settings-page .member-integration-action-btn.disconnect:hover {
+  background: rgba(229, 37, 42, 0.1) !important;
+}
+
+body.dark-mode .member-settings-page .member-integration-action-btn.connect {
+  background: #E5252A !important;
+  color: #FFFFFF !important;
+}
+body.dark-mode .member-settings-page .member-integration-action-btn.connect:hover {
+  background: #C41C20 !important;
+}
+body.dark-mode .member-settings-page .member-audit-search {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+body.dark-mode .member-settings-page .member-audit-search-input {
+  color: #e5e5e5 !important;
+}
+body.dark-mode .member-settings-page .member-audit-search-input::placeholder {
+  color: #9a9a9a !important;
+}
+body.dark-mode .member-settings-page .member-audit-search-icon {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .member-settings-page .member-audit-table-header {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+  box-shadow: none !important;
+}
+body.dark-mode .member-settings-page .member-audit-table-header .audit-col {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .member-settings-page .member-audit-row {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+  box-shadow: none !important;
+}
+body.dark-mode .member-settings-page .member-audit-row .audit-col-date,
+body.dark-mode .member-settings-page .member-audit-row .audit-col-action,
+body.dark-mode .member-settings-page .member-audit-row .audit-col-document {
+  color: #b8b8be !important;
+}
+body.dark-mode .member-settings-page .member-audit-row .audit-col-name {
+  color: #ffffff !important;
+}
+
+body.dark-mode .member-settings-page .audit-status-badge.audit-status-success {
+  background: transparent !important;
+  border: 1px solid #2ECC71 !important;
+  color: #2ECC71 !important;
+}
+body.dark-mode .member-settings-page .audit-status-badge.audit-status-failed {
+  background: transparent !important;
+  border: 1px solid #E74C3C !important;
+  color: #E74C3C !important;
+}
+
+/* Mobile card view */
+body.dark-mode .member-settings-page .member-audit-mobile-card {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+  box-shadow: none !important;
+}
+body.dark-mode .member-settings-page .member-audit-mobile-filename {
+  color: #ffffff !important;
+}
+body.dark-mode .member-settings-page .member-audit-mobile-username,
+body.dark-mode .member-settings-page .member-audit-mobile-date {
+  color: #9a9a9a !important;
+}
+body.dark-mode .member-settings-page .member-audit-mobile-search-wrapper {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+body.dark-mode .member-settings-page .member-audit-mobile-filter-btn {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #b8b8be !important;
+}
+body.dark-mode .member-settings-page .member-audit-mobile-tab {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #b8b8be !important;
+}

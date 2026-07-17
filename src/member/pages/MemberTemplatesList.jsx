@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MoreHorizontal, X, Plus } from "lucide-react";
 import MemberLayout from "../components/MemberLayout";
 import MemberTopbar from "../components/MemberTopbar";
 
@@ -49,8 +50,9 @@ export default function MemberTemplatesList({ onAddTemplate }) {
       </div>
 
       <button className="member-docs-add-btn" onClick={onAddTemplate}>
-        <span className="add-btn-full">+ Add Template</span>
-        <span className="member-docs-add-btn-short">+</span>
+        <Plus width="18" height="18" strokeWidth="2" />
+        <span className="add-btn-full">Add Template</span>
+        <span className="member-docs-add-btn-short"></span>
       </button>
     </div>
   );
@@ -159,13 +161,23 @@ export default function MemberTemplatesList({ onAddTemplate }) {
                     aria-label="More actions"
                     onClick={() => setOpenMenuId(openMenuId === t.id ? null : t.id)}
                   >
-                    &#8942;
+                    <MoreHorizontal size={16} />
                   </button>
                   {openMenuId === t.id && (
                     <div className="action-menu">
-                      <button className="action-menu__item">View</button>
-                      <div className="action-menu__divider" />
-                      <button className="action-menu__item action-menu__item--danger">Revoke</button>
+                      <button
+                        className="action-menu__item"
+                        onClick={() => setOpenMenuId(null)}
+                      >
+                        View
+                      </button>
+                      <button
+                        className="action-menu__item action-menu__item--danger"
+                        onClick={() => setOpenMenuId(null)}
+                      >
+                        <X size={13} />
+                        Revoke
+                      </button>
                     </div>
                   )}
                 </span>

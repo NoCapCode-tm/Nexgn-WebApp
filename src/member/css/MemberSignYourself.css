@@ -920,13 +920,12 @@
   .member-sign-yourself-page .mobile-tabs-container {
     display: flex;
     width: 100%;
+    gap: var(--space-sm);
     height: 9vw;
     min-height: 9vw;
     margin: 0 0 4vw 0;
-    border: 1px solid #D9D9D9;
-    border-radius: 7px;
-    overflow: hidden;
-    background: #FFFFFF;
+    border: none;
+    background: transparent;
     opacity: 1;
     visibility: visible;
   }
@@ -942,16 +941,19 @@
     font-weight: 700;
     line-height: 12px;
     white-space: nowrap;
-    border-radius: 7px;
+    border-radius: 999px;
   }
   .member-sign-yourself-page .mobile-tabs-container .tab-btn--active {
+    border: none;
     color: #FFFFFF;
     background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
   }
   .member-sign-yourself-page .mobile-tabs-container .tab-btn--inactive {
+    border: 1px solid #D9D9D9;
     color: #666666;
     background: #FFFFFF;
   }
+
   .member-theme .mobile-topbar__search-btn {
     display: none;
   }
@@ -1097,4 +1099,56 @@
     border-radius: clamp(7px, 0.55vw, 17px);
     font-size: clamp(11px, 0.9vw, 26px);
   }
+}
+/* ============================================
+   DARK MODE — Sign Yourself tabs
+   ============================================ */
+.dark-mode .setup-card__tabs {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+}
+.dark-mode .tab-btn--inactive {
+  color: #d0d0d5;
+  background: transparent;
+}
+.dark-mode .tab-btn--inactive:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.dark-mode .mobile-tabs-container {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+}
+.dark-mode .mobile-tabs-container .tab-btn--inactive {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #d0d0d5;
+  background: transparent;
+}
+.dark-mode .template-select {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d0d0d5;
+  background: transparent;
+}
+.dark-mode .template-select:focus {
+  border-color: #FF0915;
+}
+.dark-mode .template-chevron {
+  color: #9a9a9a;
+}
+.dark-mode .signer-box {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+}
+.dark-mode .signer-badge {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #d0d0d5;
+  background: rgba(255, 255, 255, 0.05);
+}
+.dark-mode .btn-add-signer {
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  color: #9a9a9a;
+  background: transparent;
+}
+.dark-mode .btn-add-signer:hover {
+  border-color: #FF0915;
+  color: #FF0915;
 }

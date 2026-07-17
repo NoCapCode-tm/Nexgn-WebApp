@@ -1134,3 +1134,47 @@
     font-size: clamp(10px, 0.69vw, 17px);
   }
 }
+/* ============================================
+   DARK MODE — Contact Book cards
+   ============================================ */
+.dark-mode .member-contact-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  box-shadow: none;
+}
+.dark-mode .member-contact-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: none;
+}
+.dark-mode .member-contact-card__avatar {
+  background: rgba(255, 255, 255, 0.08);
+}
+.dark-mode .member-contact-card__name {
+  color: #f5f5f5;
+}
+.dark-mode .member-contact-card__email {
+  color: #9a9a9a;
+}
+.dark-mode .member-contact-card__close {
+  color: #9a9a9a;
+}
+.dark-mode .member-contact-card__close:hover {
+  color: #f5f5f5;
+}
+.dark-mode .member-contact-search-wrap {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  box-shadow: none;
+}
+.dark-mode .member-contact-search-wrap:hover {
+  box-shadow: none;
+}
+.dark-mode .member-contact-search-wrap:focus-within {
+  border-color: #FF0915;
+}
+.dark-mode .member-contact-search-input {
+  color: #f5f5f5;
+}
+.dark-mode .member-contact-search-input::placeholder {
+  color: #9a9a9a;
+}

@@ -214,18 +214,16 @@ export default function MemberSignYourself() {
               </>
             ) : (
               <>
-                <div className="roles-row">
-                  <div className="form-group">
-                    <label className="form-label">System Roles</label>
+                <div>
+                  <div className="section-label">Choose Template</div>
+                  <div className="template-row">
                     <div className="template-select-wrap">
-                      <select
-                        className="template-select"
-                        value={systemRole}
-                        onChange={e => setSystemRole(e.target.value)}
-                      >
-                        <option>Member / Employee</option>
-                        <option>Admin</option>
-                        <option>Guest</option>
+                      <select className="template-select" defaultValue="">
+                        <option value="" disabled>Select a Template</option>
+                        <option>NDA Template</option>
+                        <option>Employment Agreement</option>
+                        <option>Freelance Contract</option>
+                        <option>Job Offer Letter</option>
                       </select>
                       <svg className="template-chevron" width="14" height="14" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" strokeWidth="2"
@@ -234,33 +232,6 @@ export default function MemberSignYourself() {
                       </svg>
                     </div>
                   </div>
-                  <div className="form-group">
-                    <label className="form-label">Assigned To</label>
-                    <div className="template-select-wrap">
-                      <select
-                        className="template-select"
-                        value={assignedToRole}
-                        onChange={e => setAssignedToRole(e.target.value)}
-                      >
-                        <option>Client / External signer</option>
-                        <option>Employee / Staff</option>
-                        <option>Partner</option>
-                      </select>
-                      <svg className="template-chevron" width="14" height="14" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" strokeWidth="2"
-                        strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="9 18 15 12 9 6"/>
-                      </svg>
-                    </div>
-                  </div>
-                  <button className="btn-create" onClick={(e) => { e.preventDefault(); navigate('/member-documents'); }}>
-                    <span className="btn-create-text">Create</span>
-                    <svg className="btn-create-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                      <polyline points="17 8 12 3 7 8"/>
-                      <line x1="12" y1="3" x2="12" y2="15"/>
-                    </svg>
-                  </button>
                 </div>
 
                 <div className="or-divider">OR</div>
