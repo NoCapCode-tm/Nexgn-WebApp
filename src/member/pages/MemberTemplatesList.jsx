@@ -21,6 +21,7 @@ const MOCK_TEMPLATES = [
 
 export default function MemberTemplatesList({ onAddTemplate }) {
   const [search, setSearch] = useState("");
+  const [openMenuId, setOpenMenuId] = useState(null);
 
   const filtered = MOCK_TEMPLATES.filter((t) =>
     t.title.toLowerCase().includes(search.toLowerCase())
@@ -153,9 +154,20 @@ export default function MemberTemplatesList({ onAddTemplate }) {
                 <span className="member-doc-row__note">{t.note}</span>
                 <span className="member-doc-row__cell">{t.owner}</span>
                 <span className="member-doc-row__menu">
-                  <button className="member-doc-row__menu-trigger" aria-label="More actions">
+                  <button
+                    className="member-doc-row__menu-trigger"
+                    aria-label="More actions"
+                    onClick={() => setOpenMenuId(openMenuId === t.id ? null : t.id)}
+                  >
                     &#8942;
                   </button>
+                  {openMenuId === t.id && (
+                    <div className="action-menu">
+                      <button className="action-menu__item">View</button>
+                      <div className="action-menu__divider" />
+                      <button className="action-menu__item action-menu__item--danger">Revoke</button>
+                    </div>
+                  )}
                 </span>
               </div>
             ))}
