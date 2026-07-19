@@ -746,7 +746,7 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
     --font-xl: 4.8vw;
     --font-title: 6.4vw;
     --font-section: 4.267vw;
-    --font-metric: 7.467vw;
+    --font-metric: 5.467vw;
   }
   .doc-row__icon {
     color: #E8302A;
@@ -903,7 +903,10 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
     gap: clamp(16px, 2.08vw, 24px);
   }
   .mobile-topbar__hamburger {
-    display: none;
+    display: flex;
+  }
+  .mobile-topbar {
+    justify-content: space-between;
   }
   .desktop-topbar {
     display: none;
