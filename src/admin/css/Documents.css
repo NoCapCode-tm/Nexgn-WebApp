@@ -1355,8 +1355,10 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
 }
 body.dark-mode .admin-docs-page .action-menu {
   background: rgba(17, 17, 17, 0.55) !important;
-  border: 1px solid #746b6b !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
 }
 body.dark-mode .admin-docs-page .action-menu__item {
   background: transparent !important;
