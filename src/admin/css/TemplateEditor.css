@@ -314,16 +314,34 @@
   font-size: 11px;
   color: #666666;
 }
-.template-editor-share {
+
+.template-editor-actions-row {
+  display: flex;
+  gap: 10px;
   margin-top: auto;
+}
+.template-editor-save,
+.template-editor-share {
+  flex: 1 1 50%;
   padding: 10px 0;
   border: none;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.template-editor-share {
   color: #fff;
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  cursor: pointer;
+}
+.template-editor-save {
+  color: #fff;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+}
+.template-editor-save:hover {
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  opacity: 0.9;
 }
 @media (max-width: 768px) {
   .template-editor-modal {
@@ -606,25 +624,98 @@
 .dark-mode .template-editor-widget-label {
   color: #b8b8be;
 }
+.dark-mode .template-editor-quill {
+  background: rgba(38, 38, 38, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+}
 .dark-mode .template-editor-quill .ql-toolbar {
-  border-color: rgba(255, 255, 255, 0.1);
-  background: #1f1f24;
+  background: rgba(38, 38, 38, 0.3);
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 .dark-mode .template-editor-quill .ql-container {
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(38, 38, 38, 0.3);
+  border: none;
+  color: #e5e7eb;
 }
 .dark-mode .template-editor-quill .ql-editor {
-  color: #e5e5e5;
+  color: #e5e7eb;
 }
 .dark-mode .template-editor-quill .ql-editor.ql-blank::before {
-  color: #6f6f76;
+  color: #6b7280;
+  font-style: normal;
 }
 .dark-mode .template-editor-quill .ql-stroke {
-  stroke: #b8b8be;
+  stroke: #9ca3af;
 }
 .dark-mode .template-editor-quill .ql-fill {
-  fill: #b8b8be;
+  fill: #9ca3af;
 }
 .dark-mode .template-editor-quill .ql-picker {
+  color: #9ca3af;
+}
+.dark-mode .template-editor-quill .ql-toolbar button:hover,
+.dark-mode .template-editor-quill .ql-toolbar button.ql-active {
+  color: white;
+}
+.dark-mode .template-editor-quill .ql-toolbar button:hover .ql-stroke,
+.dark-mode .template-editor-quill .ql-toolbar button.ql-active .ql-stroke {
+  stroke: white;
+}
+/* Font mappings */
+.ql-font-inter { font-family: "Inter", sans-serif; }
+.ql-font-outfit { font-family: "Outfit", sans-serif; }
+.ql-font-serif { font-family: "Instrument Serif", serif; }
+.ql-font-monospace { font-family: monospace; }
+
+/* Font sizes */
+.ql-size-small { font-size: 13px; }
+.ql-size-normal { font-size: 16px; }
+.ql-size-large { font-size: 20px; }
+.ql-size-huge { font-size: 26px; }
+
+/* Prevent auto center alignment on format change */
+.template-editor-quill .ql-editor p,
+.template-editor-quill .ql-editor h1,
+.template-editor-quill .ql-editor h2,
+.template-editor-quill .ql-editor h3,
+.template-editor-quill .ql-editor span {
+  text-align: left;
+}
+
+/* Dark mode — dropdown panels (font / size / header pickers) */
+.dark-mode .template-editor-quill .ql-picker-options {
+  background: #1f1f24;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.dark-mode .template-editor-quill .ql-picker-item {
   color: #b8b8be;
+}
+.dark-mode .template-editor-quill .ql-picker-item:hover,
+.dark-mode .template-editor-quill .ql-picker-item.ql-selected {
+  color: white;
+}
+.dark-mode .template-editor-quill .ql-picker-label {
+  color: #9ca3af;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.dark-mode .template-editor-quill .ql-picker-label.ql-active,
+.dark-mode .template-editor-quill .ql-picker-label:hover {
+  color: white;
+}
+.dark-mode .template-editor-quill .ql-picker-label .ql-stroke {
+  stroke: #9ca3af;
+}
+.dark-mode .template-editor-quill .ql-picker.ql-expanded .ql-picker-label {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.dark-mode .template-editor-save {
+  color: #fff;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+}
+.dark-mode .template-editor-save:hover {
+  opacity: 0.9;
 }
