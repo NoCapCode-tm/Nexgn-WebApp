@@ -1,6 +1,6 @@
 import MemberDocumentsRow from "./MemberDocumentsRow";
 
-export default function MemberDocumentsTable({ documents }) {
+export default function MemberDocumentsTable({ documents, onRevoke }) {
   return (
     <div className="member-docs-table-wrapper">
       <div className="member-docs-table__header">
@@ -16,7 +16,7 @@ export default function MemberDocumentsTable({ documents }) {
       <div className="member-docs-section">
         <div className="member-docs-table">
           {documents.map((doc, idx) => (
-            <MemberDocumentsRow key={idx} {...doc} />
+            <MemberDocumentsRow key={idx} {...doc} onRevoke={() => onRevoke && onRevoke(doc.id)} />
           ))}
           {documents.length === 0 && (
             <div className="member-docs-empty-state">

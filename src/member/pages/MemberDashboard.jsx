@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MemberLayout from "../components/MemberLayout";
 import MemberTopbar from "../components/MemberTopbar";
@@ -35,7 +36,7 @@ const stats = [
   },
 ];
 
-const documents = [
+const INITIAL_DOCS = [
   {
     title: "Project Proposal",
     note: "Send it to client",
@@ -79,9 +80,14 @@ const documents = [
 ];
 
 export default function MemberDashboard() {
+  const [documents, setDocuments] = useState(INITIAL_DOCS);
   const width = useWindowWidth();
   const isMobile = width <= 768;
   const navigate = useNavigate();
+
+  const handleRevoke = (title) => {
+    setDocuments(prev => prev.filter(doc => doc.title !== title));
+  };
 
   return (
     <MemberLayout className="member-dashboard-page">
@@ -148,7 +154,7 @@ export default function MemberDashboard() {
           </div>
           <div className="docs-table">
             {documents.map((doc, idx) => (
-              <MemberDocumentRow key={idx} {...doc} />
+              <MemberDocumentRow key={idx} {...doc} onRevoke={() => handleRevoke(doc.title)} />
             ))}
           </div>
         </section>

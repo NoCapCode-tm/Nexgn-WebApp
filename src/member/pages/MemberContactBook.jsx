@@ -9,12 +9,12 @@ import AddContactForm from "../components/AddContactForm";
 import "../css/MemberBaseLayout.css";
 import "../css/MemberContactBook.css";
 
-const CONTACTS = [
-  { name: "Alice Smith", email: "alice.smith@example.com", department: "Legal", status: "Active" },
-  { name: "Bob Jones", email: "bob.jones@example.com", department: "Engineering", status: "Active" },
-  { name: "Charlie Brown", email: "charlie.brown@example.com", department: "Marketing", status: "Inactive" },
-  { name: "Diana Prince", email: "diana.prince@example.com", department: "Finance", status: "Active" },
-  { name: "Blair Croft", email: "blair.croft@example.com", department: "HR", status: "Active" }
+const INITIAL_CONTACTS = [
+  { name: "Alice Smith", email: "alice.smith@example.com", department: "Legal", status: "Active", phone: "+1 98765 43210", language: "English", gender: "Female", emergencyContact: "+1 912-345-6789", address: "New York, United States" },
+  { name: "Bob Jones", email: "bob.jones@example.com", department: "Engineering", status: "Active", phone: "+1 98765 43211", language: "English", gender: "Male", emergencyContact: "+1 912-345-6780", address: "San Francisco, United States" },
+  { name: "Charlie Brown", email: "charlie.brown@example.com", department: "Marketing", status: "Inactive", phone: "+1 98765 43212", language: "English", gender: "Male", emergencyContact: "+1 912-345-6781", address: "Chicago, United States" },
+  { name: "Diana Prince", email: "diana.prince@example.com", department: "Finance", status: "Active", phone: "+1 98765 43213", language: "English", gender: "Female", emergencyContact: "+1 912-345-6782", address: "Boston, United States" },
+  { name: "Blair Croft", email: "blair.croft@example.com", department: "HR", status: "Active", phone: "+1 98765 43214", language: "English", gender: "Female", emergencyContact: "+1 912-345-6783", address: "Austin, United States" }
 ];
 
 function MemberContactActions({
@@ -24,12 +24,13 @@ function MemberContactActions({
   setSelectedStatus,
   selectedDepartment,
   setSelectedDepartment,
-  onAddClick
+  onAddClick,
+  contacts
 }) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const departments = ["All", ...new Set(CONTACTS.map(c => c.department).filter(Boolean))];
-  const statuses = ["All", ...new Set(CONTACTS.map(c => c.status).filter(Boolean))];
+  const departments = ["All", ...new Set(contacts.map(c => c.department).filter(Boolean))];
+  const statuses = ["All", ...new Set(contacts.map(c => c.status).filter(Boolean))];
 
   const hasActiveFilter = selectedStatus !== "All" || selectedDepartment !== "All";
 
@@ -59,13 +60,14 @@ function MemberContactActions({
 }
 
 export default function MemberContactBook() {
+  const [contacts, setContacts] = useState(INITIAL_CONTACTS);
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [selectedDepartment, setSelectedDepartment] = useState("All");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
 
-  const filteredContacts = CONTACTS.filter(c => {
+  const filteredContacts = contacts.filter(c => {
     const cleanSearch = search.trim().toLowerCase();
     const matchesSearch = c.name.toLowerCase().includes(cleanSearch) ||
                           c.email.toLowerCase().includes(cleanSearch);
@@ -84,6 +86,31 @@ export default function MemberContactBook() {
     }
   };
 
+  const handleAddContact = (newContact) => {
+    setContacts(prev => [
+      ...prev,
+      {
+        ...newContact,
+        department: newContact.department || "Legal",
+        status: newContact.status || "Active",
+        phone: newContact.phone || "+1 98765 43210",
+        language: newContact.language || "English",
+        gender: newContact.gender || "Female",
+        emergencyContact: newContact.emergencyContact || "+1 912-345-6789",
+        address: newContact.address || "New York, United States"
+      }
+    ]);
+  };
+
+  const handleUpdateContact = (updatedContact) => {
+    setContacts(prev => prev.map(c => c.email === selectedContact.email ? { ...c, ...updatedContact } : c));
+    setSelectedContact(prev => ({ ...prev, ...updatedContact }));
+  };
+
+  const handleDeleteContact = (email) => {
+    setContacts(prev => prev.filter(c => c.email !== email));
+  };
+
   const contactActions = (
     <MemberContactActions
       search={search}
@@ -93,6 +120,7 @@ export default function MemberContactBook() {
       selectedDepartment={selectedDepartment}
       setSelectedDepartment={setSelectedDepartment}
       onAddClick={() => setIsAddModalOpen(true)}
+      contacts={contacts}
     />
   );
 
@@ -125,7 +153,13 @@ export default function MemberContactBook() {
         <div className="member-contact-section">
           <div className="member-contact-table">
             {filteredContacts.map((c, i) => (
-              <MemberContactCard key={i} name={c.name} email={c.email} onClick={() => setSelectedContact(c)} />
+              <MemberContactCard 
+                key={i} 
+                name={c.name} 
+                email={c.email} 
+                onClick={() => setSelectedContact(c)} 
+                onDelete={() => handleDeleteContact(c.email)} 
+              />
             ))}
             {filteredContacts.length === 0 && (
               <div className="member-contact-empty-state">
@@ -156,11 +190,15 @@ export default function MemberContactBook() {
       </>
 
       {isAddModalOpen && (
-        <AddContactForm onClose={() => setIsAddModalOpen(false)} />
+        <AddContactForm onSave={handleAddContact} onClose={() => setIsAddModalOpen(false)} />
       )}
       
       {selectedContact && (
-        <ContactDetailsModal contact={selectedContact} onClose={() => setSelectedContact(null)} />
+        <ContactDetailsModal 
+          contact={selectedContact} 
+          onUpdateContact={handleUpdateContact} 
+          onClose={() => setSelectedContact(null)} 
+        />
       )}
     </MemberLayout>
   );

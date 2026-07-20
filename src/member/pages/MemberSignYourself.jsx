@@ -214,7 +214,7 @@ export default function MemberSignYourself() {
                   />
                 </div>
 
-                <button className="btn-share btn-share--compact" onClick={(e) => { e.preventDefault(); navigate('/member-documents'); }}>Share</button>
+                <button className="btn-share btn-share--compact" onClick={(e) => { e.preventDefault(); }}>Next</button>
               </>
             ) : (
               <>
@@ -363,9 +363,9 @@ export default function MemberSignYourself() {
           {activeTab !== 'sign' && (
             <button
               className="btn-share btn-share--compact"
-              onClick={(e) => { e.preventDefault(); navigate('/member-documents'); }}
+              onClick={(e) => { e.preventDefault(); }}
             >
-              Share
+              Next
             </button>
           )}
         </div>

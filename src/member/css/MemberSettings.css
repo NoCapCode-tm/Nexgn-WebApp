@@ -3147,6 +3147,8 @@
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;
+  width: 80px;
+  box-sizing: border-box;
 }
 
 .audit-status-badge.audit-status-success {

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import MemberLayout from "../components/MemberLayout";
 import MemberTopbar from "../components/MemberTopbar";
 import MemberTopbarIcons from "../components/MemberTopbarIcons";
@@ -58,11 +59,15 @@ function useIsMobile() {
 
 export default function MemberSettings() {
   const isMobile = useIsMobile();
+  const [searchParams] = useSearchParams();
+  const tabParam = searchParams.get("tab");
+
   // Ref to the MemberLayout sidebar-open function (populated via onRegisterMenuOpen)
   const sidebarOpenerRef = useRef(null);
 
   /* Desktop + Tablet */
   const [activeTab, setActiveTab] = useState("profile");
+  const [auditSearchQuery, setAuditSearchQuery] = useState("");
   const [viewingPermissions, setViewingPermissions] = useState(null);
   const [permissionsState, setPermissionsState] = useState({ "Documents-View Documents": true });
   const [showDisconnectModal, setShowDisconnectModal] = useState(false);
@@ -70,6 +75,15 @@ export default function MemberSettings() {
 
   /* Mobile only: "menu" | "profile" | "account" | "security" */
   const [mobileView, setMobileView] = useState("menu");
+
+  useEffect(() => {
+    if (tabParam) {
+      setActiveTab(tabParam);
+      if (isMobile) {
+        setMobileView(tabParam);
+      }
+    }
+  }, [tabParam, isMobile]);
 
   /* Shared form state */
   const [avatar, setAvatar] = useState(DEFAULT_AVATAR);
@@ -90,12 +104,12 @@ export default function MemberSettings() {
     confirmPassword: "",
     enable2FA: true,
   });
-  
+
   const [teamMembers, setTeamMembers] = useState([
-    { id: 1, name: "Alice Smith", email: "alice.smith@example.com", role: "Member", status: "Active" },
-    { id: 2, name: "Bob Jones", email: "bob.jones@example.com", role: "Member", status: "Active" },
-    { id: 3, name: "Charlie Brown", email: "charlie.brown@example.com", role: "Member", status: "Active" },
-    { id: 4, name: "Diana prince", email: "diana.prince@example.com", role: "Member", status: "Not Active" },
+    { id: 1, name: "Alice Smith", email: "alice.smith@example.com", role: "Subadmin", status: "Active" },
+    { id: 2, name: "Bob Jones", email: "bob.jones@example.com", role: "Subadmin", status: "Active" },
+    { id: 3, name: "Charlie Brown", email: "charlie.brown@example.com", role: "Subadmin", status: "Active" },
+    { id: 4, name: "Diana prince", email: "diana.prince@example.com", role: "Subadmin", status: "Not Active" },
   ]);
   const [teamActionOpen, setTeamActionOpen] = useState(null);
   const teamActionRef = useRef(null);
@@ -394,7 +408,7 @@ export default function MemberSettings() {
     <div className="member-settings-card member-settings-card--team">
       <h2 className="member-settings-card__title">Team Management</h2>
       <div className="member-settings-card__divider" />
-      
+
       {/* Mobile Team Filter Row */}
       <div className="ms-mobile-team-filter-row">
         <div className="ms-mobile-team-search">
@@ -410,43 +424,49 @@ export default function MemberSettings() {
 
       <div className="member-settings-team-table">
         <div className="member-settings-team-header">
-           <div className="team-col-name">Name</div>
-           <div className="team-col-role">Role</div>
-           <div className="team-col-status">Status</div>
-           <div className="team-col-action">Action</div>
+          <div className="team-col-name">Name</div>
+          <div className="team-col-role">Role</div>
+          <div className="team-col-status">Status</div>
+          <div className="team-col-action">Action</div>
         </div>
-        
+
         <div className="member-settings-team-list">
           {teamMembers.map(member => (
             <div className="member-settings-team-row" key={member.id} style={{ zIndex: teamActionOpen === member.id ? 10 : 1 }}>
               <div className="team-col-name">
-                 <div className="team-member-name">{member.name}</div>
-                 <div className="team-member-email">{member.email}</div>
+                <div className="team-member-name">{member.name}</div>
+                <div className="team-member-email">{member.email}</div>
               </div>
               <div className="team-right-controls">
                 <div className="team-col-role">
-                   <span className="team-role-badge">{member.role}</span>
+                  <span className="team-role-badge">{member.role}</span>
                 </div>
                 <div className="team-col-status">
-                   <span className={`team-status-badge ${member.status === 'Active' ? 'active' : 'inactive'}`}>
-                      {member.status}
-                   </span>
+                  <span className={`team-status-badge ${member.status === 'Active' ? 'active' : 'inactive'}`}>
+                    {member.status}
+                  </span>
                 </div>
                 <div className="team-col-action">
-                   <button 
-                     className="team-action-btn" 
-                     onClick={() => setTeamActionOpen(teamActionOpen === member.id ? null : member.id)}
-                   >
-                      <MoreVertical size={20} color="#666" />
-                   </button>
-                   {teamActionOpen === member.id && (
-                     <div className="team-action-dropdown" ref={teamActionRef}>
-                        <button className="team-dropdown-item permissions" onClick={() => { setViewingPermissions(member.id); setTeamActionOpen(null); }}>Permissions</button>
-                        <button className="team-dropdown-item delete">
-                           <span className="team-x-icon">×</span> Remove
-                        </button>
-                     </div>
-                   )}
+                  <button
+                    className="team-action-btn"
+                    onClick={() => setTeamActionOpen(teamActionOpen === member.id ? null : member.id)}
+                  >
+                    <MoreVertical size={20} color="#666" />
+                  </button>
+                  {teamActionOpen === member.id && (
+                    <div className="team-action-dropdown" ref={teamActionRef}>
+                      <button className="team-dropdown-item permissions" onClick={() => { setViewingPermissions(member.id); setTeamActionOpen(null); }}>Permissions</button>
+                      <button
+                        className="team-dropdown-item delete"
+                        onClick={() => {
+                          setTeamMembers(prev => prev.filter(m => m.id !== member.id));
+                          setTeamActionOpen(null);
+                        }}
+                      >
+                        <span className="team-x-icon">×</span> Remove
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -454,13 +474,13 @@ export default function MemberSettings() {
         </div>
       </div>
       <div className="member-settings-team-footer">
-         <button className="member-settings-form__submit">Add Member</button>
+        <button className="member-settings-form__submit">Add Subadmin</button>
       </div>
     </div>
   );
 
   const togglePermission = (key) => {
-     setPermissionsState(prev => ({...prev, [key]: !prev[key]}));
+    setPermissionsState(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
   const permissionCategories = [
@@ -473,33 +493,33 @@ export default function MemberSettings() {
 
   const permissionsViewComponent = (
     <div className="member-permissions-card">
-       <h2 className="member-permissions-card__title">Permission Settings</h2>
-       <div className="member-permissions-card__divider" />
-       
-       <div className="member-permissions-container">
-         {permissionCategories.map(cat => (
-            <div key={cat.category} className={`member-permissions-group group-${cat.category.replace(/\s+/g, '-')}`}>
-               <h3 className="member-permissions-group-title">{cat.category}</h3>
-               <div className="member-permissions-group-items">
-                 {cat.items.map(item => {
-                    const key = `${cat.category}-${item}`;
-                    const isChecked = permissionsState[key] || false;
-                    return (
-                      <label key={item} className="member-permission-item">
-                         <span className="member-permission-item-label">{item}</span>
-                         <input type="checkbox" checked={isChecked} onChange={() => togglePermission(key)} className="member-permission-checkbox-input" />
-                         <span className="member-permission-custom-checkbox"></span>
-                      </label>
-                    );
-                 })}
-               </div>
-            </div>
-         ))}
-       </div>
+      <h2 className="member-permissions-card__title">Permission Settings</h2>
+      <div className="member-permissions-card__divider" />
 
-       <div className="member-permissions-footer">
-          <button className="member-settings-form__submit" onClick={() => setViewingPermissions(null)}>Save</button>
-       </div>
+      <div className="member-permissions-container">
+        {permissionCategories.map(cat => (
+          <div key={cat.category} className={`member-permissions-group group-${cat.category.replace(/\s+/g, '-')}`}>
+            <h3 className="member-permissions-group-title">{cat.category}</h3>
+            <div className="member-permissions-group-items">
+              {cat.items.map(item => {
+                const key = `${cat.category}-${item}`;
+                const isChecked = permissionsState[key] || false;
+                return (
+                  <label key={item} className="member-permission-item">
+                    <span className="member-permission-item-label">{item}</span>
+                    <input type="checkbox" checked={isChecked} onChange={() => togglePermission(key)} className="member-permission-checkbox-input" />
+                    <span className="member-permission-custom-checkbox"></span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="member-permissions-footer">
+        <button className="member-settings-form__submit" onClick={() => setViewingPermissions(null)}>Save</button>
+      </div>
     </div>
   );
 
@@ -507,7 +527,7 @@ export default function MemberSettings() {
     <div className="member-settings-card member-settings-card--notifications">
       <h2 className="member-settings-card__title">Notification</h2>
       <div className="member-settings-card__divider" />
-      
+
       <div className="member-notification-section">
         <h3 className="member-notification-section-title">Email Notification</h3>
         <div className="member-notification-list">
@@ -570,7 +590,7 @@ export default function MemberSettings() {
     <div className="member-settings-card member-settings-card--billing">
       <h2 className="member-settings-card__title">Billing</h2>
       <div className="member-settings-card__divider" />
-      
+
       <div className="member-billing-section">
         <h3 className="member-billing-section-title">Current Plan</h3>
         <div className="member-billing-plan-card">
@@ -640,22 +660,22 @@ export default function MemberSettings() {
     <div className="member-settings-card member-settings-card--integrations">
       <h2 className="member-settings-card__title">Integration</h2>
       <div className="member-settings-card__divider" />
-      
+
       <p className="member-integrations-description">
         Connect Sign App to your favourite tools to streamline your document workflow.
       </p>
-      
+
       <div className="member-integrations-list">
         <div className="member-integration-item">
           <div className="member-integration-item-left">
             <div className="member-integration-item-header">
               <svg viewBox="0 0 87.3 78" className="member-integration-logo" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
-                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
-                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
-                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
-                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
-                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da" />
+                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47" />
+                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335" />
+                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d" />
+                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc" />
+                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00" />
               </svg>
               <div className="member-integration-info">
                 <h3 className="member-integration-title">Google Drive</h3>
@@ -673,16 +693,16 @@ export default function MemberSettings() {
           </div>
           <div className="member-integration-item-right">
             {isDriveConnected ? (
-              <button 
-                className="member-integration-action-btn disconnect" 
+              <button
+                className="member-integration-action-btn disconnect"
                 type="button"
                 onClick={() => setShowDisconnectModal(true)}
               >
                 DISCONNECT
               </button>
             ) : (
-              <button 
-                className="member-integration-action-btn connect" 
+              <button
+                className="member-integration-action-btn connect"
                 type="button"
                 onClick={() => setIsDriveConnected(true)}
               >
@@ -703,6 +723,17 @@ export default function MemberSettings() {
     { id: 4, date: "Mar 23, 11:00 AM", name: "Charlie Brown", action: "Failed Logined Attempt", document: "-", status: "Failed" },
   ];
 
+  const filteredAuditLogs = auditLogsData.filter((log) => {
+    const q = auditSearchQuery.toLowerCase();
+    return (
+      log.date.toLowerCase().includes(q) ||
+      log.name.toLowerCase().includes(q) ||
+      log.action.toLowerCase().includes(q) ||
+      log.document.toLowerCase().includes(q) ||
+      log.status.toLowerCase().includes(q)
+    );
+  });
+
   const auditCard = (
     <div className="member-settings-card member-settings-card--audit">
       {/* ── Desktop & Tablet Layout (Hidden on Mobile) ── */}
@@ -710,12 +741,18 @@ export default function MemberSettings() {
         <div className="member-audit-header">
           <h2 className="member-settings-card__title">Audit Logs</h2>
           <div className="member-audit-search">
-            <input type="text" placeholder="Search Logs....." className="member-audit-search-input" />
+            <input 
+              type="text" 
+              placeholder="Search Logs....." 
+              className="member-audit-search-input" 
+              value={auditSearchQuery}
+              onChange={(e) => setAuditSearchQuery(e.target.value)}
+            />
             <Search size={16} className="member-audit-search-icon" />
           </div>
         </div>
         <div className="member-settings-card__divider" />
-        
+
         <div className="member-audit-table">
           <div className="member-audit-table-header">
             <div className="audit-col audit-col-date">DATE</div>
@@ -725,7 +762,7 @@ export default function MemberSettings() {
             <div className="audit-col audit-col-status">STATUS</div>
           </div>
           <div className="member-audit-table-body">
-            {auditLogsData.map((log) => (
+            {filteredAuditLogs.map((log) => (
               <div key={log.id} className="member-audit-row">
                 <div className="audit-col audit-col-date">{log.date}</div>
                 <div className="audit-col audit-col-name">{log.name}</div>
@@ -746,12 +783,18 @@ export default function MemberSettings() {
       <div className="member-audit-mobile-layout">
         <h2 className="member-settings-card__title">Audit Logs</h2>
         <div className="member-settings-card__divider" />
-        
+
         {/* Mobile Search & Filter */}
         <div className="member-audit-mobile-controls">
           <div className="member-audit-mobile-search-wrapper">
             <Search size={16} className="member-audit-mobile-search-icon" />
-            <input type="text" placeholder="Search" className="member-audit-mobile-search-input" />
+            <input 
+              type="text" 
+              placeholder="Search" 
+              className="member-audit-mobile-search-input" 
+              value={auditSearchQuery}
+              onChange={(e) => setAuditSearchQuery(e.target.value)}
+            />
           </div>
           <button className="member-audit-mobile-filter-btn" type="button">
             <Filter size={18} />
@@ -776,7 +819,7 @@ export default function MemberSettings() {
 
         {/* Mobile Cards List */}
         <div className="member-audit-mobile-list">
-          {auditLogsData.map((log) => (
+          {filteredAuditLogs.map((log) => (
             <div key={log.id} className="member-audit-mobile-card">
               <div className="member-audit-mobile-card-row member-audit-mobile-card-row--top">
                 <div className="member-audit-mobile-file">
@@ -957,7 +1000,7 @@ export default function MemberSettings() {
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
               </button>
-              <div 
+              <div
                 className="ms-mobile-menu-item"
                 onClick={() => { setActiveTab("audit"); setMobileView("audit"); }}
               >
@@ -1090,39 +1133,38 @@ export default function MemberSettings() {
         {/* Settings body */}
         {viewingPermissions ? (
           <div className="member-settings-permissions-view">
-             {permissionsViewComponent}
+            {permissionsViewComponent}
           </div>
         ) : (
           <div className="member-settings-body">
             <nav className="member-settings-nav" aria-label="Member settings navigation">
-            {settingsNavItems.map((item) => (
-              <button
-                key={item.key}
-                id={`member-settings-nav-${item.key}`}
-                className={`member-settings-nav__item${
-                  activeTab === item.key ? " member-settings-nav__item--active" : ""
-                }${!item.active ? " member-settings-nav__item--disabled" : ""}`}
-                onClick={() => handleTabClick(item)}
-                disabled={!item.active}
-                aria-current={activeTab === item.key ? "page" : undefined}
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
+              {settingsNavItems.map((item) => (
+                <button
+                  key={item.key}
+                  id={`member-settings-nav-${item.key}`}
+                  className={`member-settings-nav__item${activeTab === item.key ? " member-settings-nav__item--active" : ""
+                    }${!item.active ? " member-settings-nav__item--disabled" : ""}`}
+                  onClick={() => handleTabClick(item)}
+                  disabled={!item.active}
+                  aria-current={activeTab === item.key ? "page" : undefined}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
 
-          <div className="member-settings-content">
-            {activeTab === "profile" && profileCard}
-            {activeTab === "account" && accountCard}
-            {activeTab === "notifications" && notificationCard}
-            {activeTab === "security" && securityCard}
-            {activeTab === "team" && !viewingPermissions && teamCard}
-            {activeTab === "team" && viewingPermissions && permissionsViewComponent}
-            {activeTab === "billing" && billingCard}
-            {activeTab === "integrations" && integrationsCard}
-            {activeTab === "audit" && auditCard}
+            <div className="member-settings-content">
+              {activeTab === "profile" && profileCard}
+              {activeTab === "account" && accountCard}
+              {activeTab === "notifications" && notificationCard}
+              {activeTab === "security" && securityCard}
+              {activeTab === "team" && !viewingPermissions && teamCard}
+              {activeTab === "team" && viewingPermissions && permissionsViewComponent}
+              {activeTab === "billing" && billingCard}
+              {activeTab === "integrations" && integrationsCard}
+              {activeTab === "audit" && auditCard}
+            </div>
           </div>
-        </div>
         )}
       </>
       {showDisconnectModal && (
@@ -1131,22 +1173,22 @@ export default function MemberSettings() {
             <div className="integration-modal-content">
               <div className="integration-modal-header-row">
                 <svg viewBox="0 0 24 24" className="integration-modal-warning-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#E5252A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#E5252A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 <h3 className="integration-modal-title">Disconnect Integration?</h3>
               </div>
-              
+
               <p className="integration-modal-description">
                 Disconnecting will stop data sync and disable related work flows. Existing Documents will not be affected.
               </p>
-              
+
               <ul className="integration-modal-list">
                 <li>No new document will sync</li>
                 <li>Automations using this integrations will stop</li>
                 <li>You can reconnect anytime</li>
               </ul>
             </div>
-            
+
             <div className="integration-modal-footer">
               <button className="integration-modal-btn cancel-btn" onClick={() => setShowDisconnectModal(false)}>
                 Cancel

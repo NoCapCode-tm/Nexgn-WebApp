@@ -21,18 +21,23 @@ const ALL_DOCS = [
 ];
 
 export default function MemberDocuments() {
+  const [documents, setDocuments] = useState(ALL_DOCS);
   const [activeTab, setActiveTab] = useState("all");
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
 
-  const filteredDocs = ALL_DOCS.filter(doc => {
+  const handleRevoke = (id) => {
+    setDocuments(prev => prev.filter(doc => doc.id !== id));
+  };
+
+  const filteredDocs = documents.filter(doc => {
     const matchSearch = doc.title.toLowerCase().includes(search.toLowerCase()) || 
                         doc.signers.toLowerCase().includes(search.toLowerCase());
     const matchesStatus = selectedStatus === "All" || 
                           (doc.status && doc.status.toLowerCase() === selectedStatus.toLowerCase());
     let matchesTab = true;
     if (activeTab === "created") matchesTab = doc.owner === "Me";
-    if (activeTab === "assigned") matchesTab = true; 
+    if (activeTab === "assigned") matchesTab = doc.owner !== "Me";
     return matchSearch && matchesStatus && matchesTab;
   });
 
@@ -97,7 +102,7 @@ export default function MemberDocuments() {
         </div>
 
         {/* Table Section */}
-        <MemberDocumentsTable documents={filteredDocs} />
+        <MemberDocumentsTable documents={filteredDocs} onRevoke={handleRevoke} />
 
       </>
     </MemberLayout>

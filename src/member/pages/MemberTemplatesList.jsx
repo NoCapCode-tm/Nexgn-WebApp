@@ -21,10 +21,15 @@ const MOCK_TEMPLATES = [
 ];
 
 export default function MemberTemplatesList({ onAddTemplate }) {
+  const [templates, setTemplates] = useState(MOCK_TEMPLATES);
   const [search, setSearch] = useState("");
   const [openMenuId, setOpenMenuId] = useState(null);
 
-  const filtered = MOCK_TEMPLATES.filter((t) =>
+  const handleRevoke = (id) => {
+    setTemplates(prev => prev.filter(t => t.id !== id));
+  };
+
+  const filtered = templates.filter((t) =>
     t.title.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -173,7 +178,10 @@ export default function MemberTemplatesList({ onAddTemplate }) {
                       </button>
                       <button
                         className="action-menu__item action-menu__item--danger"
-                        onClick={() => setOpenMenuId(null)}
+                        onClick={() => {
+                          setOpenMenuId(null);
+                          handleRevoke(t.id);
+                        }}
                       >
                         <X size={13} />
                         Revoke

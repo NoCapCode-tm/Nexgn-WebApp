@@ -7,7 +7,7 @@ const statusClass = {
   Expired: "badge--expired",
 };
 
-export default function MemberDocumentRow({ title, note, signers, signedAt, owner, status }) {
+export default function MemberDocumentRow({ title, note, signers, signedAt, owner, status, onRevoke }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -52,7 +52,10 @@ export default function MemberDocumentRow({ title, note, signers, signedAt, owne
             </button>
             <button
               className="doc-row__dropdown-item doc-row__dropdown-item--danger"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false);
+                if (onRevoke) onRevoke();
+              }}
             >
               <X size={13} />
               Revoke
