@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logoLight from "../../assets/logo-light.png";
+import logoDark from "../../assets/logo-dark.png";
 import useWindowWidth from "./useWindowWidth";
 import useDarkMode from "./useDarkMode";
 import {
@@ -113,7 +114,7 @@ export default function Sidebar() {
         <div className="sidebar__logo">
           {effectiveExpanded ? (
             <img
-              src={logoLight}
+              src={isDark ? logoDark : logoLight}
               alt="Nexgn"
               className="admin-sidebar__logo-img"
             />
