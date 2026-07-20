@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react';
+
+import { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout'; 
 import Topbar from '../components/Topbar';
@@ -7,6 +8,51 @@ import useWindowWidth from '../components/useWindowWidth';
 import '../css/BaseLayout.css';
 import '../css/Dashboard.css';
 import '../css/SignYourself.css';
+
+function TemplateDropdown({ value, onChange, options }) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className="template-select-wrap" ref={wrapRef}>
+      <button
+        type="button"
+        className="template-select"
+        onClick={() => setOpen(o => !o)}
+      >
+        {value || 'Select a Template'}
+      </button>
+      <svg className={`template-chevron${open ? ' template-chevron--open' : ''}`} width="14" height="14" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+      {open && (
+        <ul className="template-dropdown-menu">
+          {options.map((opt) => (
+            <li
+              key={opt}
+              className={`template-dropdown-option${value === opt ? ' template-dropdown-option--active' : ''}`}
+              onClick={() => { onChange(opt); setOpen(false); }}
+            >
+              {opt}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 export default function SignYourself() {
   const location = useLocation();
@@ -22,6 +68,7 @@ export default function SignYourself() {
   const [required, setRequired] = useState(true);
   const [fieldType, setFieldType] = useState('Signature');
   const [assignedTo, setAssignedTo] = useState('You');
+  const [selectedTemplate, setSelectedTemplate] = useState('');
   const fileInputRef = useRef(null);
 
   // Request Signature specific states
@@ -161,20 +208,11 @@ export default function SignYourself() {
                 <div>
                   <div className="section-label">Choose Template</div>
                   <div className="template-row">
-                    <div className="template-select-wrap">
-                      <select className="template-select" defaultValue="">
-                        <option value="" disabled>Select a Template</option>
-                        <option>NDA Template</option>
-                        <option>Employment Agreement</option>
-                        <option>Freelance Contract</option>
-                        <option>Job Offer Letter</option>
-                      </select>
-                      <svg className="template-chevron" width="14" height="14" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" strokeWidth="2"
-                        strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="9 18 15 12 9 6"/>
-                      </svg>
-                    </div>
+                    <TemplateDropdown
+                      value={selectedTemplate}
+                      onChange={setSelectedTemplate}
+                      options={["NDA Template", "Employment Agreement", "Freelance Contract", "Job Offer Letter"]}
+                    />
                     </div>
                 </div>
 
@@ -221,20 +259,11 @@ export default function SignYourself() {
                 <div>
                   <div className="section-label">Choose Template</div>
                   <div className="template-row">
-                    <div className="template-select-wrap">
-                      <select className="template-select" defaultValue="">
-                        <option value="" disabled>Select a Template</option>
-                        <option>NDA Template</option>
-                        <option>Employment Agreement</option>
-                        <option>Freelance Contract</option>
-                        <option>Job Offer Letter</option>
-                      </select>
-                      <svg className="template-chevron" width="14" height="14" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" strokeWidth="2"
-                        strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="9 18 15 12 9 6"/>
-                      </svg>
-                    </div>
+                    <TemplateDropdown
+                      value={selectedTemplate}
+                      onChange={setSelectedTemplate}
+                      options={["NDA Template", "Employment Agreement", "Freelance Contract", "Job Offer Letter"]}
+                    />
                   </div>
                 </div>
 
