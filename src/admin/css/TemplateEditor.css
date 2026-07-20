@@ -343,6 +343,10 @@
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   opacity: 0.9;
 }
+/* Close button is mobile-only; hidden by default on tablet/desktop */
+.template-editor-sidebar-close {
+  display: none;
+}
 @media (max-width: 768px) {
   .template-editor-modal {
     width: 100vw;
@@ -423,7 +427,10 @@
   .template-editor-sidebar--mobile-open {
     display: flex;
   }
-  .template-editor-sidebar-close {
+ .template-editor-sidebar-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     align-self: flex-end;
     width: 28px;
     height: 28px;
@@ -718,4 +725,8 @@
 }
 .dark-mode .template-editor-save:hover {
   opacity: 0.9;
+}
+.dark-mode .template-editor-sidebar-close {
+  color: #b8b8be;
+  background: rgba(255, 255, 255, 0.1);
 }
