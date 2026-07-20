@@ -1340,16 +1340,9 @@ body.dark-mode .admin-docs-page .admin-badge--failed {
   }
 }
 
-@media (min-width: 1180px) {
-  body.dark-mode .admin-docs-page .admin-doc-row__icon {
-    color: transparent;
-    fill: none;
-    border: 1px solid;
-    border-image-source: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
-    border-image-slice: 1;
-  }
+body.dark-mode .admin-docs-page .admin-doc-row__icon {
+  stroke: url(#docIconGradient) !important;
 }
-
 /* ============================================
    DARK MODE — Action dropdown (match Dashboard doc-row__dropdown)
    ============================================ */
