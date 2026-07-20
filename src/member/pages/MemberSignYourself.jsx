@@ -105,18 +105,22 @@ export default function MemberSignYourself() {
           actionButton={null} // hide upload document button since we are already on sign page
         />
 
-        {/* Mobile Page Header */}
+        {/* Mobile Page Header - same structure as Dashboard */}
         <div className="mobile-page-header">
-          <h1 className="topbar__title">
-            {activeTab === 'sign' ? 'Sign Yourself' : 'Create Signature Request'}
-          </h1>
-          <p className="topbar__sub">
-            {activeTab === 'sign' ? 'Create and sign a document where you are the signer' : 'Send a document for signing or sign it yourself'}
-          </p>
+          <div className="mobile-page-header__container">
+            <div className="mobile-page-header__titles">
+              <h1 className="topbar__title">
+                {activeTab === 'sign' ? 'Sign Yourself' : 'Create Signature Request'}
+              </h1>
+              <p className="topbar__sub">
+                {activeTab === 'sign' ? 'Create and sign a document where you are the signer' : 'Send a document for signing or sign it yourself'}
+              </p>
+            </div>
+          </div>
+          <div className="mobile-page-header__divider" />
         </div>
-        <hr className="mobile-header-divider" />
 
-        {/* MOBILE TABS */}
+        {/* MOBILE TABS - same position as dashboard mobile-cta-row */}
         <div className="mobile-tabs-container">
           <button
             className={`tab-btn ${activeTab === 'sign' ? 'tab-btn--active' : 'tab-btn--inactive'}`}

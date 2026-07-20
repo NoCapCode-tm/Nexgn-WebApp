@@ -745,20 +745,30 @@
   display: none;
 }
 @media (max-width: 768px) {
-  /* 1. Document Setup Card Structure & 8. Mobile Width Consistency */
+  /* Match dashboard mobile main layout */
   .member-sign-yourself-page .main {
-    padding-right: 16px;
-    padding-left: 16px;
-    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+    min-height: unset !important;
+    overflow-y: visible !important;
+    gap: var(--space-xs) !important;
+    padding-right: var(--space-md) !important;
+    padding-left: var(--space-md) !important;
+    padding-bottom: 72px !important;
     overflow-x: hidden;
   }
-  .member-sign-yourself-page .mobile-page-header {
-    padding-left: calc(var(--mobile-gutter) - 8px);
-  }
+  /* Edge-to-edge topbar — matches dashboard */
   .member-sign-yourself-page .mobile-topbar {
-    width: calc(100% + 32px);
-    margin-right: -16px;
-    margin-left: -16px;
+    width: calc(100% + (var(--space-md) * 2));
+    margin-right: calc(var(--space-md) * -1);
+    margin-left: calc(var(--space-md) * -1);
+  }
+  /* Mobile page header — same padding and margin as dashboard */
+  .member-sign-yourself-page .mobile-page-header {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: var(--space-md) !important;
   }
   .member-sign-yourself-page .setup-card {
     gap: var(--space-md);
@@ -767,9 +777,7 @@
     padding: var(--space-lg) var(--mobile-gutter);
     box-shadow: none;
     outline: none;
-    /* 7. Internal Padding */
-      /* 2. Card Border (Neutral light-gray, no blue outline) */
-      border: 1px solid #E4E4E4;
+    border: 1px solid #E4E4E4;
   }
   .member-sign-yourself-page .mobile-header-divider {
     display: blockc;
@@ -783,34 +791,56 @@
   .setup-card__tabs--desktop-only {
     display: none;
   }
+  /* Fluid title/subtitle font on mobile — matches dashboard */
+  .member-sign-yourself-page .topbar__title {
+    font-size: var(--font-lg) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .member-sign-yourself-page .topbar__sub {
+    font-size: var(--font-sm) !important;
+  }
   
   .member-form-group-flex {
     flex: 1;
   }
+  /* Mobile tabs — same style as dashboard mobile-cta-row pill buttons */
   .member-sign-yourself-page .mobile-tabs-container {
     display: flex;
+    gap: var(--space-sm);
     width: 100%;
-    margin-bottom: 20px;
-    border: 1px solid #E4E4E4;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #ffffff;
-  }
-  .member-sign-yourself-page .mobile-tabs-container .tab-btn {
-    flex: 1;
-    height: 40px;
+    margin-bottom: var(--space-md) !important;
+    padding: 0;
     border: none;
     border-radius: 0;
-    font-size: 13px;
-    font-weight: 600;
-    text-align: center;
+    overflow: visible;
+    background: transparent;
+  }
+  .member-sign-yourself-page .mobile-tabs-container .tab-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: 11vw !important;
+    min-height: 11vw !important;
+    padding: 0 var(--space-md) !important;
+    border-radius: 999px !important;
+    font-size: var(--font-sm) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    cursor: pointer;
+    box-sizing: border-box;
   }
   .member-sign-yourself-page .tab-btn--active {
+    border: none;
     color: #ffffff;
     background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
   }
   .member-sign-yourself-page .tab-btn--inactive {
-    color: #111827;
+    border: 0.27vw solid #D9D9D9;
+    color: #666666;
     background: #ffffff;
   }
   /* 4. Template Selector Row */
@@ -911,6 +941,55 @@
   }
   .member-sign-yourself-page .roles-row .form-group:nth-child(2) {
     grid-column: 1 / -1;
+  }
+
+  /* ── Fluid Font Sizes + No-Wrap: all text scales with viewport width ── */
+  .member-sign-yourself-page .setup-card__title {
+    font-size: var(--font-md) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .member-sign-yourself-page .section-label,
+  .member-sign-yourself-page .form-label {
+    font-size: var(--font-xs) !important;
+    white-space: nowrap;
+  }
+  .member-sign-yourself-page .form-input,
+  .member-sign-yourself-page .form-textarea,
+  .member-sign-yourself-page .template-select,
+  .member-sign-yourself-page .field-type-select,
+  .member-sign-yourself-page .assigned-input {
+    font-size: var(--font-sm) !important;
+  }
+  .member-sign-yourself-page .upload-zone {
+    font-size: var(--font-sm) !important;
+  }
+  .member-sign-yourself-page .or-divider {
+    font-size: var(--font-xs) !important;
+    white-space: nowrap;
+  }
+  .member-sign-yourself-page .btn-create {
+    font-size: var(--font-sm) !important;
+    white-space: nowrap;
+  }
+  .member-sign-yourself-page .required-label {
+    font-size: var(--font-xs) !important;
+    white-space: nowrap;
+  }
+  .member-sign-yourself-page .doc-preview__title,
+  .member-sign-yourself-page .doc-preview__zoom {
+    font-size: var(--font-xs) !important;
+    white-space: nowrap;
+  }
+  .member-sign-yourself-page .field-props__title,
+  .member-sign-yourself-page .field-props__label {
+    font-size: var(--font-xs) !important;
+    white-space: nowrap;
+  }
+  .member-sign-yourself-page .btn-share {
+    font-size: var(--font-sm) !important;
+    white-space: nowrap;
   }
 }
 /* =======================================================
