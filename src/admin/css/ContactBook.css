@@ -343,6 +343,20 @@
   }
 }
 /* == ADD CONTACT MODAL == */
+@keyframes contactOverlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes contactModalSlideIn {
+  from {
+    transform: translateX(240px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 .add-contact-modal-overlay {
   position: fixed;
   top: 0;
@@ -356,6 +370,7 @@
   padding-top: 60px;
   padding-right: 40px;
   background: rgba(0, 0, 0, 0.4);
+  animation: contactOverlayFadeIn 0.2s ease-out;
 /* Move both modals slightly upward */
 }
 .add-contact-modal {
@@ -368,6 +383,7 @@
   background: #ffffff;
   /* Intermediate padding */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  animation: contactModalSlideIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .add-contact-heading {
   margin: 0;
