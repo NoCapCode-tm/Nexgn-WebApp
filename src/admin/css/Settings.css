@@ -1,369 +1,4088 @@
 /* Page layout */
-.settings-body {
+.admin-settings-page {
+  /* Enforce no wrapping and scale down font-size dynamically on smaller screens */
+  white-space: nowrap;
+}
+
+.admin-settings-page * {
+  white-space: nowrap;
+}
+
+@media (max-width: 1179px) {
+  /* Fluid scaling for text to prevent overflow when nowrap is enforced */
+  .admin-settings-page h1,
+  .admin-settings-page h2,
+  .admin-settings-page .topbar__title,
+  .admin-settings-page .ms-mobile-detail-header__title,
+  .admin-settings-page .admin-settings-card__title {
+    font-size: clamp(20px, 6vw, 28px) !important;
+  }
+  
+  .admin-settings-page h3,
+  .admin-settings-page h4,
+  .admin-settings-page .admin-settings-nav__item,
+  .admin-settings-page .admin-settings-form__label,
+  .admin-settings-page label,
+  .admin-settings-page button,
+  .admin-settings-page input,
+  .admin-settings-page .ms-mobile-menu-item__label,
+  .admin-settings-page .ms-mobile-group-title,
+  .admin-settings-page .ms-mobile-profile-card__name {
+    font-size: clamp(16px, 5vw, 18px) !important;
+  }
+  
+  .admin-settings-page p,
+  .admin-settings-page span,
+  .admin-settings-page .topbar__sub,
+  .admin-settings-page .ms-mobile-detail-header__sub,
+  .admin-settings-page .admin-settings-avatar__helper,
+  .admin-settings-page .ms-mobile-profile-card__email,
+  .admin-settings-page .ms-mobile-profile-card__role {
+    font-size: clamp(14px, 4vw, 16px) !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+.admin-settings-body {
   display: flex;
-  gap: 24px;
   align-items: flex-start;
+  gap: 24px;
   width: 100%;
 }
 
-.settings-content {
+.admin-settings-content {
   flex: 1;
   min-width: 0;
 }
 
 /* Header & Topbar */
-.settings-topbar__bottom-row {
+.admin-settings-topbar__bottom-row {
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(204, 204, 204, 0.8);
 }
 
-.settings-topbar__bottom-row .topbar__sub {
-  font-size: 15px;
-}
-
-.settings-topbar-search {
+.admin-settings-topbar-search {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 200px;
   padding: 8px 14px;
-  background: #ffffff;
   border: 1px solid #E4E4E4;
   border-radius: 20px;
+  background: #ffffff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.2s, transform 0.2s;
-  min-width: 200px;
 }
 
-.settings-topbar-search:hover {
+.admin-settings-topbar-search:hover {
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
 
-.settings-topbar-search__input {
+.admin-settings-topbar-search__input {
+  width: 100%;
   border: none;
-  outline: none;
-  background: transparent;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   color: #1a1a2e;
-  width: 100%;
+  background: transparent;
+  outline: none;
 }
 
-.settings-topbar-search__input::placeholder {
+.admin-settings-topbar-search__input::placeholder {
   color: #8A949F;
 }
 
 /* Sidebar & Navigation */
-.settings-nav {
+.admin-settings-nav {
   display: flex;
   flex-direction: column;
-  min-width: 260px;
-  width: 260px;
   flex-shrink: 0;
+  gap: 8px;
+  width: clamp(180px, 15vw, 250px);
   background: transparent;
-  gap: 16px;
 }
 
-.settings-nav__item {
+.admin-settings-nav__item {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 9px 24px;
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: #1a1a2e;
-  background: transparent;
+  padding: 8px 16px;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
   text-align: left;
-  transition: background 0.15s, color 0.15s;
   white-space: nowrap;
-}
-
-.settings-nav__item:hover:not(.settings-nav__item--disabled) {
-  background: #FFF0F0;
-  color: #FF0915;
-}
-
-.settings-nav__item--active {
-  background: #FFDCDC !important;
-  color: #FF0915 !important;
-  font-weight: 500;
-}
-
-.settings-nav__item--disabled {
   color: #1a1a2e;
-  cursor: default;
+  background: transparent;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+}
+
+.admin-settings-nav__item:hover:not(.admin-settings-nav__item--disabled) {
+  color: #FF0915;
+  background: #FFF0F0;
+}
+
+.admin-settings-nav__item--active {
+  font-weight: 500;
+  color: #FF0915;
+  background: #FFDCDC;
+}
+
+.admin-settings-nav__item--disabled {
+  color: #1a1a2e;
   opacity: 0.7;
+  cursor: default;
 }
 
 /* Cards & Sections */
-.settings-card {
-  background: #ffffff;
+.admin-settings-card {
+  width: 100%;
+  max-width: 100%;
+  padding: 20px 28px 20px 28px;
   border: 1px solid #E4E4E4;
   border-radius: 12px;
+  background: #ffffff;
   box-shadow: 0 0 14.5px 1px rgba(131, 131, 131, 0.10);
-  padding: 24px 28px 20px 28px;
-  max-width: 1000px;
 }
 
-.settings-card__title {
+.admin-settings-card__title {
+  margin-bottom: 16px;
   font-family: 'Inter', sans-serif;
   font-size: 20px;
   font-weight: 600;
   color: #1a1a2e;
-  margin-bottom: 20px;
 }
 
-.settings-card__divider {
+.admin-settings-card__divider {
   width: 100%;
   height: 1px;
-  background: rgba(204, 204, 204, 0.8);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  background: #CCCCCC;
 }
 
-.settings-avatar-row {
+.admin-settings-avatar-row {
   display: flex;
   align-items: center;
   gap: 40px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
-.settings-avatar {
+.admin-settings-avatar {
+  position: relative;
+  flex-shrink: 0;
   width: 84px;
   height: 84px;
+  border: 2px solid #f3dede;
   border-radius: 50%;
   overflow: hidden;
   background: #FFDCDC;
-  flex-shrink: 0;
-  border: 2px solid #f3dede;
-  position: relative;
 }
 
-.settings-avatar__img {
+.admin-settings-avatar__img {
   position: absolute;
-  left: 0%;
-  right: 0%;
   top: 0%;
+  right: 0%;
   bottom: 0%;
+  left: 0%;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
-.settings-avatar-info {
+.admin-settings-avatar-info {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
 /* Forms & Inputs */
-.settings-form {
+.admin-settings-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
-.settings-form__group {
+.admin-settings-form__group {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.settings-form__label {
+.admin-settings-form__label {
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: #1a1a2e;
 }
 
-.settings-form__input {
+.admin-settings-form__input {
+  box-sizing: border-box;
   width: 100%;
-  max-width: 560px;
-  padding: 8px 12px;
+  max-width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   color: #1a1a2e;
   background: #ffffff;
-  border: 1px solid #CCCCCC;
-  border-radius: 6px;
-  outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
-  box-sizing: border-box;
+  outline: none;
 }
 
-.settings-form__input:focus {
+.admin-settings-form__input:focus {
   border-color: #FF0915;
   box-shadow: 0 0 0 3px rgba(255, 9, 21, 0.08);
 }
 
-.settings-form__input--readonly {
+.admin-settings-form__input--readonly {
+  border-color: #E4E4E4;
+  color: #8A949F;
   background: #F9FAFB;
-  color: #6B7280;
   cursor: not-allowed;
 }
 
-.settings-form__input--readonly:focus {
-  border-color: #D1D5DB;
+.admin-settings-form__input--readonly:focus {
+  border-color: #E4E4E4;
   box-shadow: none;
 }
 
-.settings-form__helper {
+.admin-settings-form__helper {
+  margin: 4px 0 0 0;
   font-family: 'Inter', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   color: #8A949F;
-  margin: 0;
 }
 
-.settings-form__success {
+.admin-settings-form__success {
+  max-width: 100%;
   padding: 10px 16px;
+  border: 1px solid #B7E4C7;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: #179747;
   background: #E6F7EC;
-  border: 1px solid #B7E4C7;
-  border-radius: 8px;
-  max-width: 100%;
 }
 
-.settings-form__footer {
+.admin-settings-form__footer {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 12px;
+  max-width: 100%;
+  margin-top: 24px;
 }
 
 /* Tables & Rows */
-
 /* Buttons & Actions */
-.settings-avatar__file-input {
+.admin-settings-avatar__file-input {
   display: none;
 }
 
-.settings-avatar__upload-btn {
+.admin-settings-avatar__upload-btn {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  align-self: flex-start;
   padding: 6px 28px;
+  border: 1px solid transparent;
+  border-radius: 4px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
+  white-space: nowrap;
   color: #666666;
   background: linear-gradient(#ffffff, #ffffff) padding-box,
-              linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) border-box;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  cursor: pointer;
+    linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) border-box;
   transition: all 0.15s;
-  white-space: nowrap;
-  align-self: flex-start;
+  cursor: pointer;
 }
 
-.settings-avatar__upload-btn:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) padding-box,
-              linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) border-box;
+.admin-settings-avatar__upload-btn:hover {
   color: #ffffff;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) padding-box,
+    linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) border-box;
 }
 
-.settings-avatar__helper {
+.admin-settings-avatar__helper {
+  margin: 0;
   font-family: 'Inter', sans-serif;
   font-size: 11px;
   color: #8A949F;
-  margin: 0;
 }
 
-.settings-form__submit {
+.admin-settings-form__submit {
   width: auto;
   min-width: 200px;
   padding: 12px 40px;
+  border: none;
+  border-radius: 6px;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 500;
+  letter-spacing: 0.2px;
   color: #ffffff;
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
   transition: background 0.15s, box-shadow 0.15s;
-  letter-spacing: 0.2px;
+  cursor: pointer;
 }
 
-.settings-form__submit:hover {
+.admin-settings-form__submit:hover {
   background: linear-gradient(90deg, #D10008 0%, #B30000 55%, #960101 100%);
   box-shadow: 0 4px 12px rgba(255, 9, 21, 0.25);
 }
 
-/* Modals & Dropdowns */
+/* Security Tab Styles */
+.admin-settings-card--security .admin-settings-form {
+  gap: 0;
+}
 
-/* Utility States */
+.admin-settings-section-title {
+  margin: 0 0 6px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
 
-/* Tablet adjustments */
+.admin-settings-card--security .admin-settings-section-title:not(:first-of-type) {
+  margin-top: 20px;
+}
+
+.admin-settings-section-divider {
+  width: 100%;
+  height: 1px;
+  margin: 0 0 16px 0;
+  background: #E4E4E4;
+}
+
+.admin-settings-2fa-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 0;
+  margin-top: 12px;
+  margin-bottom: 20px;
+}
+
+.admin-settings-2fa-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-settings-2fa-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.admin-settings-2fa-helper {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #8A949F;
+}
+
+.admin-settings-toggle {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 36px;
+  height: 20px;
+}
+
+.admin-settings-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.admin-settings-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  border-radius: 20px;
+  background-color: #E4E4E4;
+  transition: background-color 0.2s;
+}
+
+.admin-settings-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.admin-settings-toggle input:checked+.admin-settings-toggle-slider {
+  background: #e50012;
+}
+
+.admin-settings-toggle input:checked+.admin-settings-toggle-slider:before {
+  transform: translateX(16px);
+}
+
+/* Tablet adjustments (Fluid) */
 @media (min-width: 769px) and (max-width: 1179px) {
-  .settings-body {
-    padding: 0 16px 16px 16px;
-    gap: 20px;
+  .admin-settings-body {
+    gap: clamp(24px, 3.12vw, 40px);
+    padding: 0 clamp(24px, 3.12vw, 36px) clamp(24px, 3.12vw, 36px) clamp(24px, 3.12vw, 36px);
   }
 
-  .settings-nav {
-    min-width: 148px;
-    width: 148px;
+  /* Header adjustments for Tablet */
+  .admin-settings-page .admin-settings-mobile-header {
+    margin: 0;
+    padding: clamp(24px, 3.12vw, 32px) clamp(24px, 3.12vw, 32px) clamp(12px, 1.5vw, 20px) clamp(24px, 3.12vw, 32px);
   }
 
-  .settings-card {
-    padding: 20px 20px 24px 20px;
+  .admin-settings-page .admin-settings-permissions-view {
+    padding: 0 clamp(24px, 3.12vw, 32px) clamp(24px, 3.12vw, 32px) clamp(24px, 3.12vw, 32px);
   }
 
-  .settings-form__input {
+  .admin-settings-page .admin-settings-mobile-header__top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: clamp(24px, 3.12vw, 32px);
+  }
+
+  .admin-settings-page .admin-settings-mobile-search {
+    display: flex;
+    min-width: clamp(220px, 28vw, 300px);
+    height: clamp(40px, 5vw, 48px);
+  }
+
+  .admin-settings-page .mobile-page-header,
+  .admin-settings-page .admin-settings-mobile-header,
+  .admin-settings-page .admin-settings-mobile-header__top-row {
+    border: none;
+    border-bottom: none;
+    box-shadow: none;
+  }
+
+  .admin-settings-page .desktop-topbar,
+  .admin-settings-page .admin-settings-topbar__bottom-row {
+    display: none;
+  }
+
+  .admin-settings-page .mobile-page-header__divider {
+    display: none;
+  }
+
+  .admin-settings-page .admin-settings-mobile-header__titles .topbar__title {
+    font-size: clamp(24px, 3vw, 32px);
+  }
+
+  .admin-settings-page .admin-settings-mobile-header__titles .topbar__sub {
+    margin-top: clamp(10px, 1.4vw, 14px);
+    font-size: clamp(12px, 1.5vw, 15px);
+  }
+
+  .admin-settings-nav {
+    gap: clamp(16px, 2vw, 24px);
+    width: clamp(180px, 23vw, 240px);
+    min-width: clamp(180px, 23vw, 240px);
+  }
+
+  .admin-settings-nav__item {
+    padding: clamp(10px, 1.3vw, 14px) clamp(16px, 2vw, 24px);
+    font-size: clamp(14px, 1.8vw, 16px);
+  }
+
+  .admin-settings-card {
+    padding: clamp(24px, 3.12vw, 40px) clamp(24px, 3.12vw, 40px);
+  }
+
+  .admin-settings-card__title {
+    margin-bottom: clamp(16px, 2vw, 24px);
+    font-size: clamp(20px, 2.6vw, 24px);
+  }
+
+  .admin-settings-avatar-row {
+    gap: clamp(24px, 3vw, 36px);
+    margin-bottom: clamp(24px, 3.12vw, 32px);
+  }
+
+  .admin-settings-avatar {
+    width: clamp(80px, 10vw, 120px);
+    height: clamp(80px, 10vw, 120px);
+  }
+
+  .admin-settings-avatar-info {
+    gap: clamp(8px, 1vw, 12px);
+  }
+
+  .admin-settings-avatar__upload-btn {
+    padding: clamp(8px, 1vw, 10px) clamp(20px, 2.6vw, 28px);
+    font-size: clamp(13px, 1.6vw, 15px);
+  }
+
+  .admin-settings-form {
+    gap: clamp(24px, 3.12vw, 32px);
+  }
+
+  .admin-settings-form__group {
+    gap: clamp(8px, 1vw, 12px);
+  }
+
+  .admin-settings-form__label {
+    font-size: clamp(13px, 1.6vw, 15px);
+    font-weight: 600;
+  }
+
+  .admin-settings-form__input {
+    max-width: 100%;
+    padding: clamp(10px, 1.3vw, 14px) clamp(12px, 1.5vw, 16px);
+    font-size: clamp(13px, 1.6vw, 15px);
+  }
+
+  .admin-settings-form__footer {
+    justify-content: center;
+    max-width: 100%;
+    margin-top: clamp(24px, 3.12vw, 32px);
+  }
+
+  .admin-settings-form__submit {
+    width: clamp(160px, 20vw, 220px);
+    min-width: clamp(160px, 20vw, 220px);
+    padding: clamp(12px, 1.5vw, 16px);
+    font-size: clamp(14px, 1.8vw, 16px);
+  }
+
+  /* Tablet Spacing Overrides for Profile, Account, and Security Cards */
+  .admin-settings-page .admin-settings-card--profile,
+  .admin-settings-page .admin-settings-card--account,
+  .admin-settings-page .admin-settings-card--security {
+    padding: clamp(32px, 4vw, 48px);
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form,
+  .admin-settings-page .admin-settings-card--account .admin-settings-form,
+  .admin-settings-page .admin-settings-card--security .admin-settings-form {
+    gap: clamp(20px, 2.5vw, 30px);
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__group,
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__group,
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__group {
+    margin-bottom: 0;
+    gap: clamp(8px, 1vw, 12px);
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__label,
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__label,
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__label {
+    font-size: clamp(14px, 1.8vw, 16px);
+    font-weight: 500;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__input,
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__input,
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__input {
+    height: clamp(44px, 5.5vw, 50px);
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    font-size: clamp(14px, 1.8vw, 16px);
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-card__divider,
+  .admin-settings-page .admin-settings-card--account .admin-settings-card__divider,
+  .admin-settings-page .admin-settings-card--security .admin-settings-card__divider {
+    margin-bottom: clamp(24px, 3vw, 36px);
+  }
+
+  /* Security Specific Tablet spacing */
+  .admin-settings-page .admin-settings-card--security .admin-settings-form {
+    gap: 0 !important;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-card__divider {
+    margin-bottom: 24px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-section-title {
+    margin-bottom: 12px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-section-title:not(:first-of-type) {
+    margin-top: 32px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-section-divider {
+    margin: 0 0 20px 0 !important;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__group {
+    margin-bottom: 16px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-row {
+    margin-top: 0;
+    margin-bottom: 24px !important;
+    padding: clamp(12px, 1.5vw, 20px) 0;
     max-width: 100%;
   }
 
-  .settings-form__footer {
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-label {
+    font-size: clamp(15px, 1.9vw, 18px);
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-helper {
+    font-size: clamp(12px, 1.5vw, 14px);
+    max-width: 320px !important;
+    line-height: 1.45;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__footer,
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__footer,
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__footer {
+    margin-top: clamp(24px, 3vw, 36px);
     max-width: 100%;
   }
 }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
-  .settings-body {
-    flex-direction: column;
-    gap: 16px;
-    padding: 0 16px 16px 16px;
+
+  /* Hide search bar on mobile if needed to avoid clutter */
+  .admin-settings-page .admin-settings-mobile-search {
+    display: none;
   }
 
-  .settings-nav {
+  .admin-settings-body {
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: 0 var(--mobile-gutter) var(--mobile-gutter) var(--mobile-gutter);
+  }
+
+  .admin-settings-nav {
+    flex-direction: column;
+    gap: 0.533vw;
     width: 100%;
     min-width: 0;
-    flex-direction: column;
-    gap: 2px;
   }
 
-  .settings-nav__item {
-    font-size: 14px;
-    padding: 10px 14px;
+  .admin-settings-nav__item {
+    padding: 2.667vw 3.733vw;
+    font-size: var(--font-sm);
   }
 
-  .settings-card {
-    padding: 18px 16px 20px 16px;
+  .admin-settings-card {
+    padding: 4.8vw var(--mobile-gutter) 5.333vw var(--mobile-gutter);
   }
 
-  .settings-card__title {
-    font-size: 17px;
+  .admin-settings-card__title {
+    font-size: var(--font-xl);
   }
 
-  .settings-form__input {
+  .admin-settings-form__input {
     max-width: 100%;
   }
 
-  .settings-form__footer {
+  .admin-settings-form__footer {
     max-width: 100%;
   }
 
-  .settings-avatar-row {
+  .admin-settings-avatar-row {
     flex-wrap: wrap;
-    gap: 14px;
+    gap: var(--space-md);
   }
+}
+
+/* Fluid Desktop Scaling (1180px and above)
+   Preserves the 1366-1440px design, but scales it up fluidly for larger monitors using clamp(). 
+   All fluid values are scoped to .admin-settings-page to prevent affecting other pages. */
+@media (min-width: 1180px) {
+
+  /* Layout & Spacing */
+  .admin-settings-page .main {
+    gap: clamp(20px, 1.38vw, 35px);
+    padding: clamp(24px, 1.66vw, 43px) clamp(28px, 1.94vw, 50px);
+  }
+
+  .admin-settings-page .admin-settings-body {
+    gap: clamp(24px, 1.66vw, 43px);
+  }
+
+  /* Topbar */
+  .admin-settings-page .topbar__title {
+    font-size: clamp(24px, 1.66vw, 43px);
+  }
+
+  .admin-settings-page .topbar__sub,
+  .admin-settings-page .admin-settings-topbar__bottom-row .topbar__sub {
+    font-size: clamp(12px, 0.83vw, 21px);
+  }
+
+  .admin-settings-page .admin-settings-topbar__bottom-row {
+    padding-bottom: clamp(16px, 1.11vw, 28px);
+  }
+
+  .admin-settings-page .admin-settings-topbar-search {
+    gap: clamp(8px, 0.55vw, 14px);
+    min-width: clamp(200px, 13.88vw, 355px);
+    padding: clamp(8px, 0.55vw, 14px) clamp(14px, 0.97vw, 25px);
+    border-radius: clamp(20px, 1.38vw, 35px);
+  }
+
+  .admin-settings-page .admin-settings-topbar-search__input {
+    font-size: clamp(13px, 0.9vw, 23px);
+  }
+
+  /* Sidebar Base Components (scoped) */
+  .admin-settings-page .sidebar {
+    width: clamp(60px, 4.16vw, 106px);
+  }
+
+  .admin-settings-page .sidebar--expanded {
+    width: clamp(200px, 13.88vw, 355px);
+  }
+
+  .admin-settings-page .sidebar__item {
+    height: clamp(55px, 3.81vw, 97px);
+  }
+
+  .admin-settings-page .sidebar__icon-wrap {
+    width: clamp(60px, 4.16vw, 106px);
+    min-width: clamp(60px, 4.16vw, 106px);
+  }
+
+  .admin-settings-page .sidebar__item-label {
+    font-size: clamp(13px, 0.9vw, 23px);
+  }
+
+  .admin-settings-page .sidebar__logo {
+    height: clamp(110px, 7.63vw, 195px);
+  }
+
+  .admin-settings-page .sidebar__logo-name {
+    font-size: clamp(20px, 1.38vw, 35px);
+  }
+
+  .admin-settings-page .sidebar__logo-sub {
+    font-size: clamp(10px, 0.69vw, 17px);
+  }
+
+  /* Settings Navigation */
+  .admin-settings-page .admin-settings-nav {
+    gap: clamp(8px, 0.55vw, 14px);
+    width: clamp(220px, 15.27vw, 391px);
+    min-width: clamp(220px, 15.27vw, 391px);
+  }
+
+  .admin-settings-page .admin-settings-nav__item {
+    padding: clamp(8px, 0.55vw, 14px) clamp(16px, 1.11vw, 28px);
+    border-radius: clamp(8px, 0.55vw, 14px);
+    font-size: clamp(14px, 0.97vw, 25px);
+  }
+
+  /* Content Card */
+  .admin-settings-page .admin-settings-card {
+    max-width: 1422px;
+    padding: clamp(20px, 1.38vw, 35px) clamp(28px, 1.94vw, 50px) clamp(20px, 1.38vw, 35px) clamp(28px, 1.94vw, 50px);
+    border-radius: clamp(12px, 0.83vw, 21px);
+  }
+
+  .admin-settings-page .admin-settings-card--profile,
+  .admin-settings-page .admin-settings-card--account,
+  .admin-settings-page .admin-settings-card--security {
+    max-width: 950px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__group,
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-row {
+    max-width: 550px;
+  }
+
+  .admin-settings-page .admin-settings-card__title {
+    margin-bottom: clamp(16px, 1.11vw, 28px);
+    font-size: clamp(20px, 1.38vw, 35px);
+  }
+
+  .admin-settings-page .admin-settings-card__divider {
+    margin-bottom: clamp(20px, 1.38vw, 35px);
+  }
+
+  /* Avatar Section */
+  .admin-settings-page .admin-settings-avatar-row {
+    gap: clamp(40px, 2.77vw, 71px);
+    margin-bottom: clamp(20px, 1.38vw, 35px);
+  }
+
+  .admin-settings-page .admin-settings-avatar {
+    width: clamp(84px, 5.83vw, 150px);
+    height: clamp(84px, 5.83vw, 150px);
+  }
+
+  .admin-settings-page .admin-settings-avatar-info {
+    gap: clamp(6px, 0.41vw, 10px);
+  }
+
+  .admin-settings-page .admin-settings-avatar__upload-btn {
+    padding: clamp(6px, 0.41vw, 10px) clamp(28px, 1.94vw, 50px);
+    border-radius: clamp(4px, 0.27vw, 7px);
+    font-size: clamp(13px, 0.9vw, 23px);
+  }
+
+  .admin-settings-page .admin-settings-avatar__helper {
+    font-size: clamp(11px, 0.76vw, 19px);
+  }
+
+  /* Forms */
+  .admin-settings-page .admin-settings-form {
+    gap: clamp(16px, 1.11vw, 28px);
+  }
+
+  .admin-settings-page .admin-settings-form__group {
+    gap: clamp(6px, 0.41vw, 10px);
+  }
+
+  .admin-settings-page .admin-settings-form__label {
+    font-size: clamp(13px, 0.9vw, 23px);
+  }
+
+  .admin-settings-page .admin-settings-form__input {
+    max-width: 818px;
+    padding: clamp(10px, 0.7vw, 16px) clamp(14px, 1vw, 24px);
+    border-radius: clamp(8px, 0.55vw, 14px);
+    font-size: clamp(14px, 0.97vw, 25px);
+  }
+
+  .admin-settings-page .admin-settings-form__helper {
+    font-size: clamp(11px, 0.76vw, 19px);
+  }
+
+  .admin-settings-page .admin-settings-form__success {
+    padding: clamp(10px, 0.69vw, 17px) clamp(16px, 1.11vw, 28px);
+    border-radius: clamp(8px, 0.55vw, 14px);
+    font-size: clamp(13px, 0.9vw, 23px);
+  }
+
+  .admin-settings-page .admin-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    max-width: 818px;
+    margin-top: clamp(24px, 1.66vw, 42px);
+  }
+
+  .admin-settings-page .admin-settings-form__submit {
+    min-width: clamp(200px, 13.88vw, 355px);
+    padding: clamp(12px, 0.83vw, 21px) clamp(40px, 2.77vw, 71px);
+    border-radius: clamp(6px, 0.41vw, 10px);
+    font-size: clamp(14px, 0.97vw, 25px);
+  }
+
+  /* Security Tab Desktop Spacing to Match Figma (Compact View) */
+  .admin-settings-page .admin-settings-card--security {
+    padding: 16px 32px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-card__title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #111111;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-card__divider {
+    margin-bottom: 16px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form {
+    gap: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-section-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #111111;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-section-title:not(:first-of-type) {
+    margin-top: 20px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-section-divider {
+    margin: 8px 0 16px 0;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-section-title:not(:first-of-type)+.admin-settings-section-divider {
+    margin-bottom: 16px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__group {
+    max-width: 537px;
+    margin-bottom: 12px;
+    gap: 6px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__label {
+    color: #666666;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__input {
+    width: 537px;
+    max-width: 537px;
+    height: 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background: #FBFBFB;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: #666666;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__input::placeholder {
+    color: #666666;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-row {
+    max-width: 537px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-info {
+    gap: 8px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-helper {
+    font-size: 11px;
+    font-weight: 500;
+    color: #666666;
+    max-width: 370px;
+    line-height: 15px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__submit {
+    min-width: 160px;
+    height: 38px;
+    padding: 0 24px;
+    font-size: 13.5px;
+    border-radius: 6px;
+  }
+
+  /* Profile Tab Desktop Spacing & Styles to Match Security Page */
+  .admin-settings-page .admin-settings-card--profile {
+    padding: 20px 32px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-card__title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #111111;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-card__divider {
+    margin-bottom: 20px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-avatar-row {
+    margin-bottom: 20px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-avatar__upload-btn {
+    padding: 6px 20px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-avatar__helper {
+    font-size: 11px;
+    margin-top: 6px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form {
+    gap: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__group {
+    max-width: 537px;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__label {
+    color: #666666;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__input {
+    width: 537px;
+    max-width: 537px;
+    height: 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background: #FBFBFB;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: #666666;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__input::placeholder {
+    color: #666666;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__input--readonly {
+    background: #F9FAFB;
+    border: 1px solid #E4E4E4;
+    color: #8A949F;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__helper {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__submit {
+    min-width: 160px;
+    height: 38px;
+    padding: 0 24px;
+    font-size: 13.5px;
+    border-radius: 6px;
+  }
+
+  /* Account Tab Desktop Spacing & Styles to Match Profile Page */
+  .admin-settings-page .admin-settings-card--account {
+    padding: 20px 32px;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-card__title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #111111;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-card__divider {
+    margin-bottom: 20px;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form {
+    gap: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__group {
+    max-width: 537px;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__label {
+    color: #666666;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__input {
+    width: 537px;
+    max-width: 537px;
+    height: 40px;
+    gap: 6px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__label {
+    color: #666666;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__input {
+    width: 537px;
+    max-width: 537px;
+    height: 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background: #FBFBFB;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: #666666;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__input::placeholder {
+    color: #666666;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-row {
+    max-width: 537px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-info {
+    gap: 8px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-2fa-helper {
+    font-size: 11px;
+    font-weight: 500;
+    color: #666666;
+    max-width: 370px;
+    line-height: 15px;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--security .admin-settings-form__submit {
+    min-width: 160px;
+    height: 38px;
+    padding: 0 24px;
+    font-size: 13.5px;
+    border-radius: 6px;
+  }
+
+  /* Profile, Team & Notifications Tab Desktop Spacing & Styles */
+  .admin-settings-page .admin-settings-card--profile,
+  .admin-settings-page .admin-settings-card--team,
+  .admin-settings-page .admin-settings-card--notifications {
+    padding: 20px 32px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-card__title,
+  .admin-settings-page .admin-settings-card--team .admin-settings-card__title,
+  .admin-settings-page .admin-settings-card--notifications .admin-settings-card__title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #111111;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-card__divider,
+  .admin-settings-page .admin-settings-card--team .admin-settings-card__divider,
+  .admin-settings-page .admin-settings-card--notifications .admin-settings-card__divider {
+    margin-bottom: 20px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-avatar-row {
+    margin-bottom: 20px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-avatar__upload-btn {
+    padding: 6px 20px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-avatar__helper {
+    font-size: 11px;
+    margin-top: 6px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form {
+    gap: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__group {
+    max-width: 537px;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__label {
+    color: #666666;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__input {
+    width: 537px;
+    max-width: 537px;
+    height: 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background: #FBFBFB;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: #666666;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__input::placeholder {
+    color: #666666;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__input--readonly {
+    background: #F9FAFB;
+    border: 1px solid #E4E4E4;
+    color: #8A949F;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__helper {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  .admin-settings-page .admin-settings-card--profile .admin-settings-form__submit {
+    min-width: 160px;
+    height: 38px;
+    padding: 0 24px;
+    font-size: 13.5px;
+    border-radius: 6px;
+  }
+
+  /* Account Tab Desktop Spacing & Styles to Match Profile Page */
+  .admin-settings-page .admin-settings-card--account {
+    padding: 20px 32px;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-card__title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #111111;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-card__divider {
+    margin-bottom: 20px;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form {
+    gap: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__group {
+    max-width: 537px;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__label {
+    color: #666666;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__input {
+    width: 537px;
+    max-width: 537px;
+    height: 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background: #FBFBFB;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: #666666;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__input::placeholder {
+    color: #666666;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__input--readonly {
+    background: #F9FAFB;
+    border: 1px solid #E4E4E4;
+    color: #8A949F;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__helper {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  .admin-settings-page .admin-settings-card--account .admin-settings-form__submit {
+    min-width: 160px;
+    height: 38px;
+    padding: 0 24px;
+    font-size: 13.5px;
+    border-radius: 6px;
+  }
+
+  /* Notifications Tab Styles */
+  .admin-notification-section {
+    margin-bottom: 24px;
+  }
+  .admin-notification-section-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    margin-bottom: 12px;
+    font-family: 'Inter', sans-serif;
+  }
+  .admin-notification-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .admin-notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    background: #FBFBFB;
+    cursor: pointer;
+  }
+  .admin-notification-item:hover {
+    border-color: #999999;
+  }
+  .admin-notification-item-text h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666666;
+    font-family: 'Inter', sans-serif;
+  }
+  .admin-notification-item-text p {
+    margin: 0;
+    font-size: 10px;
+    color: #A1A1A1;
+    font-family: 'Inter', sans-serif;
+  }
+  .admin-settings-page .admin-settings-card--notifications .admin-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 0;
+  }
+  .admin-settings-page .admin-settings-card--notifications .admin-settings-form__submit {
+    min-width: 190px;
+    height: 44px;
+    padding: 0 28px;
+    font-size: 14px;
+    border-radius: 6px;
+    transform: translateX(40px);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE ONLY — scoped to max-width 768px.
+   Topbar row reuses global .mobile-topbar from BaseLayout.css.
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Detail sub-header (Settings title + Search) */
+  .ms-mobile-detail-header { 
+    position: relative;
+    padding: 12px 24px 24px 24px !important; 
+    margin: 0 !important; 
+  }
+  .ms-mobile-detail-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 24px;
+    right: 24px;
+    height: 1px;
+    background: #CCCCCC;
+  }
+  .ms-mobile-detail-header__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ms-mobile-detail-header__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111111;
+    font-family: 'Inter', sans-serif;
+  }
+  .ms-mobile-detail-header__search-btn {
+    width: 64px;
+    height: 52px;
+    border-radius: 35px;
+    border: none;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px 2px rgba(131, 131, 131, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .ms-mobile-detail-header__sub {
+    font-size: 12px;
+    color: #6B7280;
+    margin: 4px 0 0 0;
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Menu list */
+  .ms-mobile-menu {
+    overflow-y: auto;
+    padding: 12px 24px 24px 24px;
+    background: #fffbfd;
+  }
+
+  /* Profile shortcut card */
+  .ms-mobile-profile-card {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #F3E8E8;
+    border-radius: 12px;
+    padding: 32px 20px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    cursor: pointer;
+    text-align: left;
+    gap: 16px;
+  }
+  .ms-mobile-profile-card__avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .ms-mobile-profile-card__avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .ms-mobile-profile-card__info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .ms-mobile-profile-card__name {
+    font-size: 19px;
+    font-weight: 600;
+    color: #111111;
+    font-family: 'Inter', sans-serif;
+  }
+  .ms-mobile-profile-card__email { font-size: 14px; color: #6B7280; font-family: 'Inter', sans-serif; }
+  .ms-mobile-profile-card__role {
+    display: inline-block;
+    background: #e50012;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    margin-top: 4px;
+    align-self: flex-start;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Group labels */
+  .ms-mobile-group-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #9CA3AF;
+    letter-spacing: 0;
+    margin: 0 0 10px 4px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Group card */
+  .ms-mobile-group-items {
+    background: #FFFFFF;
+    border-radius: 12px;
+    border: 1px solid #E5E5E5;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  }
+
+  /* Menu row */
+  .ms-mobile-menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 16px;
+    border-bottom: none;
+    background: #FFFFFF;
+    color: #111111;
+    cursor: pointer;
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    text-align: left;
+    transition: background 0.12s;
+  }
+  /* Inset divider — aligned with text (16px padding + 46px icon + 12px gap = 74px) */
+  .ms-mobile-menu-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 74px;
+    right: 16px;
+    height: 1px;
+    background: #EAEAEA;
+  }
+  .ms-mobile-menu-item:last-child::after { display: none; }
+  .ms-mobile-menu-item:active { background: #F9FAFB; }
+  .ms-mobile-menu-item--disabled { opacity: 0.45; pointer-events: none; }
+  .ms-mobile-menu-item__left { display: flex; align-items: center; gap: 12px; }
+  .ms-mobile-menu-item__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #F2F2F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .ms-mobile-menu-item__icon svg {
+    width: 26px;
+    height: 26px;
+  }
+  .ms-mobile-menu-item__label {
+    font-size: 18px;
+    font-weight: 500;
+    color: #111111;
+    font-family: 'Inter', sans-serif;
+  }
+  /* Ensure button elements never inherit global red/accent colours */
+  button.ms-mobile-menu-item .ms-mobile-menu-item__label {
+    color: #111111;
+  }
+
+  /* Detail card wrapper */
+  .ms-mobile-detail {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 24px;
+    background: #fffbfd;
+  }
+  .ms-mobile-detail .admin-settings-card {
+    width: 100%;
+    max-width: 100% !important;
+    border-radius: 12px !important;
+    padding: 24px 20px !important;
+    background: #FFFFFF !important;
+    border: 1px solid #CCCCCC !important;
+    box-shadow: none !important;
+  }
+  .ms-mobile-detail .admin-settings-card__title { font-size: 24px !important; font-weight: 600 !important; color: #111111 !important; margin-bottom: 12px !important; }
+  .ms-mobile-detail .admin-settings-card__divider { margin-bottom: 24px !important; background: #CCCCCC !important; height: 1px !important; width: 100% !important; border: none !important; }
+  .ms-mobile-detail .admin-settings-form { gap: 24px !important; }
+  .ms-mobile-detail .admin-settings-form__group { gap: 8px !important; margin-bottom: 0 !important; max-width: 100% !important; }
+  .ms-mobile-detail .admin-settings-form__label { font-size: 16px !important; font-weight: 500 !important; color: #111111 !important; margin-bottom: 0 !important; }
+  .ms-mobile-detail .admin-settings-form__helper { font-size: 13px !important; color: #666666 !important; margin-top: 4px !important; }
+  .ms-mobile-detail .admin-settings-form__input {
+    height: 48px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 14px !important;
+    border-radius: 8px !important;
+    border: 1px solid #CCCCCC !important;
+    background: #FFFFFF !important;
+    color: #111111 !important;
+    font-size: 17px !important;
+    box-sizing: border-box !important;
+  }
+  .ms-mobile-detail .admin-settings-form__input--readonly {
+    color: #666666 !important;
+  }
+  .ms-mobile-detail .admin-settings-form__footer { display: flex !important; justify-content: center !important; margin-top: 12px !important; }
+  .ms-mobile-detail .admin-settings-form__submit {
+    width: 100% !important;
+    max-width: 260px !important;
+    height: 48px !important;
+    font-size: 17px !important;
+    border-radius: 8px !important;
+    background: #E22A2A !important;
+    color: #FFFFFF !important;
+    border: none !important;
+  }
+  .ms-mobile-detail .admin-settings-avatar-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .ms-mobile-detail .admin-settings-avatar { width: 90px; height: 90px; }
+  .ms-mobile-detail .admin-settings-avatar-info { align-items: flex-start; text-align: left; }
+  .ms-mobile-detail .admin-settings-avatar__upload-btn { 
+    padding: 8px 20px; 
+    font-size: 16px; 
+    border: 1px solid #E22A2A;
+    color: #666666;
+    background: #FFFFFF;
+    border-radius: 6px;
+  }
+  .ms-mobile-detail .admin-settings-avatar__helper {
+    color: #666666;
+    font-size: 14px;
+    margin-top: 6px;
+  }
+  .ms-mobile-detail .admin-settings-section-title { font-size: 16px !important; font-weight: 500 !important; color: #111111 !important; margin: 0 0 12px 0 !important; }
+  .ms-mobile-detail .admin-settings-section-title:not(:first-of-type) { margin-top: 32px !important; }
+  .ms-mobile-detail .admin-settings-section-divider { background: #CCCCCC !important; height: 1px !important; margin: 0 0 20px 0 !important; border: none !important; width: 100% !important; }
+  .ms-mobile-detail .admin-settings-2fa-row { max-width: 100% !important; margin-bottom: 32px !important; padding: 0 !important; }
+  .ms-mobile-detail .admin-settings-2fa-label { font-size: 16px !important; font-weight: 500 !important; color: #4A4A4A !important; margin-bottom: 4px !important; }
+  .ms-mobile-detail .admin-settings-2fa-helper { font-size: 13px !important; max-width: 250px !important; line-height: 1.45 !important; color: #666666 !important; }
+  .ms-mobile-detail .admin-settings-card--security .admin-settings-form { gap: 0 !important; }
+  .ms-mobile-detail .admin-settings-card--security .admin-settings-form__group { margin-bottom: 16px !important; }
+  .ms-mobile-detail .admin-settings-card--security .admin-settings-form__label { color: #4A4A4A !important; }
+  .ms-mobile-detail .admin-settings-card--security .admin-settings-form__footer { margin-top: 16px !important; }
+  .ms-mobile-detail .admin-settings-toggle { width: 54px !important; height: 30px !important; }
+  .ms-mobile-detail .admin-settings-toggle-slider:before { width: 22px !important; height: 22px !important; left: 4px !important; bottom: 4px !important; }
+  .ms-mobile-detail .admin-settings-toggle input:checked+.admin-settings-toggle-slider:before { transform: translateX(24px) !important; }
+
+  /* Mobile Team Filter Row */
+  .ms-mobile-team-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  .ms-mobile-team-search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    border: 1px solid #E4E4E4;
+    border-radius: 20px;
+    padding: 0 16px;
+    height: 40px;
+    background: #ffffff;
+  }
+
+  .ms-mobile-team-search input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 14px;
+    color: #1a1a2e;
+    margin-left: 8px; /* if search icon is added */
+  }
+
+  .ms-mobile-team-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #E4E4E4;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* Hide Desktop Team Header */
+  .admin-settings-team-header {
+    display: none;
+  }
+
+  /* Team List */
+  .admin-settings-team-list {
+    gap: 24px;
+  }
+
+  .admin-settings-team-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 16px;
+    gap: 12px;
+    border-radius: 12px;
+    position: relative;
+  }
+
+  .admin-settings-team-row .team-col-name {
+    flex: 1 1 auto;
+    margin-bottom: 0;
+    min-width: 0;
+  }
+  
+  .admin-settings-team-row .team-col-name .team-admin-name {
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .admin-settings-team-row .team-col-name .team-admin-email {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .team-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .admin-settings-team-row .team-col-role,
+  .admin-settings-team-row .team-col-status {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .admin-settings-team-row .team-role-badge,
+  .admin-settings-team-row .team-status-badge {
+    font-size: 11px;
+    padding: 0;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .admin-settings-team-row .team-role-badge {
+    width: 65px;
+  }
+
+  .admin-settings-team-row .team-status-badge {
+    width: 75px;
+  }
+
+  .admin-settings-team-row .team-col-action {
+    position: static;
+    transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .admin-settings-team-row .team-action-btn {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .admin-settings-team-row .team-action-dropdown {
+    right: 0;
+    transform: none;
+  }
+
+  .ms-mobile-detail .admin-settings-team-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 48px;
+  }
+
+
+
+  .ms-mobile-permissions .admin-permissions-card {
+    padding: 24px 16px !important;
+  }
+  
+  .ms-mobile-permissions .admin-permissions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    column-count: auto;
+  }
+} 
+
+/* Team Management Styles */
+@media (min-width: 769px) {
+  .ms-mobile-team-filter-row {
+    display: none;
+  }
+}
+
+.admin-settings-card--team {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-settings-team-table {
+  width: 100%;
+}
+
+.admin-settings-team-header {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .admin-settings-team-header {
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    margin-bottom: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6B7280;
+  }
+  
+  .admin-settings-page .admin-settings-card--team,
+  .admin-settings-page .admin-settings-card--notifications {
+    max-width: 1050px;
+  }
+}
+
+.team-col-name { flex: 2; text-align: left; }
+.team-col-role { flex: 1; display: flex; justify-content: center; }
+.team-col-status { flex: 1; display: flex; justify-content: center; }
+.team-col-action { flex: 0.5; display: flex; justify-content: center; position: relative; }
+
+.team-right-controls {
+  display: contents;
+}
+
+@media (max-width: 768px) {
+  .admin-settings-team-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+  }
+  .team-col-name {
+    flex: 1;
+    min-width: 0; /* allows text truncation */
+  }
+  .team-right-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .team-col-role,
+  .team-col-status,
+  .team-col-action {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .team-role-badge {
+    height: 26px;
+    min-width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #E4E4E4;
+    border-radius: 6px;
+    padding: 0 8px;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  .team-status-badge {
+    height: 26px;
+    min-width: 85px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    line-height: 1;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  .team-action-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+.admin-settings-team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-settings-team-row {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  background: #ffffff;
+  transition: box-shadow 0.2s ease;
+}
+
+.admin-settings-team-row:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.team-admin-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+}
+
+.team-admin-email {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #6B7280;
+}
+.team-role-badge {
+  padding: 6px 12px;
+  border: 1px solid #E4E4E4;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #6B7280;
+  background: #ffffff;
+}
+
+.team-status-badge {
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  width: 90px;
+  text-align: center;
+  box-sizing: border-box;
+  display: inline-block;
+}
+.team-status-badge.active {
+  background: #E6F7EC;
+  color: #179747;
+}
+.team-status-badge.inactive {
+  background: #FFE5E5;
+  color: #DC2626;
+}
+
+.team-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  position: relative;
+  transition: background 0.2s;
+}
+.team-action-btn:hover {
+  background: #f3f4f6;
+}
+
+.team-action-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 50%;
+  transform: translateX(50%);
+  width: 140px;
+  background: #fff;
+  border: 2px solid #E5E7EB;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+}
+
+.team-dropdown-item {
+  background: none;
+  border: none;
+  padding: 10px 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+.team-dropdown-item.permissions {
+  color: #6B7280;
+}
+.team-dropdown-item.permissions:hover {
+  background: #f9fafb;
+}
+
+.team-dropdown-item.delete {
+  background: #FFE5E5;
+  color: #DC2626;
+  border-top: 2px solid #E5E7EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.team-dropdown-item.delete:hover {
+  background: #FFD6D6;
+}
+
+.team-x-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.admin-settings-team-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+/* Permissions View Styles */
+.admin-settings-permissions-view {
+  width: 100%;
+}
+
+.admin-permissions-card {
+  width: 100%;
+  padding: 32px 21px;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 12px;
+}
+
+.admin-permissions-card__title {
+  margin-bottom: 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.admin-permissions-card__divider {
+  width: 100%;
+  height: 1px;
+  margin-bottom: 32px;
+  background: #E4E4E4;
+}
+
+.admin-permissions-container {
+  column-count: 2;
+  column-gap: 40px;
+}
+
+@media (min-width: 769px) and (max-width: 1179px) {
+  .admin-permissions-container {
+    display: flex;
+    flex-direction: column;
+    column-count: auto;
+  }
+  .group-Dashboard { order: 1; }
+  .group-Documents { order: 2; }
+  .group-signers { order: 3; }
+  .group-Templates { order: 4; }
+  .group-Contact-Books { order: 5; }
+}
+
+.admin-permissions-column {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.admin-permissions-group {
+  break-inside: avoid-column;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.admin-permissions-group-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+  margin: 0;
+}
+
+.admin-permissions-group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-permission-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  background: #FBFBFB;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-permission-item:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.admin-permission-item-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #666666;
+}
+
+.admin-permission-checkbox-input {
+  display: none;
+}
+
+.admin-permission-custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #DC2626;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.admin-permission-checkbox-input:checked + .admin-permission-custom-checkbox {
+  background: #DC2626;
+}
+
+.admin-permissions-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+  padding-bottom: 40px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TABLET & MOBILE NOTIFICATIONS (Figma Match)
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 1179px) {
+  .admin-notification-section {
+    margin-bottom: 24px;
+  }
+  .admin-notification-section-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    margin-bottom: 12px;
+    font-family: 'Inter', sans-serif;
+  }
+  .admin-notification-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .admin-notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    background: #FBFBFB;
+    cursor: pointer;
+    gap: 12px;
+  }
+  .admin-notification-item-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .admin-notification-item-text h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111111;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .admin-notification-item-text p {
+    margin: 0;
+    font-size: 12px;
+    color: #8A949F;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .admin-settings-page .admin-settings-card--notifications .admin-settings-form__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 0;
+  }
+  .admin-settings-page .admin-settings-card--notifications .admin-settings-form__submit {
+    min-width: 190px;
+    height: 44px;
+    padding: 0 28px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* Toggle Switches */
+  .admin-settings-card--notifications .admin-permission-custom-checkbox {
+    width: 36px !important;
+    height: 20px !important;
+    border-radius: 20px !important;
+    background: #999999 !important;
+    border: none !important;
+    position: relative;
+    transition: background-color 0.3s;
+    display: block !important;
+  }
+  .admin-settings-card--notifications .admin-permission-custom-checkbox::before {
+    display: none !important;
+  }
+  .admin-settings-card--notifications .admin-permission-custom-checkbox::after {
+    content: '';
+    display: block !important;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    border: none !important;
+    transform: none !important;
+    transition: transform 0.3s;
+  }
+  .admin-settings-card--notifications .admin-permission-checkbox-input:checked + .admin-permission-custom-checkbox {
+    background: #DC2626 !important;
+  }
+  .admin-settings-card--notifications .admin-permission-checkbox-input:checked + .admin-permission-custom-checkbox::after {
+    transform: translateX(16px) !important;
+  }
+}/* Billing Section Styles */
+.admin-billing-section {
+  max-width: 580px;
+  margin: 0 auto;
+  margin-top: 16px;
+}
+.admin-billing-section + .admin-billing-section {
+  margin-top: 16px;
+}
+.admin-billing-section-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 8px;
+}
+.admin-billing-plan-card,
+.admin-billing-payment-card,
+.admin-billing-address-card {
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  padding: 16px 20px;
+  background: #ffffff;
+}
+.admin-billing-plan-card {
+  background: #FBFBFB;
+}
+.admin-billing-plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.admin-billing-plan-info {
+  display: flex;
+  flex-direction: column;
+}
+.admin-billing-plan-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111111;
+  margin: 0 0 2px 0;
+}
+.admin-billing-plan-billed {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #8A949F;
+  margin: 0;
+}
+.admin-billing-plan-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+}
+.admin-billing-plan-price .price-amount {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111111;
+  line-height: 1;
+}
+.admin-billing-plan-price .price-period {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #8A949F;
+  margin-left: 2px;
+}
+.admin-billing-plan-divider {
+  height: 1px;
+  background: #666666;
+  margin: 12px 0;
+}
+.admin-billing-plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+}
+.admin-billing-plan-features li {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.admin-billing-plan-features li:last-child {
+  margin-bottom: 0;
+}
+.admin-billing-plan-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+.admin-billing-next-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #111111;
+}
+.admin-billing-upgrade-btn {
+  background: #CC0000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  height: 32px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.admin-billing-upgrade-btn:hover {
+  background: #A30000;
+}
+.admin-billing-payment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+.admin-billing-card-info {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.admin-billing-card-icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  padding: 4px 8px;
+  background: #F9FAFB;
+}
+.admin-billing-card-brand {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #8A949F;
+}
+.admin-billing-card-details {
+  display: flex;
+  flex-direction: column;
+}
+.admin-billing-card-details .card-number {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #111111;
+  font-weight: 500;
+}
+.admin-billing-card-details .card-expiry {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #8A949F;
+  margin-top: 2px;
+}
+.admin-billing-edit-btn {
+  background: white;
+  border: 1px solid #FCA5A5;
+  color: #4B5563;
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  height: 28px;
+  cursor: pointer;
+}
+.admin-billing-address-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+.admin-billing-invoice-info {
+  display: flex;
+  flex-direction: column;
+}
+.admin-billing-invoice-info .invoice-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111111;
+}
+.admin-billing-invoice-info .invoice-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #8A949F;
+  margin-top: 2px;
+}
+.admin-billing-invoice-actions {
+  display: flex;
+  gap: 8px;
+}
+.admin-billing-invoice-actions .icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 1180px) {
+  .admin-settings-page .admin-settings-card--billing {
+    max-width: 1050px;
+  }
+}
+.admin-settings-page .admin-settings-card--billing {
+  padding: 20px 24px !important;
+  height: max-content !important;
+  min-height: 0 !important;
+  margin-bottom: auto !important;
+}
+.tooltip-container {
+  position: relative;
+  display: flex;
+}
+.invoice-error-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: -10px;
+  background: white;
+  border: 1px solid #E57373;
+  border-radius: 4px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  width: max-content;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 10;
+}
+.tooltip-container:hover .invoice-error-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+.invoice-error-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 18px;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-top: 1px solid #E57373;
+  border-left: 1px solid #E57373;
+  transform: rotate(45deg);
+}
+.invoice-error-tooltip span {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #4B5563;
+}
+/* ===========================
+   BILLING - TABLET ONLY
+   769px - 1179px
+   =========================== */
+@media (min-width: 769px) and (max-width: 1179px) {
+
+  /* Billing Card wrapper */
+  .admin-settings-page .admin-settings-card--billing {
+    padding: 24px 28px !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  /* Billing Heading */
+  .admin-settings-page .admin-settings-card--billing > .admin-settings-card__title {
+    font-size: 32px !important;
+    font-weight: 600 !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* Sections */
+  .admin-settings-page .admin-billing-section {
+    margin-top: 28px !important;
+  }
+
+  .admin-settings-page .admin-billing-section:first-child {
+    margin-top: 0 !important;
+  }
+
+  /* Section Titles */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-section-title {
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Make all billing blocks taller & Internal Padding */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-card {
+    min-height: 340px !important;
+    padding: 28px 32px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Current Plan Card - Typography */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-name {
+    font-size: 26px !important;
+    font-weight: 600 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-billed {
+    font-size: 18px !important;
+    color: #8A949F !important;
+  }
+
+  /* Price */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-price {
+    align-items: baseline !important;
+  }
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-price .price-amount {
+    font-size: 60px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: #111111 !important;
+  }
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-price .price-period {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 400 !important;
+    line-height: 1 !important;
+    color: #666666 !important;
+    margin-left: 4px !important;
+  }
+
+  /* Divider inside plan card */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-divider {
+    margin: 24px 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Feature List */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-features li {
+    font-size: 18px !important;
+    line-height: 26px !important;
+    margin-bottom: 12px !important;
+    padding-left: 8px !important;
+  }
+
+  /* Bottom Row */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-footer {
+    margin-top: auto !important;
+    align-items: center !important;
+    padding-top: 16px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-next-date {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-upgrade-btn {
+    height: 52px !important;
+    width: 190px !important;
+    font-size: 18px !important;
+    border-radius: 8px !important;
+    padding: 0 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Payment Method Card */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-payment-card {
+    min-height: 92px !important;
+    padding: 16px 24px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-info {
+    gap: 32px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-icon-wrapper {
+    padding: 8px 16px !important;
+  }
+  
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-icon-wrapper svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-brand {
+    font-size: 14px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-details .card-number {
+    font-size: 18px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-details .card-expiry {
+    font-size: 16px !important;
+    margin-top: 6px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-edit-btn {
+    height: 46px !important;
+    width: 120px !important;
+    font-size: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Billing Address Card */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-address-card {
+    min-height: 92px !important;
+    padding: 16px 24px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-invoice-info .invoice-title {
+    font-size: 20px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-invoice-info .invoice-date {
+    font-size: 16px !important;
+    margin-top: 6px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-invoice-actions {
+    gap: 16px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-invoice-actions .icon-btn svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+/* ===========================
+   BILLING - MOBILE ONLY
+   max-width: 768px
+   =========================== */
+@media (max-width: 768px) {
+  /* 1. Billing Card */
+  .admin-settings-page .admin-settings-card--billing {
+    padding: 24px !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  /* 2. Billing Heading */
+  .admin-settings-page .admin-settings-card--billing > .admin-settings-card__title {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    margin-bottom: 24px !important;
+  }
+
+  /* 3. Section Titles */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-section-title {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    margin-top: 32px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-section {
+    margin-top: 40px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-section:first-child {
+    margin-top: 0 !important;
+  }
+  
+  .admin-settings-page .admin-settings-card--billing .admin-billing-section:first-child .admin-billing-section-title {
+    margin-top: 0 !important;
+  }
+
+  /* 4. Current Plan Card */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-card {
+    padding: 32px !important;
+    min-height: auto !important;
+    border-radius: 8px !important;
+  }
+
+  /* 5. Plan Header */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-name {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-billed {
+    font-size: 14px !important;
+    color: #8A949F !important;
+  }
+
+  /* 6. Price */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-price {
+    align-items: baseline !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-price .price-amount {
+    font-size: 50px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: #111111 !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-price .price-period {
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    color: #666666 !important;
+    margin-left: 4px !important;
+  }
+
+  /* 7. Divider */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-divider {
+    margin: 32px 0 !important;
+    width: 100% !important;
+  }
+
+  /* 8. Features */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-features li {
+    font-size: 16px !important;
+    margin-bottom: 16px !important;
+    line-height: 24px !important;
+    padding-left: 8px !important;
+  }
+
+  /* Footer layout */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-plan-footer {
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-top: 32px !important;
+    padding-top: 0 !important;
+  }
+
+  /* 9. Next Billing Date */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-next-date {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    width: 100% !important;
+    text-align: left !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* 10. Upgrade Button */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-upgrade-btn {
+    width: 90% !important;
+    height: 50px !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    margin-top: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+  }
+
+  /* 11. Payment Method Card */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-payment-card {
+    padding: 24px !important;
+    min-height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-info {
+    gap: 20px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-icon-wrapper {
+    padding: 10px 18px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-icon-wrapper svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-brand {
+    font-size: 14px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-details .card-number {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-card-details .card-expiry {
+    font-size: 14px !important;
+    margin-top: 6px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-edit-btn {
+    height: 42px !important;
+    width: 90px !important;
+    font-size: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* 12. Billing Address Card */
+  .admin-settings-page .admin-settings-card--billing .admin-billing-address-card {
+    padding: 24px !important;
+    min-height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-invoice-info {
+    gap: 8px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-invoice-info .invoice-title {
+    font-size: 18px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-invoice-info .invoice-date {
+    font-size: 14px !important;
+    margin-top: 0 !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-invoice-actions {
+    gap: 16px !important;
+  }
+
+  .admin-settings-page .admin-settings-card--billing .admin-billing-invoice-actions .icon-btn svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   AUDIT LOGS TAB — Desktop (1180px+) only
+   All selectors are scoped to avoid leakage into any other settings tab.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Outer Card ─────────────────────────────────────────────────────────── */
+.admin-settings-card--audit {
+  padding: 24px 28px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.10);
+  white-space: normal;
+  max-width: 1020px !important;
+  width: 100%;
+}
+
+.admin-settings-card--audit * {
+  white-space: normal;
+}
+
+/* ── Header row ─────────────────────────────────────────────────────────── */
+.admin-audit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-audit-header .admin-settings-card__title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 0;
+}
+
+/* ── Divider ────────────────────────────────────────────────────────────── */
+.admin-settings-card--audit .admin-settings-card__divider {
+  height: 1px;
+  background: #CCCCCC;
+  margin-top: 18px;
+  margin-bottom: 24px;
+}
+
+/* ── Search box ─────────────────────────────────────────────────────────── */
+.admin-audit-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 220px;
+  height: 38px;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.admin-audit-search-input {
+  flex: 1;
+  height: 100%;
+  padding: 0 36px 0 12px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #111111;
+}
+
+.admin-audit-search-input::placeholder {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #888888;
+}
+
+.admin-audit-search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888888;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+/* ── Table container ────────────────────────────────────────────────────── */
+.admin-audit-table {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Shared grid columns ────────────────────────────────────────────────── */
+.admin-audit-table-header,
+.admin-audit-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.2fr 1.5fr 1.4fr 0.8fr;
+  align-items: center;
+}
+
+/* ── Table header row ───────────────────────────────────────────────────── */
+.admin-audit-table-header {
+  height: 48px;
+  padding: 0 28px;
+  background: #ffffff;
+  border-radius: 23px 23px 0 0;
+  box-shadow: 0 0 14.5px 1px rgba(131, 131, 131, 0.10);
+}
+
+.admin-audit-table-header .audit-col {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #666666;
+  letter-spacing: 0.02em;
+}
+
+/* ── Table body ─────────────────────────────────────────────────────────── */
+.admin-audit-table-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* ── Individual data row ─────────────────────────────────────────────────── */
+.admin-audit-row {
+  height: 64px;
+  padding: 0 28px;
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.10);
+}
+
+/* ── Cell typography ─────────────────────────────────────────────────────── */
+.admin-audit-row .audit-col-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #666666;
+}
+
+.admin-audit-row .audit-col-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111;
+}
+
+.admin-audit-row .audit-col-action {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+}
+
+.admin-audit-row .audit-col-document {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+}
+
+.admin-audit-row .audit-col-status {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Status badges ──────────────────────────────────────────────────────── */
+.audit-status-badge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  width: 80px;
+  box-sizing: border-box;
+}
+
+.audit-status-badge.audit-status-success {
+  background: #DFF5E7;
+  color: #4B9B66;
+}
+
+.audit-status-badge.audit-status-failed {
+  background: #FFDCDC;
+  color: #FF3B30;
+}
+
+/* ── Sub-1180 guard: allow horizontal scroll on smaller viewports ────────── */
+@media (max-width: 1179px) {
+  .admin-settings-card--audit {
+    overflow-x: auto;
+  }
+
+  .admin-audit-table-header,
+  .admin-audit-row {
+    min-width: 600px;
+  }
+}
+
+/* ── Tablet View (769px - 1179px): Hide Action column and search box, fit fluidly ── */
+@media (min-width: 769px) and (max-width: 1179px) {
+  .admin-settings-card--audit .admin-audit-search {
+    display: none;
+  }
+
+  .admin-settings-card--audit {
+    max-width: 100% !important;
+    border: 1px solid #E4E4E4 !important;
+  }
+
+  .admin-settings-card--audit .admin-audit-table-header,
+  .admin-settings-card--audit .admin-audit-row {
+    grid-template-columns: 1.4fr 1.1fr 1.4fr 0.9fr;
+    min-width: unset; /* override the 600px min-width to fit fluidly on tablet */
+    padding: 0 16px; /* give columns more breathing room */
+  }
+
+  .admin-settings-card--audit .admin-settings-card__title {
+    font-size: 20px !important;
+  }
+
+  .admin-settings-card--audit .admin-audit-table-header .audit-col {
+    font-size: 14px !important;
+    white-space: nowrap !important; /* prevent wrapping */
+    line-height: 1.2;
+  }
+
+  .admin-settings-card--audit .admin-audit-row .audit-col-date {
+    font-size: 13px !important;
+  }
+
+  .admin-settings-card--audit .admin-audit-row .audit-col-name {
+    font-size: 14px !important;
+  }
+
+  .admin-settings-card--audit .admin-audit-row .audit-col-document {
+    font-size: 14px !important;
+  }
+
+  .admin-settings-card--audit .admin-audit-row .audit-status-badge {
+    font-size: 12px !important;
+  }
+
+  .admin-settings-card--audit .audit-col-action {
+    display: none;
+  }
+}
+
+/* ── Desktop vs Mobile layout toggle ── */
+.admin-audit-desktop-layout {
+  display: block;
+}
+
+.admin-audit-mobile-layout {
+  display: none;
+}
+
+/* ── Mobile Layout (<= 768px) ── */
+@media (max-width: 768px) {
+  .admin-audit-desktop-layout {
+    display: none !important;
+  }
+
+  .admin-audit-mobile-layout {
+    display: block !important;
+  }
+
+  .admin-settings-card--audit {
+    padding: 16px !important;
+    border: 1px solid #E4E4E4 !important;
+    max-width: 100% !important;
+  }
+
+  /* Search and Filter Controls */
+  .admin-audit-mobile-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .admin-audit-mobile-search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    height: 38px;
+    border: 1px solid #CCCCCC;
+    border-radius: 20px;
+    background: #FFFFFF;
+  }
+
+  .admin-audit-mobile-search-input {
+    padding-left: 38px;
+    padding-right: 12px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #111111;
+  }
+
+  .admin-audit-mobile-search-input::placeholder {
+    color: #888888;
+  }
+
+  .admin-audit-mobile-search-icon {
+    position: absolute;
+    left: 14px;
+    color: #888888;
+    pointer-events: none;
+  }
+
+  .admin-audit-mobile-filter-btn {
+    width: 38px;
+    height: 38px;
+    border: 1px solid #CCCCCC;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    color: #4B5563;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* Filter Tabs */
+  .admin-audit-mobile-tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+
+  .admin-audit-mobile-tab {
+    flex: 1;
+    height: 42px;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #6B7280;
+    padding: 0;
+  }
+
+  .admin-audit-mobile-tab--active {
+    background: #E5252A !important;
+    border-color: #E5252A !important;
+    color: #FFFFFF !important;
+  }
+
+  /* Mobile Cards List */
+  .admin-audit-mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .admin-audit-mobile-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.10);
+    border: 1px solid rgba(228, 228, 228, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .admin-audit-mobile-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .admin-audit-mobile-file {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .admin-audit-mobile-icon-file {
+    color: #6B7280;
+    flex-shrink: 0;
+  }
+
+  .admin-audit-mobile-filename {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111111;
+  }
+
+  .admin-audit-mobile-user {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .admin-audit-mobile-icon-user {
+    color: #9CA3AF;
+    flex-shrink: 0;
+  }
+
+  .admin-audit-mobile-username {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #6B7280;
+  }
+
+  .admin-audit-mobile-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #9CA3AF;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   INTEGRATIONS TAB — Scoped page styling
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.admin-settings-card--integrations,
+.admin-settings-card--integrations * {
+  white-space: normal !important;
+}
+
+.admin-settings-card--integrations {
+  padding: 24px 28px;
+  background: #ffffff;
+  border: 1px solid #E4E4E4;
+  border-radius: 12px;
+  box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.10);
+  max-width: 1110px !important;
+  width: 100%;
+}
+
+.admin-settings-card--integrations .admin-settings-card__title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 0;
+}
+
+.admin-settings-card--integrations .admin-settings-card__divider {
+  height: 1px;
+  background: #CCCCCC;
+  margin-top: 18px;
+  margin-bottom: 24px;
+}
+
+.admin-integrations-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+.admin-integrations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-integration-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #E4E4E4;
+  border-radius: 12px;
+  padding: 48px 24px;
+  background: #FFFFFF;
+}
+
+.admin-integration-item-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-right: 24px;
+}
+
+.admin-integration-item-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  margin-top: -4px;
+}
+
+.admin-integration-logo {
+  width: 52px;
+  height: 46px;
+  flex-shrink: 0;
+}
+
+.admin-integration-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-integration-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111111;
+  margin: 0;
+}
+
+.admin-integration-status {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #666666;
+  letter-spacing: 0.05em;
+}
+
+.admin-integration-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #666666;
+  margin: 0;
+  margin-top: 16px;
+}
+
+.admin-integration-item-right {
+  flex-shrink: 0;
+}
+
+.admin-integration-action-btn.disconnect {
+  border: 1px solid #E5252A;
+  color: #E5252A;
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 10px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: all 0.2s;
+  width: 170px;
+  height: 38px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-integration-action-btn.disconnect:hover {
+  background: #FFF0F0;
+}
+
+.admin-integration-action-btn.connect {
+  border: none;
+  color: #FFFFFF;
+  background: #E5252A;
+  border-radius: 24px;
+  padding: 10px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: all 0.2s;
+  width: 170px;
+  height: 38px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-integration-action-btn.connect:hover {
+  background: #C41C20;
+}
+
+.admin-integration-desc--tablet {
+  display: none !important;
+}
+
+.admin-integration-desc--desktop {
+  display: block !important;
+}
+
+@media (max-width: 1179px) {
+  .admin-integration-desc--desktop {
+    display: none !important;
+  }
+  .admin-integration-desc--tablet {
+    display: block !important;
+  }
+  .desktop-only-br {
+    display: none !important;
+  }
+  .admin-integration-description {
+    font-size: 7px !important;
+  }
+}
+
+/* Tablet/Mobile responsiveness for integrations tab */
+@media (max-width: 768px) {
+  .admin-integration-item {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 16px 12px !important;
+  }
+  .admin-integration-item-left {
+    margin-right: 12px !important;
+  }
+  .admin-integration-item-right {
+    width: auto !important;
+    flex-shrink: 0 !important;
+  }
+  .admin-integration-action-btn.disconnect,
+  .admin-integration-action-btn.connect {
+    width: 110px !important;
+    height: 34px !important;
+    font-size: 9px !important;
+    padding: 6px 12px !important;
+    border-radius: 24px !important;
+  }
+  .admin-settings-page .ms-mobile-detail {
+    padding: 16px 8px !important;
+  }
+  .admin-settings-page .ms-mobile-detail .admin-settings-card {
+    padding: 16px 12px !important;
+  }
+  .admin-settings-card--integrations {
+    padding: 16px 12px !important;
+  }
+  .admin-settings-page p.admin-integration-description {
+    font-size: 8px !important;
+    line-height: 1.4 !important;
+    margin-top: 8px !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+  }
+  .admin-integration-logo {
+    width: 36px !important;
+    height: 32px !important;
+  }
+  .admin-settings-page h3.admin-integration-title {
+    font-size: 14px !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+  }
+  .admin-settings-page span.admin-integration-status {
+    font-size: 9px !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONFIRMATION MODAL — Integrations Page
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.integration-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999 !important;
+}
+
+.integration-modal-container {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+  width: 480px;
+  max-width: 90%;
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+  white-space: normal !important;
+}
+
+.integration-modal-container * {
+  white-space: normal !important;
+}
+
+.integration-modal-content {
+  padding: 32px 36px 24px 36px;
+}
+
+.integration-modal-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.integration-modal-warning-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.integration-modal-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0;
+}
+
+.integration-modal-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #666666;
+  margin: 0 0 16px 0;
+}
+
+.integration-modal-list {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #666666;
+  margin: 0 0 8px 16px;
+  padding: 0;
+  list-style-type: disc;
+  line-height: 1.8;
+}
+
+.integration-modal-footer {
+  border-top: 1px solid #EAEAEA;
+  padding: 20px 36px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #FFFFFF;
+}
+
+.integration-modal-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  height: 38px;
+  min-width: 100px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.integration-modal-btn.cancel-btn {
+  border: 1px solid #E5252A;
+  background: #FFFFFF;
+  color: #E5252A;
+}
+
+.integration-modal-btn.cancel-btn:hover {
+  background: #FFF0F0;
+}
+
+.integration-modal-btn.disconnect-btn {
+  border: 1px solid #A80005;
+  background: #A80005;
+  color: #FFFFFF;
+}
+
+.integration-modal-btn.disconnect-btn:hover {
+  background: #8B0004;
+}
+
+@keyframes modalFadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   DARK MODE — Settings / Profile page
+   ============================================ */
+body.dark-mode .admin-settings-page .admin-settings-card,
+body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode .admin-settings-page .admin-settings-card__title {
+  color: #ffffff !important;
+}
+
+body.dark-mode .admin-settings-page .admin-settings-card__divider,
+body.dark-mode .admin-settings-page .admin-settings-section-divider {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+body.dark-mode .admin-settings-page .admin-settings-topbar-search {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: none !important;
+}
+body.dark-mode .admin-settings-page .admin-settings-topbar-search:hover {
+  box-shadow: none !important;
+}
+body.dark-mode .admin-settings-page .admin-settings-topbar-search__input {
+  color: #f5f5f5 !important;
+}
+body.dark-mode .admin-settings-page .admin-settings-topbar-search__input::placeholder {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .admin-settings-page .admin-settings-form__label,
+body.dark-mode .admin-settings-page .admin-settings-section-title,
+body.dark-mode .admin-settings-page .admin-settings-2fa-label {
+  color: #e5e5e5 !important;
+}
+
+body.dark-mode .admin-settings-page .admin-settings-form__helper,
+body.dark-mode .admin-settings-page .admin-settings-avatar__helper,
+body.dark-mode .admin-settings-page .admin-settings-2fa-helper {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .admin-settings-page .admin-settings-form__input {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #e5e5e5 !important;
+}
+body.dark-mode .admin-settings-page .admin-settings-form__input:focus {
+  border-color: #FF0915 !important;
+  box-shadow: 0 0 0 3px rgba(255, 9, 21, 0.15) !important;
+}
+body.dark-mode .admin-settings-page .admin-settings-form__input--readonly {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #8a8a90 !important;
+}
+
+body.dark-mode .admin-settings-page .admin-settings-avatar__upload-btn {
+  background: linear-gradient(rgb(17 17 17 / 15%), rgb(17 17 17 / 15%)) padding-box,
+    linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) border-box !important;
+  color: #d0d0d5 !important;
+}
+body.dark-mode .admin-settings-page .admin-settings-avatar__upload-btn:hover {
+  color: #ffffff !important;
+}
+
+body.dark-mode .admin-settings-page .admin-settings-nav__item {
+  color: #b8b8be !important;
+}
+body.dark-mode .admin-settings-page .admin-settings-nav__item:hover:not(.admin-settings-nav__item--disabled) {
+  color: #FF0915 !important;
+  background: rgba(255, 9, 21, 0.08) !important;
+}
+body.dark-mode .admin-settings-page .admin-settings-nav__item--active {
+  color: #FF0915 !important;
+  background: rgba(255, 9, 21, 0.15) !important;
+}
+body.dark-mode .admin-settings-page .admin-settings-team-row {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+}
+body.dark-mode .admin-settings-page .admin-settings-team-row:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode .admin-settings-page .team-admin-name {
+  color: #ffffff !important;
+}
+body.dark-mode .admin-settings-page .team-admin-email {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .admin-settings-page .team-role-badge {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #d0d0d5 !important;
+}
+
+body.dark-mode .admin-settings-page .team-status-badge.active {
+  background: transparent !important;
+  border: 1px solid #2ECC71 !important;
+  color: #2ECC71 !important;
+}
+body.dark-mode .admin-settings-page .team-status-badge.inactive {
+  background: transparent !important;
+  border: 1px solid #E74C3C !important;
+  color: #E74C3C !important;
+}
+
+body.dark-mode .admin-settings-page .team-action-btn {
+  color: #b8b8be !important;
+}
+body.dark-mode .admin-settings-page .team-action-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-mode .admin-settings-page .admin-settings-team-header {
+  color: #9a9a9a !important;
+}
+body.dark-mode .admin-settings-page .admin-notification-section-title {
+  color: #e5e5e5 !important;
+}
+
+body.dark-mode .admin-settings-page .admin-notification-item {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+}
+body.dark-mode .admin-settings-page .admin-notification-item:hover {
+  border-color: #999999 !important;
+}
+
+body.dark-mode .admin-settings-page .admin-notification-item-text h4 {
+  color: #e5e5e5 !important;
+}
+body.dark-mode .admin-settings-page .admin-notification-item-text p {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .admin-settings-page .admin-permission-custom-checkbox {
+  border-color: #E5252A !important;
+  background: transparent !important;
+}
+body.dark-mode .admin-settings-page .admin-permission-checkbox-input:checked + .admin-permission-custom-checkbox {
+  background: #E5252A !important;
+}
+body.dark-mode .admin-settings-page .admin-billing-section-title {
+  color: #e5e5e5 !important;
+}
+
+body.dark-mode .admin-settings-page .admin-billing-plan-card,
+body.dark-mode .admin-settings-page .admin-billing-payment-card,
+body.dark-mode .admin-settings-page .admin-billing-address-card {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+}
+
+body.dark-mode .admin-settings-page .admin-billing-plan-name,
+body.dark-mode .admin-settings-page .admin-billing-plan-price .price-amount,
+body.dark-mode .admin-settings-page .admin-billing-next-date,
+body.dark-mode .admin-settings-page .admin-billing-invoice-info .invoice-title,
+body.dark-mode .admin-settings-page .admin-billing-card-details .card-number {
+  color: #ffffff !important;
+}
+
+body.dark-mode .admin-settings-page .admin-billing-plan-billed,
+body.dark-mode .admin-settings-page .admin-billing-plan-price .price-period,
+body.dark-mode .admin-settings-page .admin-billing-invoice-info .invoice-date,
+body.dark-mode .admin-settings-page .admin-billing-card-details .card-expiry,
+body.dark-mode .admin-settings-page .admin-billing-card-brand {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .admin-settings-page .admin-billing-plan-features li {
+  color: #d7d7d7 !important;
+}
+
+body.dark-mode .admin-settings-page .admin-billing-plan-divider {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .admin-settings-page .admin-billing-card-icon-wrapper {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .admin-settings-page .admin-billing-edit-btn {
+  background: transparent !important;
+  border: 1px solid #E5252A !important;
+  color: #d0d0d5 !important;
+}
+body.dark-mode .admin-settings-page .admin-billing-edit-btn:hover {
+  background: rgba(229, 37, 42, 0.1) !important;
+}
+
+body.dark-mode .admin-settings-page .admin-billing-invoice-actions .icon-btn {
+  color: #b8b8be !important;
+}
+body.dark-mode .admin-settings-page .admin-integrations-description {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .admin-settings-page .admin-integration-item {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+}
+
+body.dark-mode .admin-settings-page .admin-integration-title {
+  color: #ffffff !important;
+}
+
+body.dark-mode .admin-settings-page .admin-integration-status {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .admin-settings-page .admin-integration-description {
+  color: #b8b8be !important;
+}
+body.dark-mode .admin-settings-page .admin-integration-action-btn.disconnect {
+  background: transparent !important;
+  border: 1px solid #E5252A !important;
+  color: #E5252A !important;
+}
+body.dark-mode .admin-settings-page .admin-integration-action-btn.disconnect:hover {
+  background: rgba(229, 37, 42, 0.1) !important;
+}
+
+body.dark-mode .admin-settings-page .admin-integration-action-btn.connect {
+  background: #E5252A !important;
+  color: #FFFFFF !important;
+}
+body.dark-mode .admin-settings-page .admin-integration-action-btn.connect:hover {
+  background: #C41C20 !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-search {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-search-input {
+  color: #e5e5e5 !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-search-input::placeholder {
+  color: #9a9a9a !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-search-icon {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .admin-settings-page .admin-audit-table-header {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+  box-shadow: none !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-table-header .audit-col {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .admin-settings-page .admin-audit-row {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+  box-shadow: none !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-row .audit-col-date,
+body.dark-mode .admin-settings-page .admin-audit-row .audit-col-action,
+body.dark-mode .admin-settings-page .admin-audit-row .audit-col-document {
+  color: #b8b8be !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-row .audit-col-name {
+  color: #ffffff !important;
+}
+
+body.dark-mode .admin-settings-page .audit-status-badge.audit-status-success {
+  background: transparent !important;
+  border: 1px solid #2ECC71 !important;
+  color: #2ECC71 !important;
+}
+body.dark-mode .admin-settings-page .audit-status-badge.audit-status-failed {
+  background: transparent !important;
+  border: 1px solid #E74C3C !important;
+  color: #E74C3C !important;
+}
+
+/* Mobile card view */
+body.dark-mode .admin-settings-page .admin-audit-mobile-card {
+  background: rgb(17 17 17 / 15%) !important;
+  border: 1px solid #746b6b !important;
+  box-shadow: none !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-mobile-filename {
+  color: #ffffff !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-mobile-username,
+body.dark-mode .admin-settings-page .admin-audit-mobile-date {
+  color: #9a9a9a !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-mobile-search-wrapper {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-mobile-filter-btn {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #b8b8be !important;
+}
+body.dark-mode .admin-settings-page .admin-audit-mobile-tab {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #b8b8be !important;
 }

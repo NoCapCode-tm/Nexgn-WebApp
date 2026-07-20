@@ -1,102 +1,52 @@
 import { useState } from "react";
-import Sidebar from "../components/Sidebar";
-import MobileNavbar from "../components/MobileNavbar";
+import Layout from "../components/Layout";
+import Topbar from "../components/Topbar";
 import ContactCard from "../components/ContactCard";
 import ContactDetailsModal from "../components/ContactDetailsModal";
-import { Search, Bell, UserCircle, Menu } from "lucide-react";
+
 import AddContactForm from "../components/AddContactForm";
 
-import "../css/AdminBaseLayout.css";
+import "../css/BaseLayout.css";
 import "../css/ContactBook.css";
 
-const CONTACTS = [
-  { name: "Alice Smith", email: "alice.smith@example.com", department: "Legal", status: "Active" },
-  { name: "Bob Jones", email: "bob.jones@example.com", department: "Engineering", status: "Active" },
-  { name: "Charlie Brown", email: "charlie.brown@example.com", department: "Marketing", status: "Inactive" },
-  { name: "Diana Prince", email: "diana.prince@example.com", department: "Finance", status: "Active" },
-  { name: "Blair Croft", email: "blair.croft@example.com", department: "HR", status: "Active" }
+const INITIAL_CONTACTS = [
+  { name: "Alice Smith", email: "alice.smith@example.com", department: "Legal", status: "Active", phone: "+1 98765 43210", language: "English", gender: "Female", emergencyContact: "+1 912-345-6789", address: "New York, United States" },
+  { name: "Bob Jones", email: "bob.jones@example.com", department: "Engineering", status: "Active", phone: "+1 98765 43211", language: "English", gender: "Male", emergencyContact: "+1 912-345-6780", address: "San Francisco, United States" },
+  { name: "Charlie Brown", email: "charlie.brown@example.com", department: "Marketing", status: "Inactive", phone: "+1 98765 43212", language: "English", gender: "Male", emergencyContact: "+1 912-345-6781", address: "Chicago, United States" },
+  { name: "Diana Prince", email: "diana.prince@example.com", department: "Finance", status: "Active", phone: "+1 98765 43213", language: "English", gender: "Female", emergencyContact: "+1 912-345-6782", address: "Boston, United States" },
+  { name: "Blair Croft", email: "blair.croft@example.com", department: "HR", status: "Active", phone: "+1 98765 43214", language: "English", gender: "Female", emergencyContact: "+1 912-345-6783", address: "Austin, United States" }
 ];
 
-function ContactActions({
+function MemberContactActions({
   search,
   setSearch,
   selectedStatus,
   setSelectedStatus,
   selectedDepartment,
   setSelectedDepartment,
-  onAddClick
+  onAddClick,
+  contacts
 }) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const departments = ["All", ...new Set(CONTACTS.map(c => c.department).filter(Boolean))];
-  const statuses = ["All", ...new Set(CONTACTS.map(c => c.status).filter(Boolean))];
+  const departments = ["All", ...new Set(contacts.map(c => c.department).filter(Boolean))];
+  const statuses = ["All", ...new Set(contacts.map(c => c.status).filter(Boolean))];
 
   const hasActiveFilter = selectedStatus !== "All" || selectedDepartment !== "All";
 
   return (
     <div className="admin-contact-topbar-actions">
       <div className="admin-contact-search-wrap">
-        <Search size={16} color="#9ca3af" strokeWidth={2} />
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
         <input
           className="admin-contact-search-input"
-          placeholder="Search Contacts"
+          placeholder="Search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-      </div>
-      <div className="admin-contact-filter-wrapper">
-        <button
-          className="admin-contact-filter-btn"
-          onClick={() => setIsFilterOpen(!isFilterOpen)}
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/>
-          </svg>
-          <span className="filter-text">{hasActiveFilter ? "Filter (Active)" : "Filter"}</span>
-        </button>
-
-        {isFilterOpen && (
-          <div className="admin-contact-filter-dropdown">
-            <div className="admin-contact-filter-dropdown-group">
-              <label className="admin-contact-filter-dropdown-label">Status</label>
-              <select
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-                className="admin-contact-filter-dropdown-select"
-              >
-                {statuses.map(st => (
-                  <option key={st} value={st}>{st}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="admin-contact-filter-dropdown-group">
-              <label className="admin-contact-filter-dropdown-label">Department</label>
-              <select
-                value={selectedDepartment}
-                onChange={(e) => setSelectedDepartment(e.target.value)}
-                className="admin-contact-filter-dropdown-select"
-              >
-                {departments.map(dept => (
-                  <option key={dept} value={dept}>{dept}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="admin-contact-filter-dropdown-divider" />
-
-            <button
-              onClick={() => {
-                setSelectedStatus("All");
-                setSelectedDepartment("All");
-                setIsFilterOpen(false);
-              }}
-              className="admin-contact-filter-dropdown-reset"
-            >
-              Reset Filters
-            </button>
-          </div>
-        )}
       </div>
       <button className="admin-contact-add-btn" onClick={onAddClick}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -110,14 +60,14 @@ function ContactActions({
 }
 
 export default function ContactBook() {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [contacts, setContacts] = useState(INITIAL_CONTACTS);
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [selectedDepartment, setSelectedDepartment] = useState("All");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
 
-  const filteredContacts = CONTACTS.filter(c => {
+  const filteredContacts = contacts.filter(c => {
     const cleanSearch = search.trim().toLowerCase();
     const matchesSearch = c.name.toLowerCase().includes(cleanSearch) ||
                           c.email.toLowerCase().includes(cleanSearch);
@@ -127,7 +77,7 @@ export default function ContactBook() {
   });
 
   const focusSearchInput = () => {
-    const inputs = document.querySelectorAll(".admin-contact-search-input, .member-contact-search-input");
+    const inputs = document.querySelectorAll(".admin-contact-search-input, .admin-contact-search-input");
     for (const input of inputs) {
       if (input.offsetWidth > 0 || input.offsetHeight > 0) {
         input.focus();
@@ -136,72 +86,54 @@ export default function ContactBook() {
     }
   };
 
+  const handleAddContact = (newContact) => {
+    setContacts(prev => [
+      ...prev,
+      {
+        ...newContact,
+        department: newContact.department || "Legal",
+        status: newContact.status || "Active",
+        phone: newContact.phone || "+1 98765 43210",
+        language: newContact.language || "English",
+        gender: newContact.gender || "Female",
+        emergencyContact: newContact.emergencyContact || "+1 912-345-6789",
+        address: newContact.address || "New York, United States"
+      }
+    ]);
+  };
+
+  const handleUpdateContact = (updatedContact) => {
+    setContacts(prev => prev.map(c => c.email === selectedContact.email ? { ...c, ...updatedContact } : c));
+    setSelectedContact(prev => ({ ...prev, ...updatedContact }));
+  };
+
+  const handleDeleteContact = (email) => {
+    setContacts(prev => prev.filter(c => c.email !== email));
+  };
+
+  const contactActions = (
+    <MemberContactActions
+      search={search}
+      setSearch={setSearch}
+      selectedStatus={selectedStatus}
+      setSelectedStatus={setSelectedStatus}
+      selectedDepartment={selectedDepartment}
+      setSelectedDepartment={setSelectedDepartment}
+      onAddClick={() => setIsAddModalOpen(true)}
+      contacts={contacts}
+    />
+  );
+
   return (
-    <div className="layout admin-theme admin-contact-page">
-      {mobileNavOpen && (
-        <div
-          className="mobile-backdrop"
-          onClick={() => setMobileNavOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Responsive Sidebar Layout */}
-      <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? "mobile-sidebar-wrapper--open" : ""}`}>
-        <Sidebar />
-      </div>
-
-      <div className="desktop-sidebar-wrapper">
-        <Sidebar />
-      </div>
-
-      <div className="main">
-        {/* Mobile Navigation */}
-        <header className="mobile-topbar">
-          <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(true)}>
-            <Menu size={22} color="#1a1a2e" />
-          </button>
-
-          <div className="mobile-topbar__icons">
-            <button className="topbar__icon-btn mobile-topbar__search-btn" onClick={focusSearchInput}>
-              <Search size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <Bell size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <UserCircle size={20} color="#FF0915" strokeWidth={1.5} />
-            </button>
-          </div>
-        </header>
-
+    <Layout className="admin-contact-page" onSearchClick={focusSearchInput}>
+      <>
         {/* Desktop Topbar */}
-        <div className="topbar desktop-topbar">
-          <div className="topbar__top-row">
-            <div className="topbar__icons">
-              <button className="topbar__icon-btn" onClick={focusSearchInput}><Search size={24} color="#FF0915" strokeWidth={1.5} /></button>
-              <button className="topbar__icon-btn"><Bell size={24} color="#FF0915" strokeWidth={1.5} /></button>
-              <button className="topbar__icon-btn"><UserCircle size={24} color="#FF0915" strokeWidth={1.5} /></button>
-            </div>
-          </div>
-          <div className="topbar__bottom-row">
-            <div>
-              <div className="topbar__title">Contact Book</div>
-              <div className="topbar__sub">Manage all company contacts</div>
-            </div>
-            
-            {/* Top Right Actions */}
-            <ContactActions
-              search={search}
-              setSearch={setSearch}
-              selectedStatus={selectedStatus}
-              setSelectedStatus={setSelectedStatus}
-              selectedDepartment={selectedDepartment}
-              setSelectedDepartment={setSelectedDepartment}
-              onAddClick={() => setIsAddModalOpen(true)}
-            />
-          </div>
-        </div>
+        <Topbar 
+          title="Contact Book" 
+          subtitle="Manage all company contacts"
+          actionButton={contactActions}
+          onSearchClick={focusSearchInput}
+        />
 
         {/* Mobile Page Header (Under Topbar) */}
         <div className="mobile-page-header">
@@ -213,15 +145,7 @@ export default function ContactBook() {
           </div>
           <hr className="mobile-header-divider" />
           <div className="mobile-filter-row">
-            <ContactActions
-              search={search}
-              setSearch={setSearch}
-              selectedStatus={selectedStatus}
-              setSelectedStatus={setSelectedStatus}
-              selectedDepartment={selectedDepartment}
-              setSelectedDepartment={setSelectedDepartment}
-              onAddClick={() => setIsAddModalOpen(true)}
-            />
+            {contactActions}
           </div>
         </div>
 
@@ -229,7 +153,13 @@ export default function ContactBook() {
         <div className="admin-contact-section">
           <div className="admin-contact-table">
             {filteredContacts.map((c, i) => (
-              <ContactCard key={i} name={c.name} email={c.email} onClick={() => setSelectedContact(c)} />
+              <ContactCard 
+                key={i} 
+                name={c.name} 
+                email={c.email} 
+                onClick={() => setSelectedContact(c)} 
+                onDelete={() => handleDeleteContact(c.email)} 
+              />
             ))}
             {filteredContacts.length === 0 && (
               <div className="admin-contact-empty-state">
@@ -257,17 +187,19 @@ export default function ContactBook() {
           </div>
         </div>
 
-      </div>
-      
-      <MobileNavbar />
+      </>
 
       {isAddModalOpen && (
-        <AddContactForm onClose={() => setIsAddModalOpen(false)} />
+        <AddContactForm onSave={handleAddContact} onClose={() => setIsAddModalOpen(false)} />
       )}
       
       {selectedContact && (
-        <ContactDetailsModal contact={selectedContact} onClose={() => setSelectedContact(null)} />
+        <ContactDetailsModal 
+          contact={selectedContact} 
+          onUpdateContact={handleUpdateContact} 
+          onClose={() => setSelectedContact(null)} 
+        />
       )}
-    </div>
+    </Layout>
   );
 }

@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Mail, Phone, Pencil, ChevronLeft } from "lucide-react";
 import "../css/ContactBook.css";
 
-export default function ContactDetailsModal({ contact, onClose }) {
+export default function ContactDetailsModal({ contact, onUpdateContact, onClose }) {
   if (!contact) return null;
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState(contact.name || "");
+  const [email, setEmail] = useState(contact.email || "");
+  const [phone, setPhone] = useState(contact.phone || "+1 98765 43210");
+  const [language, setLanguage] = useState(contact.language || "English");
+  const [gender, setGender] = useState(contact.gender || "Female");
+  const [emergencyContact, setEmergencyContact] = useState(contact.emergencyContact || "+1 912-345-6789");
+  const [address, setAddress] = useState(contact.address || "New York, United States");
+
+  const handleSave = () => {
+    onUpdateContact({
+      name,
+      email,
+      phone,
+      language,
+      gender,
+      emergencyContact,
+      address
+    });
+    setIsEditing(false);
+    onClose();
+  };
 
   return (
     <div className="add-contact-modal-overlay" onClick={onClose}>
@@ -14,54 +37,59 @@ export default function ContactDetailsModal({ contact, onClose }) {
         </div>
 
         {/* Profile Header */}
-        <div className="contact-details-header">
-          <div className="contact-details-avatar"></div>
+        <div className="contact-details-header contact-details-header--simple">
           <div className="contact-details-info-wrap">
             <div className="contact-details-title-row">
-              <h2 className="contact-details-name">{contact.name}</h2>
-              <button className="contact-details-edit-btn">
-                <Pencil size={14} />
-                <span>Edit Profile</span>
-              </button>
+              {isEditing ? (
+                <input 
+                  type="text" 
+                  value={name} 
+                  onChange={e => setName(e.target.value)} 
+                  className="contact-details-name-input"
+                />
+              ) : (
+                <h2 className="contact-details-name">{contact.name}</h2>
+              )}
+              {isEditing ? (
+                <button className="contact-details-edit-btn" onClick={handleSave} style={{ backgroundColor: "#FFEBEB", color: "#FF0915" }}>
+                  <span>Save Profile</span>
+                </button>
+              ) : (
+                <button className="contact-details-edit-btn" onClick={() => setIsEditing(true)}>
+                  <Pencil size={14} />
+                  <span>Edit Profile</span>
+                </button>
+              )}
             </div>
-            <div className="contact-details-status-row">
-              <span className="contact-status-badge">Active</span>
-              <span className="contact-role">Legal Manager</span>
-            </div>
-            
-            <div className="contact-quick-info">
-              <div className="quick-info-col">
-                <div className="quick-info-item">
-                  <span className="quick-info-label">Department</span>
-                  <span className="quick-info-val">Legal</span>
-                </div>
-                <div className="quick-info-item">
-                  <span className="quick-info-label">Date Hired</span>
-                  <span className="quick-info-val">Mar 7, 2021</span>
-                </div>
-              </div>
-              <div className="quick-info-col desktop-quick-info-col">
-                <div className="quick-info-item">
-                  <Mail size={14} color="#6b7280" />
-                  <span className="quick-info-val">{contact.email}</span>
-                </div>
-                <div className="quick-info-item">
-                  <Phone size={14} color="#6b7280" />
-                  <span className="quick-info-val">+1 98765 43210</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div className="mobile-contact-links">
-          <div className="quick-info-item">
-            <Mail size={14} color="#6b7280" />
-            <span className="quick-info-val">{contact.email}</span>
-          </div>
-          <div className="quick-info-item">
-            <Phone size={14} color="#6b7280" />
-            <span className="quick-info-val">+1 98765 43210</span>
+            <div className="contact-links-simple">
+              <div className="quick-info-item">
+                <Mail size={14} color="#6b7280" />
+                {isEditing ? (
+                  <input 
+                    type="email" 
+                    value={email} 
+                    onChange={e => setEmail(e.target.value)} 
+                    className="contact-details-quick-input"
+                  />
+                ) : (
+                  <span className="quick-info-val">{contact.email}</span>
+                )}
+              </div>
+              <div className="quick-info-item">
+                <Phone size={14} color="#6b7280" />
+                {isEditing ? (
+                  <input 
+                    type="text" 
+                    value={phone} 
+                    onChange={e => setPhone(e.target.value)} 
+                    className="contact-details-quick-input"
+                  />
+                ) : (
+                  <span className="quick-info-val">{contact.phone || "+1 98765 43210"}</span>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -72,63 +100,43 @@ export default function ContactDetailsModal({ contact, onClose }) {
             <div className="add-contact-grid admin-add-contact-grid--gap">
               <div className="contact-detail-field">
                 <label>Full Name</label>
-                <div className="detail-val">{contact.name}</div>
+                {isEditing ? (
+                  <input type="text" className="contact-detail-field__input" value={name} onChange={e => setName(e.target.value)} />
+                ) : (
+                  <div className="detail-val">{contact.name}</div>
+                )}
               </div>
               <div className="contact-detail-field">
                 <label>Preferred Language</label>
-                <div className="detail-val">English</div>
+                {isEditing ? (
+                  <input type="text" className="contact-detail-field__input" value={language} onChange={e => setLanguage(e.target.value)} />
+                ) : (
+                  <div className="detail-val">{contact.language || "English"}</div>
+                )}
               </div>
               <div className="contact-detail-field">
                 <label>Gender</label>
-                <div className="detail-val">Female</div>
+                {isEditing ? (
+                  <input type="text" className="contact-detail-field__input" value={gender} onChange={e => setGender(e.target.value)} />
+                ) : (
+                  <div className="detail-val">{contact.gender || "Female"}</div>
+                )}
               </div>
               <div className="contact-detail-field">
                 <label>Emergency Contact</label>
-                <div className="detail-val">+1 912-345-6789</div>
+                {isEditing ? (
+                  <input type="text" className="contact-detail-field__input" value={emergencyContact} onChange={e => setEmergencyContact(e.target.value)} />
+                ) : (
+                  <div className="detail-val">{contact.emergencyContact || "+1 912-345-6789"}</div>
+                )}
               </div>
               <div className="contact-detail-field add-contact-field-full">
                 <label>Address</label>
-                <div className="detail-val">New York, United States</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Professional Information */}
-        <div className="contact-details-card admin-contact-details-card--mt">
-          <div className="contact-details-card-header">Professional Information</div>
-          <div className="contact-details-card-body">
-            <div className="add-contact-grid admin-add-contact-grid--gap">
-              <div className="contact-detail-field">
-                <label>Company Name</label>
-                <div className="detail-val">Acme Corp</div>
-              </div>
-              <div className="contact-detail-field">
-                <label>Department</label>
-                <div className="detail-val">Legal</div>
-              </div>
-              <div className="contact-detail-field">
-                <label>Employee ID</label>
-                <div className="detail-val">EMP-0421</div>
-              </div>
-              <div className="contact-detail-field">
-                <label>Job Title</label>
-                <div className="detail-val">Legal Manager</div>
-              </div>
-              <div className="contact-detail-field">
-                <label>Date Joined</label>
-                <div className="detail-val">March 12, 2022</div>
-              </div>
-            </div>
-            
-            <div className="contact-detail-field add-contact-field-full admin-contact-field-full--mt">
-              <label>Skills</label>
-              <div className="skills-row">
-                <span className="skill-pill">Contract Review</span>
-                <span className="skill-pill">Compliance Management</span>
-                <span className="skill-pill">Risk Assessment</span>
-                <span className="skill-pill">Corporate Law</span>
-                <span className="skill-pill">Negotiation</span>
+                {isEditing ? (
+                  <input type="text" className="contact-detail-field__input" value={address} onChange={e => setAddress(e.target.value)} />
+                ) : (
+                  <div className="detail-val">{contact.address || "New York, United States"}</div>
+                )}
               </div>
             </div>
           </div>

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { MoreHorizontal, X, Plus } from "lucide-react";
-import MemberLayout from "../components/MemberLayout";
-import MemberTopbar from "../components/MemberTopbar";
+import Layout from "../components/Layout";
+import Topbar from "../components/Topbar";
 
-import "../css/MemberBaseLayout.css";
-import "../css/MemberDocuments.css";
-import "../css/MemberTemplates.css";
+import "../css/BaseLayout.css";
+import "../css/Documents.css";
+import "../css/Templates.css";
 
 const MOCK_TEMPLATES = [
   { id: 1, title: "Project Proposal", note: "Send it to client", owner: "Me" },
@@ -20,17 +20,22 @@ const MOCK_TEMPLATES = [
   { id: 10, title: "Vendor Contract", note: "Contact pending", owner: "Me" },
 ];
 
-export default function MemberTemplatesList({ onAddTemplate }) {
+export default function TemplatesList({ onAddTemplate }) {
+  const [templates, setTemplates] = useState(MOCK_TEMPLATES);
   const [search, setSearch] = useState("");
   const [openMenuId, setOpenMenuId] = useState(null);
 
-  const filtered = MOCK_TEMPLATES.filter((t) =>
+  const handleRevoke = (id) => {
+    setTemplates(prev => prev.filter(t => t.id !== id));
+  };
+
+  const filtered = templates.filter((t) =>
     t.title.toLowerCase().includes(search.toLowerCase())
   );
 
   const toolbar = (
-    <div className="member-docs-topbar-actions template-toolbar-actions">
-      <div className="member-docs-search-wrap">
+    <div className="admin-docs-topbar-actions template-toolbar-actions">
+      <div className="admin-docs-search-wrap">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
           <circle cx="7" cy="7" r="5.5" stroke="#999999" strokeWidth="1.5" />
           <path
@@ -42,25 +47,25 @@ export default function MemberTemplatesList({ onAddTemplate }) {
         </svg>
         <input
           type="text"
-          className="member-docs-search-input"
+          className="admin-docs-search-input"
           placeholder="Search Documents"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      <button className="member-docs-add-btn" onClick={onAddTemplate}>
+      <button className="admin-docs-add-btn" onClick={onAddTemplate}>
         <Plus width="18" height="18" strokeWidth="2" />
         <span className="add-btn-full">Add Template</span>
-        <span className="member-docs-add-btn-short"></span>
+        <span className="admin-docs-add-btn-short"></span>
       </button>
     </div>
   );
 
   return (
-    <MemberLayout className="member-templates-list-page">
+    <Layout className="admin-templates-list-page">
       <>
-        <MemberTopbar
+        <Topbar
           title="Manage Templates"
           subtitle="Manage all your reusable document templates in one place."
           actionButton={toolbar}
@@ -79,24 +84,24 @@ export default function MemberTemplatesList({ onAddTemplate }) {
           <div className="mobile-filter-row">{toolbar}</div>
         </div>
 
-        <div className="member-docs-table__header template-docs-cols">
+        <div className="admin-docs-table__header template-docs-cols">
           <span>TITLE</span>
           <span>NOTE</span>
           <span>OWNER</span>
           <span>ACTION</span>
         </div>
 
-        <div className="member-docs-section">
-          <div className="member-docs-table">
+        <div className="admin-docs-section">
+          <div className="admin-docs-table">
             {filtered.map((t) => (
-              <div className="member-doc-row template-docs-cols" key={t.id}>
-                <span className="member-doc-row__title">
+              <div className="admin-doc-row template-docs-cols" key={t.id}>
+                <span className="admin-doc-row__title">
                   <svg
                     width="16"
                     height="16"
                     viewBox="0 0 32 32"
                     fill="none"
-                    className="member-doc-row__icon"
+                    className="admin-doc-row__icon"
                   >
                     <path
                       d="M7.84065 28.7542C7.14735 28.7542 6.48245 28.4788 5.99221 27.9885C5.50197 27.4983 5.22656 26.8334 5.22656 26.1401V5.22738C5.22656 4.53408 5.50197 3.86917 5.99221 3.37893C6.48245 2.8887 7.14735 2.61329 7.84065 2.61329H18.297C18.7108 2.61261 19.1206 2.6938 19.5028 2.85217C19.885 3.01054 20.2322 3.24297 20.5242 3.53606L25.2139 8.22574C25.5078 8.51787 25.7409 8.86533 25.8997 9.24806C26.0585 9.63078 26.14 10.0412 26.1393 10.4556V26.1401C26.1393 26.8334 25.8639 27.4983 25.3736 27.9885C24.8834 28.4788 24.2185 28.7542 23.5252 28.7542H7.84065Z"
@@ -153,11 +158,11 @@ export default function MemberTemplatesList({ onAddTemplate }) {
                   </svg>
                   {t.title}
                 </span>
-                <span className="member-doc-row__note">{t.note}</span>
-                <span className="member-doc-row__cell">{t.owner}</span>
-                <span className="member-doc-row__menu">
+                <span className="admin-doc-row__note">{t.note}</span>
+                <span className="admin-doc-row__cell">{t.owner}</span>
+                <span className="admin-doc-row__menu">
                   <button
-                    className="member-doc-row__menu-trigger"
+                    className="admin-doc-row__menu-trigger"
                     aria-label="More actions"
                     onClick={() => setOpenMenuId(openMenuId === t.id ? null : t.id)}
                   >
@@ -173,7 +178,10 @@ export default function MemberTemplatesList({ onAddTemplate }) {
                       </button>
                       <button
                         className="action-menu__item action-menu__item--danger"
-                        onClick={() => setOpenMenuId(null)}
+                        onClick={() => {
+                          setOpenMenuId(null);
+                          handleRevoke(t.id);
+                        }}
                       >
                         <X size={13} />
                         Revoke
@@ -184,11 +192,11 @@ export default function MemberTemplatesList({ onAddTemplate }) {
               </div>
             ))}
             {filtered.length === 0 && (
-              <div className="member-docs-empty-state">No templates found.</div>
+              <div className="admin-docs-empty-state">No templates found.</div>
             )}
           </div>
         </div>
       </>
-    </MemberLayout>
+    </Layout>
   );
 }

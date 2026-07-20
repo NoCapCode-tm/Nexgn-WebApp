@@ -1,16 +1,16 @@
 import { useState } from "react";
-import MemberTemplatesList from "./MemberTemplatesList";
-import MemberTemplates from "./MemberTemplates";
-import MemberTemplateEditor from "./MemberTemplateEditor";
+import TemplatesList from "./TemplatesList";
+import Templates from "./Templates";
+import TemplateEditor from "./TemplateEditor";
 
-export default function MemberTemplatesPage() {
+export default function TemplatesPage() {
   const [view, setView] = useState("list");
   const [templateName, setTemplateName] = useState("");
   const [templateFile, setTemplateFile] = useState(null);
 
   if (view === "editor") {
     return (
-      <MemberTemplateEditor
+      <TemplateEditor
         templateName={templateName}
         templateFile={templateFile}
         onBack={() => setView("list")}
@@ -20,7 +20,7 @@ export default function MemberTemplatesPage() {
 
   if (view === "create") {
     return (
-      <MemberTemplates
+      <Templates
         onBack={() => setView("list")}
         onCreate={(name, file) => {
           setTemplateName(name);
@@ -31,5 +31,5 @@ export default function MemberTemplatesPage() {
     );
   }
 
-  return <MemberTemplatesList onAddTemplate={() => setView("create")} />;
+  return <TemplatesList onAddTemplate={() => setView("create")} />;
 }

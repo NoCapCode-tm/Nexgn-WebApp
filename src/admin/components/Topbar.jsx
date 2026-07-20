@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Search, Bell, UserCircle } from "lucide-react";
+import TopbarIcons from "./TopbarIcons";
 
 const UploadIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,33 +9,32 @@ const UploadIcon = () => (
   </svg>
 );
 
-export default function Topbar() {
+export default function Topbar({ 
+  title = "Dashboard", 
+  subtitle = "Overview of your document signing activity",
+  actionButton,
+  onSearchClick
+}) {
   const navigate = useNavigate();
+
+  const defaultActionButton = (
+    <button className="topbar__upload" onClick={() => navigate("/admin-sign-yourself")}>
+      <UploadIcon />
+      Upload Document
+    </button>
+  );
 
   return (
     <header className="topbar desktop-topbar">
       <div className="topbar__top-row">
-        <div className="topbar__icons">
-          <button className="topbar__icon-btn">
-            <Search size={24} color="#FF0915" strokeWidth={1.5} />
-          </button>
-          <button className="topbar__icon-btn">
-            <Bell size={24} color="#FF0915" strokeWidth={1.5} />
-          </button>
-          <button className="topbar__icon-btn">
-            <UserCircle size={24} color="#FF0915" strokeWidth={1.5} />
-          </button>
-        </div>
+        <TopbarIcons onSearchClick={onSearchClick} />
       </div>
       <div className="topbar__bottom-row">
         <div>
-          <h1 className="topbar__title">Dashboard</h1>
-          <p className="topbar__sub">Overview of your document signing activity</p>
+          <h1 className="topbar__title">{title}</h1>
+          <p className="topbar__sub">{subtitle}</p>
         </div>
-        <button className="topbar__upload" onClick={() => navigate("/admin-sign-yourself")}>
-          <UploadIcon />
-          Upload Document
-        </button>
+        {actionButton !== undefined ? actionButton : defaultActionButton}
       </div>
     </header>
   );

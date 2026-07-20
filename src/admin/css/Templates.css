@@ -1,19 +1,19 @@
-/* MemberTemplates.css
+/* Templates.css
    Dedicated Member styles following the same structure as
-   MemberDocuments.css / MemberContactBook.css:
+   Documents.css / ContactBook.css:
    - mobile (<=768px)
    - tablet (769px-1179px)
    - fluid desktop scaling with clamp() (>=1180px)
 
    Reuses .setup-card / .form-input / .btn-create / .upload-zone /
-   .or-divider / .form-textarea from MemberSignYourself.css.
+   .or-divider / .form-textarea from SignYourself.css.
 */
-.member-doc-row__menu {
+.admin-doc-row__menu {
   position: relative;
   display: flex;
   justify-content: center;
 }
-.member-doc-row__menu-trigger {
+.admin-doc-row__menu-trigger {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +27,7 @@
   cursor: pointer;
   transition: background 0.15s ease;
 }
-.member-doc-row__menu-trigger:hover {
+.admin-doc-row__menu-trigger:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 .action-menu {
@@ -94,7 +94,7 @@
 }
 
 @media (max-width: 768px) {
-  .member-templates-list-page .member-doc-row {
+  .admin-templates-list-page .admin-doc-row {
     display: flex;
     align-items: center;
     grid-template-columns: none;
@@ -102,13 +102,13 @@
     min-height: 64px;
     row-gap: 0;
   }
-  .member-templates-list-page .member-doc-row__title {
+  .admin-templates-list-page .admin-doc-row__title {
     grid-column: unset;
     width: 100%;
     margin: 0;
   }
 
-  .member-templates-page .setup-card {
+  .admin-templates-page .setup-card {
     box-sizing: border-box;
     width: calc(100% - 32px);
     margin: 0 16px;
@@ -168,7 +168,7 @@
     display: block;
   }
 }
-/* Fluid Desktop Scaling (1180px and above) — matches MemberSignYourself.css */
+/* Fluid Desktop Scaling (1180px and above) — matches SignYourself.css */
 @media (min-width: 1180px) {
   .template-create-row {
     gap: clamp(10px, 0.83vw, 24px);
@@ -262,30 +262,30 @@
 }
 
 @media (max-width: 768px) {
-  .member-templates-list-page .mobile-header-divider {
+  .admin-templates-list-page .mobile-header-divider {
     margin: var(--space-md) 0;
   }
-  .member-templates-list-page .mobile-filter-row {
+  .admin-templates-list-page .mobile-filter-row {
     margin-top: var(--space-sm);
   }
-  .member-templates-list-page .member-docs-add-btn-short {
+  .admin-templates-list-page .admin-docs-add-btn-short {
     display: none;
   }
 }
 
 /* Match Add button styling to Documents page (solid red circle, no gradient) */
-.member-templates-list-page .member-docs-add-btn {
+.admin-templates-list-page .admin-docs-add-btn {
   background: #E22A2A;
   box-shadow: 0 4px 12px rgba(226, 42, 42, 0.2);
 }
 
 /* Align search + Add Template to the right */
-.member-templates-list-page .template-toolbar-actions {
+.admin-templates-list-page .template-toolbar-actions {
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
-.member-templates-list-page .template-toolbar-actions .member-docs-search-wrap {
+.admin-templates-list-page .template-toolbar-actions .admin-docs-search-wrap {
   flex: 0 1 300px;
 }
 
@@ -293,24 +293,24 @@
 .template-docs-cols {
   grid-template-columns: 2.5fr 2.5fr 1fr 0.5fr !important;
 }
-.template-docs-cols .member-doc-row__cell:last-child,
-.template-docs-cols .member-doc-row__menu {
+.template-docs-cols .admin-doc-row__cell:last-child,
+.template-docs-cols .admin-doc-row__menu {
   justify-self: center;
 }
 
 /* Keep title/subtitle on one line when topbar action content is wide */
-.member-templates-list-page .topbar__sub {
+.admin-templates-list-page .topbar__sub {
   white-space: nowrap;
   overflow: visible;
 }
-.member-templates-list-page .desktop-topbar,
-.member-templates-list-page .member-docs-topbar-actions.template-toolbar-actions {
+.admin-templates-list-page .desktop-topbar,
+.admin-templates-list-page .admin-docs-topbar-actions.template-toolbar-actions {
   flex-shrink: 0;
 }
 
 /* Hide desktop topbar on mobile/tablet, use mobile-page-header instead */
 @media (max-width: 1179px) {
-  .member-templates-list-page .desktop-topbar {
+  .admin-templates-list-page .desktop-topbar {
     display: none;
   }
 }
@@ -320,18 +320,18 @@
 
 /* Tablet: 3-column layout for template rows (Note is hidden at this width) */
 @media (min-width: 769px) and (max-width: 1179px) {
-  .member-templates-list-page .template-docs-cols {
+  .admin-templates-list-page .template-docs-cols {
     grid-template-columns: 2fr 1fr 0.5fr !important;
     column-gap: 24px;
   }
-  .member-templates-list-page .template-docs-cols .member-doc-row__note {
+  .admin-templates-list-page .template-docs-cols .admin-doc-row__note {
     display: none !important;
   }
 }
 
 /* Tablet: title + search + add button all on one row */
 @media (min-width: 769px) and (max-width: 1179px) {
-  .member-templates-list-page .mobile-page-header {
+  .admin-templates-list-page .mobile-page-header {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -343,7 +343,7 @@
     margin: 0;
     border-bottom: 1px solid #E4E4E4;
   }
-  .member-templates-list-page .mobile-page-header .topbar__bottom-row {
+  .admin-templates-list-page .mobile-page-header .topbar__bottom-row {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -352,55 +352,55 @@
     min-width: 0;
     overflow: hidden;
   }
-  .member-templates-list-page .mobile-page-header .topbar__bottom-row .topbar__title,
-  .member-templates-list-page .mobile-page-header .topbar__bottom-row .topbar__sub {
+  .admin-templates-list-page .mobile-page-header .topbar__bottom-row .topbar__title,
+  .admin-templates-list-page .mobile-page-header .topbar__bottom-row .topbar__sub {
     overflow: hidden;
     max-width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-  .member-templates-list-page .mobile-page-header .mobile-filter-row {
+  .admin-templates-list-page .mobile-page-header .mobile-filter-row {
     display: flex;
     align-items: center;
     gap: 12px;
     flex-shrink: 0;
   }
-  .member-templates-list-page .mobile-page-header .mobile-filter-row .member-docs-search-wrap {
+  .admin-templates-list-page .mobile-page-header .mobile-filter-row .admin-docs-search-wrap {
     flex: 0 1 auto;
     width: 210px;
     min-width: 150px;
   }
-  .member-templates-list-page .mobile-page-header .mobile-filter-row .member-docs-add-btn {
+  .admin-templates-list-page .mobile-page-header .mobile-filter-row .admin-docs-add-btn {
     flex-shrink: 0;
   }
-  .member-templates-list-page .mobile-header-divider {
+  .admin-templates-list-page .mobile-header-divider {
     display: none;
   }
-  .member-templates-list-page .topbar__title {
+  .admin-templates-list-page .topbar__title {
     margin: 0;
     font-size: 24px;
     font-weight: 700;
     color: #111827;
   }
-  .member-templates-list-page .topbar__sub {
+  .admin-templates-list-page .topbar__sub {
     margin: 0;
     font-size: 13px;
     color: #8A949F;
   }
 }
 @media (min-width: 1180px) {
-  .member-templates-list-page .mobile-page-header {
+  .admin-templates-list-page .mobile-page-header {
     display: none;
   }
 }
 
 /* Let toolbar shrink to fit narrower desktop windows */
 @media (min-width: 1180px) {
-  .member-templates-list-page .member-docs-topbar-actions.template-toolbar-actions {
+  .admin-templates-list-page .admin-docs-topbar-actions.template-toolbar-actions {
     flex-shrink: 1;
     min-width: 0;
   }
-  .member-templates-list-page .member-docs-search-wrap {
+  .admin-templates-list-page .admin-docs-search-wrap {
     width: clamp(120px, 15vw, 300px);
     min-width: 120px;
   }
@@ -408,32 +408,32 @@
 
 /* Tablet: make template rows/cards span full width */
 @media (min-width: 769px) and (max-width: 1179px) {
-  .member-templates-list-page .member-docs-section {
+  .admin-templates-list-page .admin-docs-section {
     box-sizing: border-box;
     width: 100%;
     max-width: none;
     padding: 0 40px;
   }
-  .member-templates-list-page .member-docs-table {
+  .admin-templates-list-page .admin-docs-table {
     box-sizing: border-box;
     width: 100%;
     padding-top: 6px;
   }
-  .member-templates-list-page .member-doc-row {
+  .admin-templates-list-page .admin-doc-row {
     box-sizing: border-box;
     width: 100%;
   }
-  .member-templates-list-page .member-docs-table__header {
+  .admin-templates-list-page .admin-docs-table__header {
     box-sizing: border-box;
     width: 100%;
     padding: 0 40px 8px 40px;
     margin-bottom: 0;
   }
-  .member-templates-list-page .member-docs-table {
+  .admin-templates-list-page .admin-docs-table {
     margin-top: 0;
     gap: 8px;
   }
-  .member-templates-list-page .member-doc-row__menu {
+  .admin-templates-list-page .admin-doc-row__menu {
     position: relative;
     display: flex;
     justify-content: center;
@@ -450,7 +450,7 @@
     transform: none;
     justify-self: center;
   }
-  .member-templates-list-page .member-doc-row__menu:hover {
+  .admin-templates-list-page .admin-doc-row__menu:hover {
     position: relative;
     width: 40px;
     min-width: 40px;
@@ -468,13 +468,13 @@
 
 /* Desktop-only Action button alignment for Templates */
 @media (min-width: 1180px) {
-  .member-templates-list-page .member-docs-table__header span:last-child {
+  .admin-templates-list-page .admin-docs-table__header span:last-child {
     margin: 0;
     padding: 0;
     text-align: center;
     justify-self: center;
   }
-  .member-templates-list-page .member-doc-row__menu {
+  .admin-templates-list-page .admin-doc-row__menu {
     position: relative;
     display: flex;
     justify-content: center;
@@ -486,8 +486,8 @@
     border-radius: 6px;
     justify-self: center;
   }
-  .member-templates-list-page .member-doc-row__menu .action-menu,
-  .member-templates-list-page .member-doc-row__menu .dropdown-menu {
+  .admin-templates-list-page .admin-doc-row__menu .action-menu,
+  .admin-templates-list-page .admin-doc-row__menu .dropdown-menu {
     position: absolute;
     top: 100%;
     right: 0;
@@ -500,8 +500,8 @@
    ============================================ */
 
 /*
-.dark-mode.member-templates-page,
-.dark-mode .member-templates-list-page {
+.dark-mode.admin-templates-page,
+.dark-mode .admin-templates-list-page {
   background: transparent;
 }
 */
@@ -548,13 +548,13 @@
 .dark-mode .upload-zone svg path {
   stroke: #9a9a9a;
 }
-.dark-mode .member-docs-table__header {
+.dark-mode .admin-docs-table__header {
   color: #939393 !important;
 }
-.dark-mode .member-doc-row__menu {
+.dark-mode .admin-doc-row__menu {
   color: #b8b8be !important;
 }
-.dark-mode .member-doc-row__menu:hover {
+.dark-mode .admin-doc-row__menu:hover {
   color: #f5f5f5 !important;
   background: rgba(255, 255, 255, 0.08) !important;
 }
@@ -608,7 +608,7 @@
 
 /* Search bar */
 .dark-mode .template-search-wrap,
-.dark-mode .member-docs-search-wrap {
+.dark-mode .admin-docs-search-wrap {
   background: transparent !important;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -621,7 +621,7 @@
 
 /* Mobile card border override */
 @media (max-width: 768px) {
-  .dark-mode .member-templates-page .setup-card {
+  .dark-mode .admin-templates-page .setup-card {
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: none;
   }
@@ -629,7 +629,7 @@
 
 /* Header divider on tablet */
 @media (min-width: 769px) and (max-width: 1179px) {
-  .dark-mode .member-templates-list-page .mobile-page-header {
+  .dark-mode .admin-templates-list-page .mobile-page-header {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
