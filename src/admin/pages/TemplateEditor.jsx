@@ -3,8 +3,8 @@ import * as pdfjsLib from "pdfjs-dist";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
-import "../css/MemberBaseLayout.css";
-import "../css/MemberTemplateEditor.css";
+import "../css/BaseLayout.css";
+import "../css/TemplateEditor.css";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -87,7 +87,7 @@ const WIDGET_DEFAULT_SIZE = {
   date: { width: 120, height: 32 },
 };
 
-export default function MemberTemplateEditor({ templateName, templateFile, onBack }) {
+export default function TemplateEditor({ templateName, templateFile, onBack }) {
   const [pages, setPages] = useState([1, 2]);
   const [activePage, setActivePage] = useState(1);
   const [pdfDoc, setPdfDoc] = useState(null);

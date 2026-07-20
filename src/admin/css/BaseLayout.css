@@ -23,7 +23,7 @@
   --font-title: clamp(20px, 1.6vw, 26px);
   --font-section: clamp(14px, 0.97vw, 25px);
   --font-metric: clamp(32px, 2.7vw, 40px);
-  --member-bg: #fffbfd;
+  --admin-bg: #fffbfd;
 }
 body {
   font-family: 'Inter', sans-serif;
@@ -59,7 +59,7 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
   background: #fffbfd;
 }
 /* Global Responsive Wrapper */
-.member-page-container {
+.admin-page-container {
   width: 100%;
   max-width: clamp(1280px, 92vw, 1800px);
   margin-inline: auto;
@@ -106,7 +106,7 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
   padding-left: 0;
   overflow: hidden;
 }
-.member-sidebar__logo-img {
+.admin-sidebar__logo-img {
   width: 100%;
   max-height: 55px;
   padding: 0 24px;
@@ -146,10 +146,10 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
   cursor: pointer;
   filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.25));
 }
-.member-sidebar__toggle-icon {
+.admin-sidebar__toggle-icon {
   transition: transform 0.3s ease;
 }
-.member-sidebar__toggle-icon--collapsed {
+.admin-sidebar__toggle-icon--collapsed {
   transform: rotate(180deg);
 }
 .sidebar__nav {
@@ -1114,123 +1114,123 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
     font-weight: 500;
     color: #8A949F;
   }
-  .member-theme .sidebar {
+  .admin-theme .sidebar {
     width: clamp(49px, 4.16vw, 119px);
   }
-  .member-theme .sidebar--expanded {
+  .admin-theme .sidebar--expanded {
     width: clamp(164px, 13.88vw, 396px);
   }
-  .member-theme .sidebar__inner {
+  .admin-theme .sidebar__inner {
     border-radius: 0 clamp(31px, 2.63vw, 75px) 0 0;
   }
-  .member-theme .sidebar__logo {
+  .admin-theme .sidebar__logo {
     height: clamp(90px, 7.63vw, 218px);
   }
-  .member-theme .sidebar__logo-name {
+  .admin-theme .sidebar__logo-name {
     font-size: clamp(16px, 1.38vw, 35px);
   }
-  .member-theme .sidebar__logo-sub {
+  .admin-theme .sidebar__logo-sub {
     font-size: clamp(8px, 0.69vw, 17px);
   }
-  .member-theme .sidebar__item {
+  .admin-theme .sidebar__item {
     height: clamp(45px, 3.81vw, 109px);
   }
-  .member-theme .sidebar__icon-wrap {
+  .admin-theme .sidebar__icon-wrap {
     width: clamp(49px, 4.16vw, 119px);
     min-width: clamp(49px, 4.16vw, 119px);
   }
-  .member-theme .sidebar__item-label {
+  .admin-theme .sidebar__item-label {
     padding-right: clamp(13px, 1.11vw, 28px);
     font-size: clamp(11px, 0.9vw, 23px);
   }
   /* Main */
-  .member-theme .main {
+  .admin-theme .main {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: clamp(16px, 1.38vw, 40px);
     padding: clamp(20px, 1.66vw, 48px) clamp(23px, 1.94vw, 55px);
   }
-  .member-theme .main > * {
+  .admin-theme .main > * {
     width: 100%;
     max-width: 100%;
   }
   /* Topbar */
-  .member-theme .topbar {
+  .admin-theme .topbar {
     gap: clamp(6px, 0.55vw, 16px);
   }
-  .member-theme .topbar__title {
+  .admin-theme .topbar__title {
     font-size: clamp(20px, 1.66vw, 48px);
   }
-  .member-theme .topbar__sub {
+  .admin-theme .topbar__sub {
     margin-top: clamp(2px, 0.13vw, 4px);
     font-size: clamp(10px, 0.83vw, 24px);
   }
-  .member-theme .topbar__icons {
+  .admin-theme .topbar__icons {
     gap: clamp(20px, 1.66vw, 48px);
   }
-  .member-theme .topbar__upload {
+  .admin-theme .topbar__upload {
     gap: clamp(5px, 0.41vw, 10px);
     padding: clamp(7px, 0.62vw, 18px) clamp(15px, 1.25vw, 36px);
     border-radius: clamp(7px, 0.55vw, 14px);
     font-size: clamp(11px, 0.9vw, 23px);
   }
   /* Stats Grid */
-  .member-theme .stats-grid {
+  .admin-theme .stats-grid {
     gap: clamp(13px, 1.11vw, 32px);
   }
-  .member-theme .stat-card {
+  .admin-theme .stat-card {
     min-height: clamp(131px, 11.11vw, 317px);
     padding: clamp(20px, 1.66vw, 48px) clamp(21px, 1.8vw, 51px);
     border-radius: clamp(13px, 1.11vw, 32px);
   }
-  .member-theme .stat-card__label {
+  .admin-theme .stat-card__label {
     margin-bottom: clamp(11px, 0.97vw, 28px);
     font-size: clamp(10px, 0.83vw, 24px);
   }
-  .member-theme .stat-card__value {
+  .admin-theme .stat-card__value {
     margin-bottom: clamp(15px, 1.25vw, 36px);
     font-size: clamp(33px, 2.77vw, 80px);
   }
-  .member-theme .stat-card__trend {
+  .admin-theme .stat-card__trend {
     gap: clamp(3px, 0.27vw, 7px);
     font-size: clamp(10px, 0.83vw, 24px);
   }
   /* Tables */
-  .member-theme .docs-section__title {
+  .admin-theme .docs-section__title {
     margin-bottom: clamp(13px, 1.11vw, 32px);
     font-size: clamp(11px, 0.97vw, 28px);
   }
-  .member-theme .docs-table {
+  .admin-theme .docs-table {
     gap: clamp(8px, 0.69vw, 20px);
   }
-  .member-theme .docs-table__header {
+  .admin-theme .docs-table__header {
     padding: 0 clamp(13px, 1.11vw, 32px) clamp(6px, 0.55vw, 16px) clamp(13px, 1.11vw, 32px);
     font-size: clamp(9px, 0.76vw, 22px);
   }
-  .member-theme .docs-table th {
+  .admin-theme .docs-table th {
     padding: 0 clamp(10px, 0.83vw, 24px) clamp(8px, 0.69vw, 20px) clamp(10px, 0.83vw, 24px);
     font-size: clamp(9px, 0.76vw, 22px);
   }
-  .member-theme .doc-row {
+  .admin-theme .doc-row {
     padding: clamp(11px, 0.97vw, 28px) clamp(13px, 1.11vw, 32px);
     border-radius: clamp(8px, 0.69vw, 17px);
     font-size: clamp(11px, 0.9vw, 26px);
   }
-  .member-theme .doc-row td {
+  .admin-theme .doc-row td {
     padding: clamp(11px, 0.9vw, 26px) clamp(10px, 0.83vw, 24px);
   }
-  .member-theme .doc-row__title {
+  .admin-theme .doc-row__title {
     gap: clamp(8px, 0.69vw, 20px);
   }
-  .member-theme .doc-row__note {
+  .admin-theme .doc-row__note {
     padding-right: clamp(10px, 0.83vw, 24px);
   }
-  .member-theme .doc-row__menu {
+  .admin-theme .doc-row__menu {
     padding: clamp(3px, 0.27vw, 7px);
     border-radius: clamp(3px, 0.27vw, 7px);
   }
-  .member-theme .badge {
+  .admin-theme .badge {
     padding: clamp(2px, 0.2vw, 5px) clamp(10px, 0.83vw, 24px);
     border-radius: clamp(3px, 0.27vw, 7px);
     font-size: clamp(9px, 0.76vw, 22px);
@@ -1242,8 +1242,8 @@ img, svg, .chart, .avatar, .upload-icon, .illustration {
    even if the image path turns out wrong. If the image 404s, the gradient still shows. */
 body.dark-mode,
 .dark-mode .layout,
-.dark-mode .member-templates-list-page,
-.dark-mode .member-theme {
+.dark-mode .admin-templates-list-page,
+.dark-mode .admin-theme {
   background-color: #0a0a0c !important;
   background-image:
     url('../../assets/dark-bg.png'),
@@ -1256,33 +1256,33 @@ body.dark-mode,
   background-attachment: fixed;
 }
 .dark-mode .main,
-.dark-mode .member-page-container {
+.dark-mode .admin-page-container {
   background: transparent !important;
 }
 
 /* Catch-all: transparent row/card containers regardless of which naming convention is live */
 .dark-mode .doc-row,
-.dark-mode .member-doc-row,
+.dark-mode .admin-doc-row,
 .dark-mode .template-row,
 .dark-mode .template-table-card,
-.dark-mode .member-docs-table,
+.dark-mode .admin-docs-table,
 .dark-mode .docs-table,
 .dark-mode .docs-section,
-.dark-mode .member-docs-section {
+.dark-mode .admin-docs-section {
   background: transparent !important;
 }
 .dark-mode .doc-row,
-.dark-mode .member-doc-row,
+.dark-mode .admin-doc-row,
 .dark-mode .template-row {
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
 }
 .dark-mode .doc-row__title,
-.dark-mode .member-doc-row__title,
+.dark-mode .admin-doc-row__title,
 .dark-mode .col-title {
   color: #f5f5f5 !important;
 }
 .dark-mode .doc-row__note,
-.dark-mode .member-doc-row__note,
+.dark-mode .admin-doc-row__note,
 .dark-mode .col-note {
   color: #b8b8be !important;
 }
@@ -1358,7 +1358,7 @@ body.dark-mode,
 
 /* Search bar stays dark/opaque already, but confirm text is legible */
 .dark-mode .template-search-input,
-.dark-mode .member-docs-search-input {
+.dark-mode .admin-docs-search-input {
   color: #f5f5f5;
 }
 
@@ -1366,14 +1366,14 @@ body.dark-mode,
 .dark-mode .sidebar__bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
-.dark-mode .member-sidebar__item-label--inactive {
+.dark-mode .admin-sidebar__item-label--inactive {
   color: #8A949F;
 }
 /* Logo area — remove white box behind logo image */
 .dark-mode .sidebar__logo {
   background: transparent;
 }
-.dark-mode .member-sidebar__logo-img {
+.dark-mode .admin-sidebar__logo-img {
   filter: brightness(0) invert(1);
 }
 
@@ -1398,8 +1398,41 @@ body.dark-mode,
 .dark-mode .sidebar__toggle svg path {
   stroke: #ffffff;
 }
-/* Override the --member-bg variable so every element using it
-   (like .member-theme .main) automatically goes transparent in dark mode */
+/* Override the --admin-bg variable so every element using it
+   (like .admin-theme .main) automatically goes transparent in dark mode */
 .dark-mode {
-  --member-bg: transparent;
+  --admin-bg: transparent;
+}
+
+/* Dark view border color override */
+body.dark-mode,
+.dark-mode {
+  --border-color: #746b6b;
+}
+
+body.dark-mode .setup-card,
+body.dark-mode .template-table-card,
+body.dark-mode .template-row,
+body.dark-mode .admin-doc-row,
+body.dark-mode .doc-row,
+body.dark-mode .stat-card,
+body.dark-mode .admin-settings-card,
+body.dark-mode .admin-settings-team-row,
+body.dark-mode .admin-notification-item,
+body.dark-mode .admin-billing-plan-card,
+body.dark-mode .admin-billing-payment-card,
+body.dark-mode .admin-billing-address-card,
+body.dark-mode .upload-zone,
+body.dark-mode .form-input,
+body.dark-mode .form-textarea,
+body.dark-mode .template-search-wrap,
+body.dark-mode .admin-docs-search-wrap,
+body.dark-mode .admin-contact-card,
+body.dark-mode .admin-contact-search-wrap,
+body.dark-mode .admin-contact-filter-btn,
+body.dark-mode .admin-docs-filter-btn,
+body.dark-mode .admin-docs-filter-dropdown,
+body.dark-mode .action-menu,
+body.dark-mode .sidebar__inner {
+  border-color: #746b6b !important;
 }

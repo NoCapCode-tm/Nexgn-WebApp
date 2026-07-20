@@ -1,14 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import Layout from "../components/Layout";
 import Topbar from "../components/Topbar";
 import StatCard from "../components/StatCard";
 import DocumentRow from "../components/DocumentRow";
-import MobileNavbar from "../components/MobileNavbar";
 import useWindowWidth from "../components/useWindowWidth";
-import { Search, Bell, UserCircle, Menu } from "lucide-react";
-import "../css/AdminBaseLayout.css";
-import "../css/Dashboard.css"; // Scoped CSS Overrides
+import "../css/BaseLayout.css";
+import "../css/Dashboard.css";
 
 const stats = [
   {
@@ -38,7 +36,7 @@ const stats = [
   },
 ];
 
-const documents = [
+const INITIAL_DOCS = [
   {
     title: "Project Proposal",
     note: "Send it to client",
@@ -82,59 +80,48 @@ const documents = [
 ];
 
 export default function Dashboard() {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [documents, setDocuments] = useState(INITIAL_DOCS);
   const width = useWindowWidth();
   const isMobile = width <= 768;
   const navigate = useNavigate();
 
+  const handleRevoke = (title) => {
+    setDocuments(prev => prev.filter(doc => doc.title !== title));
+  };
+
   return (
-    <div className="layout admin-theme admin-dashboard-page">
-      {mobileNavOpen && (
-        <div
-          className="mobile-backdrop"
-          onClick={() => setMobileNavOpen(false)}
-          aria-hidden="true"
+    <Layout className="admin-dashboard-page">
+      <>
+        <Topbar 
+          title="Dashboard" 
+          subtitle="Overview of your document signing activity" 
         />
-      )}
-
-      {/* Responsive Layout */}
-      <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? "mobile-sidebar-wrapper--open" : ""}`}>
-        <Sidebar />
-      </div>
-
-      <div className="desktop-sidebar-wrapper">
-        <Sidebar />
-      </div>
-
-      <div className="main">
-        {/* Mobile Navigation */}
-        <header className="mobile-topbar">
-          <button className="mobile-topbar__hamburger" onClick={() => {
-            if (width >= 769) {
-              setMobileNavOpen(true);
-            }
-          }}>
-            <Menu size={22} color="#1a1a2e" />
-          </button>
-
-          <div className="mobile-topbar__icons">
-            <button className="topbar__icon-btn mobile-topbar__search-btn">
-              <Search size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <Bell size={18} color="#FF0915" strokeWidth={1.5} />
-            </button>
-            <button className="topbar__icon-btn">
-              <UserCircle size={20} color="#FF0915" strokeWidth={1.5} />
-            </button>
-          </div>
-        </header>
-
-        <Topbar />
 
         <div className="mobile-page-header">
-          <h1 className="topbar__title">Dashboard</h1>
-          <p className="topbar__sub">Overview Of your document signing activity</p>
+          <div className="mobile-page-header__container">
+            <div className="mobile-page-header__titles">
+              <h1 className="topbar__title">Dashboard</h1>
+              <p className="topbar__sub">Overview of your document signing activity</p>
+            </div>
+            <button className="mobile-page-header__upload-btn" aria-label="Upload document">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Left half - Solid */}
+                <path d="M 12 2 A 10 10 0 0 0 12 22" stroke="#FF0915" strokeWidth="2" strokeLinecap="round" />
+                {/* Right half - Dashed */}
+                <path d="M 12 2 A 10 10 0 0 1 12 22" stroke="#FF0915" strokeWidth="2" strokeDasharray="4 3" strokeLinecap="round" />
+                {/* Up Arrow */}
+                <path d="M 12 16 V 8 M 12 8 L 8 12 M 12 8 L 16 12" stroke="#FF0915" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            <button className="tablet-upload-btn" onClick={() => navigate("/admin-sign-yourself")}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 12 2 A 10 10 0 0 0 12 22" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+                <path d="M 12 2 A 10 10 0 0 1 12 22" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="3 3" strokeLinecap="round" />
+                <path d="M 12 16 V 8 M 12 8 L 8 12 M 12 8 L 16 12" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Upload Doc
+            </button>
+          </div>
           <div className="mobile-page-header__divider" />
         </div>
 
@@ -167,12 +154,11 @@ export default function Dashboard() {
           </div>
           <div className="docs-table">
             {documents.map((doc, idx) => (
-              <DocumentRow key={idx} {...doc} />
+              <DocumentRow key={idx} {...doc} onRevoke={() => handleRevoke(doc.title)} />
             ))}
           </div>
         </section>
-      </div>
-      <MobileNavbar />
-    </div>
+      </>
+    </Layout>
   );
 }

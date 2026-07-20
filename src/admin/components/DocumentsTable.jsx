@@ -1,8 +1,8 @@
 import DocumentsRow from "./DocumentsRow";
 
-export default function DocumentsTable({ documents }) {
+export default function DocumentsTable({ documents, onRevoke }) {
   return (
-    <>
+    <div className="admin-docs-table-wrapper">
       <div className="admin-docs-table__header">
         <span>TITLE</span>
         <span>NOTE</span>
@@ -16,7 +16,7 @@ export default function DocumentsTable({ documents }) {
       <div className="admin-docs-section">
         <div className="admin-docs-table">
           {documents.map((doc, idx) => (
-            <DocumentsRow key={idx} {...doc} />
+            <DocumentsRow key={idx} {...doc} onRevoke={() => onRevoke && onRevoke(doc.id)} />
           ))}
           {documents.length === 0 && (
             <div className="admin-docs-empty-state">
@@ -25,6 +25,6 @@ export default function DocumentsTable({ documents }) {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

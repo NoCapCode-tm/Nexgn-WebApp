@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import MemberSidebar from "./MemberSidebar";
-import MemberMobileNavbar from "./MemberMobileNavbar";
-import MemberTopbarIcons from "./MemberTopbarIcons";
+import Sidebar from "./Sidebar";
+import MobileNavbar from "./MobileNavbar";
+import TopbarIcons from "./TopbarIcons";
 import useWindowWidth from "./useWindowWidth";
 import { Menu } from "lucide-react";
 
-export default function MemberLayout({ children, onSearchClick, className, hideMobileTopbar = false, hideMobileNavbar = false, onRegisterMenuOpen }) {
+export default function Layout({ children, onSearchClick, className, hideMobileTopbar = false, hideMobileNavbar = false, onRegisterMenuOpen }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const width = useWindowWidth();
 
@@ -17,7 +17,7 @@ export default function MemberLayout({ children, onSearchClick, className, hideM
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className={`layout member-theme ${className || ""}`}>
+    <div className={`layout admin-theme ${className || ""}`}>
       {mobileNavOpen && (
         <div
           className="mobile-backdrop"
@@ -28,12 +28,12 @@ export default function MemberLayout({ children, onSearchClick, className, hideM
 
       {/* Sidebar - Mobile Wrapper */}
       <div className={`mobile-sidebar-wrapper ${mobileNavOpen ? "mobile-sidebar-wrapper--open" : ""}`}>
-        <MemberSidebar />
+        <Sidebar />
       </div>
 
       {/* Sidebar - Desktop */}
       <div className="desktop-sidebar-wrapper">
-        <MemberSidebar />
+        <Sidebar />
       </div>
 
       <div className="main">
@@ -43,14 +43,14 @@ export default function MemberLayout({ children, onSearchClick, className, hideM
             <button className="mobile-topbar__hamburger" onClick={() => setMobileNavOpen(true)}>
               <Menu size={22} />
             </button>
-            <MemberTopbarIcons iconSize={18} className="mobile-topbar__icons" onSearchClick={onSearchClick} />
+            <TopbarIcons iconSize={18} className="mobile-topbar__icons" onSearchClick={onSearchClick} />
           </header>
         )}
 
         {children}
       </div>
 
-      {!hideMobileNavbar && <MemberMobileNavbar />}
+      {!hideMobileNavbar && <MobileNavbar />}
     </div>
   );
 }

@@ -1,101 +1,96 @@
-/* â”€â”€ SignYourself.css â”€â”€
+/*  SignYourself.css 
    Dedicated Member styles cloned exactly from SignYourself.css.
 */
-
-/* â”€â”€ SETUP CARD â”€â”€ */
+/*  SETUP CARD  */
 .setup-card {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 18px;
   padding: 20px 24px;
-  background: #ffffff;
   border: 1px solid #E4E4E4;
   border-radius: 12px;
+  background: #ffffff;
 }
-
 .setup-card__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #E4E4E4;
 }
-
 .setup-card__title {
   font-size: 15px;
   font-weight: 600;
   color: #1a1a2e;
 }
-
-/* â”€â”€ TABS â”€â”€ */
+/*  TABS  */
 .setup-card__tabs {
   display: flex;
   border: 1px solid #E4E4E4;
   border-radius: 8px;
   overflow: hidden;
 }
-
 .tab-btn {
   padding: 8px 22px;
+  border: none;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
-  border: none;
   transition: background 0.15s, color 0.15s;
   cursor: pointer;
 }
-
 .tab-btn--active {
   color: #ffffff;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
 }
-
 .tab-btn--inactive {
   color: #8A949F;
   background: #ffffff;
 }
-
 .tab-btn--inactive:hover {
   background: #f9f9f9;
 }
-
-/* â”€â”€ SECTION LABEL â”€â”€ */
+/*  SECTION LABEL  */
 .section-label {
   margin-bottom: 8px;
   font-size: 12px;
   font-weight: 500;
   color: #1a1a2e;
 }
-
-/* â”€â”€ TEMPLATE ROW â”€â”€ */
+/*  TEMPLATE ROW  */
 .template-row {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
 .template-select-wrap {
   position: relative;
   flex: 1;
+  width: 100%;
 }
-
+@media (min-width: 1180px) {
+  .template-select-wrap {
+    max-width: clamp(400px, 22vw, 420px);
+  }
+}
 .template-select {
   width: 100%;
   height: 38px;
   padding: 0 36px 0 12px;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   color: #8A949F;
   background: #fff;
-  border: 1px solid #E4E4E4;
-  border-radius: 8px;
+  cursor: pointer;
   outline: none;
   appearance: none;
-  cursor: pointer;
 }
-
 .template-select:focus {
   border-color: #FF0915;
 }
-
 .template-chevron {
   position: absolute;
   top: 50%;
@@ -104,27 +99,24 @@
   transform: translateY(-50%);
   pointer-events: none;
 }
-
 .btn-create {
   height: 38px;
   padding: 0 22px;
+  border: none;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
   color: #fff;
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  border: none;
-  border-radius: 8px;
   transition: background 0.15s;
   cursor: pointer;
 }
-
 .btn-create:hover {
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
-
-/* â”€â”€ OR DIVIDER â”€â”€ */
+/*  OR DIVIDER  */
 .or-divider {
   display: flex;
   align-items: center;
@@ -134,7 +126,6 @@
   letter-spacing: 0.5px;
   color: #9ca3af;
 }
-
 .or-divider::before,
 .or-divider::after {
   flex: 1;
@@ -142,125 +133,113 @@
   background: #E4E4E4;
   content: '';
 }
-
-/* â”€â”€ UPLOAD ZONE â”€â”€ */
+/*  UPLOAD ZONE  */
 .upload-zone {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
   height: 72px;
-  font-size: 13px;
-  color: #8A949F;
   border: 1.5px dashed #CCCCCC;
   border-radius: 10px;
+  font-size: 13px;
+  color: #8A949F;
   transition: border-color 0.15s, background 0.15s;
   cursor: pointer;
 }
-
 .upload-zone:hover {
+  border-color: #FF0915;
   color: #FF0915;
   background: #fff5f5;
-  border-color: #FF0915;
 }
-
-/* â”€â”€ FORM â”€â”€ */
+.admin-file-input-hidden {
+  display: none;
+}
+/*  FORM  */
 .form-row {
   display: grid;
-  gap: 16px;
   grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
-
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
 .form-label {
   font-size: 12px;
   font-weight: 500;
   color: #1a1a2e;
 }
-
 .form-input {
   height: 38px;
   padding: 0 12px;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   color: #8A949F;
   background: #fff;
-  border: 1px solid #E4E4E4;
-  border-radius: 8px;
-  outline: none;
   transition: border-color 0.15s;
+  outline: none;
 }
-
 .form-input:focus {
-  color: #1a1a2e;
   border-color: #FF0915;
+  color: #1a1a2e;
 }
-
 .form-input::placeholder {
   color: #C4C9CE;
 }
-
 .form-textarea {
   width: 100%;
   height: 72px;
   padding: 10px 12px;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   color: #8A949F;
   background: #fff;
-  border: 1px solid #E4E4E4;
-  border-radius: 8px;
-  outline: none;
   transition: border-color 0.15s;
+  outline: none;
   resize: none;
 }
-
 .form-textarea:focus {
-  color: #1a1a2e;
   border-color: #FF0915;
+  color: #1a1a2e;
 }
-
 .form-textarea::placeholder {
   color: #C4C9CE;
 }
-
-/* â”€â”€ BOTTOM SECTION â”€â”€ */
+/*  BOTTOM SECTION  */
 .bottom-section {
   display: grid;
+  flex: 1;
   grid-template-columns: 1fr 200px;
   min-height: 220px;
   border: 1px solid #E4E4E4;
   border-radius: 10px;
   overflow: hidden;
 }
-
-/* â”€â”€ DOC PREVIEW â”€â”€ */
+/*  DOC PREVIEW  */
 .doc-preview {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 14px 16px;
-  background: #fff;
   border-right: 1px solid #E4E4E4;
+  background: #fff;
 }
-
 .doc-preview__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .doc-preview__title {
   font-size: 12px;
   font-weight: 500;
   color: #1a1a2e;
 }
-
 .doc-preview__zoom {
   display: flex;
   align-items: center;
@@ -268,338 +247,297 @@
   font-size: 12px;
   color: #8A949F;
 }
-
 .doc-preview__zoom-btn {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2px;
+  border: none;
   color: #8A949F;
   background: none;
-  border: none;
   cursor: pointer;
 }
-
 .doc-preview__zoom-btn:hover {
   color: #1a1a2e;
 }
-
 .doc-preview__canvas {
   display: flex;
   flex: 1;
   justify-content: center;
   align-items: center;
   min-height: 160px;
-  background: #F7F7F7;
   border: 1px solid #EBEBEB;
   border-radius: 6px;
+  background: #F7F7F7;
 }
-
 .doc-preview__filename {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
 }
-
 .doc-preview__filename span {
   font-size: 12px;
   color: #8A949F;
 }
-
-/* â”€â”€ FIELD PROPERTIES â”€â”€ */
+/*  FIELD PROPERTIES  */
 .field-props {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 14px;
   padding: 16px 14px;
   background: #fff;
 }
-
 .field-props__title {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.2px;
   color: #1a1a2e;
 }
-
 .field-props__label {
   margin-bottom: 5px;
   font-size: 10px;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
   color: #9ca3af;
 }
-
 .field-type-select {
   width: 100%;
   height: 32px;
   padding: 0 10px;
+  border: 1px solid #E4E4E4;
+  border-radius: 7px;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   color: #8A949F;
   background: #fff;
-  border: 1px solid #E4E4E4;
-  border-radius: 7px;
+  cursor: pointer;
   outline: none;
   appearance: none;
-  cursor: pointer;
 }
-
 .field-type-select:focus {
   border-color: #FF0915;
 }
-
-/* â”€â”€ REQUIRED TOGGLE ROW â”€â”€ */
+/*  REQUIRED TOGGLE ROW  */
 .required-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .required-label {
   font-size: 12px;
   font-weight: 500;
   color: #8A949F;
 }
-
 .toggle {
   position: relative;
+  flex-shrink: 0;
   width: 36px;
   height: 20px;
-  flex-shrink: 0;
 }
-
 .toggle input {
   width: 0;
   height: 0;
   opacity: 0;
 }
-
 .toggle-slider {
   position: absolute;
-  background: #E4E4E4;
   border-radius: 20px;
+  background: #E4E4E4;
   transition: background 0.2s;
   cursor: pointer;
   inset: 0;
 }
-
 .toggle-slider::before {
   position: absolute;
   top: 3px;
   left: 3px;
   width: 14px;
   height: 14px;
-  background: #fff;
   border-radius: 50%;
+  background: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   transition: transform 0.2s;
   content: '';
 }
-
 .toggle input:checked + .toggle-slider {
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
-
 .toggle input:checked + .toggle-slider::before {
   transform: translateX(16px);
 }
-
-/* â”€â”€ ASSIGNED INPUT â”€â”€ */
+/*  ASSIGNED INPUT  */
 .assigned-input {
   width: 100%;
   height: 32px;
   padding: 0 10px;
+  border: 1px solid #E4E4E4;
+  border-radius: 7px;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   color: #8A949F;
   background: #fff;
-  border: 1px solid #E4E4E4;
-  border-radius: 7px;
   outline: none;
 }
-
 .assigned-input:focus {
   border-color: #FF0915;
 }
-
 .assigned-input::placeholder {
   color: #C4C9CE;
 }
-
-/* â”€â”€ SHARE BUTTON â”€â”€ */
+/*  SHARE BUTTON  */
 .btn-share {
   width: 100%;
   height: 36px;
   margin-top: auto;
+  border: none;
+  border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: #fff;
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  border: none;
-  border-radius: 8px;
   transition: background 0.15s;
   cursor: pointer;
 }
-
 .btn-share:hover {
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
-
-/* â”€â”€ RESPONSIVE â”€â”€ */
+.btn-share--compact {
+  width: auto;
+  height: 32px;
+  padding: 0 24px;
+  margin-top: 4px;
+  align-self: flex-end;
+}
+/*  RESPONSIVE  */
 @media (max-width: 768px) {
   .setup-card {
-    padding: 16px;
+    padding: var(--mobile-gutter);
   }
-
   .setup-card__header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: var(--space-sm);
   }
-
   .template-row {
     flex-direction: column;
     align-items: stretch;
   }
-
   .btn-create {
     width: 100%;
   }
-
   .form-row {
     grid-template-columns: 1fr;
   }
-
   .bottom-section {
     grid-template-columns: 1fr;
   }
-
   .doc-preview {
     border-right: none;
     border-bottom: 1px solid #E4E4E4;
   }
 }
-
 @media (min-width: 769px) and (max-width: 1179px) {
   .setup-card {
     margin: 16px;
     padding: 18px;
   }
-
   .bottom-section {
-    gap: 12px;
     grid-template-columns: 1fr;
+    gap: 12px;
     border: none;
   }
-
   .doc-preview {
     border: 1px solid #E4E4E4;
     border-right: 1px solid #E4E4E4;
     border-radius: 10px;
   }
-
   .field-props {
     border: 1px solid #E4E4E4;
     border-radius: 10px;
   }
-
   .form-row {
     grid-template-columns: 1fr 1fr;
   }
 }
-
-/* â”€â”€ MEMBER SPECIFIC REQUEST SIGNATURE FIGURES & FIGMA OVERRIDES â”€â”€ */
-
+/*  MEMBER SPECIFIC REQUEST SIGNATURE FIGURES & FIGMA OVERRIDES  */
 /* Active/Inactive tab solid red matching Figma */
 .admin-theme .tab-btn--active {
-  color: #ffffff !important;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
+  color: #ffffff;
+  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
 }
-
 .admin-theme .tab-btn--inactive {
-  color: #111827 !important;
-  background: #ffffff !important;
+  color: #111827;
+  background: #ffffff;
 }
-
 .admin-theme .setup-card {
-  border: 1px solid #EAEAEA !important;
+  border: 1px solid #EAEAEA;
 }
-
 /* System Roles / Create button row layout */
 .roles-row {
   display: grid;
   align-items: flex-end;
-  gap: 16px;
   grid-template-columns: 1fr 1fr auto;
+  gap: 16px;
 }
-
 .roles-row .btn-create {
   height: 38px;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   transition: background 0.15s;
 }
-
 .roles-row .btn-create:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
-
 /* Input calendar icons */
 .input-with-icon-wrap {
-  display: flex;
   position: relative;
+  display: flex;
   align-items: center;
   width: 100%;
 }
-
 .input-with-icon-wrap .form-input {
   width: 100%;
   padding-left: 38px;
 }
-
 .input-with-icon-wrap .input-icon {
   position: absolute;
   left: 12px;
   color: #8A949F;
   pointer-events: none;
 }
-
 /* Signer Details Card and badge */
 .signer-box {
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 16px 20px;
-  background: #FFFFFF;
   border: 1px solid #EAEAEA;
   border-radius: 8px;
+  background: #FFFFFF;
 }
-
 .signer-row {
   display: flex;
   align-items: flex-end;
   gap: 16px;
   width: 100%;
 }
-
 .signer-badge {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 38px;
   padding: 0 16px;
+  border: 1px solid #EAEAEA;
+  border-radius: 20px;
   font-size: 12px;
   font-weight: 500;
   white-space: nowrap;
   color: #6B7280;
   background: #F9FAFB;
-  border: 1px solid #EAEAEA;
-  border-radius: 20px;
 }
-
 /* Dotted Add Another Signer button */
 .btn-add-signer {
   display: flex;
@@ -608,88 +546,75 @@
   gap: 6px;
   width: 100%;
   height: 38px;
+  border: 1px dashed #CCCCCC;
+  border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
   color: #6B7280;
   background: #ffffff;
-  border: 1px dashed #CCCCCC;
-  border-radius: 8px;
   transition: border-color 0.15s, color 0.15s;
   cursor: pointer;
 }
-
 .btn-add-signer:hover {
-  color: #FF0915;
   border-color: #FF0915;
+  color: #FF0915;
 }
-
 /* Read only properties inputs */
 .field-props__input-read {
-  width: 100% !important;
-  height: 32px !important;
-  font-size: 12px !important;
-  color: #111827 !important;
-  background: #F9FAFB !important;
-  border: 1px solid #E4E4E4 !important;
-  border-radius: 7px !important;
+  width: 100%;
+  height: 32px;
+  border: 1px solid #E4E4E4;
+  border-radius: 7px;
+  font-size: 12px;
+  color: #111827;
+  background: #F9FAFB;
 }
-
 .select-props {
-  height: 32px !important;
-  padding: 0 10px !important;
-  font-size: 12px !important;
+  height: 32px;
+  padding: 0 10px;
+  font-size: 12px;
 }
-
 .field-props .btn-share {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   transition: background 0.15s;
 }
-
 .field-props .btn-share:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
-
 /* Bottom section desktop scaling to match Figma */
 @media (min-width: 1180px) {
   .admin-theme .bottom-section {
-    grid-template-columns: 1fr 300px !important;
+    grid-template-columns: 1fr 300px;
   }
 }
-
 /* Responsive stacks */
 @media (max-width: 768px) {
   .roles-row {
     align-items: stretch;
     grid-template-columns: 1fr;
   }
-
   .roles-row .btn-create {
     width: 100%;
-    margin-top: 8px;
+    margin-top: var(--space-xs);
   }
-
   .signer-row {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
+    gap: var(--space-sm);
   }
-
   .signer-badge {
     align-self: flex-start;
   }
 }
-
 /* Placeholder styling matching Figma exactly */
 .admin-theme .form-input::placeholder,
 .admin-theme .form-textarea::placeholder {
-  color: #C4C9CE !important;
+  color: #C4C9CE;
 }
-
 .admin-theme .form-input:focus::placeholder,
 .admin-theme .form-textarea:focus::placeholder {
-  color: transparent !important;
+  color: transparent;
 }
-
 /* Dynamic Signers Alignment & Button Styles */
 .signer-badge-wrap {
   display: flex;
@@ -697,7 +622,6 @@
   gap: 12px;
   height: 38px;
 }
-
 .btn-remove-signer {
   display: flex;
   justify-content: center;
@@ -705,397 +629,605 @@
   width: 28px;
   height: 28px;
   padding: 0;
-  color: #FF0915;
-  background: #FFEBEB;
   border: 1px solid #FFD1D1;
   border-radius: 50%;
+  color: #FF0915;
+  background: #FFEBEB;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
   cursor: pointer;
 }
-
 .btn-remove-signer:hover {
+  border-color: #FF0915;
   color: #FFFFFF;
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  border-color: #FF0915;
 }
-
 .remove-placeholder {
   width: 28px;
   height: 28px;
 }
-
 @media (max-width: 768px) {
   .signer-badge-wrap {
     justify-content: space-between;
     width: 100%;
   }
 }
-
 /* Responsiveness fixes for mobile viewports */
 @media (max-width: 768px) {
   .admin-theme .form-row {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
   }
-
   .admin-theme .signer-row {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 12px !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
   }
-
   .admin-theme .signer-badge-wrap {
-    justify-content: space-between !important;
-    width: 100% !important;
+    justify-content: space-between;
+    width: 100%;
   }
-
   .admin-theme .remove-placeholder {
-    display: none !important;
+    display: none;
   }
-
   .admin-theme .roles-row {
-    align-items: stretch !important;
-    grid-template-columns: 1fr !important;
+    align-items: stretch;
+    grid-template-columns: 1fr;
   }
-
   .admin-theme .roles-row .btn-create {
-    width: 100% !important;
-    margin-top: 8px !important;
+    width: 100%;
+    margin-top: var(--space-xs);
   }
-
   .admin-theme .main {
-    padding-bottom: 100px !important;
+    padding-bottom: 26.667vw;
   }
 }
-
 @media (min-width: 769px) and (max-width: 1179px) {
   .admin-theme .mobile-topbar__search-btn {
-    display: flex !important;
+    display: flex;
   }
-
-  /* â”€â”€ FIGMA TABLET OVERRIDES FOR MEMBER SIGN YOURSELF â”€â”€ */
+  /*  FIGMA TABLET OVERRIDES FOR MEMBER SIGN YOURSELF  */
   .admin-sign-yourself-page .setup-card {
-    gap: 20px !important;
-    margin: 0 16px !important;
-    padding: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+    gap: 20px;
+    width: calc(100% - 32px) !important;
+    margin:  16px auto !important;
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
   }
-
   .admin-sign-yourself-page .setup-card-top {
     display: flex !important;
-    flex-direction: column !important;
-    gap: 18px !important;
-    padding: 20px 24px !important;
-    background: #ffffff !important;
-    border: 1px solid #E4E4E4 !important;
-    border-radius: 12px !important;
+    flex-direction: column;
+    gap: 18px;
+    padding-top: 16px !important;
+    padding-right: 16px !important;
+    padding-bottom: 16px !important;
+    padding-left: 16px !important;
+    border: 1px solid #CCCCCC;
+    border-radius: 9px;
+    background: #ffffff;
   }
-
   .admin-sign-yourself-page .bottom-section {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 20px !important;
-    background: transparent !important;
-    border: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: none;
+    background: transparent;
   }
-
   .admin-sign-yourself-page .doc-preview,
   .admin-sign-yourself-page .field-props {
-    margin: 0 !important;
-    padding: 20px 24px !important;
-    background: #ffffff !important;
-    border: 1px solid #E4E4E4 !important;
-    border-radius: 12px !important;
+    margin: 0;
+    padding: 20px 24px;
+    border: 1px solid #E4E4E4;
+    border-radius: 12px;
+    background: #ffffff;
+  }
+  .admin-sign-yourself-page .doc-preview {
+    min-height: 500px;
+    border-right: 1px solid #E4E4E4;
+  }
   }
 
-  .admin-sign-yourself-page .doc-preview {
-    min-height: 500px !important;
-    border-right: 1px solid #E4E4E4 !important;
-  }
-}
 
 /* Base styles for the new wrapper to avoid breaking desktop/mobile */
 .setup-card-top {
   display: contents;
 }
-
 /* Hide extra HR on tablet/desktop to avoid redundant borders */
 .admin-sign-yourself-page .mobile-header-divider {
   display: none;
 }
-
-/* â”€â”€ FIGMA MOBILE OVERRIDES FOR MEMBER SIGN YOURSELF â”€â”€ */
+/* FIGMA MOBILE OVERRIDES FOR MEMBER SIGN YOURSELF  */
 /* Ensure changes only apply to this page via .admin-sign-yourself-page */
-
 .mobile-tabs-container {
   display: none;
 }
-
 .btn-create-icon {
   display: none;
 }
-
 @media (max-width: 768px) {
-  /* 1. Document Setup Card Structure & 8. Mobile Width Consistency */
+  /* Match dashboard mobile main layout */
   .admin-sign-yourself-page .main {
-    padding-right: 16px !important;
-    padding-left: 16px !important;
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+    min-height: unset !important;
+    overflow-y: visible !important;
+    gap: var(--space-xs) !important;
+    padding-right: var(--space-md) !important;
+    padding-left: var(--space-md) !important;
+    padding-bottom: 72px !important;
     overflow-x: hidden;
   }
-
+  /* Edge-to-edge topbar — matches dashboard */
   .admin-sign-yourself-page .mobile-topbar {
-    width: calc(100% + 32px) !important;
-    margin-right: -16px !important;
-    margin-left: -16px !important;
+    width: calc(100% + (var(--space-md) * 2));
+    margin-right: calc(var(--space-md) * -1);
+    margin-left: calc(var(--space-md) * -1);
   }
-
+  /* Mobile page header — same padding and margin as dashboard */
+  .admin-sign-yourself-page .mobile-page-header {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: var(--space-md) !important;
+  }
   .admin-sign-yourself-page .setup-card {
-    gap: 20px !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 24px 20px !important; /* 7. Internal Padding */
-    /* 2. Card Border (Neutral light-gray, no blue outline) */
-    border: 1px solid #E4E4E4 !important;
-    outline: none !important;
-    box-shadow: none !important;
+    gap: var(--space-md);
+    width: 100%;
+    margin: 0;
+    padding: var(--space-lg) var(--mobile-gutter);
+    box-shadow: none;
+    outline: none;
+    border: 1px solid #E4E4E4;
   }
-
   .admin-sign-yourself-page .mobile-header-divider {
-    display: block !important;
+    display: blockc;
     width: 100%;
     height: 1px;
-    margin: 16px 0 20px 0;
-    background: #E4E4E4;
+    margin: 4vw 0 4vw 0;
     border: none;
+    background: #CCCCCC;
   }
-
   /* 3. Tabs Styling */
   .setup-card__tabs--desktop-only {
-    display: none !important;
+    display: none;
   }
-
-.admin-file-input-hidden {
-  display: none !important;
-}
-
-.admin-form-group-flex {
-  flex: 1;
-}
-
+  /* Fluid title/subtitle font on mobile — matches dashboard */
+  .admin-sign-yourself-page .topbar__title {
+    font-size: var(--font-lg) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .admin-sign-yourself-page .topbar__sub {
+    font-size: var(--font-sm) !important;
+  }
+  
+  .admin-form-group-flex {
+    flex: 1;
+  }
+  /* Mobile tabs — same style as dashboard mobile-cta-row pill buttons */
   .admin-sign-yourself-page .mobile-tabs-container {
-    display: flex !important;
-    width: 100% !important;
-    margin-bottom: 20px !important;
-    background: #ffffff !important;
-    border: 1px solid #E4E4E4 !important;
-    border-radius: 8px !important;
-    overflow: hidden !important;
+    display: flex;
+    gap: var(--space-sm);
+    width: 100%;
+    margin-bottom: var(--space-md) !important;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+    background: transparent;
   }
-
   .admin-sign-yourself-page .mobile-tabs-container .tab-btn {
-    flex: 1 !important;
-    height: 40px !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    text-align: center !important;
-    border: none !important;
-    border-radius: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: 11vw !important;
+    min-height: 11vw !important;
+    padding: 0 var(--space-md) !important;
+    border-radius: 999px !important;
+    font-size: var(--font-sm) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    cursor: pointer;
+    box-sizing: border-box;
   }
-
   .admin-sign-yourself-page .tab-btn--active {
-    color: #ffffff !important;
-    background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%) !important;
+    border: none;
+    color: #ffffff;
+    background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
   }
-
   .admin-sign-yourself-page .tab-btn--inactive {
-    color: #111827 !important;
-    background: #ffffff !important;
+    border: 0.27vw solid #D9D9D9;
+    color: #666666;
+    background: #ffffff;
   }
-
   /* 4. Template Selector Row */
   .admin-sign-yourself-page .template-row {
-    flex-direction: row !important; /* Revert to row on mobile */
-    align-items: center !important;
-    gap: 12px !important;
+    flex-direction: row;
+    gap: 12px;
+    /* Revert to row on mobile */
+      align-items: center;
   }
-
   .admin-sign-yourself-page .roles-row {
-    flex-direction: row !important;
-    align-items: flex-end !important;
-    gap: 12px !important;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 12px;
   }
-
   /* Hide text, show icon for Create button */
   .admin-sign-yourself-page .btn-create-text {
     display: none;
   }
-
   .admin-sign-yourself-page .btn-create-icon {
     display: block;
     width: 18px;
     height: 18px;
   }
-
   .admin-sign-yourself-page .template-row .btn-create,
   .admin-sign-yourself-page .roles-row .btn-create {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 44px !important;
-    height: 44px !important;
-    margin-top: 0 !important;
-    padding: 0 !important;
-    border-radius: 8px !important;
-    flex-shrink: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    margin-top: 0;
+    padding: 0;
+    border-radius: 8px;
   }
-
   .admin-sign-yourself-page .template-select {
-    height: 44px !important;
+    height: 44px;
   }
-
   /* 5. OR Divider */
   .admin-sign-yourself-page .or-divider {
-    gap: 16px !important;
-    margin: 20px 0 !important;
+    gap: 16px;
+    margin: 20px 0;
   }
-
   /* 6. Typography Adjustments */
   .admin-sign-yourself-page .setup-card__title {
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    color: #1a1a2e !important;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a2e;
   }
-
   .admin-sign-yourself-page .section-label,
   .admin-sign-yourself-page .form-label {
-    margin-bottom: 8px !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    color: #1a1a2e !important;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a2e;
   }
-
   .admin-sign-yourself-page .form-input,
   .admin-sign-yourself-page .form-textarea,
   .admin-sign-yourself-page .template-select {
-    font-size: 13px !important;
+    font-size: 13px;
   }
-
   .admin-sign-yourself-page .form-input::placeholder,
   .admin-sign-yourself-page .form-textarea::placeholder {
-    color: #9CA3AF !important;
+    color: #9CA3AF;
   }
-
   .admin-sign-yourself-page .upload-zone {
-    height: 80px !important;
+    height: 80px;
   }
-
   /* Document Preview - larger on mobile per Figma */
   .admin-sign-yourself-page .doc-preview__canvas {
-    min-height: 320px !important;
+    min-height: 320px;
   }
-
   /* Signer badge before inputs on mobile */
   .admin-sign-yourself-page .signer-row {
-    flex-wrap: wrap !important;
+    flex-wrap: wrap;
   }
-
   .admin-sign-yourself-page .signer-row .signer-badge-wrap {
-    width: 100% !important;
-    margin-bottom: 4px !important;
-    order: -1 !important;
+    order: -1;
+    width: 100%;
+    margin-bottom: 4px;
   }
-
   /* Roles row: System Roles + Create button on same row, Assigned To below full width */
   .admin-sign-yourself-page .roles-row {
-    display: grid !important;
-    align-items: flex-end !important;
-    gap: 12px !important;
-    grid-template-columns: 1fr auto !important;
+    display: grid;
+    align-items: flex-end;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
   }
-
   .admin-sign-yourself-page .roles-row .form-group:first-child {
-    grid-column: 1 / 2 !important;
+    grid-column: 1 / 2;
   }
-
   .admin-sign-yourself-page .roles-row .btn-create {
-    width: 44px !important;
-    height: 44px !important;
-    margin-top: 0 !important;
-    grid-column: 2 / 3 !important;
-    grid-row: 1 / 2 !important;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    width: 44px;
+    height: 44px;
+    margin-top: 0;
+  }
+  .admin-sign-yourself-page .roles-row .form-group:nth-child(2) {
+    grid-column: 1 / -1;
   }
 
-  .admin-sign-yourself-page .roles-row .form-group:nth-child(2) {
-    grid-column: 1 / -1 !important;
+  /* ── Fluid Font Sizes + No-Wrap: all text scales with viewport width ── */
+  .admin-sign-yourself-page .setup-card__title {
+    font-size: var(--font-md) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .admin-sign-yourself-page .section-label,
+  .admin-sign-yourself-page .form-label {
+    font-size: var(--font-xs) !important;
+    white-space: nowrap;
+  }
+  .admin-sign-yourself-page .form-input,
+  .admin-sign-yourself-page .form-textarea,
+  .admin-sign-yourself-page .template-select,
+  .admin-sign-yourself-page .field-type-select,
+  .admin-sign-yourself-page .assigned-input {
+    font-size: var(--font-sm) !important;
+  }
+  .admin-sign-yourself-page .upload-zone {
+    font-size: var(--font-sm) !important;
+  }
+  .admin-sign-yourself-page .or-divider {
+    font-size: var(--font-xs) !important;
+    white-space: nowrap;
+  }
+  .admin-sign-yourself-page .btn-create {
+    font-size: var(--font-sm) !important;
+    white-space: nowrap;
+  }
+  .admin-sign-yourself-page .required-label {
+    font-size: var(--font-xs) !important;
+    white-space: nowrap;
+  }
+  .admin-sign-yourself-page .doc-preview__title,
+  .admin-sign-yourself-page .doc-preview__zoom {
+    font-size: var(--font-xs) !important;
+    white-space: nowrap;
+  }
+  .admin-sign-yourself-page .field-props__title,
+  .admin-sign-yourself-page .field-props__label {
+    font-size: var(--font-xs) !important;
+    white-space: nowrap;
+  }
+  .admin-sign-yourself-page .btn-share {
+    font-size: var(--font-sm) !important;
+    white-space: nowrap;
   }
 }
 /* =======================================================
    MEMBER SIGN YOURSELF - MOBILE TABS FIX
    ======================================================= */
-
 @media (max-width: 768px) {
-
   .admin-sign-yourself-page .mobile-tabs-container {
-    display: flex !important;
-    visibility: visible !important;
-
-    width: 100% !important;
-    height: 48px !important;
-
-    min-height: 48px !important;
-
-    margin: 0 0 20px 0 !important;
-
-    background: #FFFFFF !important;
-
-    border: 1px solid #E4E4E4 !important;
-    border-radius: 8px !important;
-    opacity: 1 !important;
-    overflow: hidden !important;
+    display: flex;
+    width: 100%;
+    gap: var(--space-sm);
+    height: 9vw;
+    min-height: 9vw;
+    margin: 0 0 4vw 0;
+    border: none;
+    background: transparent;
+    opacity: 1;
+    visibility: visible;
   }
-
   .admin-sign-yourself-page .mobile-tabs-container .tab-btn {
-    display: flex !important;
-
-    flex: 1 1 50% !important;
-    justify-content: center !important;
-    align-items: center !important;
-
-    height: 48px !important;
-    min-height: 48px !important;
-
-    padding: 0 12px !important;
-
-    font-size: 13px !important;
-    font-weight: 600 !important;
-
-    line-height: normal !important;
-
-    white-space: nowrap !important;
+    display: flex;
+    flex: 1 1 50%;
+    justify-content: center;
+    align-items: center;
+    height: 9vw;
+    min-height: 9vw;
+    padding: 0 var(--space-sm);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 12px;
+    white-space: nowrap;
+    border-radius: 999px;
   }
-
   .admin-sign-yourself-page .mobile-tabs-container .tab-btn--active {
-    color: #FFFFFF !important;
-    background: #E50914 !important;
+    border: none;
+    color: #FFFFFF;
+    background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
   }
-
   .admin-sign-yourself-page .mobile-tabs-container .tab-btn--inactive {
-    color: #1A1A2E !important;
-    background: #FFFFFF !important;
+    border: 1px solid #D9D9D9;
+    color: #666666;
+    background: #FFFFFF;
   }
-}
 
-/* â”€â”€ Mobile (<425px): hide Search on Sign Yourself page â”€â”€ */
-@media (max-width: 768px) {
   .admin-theme .mobile-topbar__search-btn {
-    display: none !important;
+    display: none;
   }
 }
-
 /* ── Tablet (425px–768px): show Search on Sign Yourself page ── */
 @media (min-width: 769px) and (max-width: 1179px) {
   .admin-theme .mobile-topbar__search-btn {
-    display: flex !important;
+    display: flex;
   }
+}
+/* Fluid Desktop Scaling (1180px and above)
+   Preserves the 1366-1440px design, but scales it up fluidly for larger monitors using clamp(). */
+@media (min-width: 1180px) {
+  .setup-card {
+    gap: clamp(15px, 1.25vw, 36px);
+    padding: clamp(16px, 1.38vw, 40px) clamp(20px, 1.66vw, 48px);
+    border-radius: clamp(10px, 0.83vw, 24px);
+  }
+  .setup-card__title {
+    font-size: clamp(12px, 1.04vw, 30px);
+  }
+  .setup-card__tabs {
+    border-radius: clamp(8px, 0.55vw, 14px);
+  }
+  .tab-btn {
+    padding: clamp(7px, 0.55vw, 18px) clamp(18px, 1.52vw, 44px);
+    font-size: clamp(11px, 0.9vw, 26px);
+  }
+  .section-label {
+    margin-bottom: clamp(7px, 0.55vw, 18px);
+    font-size: clamp(10px, 0.83vw, 24px);
+  }
+  .template-row {
+    gap: clamp(10px, 0.83vw, 24px);
+  }
+  .template-select {
+    height: clamp(31px, 2.63vw, 75px);
+    padding: 0 clamp(30px, 2.5vw, 71px) 0 clamp(10px, 0.83vw, 24px);
+    border-radius: clamp(7px, 0.55vw, 17px);
+    font-size: clamp(11px, 0.9vw, 26px);
+  }
+  .btn-create {
+    height: clamp(31px, 2.63vw, 75px);
+    padding: 0 clamp(18px, 1.52vw, 44px);
+    border-radius: clamp(7px, 0.55vw, 17px);
+    font-size: clamp(11px, 0.9vw, 26px);
+  }
+  .or-divider {
+    gap: clamp(8px, 0.69vw, 20px);
+    font-size: clamp(9px, 0.76vw, 22px);
+  }
+  .upload-zone {
+    gap: clamp(7px, 0.55vw, 18px);
+    height: clamp(59px, 5.0vw, 142px);
+    border-radius: clamp(8px, 0.69vw, 20px);
+    font-size: clamp(11px, 0.9vw, 26px);
+  }
+  .form-row {
+    gap: clamp(13px, 1.11vw, 32px);
+  }
+  .form-group {
+    gap: clamp(5px, 0.41vw, 12px);
+  }
+  .form-label {
+    font-size: clamp(10px, 0.83vw, 24px);
+  }
+  .form-input {
+    height: clamp(31px, 2.63vw, 75px);
+    padding: 0 clamp(10px, 0.83vw, 24px);
+    border-radius: clamp(7px, 0.55vw, 17px);
+    font-size: clamp(11px, 0.9vw, 26px);
+  }
+  .form-textarea {
+    height: clamp(59px, 5.0vw, 142px);
+    padding: clamp(8px, 0.69vw, 20px) clamp(10px, 0.83vw, 24px);
+    border-radius: clamp(7px, 0.55vw, 17px);
+    font-size: clamp(11px, 0.9vw, 26px);
+  }
+  .bottom-section {
+    min-height: clamp(180px, 15.27vw, 435px);
+    border-radius: clamp(8px, 0.69vw, 20px);
+  }
+  .doc-preview {
+    gap: clamp(8px, 0.69vw, 20px);
+    padding: clamp(11px, 0.97vw, 28px) clamp(13px, 1.11vw, 32px);
+  }
+  .doc-preview__title {
+    font-size: clamp(10px, 0.83vw, 24px);
+  }
+  .doc-preview__zoom {
+    gap: clamp(5px, 0.41vw, 12px);
+    font-size: clamp(10px, 0.83vw, 24px);
+  }
+  .doc-preview__canvas {
+    min-height: clamp(131px, 11.11vw, 317px);
+    border-radius: clamp(5px, 0.41vw, 12px);
+  }
+  .doc-preview__filename {
+    gap: clamp(7px, 0.55vw, 18px);
+  }
+  .doc-preview__filename span {
+    font-size: clamp(10px, 0.83vw, 24px);
+  }
+  .field-props {
+    gap: clamp(11px, 0.97vw, 28px);
+    padding: clamp(13px, 1.11vw, 32px) clamp(11px, 0.97vw, 28px);
+  }
+  .field-props__title {
+    font-size: clamp(10px, 0.83vw, 24px);
+  }
+  .field-props__label {
+    margin-bottom: clamp(4px, 0.34vw, 10px);
+    font-size: clamp(8px, 0.69vw, 20px);
+  }
+  .field-type-select,
+  .assigned-input {
+    height: clamp(26px, 2.22vw, 63px);
+    padding: 0 clamp(8px, 0.69vw, 20px);
+    border-radius: clamp(6px, 0.48vw, 14px);
+    font-size: clamp(10px, 0.83vw, 24px);
+  }
+  .required-label {
+    font-size: clamp(10px, 0.83vw, 24px);
+  }
+  .toggle {
+    width: clamp(30px, 2.5vw, 71px);
+    height: clamp(16px, 1.38vw, 39px);
+  }
+  .toggle-slider {
+    border-radius: clamp(16px, 1.38vw, 39px);
+  }
+  .toggle-slider::before {
+    top: clamp(2px, 0.2vw, 6px);
+    left: clamp(2px, 0.2vw, 6px);
+    width: clamp(11px, 0.97vw, 28px);
+    height: clamp(11px, 0.97vw, 28px);
+  }
+  .toggle input:checked + .toggle-slider::before {
+    transform: translateX(clamp(13px, 1.11vw, 32px));
+  }
+  .btn-share {
+    height: clamp(30px, 2.5vw, 71px);
+    border-radius: clamp(7px, 0.55vw, 17px);
+    font-size: clamp(11px, 0.9vw, 26px);
+  }
+}
+/* ============================================
+   DARK MODE — Sign Yourself tabs
+   ============================================ */
+.dark-mode .setup-card__tabs {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+}
+.dark-mode .tab-btn--inactive {
+  color: #d0d0d5;
+  background: transparent;
+}
+.dark-mode .tab-btn--inactive:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.dark-mode .mobile-tabs-container {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+}
+.dark-mode .mobile-tabs-container .tab-btn--inactive {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #d0d0d5;
+  background: transparent;
+}
+.dark-mode .template-select {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d0d0d5;
+  background: transparent;
+}
+.dark-mode .template-select:focus {
+  border-color: #FF0915;
+}
+.dark-mode .template-chevron {
+  color: #9a9a9a;
+}
+.dark-mode .signer-box {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+}
+.dark-mode .signer-badge {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #d0d0d5;
+  background: rgba(255, 255, 255, 0.05);
+}
+.dark-mode .btn-add-signer {
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  color: #9a9a9a;
+  background: transparent;
+}
+.dark-mode .btn-add-signer:hover {
+  border-color: #FF0915;
+  color: #FF0915;
 }
