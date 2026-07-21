@@ -1,639 +1,524 @@
-/* src/admin/css/Documents.css */
-/* == TOPBAR ACTIONS (search + filter + add) == */
+/* ==========================================================
+   2. Page / Root Container
+========================================================== */
+
+.admin-docs-page .desktop-topbar .admin-docs-filter-wrapper {
+  display: none;
+}
+
+/* ==========================================================
+   3. Layout
+========================================================== */
+
 .admin-docs-topbar-actions {
-display: flex;
+  display: flex;
   align-items: center;
   gap: 10px;
 }
-.admin-docs-search-wrap {
-display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  max-width: 300px;
-  height: 36px;
-  padding: 0 12px;
-  border: 1px solid #E4E4E4;
-  border-radius: 20px;
-  background: #fff;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-.admin-docs-search-wrap:hover {
-box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
-  transform: translateY(-2px);
-}
-.admin-docs-search-wrap:focus-within {
-border-color: #FF0915;
-}
-.admin-docs-search-input {
-width: 100%;
-  border: none;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  color: #1a1a2e;
-  background: transparent;
-  outline: none;
-}
-.admin-docs-search-input::placeholder {
-color: #9ca3af;
-}
-.admin-docs-filter-btn {
-display: flex;
-  align-items: center;
-  gap: 6px;
-  height: 36px;
-  padding: 0 14px;
-  border: 1px solid #E4E4E4;
-  border-radius: 20px;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  color: #6b7280;
-  background: #fff;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  transition: box-shadow 0.2s, transform 0.2s;
-  cursor: pointer;
-}
-/* Hide Filter button on desktop Documents topbar only */
-.admin-docs-page .desktop-topbar .admin-docs-filter-wrapper {
-display: none;
-}
-.admin-docs-filter-btn:hover {
-box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
-  transform: translateY(-2px);
-}
-.admin-docs-filter-btn:active {
-box-shadow: 0 1px 4px rgba(138, 148, 159, 0.3);
-  transform: translateY(1px);
-}
-.admin-docs-add-btn {
-display: flex;
-  align-items: center;
-  gap: 6px;
-  height: 36px;
-  padding: 0 16px;
-  border: none;
-  border-radius: 20px;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  color: #fff;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  transition: box-shadow 0.2s, transform 0.2s;
-  cursor: pointer;
-}
-.admin-docs-add-btn:hover {
-background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
-  transform: translateY(-2px);
-}
-.admin-docs-add-btn:active {
-box-shadow: none;
-  transform: translateY(1px);
-}
-.admin-docs-add-btn-short {
-display: none;
-}
-/* == TABS == */
-.admin-docs-tabs {
-display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  width: 100%;
-  height: 37px;
-}
+
+/* ==========================================================
+   4. Navigation
+========================================================== */
+
 .admin-docs-tab {
-/* Apply full-width bottom border to each individual section */
   height: 37px;
-  border: none;
-  border-bottom: 2px solid #E4E4E4;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
+  color: #9ca3af;
   text-align: center;
   white-space: nowrap;
-  color: #9ca3af;
   background: none;
-  transition: color 0.15s, border-color 0.15s;
+  border: none;
+  border-bottom: 2px solid #E4E4E4;
   cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
 }
-.admin-docs-tab:hover {
-color: #FF0915;
-}
+
 .admin-docs-tab--active {
-font-weight: 600;
+  font-weight: 600;
   color: #FF0915;
   border-bottom-color: #FF0915;
 }
-/* == TABLE == */
-.admin-docs-section {
-flex: 1;
-  padding: 0;
-  border-radius: 0;
-  background: transparent;
+
+.admin-docs-tab:hover {
+  color: #FF0915;
 }
-.admin-docs-table__header {
-display: grid;
-  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
-  padding: 10px 16px;
-  border: none;
-  border-bottom: none;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: #1a1a2e;
-  background: transparent;
-}
-.admin-docs-table {
-display: flex;
-  flex-direction: column;
-  gap: 8px;
+
+.admin-docs-tabs {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
+  height: 37px;
 }
-.admin-doc-row {
-display: grid;
-  align-items: center;
-  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
-  height: 60px;
-  padding: 0 16px;
-  border: 1px solid #E4E4E4;
-  border-radius: 16px;
-  font-size: 13px;
-  color: #8A949F;
-  background: #ffffff;
-  transition: background 0.12s;
+
+body.dark-mode .admin-docs-page .action-menu {
+  background: rgba(17, 17, 17, 0.55) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
 }
-.admin-doc-row:hover {
-background: #fafafa;
+
+body.dark-mode .admin-docs-page .action-menu__item {
+  color: #D7D7D7 !important;
+  background: transparent !important;
+  border-bottom: 1px solid rgba(116, 107, 107, 0.4) !important;
 }
-.admin-doc-row__title {
-display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 500;
-  color: #111827;
+
+body.dark-mode .admin-docs-page .action-menu__item--danger {
+  color: #E53935 !important;
+  background: transparent !important;
 }
-.admin-doc-row__icon {
-width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  color: #E53935;
+
+body.dark-mode .admin-docs-page .action-menu__item--danger:hover {
+  background: rgba(229, 57, 53, 0.1) !important;
 }
-.admin-doc-row__note {
-padding-right: 12px;
-  overflow: hidden;
-  font-size: 12px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: #8A949F;
+
+body.dark-mode .admin-docs-page .action-menu__item:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
 }
-.admin-doc-row__cell {
-font-size: 12px;
-  color: #8A949F;
+
+body.dark-mode .admin-docs-page .action-menu__item:last-child {
+  border-bottom: none !important;
 }
-.admin-doc-row__menu {
-position: relative;
-  display: flex;
-  align-items: center;
-  padding: 4px;
-  border-radius: 4px;
-  color: #9ca3af;
-  cursor: pointer;
-}
-.admin-doc-row__menu:hover {
-color: #374151;
-  background: #f3f4f6;
-}
-.admin-doc-row__menu-trigger {
-display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: none;
-  color: inherit;
-  cursor: pointer;
-}
-.action-menu {
-position: absolute;
-  top: 100%;
-  right: 0;
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
-  width: 100px;
-  margin-top: 4px;
-  overflow: hidden;
-  border: 2px solid #CCCCCC;
-  border-radius: 10px;
-  background: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-.action-menu__item {
-display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px 14px;
-  border: none;
-  border-bottom: 2px solid #CCCCCC;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  text-align: center;
-  color: #374151;
-  background: #ffffff;
-  cursor: pointer;
-}
-.action-menu__item:last-child {
-border-bottom: none;
-}
-.action-menu__item:hover {
-background: #f9fafb;
-}
-.action-menu__item--danger {
-color: #E22A2A;
-  background: #FFF1F1;
-}
-.action-menu__item--danger:hover {
-background: #FFE2E2;
-}
-/* == BADGES == */
+
+/* ==========================================================
+   5. Shared Components
+========================================================== */
+
 .admin-badge {
-display: inline-block;
+  display: inline-block;
   padding: 3px 12px;
-  border-radius: 4px;
   font-size: 11px;
   font-weight: 400;
+  border-radius: 4px;
 }
-.admin-badge--pending {
-color: #D28E56;
-  background: #FEF5E0;
+
+.admin-docs-filter-dropdown-divider {
+  margin: 4px 0;
+  border-top: 1px solid #F3F4F6;
 }
-.admin-badge--signed {
-color: #559B6F;
-  background: #E6F7EC;
-}
-.admin-badge--expired, .admin-badge--failed {
-color: #E22A2A;
-  background: #FFDCDC;
-}
-/* ── FIGMA MOBILE OVERRIDES (Hidden on Desktop/Tablet) ── */
+
 .mobile-status-corner,
 .mobile-only-icon,
 .mobile-lbl,
 .mobile-owner-badge,
 .admin-docs-mobile-section-title {
-display: none;
-}
-.desktop-val,
-.desktop-status {
-display: block;
+  display: none;
 }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .admin-docs-page .mobile-page-header .topbar__bottom-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--space-xs);
+/* ==========================================================
+   6. Page Components
+========================================================== */
+
+.admin-docs-empty-state {
+  padding: 40px;
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.admin-docs-filter-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  width: 220px;
+  padding: 12px;
+  font-family: 'Inter', sans-serif;
+  background-color: #FFFFFF;
+  border: 1px solid #E4E4E4;
+  border-radius: 12px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.admin-docs-filter-dropdown-group {
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+}
+
+.admin-docs-filter-dropdown-reset {
+  width: 100%;
+  padding: 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #FF0915;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-docs-filter-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.admin-docs-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 36px;
+  max-width: 300px;
+  padding: 0 12px;
+  background: #fff;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.admin-docs-search-wrap:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.admin-docs-section {
+  flex: 1;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.desktop-val,
+.desktop-status {
+  display: block;
+}
+
+/* ==========================================================
+   7. Forms
+========================================================== */
+
+.admin-docs-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.admin-docs-add-btn-short {
+  display: none;
+}
+
+.admin-docs-add-btn:active {
+  box-shadow: none;
+  transform: translateY(1px);
+}
+
+.admin-docs-add-btn:hover {
+  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.admin-docs-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  background: #fff;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.admin-docs-filter-btn:active {
+  box-shadow: 0 1px 4px rgba(138, 148, 159, 0.3);
+  transform: translateY(1px);
+}
+
+.admin-docs-filter-btn:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.admin-docs-filter-dropdown-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: #6B7280;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-docs-filter-dropdown-select {
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+  color: #374151;
+  background-color: #fff;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+}
+
+.admin-docs-search-input {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #1a1a2e;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.admin-docs-search-input::placeholder {
+  color: #9ca3af;
+}
+
+/* ==========================================================
+   8. Tables
+========================================================== */
+
+.admin-doc-row {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
+  height: 60px;
+  padding: 0 16px;
+  font-size: 13px;
+  color: #8A949F;
+  background: #ffffff;
+  border: 1px solid #E4E4E4;
+  border-radius: 16px;
+  transition: background 0.12s;
+}
+
+.admin-doc-row__cell {
+  font-size: 12px;
+  color: #8A949F;
+}
+
+.admin-doc-row__icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: #E53935;
+}
+
+.admin-doc-row__menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  color: #9ca3af;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-doc-row__menu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-doc-row__menu:hover {
+  color: #374151;
+  background: #f3f4f6;
+}
+
+.admin-doc-row__note {
+  padding-right: 12px;
+  font-size: 12px;
+  color: #8A949F;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.admin-doc-row__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.admin-doc-row:hover {
+  background: #fafafa;
+}
+
+.admin-docs-search-wrap:focus-within {
+  border-color: #FF0915;
+}
+
+.admin-docs-table {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  width: 100%;
+}
+
+.admin-docs-table__header {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #1a1a2e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: transparent;
+  border: none;
+  border-bottom: none;
+}
+
+body.dark-mode .admin-docs-page .admin-doc-row__icon {
+  stroke: url(#docIconGradient) !important;
+}
+
+body.dark-mode .admin-docs-page .admin-doc-row__menu {
+  color: #9A9A9A !important;
+}
+
+body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ==========================================================
+   13. Desktop (1180px+)
+========================================================== */
+
+@media (min-width: 1180px) {
+  .admin-docs-page .admin-docs-search-wrap {
+    gap: clamp(8px, 0.55vw, 14px);
+    width: clamp(200px, 13.88vw, 355px);
+    height: clamp(36px, 2.5vw, 64px);
+    padding: 0 clamp(12px, 0.83vw, 21px);
+    border-radius: clamp(20px, 1.38vw, 35px);
   }
-  .admin-docs-page .mobile-header-divider {
-    margin: var(--space-md) 0;
+
+  .admin-docs-page .admin-docs-topbar-actions {
+    gap: clamp(10px, 0.69vw, 17px);
   }
-  .admin-docs-page .mobile-filter-row {
-    margin-top: var(--space-sm);
+
+  .admin-docs-page .admin-docs-tab {
+    height: clamp(37px, 2.56vw, 65px);
+    font-size: clamp(13px, 0.9vw, 23px);
   }
-  .admin-docs-topbar-actions {
+
+  .admin-docs-page .admin-docs-tabs {
+    height: clamp(37px, 2.56vw, 65px);
+  }
+
+  .admin-docs-page .admin-docs-add-btn {
+    padding: 0 clamp(16px, 1.11vw, 28px);
+  }
+
+  .admin-docs-page .admin-docs-filter-btn {
+    padding: 0 clamp(14px, 0.97vw, 25px);
+  }
+
+  .admin-docs-page .admin-docs-filter-btn,
+  .admin-docs-page .admin-docs-add-btn {
+    gap: clamp(6px, 0.41vw, 10px);
+    height: clamp(36px, 2.5vw, 64px);
+    font-size: clamp(12px, 0.83vw, 21px);
+    border-radius: clamp(20px, 1.38vw, 35px);
+  }
+
+  .admin-docs-page .admin-docs-search-input {
+    font-size: clamp(12px, 0.83vw, 21px);
+  }
+
+  .admin-docs-page .admin-doc-row {
+    height: clamp(60px, 4.16vw, 106px);
+    padding: 0 clamp(16px, 1.11vw, 28px);
+    font-size: clamp(13px, 0.9vw, 23px);
+    border-radius: clamp(16px, 1.11vw, 28px);
+  }
+
+  .admin-docs-page .admin-doc-row__menu {
+    position: relative;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: var(--space-sm);
-    width: 100%;
-  }
-  /* --- Action Controls Styling (Figma) --- */
-  .admin-docs-search-wrap {
-    flex: 1;
-    max-width: none;
-    height: 10.667vw;
-    padding-left: var(--space-sm);
-    border: 0.267vw solid #E4E4E4;
-    border-radius: var(--space-2xl);
-    background: #fff;
-  }
-  .admin-docs-search-input {
-    height: 100%;
-    line-height: normal;
-  }
-  .admin-docs-search-input::placeholder {
-    font-size: var(--font-sm);
-    line-height: normal;
-  }
-  .admin-docs-filter-btn {
-    display: flex;
     justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    width: 10.667vw;
-    height: 10.667vw;
+    justify-self: center;
+    width: 36px;
+    height: 36px;
+    margin: 0;
     padding: 0;
-    border: none;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 0.533vw 2.667vw rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
   }
-  .admin-docs-filter-btn .filter-text {
-    display: none;
+
+  .admin-docs-page .admin-doc-row__menu .action-menu,
+  .admin-docs-page .admin-doc-row__menu .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
   }
+
+  .admin-docs-page .admin-doc-row__title {
+    gap: clamp(10px, 0.69vw, 17px);
+  }
+
+  .admin-docs-page .admin-docs-table {
+    gap: clamp(8px, 0.55vw, 14px);
+  }
+
+  .admin-docs-page .admin-docs-table__header {
+    padding: clamp(10px, 0.69vw, 17px) clamp(16px, 1.11vw, 28px);
+    font-size: clamp(11px, 0.76vw, 19px);
+  }
+
+  .admin-docs-page .admin-docs-table__header span:last-child {
+    justify-self: center;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+/* ==========================================================
+   14. Tablet (769px–1179px)
+========================================================== */
+
+@media (min-width: 769px) and (max-width: 1179px) {
   .admin-docs-page .admin-docs-filter-wrapper {
     display: none;
   }
-  .admin-docs-add-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    width: 10.667vw;
-    height: 10.667vw;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    color: #fff;
-    background: #E22A2A;
-    box-shadow: 0 1.067vw 3.2vw rgba(226, 42, 42, 0.2);
-  }
-  .admin-docs-add-btn .add-btn-full {
-    display: none;
-  }
-  /* --- Tabs Styling (Figma) --- */
-  .admin-docs-tabs {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    width: auto;
-    height: 12.267vw;
-    min-height: 12.267vw;
-    margin: var(--space-md) var(--mobile-gutter) var(--space-md) var(--mobile-gutter);
-    padding: 0;
-    border-bottom: none;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .admin-docs-tab {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    height: 100%;
-    padding: 0 var(--space-md);
-    border: none;
-    border-radius: 999px;
-    font-size: var(--font-sm);
-    font-weight: 500;
-    white-space: nowrap;
-    color: #8A949F;
-    background: transparent;
-  }
-  .admin-docs-page .admin-docs-tab--active {
-    color: #ffffff;
-    background: #E22A2A;
-  }
-  /* --- Section Title --- */
-  .admin-docs-mobile-section-title {
-    display: block;
-    margin-bottom: var(--space-md);
-    padding: 0 var(--mobile-gutter);
-    font-size: var(--font-md);
-    font-weight: 600;
-    color: #111827;
-  }
-  .mobile-header-divider {
-    display: block;
-    width: 100%;
-    margin: var(--space-md) 0;
-    border: none;
-    border-bottom: 1px solid #E5E7EB;
-  }
-  /* Title for "Need My Sign" */
-  .admin-docs-mobile-section-title {
-    margin-bottom: var(--space-lg);
-    font-size: var(--font-xl);
-    font-weight: 700;
-    color: #111827;
-  }
-  .mobile-hidden-search {
-    display: none;
-  }
-  /* --- Table Header --- */
-  .admin-docs-table__header {
-    display: none;
-  }
-  .admin-docs-table {
-    gap: var(--space-md);
-    padding: 0 var(--mobile-gutter) var(--space-xl) var(--mobile-gutter);
-  }
-  /* --- Document Card Overhaul (Figma) --- */
-  .admin-doc-row {
-    /* Signer, Date, Owner */
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr 0.8fr;
-    grid-template-rows: auto auto;
-    column-gap: var(--space-xs);
-    row-gap: var(--space-lg);
-    height: auto;
-    padding: var(--space-md);
-    border: none;
-    border-radius: var(--space-md);
-    background: #ffffff;
-    box-shadow: 0 1.067vw 5.333vw rgba(0,0,0,0.04);
-      align-items: start;
-  }
-  /* Hide Desktop Elements */
-  .desktop-val,
-  .admin-doc-row__menu,
-  .admin-doc-row__note {
-    display: none;
-  }
-  /* Show Mobile Elements */
-  .mobile-only-icon {
-    display: flex;
-    width: 4.8vw;
-    height: 4.8vw;
-    color: #686868;
-  }
-  .mobile-lbl {
-    display: block;
-  }
-  /* Title Row */
-  .admin-doc-row__title {
-    /* Take up first two cols */
-    display: flex;
-    align-items: center;
-    grid-column: 1 / 3;
-    width: 100%;
-    margin: 0;
-    font-size: var(--font-lg);
-    font-weight: 600;
-    color: #111827;
-      gap: var(--space-xs);
-  }
-  .admin-doc-row__title span {
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-  .admin-doc-row__icon {
-    width: var(--font-lg);
-    height: var(--font-lg);
-    color: #111827;
-  }
-  /* Top Right Status Pill (Desktop style but positioned for Mobile grid) */
-  .mobile-status-corner {
-  /* Hide corner dot */
-    display: none;
-  }
-  .desktop-status {
-    /* Put in 3rd column of first row */
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    grid-column: 3 / 4;
-      grid-row: 1;
-  }
-  .desktop-status .admin-badge {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--space-2xl);
-    font-size: var(--font-xs);
-  }
-  /* Grid Layout for Meta Columns */
-  .admin-doc-row__cell {
-  /* Hide any default wrapper cell styles */
-    display: none;
-  }
-  .admin-doc-row__cell.mobile-col {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-  }
-  .admin-doc-row__cell.mobile-col-owner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--space-xs);
-  }
-  .mobile-col-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.533vw;
-  }
-  .mobile-val {
-    max-width: 29.333vw;
-    overflow: hidden;
-    font-size: var(--font-sm);
-    font-weight: 500;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #4b5563;
-  }
-  .mobile-lbl {
-    font-size: var(--font-xs);
-    color: #9ca3af;
-  }
-  /* Owner text formatting */
-  .mobile-owner-badge {
-  /* Hide the stacked colored badge */
-    display: none;
-  }
-  .admin-doc-row__cell.mobile-col-owner .desktop-val {
-    display: block;
-    font-size: var(--font-sm);
-    font-weight: 600;
-    color: #111827;
-  }
-  .admin-doc-row__cell.mobile-col-owner::after {
-    font-size: var(--font-xs);
-    color: #686868;
-    content: "Owner";
-  }
-  .admin-docs-page .badge-pending {
-    border: 1px solid #F59E0B;
-  }
-  .admin-docs-page .badge-pending .mobile-owner-badge__bot {
-    background: #F59E0B;
-  }
-  .admin-docs-page .badge-signed {
-    border: 1px solid #559B6F;
-  }
-  .admin-docs-page .badge-signed .mobile-owner-badge__bot {
-    background: #559B6F;
-  }
-  .admin-docs-page .badge-expired {
-    border: 1px solid #E22A2A;
-  }
-  .admin-docs-page .badge-expired .mobile-owner-badge__bot {
-    background: #E22A2A;
-  }
-}
-@media (min-width: 769px) and (max-width: 1179px) {
-  /* =================================================================
-     1. HIDE THINGS THAT MUST NOT SHOW ON TABLET
-     ================================================================= */
-  /* The desktop topbar is not used on tablet =€” hide it */
+
   .admin-docs-page .desktop-topbar {
     display: none;
   }
-  /* The mobile-topbar (hamburger bar) IS shown on tablet =€” keep it visible */
-  /* (no rule needed =€” default shared CSS handles this) */
-  /* =================================================================
-     2. HEADER LAYOUT  (mobile-page-header)
-        Structure inside JSX:
-          .mobile-page-header
-            .topbar__bottom-row   =† title + subtitle (col 1)
-            hr.mobile-header-divider  =† full-width divider (col 1/-1)
-            .mobile-filter-row    =† search/filter/add (col 2, row 1)
-        We use a 2-col grid with explicit row placement.
-     ================================================================= */
-  .admin-docs-page .mobile-page-header {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto;
-    gap: 0 24px;
-    border-bottom: none;
-    padding: 20px 0px 0 0px;
-    margin: 0;
-  }
-  /* Title+subtitle block =†’ row 1, col 1 */
-  .admin-docs-page .mobile-page-header .topbar__bottom-row {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    grid-column: 1;
-    grid-row: 1;
-    gap: 4px;
-    margin: 0;
-  }
-  /* Filter/action row =†’ row 1, col 2 (sits beside title) */
-  .admin-docs-page .mobile-page-header .mobile-filter-row {
-    display: flex;
-    align-items: center;
-    grid-column: 2;
-    grid-row: 1;
-    margin: 0;
-  }
-  /* Divider =†’ row 2, spans both cols, bleeds to edges */
+
   .admin-docs-page .mobile-header-divider {
     display: block;
     grid-column: 1 / -1;
@@ -643,16 +528,18 @@ display: block;
     border: none;
     border-bottom: none;
   }
-  /* =================================================================
-     3. TITLE TYPOGRAPHY  =€” match Figma bold heading
-     ================================================================= */
-  .admin-docs-page .topbar__title {
+
+  .admin-docs-page .mobile-page-header {
+    display: grid;
+    align-items: center;
+    gap: 0 24px;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
     margin: 0;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 1.2;
-    color: #111827;
+    padding: 20px 0px 0 0px;
+    border-bottom: none;
   }
+
   .admin-docs-page .topbar__sub {
     margin: 0;
     margin-top: 7px;
@@ -661,16 +548,74 @@ display: block;
     line-height: 1.4;
     color: #8A949F;
   }
-  /* =================================================================
-     4. ACTION CONTROLS  =€” Search, Filter, + Add
-        Figma: search ~210px pill, filter ~44px circle, add ~88px pill
-     ================================================================= */
+
+  .admin-docs-page .topbar__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #111827;
+  }
+
   .admin-docs-topbar-actions {
     display: flex;
     align-items: center;
     gap: 12px;
   }
-  /* Search pill */
+
+  .admin-docs-tab {
+    flex: 1 1 0;
+    width: 0;
+    height: auto;
+    box-sizing: border-box;
+    padding: 14px 0 16px 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: #8A949F;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s;
+  }
+
+  .admin-docs-tab--active {
+    font-weight: 600;
+    color: #E22A2A;
+    border-bottom: 2px solid #E22A2A;
+  }
+
+  .admin-docs-tabs {
+    display: flex;
+    gap: 14px;
+    height: auto;
+    margin: 0px 40px 10px 40px;
+    padding: 0;
+  }
+
+  .admin-badge {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    min-width: 0;
+    padding: 0;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+    border: none;
+    border-radius: 50%;
+  }
+
+  .mobile-status-corner,
+  .mobile-only-icon,
+  .mobile-lbl,
+  .mobile-owner-badge {
+    display: none;
+  }
+
+  .admin-docs-filter-dropdown {
+    top: 46px;
+  }
+
   .admin-docs-search-wrap {
     width: 210px;
     height: 42px;
@@ -678,696 +623,501 @@ display: block;
     border-radius: 21px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
-  .admin-docs-search-input {
-    font-size: 13px;
+
+  .admin-docs-section {
+    flex: 1;
+    width: auto;
+    margin: 0;
   }
-  /* Filter circle */
+
+  .desktop-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .desktop-val {
+    display: block;
+  }
+
+  .filter-text {
+    display: none;
+  }
+
+  .add-btn-full {
+    display: none;
+  }
+
+  .admin-docs-add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 88px;
+    height: 42px;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 21px;
+  }
+
+  .admin-docs-add-btn-short {
+    display: inline-block;
+  }
+
   .admin-docs-filter-btn {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 44px;
     height: 44px;
     padding: 0;
     border-radius: 50%;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
-  .filter-text {
+
+  .admin-docs-search-input {
+    font-size: 13px;
+  }
+
+  .admin-doc-row {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    height: auto;
+    min-height: 72px;
+    box-sizing: border-box;
+    margin: 0 0 14px 0;
+    padding: 0 20px;
+    background: #ffffff;
+    border: 1px solid #E4E4E4;
+    border-radius: 14px;
+  }
+
+  .admin-doc-row__cell {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    font-size: 13px;
+    color: #8A949F;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .admin-doc-row__menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    width: 40px;
+    height: 36px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 36px;
+    min-height: 36px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 6px;
+    transform: none;
+  }
+
+  .admin-doc-row__menu:hover {
+    position: relative;
+    justify-self: center;
+    width: 40px;
+    height: 36px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 36px;
+    min-height: 36px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 6px;
+    transform: none;
+  }
+
+  .admin-doc-row__note {
     display: none;
   }
+
+  .admin-doc-row__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: none;
+    min-width: 0;
+    padding-left: 0;
+    overflow: hidden;
+  }
+
+  .admin-doc-row__title span {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .admin-doc-row:hover {
+    background: #fafafa;
+  }
+
+  .admin-docs-page .mobile-page-header .mobile-filter-row {
+    display: flex;
+    align-items: center;
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+  }
+
+  .admin-docs-page .mobile-page-header .topbar__bottom-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    flex-direction: column;
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+  }
+
+  .admin-docs-table {
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 30px 0 32px 0;
+  }
+
+  .admin-docs-table__header {
+    display: grid;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    background: transparent;
+  }
+
+  .admin-docs-table__header span:last-child {
+    justify-self: center;
+  }
+
+  .admin-docs-table__header span:nth-child(2) {
+    display: none;
+  }
+
+  .admin-docs-table__header span:nth-child(6) {
+    justify-self: center;
+    text-align: center;
+  }
+}
+
+/* ==========================================================
+   15. Mobile (0px–768px)
+========================================================== */
+
+@media (max-width: 768px) {
   .admin-docs-page .admin-docs-filter-wrapper {
     display: none;
   }
-  /* + Add pill */
-  .admin-docs-add-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    width: 88px;
-    height: 42px;
-    padding: 0;
-    border-radius: 21px;
-    font-size: 14px;
-    font-weight: 600;
-  }
-  .add-btn-full {
-    display: none;
-  }
-  .admin-docs-add-btn-short {
-    display: inline-block;
-  }
-  /* =================================================================
-     5. TABS  =€” Figma: generous top margin, full-width strip, larger text
-     ================================================================= */
-  .admin-docs-tabs {
-    display: flex;
-    gap: 14px;
-    margin: 0px 40px 10px 40px;
-    padding: 0;
-    height: auto;
-  }
-  .admin-docs-tab {
-    /* Underline sits only under the tab's own 1/3 section =€” not wider */
-  /* Prevent underline from bleeding =€” each tab is exactly 1/3 */
-    flex: 1 1 0;
-    box-sizing: border-box;
-    width: 0;
-    height: auto;
-    padding: 14px 0 16px 0;
-    border: none;
-    font-size: 15px;
-    font-weight: 400;
-    text-align: center;
-    color: #8A949F;
-    transition: color 0.15s;
-      border-bottom: 2px solid transparent;
-  }
-  .admin-docs-tab--active {
-    border-bottom: 2px solid #E22A2A;
-    font-weight: 600;
-    color: #E22A2A;
-  }
-  /* =================================================================
-     6. TABLE SECTION WRAPPER
-        =€” aligned with header/tabs (40px side margins)
-        =€” extra top gap from tabs to header row
-     ================================================================= */
-  .admin-docs-section {
-    flex: 1;
-    width: auto;
-    margin: 0;
-  }
-  .admin-docs-table {
-    /* Increased breathing room between tabs and header row */
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
-    margin: 0;
-    padding: 30px 0 32px 0;
-      display: flex;
-  }
-  /* =================================================================
-     7. TABLE HEADER =€” rebalanced columns per Figma
-        TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
-     ================================================================= */
-  .admin-docs-table__header {
-    /*
-       * SAME grid as .admin-doc-row =€” guarantees column alignment.
-       */
-      /*
-       * Header must use 60px padding to match that exact X position.
-       */
-    display: grid;
-    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
-    width: 100%;
-    margin: 0;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.7px;
-    text-transform: uppercase;
-    color: #374151;
-    background: transparent;
-    /*
-     * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
-     * ROOT CAUSE FIX: .admin-docs-table__header is OUTSIDE .admin-docs-section.
-     * .admin-docs-section has padding: 0 40px
-     * .admin-doc-row (inside section) has padding: 0 20px
-     * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
-     */
-    box-sizing: border-box;
-  }
-  /* Hide the NOTE column header */
-  .admin-docs-table__header span:nth-child(2) {
-    display: none;
-  }
-  .admin-docs-table__header span:last-child {
-    justify-self: center;
-  }
-  /* =================================================================
-     8. TABLE ROWS =€” taller, properly padded cards
-     ================================================================= */
-  .admin-doc-row {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
-    grid-template-rows: 1fr;
-    box-sizing: border-box;
-    width: 100%;
-    height: auto;
-    min-height: 72px;
-    margin: 0 0 14px 0;
-    padding: 0 20px;
-    border: 1px solid #E4E4E4;
-    border-radius: 14px;
-    background: #ffffff;
-  }
-  .admin-doc-row:hover {
-    background: #fafafa;
-  }
-  /* Hide NOTE cell =€” not in Figma tablet view */
-  .admin-doc-row__note {
-    display: none;
-  }
-  /* =================================================================
-     9. TITLE COLUMN =€” ellipsis on overflow
-     ================================================================= */
-  .admin-doc-row__title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-    max-width: none;
-    padding-left: 0;
-    overflow: hidden;
-  }
-  .admin-doc-row__title span {
-    display: block;
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: 500;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #111827;
-  }
-  /* =================================================================
-     10. ROW CELLS =€” restore desktop-style rendering
-     ================================================================= */
-  .admin-doc-row__cell {
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    overflow: hidden;
-    font-size: 13px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #8A949F;
-  }
-  /* Show desktop elements */
-  .desktop-val {
-    display: block;
-  }
-  .desktop-status {
-    display: flex;
-  }
-  .admin-doc-row__menu {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    min-width: 40px;
-    max-width: 40px;
-    height: 36px;
-    min-height: 36px;
-    max-height: 36px;
-    margin: 0 auto;
-    padding: 0;
-    border-radius: 6px;
-    transform: none;
-    justify-self: center;
-  }
-  .admin-doc-row__menu:hover {
-    position: relative;
-    width: 40px;
-    min-width: 40px;
-    max-width: 40px;
-    height: 36px;
-    min-height: 36px;
-    max-height: 36px;
-    margin: 0 auto;
-    padding: 0;
-    border-radius: 6px;
-    transform: none;
-    justify-self: center;
-  }
-  /* Hide mobile-only elements */
-  .mobile-status-corner,
-  .mobile-only-icon,
-  .mobile-lbl,
-  .mobile-owner-badge {
-    display: none;
-  }
-  /* =================================================================
-     11. STATUS =€” colored dot matching Dashboard mobile reference
-     ================================================================= */
-  .admin-badge {
-    display: inline-block;
-    width: 10px;
-    min-width: 0;
-    height: 10px;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    font-size: 0;
-    line-height: 0;
-    color: transparent;
-  }
-  .admin-badge--pending {
-    background-color: #D28E56;
-  }
-  .admin-badge--signed {
-    background-color: #559B6F;
-  }
-  .admin-badge--expired {
-    background-color: #E22A2A;
-  }
-  /* =================================================================
-     6. TABLE SECTION WRAPPER
-        =€” aligned with header/tabs (40px side margins)
-        =€” extra top gap from tabs to header row
-     ================================================================= */
-  .admin-docs-section {
-    flex: 1;
-    width: auto;
-    margin: 0;
-  }
-  .admin-docs-table {
-    /* Increased breathing room between tabs and header row */
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
-    margin: 0;
-    padding: 30px 0 32px 0;
-      display: flex;
-  }
-  /* =================================================================
-     7. TABLE HEADER =€” rebalanced columns per Figma
-        TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
-     ================================================================= */
-  .admin-docs-table__header {
-    /*
-       * SAME grid as .admin-doc-row =€” guarantees column alignment.
-       */
-      /*
-       * Header must use 60px padding to match that exact X position.
-       */
-    display: grid;
-    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
-    width: 100%;
-    margin: 0;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.7px;
-    text-transform: uppercase;
-    color: #374151;
-    background: transparent;
-    /*
-     * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
-     * ROOT CAUSE FIX: .admin-docs-table__header is OUTSIDE .admin-docs-section.
-     * .admin-docs-section has padding: 0 40px
-     * .admin-doc-row (inside section) has padding: 0 20px
-     * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
-     */
-    box-sizing: border-box;
-  }
-  /* Hide the NOTE column header */
-  .admin-docs-table__header span:nth-child(2) {
-    display: none;
-  }
-  .admin-docs-table__header span:last-child {
-    justify-self: center;
-  }
-  /* Center the STATUS column header to align with the status dot below */
-  .admin-docs-table__header span:nth-child(6) {
-    text-align: center;
-    justify-self: center;
-  }
-  /* =================================================================
-     8. TABLE ROWS =€” taller, properly padded cards
-     ================================================================= */
-  .admin-doc-row {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
-    grid-template-rows: 1fr;
-    box-sizing: border-box;
-    width: 100%;
-    height: auto;
-    min-height: 72px;
-    margin: 0 0 14px 0;
-    padding: 0 20px;
-    border: 1px solid #E4E4E4;
-    border-radius: 14px;
-    background: #ffffff;
-  }
-  .admin-doc-row:hover {
-    background: #fafafa;
-  }
-  /* Hide NOTE cell =€” not in Figma tablet view */
-  .admin-doc-row__note {
-    display: none;
-  }
-  /* =================================================================
-     9. TITLE COLUMN =€” ellipsis on overflow
-     ================================================================= */
-  .admin-doc-row__title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-    max-width: none;
-    padding-left: 0;
-    overflow: hidden;
-  }
-  .admin-doc-row__title span {
-    display: block;
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: 500;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #111827;
-  }
-  /* =================================================================
-     10. ROW CELLS =€” restore desktop-style rendering
-     ================================================================= */
-  .admin-doc-row__cell {
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    overflow: hidden;
-    font-size: 13px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #8A949F;
-  }
-  /* Show desktop elements */
-  .desktop-val {
-    display: block;
-  }
-  .desktop-status {
-    display: flex;
-  }
-  .admin-doc-row__menu {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    min-width: 40px;
-    max-width: 40px;
-    height: 36px;
-    min-height: 36px;
-    max-height: 36px;
-    margin: 0 auto;
-    padding: 0;
-    border-radius: 6px;
-    transform: none;
-    justify-self: center;
-  }
-  .admin-doc-row__menu:hover {
-    position: relative;
-    width: 40px;
-    min-width: 40px;
-    max-width: 40px;
-    height: 36px;
-    min-height: 36px;
-    max-height: 36px;
-    margin: 0 auto;
-    padding: 0;
-    border-radius: 6px;
-    transform: none;
-    justify-self: center;
-  }
-  /* Hide mobile-only elements */
-  .mobile-status-corner,
-  .mobile-only-icon,
-  .mobile-lbl,
-  .mobile-owner-badge {
-    display: none;
-  }
-  /* =================================================================
-     11. STATUS =€” colored dot matching Dashboard mobile reference
-     ================================================================= */
-  .desktop-status {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .admin-badge {
-    display: inline-block;
-    width: 10px;
-    min-width: 0;
-    height: 10px;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    font-size: 0;
-    line-height: 0;
-    color: transparent;
-  }
-  .admin-badge--pending {
-    background-color: #D28E56;
-  }
-  .admin-badge--signed {
-    background-color: #559B6F;
-  }
-  .admin-badge--expired {
-    background-color: #E22A2A;
-  }
-}
-/* Desktop-only overrides for Action Button alignment */
-@media (min-width: 1180px) {
-  /* Center the ACTION header to align perfectly with the button below it */
-  .admin-docs-page .admin-docs-table__header span:last-child {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    justify-self: center;
-  }
-  .admin-docs-page .admin-doc-row__menu {
-  /* Centers the button in the ACTION column */
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 36px;
-    height: 36px;
-    margin: 0;
-    padding: 0;
-    border-radius: 6px;
-    justify-self: center;
-  }
-  /* Dropdown/hover menu positioning relative to action button */
-  .admin-docs-page .admin-doc-row__menu .action-menu,
-  .admin-docs-page .admin-doc-row__menu .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: auto;
-  }
-}.admin-docs-empty-state {
-padding: 40px;
-  font-size: 13px;
-  text-align: center;
-  color: #9ca3af;
-}
-/* Member documents filter popover styling */
-.admin-docs-filter-wrapper {
-position: relative;
-  display: inline-block;
-}
-.admin-docs-filter-dropdown {
-/* Desktop default */
-  position: absolute;
-  top: 48px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 220px;
-  padding: 12px;
-  border: 1px solid #E4E4E4;
-  border-radius: 12px;
-  font-family: 'Inter', sans-serif;
-  background-color: #FFFFFF;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  right: 0;
-}
-.admin-docs-filter-dropdown-group {
-display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.admin-docs-filter-dropdown-label {
-display: block;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-align: left;
-  text-transform: uppercase;
-  color: #6B7280;
-}
-.admin-docs-filter-dropdown-select {
-width: 100%;
-  height: 32px;
-  padding: 0 8px;
-  border: 1px solid #E4E4E4;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #374151;
-  background-color: #fff;
-  cursor: pointer;
-  outline: none;
-}
-.admin-docs-filter-dropdown-divider {
-margin: 4px 0;
-  border-top: 1px solid #F3F4F6;
-}
-.admin-docs-filter-dropdown-reset {
-width: 100%;
-  padding: 8px 0;
-  border: none;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  color: #FF0915;
-  background-color: transparent;
-  cursor: pointer;
-}
 
-/* Positioning overrides based on viewport */
-@media (max-width: 768px) {
-  .admin-docs-filter-dropdown {
-    top: 46px;
+  .admin-docs-page .mobile-header-divider {
+    margin: var(--space-md) 0;
   }
-}
-@media (min-width: 769px) and (max-width: 1179px) {
-  .admin-docs-filter-dropdown {
-    top: 46px;
-  }
-}
-/* Fluid Desktop Scaling (1180px and above)
-   Preserves the 1366-1440px design, but scales it up fluidly for larger monitors using clamp(). */
-@media (min-width: 1180px) {
-  /* Actions */
-  .admin-docs-page .admin-docs-topbar-actions {
-    gap: clamp(10px, 0.69vw, 17px);
-  }
-  .admin-docs-page .admin-docs-search-wrap {
-    gap: clamp(8px, 0.55vw, 14px);
-    width: clamp(200px, 13.88vw, 355px);
-    height: clamp(36px, 2.5vw, 64px);
-    padding: 0 clamp(12px, 0.83vw, 21px);
-    border-radius: clamp(20px, 1.38vw, 35px);
-  }
-  .admin-docs-page .admin-docs-search-input {
-    font-size: clamp(12px, 0.83vw, 21px);
-  }
-  .admin-docs-page .admin-docs-filter-btn,
-  .admin-docs-page .admin-docs-add-btn {
-    gap: clamp(6px, 0.41vw, 10px);
-    height: clamp(36px, 2.5vw, 64px);
-    border-radius: clamp(20px, 1.38vw, 35px);
-    font-size: clamp(12px, 0.83vw, 21px);
-  }
-  .admin-docs-page .admin-docs-filter-btn {
-    padding: 0 clamp(14px, 0.97vw, 25px);
-  }
-  .admin-docs-page .admin-docs-add-btn {
-    padding: 0 clamp(16px, 1.11vw, 28px);
-  }
-  /* Tabs */
-  .admin-docs-page .admin-docs-tabs {
-    height: clamp(37px, 2.56vw, 65px);
-  }
-  .admin-docs-page .admin-docs-tab {
-    height: clamp(37px, 2.56vw, 65px);
-    font-size: clamp(13px, 0.9vw, 23px);
-  }
-  /* Table */
-  .admin-docs-page .admin-docs-table__header {
-    padding: clamp(10px, 0.69vw, 17px) clamp(16px, 1.11vw, 28px);
-    font-size: clamp(11px, 0.76vw, 19px);
-  }
-  .admin-docs-page .admin-docs-table {
-    gap: clamp(8px, 0.55vw, 14px);
-  }
-  .admin-docs-page .admin-doc-row {
-    height: clamp(60px, 4.16vw, 106px);
-    padding: 0 clamp(16px, 1.11vw, 28px);
-    border-radius: clamp(16px, 1.11vw, 28px);
-    font-size: clamp(13px, 0.9vw, 23px);
-  }
-  .admin-docs-page .admin-doc-row__title {
-    gap: clamp(10px, 0.69vw, 17px);
-  }
-}/* ============================================
-   DARK MODE — Status badges (match Dashboard)
-   ============================================ */
-body.dark-mode .admin-docs-page .admin-badge--pending {
-border: 1px solid #FFC107 !important;
-  color: #FFC107 !important;
-}
-body.dark-mode .admin-docs-page .admin-badge--signed {
-border: 1px solid #2ECC71 !important;
-  color: #2ECC71 !important;
-}
-body.dark-mode .admin-docs-page .admin-badge--expired,
-body.dark-mode .admin-docs-page .admin-badge--failed {
-border: 1px solid #E74C3C !important;
-  color: #E74C3C !important;
-}
 
-
-@media (max-width: 768px) {
   body.dark-mode .admin-docs-page .admin-badge {
     width: 10px !important;
-    min-width: 0 !important;
     height: 10px !important;
+    min-width: 0 !important;
     padding: 0 !important;
-    border-radius: 50% !important;
     font-size: 0 !important;
     line-height: 0 !important;
     color: transparent !important;
     border: none !important;
+    border-radius: 50% !important;
   }
-  body.dark-mode .admin-docs-page .admin-badge--pending {
-    background-color: #FFC107 !important;
+
+  .admin-docs-topbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    width: 100%;
   }
-  body.dark-mode .admin-docs-page .admin-badge--signed {
-    background-color: #2ECC71 !important;
+
+  .mobile-header-divider {
+    display: block;
+    width: 100%;
+    margin: var(--space-md) 0;
+    border: none;
+    border-bottom: 1px solid #E5E7EB;
   }
-  body.dark-mode .admin-docs-page .admin-badge--expired,
-  body.dark-mode .admin-docs-page .admin-badge--failed {
-    background-color: #E74C3C !important;
+
+  .admin-docs-page .admin-docs-tab--active {
+    color: #ffffff;
+    background: #E22A2A;
   }
-}body.dark-mode .admin-docs-page .admin-doc-row__icon {
-stroke: url(#docIconGradient) !important;
-}
-/* ============================================
-   DARK MODE — Action dropdown (match Dashboard doc-row__dropdown)
-   ============================================ */
-body.dark-mode .admin-docs-page .admin-doc-row__menu {
-color: #9A9A9A !important;
-}
-body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
-background: rgba(255, 255, 255, 0.05) !important;
-  color: #FFFFFF !important;
-}
-body.dark-mode .admin-docs-page .action-menu {
-background: rgba(17, 17, 17, 0.55) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
-}
-body.dark-mode .admin-docs-page .action-menu__item {
-background: transparent !important;
-  border-bottom: 1px solid rgba(116, 107, 107, 0.4) !important;
-  color: #D7D7D7 !important;
-}
-body.dark-mode .admin-docs-page .action-menu__item:last-child {
-border-bottom: none !important;
-}
-body.dark-mode .admin-docs-page .action-menu__item:hover {
-background: rgba(255, 255, 255, 0.04) !important;
-}
-body.dark-mode .admin-docs-page .action-menu__item--danger {
-color: #E53935 !important;
-  background: transparent !important;
-}
-body.dark-mode .admin-docs-page .action-menu__item--danger:hover {
-background: rgba(229, 57, 53, 0.1) !important;
+
+  .admin-docs-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 100%;
+    padding: 0 var(--space-md);
+    font-size: var(--font-sm);
+    font-weight: 500;
+    color: #8A949F;
+    white-space: nowrap;
+    background: transparent;
+    border: none;
+    border-radius: 999px;
+  }
+
+  .admin-docs-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    height: 12.267vw;
+    min-height: 12.267vw;
+    box-sizing: border-box;
+    margin: var(--space-md) var(--mobile-gutter) var(--space-md) var(--mobile-gutter);
+    padding: 0;
+    border-bottom: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .desktop-status .admin-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-xs);
+    border-radius: var(--space-2xl);
+  }
+
+  .mobile-only-icon {
+    display: flex;
+    width: 4.8vw;
+    height: 4.8vw;
+    color: #686868;
+  }
+
+  .mobile-owner-badge {
+    display: none;
+  }
+
+  .admin-docs-filter-dropdown {
+    top: 46px;
+  }
+
+  .admin-docs-mobile-section-title {
+    display: block;
+    margin-bottom: var(--space-lg);
+    padding: 0 var(--mobile-gutter);
+    font-size: var(--font-xl);
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .admin-docs-search-wrap {
+    flex: 1;
+    height: 10.667vw;
+    max-width: none;
+    padding-left: var(--space-sm);
+    background: #fff;
+    border: 0.267vw solid #E4E4E4;
+    border-radius: var(--space-2xl);
+  }
+
+  .desktop-status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    grid-column: 3 / 4;
+    grid-row: 1;
+  }
+
+  .mobile-col-text {
+    display: flex;
+    gap: 0.533vw;
+    flex-direction: column;
+  }
+
+  .mobile-lbl {
+    display: block;
+    font-size: var(--font-xs);
+    color: #9ca3af;
+  }
+
+  .mobile-status-corner {
+    display: none;
+  }
+
+  .mobile-val {
+    max-width: 29.333vw;
+    font-size: var(--font-sm);
+    font-weight: 500;
+    color: #4b5563;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .admin-docs-add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 10.667vw;
+    height: 10.667vw;
+    padding: 0;
+    color: #fff;
+    background: #E22A2A;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 1.067vw 3.2vw rgba(226, 42, 42, 0.2);
+  }
+
+  .admin-docs-add-btn .add-btn-full {
+    display: none;
+  }
+
+  .admin-docs-filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 10.667vw;
+    height: 10.667vw;
+    padding: 0;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0.533vw 2.667vw rgba(0, 0, 0, 0.08);
+  }
+
+  .admin-docs-filter-btn .filter-text {
+    display: none;
+  }
+
+  .admin-docs-search-input {
+    height: 100%;
+    line-height: normal;
+  }
+
+  .admin-docs-search-input::placeholder {
+    font-size: var(--font-sm);
+    line-height: normal;
+  }
+
+  .admin-doc-row {
+    position: relative;
+    display: grid;
+    align-items: start;
+    column-gap: var(--space-xs);
+    row-gap: var(--space-lg);
+    grid-template-columns: 1fr 1fr 0.8fr;
+    grid-template-rows: auto auto;
+    height: auto;
+    padding: var(--space-md);
+    background: #ffffff;
+    border: none;
+    border-radius: var(--space-md);
+    box-shadow: 0 1.067vw 5.333vw rgba(0,0,0,0.04);
+  }
+
+  .admin-doc-row__cell {
+    display: none;
+  }
+
+  .admin-doc-row__cell.mobile-col {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .admin-doc-row__cell.mobile-col-owner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    flex-direction: column;
+  }
+
+  .admin-doc-row__cell.mobile-col-owner .desktop-val {
+    display: block;
+    font-size: var(--font-sm);
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .admin-doc-row__cell.mobile-col-owner::after {
+    font-size: var(--font-xs);
+    color: #686868;
+    content: "Owner";
+  }
+
+  .admin-doc-row__icon {
+    width: var(--font-lg);
+    height: var(--font-lg);
+    color: #111827;
+  }
+
+  .admin-doc-row__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    grid-column: 1 / 3;
+    width: 100%;
+    margin: 0;
+    font-size: var(--font-lg);
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .admin-doc-row__title span {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .admin-docs-page .mobile-filter-row {
+    margin-top: var(--space-sm);
+  }
+
+  .admin-docs-page .mobile-page-header .topbar__bottom-row {
+    align-items: stretch;
+    gap: var(--space-xs);
+    flex-direction: column;
+  }
+
+  .admin-docs-table {
+    gap: var(--space-md);
+    padding: 0 var(--mobile-gutter) var(--space-xl) var(--mobile-gutter);
+  }
+
+  .admin-docs-table__header {
+    display: none;
+  }
+
+  .desktop-val,
+  .admin-doc-row__menu,
+  .admin-doc-row__note {
+    display: none;
+  }
 }
