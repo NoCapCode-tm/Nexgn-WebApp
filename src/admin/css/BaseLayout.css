@@ -1374,7 +1374,7 @@ body.dark-mode,
   background: transparent;
 }
 .dark-mode .admin-sidebar__logo-img {
-  filter: brightness(0) invert(1);
+  filter: none;
 }
 
 /* Topbar title/subtitle — currently near-invisible on dark background */

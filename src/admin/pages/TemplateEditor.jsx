@@ -1,12 +1,23 @@
+
 import { useState, useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
-import ReactQuill from "react-quill-new";
+import ReactQuill, { Quill } from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import "../css/BaseLayout.css";
 import "../css/TemplateEditor.css";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+
+// Register custom font + size formats once at module load
+// (matches the classes styled in TemplateEditor.css: ql-font-inter, ql-font-outfit, etc.)
+const Font = Quill.import("formats/font");
+Font.whitelist = ["inter", "outfit", "serif", "monospace"];
+Quill.register(Font, true);
+
+const Size = Quill.import("formats/size");
+Size.whitelist = ["small", "normal", "large", "huge"];
+Quill.register(Size, true);
 
 const WIDGETS = [
   { id: "text", label: "Text", icon: "Aa" },
@@ -89,6 +100,7 @@ const WIDGET_DEFAULT_SIZE = {
 
 export default function TemplateEditor({ templateName, templateFile, onBack }) {
   const [pages, setPages] = useState([1, 2]);
+  const [saveStatus, setSaveStatus] = useState(""); // "", "saved"
   const [activePage, setActivePage] = useState(1);
   const [pdfDoc, setPdfDoc] = useState(null);
   const [mobileOptionsOpen, setMobileOptionsOpen] = useState(false);
@@ -101,9 +113,12 @@ export default function TemplateEditor({ templateName, templateFile, onBack }) {
 
   const quillModules = {
     toolbar: [
+      [{ font: Font.whitelist }],
+      [{ size: Size.whitelist }],
       [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "underline", "strike"],
       [{ list: "ordered" }, { list: "bullet" }],
+      [{ align: [] }],
       ["link"],
       ["clean"],
     ],
@@ -126,7 +141,37 @@ export default function TemplateEditor({ templateName, templateFile, onBack }) {
     };
     setPlacedWidgets((prev) => [...prev, newWidget]);
   }
-
+/* ADD after addWidget() */
+  function handleSave() {
+    const storageKey = `template-layout:${templateName || "untitled"}`;
+    const payload = {
+      templateName,
+      docContent,
+      placedWidgets,
+      savedAt: new Date().toISOString(),
+    };
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(payload));
+      setSaveStatus("saved");
+      setTimeout(() => setSaveStatus(""), 2000);
+    } catch (err) {
+      console.error("Failed to save template layout:", err);
+    }
+  }
+  /* ADD near your other useEffects */
+  useEffect(() => {
+    const storageKey = `template-layout:${templateName || "untitled"}`;
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.placedWidgets) setPlacedWidgets(parsed.placedWidgets);
+        if (parsed.docContent) setDocContent(parsed.docContent);
+      }
+    } catch (err) {
+      console.error("Failed to load saved template layout:", err);
+    }
+  }, [templateName]);
   function handleWidgetPointerDown(e, widget) {
     e.stopPropagation();
     const canvasBox = canvasBoxRef.current?.getBoundingClientRect();
@@ -396,7 +441,12 @@ export default function TemplateEditor({ templateName, templateFile, onBack }) {
               </div>
             </div>
 
-            <button className="template-editor-share">Share</button>
+            <div className="template-editor-actions-row">
+              <button className="template-editor-save" onClick={handleSave}>
+                {saveStatus === "saved" ? "Saved ✓" : "Save"}
+              </button>
+              <button className="template-editor-share">Share</button>
+            </div>
           </div>
         </div>
       </div>

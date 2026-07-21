@@ -99,7 +99,7 @@ export default function Settings() {
     language: "English (united States)",
   });
   const [securityData, setSecurityData] = useState({
-    currentPassword: "********",
+    currentPassword: "",
     newPassword: "",
     confirmPassword: "",
     enable2FA: true,
@@ -335,10 +335,11 @@ export default function Settings() {
             Current Password
           </label>
           <input
-            type="text"
+            type="password"
             id="admin-settings-current-password"
             name="currentPassword"
             className="admin-settings-form__input"
+            placeholder="Enter current password"
             value={securityData.currentPassword}
             onChange={handleSecurityChange}
           />

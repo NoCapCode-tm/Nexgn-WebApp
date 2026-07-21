@@ -50,9 +50,19 @@ export default function Documents() {
     />
   );
 
-  return (
+   return (
     <Layout className="admin-docs-page">
       <>
+        {/* Hidden shared gradient def used by .admin-doc-row__icon in dark mode */}
+        <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
+          <defs>
+            <linearGradient id="docIconGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="24" y2="24">
+              <stop offset="2.19%" stopColor="#960101" />
+              <stop offset="100.02%" stopColor="#FF0915" />
+            </linearGradient>
+          </defs>
+        </svg>
+
         {/* Desktop Topbar */}
         <Topbar 
           title="Documents" 
