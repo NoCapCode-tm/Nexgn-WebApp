@@ -127,23 +127,21 @@ export default function Sidebar() {
           {navItems.map(renderItem)}
         </nav>
         <div className="sidebar__bottom">
-          {!isMobile && (
-            <button
-              type="button"
-              className="sidebar__item sidebar__theme-toggle"
-              onClick={toggleDark}
-              title={!expanded ? (isDark ? "Dark Mode" : "Light Mode") : undefined}
-            >
-              <span className="sidebar__icon-wrap">
-                {isDark ? <MoonIcon color="#FF0915" /> : <SunIcon color="#FF0915" />}
+          <button
+            type="button"
+            className="sidebar__item sidebar__theme-toggle"
+            onClick={toggleDark}
+            title={!expanded ? (isDark ? "Dark Mode" : "Light Mode") : undefined}
+          >
+            <span className="sidebar__icon-wrap">
+              {isDark ? <MoonIcon color="#FF0915" /> : <SunIcon color="#FF0915" />}
+            </span>
+            {effectiveExpanded && (
+              <span className="sidebar__item-label sidebar__item-label--theme-active">
+                {isDark ? "Dark Mode" : "Light Mode"}
               </span>
-              {effectiveExpanded && (
-                <span className="sidebar__item-label sidebar__item-label--theme-active">
-                  {isDark ? "Dark Mode" : "Light Mode"}
-                </span>
-              )}
-            </button>
-          )}
+            )}
+          </button>
           {bottomItems.map(renderItem)}
         </div>
       </div>
