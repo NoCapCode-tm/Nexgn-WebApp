@@ -241,7 +241,7 @@ body.dark-mode .admin-theme.admin-dashboard-page .main {
 }
 body.dark-mode .admin-theme.admin-dashboard-page .mobile-topbar {
   background: transparent !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: none !important;
 }
 body.dark-mode .admin-theme.admin-dashboard-page .mobile-topbar__hamburger {
   color: #FFFFFF !important;
@@ -718,10 +718,10 @@ body.dark-mode .admin-theme.admin-dashboard-page .badge--expired {
    ========================================================================== */
 @media (min-width: 769px) and (max-width: 1179px) {
   .admin-theme .main {
-    gap: 24px;
-    padding-right: 32px;
-    padding-bottom: 24px;
-    padding-left: 32px;
+    gap: 28px;
+    padding-right: 42px;
+    padding-bottom: 26px;
+    padding-left: 42px;
   }
   .admin-theme .mobile-topbar {
     padding: 20px 0px 8px 0px;
@@ -757,7 +757,7 @@ body.dark-mode .admin-theme.admin-dashboard-page .badge--expired {
     padding: 0;
   }
   .admin-theme .stat-card {
-    min-height: 186px;
+    min-height: auto;
   }
 
   /* Docs section spacing */

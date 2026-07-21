@@ -3,7 +3,7 @@
 */
 /*  SETUP CARD  */
 .setup-card {
-  display: flex;
+display: flex;
   flex: 1;
   flex-direction: column;
   gap: 18px;
@@ -13,26 +13,26 @@
   background: #ffffff;
 }
 .setup-card__header {
-  display: flex;
+display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 18px;
   border-bottom: 1px solid #E4E4E4;
 }
 .setup-card__title {
-  font-size: 15px;
+font-size: 15px;
   font-weight: 600;
   color: #1a1a2e;
 }
 /*  TABS  */
 .setup-card__tabs {
-  display: flex;
+display: flex;
   border: 1px solid #E4E4E4;
   border-radius: 8px;
   overflow: hidden;
 }
 .tab-btn {
-  padding: 8px 22px;
+padding: 8px 22px;
   border: none;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
@@ -41,41 +41,41 @@
   cursor: pointer;
 }
 .tab-btn--active {
-  color: #ffffff;
+color: #ffffff;
   background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
 }
 .tab-btn--inactive {
-  color: #8A949F;
+color: #8A949F;
   background: #ffffff;
 }
 .tab-btn--inactive:hover {
-  background: #f9f9f9;
+background: #f9f9f9;
 }
 /*  SECTION LABEL  */
 .section-label {
-  margin-bottom: 8px;
+margin-bottom: 8px;
   font-size: 12px;
   font-weight: 500;
   color: #1a1a2e;
 }
 /*  TEMPLATE ROW  */
 .template-row {
-  display: flex;
+display: flex;
   align-items: center;
   gap: 12px;
 }
 .template-select-wrap {
-  position: relative;
+position: relative;
   flex: 1;
   width: 100%;
 }
+
 @media (min-width: 1180px) {
   .template-select-wrap {
     max-width: clamp(400px, 22vw, 420px);
   }
-}
-.template-select {
-  display: flex;
+}.template-select {
+display: flex;
   align-items: center;
   width: 100%;
   height: 38px;
@@ -92,10 +92,10 @@
   appearance: none;
 }
 .template-select:focus {
-  border-color: #FF0915;
+border-color: #FF0915;
 }
 .template-chevron {
-  position: absolute;
+position: absolute;
   top: 50%;
   right: 10px;
   color: #8A949F;
@@ -104,10 +104,10 @@
   transition: transform 0.15s;
 }
 .template-chevron--open {
-  transform: translateY(-50%) rotate(90deg);
+transform: translateY(-50%) rotate(90deg);
 }
 .template-dropdown-menu {
-  position: absolute;
+position: absolute;
   top: calc(100% + 6px);
   left: 0;
   z-index: 50;
@@ -121,7 +121,7 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 .template-dropdown-option {
-  padding: 8px 10px;
+padding: 8px 10px;
   border-radius: 6px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
@@ -130,15 +130,15 @@
   transition: background 0.12s;
 }
 .template-dropdown-option:hover {
-  background: #FFF0F0;
+background: #FFF0F0;
   color: #FF0915;
 }
 .template-dropdown-option--active {
-  color: #FF0915;
+color: #FF0915;
   background: #FFDCDC;
 }
 .btn-create {
-  height: 38px;
+height: 38px;
   padding: 0 22px;
   border: none;
   border-radius: 8px;
@@ -152,11 +152,11 @@
   cursor: pointer;
 }
 .btn-create:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
 /*  OR DIVIDER  */
 .or-divider {
-  display: flex;
+display: flex;
   align-items: center;
   gap: 10px;
   font-size: 11px;
@@ -166,14 +166,14 @@
 }
 .or-divider::before,
 .or-divider::after {
-  flex: 1;
+flex: 1;
   height: 1px;
   background: #E4E4E4;
   content: '';
 }
 /*  UPLOAD ZONE  */
 .upload-zone {
-  display: flex;
+display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
@@ -186,31 +186,31 @@
   cursor: pointer;
 }
 .upload-zone:hover {
-  border-color: #FF0915;
+border-color: #FF0915;
   color: #FF0915;
   background: #fff5f5;
 }
 .admin-file-input-hidden {
-  display: none;
+display: none;
 }
 /*  FORM  */
 .form-row {
-  display: grid;
+display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 .form-group {
-  display: flex;
+display: flex;
   flex-direction: column;
   gap: 6px;
 }
 .form-label {
-  font-size: 12px;
+font-size: 12px;
   font-weight: 500;
   color: #1a1a2e;
 }
 .form-input {
-  height: 38px;
+height: 38px;
   padding: 0 12px;
   border: 1px solid #E4E4E4;
   border-radius: 8px;
@@ -222,14 +222,14 @@
   outline: none;
 }
 .form-input:focus {
-  border-color: #FF0915;
+border-color: #FF0915;
   color: #1a1a2e;
 }
 .form-input::placeholder {
-  color: #C4C9CE;
+color: #C4C9CE;
 }
 .form-textarea {
-  width: 100%;
+width: 100%;
   height: 72px;
   padding: 10px 12px;
   border: 1px solid #E4E4E4;
@@ -243,15 +243,15 @@
   resize: none;
 }
 .form-textarea:focus {
-  border-color: #FF0915;
+border-color: #FF0915;
   color: #1a1a2e;
 }
 .form-textarea::placeholder {
-  color: #C4C9CE;
+color: #C4C9CE;
 }
 /*  BOTTOM SECTION  */
 .bottom-section {
-  display: grid;
+display: grid;
   flex: 1;
   grid-template-columns: 1fr 200px;
   min-height: 220px;
@@ -261,7 +261,7 @@
 }
 /*  DOC PREVIEW  */
 .doc-preview {
-  display: flex;
+display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 14px 16px;
@@ -269,24 +269,24 @@
   background: #fff;
 }
 .doc-preview__header {
-  display: flex;
+display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .doc-preview__title {
-  font-size: 12px;
+font-size: 12px;
   font-weight: 500;
   color: #1a1a2e;
 }
 .doc-preview__zoom {
-  display: flex;
+display: flex;
   align-items: center;
   gap: 6px;
   font-size: 12px;
   color: #8A949F;
 }
 .doc-preview__zoom-btn {
-  display: flex;
+display: flex;
   justify-content: center;
   align-items: center;
   padding: 2px;
@@ -296,10 +296,10 @@
   cursor: pointer;
 }
 .doc-preview__zoom-btn:hover {
-  color: #1a1a2e;
+color: #1a1a2e;
 }
 .doc-preview__canvas {
-  display: flex;
+display: flex;
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -309,18 +309,18 @@
   background: #F7F7F7;
 }
 .doc-preview__filename {
-  display: flex;
+display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
 }
 .doc-preview__filename span {
-  font-size: 12px;
+font-size: 12px;
   color: #8A949F;
 }
 /*  FIELD PROPERTIES  */
 .field-props {
-  display: flex;
+display: flex;
   flex-direction: column;
   justify-content: flex-end;
   gap: 14px;
@@ -328,13 +328,13 @@
   background: #fff;
 }
 .field-props__title {
-  font-size: 12px;
+font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.2px;
   color: #1a1a2e;
 }
 .field-props__label {
-  margin-bottom: 5px;
+margin-bottom: 5px;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -342,7 +342,7 @@
   color: #9ca3af;
 }
 .field-type-select {
-  width: 100%;
+width: 100%;
   height: 32px;
   padding: 0 10px;
   border: 1px solid #E4E4E4;
@@ -356,32 +356,32 @@
   appearance: none;
 }
 .field-type-select:focus {
-  border-color: #FF0915;
+border-color: #FF0915;
 }
 /*  REQUIRED TOGGLE ROW  */
 .required-row {
-  display: flex;
+display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .required-label {
-  font-size: 12px;
+font-size: 12px;
   font-weight: 500;
   color: #8A949F;
 }
 .toggle {
-  position: relative;
+position: relative;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
 }
 .toggle input {
-  width: 0;
+width: 0;
   height: 0;
   opacity: 0;
 }
 .toggle-slider {
-  position: absolute;
+position: absolute;
   border-radius: 20px;
   background: #E4E4E4;
   transition: background 0.2s;
@@ -389,7 +389,7 @@
   inset: 0;
 }
 .toggle-slider::before {
-  position: absolute;
+position: absolute;
   top: 3px;
   left: 3px;
   width: 14px;
@@ -401,14 +401,14 @@
   content: '';
 }
 .toggle input:checked + .toggle-slider {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
 .toggle input:checked + .toggle-slider::before {
-  transform: translateX(16px);
+transform: translateX(16px);
 }
 /*  ASSIGNED INPUT  */
 .assigned-input {
-  width: 100%;
+width: 100%;
   height: 32px;
   padding: 0 10px;
   border: 1px solid #E4E4E4;
@@ -420,14 +420,14 @@
   outline: none;
 }
 .assigned-input:focus {
-  border-color: #FF0915;
+border-color: #FF0915;
 }
 .assigned-input::placeholder {
-  color: #C4C9CE;
+color: #C4C9CE;
 }
 /*  SHARE BUTTON  */
 .btn-share {
-  width: 100%;
+width: 100%;
   height: 36px;
   margin-top: auto;
   border: none;
@@ -441,15 +441,16 @@
   cursor: pointer;
 }
 .btn-share:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
 .btn-share--compact {
-  width: auto;
+width: auto;
   height: 32px;
   padding: 0 24px;
   margin-top: 4px;
   align-self: flex-end;
 }
+
 /*  RESPONSIVE  */
 @media (max-width: 768px) {
   .setup-card {
@@ -500,55 +501,54 @@
   .form-row {
     grid-template-columns: 1fr 1fr;
   }
-}
-/*  MEMBER SPECIFIC REQUEST SIGNATURE FIGURES & FIGMA OVERRIDES  */
+}/*  MEMBER SPECIFIC REQUEST SIGNATURE FIGURES & FIGMA OVERRIDES  */
 /* Active/Inactive tab solid red matching Figma */
 .admin-theme .tab-btn--active {
-  color: #ffffff;
+color: #ffffff;
   background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
 }
 .admin-theme .tab-btn--inactive {
-  color: #111827;
+color: #111827;
   background: #ffffff;
 }
 .admin-theme .setup-card {
-  border: 1px solid #EAEAEA;
+border: 1px solid #EAEAEA;
 }
 /* System Roles / Create button row layout */
 .roles-row {
-  display: grid;
+display: grid;
   align-items: flex-end;
   grid-template-columns: 1fr 1fr auto;
   gap: 16px;
 }
 .roles-row .btn-create {
-  height: 38px;
+height: 38px;
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   transition: background 0.15s;
 }
 .roles-row .btn-create:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
 /* Input calendar icons */
 .input-with-icon-wrap {
-  position: relative;
+position: relative;
   display: flex;
   align-items: center;
   width: 100%;
 }
 .input-with-icon-wrap .form-input {
-  width: 100%;
+width: 100%;
   padding-left: 38px;
 }
 .input-with-icon-wrap .input-icon {
-  position: absolute;
+position: absolute;
   left: 12px;
   color: #8A949F;
   pointer-events: none;
 }
 /* Signer Details Card and badge */
 .signer-box {
-  display: flex;
+display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 16px 20px;
@@ -557,13 +557,13 @@
   background: #FFFFFF;
 }
 .signer-row {
-  display: flex;
+display: flex;
   align-items: flex-end;
   gap: 16px;
   width: 100%;
 }
 .signer-badge {
-  display: flex;
+display: flex;
   justify-content: center;
   align-items: center;
   height: 38px;
@@ -578,7 +578,7 @@
 }
 /* Dotted Add Another Signer button */
 .btn-add-signer {
-  display: flex;
+display: flex;
   justify-content: center;
   align-items: center;
   gap: 6px;
@@ -594,12 +594,12 @@
   cursor: pointer;
 }
 .btn-add-signer:hover {
-  border-color: #FF0915;
+border-color: #FF0915;
   color: #FF0915;
 }
 /* Read only properties inputs */
 .field-props__input-read {
-  width: 100%;
+width: 100%;
   height: 32px;
   border: 1px solid #E4E4E4;
   border-radius: 7px;
@@ -608,17 +608,18 @@
   background: #F9FAFB;
 }
 .select-props {
-  height: 32px;
+height: 32px;
   padding: 0 10px;
   font-size: 12px;
 }
 .field-props .btn-share {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   transition: background 0.15s;
 }
 .field-props .btn-share:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
+
 /* Bottom section desktop scaling to match Figma */
 @media (min-width: 1180px) {
   .admin-theme .bottom-section {
@@ -643,25 +644,24 @@
   .signer-badge {
     align-self: flex-start;
   }
-}
-/* Placeholder styling matching Figma exactly */
+}/* Placeholder styling matching Figma exactly */
 .admin-theme .form-input::placeholder,
 .admin-theme .form-textarea::placeholder {
-  color: #C4C9CE;
+color: #C4C9CE;
 }
 .admin-theme .form-input:focus::placeholder,
 .admin-theme .form-textarea:focus::placeholder {
-  color: transparent;
+color: transparent;
 }
 /* Dynamic Signers Alignment & Button Styles */
 .signer-badge-wrap {
-  display: flex;
+display: flex;
   align-items: center;
   gap: 12px;
   height: 38px;
 }
 .btn-remove-signer {
-  display: flex;
+display: flex;
   justify-content: center;
   align-items: center;
   width: 28px;
@@ -675,14 +675,15 @@
   cursor: pointer;
 }
 .btn-remove-signer:hover {
-  border-color: #FF0915;
+border-color: #FF0915;
   color: #FFFFFF;
   background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
 }
 .remove-placeholder {
-  width: 28px;
+width: 28px;
   height: 28px;
 }
+
 @media (max-width: 768px) {
   .signer-badge-wrap {
     justify-content: space-between;
@@ -725,7 +726,7 @@
   /*  FIGMA TABLET OVERRIDES FOR MEMBER SIGN YOURSELF  */
   .admin-sign-yourself-page .setup-card {
     gap: 20px;
-    width: calc(100% - 32px) !important;
+    width: calc(100% - 2px) !important;
     margin:  16px auto !important;
     padding: 0;
     border: none;
@@ -763,25 +764,23 @@
     min-height: 500px;
     border-right: 1px solid #E4E4E4;
   }
-  }
-
-
-/* Base styles for the new wrapper to avoid breaking desktop/mobile */
+  }/* Base styles for the new wrapper to avoid breaking desktop/mobile */
 .setup-card-top {
-  display: contents;
+display: contents;
 }
 /* Hide extra HR on tablet/desktop to avoid redundant borders */
 .admin-sign-yourself-page .mobile-header-divider {
-  display: none;
+display: none;
 }
 /* FIGMA MOBILE OVERRIDES FOR MEMBER SIGN YOURSELF  */
 /* Ensure changes only apply to this page via .admin-sign-yourself-page */
 .mobile-tabs-container {
-  display: none;
+display: none;
 }
 .btn-create-icon {
-  display: none;
+display: none;
 }
+
 @media (max-width: 768px) {
   /* Match dashboard mobile main layout */
   .admin-sign-yourself-page .main {
@@ -883,9 +882,9 @@
   }
   /* 4. Template Selector Row */
   .admin-sign-yourself-page .template-row {
+    /* Revert to row on mobile */
     flex-direction: row;
     gap: 12px;
-    /* Revert to row on mobile */
       align-items: center;
   }
   .admin-sign-yourself-page .roles-row {
@@ -1216,75 +1215,106 @@
     border-radius: clamp(7px, 0.55vw, 17px);
     font-size: clamp(11px, 0.9vw, 26px);
   }
-}
-/* ============================================
+}/* ============================================
    DARK MODE — Sign Yourself tabs
    ============================================ */
 .dark-mode .setup-card__tabs {
-  border: 1px solid rgba(255, 255, 255, 0.12);
+border: 1px solid rgba(255, 255, 255, 0.12);
   background: transparent;
 }
 .dark-mode .tab-btn--inactive {
-  color: #d0d0d5;
+color: #d0d0d5;
   background: transparent;
 }
 .dark-mode .tab-btn--inactive:hover {
-  background: rgba(255, 255, 255, 0.06);
+background: rgba(255, 255, 255, 0.06);
 }
 .dark-mode .mobile-tabs-container {
-  border: 1px solid rgba(255, 255, 255, 0.12);
+border: none;
   background: transparent;
 }
 .dark-mode .mobile-tabs-container .tab-btn--inactive {
-  border: 1px solid rgba(255, 255, 255, 0.15);
+border: 1px solid rgba(255, 255, 255, 0.15);
   color: #d0d0d5;
   background: transparent;
 }
 .dark-mode .template-select {
-  border: 1px solid rgba(255, 255, 255, 0.12);
+border: 1px solid rgba(255, 255, 255, 0.12);
   color: #d0d0d5;
   background: transparent;
 }
 .dark-mode .template-select:focus {
-  border-color: #FF0915;
+border-color: #FF0915;
 }
-
 .dark-mode .template-chevron {
-  color: #9a9a9a;
+color: #9a9a9a;
 }
 .dark-mode .template-dropdown-menu {
-  border: 1px solid rgba(255, 255, 255, 0.15);
+border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(20, 20, 20, 0.55);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 .dark-mode .template-dropdown-option {
-  color: #d0d0d5;
+color: #d0d0d5;
 }
 .dark-mode .template-dropdown-option:hover {
-  background: rgba(255, 9, 21, 0.12);
+background: rgba(255, 9, 21, 0.12);
   color: #FF6B6B;
 }
 .dark-mode .template-dropdown-option--active {
-  color: #FF0915;
+color: #FF0915;
   background: rgba(255, 9, 21, 0.18);
 }
 .dark-mode .signer-box {
-  border: 1px solid rgba(255, 255, 255, 0.12);
+border: 1px solid rgba(255, 255, 255, 0.12);
   background: transparent;
 }
 .dark-mode .signer-badge {
-  border: 1px solid rgba(255, 255, 255, 0.15);
+border: 1px solid rgba(255, 255, 255, 0.15);
   color: #d0d0d5;
   background: rgba(255, 255, 255, 0.05);
 }
 .dark-mode .btn-add-signer {
-  border: 1px dashed rgba(255, 255, 255, 0.2);
+border: 1px dashed rgba(255, 255, 255, 0.2);
   color: #9a9a9a;
   background: transparent;
 }
 .dark-mode .btn-add-signer:hover {
-  border-color: #FF0915;
+border-color: #FF0915;
   color: #FF0915;
+}
+/* Dark mode overrides for Sign Yourself in Tab / Tablet view */
+body.dark-mode .admin-sign-yourself-page .setup-card,
+.dark-mode .admin-sign-yourself-page .setup-card,
+body.dark-mode .admin-sign-yourself-page .setup-card-top,
+.dark-mode .admin-sign-yourself-page .setup-card-top,
+body.dark-mode .admin-sign-yourself-page .bottom-section,
+.dark-mode .admin-sign-yourself-page .bottom-section,
+body.dark-mode .admin-sign-yourself-page .doc-preview,
+.dark-mode .admin-sign-yourself-page .doc-preview,
+body.dark-mode .admin-sign-yourself-page .field-props,
+.dark-mode .admin-sign-yourself-page .field-props,
+body.dark-mode .admin-sign-yourself-page .mobile-tabs-container,
+.dark-mode .admin-sign-yourself-page .mobile-tabs-container,
+body.dark-mode .admin-sign-yourself-page .setup-card__tabs,
+.dark-mode .admin-sign-yourself-page .setup-card__tabs,
+body.dark-mode .admin-sign-yourself-page .tab-btn--inactive,
+.dark-mode .admin-sign-yourself-page .tab-btn--inactive {
+background: transparent !important;
+}
+
+
+@media (min-width: 769px) and (max-width: 1179px) {
+  body.dark-mode .admin-sign-yourself-page .setup-card-top,
+  .dark-mode .admin-sign-yourself-page .setup-card-top,
+  body.dark-mode .admin-sign-yourself-page .doc-preview,
+  .dark-mode .admin-sign-yourself-page .doc-preview,
+  body.dark-mode .admin-sign-yourself-page .field-props,
+  .dark-mode .admin-sign-yourself-page .field-props,
+  body.dark-mode .admin-sign-yourself-page .tab-btn--inactive,
+  .dark-mode .admin-sign-yourself-page .tab-btn--inactive {
+    background: transparent !important;
+  }
 }

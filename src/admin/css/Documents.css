@@ -1,12 +1,12 @@
 /* src/admin/css/Documents.css */
 /* == TOPBAR ACTIONS (search + filter + add) == */
 .admin-docs-topbar-actions {
-  display: flex;
+display: flex;
   align-items: center;
   gap: 10px;
 }
 .admin-docs-search-wrap {
-  display: flex;
+display: flex;
   align-items: center;
   gap: 8px;
   width: 100%;
@@ -20,14 +20,14 @@
   transition: box-shadow 0.2s, transform 0.2s;
 }
 .admin-docs-search-wrap:hover {
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
 .admin-docs-search-wrap:focus-within {
-  border-color: #FF0915;
+border-color: #FF0915;
 }
 .admin-docs-search-input {
-  width: 100%;
+width: 100%;
   border: none;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
@@ -36,10 +36,10 @@
   outline: none;
 }
 .admin-docs-search-input::placeholder {
-  color: #9ca3af;
+color: #9ca3af;
 }
 .admin-docs-filter-btn {
-  display: flex;
+display: flex;
   align-items: center;
   gap: 6px;
   height: 36px;
@@ -57,18 +57,18 @@
 }
 /* Hide Filter button on desktop Documents topbar only */
 .admin-docs-page .desktop-topbar .admin-docs-filter-wrapper {
-  display: none;
+display: none;
 }
 .admin-docs-filter-btn:hover {
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
 .admin-docs-filter-btn:active {
-  box-shadow: 0 1px 4px rgba(138, 148, 159, 0.3);
+box-shadow: 0 1px 4px rgba(138, 148, 159, 0.3);
   transform: translateY(1px);
 }
 .admin-docs-add-btn {
-  display: flex;
+display: flex;
   align-items: center;
   gap: 6px;
   height: 36px;
@@ -86,26 +86,27 @@
   cursor: pointer;
 }
 .admin-docs-add-btn:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
 .admin-docs-add-btn:active {
-  box-shadow: none;
+box-shadow: none;
   transform: translateY(1px);
 }
 .admin-docs-add-btn-short {
-  display: none;
+display: none;
 }
 /* == TABS == */
 .admin-docs-tabs {
-  display: grid;
+display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   width: 100%;
   height: 37px;
 }
 .admin-docs-tab {
+/* Apply full-width bottom border to each individual section */
   height: 37px;
   border: none;
   border-bottom: 2px solid #E4E4E4;
@@ -118,25 +119,24 @@
   background: none;
   transition: color 0.15s, border-color 0.15s;
   cursor: pointer;
-/* Apply full-width bottom border to each individual section */
 }
 .admin-docs-tab:hover {
-  color: #FF0915;
+color: #FF0915;
 }
 .admin-docs-tab--active {
-  font-weight: 600;
+font-weight: 600;
   color: #FF0915;
   border-bottom-color: #FF0915;
 }
 /* == TABLE == */
 .admin-docs-section {
-  flex: 1;
+flex: 1;
   padding: 0;
   border-radius: 0;
   background: transparent;
 }
 .admin-docs-table__header {
-  display: grid;
+display: grid;
   grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
   padding: 10px 16px;
   border: none;
@@ -149,13 +149,13 @@
   background: transparent;
 }
 .admin-docs-table {
-  display: flex;
+display: flex;
   flex-direction: column;
   gap: 8px;
   width: 100%;
 }
 .admin-doc-row {
-  display: grid;
+display: grid;
   align-items: center;
   grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
   height: 60px;
@@ -168,21 +168,23 @@
   transition: background 0.12s;
 }
 .admin-doc-row:hover {
-  background: #fafafa;
+background: #fafafa;
 }
 .admin-doc-row__title {
-  display: flex;
+display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 500;
   color: #111827;
 }
 .admin-doc-row__icon {
+width: 22px;
+  height: 22px;
   flex-shrink: 0;
-  color: #FF0915;
+  color: #E53935;
 }
 .admin-doc-row__note {
-  padding-right: 12px;
+padding-right: 12px;
   overflow: hidden;
   font-size: 12px;
   white-space: nowrap;
@@ -190,11 +192,11 @@
   color: #8A949F;
 }
 .admin-doc-row__cell {
-  font-size: 12px;
+font-size: 12px;
   color: #8A949F;
 }
 .admin-doc-row__menu {
-  position: relative;
+position: relative;
   display: flex;
   align-items: center;
   padding: 4px;
@@ -203,11 +205,11 @@
   cursor: pointer;
 }
 .admin-doc-row__menu:hover {
-  color: #374151;
+color: #374151;
   background: #f3f4f6;
 }
 .admin-doc-row__menu-trigger {
-  display: flex;
+display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -218,7 +220,7 @@
   cursor: pointer;
 }
 .action-menu {
-  position: absolute;
+position: absolute;
   top: 100%;
   right: 0;
   z-index: 20;
@@ -233,7 +235,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 .action-menu__item {
-  display: flex;
+display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
@@ -249,36 +251,36 @@
   cursor: pointer;
 }
 .action-menu__item:last-child {
-  border-bottom: none;
+border-bottom: none;
 }
 .action-menu__item:hover {
-  background: #f9fafb;
+background: #f9fafb;
 }
 .action-menu__item--danger {
-  color: #E22A2A;
+color: #E22A2A;
   background: #FFF1F1;
 }
 .action-menu__item--danger:hover {
-  background: #FFE2E2;
+background: #FFE2E2;
 }
 /* == BADGES == */
 .admin-badge {
-  display: inline-block;
+display: inline-block;
   padding: 3px 12px;
   border-radius: 4px;
   font-size: 11px;
   font-weight: 400;
 }
 .admin-badge--pending {
-  color: #D28E56;
+color: #D28E56;
   background: #FEF5E0;
 }
 .admin-badge--signed {
-  color: #559B6F;
+color: #559B6F;
   background: #E6F7EC;
 }
 .admin-badge--expired, .admin-badge--failed {
-  color: #E22A2A;
+color: #E22A2A;
   background: #FFDCDC;
 }
 /* ── FIGMA MOBILE OVERRIDES (Hidden on Desktop/Tablet) ── */
@@ -287,12 +289,13 @@
 .mobile-lbl,
 .mobile-owner-badge,
 .admin-docs-mobile-section-title {
-  display: none;
+display: none;
 }
 .desktop-val,
 .desktop-status {
-  display: block;
+display: block;
 }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .admin-docs-page .mobile-page-header .topbar__bottom-row {
@@ -437,6 +440,7 @@
   }
   /* --- Document Card Overhaul (Figma) --- */
   .admin-doc-row {
+    /* Signer, Date, Owner */
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr 0.8fr;
@@ -449,7 +453,6 @@
     border-radius: var(--space-md);
     background: #ffffff;
     box-shadow: 0 1.067vw 5.333vw rgba(0,0,0,0.04);
-    /* Signer, Date, Owner */
       align-items: start;
   }
   /* Hide Desktop Elements */
@@ -470,6 +473,7 @@
   }
   /* Title Row */
   .admin-doc-row__title {
+    /* Take up first two cols */
     display: flex;
     align-items: center;
     grid-column: 1 / 3;
@@ -478,7 +482,6 @@
     font-size: var(--font-lg);
     font-weight: 600;
     color: #111827;
-    /* Take up first two cols */
       gap: var(--space-xs);
   }
   .admin-doc-row__title span {
@@ -494,15 +497,15 @@
   }
   /* Top Right Status Pill (Desktop style but positioned for Mobile grid) */
   .mobile-status-corner {
-    display: none;
   /* Hide corner dot */
+    display: none;
   }
   .desktop-status {
+    /* Put in 3rd column of first row */
     display: flex;
     justify-content: flex-end;
     align-items: center;
     grid-column: 3 / 4;
-    /* Put in 3rd column of first row */
       grid-row: 1;
   }
   .desktop-status .admin-badge {
@@ -515,8 +518,8 @@
   }
   /* Grid Layout for Meta Columns */
   .admin-doc-row__cell {
-    display: none;
   /* Hide any default wrapper cell styles */
+    display: none;
   }
   .admin-doc-row__cell.mobile-col {
     display: flex;
@@ -550,8 +553,8 @@
   }
   /* Owner text formatting */
   .mobile-owner-badge {
-    display: none;
   /* Hide the stacked colored badge */
+    display: none;
   }
   .admin-doc-row__cell.mobile-col-owner .desktop-val {
     display: block;
@@ -609,10 +612,8 @@
     grid-template-rows: auto auto;
     gap: 0 24px;
     border-bottom: none;
-    /* Figma: ~40px side padding, 32px top gap from hamburger bar */
-      padding: 24px 40px 0 40px;
-    /* row-gap=0, col-gap=24px */
-      margin: 0;
+    padding: 20px 0px 0 0px;
+    margin: 0;
   }
   /* Title+subtitle block =†’ row 1, col 1 */
   .admin-docs-page .mobile-page-header .topbar__bottom-row {
@@ -640,7 +641,7 @@
     width: calc(100% + 80px);
     margin: 20px -40px 0 -40px;
     border: none;
-    border-bottom: 1px solid #E4E4E4;
+    border-bottom: none;
   }
   /* =================================================================
      3. TITLE TYPOGRAPHY  =€” match Figma bold heading
@@ -654,6 +655,7 @@
   }
   .admin-docs-page .topbar__sub {
     margin: 0;
+    margin-top: 7px;
     font-size: 13px;
     font-weight: 400;
     line-height: 1.4;
@@ -720,15 +722,14 @@
      ================================================================= */
   .admin-docs-tabs {
     display: flex;
-    gap: 24px;
-    width: calc(100% - 80px);
-    margin: 40px 40px 0 40px;
+    gap: 14px;
+    margin: 0px 40px 10px 40px;
     padding: 0;
-    border-bottom: 1px solid #E6E6E6;
-    /* Tabs must align with the section content: section has 40px padding, so tabs use same 40px side margin */
-      height: auto;
+    height: auto;
   }
   .admin-docs-tab {
+    /* Underline sits only under the tab's own 1/3 section =€” not wider */
+  /* Prevent underline from bleeding =€” each tab is exactly 1/3 */
     flex: 1 1 0;
     box-sizing: border-box;
     width: 0;
@@ -740,9 +741,7 @@
     text-align: center;
     color: #8A949F;
     transition: color 0.15s;
-    /* Underline sits only under the tab's own 1/3 section =€” not wider */
       border-bottom: 2px solid transparent;
-  /* Prevent underline from bleeding =€” each tab is exactly 1/3 */
   }
   .admin-docs-tab--active {
     border-bottom: 2px solid #E22A2A;
@@ -758,15 +757,14 @@
     flex: 1;
     width: auto;
     margin: 0;
-    padding: 0 40px;
   }
   .admin-docs-table {
+    /* Increased breathing room between tabs and header row */
     flex-direction: column;
     gap: 0;
     width: 100%;
     margin: 0;
-    padding: 0 0 32px 0;
-    /* Increased breathing room between tabs and header row */
+    padding: 30px 0 32px 0;
       display: flex;
   }
   /* =================================================================
@@ -774,11 +772,16 @@
         TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
      ================================================================= */
   .admin-docs-table__header {
+    /*
+       * SAME grid as .admin-doc-row =€” guarantees column alignment.
+       */
+      /*
+       * Header must use 60px padding to match that exact X position.
+       */
     display: grid;
     grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
     width: 100%;
     margin: 0;
-    padding: 0 60px 14px 60px;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.7px;
@@ -786,17 +789,13 @@
     color: #374151;
     background: transparent;
     /*
-       * SAME grid as .admin-doc-row =€” guarantees column alignment.
-       * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
-       */
-      /*
-       * ROOT CAUSE FIX: .admin-docs-table__header is OUTSIDE .admin-docs-section.
-       * .admin-docs-section has padding: 0 40px
-       * .admin-doc-row (inside section) has padding: 0 20px
-       * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
-       * Header must use 60px padding to match that exact X position.
-       */
-      box-sizing: border-box;
+     * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
+     * ROOT CAUSE FIX: .admin-docs-table__header is OUTSIDE .admin-docs-section.
+     * .admin-docs-section has padding: 0 40px
+     * .admin-doc-row (inside section) has padding: 0 20px
+     * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
+     */
+    box-sizing: border-box;
   }
   /* Hide the NOTE column header */
   .admin-docs-table__header span:nth-child(2) {
@@ -942,15 +941,14 @@
     flex: 1;
     width: auto;
     margin: 0;
-    padding: 0 40px;
   }
   .admin-docs-table {
+    /* Increased breathing room between tabs and header row */
     flex-direction: column;
     gap: 0;
     width: 100%;
     margin: 0;
-    padding: 40px 0 32px 0;
-    /* Increased breathing room between tabs and header row */
+    padding: 30px 0 32px 0;
       display: flex;
   }
   /* =================================================================
@@ -958,11 +956,16 @@
         TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
      ================================================================= */
   .admin-docs-table__header {
+    /*
+       * SAME grid as .admin-doc-row =€” guarantees column alignment.
+       */
+      /*
+       * Header must use 60px padding to match that exact X position.
+       */
     display: grid;
     grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
     width: 100%;
     margin: 0;
-    padding: 0 60px 14px 60px;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.7px;
@@ -970,17 +973,13 @@
     color: #374151;
     background: transparent;
     /*
-       * SAME grid as .admin-doc-row =€” guarantees column alignment.
-       * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
-       */
-      /*
-       * ROOT CAUSE FIX: .admin-docs-table__header is OUTSIDE .admin-docs-section.
-       * .admin-docs-section has padding: 0 40px
-       * .admin-doc-row (inside section) has padding: 0 20px
-       * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
-       * Header must use 60px padding to match that exact X position.
-       */
-      box-sizing: border-box;
+     * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
+     * ROOT CAUSE FIX: .admin-docs-table__header is OUTSIDE .admin-docs-section.
+     * .admin-docs-section has padding: 0 40px
+     * .admin-doc-row (inside section) has padding: 0 20px
+     * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
+     */
+    box-sizing: border-box;
   }
   /* Hide the NOTE column header */
   .admin-docs-table__header span:nth-child(2) {
@@ -1138,6 +1137,7 @@
     justify-self: center;
   }
   .admin-docs-page .admin-doc-row__menu {
+  /* Centers the button in the ACTION column */
     position: relative;
     display: flex;
     justify-content: center;
@@ -1148,7 +1148,6 @@
     padding: 0;
     border-radius: 6px;
     justify-self: center;
-  /* Centers the button in the ACTION column */
   }
   /* Dropdown/hover menu positioning relative to action button */
   .admin-docs-page .admin-doc-row__menu .action-menu,
@@ -1158,19 +1157,19 @@
     right: 0;
     left: auto;
   }
-}
-.admin-docs-empty-state {
-  padding: 40px;
+}.admin-docs-empty-state {
+padding: 40px;
   font-size: 13px;
   text-align: center;
   color: #9ca3af;
 }
 /* Member documents filter popover styling */
 .admin-docs-filter-wrapper {
-  position: relative;
+position: relative;
   display: inline-block;
 }
 .admin-docs-filter-dropdown {
+/* Desktop default */
   position: absolute;
   top: 48px;
   z-index: 1000;
@@ -1184,16 +1183,15 @@
   font-family: 'Inter', sans-serif;
   background-color: #FFFFFF;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  /* Desktop default */
   right: 0;
 }
 .admin-docs-filter-dropdown-group {
-  display: flex;
+display: flex;
   flex-direction: column;
   gap: 4px;
 }
 .admin-docs-filter-dropdown-label {
-  display: block;
+display: block;
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -1202,7 +1200,7 @@
   color: #6B7280;
 }
 .admin-docs-filter-dropdown-select {
-  width: 100%;
+width: 100%;
   height: 32px;
   padding: 0 8px;
   border: 1px solid #E4E4E4;
@@ -1214,11 +1212,11 @@
   outline: none;
 }
 .admin-docs-filter-dropdown-divider {
-  margin: 4px 0;
+margin: 4px 0;
   border-top: 1px solid #F3F4F6;
 }
 .admin-docs-filter-dropdown-reset {
-  width: 100%;
+width: 100%;
   padding: 8px 0;
   border: none;
   font-size: 12px;
@@ -1228,6 +1226,7 @@
   background-color: transparent;
   cursor: pointer;
 }
+
 /* Positioning overrides based on viewport */
 @media (max-width: 768px) {
   .admin-docs-filter-dropdown {
@@ -1294,27 +1293,23 @@
   .admin-docs-page .admin-doc-row__title {
     gap: clamp(10px, 0.69vw, 17px);
   }
-}
-
-/* ============================================
+}/* ============================================
    DARK MODE — Status badges (match Dashboard)
    ============================================ */
 body.dark-mode .admin-docs-page .admin-badge--pending {
-  background: transparent !important;
-  border: 1px solid #FFC107 !important;
+border: 1px solid #FFC107 !important;
   color: #FFC107 !important;
 }
 body.dark-mode .admin-docs-page .admin-badge--signed {
-  background: transparent !important;
-  border: 1px solid #2ECC71 !important;
+border: 1px solid #2ECC71 !important;
   color: #2ECC71 !important;
 }
 body.dark-mode .admin-docs-page .admin-badge--expired,
 body.dark-mode .admin-docs-page .admin-badge--failed {
-  background: transparent !important;
-  border: 1px solid #E74C3C !important;
+border: 1px solid #E74C3C !important;
   color: #E74C3C !important;
 }
+
 
 @media (max-width: 768px) {
   body.dark-mode .admin-docs-page .admin-badge {
@@ -1338,43 +1333,41 @@ body.dark-mode .admin-docs-page .admin-badge--failed {
   body.dark-mode .admin-docs-page .admin-badge--failed {
     background-color: #E74C3C !important;
   }
-}
-
-body.dark-mode .admin-docs-page .admin-doc-row__icon {
-  stroke: url(#docIconGradient) !important;
+}body.dark-mode .admin-docs-page .admin-doc-row__icon {
+stroke: url(#docIconGradient) !important;
 }
 /* ============================================
    DARK MODE — Action dropdown (match Dashboard doc-row__dropdown)
    ============================================ */
 body.dark-mode .admin-docs-page .admin-doc-row__menu {
-  color: #9A9A9A !important;
+color: #9A9A9A !important;
 }
 body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
-  background: rgba(255, 255, 255, 0.05) !important;
+background: rgba(255, 255, 255, 0.05) !important;
   color: #FFFFFF !important;
 }
 body.dark-mode .admin-docs-page .action-menu {
-  background: rgba(17, 17, 17, 0.55) !important;
+background: rgba(17, 17, 17, 0.55) !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
 }
 body.dark-mode .admin-docs-page .action-menu__item {
-  background: transparent !important;
+background: transparent !important;
   border-bottom: 1px solid rgba(116, 107, 107, 0.4) !important;
   color: #D7D7D7 !important;
 }
 body.dark-mode .admin-docs-page .action-menu__item:last-child {
-  border-bottom: none !important;
+border-bottom: none !important;
 }
 body.dark-mode .admin-docs-page .action-menu__item:hover {
-  background: rgba(255, 255, 255, 0.04) !important;
+background: rgba(255, 255, 255, 0.04) !important;
 }
 body.dark-mode .admin-docs-page .action-menu__item--danger {
-  color: #E53935 !important;
+color: #E53935 !important;
   background: transparent !important;
 }
 body.dark-mode .admin-docs-page .action-menu__item--danger:hover {
-  background: rgba(229, 57, 53, 0.1) !important;
+background: rgba(229, 57, 53, 0.1) !important;
 }
