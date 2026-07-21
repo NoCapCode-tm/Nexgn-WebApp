@@ -1000,10 +1000,6 @@ body.dark-mode .admin-sign-yourself-page .tab-btn--inactive,
     grid-template-columns: 1fr;
   }
 
-  .admin-theme .main {
-    padding-bottom: 26.667vw;
-  }
-
   .admin-theme .remove-placeholder {
     display: none;
   }
