@@ -326,13 +326,13 @@
 }
 
 .dark-mode .mobile-tabs-container .tab-btn--inactive {
-  color: #d0d0d5;
+  color: #D8D8D8;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .dark-mode .tab-btn--inactive {
-  color: #d0d0d5;
+  color: #D8D8D8;
   background: transparent;
 }
 
@@ -501,8 +501,11 @@
 }
 
 .admin-theme .tab-btn--inactive {
-  color: #111827;
   background: #ffffff;
+}
+
+.dark-mode.admin-theme .tab-btn--inactive {
+  color: #D8D8D8;
 }
 
 .form-row {
@@ -607,7 +610,11 @@ body.dark-mode .admin-sign-yourself-page .mobile-tabs-container,
 body.dark-mode .admin-sign-yourself-page .setup-card__tabs,
 .dark-mode .admin-sign-yourself-page .setup-card__tabs,
 body.dark-mode .admin-sign-yourself-page .tab-btn--inactive,
-.dark-mode .admin-sign-yourself-page .tab-btn--inactive {
+.dark-mode .admin-sign-yourself-page .tab-btn--inactive,
+body.dark-mode .admin-sign-yourself-page .template-select,
+.dark-mode .admin-sign-yourself-page .template-select,
+body.dark-mode .admin-sign-yourself-page .template-row,
+.dark-mode .admin-sign-yourself-page .template-row {
   background: transparent !important;
 }
 
@@ -914,6 +921,12 @@ body.dark-mode .admin-sign-yourself-page .tab-btn--inactive,
     border: 1px solid #D9D9D9;
   }
 
+  .dark-mode .admin-sign-yourself-page .mobile-tabs-container .tab-btn--inactive {
+    color: #D8D8D8;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
   .admin-sign-yourself-page .section-label,
   .admin-sign-yourself-page .form-label {
     margin-bottom: 8px;
@@ -933,6 +946,12 @@ body.dark-mode .admin-sign-yourself-page .tab-btn--inactive,
     color: #666666;
     background: #ffffff;
     border: 0.27vw solid #D9D9D9;
+  }
+
+  .dark-mode .admin-sign-yourself-page .tab-btn--inactive {
+    color: #D8D8D8;
+    background: transparent;
+    border: 0.27vw solid rgba(255, 255, 255, 0.15);
   }
 
   .admin-sign-yourself-page .template-select {
