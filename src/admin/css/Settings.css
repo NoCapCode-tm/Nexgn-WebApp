@@ -20,6 +20,11 @@ body.dark-mode .admin-settings-page .admin-settings-topbar-search:hover {
   box-shadow: none !important;
 }
 
+body.dark-mode .admin-settings-page .topbar__title,
+body.dark-mode .admin-settings-page .ms-mobile-detail-header__title {
+  color: #f5f5f5 !important;
+}
+
 body.dark-mode .admin-settings-page .team-admin-name {
   color: #ffffff !important;
 }
@@ -615,15 +620,11 @@ body.dark-mode .admin-settings-page .admin-audit-mobile-tab {
   color: #111111;
 }
 
-.admin-integration-desc--desktop {
-  display: block !important;
-}
-
 .admin-integration-description {
   margin: 0;
   margin-top: 16px;
   font-family: 'Inter', sans-serif;
-  font-size: 11px;
+  font-size: clamp(11px, 0.9vw, 14px);
   line-height: 1.5;
   color: #666666;
 }
@@ -1408,9 +1409,7 @@ body.dark-mode .admin-settings-page .team-action-btn:hover {
   grid-template-columns: 1.4fr 1.2fr 1.5fr 1.4fr 0.8fr;
 }
 
-.admin-integration-desc--tablet {
-  display: none !important;
-}
+
 
 .admin-settings-2fa-row {
   display: flex;
@@ -2507,13 +2506,7 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
     gap: clamp(8px, 1vw, 12px);
   }
 
-  .admin-integration-desc--desktop {
-    display: none !important;
-  }
-
-  .admin-integration-description {
-    font-size: 7px !important;
-  }
+  
 
   .admin-notification-item {
     display: flex;
@@ -2651,9 +2644,7 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
     min-width: 600px;
   }
 
-  .admin-integration-desc--tablet {
-    display: block !important;
-  }
+  
 
   .admin-settings-avatar-row {
     gap: clamp(24px, 3vw, 36px);
@@ -3414,13 +3405,7 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
     color: #6B7280;
   }
 
-  .admin-integration-desc--desktop {
-    display: none !important;
-  }
-
-  .admin-integration-description {
-    font-size: 7px !important;
-  }
+  
 
   .admin-integration-item {
     align-items: center !important;
@@ -3519,10 +3504,13 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
   }
 
   .ms-mobile-detail .admin-settings-2fa-helper {
-    max-width: 250px !important;
+    max-width: 100% !important;
     font-size: 13px !important;
     line-height: 1.45 !important;
     color: #666666 !important;
+    white-space: normal !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
   }
 
   .ms-mobile-detail .admin-settings-section-title {
@@ -3582,6 +3570,19 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
     background: #ffffff;
     border: 1px solid #E4E4E4;
     border-radius: 20px;
+  }
+
+  body.dark-mode .ms-mobile-team-search {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  body.dark-mode .ms-mobile-team-search input {
+    color: #e5e5e5;
+  }
+
+  body.dark-mode .ms-mobile-team-search input::placeholder {
+    color: #9a9a9a;
   }
 
   .team-col-name {
@@ -3745,6 +3746,12 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
     cursor: pointer;
   }
 
+  body.dark-mode .ms-mobile-detail-header__search-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: none;
+  }
+
   .ms-mobile-menu-item__label {
     font-family: 'Inter', sans-serif;
     font-size: 18px;
@@ -3763,6 +3770,12 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
     border: 1px solid #E4E4E4;
     border-radius: 50%;
     cursor: pointer;
+  }
+
+  body.dark-mode .ms-mobile-team-icon-btn {
+    color: #b8b8be;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .ms-mobile-team-search input {
@@ -3793,9 +3806,7 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
     min-width: 600px;
   }
 
-  .admin-integration-desc--tablet {
-    display: block !important;
-  }
+  
 
   .admin-settings-avatar-row {
     gap: var(--space-md);
@@ -4325,5 +4336,55 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
     color: #FFFFFF;
     background: #e50012;
     border-radius: 9999px;
+  }
+
+  body.dark-mode .ms-mobile-menu {
+    background: transparent;
+  }
+
+  body.dark-mode .ms-mobile-profile-card {
+    background: rgb(17 17 17 / 15%);
+    border: 1px solid #746b6b;
+    box-shadow: none;
+  }
+
+  body.dark-mode .ms-mobile-profile-card__name {
+    color: #f5f5f5;
+  }
+
+  body.dark-mode .ms-mobile-profile-card__email {
+    color: #9a9a9a;
+  }
+
+  body.dark-mode .ms-mobile-group-title {
+    color: #9a9a9a;
+  }
+
+  body.dark-mode .ms-mobile-group-items {
+    background: rgb(17 17 17 / 15%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+  }
+
+  body.dark-mode .ms-mobile-menu-item {
+    color: #e5e5e5;
+    background: transparent;
+  }
+
+  body.dark-mode .ms-mobile-menu-item::after {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  body.dark-mode .ms-mobile-menu-item:active {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  body.dark-mode .ms-mobile-menu-item__label,
+  body.dark-mode button.ms-mobile-menu-item .ms-mobile-menu-item__label {
+    color: #e5e5e5;
+  }
+
+  body.dark-mode .ms-mobile-menu-item__icon {
+    background: rgba(255, 255, 255, 0.08);
   }
 }

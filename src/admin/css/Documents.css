@@ -574,7 +574,7 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     color: #8A949F;
     text-align: center;
     border: none;
-    border-bottom: 2px solid transparent;
+    border-bottom: 2px solid #E4E4E4;
     transition: color 0.15s;
   }
 

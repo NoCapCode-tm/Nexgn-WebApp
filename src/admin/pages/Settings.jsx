@@ -685,10 +685,7 @@ export default function Settings() {
                 </span>
               </div>
             </div>
-            <p className="admin-integration-description admin-integration-desc--desktop">
-              Sync your signed documents directly to Sync your signed documents directly to Google Drive for instant access<br className="desktop-only-br" />and secure storage. Enjoy seamless organization, real-time backup, and effortless sharing with your team.Google<br className="desktop-only-br" />drive
-            </p>
-            <p className="admin-integration-description admin-integration-desc--tablet">
+            <p className="admin-integration-description">
               Sync your signed documents directly to Sync your signed documents directly to Google Drive for instant access and secure storage. Enjoy seamless organization, real-time backup, and effortless sharing with your team.Google drive
             </p>
           </div>
