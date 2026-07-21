@@ -482,6 +482,12 @@
     margin-top: var(--space-sm);
   }
 
+  .admin-templates-list-page .mobile-page-header .mobile-filter-row .admin-docs-search-wrap {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+
   .template-create-row {
     align-items: center;
     flex-direction: row;
