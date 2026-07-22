@@ -13,6 +13,36 @@
   --color-border: #E5E7EB;
   --color-card-border: #F3E8E8;
   --font-family-sans: 'Inter', sans-serif;
+
+  --color-bg-page: #FDF9F9;
+  --color-bg-card: #FFFFFF;
+  --color-input-bg: #FFFFFF;
+  --color-input-border: #4B5563;
+  --color-input-placeholder: #9CA3AF;
+  --color-footer-text: #000000;
+  --color-subtitle-text: #666666;
+  --color-select-arrow: #666666;
+  --color-readonly-bg: #F9FAFB;
+}
+
+[data-theme='dark'] {
+  --color-brand-red: #FF3B42;
+  --color-brand-red-hover: #FF565D;
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #D4D4D4;
+  --color-text-muted: #A3A3A3;
+  --color-border: #2E2E2E;
+  --color-card-border: #262626;
+
+  --color-bg-page: #0D0D0F;
+  --color-bg-card: #1A1A1D;
+  --color-input-bg: #1F1F22;
+  --color-input-border: #3A3A3E;
+  --color-input-placeholder: #6B6B6F;
+  --color-footer-text: #F5F5F5;
+  --color-subtitle-text: #A3A3A3;
+  --color-select-arrow: #A3A3A3;
+  --color-readonly-bg: #26262A;
 }
 
 /* ==========================================================
@@ -24,9 +54,31 @@
   flex-direction: row;
   min-height: 100vh;
   font-family: var(--font-family-sans);
-  background: #FDF9F9 url('../../assets/light.png') no-repeat center center / cover;
+  background: var(--color-bg-page) url('../../assets/light.png') no-repeat center center / cover;
   overflow-x: hidden;
   box-sizing: border-box;
+  transition: background-color 0.2s;
+}
+
+[data-theme="dark"] .login-signup-container {
+  background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url('../../assets/dark-bg.png');
+  background-color: #090909;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.brand-logo-img--dark {
+  display: none;
+}
+
+[data-theme="dark"] .brand-logo-img--light {
+  display: none;
+}
+
+[data-theme="dark"] .brand-logo-img--dark {
+  display: block;
 }
 
 /* ==========================================================
@@ -40,6 +92,13 @@
   box-sizing: border-box;
   width: 50%;
   padding: 4.44vw 5.56vw;
+}
+
+.brand-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .login-signup-right {
@@ -59,9 +118,9 @@
 .brand-header {
   display: flex;
   align-items: center;
-  margin-top: -1.44vw;
+  margin-top: 0;
   margin-left: -2.56vw;
-  margin-bottom: 0;
+  margin-bottom: 2vw;
 }
 
 .brand-logo-img {
@@ -76,7 +135,7 @@
 .brand-hero {
   display: flex;
   flex-direction: column;
-  margin-top: 7.5vw;
+  margin-top: 0;
   margin-bottom: 2.5vw;
 }
 
@@ -89,6 +148,10 @@
   color: var(--color-text-primary);
 }
 
+[data-theme="dark"] .brand-hero__title {
+  color: #FFFFFF;
+}
+
 .brand-hero__title--red {
   color: var(--color-brand-red);
 }
@@ -99,6 +162,10 @@
   font-size: 1.04vw;
   line-height: 1.6;
   color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .brand-hero__subtext {
+  color: #B3B3B3;
 }
 
 .brand-hero__divider {
@@ -153,11 +220,19 @@
   color: var(--color-text-primary);
 }
 
+[data-theme="dark"] .brand-feature-item__title {
+  color: #FFFFFF;
+}
+
 .brand-feature-item__desc {
   margin: 0;
   font-size: 0.83vw;
   line-height: 1.5;
   color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .brand-feature-item__desc {
+  color: #999999;
 }
 
 /* ==========================================================
@@ -169,7 +244,7 @@
   width: 34.72vw;
   height: 38.89vw;
   padding: 0 4.17vw;
-  background: #FFFFFF;
+  background: var(--color-bg-card);
   border: none;
   border-radius: 0.42vw;
   box-shadow: 0 0.69vw 2.78vw rgba(0, 0, 0, 0.035);
@@ -177,6 +252,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: background-color 0.2s;
+}
+
+[data-theme="dark"] .form-card {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: none;
 }
 
 .login-signup-container .form-card__icon-header {
@@ -196,6 +278,10 @@
   color: #111111;
 }
 
+[data-theme="dark"] .login-signup-container .form-card__icon {
+  color: #FFFFFF;
+}
+
 .login-signup-container .form-card__icon-header svg.success-icon {
   width: 3.8vw !important;
   height: 3.8vw !important;
@@ -211,11 +297,19 @@
   color: #000000;
 }
 
+[data-theme="dark"] .login-signup-container .form-card__title {
+  color: #FFFFFF;
+}
+
 .login-signup-container .form-card__subtitle {
   margin: 0 0 1.67vw 0;
   font-size: 0.9vw;
   font-weight: 500;
   color: #666666;
+}
+
+[data-theme="dark"] .login-signup-container .form-card__subtitle {
+  color: #A3A3A3;
 }
 
 /* ==========================================================
@@ -242,12 +336,20 @@
   color: #333333;
 }
 
+[data-theme="dark"] .login-signup-container .form-label {
+  color: #E5E5E5;
+}
+
 .login-signup-container .forgot-password-link {
   font-size: 0.83vw;
   font-weight: 500;
   color: #333333;
   text-decoration: none;
   cursor: pointer;
+}
+
+[data-theme="dark"] .login-signup-container .forgot-password-link {
+  color: #B3B3B3;
 }
 
 .login-signup-container .forgot-password-link:hover {
@@ -268,8 +370,18 @@
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+[data-theme="dark"] .login-signup-container .form-input {
+  color: #FFFFFF;
+  background: transparent;
+  border-color: #3A3A3A;
+}
+
 .login-signup-container .form-input::placeholder {
   color: #9CA3AF;
+}
+
+[data-theme="dark"] .login-signup-container .form-input::placeholder {
+  color: #6B6B6B;
 }
 
 .login-signup-container .form-input:focus {
@@ -313,6 +425,10 @@
   color: #000000;
 }
 
+[data-theme="dark"] .form-card-footer {
+  color: #FFFFFF;
+}
+
 .form-footer-link {
   font-weight: 600;
   color: var(--color-brand-red);
@@ -335,4 +451,147 @@
 .form-select option {
   color: #000000;
   background: #FFFFFF;
+}
+
+[data-theme="dark"] .form-select option {
+  color: #FFFFFF;
+  background: #1A1A1A;
+}
+
+.login-signup-container .form-input--readonly {
+  background: var(--color-readonly-bg);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================
+   9. Tablet (769px–1179px)
+========================================================== */
+
+@media (min-width: 769px) and (max-width: 1179px) {
+  .login-signup-left,
+  .login-signup-right {
+    padding: clamp(24px, 4vw, 48px);
+  }
+
+  .brand-hero__title {
+    font-size: clamp(28px, 4.5vw, 44px);
+  }
+
+  .brand-hero__subtext {
+    max-width: 100%;
+    font-size: clamp(13px, 1.4vw, 16px);
+  }
+
+  .brand-features {
+    gap: clamp(16px, 2vw, 28px);
+  }
+
+  .form-card {
+    width: 90%;
+    height: auto;
+    padding: clamp(24px, 4vw, 48px);
+  }
+
+  .login-signup-container .form-card__title {
+    font-size: clamp(20px, 2.2vw, 26px);
+  }
+
+  .login-signup-container .form-input,
+  .login-signup-container .form-submit-btn {
+    height: clamp(40px, 5vw, 52px);
+    font-size: clamp(13px, 1.3vw, 15px);
+  }
+}
+
+/* ==========================================================
+   10. Mobile (0px–768px)
+========================================================== */
+
+@media (max-width: 768px) {
+  .login-signup-container {
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .login-signup-left,
+  .login-signup-right {
+    width: 100%;
+    padding: 24px 20px;
+  }
+
+  .login-signup-left {
+    order: 1;
+  }
+
+  .login-signup-right {
+    order: 2;
+    flex: 1;
+  }
+
+  .brand-header {
+    margin-top: 0;
+    margin-left: 0;
+  }
+
+  .brand-logo-img {
+    height: 32px;
+  }
+
+  .brand-hero {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  .brand-hero__title {
+    font-size: 28px;
+  }
+
+  .brand-hero__subtext {
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  .brand-features {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-card {
+    width: 100%;
+    height: auto;
+    padding: 28px 20px;
+    box-sizing: border-box;
+  }
+
+  .login-signup-container .form-card__icon-header svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .login-signup-container .form-card__title {
+    font-size: 20px;
+  }
+
+  .login-signup-container .form-card__subtitle {
+    font-size: 13px;
+  }
+
+  .login-signup-container .form-label,
+  .login-signup-container .forgot-password-link {
+    font-size: 13px;
+  }
+
+  .login-signup-container .form-input {
+    height: 44px;
+    font-size: 14px;
+  }
+
+  .login-signup-container .form-submit-btn {
+    height: 46px;
+    font-size: 14px;
+  }
+
+  .form-card-footer {
+    font-size: 13px;
+  }
 }

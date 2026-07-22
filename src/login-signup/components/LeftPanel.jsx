@@ -1,14 +1,17 @@
 import React from "react";
 import logoLight from "../../assets/logo-light.png";
+import logoDark from "../../assets/logo-dark.png";
 import { ShieldCheck, Zap, Footprints } from "lucide-react";
 
 export default function LeftPanel() {
   return (
     <div className="login-signup-left">
       <div className="brand-header">
-        <img src={logoLight} alt="Nexgn Logo" className="brand-logo-img" />
+        <img src={logoLight} alt="Nexgn Logo" className="brand-logo-img brand-logo-img--light" />
+        <img src={logoDark} alt="Nexgn Logo" className="brand-logo-img brand-logo-img--dark" />
       </div>
 
+      <div className="brand-content">
       <div className="brand-hero">
         <h1 className="brand-hero__title">
           Documents signed.<br />
@@ -57,6 +60,7 @@ export default function LeftPanel() {
             </p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
