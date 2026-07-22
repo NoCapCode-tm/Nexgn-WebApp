@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./landing_page/LandingPage";
+import Login from "./login-signup/pages/Login";
+import SignUp from "./login-signup/pages/SignUp";
+import Invite from "./login-signup/pages/Invite";
 
 /* ADMIN MODULE (formerly Member) */
 import Dashboard from "./admin/pages/Dashboard";
@@ -15,6 +18,11 @@ export default function App() {
       <Routes>
         {/* LANDING PAGE */}
         <Route path="/landing" element={<LandingPage />} />
+
+        {/* AUTH ROUTES */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/mail-invite" element={<Invite />} />
 
         {/* ADMIN ROUTES */}
         <Route path="/" element={<Dashboard />} />
