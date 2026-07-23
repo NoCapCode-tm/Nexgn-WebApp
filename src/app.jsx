@@ -11,8 +11,10 @@ import Documents from "./admin/pages/Documents";
 import ContactBook from "./admin/pages/ContactBook";
 import Settings from "./admin/pages/Settings";
 import TemplatesPage from "./admin/pages/TemplatesPage";
+import useSystemTheme from "./login-signup/hooks/useSystemTheme";
 
 export default function App() {
+  useSystemTheme();
   return (
     <BrowserRouter>
       <Routes>
