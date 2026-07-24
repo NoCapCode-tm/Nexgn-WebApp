@@ -69,6 +69,7 @@ export default function Settings() {
 
   /* Desktop + Tablet */
   const [activeTab, setActiveTab] = useState("profile");
+
   const [auditSearchQuery, setAuditSearchQuery] = useState("");
   const [viewingPermissions, setViewingPermissions] = useState(null);
   const [permissionsState, setPermissionsState] = useState({
@@ -91,6 +92,8 @@ export default function Settings() {
       }
     }
   }, [tabParam, isMobile]);
+
+
 
   /* Shared form state */
   const [avatar, setAvatar] = useState(DEFAULT_AVATAR);
@@ -1407,18 +1410,6 @@ export default function Settings() {
      DESKTOP + TABLET — original layout, unchanged.
      Topbar is only mounted here; never on mobile.
      ════════════════════════════════════════════════════════════════════════ */
-  const searchComponent = (
-    <div className="admin-settings-topbar-search">
-      <Search size={16} color="#8A949F" strokeWidth={1.5} />
-      <input
-        type="text"
-        className="admin-settings-topbar-search__input"
-        placeholder="Search Documents"
-        id="admin-settings-search-input"
-      />
-    </div>
-  );
-
   return (
     <Layout
       className="admin-settings-page"
@@ -1433,7 +1424,7 @@ export default function Settings() {
               ? "Manage your permissions."
               : "Manage your account preferences and configurations"
           }
-          actionButton={searchComponent}
+          actionButton={null}
         />
 
         {/* Tablet page header */}
@@ -1448,14 +1439,6 @@ export default function Settings() {
                   ? "Manage your permissions."
                   : "Manage your account preferences and configurations"}
               </div>
-            </div>
-            <div className="admin-settings-topbar-search admin-settings-mobile-search">
-              <Search size={16} color="#8A949F" strokeWidth={1.5} />
-              <input
-                type="text"
-                className="admin-settings-topbar-search__input"
-                placeholder="Search"
-              />
             </div>
           </div>
         </div>
