@@ -19,7 +19,9 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         {/* LANDING PAGE */}
+        <Route path="/" element={<LandingPage />} />
         <Route path="/landing" element={<LandingPage />} />
+        <Route path="*" element={<LandingPage />} />
 
         {/* AUTH ROUTES */}
         <Route path="/login" element={<Login />} />
@@ -27,7 +29,6 @@ export default function App() {
         <Route path="/mail-invite" element={<Invite />} />
 
         {/* ADMIN ROUTES */}
-        <Route path="/" element={<Dashboard />} />
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin-dashboard" element={<Dashboard />} />
         <Route path="/admin-documents" element={<Documents />} />
@@ -36,8 +37,6 @@ export default function App() {
         <Route path="/admin-settings" element={<Settings />} />
         <Route path="/admin-contact-book" element={<ContactBook />} />
         <Route path="/admin-templates" element={<TemplatesPage />} />
-
-        <Route path="*" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );

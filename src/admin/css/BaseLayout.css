@@ -252,11 +252,11 @@ body {
   border-radius: 0 12px 12px 0;
 }
 
-.sidebar__item:hover {
+.sidebar__item:not(.sidebar__item--active):hover {
   background: transparent;
 }
 
-.sidebar__item:hover::before {
+.sidebar__item:not(.sidebar__item--active):hover::before {
   display: none;
 }
 
@@ -392,7 +392,7 @@ body {
   background: #c7000b;
 }
 
-.dark-mode .sidebar__item:hover {
+.dark-mode .sidebar__item:not(.sidebar__item--active):hover {
   background: transparent;
 }
 
@@ -759,7 +759,7 @@ body.dark-mode,
   color: #ffffff;
 }
 
-.dark-mode .sidebar__item:hover .sidebar__item-label {
+.dark-mode .sidebar__item:not(.sidebar__item--active):hover .sidebar__item-label {
   color: #8a949f;
 }
 
@@ -777,7 +777,7 @@ body.dark-mode,
   transition: color 0.15s;
 }
 
-.sidebar__item:hover .sidebar__item-label {
+.sidebar__item:not(.sidebar__item--active):hover .sidebar__item-label {
   color: #8a949f;
 }
 
@@ -1216,11 +1216,11 @@ body.dark-mode .sidebar__inner {
     border-radius: 0;
   }
 
-  .sidebar__item:hover {
+  .sidebar__item:not(.sidebar__item--active):hover {
     background: transparent;
   }
 
-  .sidebar__item:hover::before {
+  .sidebar__item:not(.sidebar__item--active):hover::before {
     position: absolute;
     top: 0;
     left: 0;

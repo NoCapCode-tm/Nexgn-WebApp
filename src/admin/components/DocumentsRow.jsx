@@ -133,6 +133,31 @@ export default function DocumentsRow({
           <polyline points="10 9 9 9 8 9" />
         </svg>
         <span>{title}</span>
+        {status && (
+          <span className={`mobile-status-badge mobile-status-badge--${status.toLowerCase()}`}>
+            {status.toLowerCase() === "expired" ? "Failed" : status}
+            {status.toLowerCase() === "signed" && (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "4px", flexShrink: 0 }}>
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            )}
+            {(status.toLowerCase() === "expired" || status.toLowerCase() === "failed") && (
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "4px", flexShrink: 0 }}>
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            )}
+            {status.toLowerCase() === "pending" && (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "4px", flexShrink: 0 }}>
+                <path d="M16 22h2a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v3" />
+                <polyline points="14 2 14 8 20 8" />
+                <circle cx="8" cy="16" r="6" />
+                <path d="M9.5 17.5 8 16.25V14" />
+              </svg>
+            )}
+          </span>
+        )}
       </div>
 
       <div className="admin-doc-row__note" data-label="NOTE">
@@ -184,9 +209,9 @@ export default function DocumentsRow({
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <circle cx="5" cy="12" r="1" />
+            <circle cx="12" cy="5" r="1" />
             <circle cx="12" cy="12" r="1" />
-            <circle cx="19" cy="12" r="1" />
+            <circle cx="12" cy="19" r="1" />
           </svg>
         </button>
         {menuOpen && (

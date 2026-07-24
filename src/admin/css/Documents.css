@@ -116,6 +116,10 @@ body.dark-mode .admin-docs-page .admin-badge--expired {
   border-radius: 4px;
 }
 
+.mobile-status-badge {
+  display: none !important;
+}
+
 .admin-badge--pending {
   color: #B45309;
   background: #FEF3C7;
@@ -942,40 +946,58 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
   }
 
   .admin-docs-page .admin-docs-tab--active {
-    color: #ffffff;
-    background: #e22a2a;
+    color: #FFFFFF !important;
+    background: #E22A2A !important;
+    border-radius: 3vw !important;
   }
 
   .admin-docs-tab {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    height: 100%;
-    padding: 0 var(--space-md);
-    font-size: var(--font-sm);
-    font-weight: 500;
-    color: #8a949f;
-    white-space: nowrap;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 2.5vw 1.5vw !important;
+    box-sizing: border-box !important;
+    height: 11.5vw !important;
+    font-family: 'Inter', sans-serif !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 3vw !important;
+    line-height: 3.75vw !important;
+    color: #666666 !important;
     background: transparent;
     border: none;
-    border-radius: 999px;
+    border-radius: 3vw !important;
+    white-space: nowrap !important;
+    cursor: pointer;
+    min-width: 0 !important;
+  }
+
+  .admin-docs-tab:nth-child(1) {
+    width: 28.05vw !important;
+  }
+
+  .admin-docs-tab:nth-child(2) {
+    width: 28.56vw !important;
+  }
+
+  .admin-docs-tab:nth-child(3) {
+    width: 28.05vw !important;
   }
 
   .admin-docs-tabs {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: auto;
-    height: 12.267vw;
-    min-height: 12.267vw;
-    box-sizing: border-box;
-    margin: var(--space-md) var(--mobile-gutter) var(--space-md)
-      var(--mobile-gutter);
-    padding: 0;
-    border-bottom: none;
-    overflow-x: auto;
-    scrollbar-width: none;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 2.5vw !important;
+    width: 90.5vw !important;
+    height: 11.5vw !important;
+    margin: var(--space-md) auto !important;
+    padding: 0 !important;
+    border-bottom: none !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
   }
 
   .desktop-status .admin-badge {
@@ -1108,7 +1130,7 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     align-items: start;
     column-gap: var(--space-xs);
     row-gap: var(--space-lg);
-    grid-template-columns: 1fr 1fr 0.8fr;
+    grid-template-columns: 1fr 1fr auto;
     grid-template-rows: auto auto;
     height: auto;
     padding: var(--space-md);
@@ -1128,12 +1150,19 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     gap: var(--space-xs);
   }
 
-  .admin-doc-row__cell.mobile-col-owner {
-    display: flex;
-    align-items: center;
+  .admin-doc-row__cell.mobile-col[data-label="SIGNED AT"] {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .admin-doc-row__cell.mobile-col[data-label="SIGNERS"] {
+    grid-column: 2;
+    grid-row: 2;
     justify-content: center;
-    gap: var(--space-xs);
-    flex-direction: column;
+  }
+
+  .admin-doc-row__cell.mobile-col-owner {
+    display: none !important;
   }
 
   .admin-doc-row__cell.mobile-col-owner .desktop-val {
@@ -1159,7 +1188,9 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     display: flex;
     align-items: center;
     gap: var(--space-xs);
-    grid-column: 1 / 3;
+    grid-column: 1 / 4;
+    grid-row: 1;
+    min-width: 0;
     width: 100%;
     margin: 0;
     font-size: var(--font-lg);
@@ -1194,8 +1225,57 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
   }
 
   .desktop-val,
-  .admin-doc-row__menu,
   .admin-doc-row__note {
     display: none;
+  }
+
+  .admin-doc-row__menu {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  /* Mobile-only status badge beside title */
+  .mobile-status-badge {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 1vw !important;
+    padding: 1vw 2.5vw !important;
+    font-size: 2.75vw !important;
+    font-weight: 500;
+    border-radius: 9999px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    vertical-align: middle;
+    margin-left: auto;
+  }
+
+  .mobile-status-badge svg {
+    width: 3.5vw !important;
+    height: 3.5vw !important;
+  }
+
+  .mobile-status-badge--pending {
+    color: #B45309;
+    background: #FEF3C7;
+  }
+
+  .mobile-status-badge--signed {
+    color: #15803D;
+    background: #DCFCE7;
+  }
+
+  .mobile-status-badge--expired,
+  .mobile-status-badge--failed {
+    color: #B91C1C;
+    background: #FEE2E2;
+  }
+
+  .mobile-status-badge--expired svg,
+  .mobile-status-badge--failed svg {
+    width: 3vw !important;
+    height: 3vw !important;
   }
 }
