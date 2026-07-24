@@ -22,7 +22,7 @@
 
 .admin-docs-tab {
   height: 37px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: #9ca3af;
@@ -30,19 +30,21 @@
   white-space: nowrap;
   background: none;
   border: none;
-  border-bottom: 2px solid #E4E4E4;
+  border-bottom: 2px solid #e4e4e4;
   cursor: pointer;
-  transition: color 0.15s, border-color 0.15s;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .admin-docs-tab--active {
   font-weight: 600;
-  color: #FF0915;
-  border-bottom-color: #FF0915;
+  color: #ff0915;
+  border-bottom-color: #ff0915;
 }
 
 .admin-docs-tab:hover {
-  color: #FF0915;
+  color: #ff0915;
 }
 
 .admin-docs-tabs {
@@ -62,13 +64,13 @@ body.dark-mode .admin-docs-page .action-menu {
 }
 
 body.dark-mode .admin-docs-page .action-menu__item {
-  color: #D7D7D7 !important;
+  color: #d7d7d7 !important;
   background: transparent !important;
   border-bottom: 1px solid rgba(116, 107, 107, 0.4) !important;
 }
 
 body.dark-mode .admin-docs-page .action-menu__item--danger {
-  color: #E53935 !important;
+  color: #e53935 !important;
   background: transparent !important;
 }
 
@@ -84,6 +86,24 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
   border-bottom: none !important;
 }
 
+body.dark-mode .admin-docs-page .admin-badge--pending {
+  color: #FFC107 !important;
+  background: transparent !important;
+  border: 1px solid #FFC107 !important;
+}
+
+body.dark-mode .admin-docs-page .admin-badge--signed {
+  color: #2ECC71 !important;
+  background: transparent !important;
+  border: 1px solid #2ECC71 !important;
+}
+
+body.dark-mode .admin-docs-page .admin-badge--expired {
+  color: #E74C3C !important;
+  background: transparent !important;
+  border: 1px solid #E74C3C !important;
+}
+
 /* ==========================================================
    5. Shared Components
 ========================================================== */
@@ -96,9 +116,24 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
   border-radius: 4px;
 }
 
+.admin-badge--pending {
+  color: #B45309;
+  background: #FEF3C7;
+}
+
+.admin-badge--signed {
+  color: #15803D;
+  background: #DCFCE7;
+}
+
+.admin-badge--expired {
+  color: #B91C1C;
+  background: #FEE2E2;
+}
+
 .admin-docs-filter-dropdown-divider {
   margin: 4px 0;
-  border-top: 1px solid #F3F4F6;
+  border-top: 1px solid #f3f4f6;
 }
 
 .mobile-status-corner,
@@ -130,9 +165,9 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
   flex-direction: column;
   width: 220px;
   padding: 12px;
-  font-family: 'Inter', sans-serif;
-  background-color: #FFFFFF;
-  border: 1px solid #E4E4E4;
+  font-family: "Inter", sans-serif;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e4;
   border-radius: 12px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -148,7 +183,7 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
   padding: 8px 0;
   font-size: 12px;
   font-weight: 600;
-  color: #FF0915;
+  color: #ff0915;
   text-align: center;
   background-color: transparent;
   border: none;
@@ -169,10 +204,12 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
   max-width: 300px;
   padding: 0 12px;
   background: #fff;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
 }
 
 .admin-docs-search-wrap:hover {
@@ -202,17 +239,19 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
   gap: 6px;
   height: 36px;
   padding: 0 16px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: #fff;
   white-space: nowrap;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
   border: none;
   border-radius: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
 }
 
 .admin-docs-add-btn-short {
@@ -225,7 +264,7 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
 }
 
 .admin-docs-add-btn:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   transform: translateY(-2px);
 }
@@ -236,16 +275,18 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
   gap: 6px;
   height: 36px;
   padding: 0 14px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 500;
   color: #6b7280;
   background: #fff;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
 }
 
 .admin-docs-filter-btn:active {
@@ -262,7 +303,7 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
   display: block;
   font-size: 10px;
   font-weight: 500;
-  color: #6B7280;
+  color: #6b7280;
   text-align: left;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -275,7 +316,7 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
   font-size: 13px;
   color: #374151;
   background-color: #fff;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 8px;
   outline: none;
   cursor: pointer;
@@ -283,7 +324,7 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
 
 .admin-docs-search-input {
   width: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
   color: #1a1a2e;
   background: transparent;
@@ -306,23 +347,23 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
   height: 60px;
   padding: 0 16px;
   font-size: 13px;
-  color: #8A949F;
+  color: #8a949f;
   background: #ffffff;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 16px;
   transition: background 0.12s;
 }
 
 .admin-doc-row__cell {
   font-size: 12px;
-  color: #8A949F;
+  color: #8a949f;
 }
 
 .admin-doc-row__icon {
   flex-shrink: 0;
   width: 22px;
   height: 22px;
-  color: #E53935;
+  color: #e53935;
 }
 
 .admin-doc-row__menu {
@@ -355,7 +396,7 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
 .admin-doc-row__note {
   padding-right: 12px;
   font-size: 12px;
-  color: #8A949F;
+  color: #8a949f;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -374,7 +415,7 @@ body.dark-mode .admin-docs-page .action-menu__item:last-child {
 }
 
 .admin-docs-search-wrap:focus-within {
-  border-color: #FF0915;
+  border-color: #ff0915;
 }
 
 .admin-docs-table {
@@ -403,11 +444,11 @@ body.dark-mode .admin-docs-page .admin-doc-row__icon {
 }
 
 body.dark-mode .admin-docs-page .admin-doc-row__menu {
-  color: #9A9A9A !important;
+  color: #9a9a9a !important;
 }
 
 body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   background: rgba(255, 255, 255, 0.05) !important;
 }
 
@@ -546,7 +587,7 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     font-size: 13px;
     font-weight: 400;
     line-height: 1.4;
-    color: #8A949F;
+    color: #8a949f;
   }
 
   .admin-docs-page .topbar__title {
@@ -571,17 +612,17 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     padding: 14px 0 16px 0;
     font-size: 15px;
     font-weight: 400;
-    color: #8A949F;
+    color: #8a949f;
     text-align: center;
     border: none;
-    border-bottom: 2px solid #E4E4E4;
+    border-bottom: 2px solid #e4e4e4;
     transition: color 0.15s;
   }
 
   .admin-docs-tab--active {
     font-weight: 600;
-    color: #E22A2A;
-    border-bottom: 2px solid #E22A2A;
+    color: #e22a2a;
+    border-bottom: 2px solid #e22a2a;
   }
 
   .admin-docs-tabs {
@@ -603,6 +644,30 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     color: transparent;
     border: none;
     border-radius: 50%;
+  }
+
+  .admin-badge--pending {
+    background-color: #D28E56;
+  }
+
+  .admin-badge--signed {
+    background-color: #559B6F;
+  }
+
+  .admin-badge--expired {
+    background-color: #E22A2A;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge--pending {
+    background-color: #FFC107;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge--signed {
+    background-color: #2ECC71;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge--expired {
+    background-color: #E74C3C;
   }
 
   .mobile-status-corner,
@@ -692,7 +757,7 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     margin: 0 0 14px 0;
     padding: 0 20px;
     background: #ffffff;
-    border: 1px solid #E4E4E4;
+    border: 1px solid #e4e4e4;
     border-radius: 14px;
   }
 
@@ -701,7 +766,7 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     align-items: center;
     min-width: 0;
     font-size: 13px;
-    color: #8A949F;
+    color: #8a949f;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -848,6 +913,18 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     border-radius: 50% !important;
   }
 
+  body.dark-mode .admin-docs-page .admin-badge--pending {
+    background-color: #FFC107 !important;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge--signed {
+    background-color: #2ECC71 !important;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge--expired {
+    background-color: #E74C3C !important;
+  }
+
   .admin-docs-topbar-actions {
     display: flex;
     align-items: center;
@@ -861,12 +938,12 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     width: 100%;
     margin: var(--space-md) 0;
     border: none;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid #e5e7eb;
   }
 
   .admin-docs-page .admin-docs-tab--active {
     color: #ffffff;
-    background: #E22A2A;
+    background: #e22a2a;
   }
 
   .admin-docs-tab {
@@ -878,7 +955,7 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     padding: 0 var(--space-md);
     font-size: var(--font-sm);
     font-weight: 500;
-    color: #8A949F;
+    color: #8a949f;
     white-space: nowrap;
     background: transparent;
     border: none;
@@ -893,7 +970,8 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     height: 12.267vw;
     min-height: 12.267vw;
     box-sizing: border-box;
-    margin: var(--space-md) var(--mobile-gutter) var(--space-md) var(--mobile-gutter);
+    margin: var(--space-md) var(--mobile-gutter) var(--space-md)
+      var(--mobile-gutter);
     padding: 0;
     border-bottom: none;
     overflow-x: auto;
@@ -939,7 +1017,7 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     max-width: none;
     padding-left: var(--space-sm);
     background: #fff;
-    border: 0.267vw solid #E4E4E4;
+    border: 0.267vw solid #e4e4e4;
     border-radius: var(--space-2xl);
   }
 
@@ -986,7 +1064,7 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     height: 10.667vw;
     padding: 0;
     color: #fff;
-    background: #E22A2A;
+    background: #e22a2a;
     border: none;
     border-radius: 50%;
     box-shadow: 0 1.067vw 3.2vw rgba(226, 42, 42, 0.2);
@@ -1037,7 +1115,7 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     background: #ffffff;
     border: none;
     border-radius: var(--space-md);
-    box-shadow: 0 1.067vw 5.333vw rgba(0,0,0,0.04);
+    box-shadow: 0 1.067vw 5.333vw rgba(0, 0, 0, 0.04);
   }
 
   .admin-doc-row__cell {

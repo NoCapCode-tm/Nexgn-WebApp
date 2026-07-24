@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import "../css/BaseLayout.css";
 import "../css/Settings.css";
+import "../css/ContactBook.css";
 
 import AvatarImg from "../../assets/Avatar.png";
 const DEFAULT_AVATAR = AvatarImg;
@@ -69,9 +70,14 @@ export default function Settings() {
   const [activeTab, setActiveTab] = useState("profile");
   const [auditSearchQuery, setAuditSearchQuery] = useState("");
   const [viewingPermissions, setViewingPermissions] = useState(null);
-  const [permissionsState, setPermissionsState] = useState({ "Documents-View Documents": true });
+  const [permissionsState, setPermissionsState] = useState({
+    "Documents-View Documents": true,
+  });
   const [showDisconnectModal, setShowDisconnectModal] = useState(false);
   const [isDriveConnected, setIsDriveConnected] = useState(true);
+  const [showAddSubAdminModal, setShowAddSubAdminModal] = useState(false);
+  const [newSubAdmin, setNewSubAdmin] = useState({ name: "", email: "" });
+  const [subAdminErrors, setSubAdminErrors] = useState({});
 
   /* Mobile only: "menu" | "profile" | "account" | "security" */
   const [mobileView, setMobileView] = useState("menu");
@@ -106,10 +112,34 @@ export default function Settings() {
   });
 
   const [teamMembers, setTeamMembers] = useState([
-    { id: 1, name: "Alice Smith", email: "alice.smith@example.com", role: "Subadmin", status: "Active" },
-    { id: 2, name: "Bob Jones", email: "bob.jones@example.com", role: "Subadmin", status: "Active" },
-    { id: 3, name: "Charlie Brown", email: "charlie.brown@example.com", role: "Subadmin", status: "Active" },
-    { id: 4, name: "Diana prince", email: "diana.prince@example.com", role: "Subadmin", status: "Not Active" },
+    {
+      id: 1,
+      name: "Alice Smith",
+      email: "alice.smith@example.com",
+      role: "Sub-admin",
+      status: "Active",
+    },
+    {
+      id: 2,
+      name: "Bob Jones",
+      email: "bob.jones@example.com",
+      role: "Sub-admin",
+      status: "Active",
+    },
+    {
+      id: 3,
+      name: "Charlie Brown",
+      email: "charlie.brown@example.com",
+      role: "Sub-admin",
+      status: "Active",
+    },
+    {
+      id: 4,
+      name: "Diana prince",
+      email: "diana.prince@example.com",
+      role: "Sub-admin",
+      status: "Not Active",
+    },
   ]);
   const [teamActionOpen, setTeamActionOpen] = useState(null);
   const teamActionRef = useRef(null);
@@ -128,7 +158,10 @@ export default function Settings() {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (teamActionRef.current && !teamActionRef.current.contains(event.target)) {
+      if (
+        teamActionRef.current &&
+        !teamActionRef.current.contains(event.target)
+      ) {
         setTeamActionOpen(null);
       }
     }
@@ -199,7 +232,10 @@ export default function Settings() {
         id="admin-settings-profile-form"
       >
         <div className="admin-settings-form__group">
-          <label className="admin-settings-form__label" htmlFor="admin-settings-full-name">
+          <label
+            className="admin-settings-form__label"
+            htmlFor="admin-settings-full-name"
+          >
             Full Name
           </label>
           <input
@@ -213,7 +249,10 @@ export default function Settings() {
           />
         </div>
         <div className="admin-settings-form__group">
-          <label className="admin-settings-form__label" htmlFor="admin-settings-email">
+          <label
+            className="admin-settings-form__label"
+            htmlFor="admin-settings-email"
+          >
             Email Address
           </label>
           <input
@@ -230,7 +269,10 @@ export default function Settings() {
           </p>
         </div>
         <div className="admin-settings-form__group">
-          <label className="admin-settings-form__label" htmlFor="admin-settings-phone">
+          <label
+            className="admin-settings-form__label"
+            htmlFor="admin-settings-phone"
+          >
             Phone Number
           </label>
           <input
@@ -260,9 +302,15 @@ export default function Settings() {
     <div className="admin-settings-card admin-settings-card--account">
       <h2 className="admin-settings-card__title">Account</h2>
       <div className="admin-settings-card__divider" />
-      <form className="admin-settings-form" onSubmit={(e) => e.preventDefault()}>
+      <form
+        className="admin-settings-form"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <div className="admin-settings-form__group">
-          <label className="admin-settings-form__label" htmlFor="admin-settings-company">
+          <label
+            className="admin-settings-form__label"
+            htmlFor="admin-settings-company"
+          >
             Company Name
           </label>
           <input
@@ -270,11 +318,16 @@ export default function Settings() {
             id="admin-settings-company"
             className="admin-settings-form__input"
             value={accountData.companyName}
-            onChange={(e) => setAccountData({ ...accountData, companyName: e.target.value })}
+            onChange={(e) =>
+              setAccountData({ ...accountData, companyName: e.target.value })
+            }
           />
         </div>
         <div className="admin-settings-form__group">
-          <label className="admin-settings-form__label" htmlFor="admin-settings-org-id">
+          <label
+            className="admin-settings-form__label"
+            htmlFor="admin-settings-org-id"
+          >
             Organization ID
           </label>
           <input
@@ -284,10 +337,15 @@ export default function Settings() {
             value={accountData.organizationId}
             readOnly
           />
-          <p className="admin-settings-form__helper">Used for API integrations</p>
+          <p className="admin-settings-form__helper">
+            Used for API integrations
+          </p>
         </div>
         <div className="admin-settings-form__group">
-          <label className="admin-settings-form__label" htmlFor="admin-settings-timezone">
+          <label
+            className="admin-settings-form__label"
+            htmlFor="admin-settings-timezone"
+          >
             Time Zone
           </label>
           <input
@@ -295,11 +353,16 @@ export default function Settings() {
             id="admin-settings-timezone"
             className="admin-settings-form__input"
             value={accountData.timeZone}
-            onChange={(e) => setAccountData({ ...accountData, timeZone: e.target.value })}
+            onChange={(e) =>
+              setAccountData({ ...accountData, timeZone: e.target.value })
+            }
           />
         </div>
         <div className="admin-settings-form__group">
-          <label className="admin-settings-form__label" htmlFor="admin-settings-language">
+          <label
+            className="admin-settings-form__label"
+            htmlFor="admin-settings-language"
+          >
             Language
           </label>
           <input
@@ -307,7 +370,9 @@ export default function Settings() {
             id="admin-settings-language"
             className="admin-settings-form__input"
             value={accountData.language}
-            onChange={(e) => setAccountData({ ...accountData, language: e.target.value })}
+            onChange={(e) =>
+              setAccountData({ ...accountData, language: e.target.value })
+            }
           />
         </div>
         <div className="admin-settings-form__footer">
@@ -331,7 +396,10 @@ export default function Settings() {
         <h3 className="admin-settings-section-title">Change Password</h3>
         <div className="admin-settings-section-divider" />
         <div className="admin-settings-form__group">
-          <label className="admin-settings-form__label" htmlFor="admin-settings-current-password">
+          <label
+            className="admin-settings-form__label"
+            htmlFor="admin-settings-current-password"
+          >
             Current Password
           </label>
           <input
@@ -345,7 +413,10 @@ export default function Settings() {
           />
         </div>
         <div className="admin-settings-form__group">
-          <label className="admin-settings-form__label" htmlFor="admin-settings-new-password">
+          <label
+            className="admin-settings-form__label"
+            htmlFor="admin-settings-new-password"
+          >
             New Password
           </label>
           <input
@@ -359,7 +430,10 @@ export default function Settings() {
           />
         </div>
         <div className="admin-settings-form__group">
-          <label className="admin-settings-form__label" htmlFor="admin-settings-confirm-password">
+          <label
+            className="admin-settings-form__label"
+            htmlFor="admin-settings-confirm-password"
+          >
             Confirm New Password
           </label>
           <input
@@ -372,13 +446,16 @@ export default function Settings() {
             onChange={handleSecurityChange}
           />
         </div>
-        <h3 className="admin-settings-section-title">Two - Factor Authentication</h3>
+        <h3 className="admin-settings-section-title">
+          Two - Factor Authentication
+        </h3>
         <div className="admin-settings-section-divider" />
         <div className="admin-settings-2fa-row">
           <div className="admin-settings-2fa-info">
             <div className="admin-settings-2fa-label">Enable 2FA</div>
             <div className="admin-settings-2fa-helper">
-              Add and extra layer of security to your account by enabling two-factor authentication
+              Add and extra layer of security to your account by enabling
+              two-factor authentication
             </div>
           </div>
           <label className="admin-settings-toggle">
@@ -386,7 +463,10 @@ export default function Settings() {
               type="checkbox"
               checked={securityData.enable2FA}
               onChange={(e) =>
-                setSecurityData({ ...securityData, enable2FA: e.target.checked })
+                setSecurityData({
+                  ...securityData,
+                  enable2FA: e.target.checked,
+                })
               }
             />
             <span className="admin-settings-toggle-slider" />
@@ -432,8 +512,12 @@ export default function Settings() {
         </div>
 
         <div className="admin-settings-team-list">
-          {teamMembers.map(admin => (
-            <div className="admin-settings-team-row" key={admin.id} style={{ zIndex: teamActionOpen === admin.id ? 10 : 1 }}>
+          {teamMembers.map((admin) => (
+            <div
+              className="admin-settings-team-row"
+              key={admin.id}
+              style={{ zIndex: teamActionOpen === admin.id ? 10 : 1 }}
+            >
               <div className="team-col-name">
                 <div className="team-admin-name">{admin.name}</div>
                 <div className="team-admin-email">{admin.email}</div>
@@ -443,24 +527,40 @@ export default function Settings() {
                   <span className="team-role-badge">{admin.role}</span>
                 </div>
                 <div className="team-col-status">
-                  <span className={`team-status-badge ${admin.status === 'Active' ? 'active' : 'inactive'}`}>
+                  <span
+                    className={`team-status-badge ${admin.status === "Active" ? "active" : "inactive"}`}
+                  >
                     {admin.status}
                   </span>
                 </div>
                 <div className="team-col-action">
                   <button
                     className="team-action-btn"
-                    onClick={() => setTeamActionOpen(teamActionOpen === admin.id ? null : admin.id)}
+                    onClick={() =>
+                      setTeamActionOpen(
+                        teamActionOpen === admin.id ? null : admin.id,
+                      )
+                    }
                   >
                     <MoreVertical size={20} color="#666" />
                   </button>
                   {teamActionOpen === admin.id && (
                     <div className="team-action-dropdown" ref={teamActionRef}>
-                      <button className="team-dropdown-item permissions" onClick={() => { setViewingPermissions(admin.id); setTeamActionOpen(null); }}>Permissions</button>
+                      <button
+                        className="team-dropdown-item permissions"
+                        onClick={() => {
+                          setViewingPermissions(admin.id);
+                          setTeamActionOpen(null);
+                        }}
+                      >
+                        Permissions
+                      </button>
                       <button
                         className="team-dropdown-item delete"
                         onClick={() => {
-                          setTeamMembers(prev => prev.filter(m => m.id !== admin.id));
+                          setTeamMembers((prev) =>
+                            prev.filter((m) => m.id !== admin.id),
+                          );
                           setTeamActionOpen(null);
                         }}
                       >
@@ -475,21 +575,78 @@ export default function Settings() {
         </div>
       </div>
       <div className="admin-settings-team-footer">
-        <button className="admin-settings-form__submit">Add Subadmin</button>
+        <button
+          className="admin-settings-form__submit"
+          onClick={() => setShowAddSubAdminModal(true)}
+        >
+          Add Sub-admin
+        </button>
       </div>
     </div>
   );
 
+  const handleAddSubAdmin = (e) => {
+    if (e) e.preventDefault();
+    const errors = {};
+    if (!newSubAdmin.name.trim()) errors.name = "Full name is required";
+    if (!newSubAdmin.email.trim()) errors.email = "Email address is required";
+    if (Object.keys(errors).length > 0) {
+      setSubAdminErrors(errors);
+      return;
+    }
+    setSubAdminErrors({});
+    setTeamMembers((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
+        name: newSubAdmin.name,
+        email: newSubAdmin.email,
+        role: "Sub-admin",
+        status: "Active",
+      },
+    ]);
+    setNewSubAdmin({ name: "", email: "" });
+    setShowAddSubAdminModal(false);
+  };
+
   const togglePermission = (key) => {
-    setPermissionsState(prev => ({ ...prev, [key]: !prev[key] }));
+    setPermissionsState((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   const permissionCategories = [
-    { column: 'left', category: "Dashboard", items: ["View Dashboard", "View Analytics", "Export Reports"] },
-    { column: 'left', category: "signers", items: ["View", "Add", "Edit", "Delete"] },
-    { column: 'left', category: "Templates", items: ["View", "Create", "Delete"] },
-    { column: 'right', category: "Documents", items: ["View Documents", "Upload Documents", "Edit Documents", "Delete Documents", "Send for Signature", "Cancel Requests", "Archive Documents"] },
-    { column: 'right', category: "Contact Books", items: ["View", "Add", "Edit", "Delete"] }
+    {
+      column: "left",
+      category: "Dashboard",
+      items: ["View Dashboard", "View Analytics", "Export Reports"],
+    },
+    {
+      column: "left",
+      category: "signers",
+      items: ["View", "Add", "Edit", "Delete"],
+    },
+    {
+      column: "left",
+      category: "Templates",
+      items: ["View", "Create", "Delete"],
+    },
+    {
+      column: "right",
+      category: "Documents",
+      items: [
+        "View Documents",
+        "Upload Documents",
+        "Edit Documents",
+        "Delete Documents",
+        "Send for Signature",
+        "Cancel Requests",
+        "Archive Documents",
+      ],
+    },
+    {
+      column: "right",
+      category: "Contact Books",
+      items: ["View", "Add", "Edit", "Delete"],
+    },
   ];
 
   const permissionsViewComponent = (
@@ -498,17 +655,25 @@ export default function Settings() {
       <div className="admin-permissions-card__divider" />
 
       <div className="admin-permissions-container">
-        {permissionCategories.map(cat => (
-          <div key={cat.category} className={`admin-permissions-group group-${cat.category.replace(/\s+/g, '-')}`}>
+        {permissionCategories.map((cat) => (
+          <div
+            key={cat.category}
+            className={`admin-permissions-group group-${cat.category.replace(/\s+/g, "-")}`}
+          >
             <h3 className="admin-permissions-group-title">{cat.category}</h3>
             <div className="admin-permissions-group-items">
-              {cat.items.map(item => {
+              {cat.items.map((item) => {
                 const key = `${cat.category}-${item}`;
                 const isChecked = permissionsState[key] || false;
                 return (
                   <label key={item} className="admin-permission-item">
                     <span className="admin-permission-item-label">{item}</span>
-                    <input type="checkbox" checked={isChecked} onChange={() => togglePermission(key)} className="admin-permission-checkbox-input" />
+                    <input
+                      type="checkbox"
+                      checked={isChecked}
+                      onChange={() => togglePermission(key)}
+                      className="admin-permission-checkbox-input"
+                    />
                     <span className="admin-permission-custom-checkbox"></span>
                   </label>
                 );
@@ -519,7 +684,12 @@ export default function Settings() {
       </div>
 
       <div className="admin-permissions-footer">
-        <button className="admin-settings-form__submit" onClick={() => setViewingPermissions(null)}>Save</button>
+        <button
+          className="admin-settings-form__submit"
+          onClick={() => setViewingPermissions(null)}
+        >
+          Save
+        </button>
       </div>
     </div>
   );
@@ -537,7 +707,12 @@ export default function Settings() {
               <h4>Document Signed</h4>
               <p>Receive an email when someone signs your document</p>
             </div>
-            <input type="checkbox" checked={notificationData.email_document_signed} onChange={() => handleNotificationChange('email_document_signed')} className="admin-permission-checkbox-input" />
+            <input
+              type="checkbox"
+              checked={notificationData.email_document_signed}
+              onChange={() => handleNotificationChange("email_document_signed")}
+              className="admin-permission-checkbox-input"
+            />
             <span className="admin-permission-custom-checkbox"></span>
           </label>
           <label className="admin-notification-item">
@@ -545,7 +720,14 @@ export default function Settings() {
               <h4>Signature Request Received</h4>
               <p>Get notified when you receive a new signature request</p>
             </div>
-            <input type="checkbox" checked={notificationData.email_signature_request} onChange={() => handleNotificationChange('email_signature_request')} className="admin-permission-checkbox-input" />
+            <input
+              type="checkbox"
+              checked={notificationData.email_signature_request}
+              onChange={() =>
+                handleNotificationChange("email_signature_request")
+              }
+              className="admin-permission-checkbox-input"
+            />
             <span className="admin-permission-custom-checkbox"></span>
           </label>
           <label className="admin-notification-item">
@@ -553,7 +735,14 @@ export default function Settings() {
               <h4>Document Expired</h4>
               <p>Alert me when a pending document passes its expiration date</p>
             </div>
-            <input type="checkbox" checked={notificationData.email_document_expired} onChange={() => handleNotificationChange('email_document_expired')} className="admin-permission-checkbox-input" />
+            <input
+              type="checkbox"
+              checked={notificationData.email_document_expired}
+              onChange={() =>
+                handleNotificationChange("email_document_expired")
+              }
+              className="admin-permission-checkbox-input"
+            />
             <span className="admin-permission-custom-checkbox"></span>
           </label>
         </div>
@@ -567,7 +756,12 @@ export default function Settings() {
               <h4>System Updates</h4>
               <p>News about product and feature updates</p>
             </div>
-            <input type="checkbox" checked={notificationData.system_updates} onChange={() => handleNotificationChange('system_updates')} className="admin-permission-checkbox-input" />
+            <input
+              type="checkbox"
+              checked={notificationData.system_updates}
+              onChange={() => handleNotificationChange("system_updates")}
+              className="admin-permission-checkbox-input"
+            />
             <span className="admin-permission-custom-checkbox"></span>
           </label>
           <label className="admin-notification-item">
@@ -575,7 +769,12 @@ export default function Settings() {
               <h4>Security Alerts</h4>
               <p>Important notifications about your account security</p>
             </div>
-            <input type="checkbox" checked={notificationData.system_security} onChange={() => handleNotificationChange('system_security')} className="admin-permission-checkbox-input" />
+            <input
+              type="checkbox"
+              checked={notificationData.system_security}
+              onChange={() => handleNotificationChange("system_security")}
+              className="admin-permission-checkbox-input"
+            />
             <span className="admin-permission-custom-checkbox"></span>
           </label>
         </div>
@@ -612,7 +811,9 @@ export default function Settings() {
             <li>Advance Templates</li>
           </ul>
           <div className="admin-billing-plan-footer">
-            <span className="admin-billing-next-date">Next billing date : 24 Jan 2027</span>
+            <span className="admin-billing-next-date">
+              Next billing date : 24 Jan 2027
+            </span>
             <button className="admin-billing-upgrade-btn">Upgrade Plan</button>
           </div>
         </div>
@@ -643,9 +844,13 @@ export default function Settings() {
             <span className="invoice-date">24 Jan 2026</span>
           </div>
           <div className="admin-billing-invoice-actions">
-            <button className="icon-btn"><Download size={16} color="#666" /></button>
+            <button className="icon-btn">
+              <Download size={16} color="#666" />
+            </button>
             <div className="tooltip-container">
-              <button className="icon-btn"><RefreshCw size={16} color="#666" /></button>
+              <button className="icon-btn">
+                <RefreshCw size={16} color="#666" />
+              </button>
               <div className="invoice-error-tooltip">
                 <AlertCircle size={14} color="#666" />
                 <span>Unable to download. Refresh and try again</span>
@@ -663,20 +868,44 @@ export default function Settings() {
       <div className="admin-settings-card__divider" />
 
       <p className="admin-integrations-description">
-        Connect Sign App to your favourite tools to streamline your document workflow.
+        Connect Sign App to your favourite tools to streamline your document
+        workflow.
       </p>
 
       <div className="admin-integrations-list">
         <div className="admin-integration-item">
           <div className="admin-integration-item-left">
             <div className="admin-integration-item-header">
-              <svg viewBox="0 0 87.3 78" className="admin-integration-logo" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da" />
-                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47" />
-                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335" />
-                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d" />
-                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc" />
-                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00" />
+              <svg
+                viewBox="0 0 87.3 78"
+                className="admin-integration-logo"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z"
+                  fill="#0066da"
+                />
+                <path
+                  d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z"
+                  fill="#00ac47"
+                />
+                <path
+                  d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z"
+                  fill="#ea4335"
+                />
+                <path
+                  d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z"
+                  fill="#00832d"
+                />
+                <path
+                  d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z"
+                  fill="#2684fc"
+                />
+                <path
+                  d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z"
+                  fill="#ffba00"
+                />
               </svg>
               <div className="admin-integration-info">
                 <h3 className="admin-integration-title">Google Drive</h3>
@@ -686,7 +915,10 @@ export default function Settings() {
               </div>
             </div>
             <p className="admin-integration-description">
-              Sync your signed documents directly to Sync your signed documents directly to Google Drive for instant access and secure storage. Enjoy seamless organization, real-time backup, and effortless sharing with your team.Google drive
+              Sync your signed documents directly to Sync your signed documents
+              directly to Google Drive for instant access and secure storage.
+              Enjoy seamless organization, real-time backup, and effortless
+              sharing with your team.Google drive
             </p>
           </div>
           <div className="admin-integration-item-right">
@@ -713,12 +945,39 @@ export default function Settings() {
     </div>
   );
 
-
   const auditLogsData = [
-    { id: 1, date: "Mar 24, 10:45 AM", name: "Alice Smith", action: "Signed Document", document: "NDA_V2.pdf", status: "Success" },
-    { id: 2, date: "Mar 23, 2:15 PM", name: "Bob Jones", action: "Created Template", document: "Emploement_Offer", status: "Success" },
-    { id: 3, date: "Mar 23, 11:00 AM", name: "System", action: "Auto- Archieved", document: "Project_Spec.pdf", status: "Success" },
-    { id: 4, date: "Mar 23, 11:00 AM", name: "Charlie Brown", action: "Failed Logined Attempt", document: "-", status: "Failed" },
+    {
+      id: 1,
+      date: "Mar 24, 10:45 AM",
+      name: "Alice Smith",
+      action: "Signed Document",
+      document: "NDA_V2.pdf",
+      status: "Success",
+    },
+    {
+      id: 2,
+      date: "Mar 23, 2:15 PM",
+      name: "Bob Jones",
+      action: "Created Template",
+      document: "Emploement_Offer",
+      status: "Success",
+    },
+    {
+      id: 3,
+      date: "Mar 23, 11:00 AM",
+      name: "System",
+      action: "Auto- Archieved",
+      document: "Project_Spec.pdf",
+      status: "Success",
+    },
+    {
+      id: 4,
+      date: "Mar 23, 11:00 AM",
+      name: "Charlie Brown",
+      action: "Failed Logined Attempt",
+      document: "-",
+      status: "Failed",
+    },
   ];
 
   const filteredAuditLogs = auditLogsData.filter((log) => {
@@ -739,10 +998,10 @@ export default function Settings() {
         <div className="admin-audit-header">
           <h2 className="admin-settings-card__title">Audit Logs</h2>
           <div className="admin-audit-search">
-            <input 
-              type="text" 
-              placeholder="Search Logs....." 
-              className="admin-audit-search-input" 
+            <input
+              type="text"
+              placeholder="Search Logs....."
+              className="admin-audit-search-input"
               value={auditSearchQuery}
               onChange={(e) => setAuditSearchQuery(e.target.value)}
             />
@@ -765,9 +1024,13 @@ export default function Settings() {
                 <div className="audit-col audit-col-date">{log.date}</div>
                 <div className="audit-col audit-col-name">{log.name}</div>
                 <div className="audit-col audit-col-action">{log.action}</div>
-                <div className="audit-col audit-col-document">{log.document}</div>
+                <div className="audit-col audit-col-document">
+                  {log.document}
+                </div>
                 <div className="audit-col audit-col-status">
-                  <span className={`audit-status-badge audit-status-${log.status.toLowerCase()}`}>
+                  <span
+                    className={`audit-status-badge audit-status-${log.status.toLowerCase()}`}
+                  >
                     {log.status}
                   </span>
                 </div>
@@ -786,10 +1049,10 @@ export default function Settings() {
         <div className="admin-audit-mobile-controls">
           <div className="admin-audit-mobile-search-wrapper">
             <Search size={16} className="admin-audit-mobile-search-icon" />
-            <input 
-              type="text" 
-              placeholder="Search" 
-              className="admin-audit-mobile-search-input" 
+            <input
+              type="text"
+              placeholder="Search"
+              className="admin-audit-mobile-search-input"
               value={auditSearchQuery}
               onChange={(e) => setAuditSearchQuery(e.target.value)}
             />
@@ -801,7 +1064,10 @@ export default function Settings() {
 
         {/* Mobile Filter Tabs */}
         <div className="admin-audit-mobile-tabs">
-          <button className="admin-audit-mobile-tab admin-audit-mobile-tab--active" type="button">
+          <button
+            className="admin-audit-mobile-tab admin-audit-mobile-tab--active"
+            type="button"
+          >
             <FileText size={18} />
           </button>
           <button className="admin-audit-mobile-tab" type="button">
@@ -821,17 +1087,26 @@ export default function Settings() {
             <div key={log.id} className="admin-audit-mobile-card">
               <div className="admin-audit-mobile-card-row admin-audit-mobile-card-row--top">
                 <div className="admin-audit-mobile-file">
-                  <FileText size={18} className="admin-audit-mobile-icon-file" />
-                  <span className="admin-audit-mobile-filename">{log.document}</span>
+                  <FileText
+                    size={18}
+                    className="admin-audit-mobile-icon-file"
+                  />
+                  <span className="admin-audit-mobile-filename">
+                    {log.document}
+                  </span>
                 </div>
-                <span className={`audit-status-badge audit-status-${log.status.toLowerCase()}`}>
+                <span
+                  className={`audit-status-badge audit-status-${log.status.toLowerCase()}`}
+                >
                   {log.status}
                 </span>
               </div>
               <div className="admin-audit-mobile-card-row admin-audit-mobile-card-row--bottom">
                 <div className="admin-audit-mobile-user">
                   <User size={16} className="admin-audit-mobile-icon-user" />
-                  <span className="admin-audit-mobile-username">{log.name}</span>
+                  <span className="admin-audit-mobile-username">
+                    {log.name}
+                  </span>
                 </div>
                 <span className="admin-audit-mobile-date">{log.date}</span>
               </div>
@@ -854,7 +1129,9 @@ export default function Settings() {
         hideMobileTopbar
         hideMobileNavbar={mobileView !== "menu"}
         className="admin-settings-page"
-        onRegisterMenuOpen={(openFn) => { sidebarOpenerRef.current = openFn; }}
+        onRegisterMenuOpen={(openFn) => {
+          sidebarOpenerRef.current = openFn;
+        }}
       >
         {/* ── Custom mobile header — same classes as global mobile-topbar ── */}
         <header className="mobile-topbar ms-mobile-header--settings">
@@ -917,8 +1194,12 @@ export default function Settings() {
                 <img src={avatar} alt="Avatar" />
               </div>
               <div className="ms-mobile-profile-card__info">
-                <span className="ms-mobile-profile-card__name">{formData.fullName}</span>
-                <span className="ms-mobile-profile-card__email">{formData.email}</span>
+                <span className="ms-mobile-profile-card__name">
+                  {formData.fullName}
+                </span>
+                <span className="ms-mobile-profile-card__email">
+                  {formData.email}
+                </span>
                 <span className="ms-mobile-profile-card__role">Admin</span>
               </div>
               <ChevronRight size={20} color="#9CA3AF" />
@@ -933,7 +1214,9 @@ export default function Settings() {
                 onClick={() => setMobileView("account")}
               >
                 <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon"><Building size={18} /></span>
+                  <span className="ms-mobile-menu-item__icon">
+                    <Building size={18} />
+                  </span>
                   <span className="ms-mobile-menu-item__label">Account</span>
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
@@ -944,8 +1227,12 @@ export default function Settings() {
                 onClick={() => setMobileView("notifications")}
               >
                 <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon"><Bell size={18} /></span>
-                  <span className="ms-mobile-menu-item__label">Notification</span>
+                  <span className="ms-mobile-menu-item__icon">
+                    <Bell size={18} />
+                  </span>
+                  <span className="ms-mobile-menu-item__label">
+                    Notification
+                  </span>
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
               </button>
@@ -955,7 +1242,9 @@ export default function Settings() {
                 onClick={() => setMobileView("billing")}
               >
                 <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon"><CreditCard size={18} /></span>
+                  <span className="ms-mobile-menu-item__icon">
+                    <CreditCard size={18} />
+                  </span>
                   <span className="ms-mobile-menu-item__label">Billing</span>
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
@@ -971,7 +1260,9 @@ export default function Settings() {
                 onClick={() => setMobileView("security")}
               >
                 <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon"><Shield size={18} /></span>
+                  <span className="ms-mobile-menu-item__icon">
+                    <Shield size={18} />
+                  </span>
                   <span className="ms-mobile-menu-item__label">Security</span>
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
@@ -982,28 +1273,44 @@ export default function Settings() {
                 onClick={() => setMobileView("team")}
               >
                 <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon"><Users size={18} /></span>
-                  <span className="ms-mobile-menu-item__label">Team Management</span>
+                  <span className="ms-mobile-menu-item__icon">
+                    <Users size={18} />
+                  </span>
+                  <span className="ms-mobile-menu-item__label">
+                    Team Management
+                  </span>
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
               </button>
               <button
                 type="button"
                 className="ms-mobile-menu-item"
-                onClick={() => { setActiveTab("integrations"); setMobileView("integrations"); }}
+                onClick={() => {
+                  setActiveTab("integrations");
+                  setMobileView("integrations");
+                }}
               >
                 <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon"><Share2 size={18} /></span>
-                  <span className="ms-mobile-menu-item__label">Integrations</span>
+                  <span className="ms-mobile-menu-item__icon">
+                    <Share2 size={18} />
+                  </span>
+                  <span className="ms-mobile-menu-item__label">
+                    Integrations
+                  </span>
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
               </button>
               <div
                 className="ms-mobile-menu-item"
-                onClick={() => { setActiveTab("audit"); setMobileView("audit"); }}
+                onClick={() => {
+                  setActiveTab("audit");
+                  setMobileView("audit");
+                }}
               >
                 <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon"><FileText size={18} /></span>
+                  <span className="ms-mobile-menu-item__icon">
+                    <FileText size={18} />
+                  </span>
                   <span className="ms-mobile-menu-item__label">Audit Logs</span>
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
@@ -1015,17 +1322,25 @@ export default function Settings() {
             <div className="ms-mobile-group-items">
               <div className="ms-mobile-menu-item">
                 <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon"><LogOut size={18} /></span>
+                  <span className="ms-mobile-menu-item__icon">
+                    <LogOut size={18} />
+                  </span>
                   <span className="ms-mobile-menu-item__label">Logout</span>
                 </div>
                 <ChevronRight size={18} color="#9CA3AF" />
               </div>
               <div className="ms-mobile-menu-item ms-mobile-menu-item--disabled">
                 <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon" style={{ color: "#DC2626" }}>
+                  <span
+                    className="ms-mobile-menu-item__icon"
+                    style={{ color: "#DC2626" }}
+                  >
                     <PauseCircle size={18} />
                   </span>
-                  <span className="ms-mobile-menu-item__label" style={{ color: "#DC2626" }}>
+                  <span
+                    className="ms-mobile-menu-item__label"
+                    style={{ color: "#DC2626" }}
+                  >
                     Deactivate Account
                   </span>
                 </div>
@@ -1033,10 +1348,16 @@ export default function Settings() {
               </div>
               <div className="ms-mobile-menu-item ms-mobile-menu-item--disabled">
                 <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon" style={{ color: "#DC2626" }}>
+                  <span
+                    className="ms-mobile-menu-item__icon"
+                    style={{ color: "#DC2626" }}
+                  >
                     <Trash2 size={18} />
                   </span>
-                  <span className="ms-mobile-menu-item__label" style={{ color: "#DC2626" }}>
+                  <span
+                    className="ms-mobile-menu-item__label"
+                    style={{ color: "#DC2626" }}
+                  >
                     Delete Account
                   </span>
                 </div>
@@ -1097,12 +1418,19 @@ export default function Settings() {
   );
 
   return (
-    <Layout className="admin-settings-page" hideMobileNavbar={mobileView === "detail"}>
+    <Layout
+      className="admin-settings-page"
+      hideMobileNavbar={mobileView === "detail"}
+    >
       <>
         {/* Desktop topbar */}
         <Topbar
           title={viewingPermissions ? "Permission Settings" : "Settings"}
-          subtitle={viewingPermissions ? "Manage your permissions." : "Manage your account preferences and configurations"}
+          subtitle={
+            viewingPermissions
+              ? "Manage your permissions."
+              : "Manage your account preferences and configurations"
+          }
           actionButton={searchComponent}
         />
 
@@ -1114,7 +1442,9 @@ export default function Settings() {
                 {viewingPermissions ? "Permission Settings" : "Settings"}
               </div>
               <div className="topbar__sub">
-                {viewingPermissions ? "Manage your permissions." : "Manage your account preferences and configurations"}
+                {viewingPermissions
+                  ? "Manage your permissions."
+                  : "Manage your account preferences and configurations"}
               </div>
             </div>
             <div className="admin-settings-topbar-search admin-settings-mobile-search">
@@ -1135,13 +1465,19 @@ export default function Settings() {
           </div>
         ) : (
           <div className="admin-settings-body">
-            <nav className="admin-settings-nav" aria-label="Member settings navigation">
+            <nav
+              className="admin-settings-nav"
+              aria-label="Member settings navigation"
+            >
               {settingsNavItems.map((item) => (
                 <button
                   key={item.key}
                   id={`admin-settings-nav-${item.key}`}
-                  className={`admin-settings-nav__item${activeTab === item.key ? " admin-settings-nav__item--active" : ""
-                    }${!item.active ? " admin-settings-nav__item--disabled" : ""}`}
+                  className={`admin-settings-nav__item${
+                    activeTab === item.key
+                      ? " admin-settings-nav__item--active"
+                      : ""
+                  }${!item.active ? " admin-settings-nav__item--disabled" : ""}`}
                   onClick={() => handleTabClick(item)}
                   disabled={!item.active}
                   aria-current={activeTab === item.key ? "page" : undefined}
@@ -1157,7 +1493,9 @@ export default function Settings() {
               {activeTab === "notifications" && notificationCard}
               {activeTab === "security" && securityCard}
               {activeTab === "team" && !viewingPermissions && teamCard}
-              {activeTab === "team" && viewingPermissions && permissionsViewComponent}
+              {activeTab === "team" &&
+                viewingPermissions &&
+                permissionsViewComponent}
               {activeTab === "billing" && billingCard}
               {activeTab === "integrations" && integrationsCard}
               {activeTab === "audit" && auditCard}
@@ -1166,18 +1504,38 @@ export default function Settings() {
         )}
       </>
       {showDisconnectModal && (
-        <div className="integration-modal-backdrop" onClick={() => setShowDisconnectModal(false)}>
-          <div className="integration-modal-container" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="integration-modal-backdrop"
+          onClick={() => setShowDisconnectModal(false)}
+        >
+          <div
+            className="integration-modal-container"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="integration-modal-content">
               <div className="integration-modal-header-row">
-                <svg viewBox="0 0 24 24" className="integration-modal-warning-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#E5252A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  viewBox="0 0 24 24"
+                  className="integration-modal-warning-icon"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                    stroke="#E5252A"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
-                <h3 className="integration-modal-title">Disconnect Integration?</h3>
+                <h3 className="integration-modal-title">
+                  Disconnect Integration?
+                </h3>
               </div>
 
               <p className="integration-modal-description">
-                Disconnecting will stop data sync and disable related work flows. Existing Documents will not be affected.
+                Disconnecting will stop data sync and disable related work
+                flows. Existing Documents will not be affected.
               </p>
 
               <ul className="integration-modal-list">
@@ -1188,14 +1546,90 @@ export default function Settings() {
             </div>
 
             <div className="integration-modal-footer">
-              <button className="integration-modal-btn cancel-btn" onClick={() => setShowDisconnectModal(false)}>
+              <button
+                className="integration-modal-btn cancel-btn"
+                onClick={() => setShowDisconnectModal(false)}
+              >
                 Cancel
               </button>
-              <button className="integration-modal-btn disconnect-btn" onClick={() => { setIsDriveConnected(false); setShowDisconnectModal(false); }}>
+              <button
+                className="integration-modal-btn disconnect-btn"
+                onClick={() => {
+                  setIsDriveConnected(false);
+                  setShowDisconnectModal(false);
+                }}
+              >
                 Disconnect
               </button>
             </div>
           </div>
+        </div>
+      )}
+      {showAddSubAdminModal && (
+        <div
+          className="add-contact-modal-overlay"
+          onClick={() => {
+            setShowAddSubAdminModal(false);
+            setSubAdminErrors({});
+          }}
+        >
+          <form
+            className="add-contact-modal add-contact-modal--compact"
+            onClick={(e) => e.stopPropagation()}
+            onSubmit={handleAddSubAdmin}
+            noValidate
+          >
+            <h3 className="add-contact-heading">Add Sub-admin</h3>
+            <div className="add-contact-grid">
+              <div className="add-contact-field">
+                <label htmlFor="subadmin-name">
+                  Full Name <span className="required-asterisk">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="subadmin-name"
+                  value={newSubAdmin.name}
+                  onChange={(e) => {
+                    setNewSubAdmin({ ...newSubAdmin, name: e.target.value });
+                    if (subAdminErrors.name) {
+                      setSubAdminErrors((prev) => ({ ...prev, name: undefined }));
+                    }
+                  }}
+                  className={subAdminErrors.name ? "field-error" : ""}
+                  required
+                />
+                {subAdminErrors.name && (
+                  <span className="field-error-msg">{subAdminErrors.name}</span>
+                )}
+              </div>
+              <div className="add-contact-field">
+                <label htmlFor="subadmin-email">
+                  Email Address <span className="required-asterisk">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="subadmin-email"
+                  value={newSubAdmin.email}
+                  onChange={(e) => {
+                    setNewSubAdmin({ ...newSubAdmin, email: e.target.value });
+                    if (subAdminErrors.email) {
+                      setSubAdminErrors((prev) => ({ ...prev, email: undefined }));
+                    }
+                  }}
+                  className={subAdminErrors.email ? "field-error" : ""}
+                  required
+                />
+                {subAdminErrors.email && (
+                  <span className="field-error-msg">{subAdminErrors.email}</span>
+                )}
+              </div>
+            </div>
+            <div className="add-contact-save-row">
+              <button type="submit" className="add-contact-save-btn">
+                Save
+              </button>
+            </div>
+          </form>
         </div>
       )}
     </Layout>
