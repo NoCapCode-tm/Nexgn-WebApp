@@ -1,11 +1,7 @@
 import { ArrowUp, ArrowDown } from "lucide-react";
 
-export default function StatCard({ label, value, trend, trendUp, trendColor }) {
-  const trendClass = trendColor
-    ? `stat-card__trend--${trendColor}`
-    : trendUp
-    ? "stat-card__trend--up"
-    : "stat-card__trend--down";
+export default function StatCard({ label, value, trend, trendUp }) {
+  const trendClass = trendUp ? "stat-card__trend--up" : "stat-card__trend--down";
 
   return (
     <div className="stat-card">

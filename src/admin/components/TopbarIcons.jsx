@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Bell, UserCircle, Settings, FileClock, UserPen, Crown, LogOut } from "lucide-react";
+import { Bell, UserCircle, Settings, FileClock, UserPen, Crown, LogOut, Sun, Moon } from "lucide-react";
+import useDarkMode from "./useDarkMode";
 
 export default function TopbarIcons({ 
   iconSize = 24, 
@@ -9,9 +10,22 @@ export default function TopbarIcons({
   onSearchClick
 }) {
   const navigate = useNavigate();
+  const [isDark, toggleDark] = useDarkMode();
 
   return (
     <div className={className}>
+      {/* Dark mode toggle — mobile only */}
+      <button
+        className="topbar__icon-btn topbar__dark-toggle"
+        onClick={toggleDark}
+        aria-label="Toggle dark mode"
+      >
+        {isDark
+          ? <Sun size={iconSize} color="#FF0915" strokeWidth={1.5} />
+          : <Moon size={iconSize} color="#FF0915" strokeWidth={1.5} />
+        }
+      </button>
+
       <div className="topbar__icon-wrapper">
         <button className="topbar__icon-btn">
           <Bell size={iconSize} color="#FF0915" strokeWidth={1.5} />

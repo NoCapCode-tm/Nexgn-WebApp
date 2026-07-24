@@ -906,11 +906,11 @@ body.dark-mode .admin-sign-yourself-page .template-row,
     align-items: center;
     justify-content: center;
     flex: 1 1 50%;
-    height: 11vw !important;
-    min-height: 11vw !important;
+    height: 9vw !important;
+    min-height: 9vw !important;
     box-sizing: border-box;
-    padding: 0 var(--space-md) !important;
-    font-size: var(--font-sm) !important;
+    padding: 0 var(--space-sm) !important;
+    font-size: 3.2vw !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
     white-space: nowrap !important;
