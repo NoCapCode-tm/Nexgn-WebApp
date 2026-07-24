@@ -14,7 +14,7 @@ export default function DocumentsFilter({ search, setSearch, selectedStatus, set
         <Search size={16} color="#9ca3af" strokeWidth={2} />
         <input
           className="admin-docs-search-input"
-          placeholder="Search Documents"
+          placeholder="Search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -64,7 +64,7 @@ export default function DocumentsFilter({ search, setSearch, selectedStatus, set
           <line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/>
         </svg>
         <span className="add-btn-full">Add Document</span>
-        <span className="admin-docs-add-btn-short">Add</span>
+        <span className="admin-docs-add-btn-short" style={{ display: 'none' }}>Add</span>
       </button>
     </div>
   );

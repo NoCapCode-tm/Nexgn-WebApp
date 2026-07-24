@@ -1,79 +1,122 @@
+/* ==========================================================
+   4. Navigation
+========================================================== */
+
 .admin-mobile-navbar {
   display: none;
 }
 
+body.dark-mode .admin-mobile-navbar__icon-wrap,
+.dark-mode .admin-mobile-navbar__icon-wrap {
+  color: #ffffff !important;
+}
+
+body.dark-mode .admin-mobile-navbar__item,
+.dark-mode .admin-mobile-navbar__item {
+  color: #ffffff !important;
+}
+
+body.dark-mode .admin-mobile-navbar,
+.dark-mode .admin-mobile-navbar {
+  background: #1e1e1e !important;
+  background-color: #1e1e1e !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ==========================================================
+   7. Forms
+========================================================== */
+
+body.dark-mode .admin-mobile-navbar__label,
+.dark-mode .admin-mobile-navbar__label {
+  color: #ffffff !important;
+}
+
+/* ==========================================================
+   15. Mobile (0px–768px)
+========================================================== */
+
 @media (max-width: 768px) {
   .admin-mobile-navbar {
-    display: flex;
     position: fixed;
     right: 0;
     bottom: 0;
     left: 0;
     z-index: 1000;
-    justify-content: space-around;
+    display: flex;
     align-items: center;
-    height: 80px;
+    justify-content: space-around;
+    height: 60px;
     padding-bottom: calc(env(safe-area-inset-bottom) / 2);
     background: #ffffff;
-    border-top: 1px solid #E4E4E4;
+    border-top: 1px solid #e4e4e4;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-    overflow: visible !important;
-  }
-
-  .admin-mobile-navbar__item {
-    display: flex;
-    position: relative;
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    padding: 0;
-    text-decoration: none;
-    color: #8A949F;
-    background: none;
-    border: none;
-    cursor: pointer;
+    overflow: visible;
   }
 
   .admin-mobile-navbar__icon-wrap {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 44px;
-    height: 44px;
-    color: #8A949F;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    color: #8a949f;
     background: transparent;
     border-radius: 50%;
     transition: all 0.2s ease;
   }
 
+  .admin-mobile-navbar__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+    color: #8a949f;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
   .admin-mobile-navbar__item--active .admin-mobile-navbar__icon-wrap {
-    width: 64px;
-    height: 64px;
+    width: 50px;
+    height: 50px;
     color: #ffffff;
-    background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-    box-shadow: 0 4px 12px rgba(255, 9, 21, 0.2);
-    transform: translateY(-22px); /* Shift up to pop out of the top of the navbar */
+    background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
+    box-shadow: 0 8px 16px rgba(255, 9, 21, 0.3);
+    transform: translateY(-20px);
   }
 
   .admin-mobile-navbar__item--active svg {
-    stroke: #ffffff !important;
+    stroke: #ffffff;
   }
 
-  /* Specific stroke fixes for custom SVGs inside active tab */
-  .admin-mobile-navbar__item--active svg path,
-  .admin-mobile-navbar__item--active svg circle,
-  .admin-mobile-navbar__item--active svg rect {
-    stroke: #ffffff !important;
+  .admin-mobile-navbar__item:last-child {
+    display: none;
   }
 
   .admin-mobile-navbar__label {
     position: absolute;
-    bottom: 8px;
-    margin-top: 2px;
-    font-size: 10px;
-    font-weight: 600;
-    color: #1a1a2e; /* Position label at the bottom of the white bar */
+    bottom: 10px;
+    left: 50%;
+    width: max-content;
+    max-width: 90px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1a1a2e;
+    text-align: center;
+    transform: translateX(-50%);
+  }
+
+  .admin-mobile-navbar__item--active svg path,
+  .admin-mobile-navbar__item--active svg circle,
+  .admin-mobile-navbar__item--active svg rect {
+    stroke: #ffffff;
   }
 }

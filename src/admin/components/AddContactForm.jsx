@@ -1,12 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import "../css/ContactBook.css";
 
-export default function AddContactForm({ onClose }) {
+export default function AddContactForm({ onSave, onClose }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [language, setLanguage] = useState("");
+  const [gender, setGender] = useState("");
+  const [emergencyContact, setEmergencyContact] = useState("");
+  const [address, setAddress] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const handleSave = (e) => {
+    if (e) e.preventDefault();
+    const newErrors = {};
+    if (!name.trim()) newErrors.name = "Full name is required";
+    if (!email.trim()) newErrors.email = "Email address is required";
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    setErrors({});
+    onSave({
+      name,
+      email,
+      phone,
+      language,
+      gender,
+      emergencyContact,
+      address,
+      department: jobTitle,
+    });
+    onClose();
+  };
+
   return (
     <div className="add-contact-modal-overlay" onClick={onClose}>
-      <div className="add-contact-modal" onClick={(e) => e.stopPropagation()}>
-        
+      <form
+        className="add-contact-modal add-contact-modal--compact"
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={handleSave}
+        noValidate
+      >
         <div className="mobile-add-contact-back" onClick={onClose}>
           <ChevronLeft size={24} color="#111827" />
         </div>
@@ -16,73 +53,100 @@ export default function AddContactForm({ onClose }) {
           <h3 className="add-contact-heading">Personal Information</h3>
           <div className="add-contact-grid">
             <div className="add-contact-field">
-              <label>Full Name</label>
-              <input type="text" />
+              <label>
+                Full Name <span className="required-asterisk">*</span>
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (errors.name)
+                    setErrors((prev) => ({ ...prev, name: undefined }));
+                }}
+                className={errors.name ? "field-error" : ""}
+                required
+              />
+              {errors.name && (
+                <span className="field-error-msg">{errors.name}</span>
+              )}
             </div>
             <div className="add-contact-field">
               <label>Preferred Language</label>
-              <input type="text" />
+              <input
+                type="text"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+              />
             </div>
             <div className="add-contact-field">
               <label>Gender</label>
-              <input type="text" />
+              <input
+                type="text"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              />
             </div>
             <div className="add-contact-field">
               <label>Contact</label>
-              <input type="text" />
+              <input
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
             </div>
             <div className="add-contact-field">
-              <label>Email Address</label>
-              <input type="email" />
+              <label>
+                Email Address <span className="required-asterisk">*</span>
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (errors.email)
+                    setErrors((prev) => ({ ...prev, email: undefined }));
+                }}
+                className={errors.email ? "field-error" : ""}
+                required
+              />
+              {errors.email && (
+                <span className="field-error-msg">{errors.email}</span>
+              )}
             </div>
             <div className="add-contact-field">
               <label>Emergency Contact</label>
-              <input type="text" />
-            </div>
-            <div className="add-contact-field add-contact-field-full">
-              <label>Address</label>
-              <input type="text" />
-            </div>
-          </div>
-        </div>
-
-        {/* Professional Information */}
-        <div className="add-contact-section add-contact-section--prof">
-          <h3 className="add-contact-heading">Professional Information</h3>
-          <div className="add-contact-grid">
-            <div className="add-contact-field">
-              <label>Company Name</label>
-              <input type="text" />
-            </div>
-            <div className="add-contact-field">
-              <label>Department</label>
-              <input type="text" />
-            </div>
-            <div className="add-contact-field">
-              <label>Employee ID</label>
-              <input type="text" />
+              <input
+                type="text"
+                value={emergencyContact}
+                onChange={(e) => setEmergencyContact(e.target.value)}
+              />
             </div>
             <div className="add-contact-field">
               <label>Job Title</label>
-              <input type="text" />
+              <input
+                type="text"
+                value={jobTitle}
+                onChange={(e) => setJobTitle(e.target.value)}
+              />
             </div>
-            <div className="add-contact-field">
-              <label>Date Joined</label>
-              <input type="text" />
-            </div>
-            <div className="add-contact-field empty-cell"></div>
             <div className="add-contact-field add-contact-field-full">
-              <label>Skills</label>
-              <input type="text" />
+              <label>Address</label>
+              <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
             </div>
           </div>
         </div>
 
-        <div className="mobile-add-contact-save">
-          <button className="mobile-add-contact-save-btn">Save</button>
+        <div className="add-contact-save-row">
+          <button type="submit" className="add-contact-save-btn">
+            Save
+          </button>
         </div>
-
-      </div>
+      </form>
     </div>
   );
 }

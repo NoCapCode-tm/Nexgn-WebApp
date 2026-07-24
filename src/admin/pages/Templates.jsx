@@ -1,12 +1,12 @@
 import { useState, useRef } from "react";
-import MemberLayout from "../components/MemberLayout";
-import MemberTopbar from "../components/MemberTopbar";
+import Layout from "../components/Layout";
+import Topbar from "../components/Topbar";
 
-import "../css/MemberBaseLayout.css";
-import "../css/MemberSignYourself.css";
-import "../css/MemberTemplates.css";
+import "../css/BaseLayout.css";
+import "../css/SignYourself.css";
+import "../css/Templates.css";
 
-export default function MemberTemplates({ onCreate }) {
+export default function Templates({ onCreate }) {
   const [templateName, setTemplateName] = useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
   const [docTitle, setDocTitle] = useState("");
@@ -24,9 +24,9 @@ export default function MemberTemplates({ onCreate }) {
   }
 
   return (
-    <MemberLayout className="member-templates-page">
+    <Layout className="admin-templates-page">
       <>
-        <MemberTopbar
+        <Topbar
           title="Create Template"
           subtitle="Create reusable templates for faster document signing."
           actionButton={null}
@@ -55,7 +55,10 @@ export default function MemberTemplates({ onCreate }) {
                 value={templateName}
                 onChange={(e) => setTemplateName(e.target.value)}
               />
-              <button className="btn-create" onClick={() => onCreate && onCreate(templateName)}>
+              <button
+                className="btn-create"
+                onClick={() => onCreate && onCreate(templateName)}
+              >
                 <span className="btn-create__text">Create</span>
                 <svg
                   className="btn-create__icon"
@@ -150,7 +153,7 @@ export default function MemberTemplates({ onCreate }) {
                 ref={fileInputRef}
                 type="file"
                 accept=".pdf"
-                className="member-file-input-hidden"
+                className="admin-file-input-hidden"
                 onChange={handleFile}
               />
             </div>
@@ -182,7 +185,10 @@ export default function MemberTemplates({ onCreate }) {
               className="btn-create"
               onClick={() =>
                 onCreate &&
-                onCreate(docTitle || uploadedFile || "Untitled Template", uploadedFileObj)
+                onCreate(
+                  docTitle || uploadedFile || "Untitled Template",
+                  uploadedFileObj,
+                )
               }
             >
               Next
@@ -190,6 +196,6 @@ export default function MemberTemplates({ onCreate }) {
           </div>
         </div>
       </>
-    </MemberLayout>
+    </Layout>
   );
 }

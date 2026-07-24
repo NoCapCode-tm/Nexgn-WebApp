@@ -13,9 +13,9 @@ export default function StatCard({ label, value, trend, trendUp, trendColor }) {
       <h2 className="stat-card__value">{value}</h2>
       <div className={`stat-card__trend ${trendClass}`}>
         {trendUp ? (
-          <ArrowUp size={13} strokeWidth={2} />
+          <ArrowUp className="stat-card__trend-icon" strokeWidth={2} />
         ) : (
-          <ArrowDown size={13} strokeWidth={2} />
+          <ArrowDown className="stat-card__trend-icon" strokeWidth={2} />
         )}
         <span>{trend} this week</span>
       </div>

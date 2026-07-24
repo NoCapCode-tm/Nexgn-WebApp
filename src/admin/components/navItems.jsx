@@ -47,25 +47,25 @@ export const HelpIcon = ({ color, size = 24 }) => (
 export function isNavItemActive(itemPath, currentPathname) {
   return (
     currentPathname === itemPath ||
-    (itemPath === "/member-sign-yourself" && currentPathname === "/member-request-signature")
+    (itemPath === "/admin-sign-yourself" && currentPathname === "/admin-request-signature")
   );
 }
 
-export const MEMBER_NAV_ITEMS = [
-  { label: "Dashboard",    path: "/member-dashboard",    icon: HomeIcon },
-  { label: "Signers",      path: "/member-sign-yourself", icon: ClipboardIcon },
-  { label: "Documents",    path: "/member-documents",    icon: FileIcon },
-  { label: "Contact Book", path: "/member-contact-book", icon: ContactIcon },
+export const ADMIN_NAV_ITEMS = [
+  { label: "Dashboard",    path: "/admin-dashboard",    icon: HomeIcon },
+  { label: "Signers",      path: "/admin-sign-yourself", icon: ClipboardIcon },
+  { label: "Documents",    path: "/admin-documents",    icon: FileIcon },
+  { label: "Contact Book", path: "/admin-contact-book", icon: ContactIcon },
 ];
 
-export const MEMBER_BOTTOM_ITEMS = [
-  { label: "Settings", path: "/member-settings", icon: SettingsIcon },
+export const ADMIN_BOTTOM_ITEMS = [
+  { label: "Settings", path: "/admin-settings", icon: SettingsIcon },
   { label: "Help",     path: "/help",            icon: HelpIcon },
 ];
 
-export const MEMBER_MOBILE_NAV_ITEMS = [
-  ...MEMBER_NAV_ITEMS,
-  { label: "Settings", path: "/member-settings", icon: SettingsIcon },
+export const ADMIN_MOBILE_NAV_ITEMS = [
+  ...ADMIN_NAV_ITEMS,
+  { label: "Settings", path: "/admin-settings", icon: SettingsIcon },
 ];
 
 export const NexgnLogo = () => (
@@ -89,7 +89,7 @@ export const ThemeToggleIcon = ({ color = "#8A949F", size = 24 }) => (
 
 export const ToggleBtn = ({ expanded }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-    className={`member-sidebar__toggle-icon ${expanded ? '' : 'member-sidebar__toggle-icon--collapsed'}`}>
+    className={`admin-sidebar__toggle-icon ${expanded ? '' : 'admin-sidebar__toggle-icon--collapsed'}`}>
     <rect width="24" height="24" rx="12" fill="white"/>
     <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" stroke="#8A949F" strokeOpacity="0.58"/>
     <path d="M14.679 17.212L9.345 11.878L14.679 6.545" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

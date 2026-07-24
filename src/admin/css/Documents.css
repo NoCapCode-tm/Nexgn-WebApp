@@ -1,24 +1,215 @@
-/* src/member/css/Documents.css */
+/* ==========================================================
+   2. Page / Root Container
+========================================================== */
 
-/* â”€â”€ TOPBAR ACTIONS (search + filter + add) â”€â”€ */
+.admin-docs-page .desktop-topbar .admin-docs-filter-wrapper {
+  display: none;
+}
+
+/* ==========================================================
+   3. Layout
+========================================================== */
+
 .admin-docs-topbar-actions {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+/* ==========================================================
+   4. Navigation
+========================================================== */
+
+.admin-docs-tab {
+  height: 37px;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #9ca3af;
+  text-align: center;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #e4e4e4;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.admin-docs-tab--active {
+  font-weight: 600;
+  color: #ff0915;
+  border-bottom-color: #ff0915;
+}
+
+.admin-docs-tab:hover {
+  color: #ff0915;
+}
+
+.admin-docs-tabs {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  height: 37px;
+}
+
+body.dark-mode .admin-docs-page .action-menu {
+  background: rgba(17, 17, 17, 0.55) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+body.dark-mode .admin-docs-page .action-menu__item {
+  color: #d7d7d7 !important;
+  background: transparent !important;
+  border-bottom: 1px solid rgba(116, 107, 107, 0.4) !important;
+}
+
+body.dark-mode .admin-docs-page .action-menu__item--danger {
+  color: #e53935 !important;
+  background: transparent !important;
+}
+
+body.dark-mode .admin-docs-page .action-menu__item--danger:hover {
+  background: rgba(229, 57, 53, 0.1) !important;
+}
+
+body.dark-mode .admin-docs-page .action-menu__item:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+body.dark-mode .admin-docs-page .action-menu__item:last-child {
+  border-bottom: none !important;
+}
+
+body.dark-mode .admin-docs-page .admin-badge--pending {
+  color: #FFC107 !important;
+  background: transparent !important;
+  border: 1px solid #FFC107 !important;
+}
+
+body.dark-mode .admin-docs-page .admin-badge--signed {
+  color: #2ECC71 !important;
+  background: transparent !important;
+  border: 1px solid #2ECC71 !important;
+}
+
+body.dark-mode .admin-docs-page .admin-badge--expired {
+  color: #E74C3C !important;
+  background: transparent !important;
+  border: 1px solid #E74C3C !important;
+}
+
+/* ==========================================================
+   5. Shared Components
+========================================================== */
+
+.admin-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 400;
+  border-radius: 4px;
+}
+
+.admin-badge--pending {
+  color: #B45309;
+  background: #FEF3C7;
+}
+
+.admin-badge--signed {
+  color: #15803D;
+  background: #DCFCE7;
+}
+
+.admin-badge--expired {
+  color: #B91C1C;
+  background: #FEE2E2;
+}
+
+.admin-docs-filter-dropdown-divider {
+  margin: 4px 0;
+  border-top: 1px solid #f3f4f6;
+}
+
+.mobile-status-corner,
+.mobile-only-icon,
+.mobile-lbl,
+.mobile-owner-badge,
+.admin-docs-mobile-section-title {
+  display: none;
+}
+
+/* ==========================================================
+   6. Page Components
+========================================================== */
+
+.admin-docs-empty-state {
+  padding: 40px;
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.admin-docs-filter-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  width: 220px;
+  padding: 12px;
+  font-family: "Inter", sans-serif;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 12px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.admin-docs-filter-dropdown-group {
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+}
+
+.admin-docs-filter-dropdown-reset {
+  width: 100%;
+  padding: 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ff0915;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-docs-filter-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .admin-docs-search-wrap {
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 200px;
+  width: 100%;
   height: 36px;
+  max-width: 300px;
   padding: 0 12px;
   background: #fff;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
 }
 
 .admin-docs-search-wrap:hover {
@@ -26,13 +217,114 @@
   transform: translateY(-2px);
 }
 
-.admin-docs-search-wrap:focus-within {
-  border-color: #FF0915;
+.admin-docs-section {
+  flex: 1;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.desktop-val,
+.desktop-status {
+  display: block;
+}
+
+/* ==========================================================
+   7. Forms
+========================================================== */
+
+.admin-docs-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.admin-docs-add-btn-short {
+  display: none;
+}
+
+.admin-docs-add-btn:active {
+  box-shadow: none;
+  transform: translateY(1px);
+}
+
+.admin-docs-add-btn:hover {
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.admin-docs-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  background: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.admin-docs-filter-btn:active {
+  box-shadow: 0 1px 4px rgba(138, 148, 159, 0.3);
+  transform: translateY(1px);
+}
+
+.admin-docs-filter-btn:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.admin-docs-filter-dropdown-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: #6b7280;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-docs-filter-dropdown-select {
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+  color: #374151;
+  background-color: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
 }
 
 .admin-docs-search-input {
   width: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
   color: #1a1a2e;
   background: transparent;
@@ -44,131 +336,9 @@
   color: #9ca3af;
 }
 
-.admin-docs-filter-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  height: 36px;
-  padding: 0 14px;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  color: #6b7280;
-  background: #fff;
-  border: 1px solid #E4E4E4;
-  border-radius: 20px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  transition: box-shadow 0.2s, transform 0.2s;
-  cursor: pointer;
-}
-
-.admin-docs-filter-btn:hover {
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
-  transform: translateY(-2px);
-}
-
-.admin-docs-filter-btn:active {
-  box-shadow: 0 1px 4px rgba(138, 148, 159, 0.3);
-  transform: translateY(1px);
-}
-
-.admin-docs-add-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  height: 36px;
-  padding: 0 16px;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  color: #fff;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  border: none;
-  border-radius: 20px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  transition: box-shadow 0.2s, transform 0.2s;
-  cursor: pointer;
-}
-
-.admin-docs-add-btn:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
-  transform: translateY(-2px);
-}
-
-.admin-docs-add-btn:active {
-  box-shadow: none;
-  transform: translateY(1px);
-}
-
-.admin-docs-add-btn-short {
-  display: none;
-}
-
-/* â”€â”€ TABS â”€â”€ */
-.admin-docs-tabs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
-  height: 37px;
-}
-
-.admin-docs-tab {
-  height: 37px;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  text-align: center;
-  white-space: nowrap;
-  color: #9ca3af;
-  background: none;
-  border: none;
-  border-bottom: 2px solid #E4E4E4;
-  transition: color 0.15s, border-color 0.15s;
-  cursor: pointer;
-
-  /* Apply full-width bottom border to each individual section */
-}
-
-.admin-docs-tab:hover {
-  color: #FF0915;
-}
-
-.admin-docs-tab--active {
-  font-weight: 600;
-  color: #FF0915;
-  border-bottom-color: #FF0915;
-}
-
-/* â”€â”€ TABLE â”€â”€ */
-.admin-docs-section {
-  flex: 1;
-  padding: 0;
-  background: transparent;
-  border-radius: 0;
-}
-
-.admin-docs-table__header {
-  display: grid;
-  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
-  padding: 10px 16px;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #1a1a2e;
-  background: transparent;
-  border: none;
-  border-bottom: none;
-}
-
-.admin-docs-table {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-}
+/* ==========================================================
+   8. Tables
+========================================================== */
 
 .admin-doc-row {
   display: grid;
@@ -177,15 +347,59 @@
   height: 60px;
   padding: 0 16px;
   font-size: 13px;
-  color: #8A949F;
+  color: #8a949f;
   background: #ffffff;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 16px;
   transition: background 0.12s;
 }
 
-.admin-doc-row:hover {
-  background: #fafafa;
+.admin-doc-row__cell {
+  font-size: 12px;
+  color: #8a949f;
+}
+
+.admin-doc-row__icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: #e53935;
+}
+
+.admin-doc-row__menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  color: #9ca3af;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-doc-row__menu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-doc-row__menu:hover {
+  color: #374151;
+  background: #f3f4f6;
+}
+
+.admin-doc-row__note {
+  padding-right: 12px;
+  font-size: 12px;
+  color: #8a949f;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .admin-doc-row__title {
@@ -196,973 +410,792 @@
   color: #111827;
 }
 
-.admin-doc-row__icon {
-  color: #FF0915;
-  flex-shrink: 0;
+.admin-doc-row:hover {
+  background: #fafafa;
 }
 
-.admin-doc-row__note {
-  padding-right: 12px;
-  font-size: 12px;
-  white-space: nowrap;
-  color: #8A949F;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.admin-docs-search-wrap:focus-within {
+  border-color: #ff0915;
 }
 
-.admin-doc-row__cell {
-  font-size: 12px;
-  color: #8A949F;
-}
-
-.admin-doc-row__menu {
+.admin-docs-table {
   display: flex;
-  align-items: center;
-  padding: 4px;
-  color: #9ca3af;
-  border-radius: 4px;
-  cursor: pointer;
+  gap: 8px;
+  flex-direction: column;
+  width: 100%;
 }
 
-.admin-doc-row__menu:hover {
-  color: #374151;
-  background: #f3f4f6;
-}
-
-/* â”€â”€ BADGES â”€â”€ */
-.admin-badge {
-  display: inline-block;
-  padding: 3px 12px;
+.admin-docs-table__header {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
+  padding: 10px 16px;
   font-size: 11px;
-  font-weight: 400;
-  border-radius: 4px;
+  font-weight: 600;
+  color: #1a1a2e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: transparent;
+  border: none;
+  border-bottom: none;
 }
 
-.admin-badge--pending  { color: #D28E56; background: #FEF5E0; }
-.admin-badge--signed   { color: #559B6F; background: #E6F7EC; }
-.admin-badge--expired  { color: #E22A2A; background: #FFDCDC; }
-
-/* â”€â”€ FIGMA MOBILE OVERRIDES (Hidden on Desktop/Tablet) â”€â”€ */
-.mobile-status-corner,
-.mobile-only-icon,
-.mobile-lbl,
-.mobile-owner-badge,
-.admin-docs-mobile-section-title {
-  display: none;
-}
-.desktop-val,
-.desktop-status {
-  display: block;
+body.dark-mode .admin-docs-page .admin-doc-row__icon {
+  stroke: url(#docIconGradient) !important;
 }
 
-/* â”€â”€ RESPONSIVE â”€â”€ */
-@media (max-width: 768px) {
-  .admin-docs-page .mobile-page-header .topbar__bottom-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
+body.dark-mode .admin-docs-page .admin-doc-row__menu {
+  color: #9a9a9a !important;
+}
+
+body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ==========================================================
+   13. Desktop (1180px+)
+========================================================== */
+
+@media (min-width: 1180px) {
+  .admin-docs-page .admin-docs-search-wrap {
+    gap: clamp(8px, 0.55vw, 14px);
+    width: clamp(200px, 13.88vw, 355px);
+    height: clamp(36px, 2.5vw, 64px);
+    padding: 0 clamp(12px, 0.83vw, 21px);
+    border-radius: clamp(20px, 1.38vw, 35px);
   }
-  .admin-docs-topbar-actions {
+
+  .admin-docs-page .admin-docs-topbar-actions {
+    gap: clamp(10px, 0.69vw, 17px);
+  }
+
+  .admin-docs-page .admin-docs-tab {
+    height: clamp(37px, 2.56vw, 65px);
+    font-size: clamp(13px, 0.9vw, 23px);
+  }
+
+  .admin-docs-page .admin-docs-tabs {
+    height: clamp(37px, 2.56vw, 65px);
+  }
+
+  .admin-docs-page .admin-docs-add-btn {
+    padding: 0 clamp(16px, 1.11vw, 28px);
+  }
+
+  .admin-docs-page .admin-docs-filter-btn {
+    padding: 0 clamp(14px, 0.97vw, 25px);
+  }
+
+  .admin-docs-page .admin-docs-filter-btn,
+  .admin-docs-page .admin-docs-add-btn {
+    gap: clamp(6px, 0.41vw, 10px);
+    height: clamp(36px, 2.5vw, 64px);
+    font-size: clamp(12px, 0.83vw, 21px);
+    border-radius: clamp(20px, 1.38vw, 35px);
+  }
+
+  .admin-docs-page .admin-docs-search-input {
+    font-size: clamp(12px, 0.83vw, 21px);
+  }
+
+  .admin-docs-page .admin-doc-row {
+    height: clamp(60px, 4.16vw, 106px);
+    padding: 0 clamp(16px, 1.11vw, 28px);
+    font-size: clamp(13px, 0.9vw, 23px);
+    border-radius: clamp(16px, 1.11vw, 28px);
+  }
+
+  .admin-docs-page .admin-doc-row__menu {
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  /* --- Action Controls Styling (Figma) --- */
-  .admin-docs-search-wrap {
-    flex: 1;
-    max-width: none;
-    padding-left: 12px;
-    border: 1px solid #E4E4E4;
-    border-radius: 20px;
-  }
-  .admin-docs-search-input::placeholder {
-    font-size: 13px;
-  }
-  .admin-docs-filter-btn {
+    align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    justify-self: center;
+    width: 36px;
+    height: 36px;
+    margin: 0;
     padding: 0;
-    background: #fff;
-    border: 1px solid #E4E4E4;
-    border-radius: 50%;
-  }
-  .admin-docs-filter-btn .filter-text { display: none; }
-  .admin-docs-add-btn {
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    color: #fff;
-    background: #E22A2A;
-    border: none;
-    border-radius: 50%;
-  }
-  .admin-docs-add-btn .add-btn-full { display: none; }
-
-  /* --- Tabs Styling (Figma) --- */
-  .admin-docs-tabs {
-    gap: 16px;
-    margin-bottom: 16px;
-    padding: 0 16px;
-    border-bottom: none;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .admin-docs-tab {
-    padding: 8px 24px;
-    font-size: 13px;
-    color: #8A949F;
-    border: none !important;
-    border-radius: 12px;
-  }
-  .admin-docs-tab--active {
-    font-weight: 500;
-    color: #ffffff !important;
-    background: #E22A2A;
+    border-radius: 6px;
   }
 
-  /* --- Section Title --- */
-  .admin-docs-mobile-section-title {
+  .admin-docs-page .admin-doc-row__menu .action-menu,
+  .admin-docs-page .admin-doc-row__menu .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
+  }
+
+  .admin-docs-page .admin-doc-row__title {
+    gap: clamp(10px, 0.69vw, 17px);
+  }
+
+  .admin-docs-page .admin-docs-table {
+    gap: clamp(8px, 0.55vw, 14px);
+  }
+
+  .admin-docs-page .admin-docs-table__header {
+    padding: clamp(10px, 0.69vw, 17px) clamp(16px, 1.11vw, 28px);
+    font-size: clamp(11px, 0.76vw, 19px);
+  }
+
+  .admin-docs-page .admin-docs-table__header span:last-child {
+    justify-self: center;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+/* ==========================================================
+   14. Tablet (769px–1179px)
+========================================================== */
+
+@media (min-width: 769px) and (max-width: 1179px) {
+  .admin-docs-page .admin-docs-filter-wrapper {
+    display: none;
+  }
+
+  .admin-docs-page .desktop-topbar {
+    display: none;
+  }
+
+  .admin-docs-page .mobile-header-divider {
     display: block;
-    margin-bottom: 24px;
-    padding: 0 16px;
-    font-size: 14px;
-    font-weight: 600;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: calc(100% + 80px);
+    margin: 20px -40px 0 -40px;
+    border: none;
+    border-bottom: none;
+  }
+
+  .admin-docs-page .mobile-page-header {
+    display: grid;
+    align-items: center;
+    gap: 0 24px;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    margin: 0;
+    padding: 20px 0px 0 0px;
+    border-bottom: none;
+  }
+
+  .admin-docs-page .topbar__sub {
+    margin: 0;
+    margin-top: 7px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #8a949f;
+  }
+
+  .admin-docs-page .topbar__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
     color: #111827;
   }
 
-  .mobile-header-divider {
+  .admin-docs-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .admin-docs-tab {
+    flex: 1 1 0;
+    width: 0;
+    height: auto;
+    box-sizing: border-box;
+    padding: 14px 0 16px 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: #8a949f;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid #e4e4e4;
+    transition: color 0.15s;
+  }
+
+  .admin-docs-tab--active {
+    font-weight: 600;
+    color: #e22a2a;
+    border-bottom: 2px solid #e22a2a;
+  }
+
+  .admin-docs-tabs {
+    display: flex;
+    gap: 14px;
+    height: auto;
+    margin: 0px 40px 10px 40px;
+    padding: 0;
+  }
+
+  .admin-badge {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    min-width: 0;
+    padding: 0;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+    border: none;
+    border-radius: 50%;
+  }
+
+  .admin-badge--pending {
+    background-color: #D28E56;
+  }
+
+  .admin-badge--signed {
+    background-color: #559B6F;
+  }
+
+  .admin-badge--expired {
+    background-color: #E22A2A;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge--pending {
+    background-color: #FFC107;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge--signed {
+    background-color: #2ECC71;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge--expired {
+    background-color: #E74C3C;
+  }
+
+  .mobile-status-corner,
+  .mobile-only-icon,
+  .mobile-lbl,
+  .mobile-owner-badge {
+    display: none;
+  }
+
+  .admin-docs-filter-dropdown {
+    top: 46px;
+  }
+
+  .admin-docs-search-wrap {
+    width: 210px;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 21px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .admin-docs-section {
+    flex: 1;
+    width: auto;
+    margin: 0;
+  }
+
+  .desktop-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .desktop-val {
+    display: block;
+  }
+
+  .filter-text {
+    display: none;
+  }
+
+  .add-btn-full {
+    display: none;
+  }
+
+  .admin-docs-add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 88px;
+    height: 42px;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 21px;
+  }
+
+  .admin-docs-add-btn-short {
+    display: inline-block;
+  }
+
+  .admin-docs-filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .admin-docs-search-input {
+    font-size: 13px;
+  }
+
+  .admin-doc-row {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
+    grid-template-rows: 1fr;
     width: 100%;
-    margin: 16px 0;
+    height: auto;
+    min-height: 72px;
+    box-sizing: border-box;
+    margin: 0 0 14px 0;
+    padding: 0 20px;
+    background: #ffffff;
+    border: 1px solid #e4e4e4;
+    border-radius: 14px;
+  }
+
+  .admin-doc-row__cell {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    font-size: 13px;
+    color: #8a949f;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .admin-doc-row__menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    width: 40px;
+    height: 36px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 36px;
+    min-height: 36px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 6px;
+    transform: none;
+  }
+
+  .admin-doc-row__menu:hover {
+    position: relative;
+    justify-self: center;
+    width: 40px;
+    height: 36px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 36px;
+    min-height: 36px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 6px;
+    transform: none;
+  }
+
+  .admin-doc-row__note {
+    display: none;
+  }
+
+  .admin-doc-row__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: none;
+    min-width: 0;
+    padding-left: 0;
+    overflow: hidden;
+  }
+
+  .admin-doc-row__title span {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .admin-doc-row:hover {
+    background: #fafafa;
+  }
+
+  .admin-docs-page .mobile-page-header .mobile-filter-row {
+    display: flex;
+    align-items: center;
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+  }
+
+  .admin-docs-page .mobile-page-header .topbar__bottom-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    flex-direction: column;
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+  }
+
+  .admin-docs-table {
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 30px 0 32px 0;
+  }
+
+  .admin-docs-table__header {
+    display: grid;
+    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    background: transparent;
+  }
+
+  .admin-docs-table__header span:last-child {
+    justify-self: center;
+  }
+
+  .admin-docs-table__header span:nth-child(2) {
+    display: none;
+  }
+
+  .admin-docs-table__header span:nth-child(6) {
+    justify-self: center;
+    text-align: center;
+  }
+}
+
+/* ==========================================================
+   15. Mobile (0px–768px)
+========================================================== */
+
+@media (max-width: 768px) {
+  .admin-docs-page .admin-docs-filter-wrapper {
+    display: none;
+  }
+
+  .admin-docs-page .mobile-header-divider {
+    margin: var(--space-md) 0;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge {
+    width: 10px !important;
+    height: 10px !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    color: transparent !important;
+    border: none !important;
+    border-radius: 50% !important;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge--pending {
+    background-color: #FFC107 !important;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge--signed {
+    background-color: #2ECC71 !important;
+  }
+
+  body.dark-mode .admin-docs-page .admin-badge--expired {
+    background-color: #E74C3C !important;
+  }
+
+  .admin-docs-topbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    width: 100%;
+  }
+
+  .mobile-header-divider {
+    display: block;
+    width: 100%;
+    margin: var(--space-md) 0;
     border: none;
     border-bottom: 1px solid #e5e7eb;
   }
 
-  /* --- Table Header --- */
-  .admin-docs-table__header {
-    display: none;
-  }
-  .admin-docs-table {
-    gap: 12px;
-    padding: 0 16px 20px 16px;
+  .admin-docs-page .admin-docs-tab--active {
+    color: #ffffff;
+    background: #e22a2a;
   }
 
-  /* --- Document Card Overhaul (Figma) --- */
-  .admin-doc-row {
-    display: grid;
-    position: relative;
-    grid-template-columns: 1fr 1fr 0.8fr; /* Signer, Date, Owner */
-    align-items: start;
-    grid-template-rows: auto auto;
-    height: auto;
-    padding: 20px 16px;
-    background: #ffffff;
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-    column-gap: 8px;
-    row-gap: 20px;
-  }
-
-  /* Hide Desktop Elements */
-  .desktop-val,
-  .desktop-status,
-  .admin-doc-row__menu,
-  .admin-doc-row__note {
-    display: none !important;
-  }
-
-  /* Show Mobile Elements */
-  .mobile-status-corner,
-  .mobile-only-icon,
-  .mobile-owner-badge {
+  .admin-docs-tab {
     display: flex;
-  }
-  .mobile-lbl {
-    display: block;
-  }
-
-  /* Title Row */
-  .admin-doc-row__title {
     align-items: center;
-    width: 90%;
-    margin: 0;
-    font-size: 15px;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 100%;
+    padding: 0 var(--space-md);
+    font-size: var(--font-sm);
     font-weight: 500;
-    color: #111827;
-    grid-column: 1 / -1;
-  }
-  .admin-doc-row__title span {
-    display: block;
+    color: #8a949f;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .admin-doc-row__icon {
-    width: 18px;
-    height: 18px;
-    color: #111827;
+    background: transparent;
+    border: none;
+    border-radius: 999px;
   }
 
-  /* Top Right Status Corner */
-  .mobile-status-corner {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    padding: 2px;
-    background: #fff;
-    border-radius: 50%;
-  }
-  .status-circle-icon {
-    width: 18px;
-    height: 18px;
-  }
-  .status-green { color: #559B6F; }
-  .status-red { color: #E22A2A; }
-  .status-yellow { color: #F59E0B; }
-
-  /* Grid Layout for Meta Columns */
-  .admin-doc-row__cell {
-    display: none; /* Hide any default wrapper cell styles */
-  }
-  .admin-doc-row__cell.mobile-col {
+  .admin-docs-tabs {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
+    width: auto;
+    height: 12.267vw;
+    min-height: 12.267vw;
+    box-sizing: border-box;
+    margin: var(--space-md) var(--mobile-gutter) var(--space-md)
+      var(--mobile-gutter);
+    padding: 0;
+    border-bottom: none;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
-  .admin-doc-row__cell.mobile-col-owner {
+
+  .desktop-status .admin-badge {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-xs);
+    border-radius: var(--space-2xl);
   }
 
   .mobile-only-icon {
-    margin-top: 1px;
+    display: flex;
+    width: 4.8vw;
+    height: 4.8vw;
     color: #686868;
   }
+
+  .mobile-owner-badge {
+    display: none;
+  }
+
+  .admin-docs-filter-dropdown {
+    top: 46px;
+  }
+
+  .admin-docs-mobile-section-title {
+    display: block;
+    margin-bottom: var(--space-lg);
+    padding: 0 var(--mobile-gutter);
+    font-size: var(--font-xl);
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .admin-docs-search-wrap {
+    flex: 1;
+    height: 10.667vw;
+    max-width: none;
+    padding-left: var(--space-sm);
+    background: #fff;
+    border: 0.267vw solid #e4e4e4;
+    border-radius: var(--space-2xl);
+  }
+
+  .desktop-status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    grid-column: 3 / 4;
+    grid-row: 1;
+  }
+
   .mobile-col-text {
     display: flex;
+    gap: 0.533vw;
     flex-direction: column;
-    gap: 6px;
-  }
-  .mobile-val {
-    max-width: 80px;
-    font-size: 12px;
-    font-weight: 400;
-    white-space: nowrap;
-    color: #686868;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .mobile-lbl {
-    font-size: 10px;
-    color: #686868;
   }
 
-  /* Owner Stacked Badge Base */
-  .mobile-owner-badge {
-    display: flex;
-    flex-direction: column;
-    width: 100px;
-    text-align: center;
-    border-radius: 6px;
-    overflow: hidden;
+  .mobile-lbl {
+    display: block;
+    font-size: var(--font-xs);
+    color: #9ca3af;
   }
-  .mobile-owner-badge__top {
-    padding: 2px 0;
-    font-size: 9px;
+
+  .mobile-status-corner {
+    display: none;
+  }
+
+  .mobile-val {
+    max-width: 29.333vw;
+    font-size: var(--font-sm);
     font-weight: 500;
     color: #4b5563;
-    background: #ffffff;
-  }
-  .mobile-owner-badge__bot {
-    padding: 2px 0;
-    font-size: 10px;
-    font-weight: 600;
-    color: #ffffff;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
-  /* Dynamic Owner Badge Colors */
-  .admin-docs-page .badge-pending { border: 1px solid #F59E0B; }
-  .admin-docs-page .badge-pending .mobile-owner-badge__bot { background: #F59E0B; }
-
-  .admin-docs-page .badge-signed { border: 1px solid #559B6F; }
-  .admin-docs-page .badge-signed .mobile-owner-badge__bot { background: #559B6F; }
-
-  .admin-docs-page .badge-expired { border: 1px solid #E22A2A; }
-  .admin-docs-page .badge-expired .mobile-owner-badge__bot { background: #E22A2A; }
-}
-
-@media (min-width: 769px) and (max-width: 1179px) {
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     1. HIDE THINGS THAT MUST NOT SHOW ON TABLET
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-
-  /* The desktop topbar is not used on tablet â€” hide it */
-  .admin-docs-page .desktop-topbar {
-    display: none !important;
-  }
-
-  /* The mobile-topbar (hamburger bar) IS shown on tablet â€” keep it visible */
-  /* (no rule needed â€” default shared CSS handles this) */
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     2. HEADER LAYOUT  (mobile-page-header)
-        Structure inside JSX:
-          .mobile-page-header
-            .topbar__bottom-row   â† title + subtitle (col 1)
-            hr.mobile-header-divider  â† full-width divider (col 1/-1)
-            .mobile-filter-row    â† search/filter/add (col 2, row 1)
-        We use a 2-col grid with explicit row placement.
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-docs-page .mobile-page-header {
-    display: grid !important;
-    align-items: center !important;
-    gap: 0 24px !important;
-    grid-template-columns: 1fr auto !important;
-    grid-template-rows: auto auto !important;
-    /* Figma: ~40px side padding, 32px top gap from hamburger bar */
-    padding: 24px 40px 0 40px !important; /* row-gap=0, col-gap=24px */
-    margin: 0 !important;
-    border-bottom: none !important;
-  }
-
-  /* Title+subtitle block â†’ row 1, col 1 */
-  .admin-docs-page .mobile-page-header .topbar__bottom-row {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 4px !important;
-    margin: 0 !important;
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-  }
-
-  /* Filter/action row â†’ row 1, col 2 (sits beside title) */
-  .admin-docs-page .mobile-page-header .mobile-filter-row {
-    display: flex !important;
-    align-items: center !important;
-    margin: 0 !important;
-    grid-column: 2 !important;
-    grid-row: 1 !important;
-  }
-
-  /* Divider â†’ row 2, spans both cols, bleeds to edges */
-  .admin-docs-page .mobile-header-divider {
-    display: block !important;
-    width: calc(100% + 80px) !important;
-    margin: 20px -40px 0 -40px !important;
-    border: none !important;
-    border-bottom: 1px solid #E4E4E4 !important;
-    grid-column: 1 / -1 !important;
-    grid-row: 2 !important;
-  }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     3. TITLE TYPOGRAPHY  â€” match Figma bold heading
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-docs-page .topbar__title {
-    margin: 0 !important;
-    font-size: 24px !important;
-    font-weight: 700 !important;
-    line-height: 1.2 !important;
-    color: #111827 !important;
-  }
-  .admin-docs-page .topbar__sub {
-    margin: 0 !important;
-    font-size: 13px !important;
-    font-weight: 400 !important;
-    line-height: 1.4 !important;
-    color: #8A949F !important;
-  }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     4. ACTION CONTROLS  â€” Search, Filter, + Add
-        Figma: search ~210px pill, filter ~44px circle, add ~88px pill
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-docs-topbar-actions {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-  }
-
-  /* Search pill */
-  .admin-docs-search-wrap {
-    width: 210px !important;
-    height: 42px !important;
-    padding: 0 14px !important;
-    border-radius: 21px !important;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
-  }
-  .admin-docs-search-input {
-    font-size: 13px !important;
-  }
-
-  /* Filter circle */
-  .admin-docs-filter-btn {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 44px !important;
-    height: 44px !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
-  }
-  .filter-text {
-    display: none !important;
-  }
-
-  /* + Add pill */
   .admin-docs-add-btn {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 6px !important;
-    width: 88px !important;
-    height: 42px !important;
-    padding: 0 !important;
-    font-size: 14px !important;
-    font-weight: 600 !important;
-    border-radius: 21px !important;
-  }
-  .add-btn-full {
-    display: none !important;
-  }
-  .admin-docs-add-btn-short {
-    display: inline-block !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 10.667vw;
+    height: 10.667vw;
+    padding: 0;
+    color: #fff;
+    background: #e22a2a;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 1.067vw 3.2vw rgba(226, 42, 42, 0.2);
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     5. TABS  â€” Figma: generous top margin, full-width strip, larger text
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-docs-tabs {
-    display: flex !important;
-    gap: 0 !important;
-    width: auto !important;
-    /* Tabs must align with the section content:
-       section has 40px padding, so tabs use same 40px side margin */
-    height: auto !important;
-    margin: 40px 40px 0 40px !important;
-    padding: 0 !important;
-    border-bottom: 1px solid #E6E6E6 !important;
-  }
-  .admin-docs-tab {
-    flex: 1 !important;
-    height: auto !important;
-    box-sizing: border-box !important;
-    padding: 14px 0 16px 0 !important;
-    font-size: 15px !important;
-    font-weight: 400 !important;
-    text-align: center !important;
-    color: #8A949F !important;
-    border: none !important;
-    /* Underline sits only under the tab's own 1/3 section â€” not wider */
-    border-bottom: 2px solid transparent !important;
-    transition: color 0.15s !important;
-    /* Prevent underline from bleeding â€” each tab is exactly 1/3 */
-  }
-  .admin-docs-tab--active {
-    font-weight: 600 !important;
-    color: #E22A2A !important;
-    border-bottom: 2px solid #E22A2A !important;
+  .admin-docs-add-btn .add-btn-full {
+    display: none;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     6. TABLE SECTION WRAPPER
-        â€” aligned with header/tabs (40px side margins)
-        â€” extra top gap from tabs to header row
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-docs-section {
-    flex: 1 !important;
-    width: auto !important;
-    margin: 0 !important;
-    padding: 0 40px !important;
-  }
-  .admin-docs-table {
-    width: 100% !important;
-    /* Increased breathing room between tabs and header row */
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0 !important;
-    margin: 0 !important;
-    padding: 40px 0 32px 0 !important;
+  .admin-docs-filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 10.667vw;
+    height: 10.667vw;
+    padding: 0;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0.533vw 2.667vw rgba(0, 0, 0, 0.08);
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     7. TABLE HEADER â€” rebalanced columns per Figma
-        TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-docs-table__header {
-    display: grid !important;
-    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
-    width: 100% !important;
-    /*
-     * SAME grid as .admin-doc-row â€” guarantees column alignment.
-     * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
-     */
-    /*
-     * ROOT CAUSE FIX: .admin-docs-table__header is OUTSIDE .admin-docs-section.
-     * .admin-docs-section has padding: 0 40px
-     * .admin-doc-row (inside section) has padding: 0 20px
-     * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
-     * Header must use 60px padding to match that exact X position.
-     */
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    padding: 0 60px 14px 60px !important;
-    font-size: 12px !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.7px !important;
-    color: #374151 !important;
-    background: transparent !important;
-  }
-  /* Hide the NOTE column header */
-  .admin-docs-table__header span:nth-child(2) {
-    display: none !important;
-  }
-  .admin-docs-table__header span:last-child {
-    justify-self: center !important;
+  .admin-docs-filter-btn .filter-text {
+    display: none;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     8. TABLE ROWS â€” taller, properly padded cards
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  .admin-docs-search-input {
+    height: 100%;
+    line-height: normal;
+  }
+
+  .admin-docs-search-input::placeholder {
+    font-size: var(--font-sm);
+    line-height: normal;
+  }
+
   .admin-doc-row {
-    display: grid !important;
-    align-items: center !important;
-    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
-    grid-template-rows: 1fr !important;
-    width: 100% !important;
-    height: auto !important;
-    min-height: 72px !important;
-    box-sizing: border-box !important;
-    margin: 0 0 14px 0 !important;
-    padding: 0 20px !important;
-    background: #ffffff !important;
-    border: 1px solid #E4E4E4 !important;
-    border-radius: 14px !important;
-  }
-  .admin-doc-row:hover {
-    background: #fafafa !important;
+    position: relative;
+    display: grid;
+    align-items: start;
+    column-gap: var(--space-xs);
+    row-gap: var(--space-lg);
+    grid-template-columns: 1fr 1fr 0.8fr;
+    grid-template-rows: auto auto;
+    height: auto;
+    padding: var(--space-md);
+    background: #ffffff;
+    border: none;
+    border-radius: var(--space-md);
+    box-shadow: 0 1.067vw 5.333vw rgba(0, 0, 0, 0.04);
   }
 
-  /* Hide NOTE cell â€” not in Figma tablet view */
-  .admin-doc-row__note {
-    display: none !important;
-  }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     9. TITLE COLUMN â€” ellipsis on overflow
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-doc-row__title {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    min-width: 0 !important;
-    max-width: none !important;
-    padding-left: 0 !important;
-    overflow: hidden !important;
-  }
-  .admin-doc-row__title span {
-    display: block !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    white-space: nowrap !important;
-    color: #111827 !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     10. ROW CELLS â€” restore desktop-style rendering
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .admin-doc-row__cell {
-    display: flex !important;
-    align-items: center !important;
-    min-width: 0 !important;
-    font-size: 13px !important;
-    white-space: nowrap !important;
-    color: #8A949F !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+    display: none;
   }
 
-  /* Show desktop elements */
-  .desktop-val { display: block !important; }
-  .desktop-status { display: flex !important; }
-  .admin-doc-row__menu {
-    display: flex !important;
-    position: static !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    border-radius: 6px !important;
-    transform: none !important;
-    justify-self: center !important;
-  }
-  .admin-doc-row__menu:hover {
-    position: static !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    border-radius: 6px !important;
-    transform: none !important;
-    justify-self: center !important;
+  .admin-doc-row__cell.mobile-col {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
   }
 
-  /* Hide mobile-only elements */
-  .mobile-status-corner,
-  .mobile-only-icon,
-  .mobile-lbl,
-  .mobile-owner-badge {
-    display: none !important;
+  .admin-doc-row__cell.mobile-col-owner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    flex-direction: column;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     11. STATUS â€” colored dot matching Dashboard mobile reference
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-badge {
-    display: inline-block !important;
-    width: 10px !important;
-    min-width: 0 !important;
-    height: 10px !important;
-    padding: 0 !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    color: transparent !important;
-    border: none !important;
-    border-radius: 50% !important;
+  .admin-doc-row__cell.mobile-col-owner .desktop-val {
+    display: block;
+    font-size: var(--font-sm);
+    font-weight: 600;
+    color: #111827;
   }
-  .admin-badge--pending { background-color: #D28E56 !important; }
-  .admin-badge--signed  { background-color: #559B6F !important; }
-  .admin-badge--expired { background-color: #E22A2A !important; }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     6. TABLE SECTION WRAPPER
-        â€” aligned with header/tabs (40px side margins)
-        â€” extra top gap from tabs to header row
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-docs-section {
-    flex: 1 !important;
-    width: auto !important;
-    margin: 0 !important;
-    padding: 0 40px !important;
+  .admin-doc-row__cell.mobile-col-owner::after {
+    font-size: var(--font-xs);
+    color: #686868;
+    content: "Owner";
   }
+
+  .admin-doc-row__icon {
+    width: var(--font-lg);
+    height: var(--font-lg);
+    color: #111827;
+  }
+
+  .admin-doc-row__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    grid-column: 1 / 3;
+    width: 100%;
+    margin: 0;
+    font-size: var(--font-lg);
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .admin-doc-row__title span {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .admin-docs-page .mobile-filter-row {
+    margin-top: var(--space-sm);
+  }
+
+  .admin-docs-page .mobile-page-header .topbar__bottom-row {
+    align-items: stretch;
+    gap: var(--space-xs);
+    flex-direction: column;
+  }
+
   .admin-docs-table {
-    width: 100% !important;
-    /* Increased breathing room between tabs and header row */
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0 !important;
-    margin: 0 !important;
-    padding: 40px 0 32px 0 !important;
+    gap: var(--space-md);
+    padding: 0 var(--mobile-gutter) var(--space-xl) var(--mobile-gutter);
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     7. TABLE HEADER â€” rebalanced columns per Figma
-        TITLE | SIGNERS | SIGNED AT | OWNER | STATUS | Action
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .admin-docs-table__header {
-    display: grid !important;
-    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
-    width: 100% !important;
-    /*
-     * SAME grid as .admin-doc-row â€” guarantees column alignment.
-     * 6 columns: TITLE(3.2) | SIGNERS(1.8) | SIGNED AT(1.8) | OWNER(0.9) | STATUS(1.1) | Action(0.6)
-     */
-    /*
-     * ROOT CAUSE FIX: .admin-docs-table__header is OUTSIDE .admin-docs-section.
-     * .admin-docs-section has padding: 0 40px
-     * .admin-doc-row (inside section) has padding: 0 20px
-     * So card text starts at: 40px (section) + 20px (row) = 60px from edge.
-     * Header must use 60px padding to match that exact X position.
-     */
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    padding: 0 60px 14px 60px !important;
-    font-size: 12px !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.7px !important;
-    color: #374151 !important;
-    background: transparent !important;
-  }
-  /* Hide the NOTE column header */
-  .admin-docs-table__header span:nth-child(2) {
-    display: none !important;
-  }
-  .admin-docs-table__header span:last-child {
-    justify-self: center !important;
-  }
-  /* Center the STATUS column header to align with the status dot below */
-  .admin-docs-table__header span:nth-child(6) {
-    text-align: center !important;
-    justify-self: center !important;
+    display: none;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     8. TABLE ROWS â€” taller, properly padded cards
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-doc-row {
-    display: grid !important;
-    align-items: center !important;
-    grid-template-columns: 3.2fr 1.8fr 1.8fr 0.9fr 1.1fr 0.6fr !important;
-    grid-template-rows: 1fr !important;
-    width: 100% !important;
-    height: auto !important;
-    min-height: 72px !important;
-    box-sizing: border-box !important;
-    margin: 0 0 14px 0 !important;
-    padding: 0 20px !important;
-    background: #ffffff !important;
-    border: 1px solid #E4E4E4 !important;
-    border-radius: 14px !important;
-  }
-  .admin-doc-row:hover {
-    background: #fafafa !important;
-  }
-
-  /* Hide NOTE cell â€” not in Figma tablet view */
+  .desktop-val,
+  .admin-doc-row__menu,
   .admin-doc-row__note {
-    display: none !important;
-  }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     9. TITLE COLUMN â€” ellipsis on overflow
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-doc-row__title {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    min-width: 0 !important;
-    max-width: none !important;
-    padding-left: 0 !important;
-    overflow: hidden !important;
-  }
-  .admin-doc-row__title span {
-    display: block !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    white-space: nowrap !important;
-    color: #111827 !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     10. ROW CELLS â€” restore desktop-style rendering
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .admin-doc-row__cell {
-    display: flex !important;
-    align-items: center !important;
-    min-width: 0 !important;
-    font-size: 13px !important;
-    white-space: nowrap !important;
-    color: #8A949F !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-
-  /* Show desktop elements */
-  .desktop-val { display: block !important; }
-  .desktop-status { display: flex !important; }
-  .admin-doc-row__menu {
-    display: flex !important;
-    position: static !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    border-radius: 6px !important;
-    transform: none !important;
-    justify-self: center !important;
-  }
-  .admin-doc-row__menu:hover {
-    position: static !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    border-radius: 6px !important;
-    transform: none !important;
-    justify-self: center !important;
-  }
-
-  /* Hide mobile-only elements */
-  .mobile-status-corner,
-  .mobile-only-icon,
-  .mobile-lbl,
-  .mobile-owner-badge {
-    display: none !important;
-  }
-
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-     11. STATUS â€” colored dot matching Dashboard mobile reference
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  .desktop-status {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-  }
-  .admin-badge {
-    display: inline-block !important;
-    width: 10px !important;
-    min-width: 0 !important;
-    height: 10px !important;
-    padding: 0 !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    color: transparent !important;
-    border: none !important;
-    border-radius: 50% !important;
-  }
-  .admin-badge--pending { background-color: #D28E56 !important; }
-  .admin-badge--signed  { background-color: #559B6F !important; }
-  .admin-badge--expired { background-color: #E22A2A !important; }
-}
-
-/* Desktop-only overrides for Action Button alignment */
-@media (min-width: 1180px) {
-  /* Center the ACTION header to align perfectly with the button below it */
-  .admin-docs-page .admin-docs-table__header span:last-child {
-    margin: 0 !important;
-    padding: 0 !important;
-    text-align: center !important;
-    justify-self: center !important;
-  }
-
-  .admin-docs-page .admin-doc-row__menu {
-    display: flex !important;
-    position: relative !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 36px !important;
-    height: 36px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border-radius: 6px !important;
-    justify-self: center !important; /* Centers the button in the ACTION column */
-  }
-
-  /* Dropdown/hover menu positioning relative to action button */
-  .admin-docs-page .admin-doc-row__menu .action-menu,
-  .admin-docs-page .admin-doc-row__menu .dropdown-menu {
-    position: absolute !important;
-    top: 100% !important;
-    right: 0 !important;
-    left: auto !important;
-  }
-}
-
-.admin-docs-empty-state {
-  padding: 40px;
-  font-size: 13px;
-  text-align: center;
-  color: #9ca3af;
-}
-
-/* Documents filter popover styling */
-.admin-docs-filter-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.admin-docs-filter-dropdown {
-  position: absolute;
-  top: 48px; /* Desktop default */
-  right: 0;
-  z-index: 1000;
-  width: 220px;
-  background-color: #FFFFFF;
-  border: 1px solid #E4E4E4;
-  border-radius: 12px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 12px;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.admin-docs-filter-dropdown-group {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.admin-docs-filter-dropdown-label {
-  display: block;
-  font-size: 10px;
-  font-weight: 500;
-  color: #6B7280;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  text-align: left;
-}
-
-.admin-docs-filter-dropdown-select {
-  width: 100%;
-  height: 32px;
-  font-size: 13px;
-  border-radius: 8px;
-  border: 1px solid #E4E4E4;
-  padding: 0 8px;
-  background-color: #fff;
-  color: #374151;
-  outline: none;
-  cursor: pointer;
-}
-
-.admin-docs-filter-dropdown-divider {
-  border-top: 1px solid #F3F4F6;
-  margin: 4px 0;
-}
-
-.admin-docs-filter-dropdown-reset {
-  width: 100%;
-  padding: 8px 0;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  border: none;
-  background-color: transparent;
-  color: #FF0915;
-  cursor: pointer;
-}
-
-/* Positioning overrides based on viewport */
-@media (max-width: 768px) {
-  .admin-docs-filter-dropdown {
-    top: 46px !important;
-  }
-}
-@media (min-width: 769px) and (max-width: 1179px) {
-  .admin-docs-filter-dropdown {
-    top: 46px !important;
+    display: none;
   }
 }

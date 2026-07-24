@@ -1,4 +1,5 @@
-import { FileText, MoreHorizontal } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { FileText, MoreHorizontal, X } from "lucide-react";
 
 const statusClass = {
   Pending: "badge--pending",
@@ -6,7 +7,20 @@ const statusClass = {
   Expired: "badge--expired",
 };
 
-export default function DocumentRow({ title, note, signers, signedAt, owner, status }) {
+export default function DocumentRow({ title, note, signers, signedAt, owner, status, onRevoke }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <div className="doc-row">
       <div className="doc-row__title">
@@ -20,10 +34,34 @@ export default function DocumentRow({ title, note, signers, signedAt, owner, sta
       <div className="doc-row__cell">
         <span className={`badge ${statusClass[status]}`}>{status}</span>
       </div>
-      <div className="doc-row__cell">
-        <button className="doc-row__menu">
+      <div className="doc-row__cell doc-row__action" ref={menuRef}>
+        <button
+          className="doc-row__menu"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label="Row actions"
+        >
           <MoreHorizontal size={16} />
         </button>
+        {menuOpen && (
+          <div className="doc-row__dropdown">
+            <button
+              className="doc-row__dropdown-item"
+              onClick={() => setMenuOpen(false)}
+            >
+              View
+            </button>
+            <button
+              className="doc-row__dropdown-item doc-row__dropdown-item--danger"
+              onClick={() => {
+                setMenuOpen(false);
+                if (onRevoke) onRevoke();
+              }}
+            >
+              <X size={13} />
+              Revoke
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

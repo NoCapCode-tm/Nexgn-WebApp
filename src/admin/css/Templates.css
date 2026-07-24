@@ -1,0 +1,551 @@
+/* ==========================================================
+   2. Page / Root Container
+========================================================== */
+
+.admin-templates-list-page .desktop-topbar,
+.admin-templates-list-page .admin-docs-topbar-actions.template-toolbar-actions {
+  flex-shrink: 0;
+}
+
+.admin-templates-list-page .template-toolbar-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.admin-templates-list-page .template-toolbar-actions .admin-docs-search-wrap {
+  flex: 0 1 300px;
+}
+
+.admin-templates-list-page .topbar__sub {
+  white-space: nowrap;
+  overflow: visible;
+}
+
+/* ==========================================================
+   3. Layout
+========================================================== */
+
+.template-setup-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.dark-mode .topbar__sub {
+  color: #9a9a9a;
+}
+
+.dark-mode .topbar__title {
+  color: #f5f5f5;
+}
+
+/* ==========================================================
+   4. Navigation
+========================================================== */
+
+.dark-mode .admin-templates-list-page .action-menu {
+  background: rgba(17, 17, 17, 0.55) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.dark-mode .admin-templates-list-page .action-menu__item {
+  color: #e5e5e5 !important;
+  background: transparent !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-mode .admin-templates-list-page .action-menu__item--danger {
+  color: #ff6b6b !important;
+  background: transparent !important;
+}
+
+.dark-mode .admin-templates-list-page .action-menu__item--danger:hover {
+  background: rgba(255, 107, 107, 0.12) !important;
+}
+
+.dark-mode .admin-templates-list-page .action-menu__item:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ==========================================================
+   5. Shared Components
+========================================================== */
+
+.dark-mode .or-divider {
+  color: #6f6f76;
+}
+
+/* ==========================================================
+   6. Page Components
+========================================================== */
+
+.dark-mode .admin-docs-search-wrap {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .upload-zone {
+  color: #9a9a9a;
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.template-toolbar-actions {
+  margin-bottom: 20px;
+}
+
+/* ==========================================================
+   7. Forms
+========================================================== */
+
+.admin-templates-list-page .admin-docs-add-btn {
+  background: #e22a2a;
+  box-shadow: 0 4px 12px rgba(226, 42, 42, 0.2);
+}
+
+.btn-create__icon {
+  display: none;
+}
+
+.dark-mode .form-input,
+.dark-mode .form-textarea {
+  color: #e5e5e5;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .form-input::placeholder,
+.dark-mode .form-textarea::placeholder {
+  color: #6f6f76;
+}
+
+/* ==========================================================
+   8. Tables
+========================================================== */
+
+.admin-doc-row__menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-doc-row__menu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.admin-doc-row__menu-trigger:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .admin-doc-row__menu {
+  color: #b8b8be !important;
+}
+
+.dark-mode .admin-doc-row__menu:hover {
+  color: #f5f5f5 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-mode .admin-docs-table__header {
+  color: #939393 !important;
+}
+
+.dark-mode .template-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .template-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.dark-mode .upload-zone svg path {
+  stroke: #9a9a9a;
+}
+
+.template-create-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.template-create-row .btn-create {
+  flex-shrink: 0;
+}
+
+.template-create-row .form-input {
+  flex: 1;
+  max-width: clamp(200px, 25vw, 320px);
+}
+
+.template-docs-cols {
+  grid-template-columns: 2.5fr 2.5fr 1fr 0.5fr !important;
+}
+
+.template-docs-cols .admin-doc-row__cell:last-child,
+.template-docs-cols .admin-doc-row__menu {
+  justify-self: center;
+}
+
+.template-row {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 2fr 2fr 1fr 0.5fr;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.template-row:last-child {
+  border-bottom: none;
+}
+
+/* ==========================================================
+   9. Cards
+========================================================== */
+
+.dark-mode .setup-card__title,
+.dark-mode .section-label,
+.dark-mode .form-label {
+  color: #eaeaea;
+}
+
+.dark-mode .setup-card {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+}
+
+/* ==========================================================
+   13. Desktop (1180px+)
+========================================================== */
+
+@media (min-width: 1180px) {
+  .admin-templates-list-page .admin-docs-search-wrap {
+    width: clamp(120px, 15vw, 300px);
+    min-width: 120px;
+  }
+
+  .admin-templates-list-page
+    .admin-docs-topbar-actions.template-toolbar-actions {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .admin-templates-list-page .mobile-page-header {
+    display: none;
+  }
+
+  .admin-templates-list-page .admin-doc-row__menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    padding: 0;
+    border-radius: 6px;
+  }
+
+  .admin-templates-list-page .admin-doc-row__menu .action-menu,
+  .admin-templates-list-page .admin-doc-row__menu .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
+  }
+
+  .admin-templates-list-page .admin-docs-table__header span:last-child {
+    justify-self: center;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .template-create-row {
+    gap: clamp(10px, 0.83vw, 24px);
+  }
+}
+
+/* ==========================================================
+   14. Tablet (769px–1179px)
+========================================================== */
+
+@media (min-width: 769px) and (max-width: 1179px) {
+  .admin-templates-list-page .admin-docs-section {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+  }
+
+  .admin-templates-list-page .desktop-topbar {
+    display: none;
+  }
+
+  .admin-templates-list-page .mobile-header-divider {
+    display: none;
+  }
+
+  .admin-templates-list-page .mobile-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0px;
+    border-bottom: none;
+  }
+
+  .admin-templates-list-page .topbar__sub {
+    margin: 0;
+    margin-top: 7px;
+    font-size: 13px;
+    color: #8a949f;
+  }
+
+  .admin-templates-list-page .topbar__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .dark-mode .admin-templates-list-page .mobile-page-header {
+    border-bottom: none;
+  }
+
+  .admin-templates-list-page .admin-doc-row {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .admin-templates-list-page .admin-doc-row__menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    width: 40px;
+    height: 36px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 36px;
+    min-height: 36px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 6px;
+    transform: none;
+  }
+
+  .admin-templates-list-page .admin-doc-row__menu:hover {
+    position: relative;
+    justify-self: center;
+    width: 40px;
+    height: 36px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 36px;
+    min-height: 36px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 6px;
+    transform: none;
+  }
+
+  .admin-templates-list-page .admin-docs-table {
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0;
+    padding-top: 6px;
+  }
+
+  .admin-templates-list-page .admin-docs-table__header {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0;
+  }
+
+  .admin-templates-list-page .mobile-page-header .mobile-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .admin-templates-list-page
+    .mobile-page-header
+    .mobile-filter-row
+    .admin-docs-add-btn {
+    flex-shrink: 0;
+  }
+
+  .admin-templates-list-page
+    .mobile-page-header
+    .mobile-filter-row
+    .admin-docs-search-wrap {
+    flex: 0 1 auto;
+    width: 210px;
+    min-width: 150px;
+  }
+
+  .admin-templates-list-page .mobile-page-header .topbar__bottom-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    flex-direction: column;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .admin-templates-list-page
+    .mobile-page-header
+    .topbar__bottom-row
+    .topbar__title,
+  .admin-templates-list-page
+    .mobile-page-header
+    .topbar__bottom-row
+    .topbar__sub {
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .admin-templates-list-page .template-docs-cols {
+    column-gap: 24px;
+    grid-template-columns: 2fr 1fr 0.5fr !important;
+  }
+
+  .admin-templates-list-page .template-docs-cols .admin-doc-row__note {
+    display: none !important;
+  }
+
+  .setup-card {
+    width: calc(100% - 48px);
+    box-sizing: border-box;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+/* ==========================================================
+   15. Mobile (0px–768px)
+========================================================== */
+
+@media (max-width: 768px) {
+  .admin-templates-list-page .desktop-topbar {
+    display: none;
+  }
+
+  .admin-templates-list-page .mobile-header-divider {
+    margin: var(--space-md) 0;
+  }
+
+  .template-setup-footer {
+    justify-content: center;
+  }
+
+  .admin-templates-list-page .admin-docs-add-btn-short {
+    display: none;
+  }
+
+  .btn-create__icon {
+    display: block;
+  }
+
+  .btn-create__text {
+    display: none;
+  }
+
+  .template-setup-footer .btn-create {
+    width: auto;
+    padding: 10px 32px;
+  }
+
+  .admin-templates-list-page .admin-doc-row {
+    display: flex;
+    align-items: center;
+    row-gap: 0;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    min-height: 64px;
+  }
+
+  .admin-templates-list-page .admin-doc-row__title {
+    grid-column: unset;
+    width: 100%;
+    margin: 0;
+  }
+
+  .admin-templates-list-page .mobile-filter-row {
+    margin-top: var(--space-sm);
+  }
+
+  .admin-templates-list-page
+    .mobile-page-header
+    .mobile-filter-row
+    .admin-docs-search-wrap {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+
+  .template-create-row {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .template-create-row .btn-create {
+    display: flex;
+    flex-shrink: 0;
+    width: auto;
+    padding: 0;
+    background: none;
+    border-radius: 7px;
+  }
+
+  .template-create-row .form-input {
+    flex: 1;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .template-row {
+    gap: 4px;
+    grid-template-columns: 1fr;
+  }
+
+  .admin-templates-page .setup-card {
+    width: calc(100% - 32px);
+    box-sizing: border-box;
+    margin: 0 16px;
+    border: 1px solid #e4e4e4;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  }
+
+  .dark-mode .admin-templates-page .setup-card {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+  }
+}
