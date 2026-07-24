@@ -22,7 +22,7 @@
   width: 100%;
   padding: 4px;
   background: #ffffff;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 8px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -66,8 +66,8 @@
 .or-divider::after {
   flex: 1;
   height: 1px;
-  content: '';
-  background: #E4E4E4;
+  content: "";
+  background: #e4e4e4;
 }
 
 .signer-badge {
@@ -78,10 +78,10 @@
   padding: 0 16px;
   font-size: 12px;
   font-weight: 500;
-  color: #6B7280;
+  color: #6b7280;
   white-space: nowrap;
-  background: #F9FAFB;
-  border: 1px solid #EAEAEA;
+  background: #f9fafb;
+  border: 1px solid #eaeaea;
   border-radius: 20px;
 }
 
@@ -110,12 +110,12 @@
 }
 
 .dark-mode .template-dropdown-option--active {
-  color: #FF0915;
+  color: #ff0915;
   background: rgba(255, 9, 21, 0.18);
 }
 
 .dark-mode .template-dropdown-option:hover {
-  color: #FF6B6B;
+  color: #ff6b6b;
   background: rgba(255, 9, 21, 0.12);
 }
 
@@ -129,8 +129,8 @@
   gap: 16px;
   flex-direction: column;
   padding: 16px 20px;
-  background: #FFFFFF;
-  border: 1px solid #EAEAEA;
+  background: #ffffff;
+  border: 1px solid #eaeaea;
   border-radius: 8px;
 }
 
@@ -138,7 +138,7 @@
   position: absolute;
   top: 50%;
   right: 10px;
-  color: #8A949F;
+  color: #8a949f;
   pointer-events: none;
   transition: transform 0.15s;
   transform: translateY(-50%);
@@ -150,7 +150,7 @@
 
 .template-dropdown-option {
   padding: 8px 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 13px;
   color: #1a1a2e;
   border-radius: 6px;
@@ -159,13 +159,13 @@
 }
 
 .template-dropdown-option--active {
-  color: #FF0915;
-  background: #FFDCDC;
+  color: #ff0915;
+  background: #ffdcdc;
 }
 
 .template-dropdown-option:hover {
-  color: #FF0915;
-  background: #FFF0F0;
+  color: #ff0915;
+  background: #fff0f0;
 }
 
 .toggle {
@@ -177,7 +177,7 @@
 
 .toggle-slider {
   position: absolute;
-  background: #E4E4E4;
+  background: #e4e4e4;
   border-radius: 20px;
   cursor: pointer;
   transition: background 0.2s;
@@ -190,10 +190,10 @@
   left: 3px;
   width: 14px;
   height: 14px;
-  content: '';
+  content: "";
   background: #fff;
   border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
 }
 
@@ -204,17 +204,19 @@
   gap: 8px;
   height: 72px;
   font-size: 13px;
-  color: #8A949F;
-  border: 1.5px dashed #CCCCCC;
+  color: #8a949f;
+  border: 1.5px dashed #cccccc;
   border-radius: 10px;
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
 }
 
 .upload-zone:hover {
-  color: #FF0915;
+  color: #ff0915;
   background: #fff5f5;
-  border-color: #FF0915;
+  border-color: #ff0915;
 }
 
 /* ==========================================================
@@ -234,28 +236,30 @@
   height: 38px;
   font-size: 13px;
   font-weight: 500;
-  color: #6B7280;
+  color: #6b7280;
   background: #ffffff;
-  border: 1px dashed #CCCCCC;
+  border: 1px dashed #cccccc;
   border-radius: 8px;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
 }
 
 .btn-add-signer:hover {
-  color: #FF0915;
-  border-color: #FF0915;
+  color: #ff0915;
+  border-color: #ff0915;
 }
 
 .btn-create {
   height: 38px;
   padding: 0 22px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: #fff;
   white-space: nowrap;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -263,7 +267,7 @@
 }
 
 .btn-create:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
 }
 
 .btn-remove-signer {
@@ -273,29 +277,32 @@
   width: 28px;
   height: 28px;
   padding: 0;
-  color: #FF0915;
-  background: #FFEBEB;
-  border: 1px solid #FFD1D1;
+  color: #ff0915;
+  background: #ffebeb;
+  border: 1px solid #ffd1d1;
   border-radius: 50%;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .btn-remove-signer:hover {
-  color: #FFFFFF;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
-  border-color: #FF0915;
+  color: #ffffff;
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
+  border-color: #ff0915;
 }
 
 .btn-share {
   width: 100%;
   height: 36px;
   margin-top: auto;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -311,7 +318,7 @@
 }
 
 .btn-share:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
 }
 
 .dark-mode .btn-add-signer {
@@ -321,18 +328,18 @@
 }
 
 .dark-mode .btn-add-signer:hover {
-  color: #FF0915;
-  border-color: #FF0915;
+  color: #ff0915;
+  border-color: #ff0915;
 }
 
 .dark-mode .mobile-tabs-container .tab-btn--inactive {
-  color: #D8D8D8;
+  color: #d8d8d8;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .dark-mode .tab-btn--inactive {
-  color: #D8D8D8;
+  color: #d8d8d8;
   background: transparent;
 }
 
@@ -347,7 +354,7 @@
 }
 
 .dark-mode .template-select:focus {
-  border-color: #FF0915;
+  border-color: #ff0915;
 }
 
 .form-group {
@@ -359,23 +366,23 @@
 .form-input {
   height: 38px;
   padding: 0 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 13px;
-  color: #8A949F;
+  color: #8a949f;
   background: #fff;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 8px;
   outline: none;
   transition: border-color 0.15s;
 }
 
 .form-input::placeholder {
-  color: #C4C9CE;
+  color: #c4c9ce;
 }
 
 .form-input:focus {
   color: #1a1a2e;
-  border-color: #FF0915;
+  border-color: #ff0915;
 }
 
 .form-label {
@@ -388,11 +395,11 @@
   width: 100%;
   height: 72px;
   padding: 10px 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 13px;
-  color: #8A949F;
+  color: #8a949f;
   background: #fff;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 8px;
   outline: none;
   transition: border-color 0.15s;
@@ -400,12 +407,12 @@
 }
 
 .form-textarea::placeholder {
-  color: #C4C9CE;
+  color: #c4c9ce;
 }
 
 .form-textarea:focus {
   color: #1a1a2e;
-  border-color: #FF0915;
+  border-color: #ff0915;
 }
 
 .section-label {
@@ -417,21 +424,23 @@
 
 .tab-btn {
   padding: 8px 22px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 13px;
   font-weight: 500;
   border: none;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .tab-btn--active {
   color: #ffffff;
-  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  background: linear-gradient(234.21deg, #960101 2.19%, #ff0915 100.02%);
 }
 
 .tab-btn--inactive {
-  color: #8A949F;
+  color: #8a949f;
   background: #ffffff;
 }
 
@@ -445,12 +454,12 @@
   width: 100%;
   height: 38px;
   padding: 0 36px 0 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 13px;
-  color: #8A949F;
+  color: #8a949f;
   text-align: left;
   background: #fff;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 8px;
   outline: none;
   cursor: pointer;
@@ -464,7 +473,7 @@
 }
 
 .template-select:focus {
-  border-color: #FF0915;
+  border-color: #ff0915;
 }
 
 .toggle input {
@@ -474,7 +483,7 @@
 }
 
 .toggle input:checked + .toggle-slider {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
 }
 
 .toggle input:checked + .toggle-slider::before {
@@ -487,7 +496,7 @@
 
 .admin-theme .form-input::placeholder,
 .admin-theme .form-textarea::placeholder {
-  color: #C4C9CE;
+  color: #c4c9ce;
 }
 
 .admin-theme .form-input:focus::placeholder,
@@ -497,7 +506,7 @@
 
 .admin-theme .tab-btn--active {
   color: #ffffff;
-  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  background: linear-gradient(234.21deg, #960101 2.19%, #ff0915 100.02%);
 }
 
 .admin-theme .tab-btn--inactive {
@@ -505,7 +514,7 @@
 }
 
 .dark-mode.admin-theme .tab-btn--inactive {
-  color: #D8D8D8;
+  color: #d8d8d8;
 }
 
 .form-row {
@@ -529,7 +538,7 @@
 .input-with-icon-wrap .input-icon {
   position: absolute;
   left: 12px;
-  color: #8A949F;
+  color: #8a949f;
   pointer-events: none;
 }
 
@@ -542,12 +551,12 @@
 
 .roles-row .btn-create {
   height: 38px;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
   transition: background 0.15s;
 }
 
 .roles-row .btn-create:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
 }
 
 .signer-row {
@@ -568,7 +577,7 @@
 ========================================================== */
 
 .admin-theme .setup-card {
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
 }
 
 .dark-mode .setup-card__tabs {
@@ -581,12 +590,12 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 18px;
-  border-bottom: 1px solid #E4E4E4;
+  border-bottom: 1px solid #e4e4e4;
 }
 
 .setup-card__tabs {
   display: flex;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -646,7 +655,7 @@ body.dark-mode .admin-sign-yourself-page .template-row,
 
   .upload-zone {
     gap: clamp(7px, 0.55vw, 18px);
-    height: clamp(59px, 5.0vw, 142px);
+    height: clamp(59px, 5vw, 142px);
     font-size: clamp(11px, 0.9vw, 26px);
     border-radius: clamp(8px, 0.69vw, 20px);
   }
@@ -680,7 +689,7 @@ body.dark-mode .admin-sign-yourself-page .template-row,
   }
 
   .form-textarea {
-    height: clamp(59px, 5.0vw, 142px);
+    height: clamp(59px, 5vw, 142px);
     padding: clamp(8px, 0.69vw, 20px) clamp(10px, 0.83vw, 24px);
     font-size: clamp(11px, 0.9vw, 26px);
     border-radius: clamp(7px, 0.55vw, 17px);
@@ -762,7 +771,7 @@ body.dark-mode .admin-sign-yourself-page .template-row,
     padding-bottom: 16px !important;
     padding-left: 16px !important;
     background: #ffffff;
-    border: 1px solid #CCCCCC;
+    border: 1px solid #cccccc;
     border-radius: 9px;
   }
 
@@ -802,7 +811,7 @@ body.dark-mode .admin-sign-yourself-page .template-row,
     width: 100%;
     height: 1px;
     margin: 4vw 0 4vw 0;
-    background: #CCCCCC;
+    background: #cccccc;
     border: none;
   }
 
@@ -889,7 +898,7 @@ body.dark-mode .admin-sign-yourself-page .template-row,
 
   .admin-sign-yourself-page .form-input::placeholder,
   .admin-sign-yourself-page .form-textarea::placeholder {
-    color: #9CA3AF;
+    color: #9ca3af;
   }
 
   .admin-sign-yourself-page .mobile-tabs-container .tab-btn {
@@ -910,19 +919,22 @@ body.dark-mode .admin-sign-yourself-page .template-row,
   }
 
   .admin-sign-yourself-page .mobile-tabs-container .tab-btn--active {
-    color: #FFFFFF;
-    background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+    color: #ffffff;
+    background: linear-gradient(234.21deg, #960101 2.19%, #ff0915 100.02%);
     border: none;
   }
 
   .admin-sign-yourself-page .mobile-tabs-container .tab-btn--inactive {
     color: #666666;
-    background: #FFFFFF;
-    border: 1px solid #D9D9D9;
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
   }
 
-  .dark-mode .admin-sign-yourself-page .mobile-tabs-container .tab-btn--inactive {
-    color: #D8D8D8;
+  .dark-mode
+    .admin-sign-yourself-page
+    .mobile-tabs-container
+    .tab-btn--inactive {
+    color: #d8d8d8;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
@@ -938,18 +950,18 @@ body.dark-mode .admin-sign-yourself-page .template-row,
 
   .admin-sign-yourself-page .tab-btn--active {
     color: #ffffff;
-    background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+    background: linear-gradient(234.21deg, #960101 2.19%, #ff0915 100.02%);
     border: none;
   }
 
   .admin-sign-yourself-page .tab-btn--inactive {
     color: #666666;
     background: #ffffff;
-    border: 0.27vw solid #D9D9D9;
+    border: 0.27vw solid #d9d9d9;
   }
 
   .dark-mode .admin-sign-yourself-page .tab-btn--inactive {
-    color: #D8D8D8;
+    color: #d8d8d8;
     background: transparent;
     border: 0.27vw solid rgba(255, 255, 255, 0.15);
   }
@@ -1074,7 +1086,7 @@ body.dark-mode .admin-sign-yourself-page .template-row,
     width: 100%;
     margin: 0;
     padding: var(--space-lg) var(--mobile-gutter);
-    border: 1px solid #E4E4E4;
+    border: 1px solid #e4e4e4;
     outline: none;
     box-shadow: none;
   }
@@ -1101,4 +1113,7 @@ body.dark-mode .admin-sign-yourself-page .template-row,
   .setup-card__tabs--desktop-only {
     display: none;
   }
+}
+.sign-yourself-editor-no-roles .template-editor-roles-row {
+  display: none;
 }

@@ -1806,6 +1806,8 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
   white-space: normal !important;
 }
 
+
+
 .integration-modal-content {
   padding: 32px 36px 24px 36px;
 }
@@ -1856,6 +1858,20 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
+}
+
+.required-asterisk {
+  color: #FF0915;
+}
+
+.field-error {
+  border-color: #E5252A !important;
+}
+
+.field-error-msg {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #E5252A;
 }
 
 /* ==========================================================

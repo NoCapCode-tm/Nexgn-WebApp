@@ -54,8 +54,15 @@ export default function TopbarIcons({
           <UserCircle size={iconSize} color="#FF0915" strokeWidth={1.5} />
         </button>
         <div className="notification-dropdown profile-dropdown">
-          <div className="notification-dropdown__header">
+          <div className="notification-dropdown__header profile-dropdown__header">
             <span>Profile</span>
+            <button
+              className="profile-dropdown__settings-btn"
+              onClick={() => navigate("/admin-settings")}
+              aria-label="Settings"
+            >
+              <Settings size={16} color="#FFFFFF" strokeWidth={2} />
+            </button>
           </div>
           <div className="profile-dropdown__body">
             <div className="profile-dropdown__info">

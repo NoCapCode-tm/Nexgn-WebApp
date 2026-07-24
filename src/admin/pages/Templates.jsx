@@ -55,7 +55,10 @@ export default function Templates({ onCreate }) {
                 value={templateName}
                 onChange={(e) => setTemplateName(e.target.value)}
               />
-              <button className="btn-create" onClick={() => onCreate && onCreate(templateName)}>
+              <button
+                className="btn-create"
+                onClick={() => onCreate && onCreate(templateName)}
+              >
                 <span className="btn-create__text">Create</span>
                 <svg
                   className="btn-create__icon"
@@ -182,7 +185,10 @@ export default function Templates({ onCreate }) {
               className="btn-create"
               onClick={() =>
                 onCreate &&
-                onCreate(docTitle || uploadedFile || "Untitled Template", uploadedFileObj)
+                onCreate(
+                  docTitle || uploadedFile || "Untitled Template",
+                  uploadedFileObj,
+                )
               }
             >
               Next

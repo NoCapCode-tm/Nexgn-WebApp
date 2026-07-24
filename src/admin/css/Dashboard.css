@@ -7,7 +7,7 @@
   height: 1px;
   margin-top: 14px;
   margin-bottom: 8px;
-  background-color: #E4E4E4;
+  background-color: #e4e4e4;
 }
 
 /* ==========================================================
@@ -49,7 +49,7 @@
   flex-direction: column;
   width: 100px;
   background: #ffffff;
-  border: 2px solid #CCCCCC;
+  border: 2px solid #cccccc;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   overflow: hidden;
@@ -62,24 +62,24 @@
   gap: 6px;
   width: 100%;
   padding: 10px 14px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: #374151;
   text-align: center;
   background: #ffffff;
   border: none;
-  border-bottom: 2px solid #CCCCCC;
+  border-bottom: 2px solid #cccccc;
   cursor: pointer;
 }
 
 .admin-theme .doc-row__dropdown-item--danger {
-  color: #E22A2A;
-  background: #FFF1F1;
+  color: #e22a2a;
+  background: #fff1f1;
 }
 
 .admin-theme .doc-row__dropdown-item--danger:hover {
-  background: #FFE2E2;
+  background: #ffe2e2;
 }
 
 .admin-theme .doc-row__dropdown-item:hover {
@@ -91,7 +91,7 @@
 }
 
 .admin-theme .doc-row__icon {
-  color: #FF0915;
+  color: #ff0915;
   opacity: 1;
 }
 
@@ -101,7 +101,7 @@
   justify-content: center;
   width: 28px;
   height: 28px;
-  color: #6B7280;
+  color: #6b7280;
   background: transparent;
   border: none;
   border-radius: 6px;
@@ -158,22 +158,22 @@
   width: 164px;
   height: 48px;
   padding: 0 16px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 600;
-  color: #FFFFFF;
-  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+  color: #ffffff;
+  background: linear-gradient(234.21deg, #960101 2.19%, #ff0915 100.02%);
   border: none;
   border-radius: 8px;
   cursor: pointer;
 }
 
 .admin-theme .topbar__upload {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
 }
 
 .admin-theme .topbar__upload:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
 }
 
 .admin-theme * {
@@ -200,7 +200,7 @@
   margin: 24px 32px 32px 32px !important;
   padding: 24px 24px 12px 24px !important;
   background: #ffffff !important;
-  border: 1px solid #EAEAEA !important;
+  border: 1px solid #eaeaea !important;
   border-radius: 12px !important;
   box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.05) !important;
 }
@@ -219,7 +219,9 @@
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page {
-  background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url("../../assets/dark-bg.png") !important;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+    url("../../assets/dark-bg.png") !important;
   background-color: #090909 !important;
   background-size: cover !important;
   background-position: center !important;
@@ -228,40 +230,40 @@ body.dark-mode .admin-theme.admin-dashboard-page {
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .badge--expired {
-  color: #E74C3C !important;
+  color: #e74c3c !important;
   background: transparent !important;
-  border: 1px solid #E74C3C !important;
+  border: 1px solid #e74c3c !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .badge--pending {
-  color: #FFC107 !important;
+  color: #ffc107 !important;
   background: transparent !important;
-  border: 1px solid #FFC107 !important;
+  border: 1px solid #ffc107 !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .badge--signed {
-  color: #2ECC71 !important;
+  color: #2ecc71 !important;
   background: transparent !important;
-  border: 1px solid #2ECC71 !important;
+  border: 1px solid #2ecc71 !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .desktop-table-header {
-  color: #B8B8B8 !important;
+  color: #b8b8b8 !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .desktop-table-header span {
-  color: #B8B8B8 !important;
+  color: #b8b8b8 !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .doc-row {
-  color: #D7D7D7 !important;
+  color: #d7d7d7 !important;
   background: rgb(17 17 17 / 15%) !important;
   border: 1px solid #746b6b !important;
   box-shadow: none !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .doc-row__cell {
-  color: #D7D7D7 !important;
+  color: #d7d7d7 !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .doc-row__dropdown {
@@ -273,17 +275,21 @@ body.dark-mode .admin-theme.admin-dashboard-page .doc-row__dropdown {
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .doc-row__dropdown-item {
-  color: #D7D7D7 !important;
+  color: #d7d7d7 !important;
   background: transparent !important;
   border-bottom: 1px solid rgba(116, 107, 107, 0.4) !important;
 }
 
-body.dark-mode .admin-theme.admin-dashboard-page .doc-row__dropdown-item--danger {
-  color: #E53935 !important;
+body.dark-mode
+  .admin-theme.admin-dashboard-page
+  .doc-row__dropdown-item--danger {
+  color: #e53935 !important;
   background: transparent !important;
 }
 
-body.dark-mode .admin-theme.admin-dashboard-page .doc-row__dropdown-item--danger:hover {
+body.dark-mode
+  .admin-theme.admin-dashboard-page
+  .doc-row__dropdown-item--danger:hover {
   background: rgba(229, 57, 53, 0.1) !important;
 }
 
@@ -291,29 +297,31 @@ body.dark-mode .admin-theme.admin-dashboard-page .doc-row__dropdown-item:hover {
   background: rgba(255, 255, 255, 0.04) !important;
 }
 
-body.dark-mode .admin-theme.admin-dashboard-page .doc-row__dropdown-item:last-child {
+body.dark-mode
+  .admin-theme.admin-dashboard-page
+  .doc-row__dropdown-item:last-child {
   border-bottom: none !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .doc-row__icon {
-  color: #E53935 !important;
+  color: #e53935 !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .doc-row__menu {
-  color: #9A9A9A !important;
+  color: #9a9a9a !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .doc-row__menu:hover {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   background: rgba(255, 255, 255, 0.05) !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .doc-row__note {
-  color: #9A9A9A !important;
+  color: #9a9a9a !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .doc-row__title {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .doc-row:hover {
@@ -338,22 +346,25 @@ body.dark-mode .admin-theme.admin-dashboard-page .mobile-topbar {
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .mobile-topbar__hamburger {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .mobile-topbar__hamburger svg {
-  color: #FFFFFF !important;
-  stroke: #FFFFFF !important;
+  color: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .topbar__sub {
-  color: #9A9A9A !important;
+  color: #9a9a9a !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .topbar__title,
 body.dark-mode .admin-theme.admin-dashboard-page .docs-section__title,
-body.dark-mode .admin-theme.admin-dashboard-page .mobile-page-header h1.topbar__title {
-  color: #FFFFFF !important;
+body.dark-mode
+  .admin-theme.admin-dashboard-page
+  .mobile-page-header
+  h1.topbar__title {
+  color: #ffffff !important;
 }
 
 /* ==========================================================
@@ -370,36 +381,52 @@ body.dark-mode .admin-theme.admin-dashboard-page .stat-card {
   background: rgb(17 17 17 / 15%) !important;
   border: 1px solid #746b6b !important;
   box-shadow: none !important;
-  transition: background 0.25s ease, border-color 0.25s ease !important;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .stat-card .stat-card__label {
-  color: #9A9A9A !important;
+  color: #9a9a9a !important;
 }
 
-body.dark-mode .admin-theme.admin-dashboard-page .stat-card .stat-card__trend span {
-  color: #9A9A9A !important;
+body.dark-mode
+  .admin-theme.admin-dashboard-page
+  .stat-card
+  .stat-card__trend
+  span {
+  color: #9a9a9a !important;
 }
 
-body.dark-mode .admin-theme.admin-dashboard-page .stat-card .stat-card__trend--down {
-  color: #E74C3C !important;
+body.dark-mode
+  .admin-theme.admin-dashboard-page
+  .stat-card
+  .stat-card__trend--down {
+  color: #e74c3c !important;
 }
 
-body.dark-mode .admin-theme.admin-dashboard-page .stat-card .stat-card__trend--up {
-  color: #2ECC71 !important;
+body.dark-mode
+  .admin-theme.admin-dashboard-page
+  .stat-card
+  .stat-card__trend--up {
+  color: #2ecc71 !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .stat-card .stat-card__value {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .stat-card:hover {
-  background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%) !important;
+  background: linear-gradient(
+    234.21deg,
+    #960101 2.19%,
+    #ff0915 100.02%
+  ) !important;
   border-color: transparent !important;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .stat-card:hover * {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 /* ==========================================================
@@ -615,15 +642,15 @@ body.dark-mode .admin-theme.admin-dashboard-page .stat-card:hover * {
   }
 
   .admin-theme .badge--expired {
-    background-color: #E22A2A;
+    background-color: #e22a2a;
   }
 
   .admin-theme .badge--pending {
-    background-color: #D28E56;
+    background-color: #d28e56;
   }
 
   .admin-theme .badge--signed {
-    background-color: #559B6F;
+    background-color: #559b6f;
   }
 
   .admin-theme .desktop-table-header {
@@ -705,12 +732,12 @@ body.dark-mode .admin-theme.admin-dashboard-page .stat-card:hover * {
   .admin-theme .mobile-cta--outline {
     color: #666666;
     background: #ffffff;
-    border: 0.27vw solid #D9D9D9;
+    border: 0.27vw solid #d9d9d9;
   }
 
   .admin-theme .mobile-cta--primary {
     color: #ffffff;
-    background: linear-gradient(234.21deg, #960101 2.19%, #FF0915 100.02%);
+    background: linear-gradient(234.21deg, #960101 2.19%, #ff0915 100.02%);
     border: none;
   }
 
@@ -775,7 +802,7 @@ body.dark-mode .admin-theme.admin-dashboard-page .stat-card:hover * {
   .admin-theme .topbar__sub {
     margin-bottom: 0;
     font-size: var(--font-sm);
-    color: #6B7280;
+    color: #6b7280;
   }
 
   .admin-theme .topbar__title,
@@ -823,23 +850,25 @@ body.dark-mode .admin-theme.admin-dashboard-page .stat-card:hover * {
   }
 
   body.dark-mode .admin-theme.admin-dashboard-page .badge--expired {
-    background-color: #E74C3C !important;
+    background-color: #e74c3c !important;
   }
 
   body.dark-mode .admin-theme.admin-dashboard-page .badge--pending {
-    background-color: #FFC107 !important;
+    background-color: #ffc107 !important;
   }
 
   body.dark-mode .admin-theme.admin-dashboard-page .badge--signed {
-    background-color: #2ECC71 !important;
+    background-color: #2ecc71 !important;
   }
 
   body.dark-mode .admin-theme.admin-dashboard-page .mobile-cta--outline {
-    color: #8A949F !important;
+    color: #8a949f !important;
     background: transparent !important;
   }
 
-  body.dark-mode .admin-theme.admin-dashboard-page .mobile-page-header__divider {
+  body.dark-mode
+    .admin-theme.admin-dashboard-page
+    .mobile-page-header__divider {
     background-color: #746b6b !important;
   }
 
@@ -847,7 +876,7 @@ body.dark-mode .admin-theme.admin-dashboard-page .stat-card:hover * {
     height: auto !important;
     min-height: unset !important;
     padding: var(--space-md) !important;
-    border: 0.27vw solid #F9FAFB !important;
+    border: 0.27vw solid #f9fafb !important;
     border-radius: var(--space-sm) !important;
     box-shadow: 0px 1.07vw 4.27vw rgba(0, 0, 0, 0.04) !important;
   }
@@ -855,7 +884,7 @@ body.dark-mode .admin-theme.admin-dashboard-page .stat-card:hover * {
   .admin-theme .stat-card__label {
     margin-bottom: 2.67vw !important;
     font-size: var(--font-sm) !important;
-    color: #6B7280;
+    color: #6b7280;
   }
 
   .admin-theme .stat-card__trend {
@@ -866,7 +895,7 @@ body.dark-mode .admin-theme.admin-dashboard-page .stat-card:hover * {
   .admin-theme .stat-card__trend-icon {
     width: var(--font-xs) !important;
     height: var(--font-xs) !important;
-    color: #FF0000 !important;
+    color: #ff0000 !important;
   }
 
   .admin-theme .stat-card__value {

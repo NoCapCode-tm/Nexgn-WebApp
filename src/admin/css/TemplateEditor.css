@@ -73,9 +73,9 @@
 ========================================================== */
 
 .dark-mode .template-editor-add-role {
-  color: #FF6B6B;
+  color: #ff6b6b;
   background: transparent;
-  border: 1.5px solid #FF0915;
+  border: 1.5px solid #ff0915;
 }
 
 .dark-mode .template-editor-add-role:hover {
@@ -114,7 +114,7 @@
 
 .dark-mode .template-editor-save {
   color: #fff;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
 }
 
 .dark-mode .template-editor-save:hover {
@@ -145,16 +145,16 @@
   padding: 0 20px;
   font-size: 14px;
   font-weight: 700;
-  color: #FF0915;
+  color: #ff0915;
   background: #fff;
-  border: 1.5px solid #FF0915;
+  border: 1.5px solid #ff0915;
   border-radius: 22px;
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .template-editor-add-role:hover {
-  background: #FFF1F1;
+  background: #fff1f1;
 }
 
 .template-editor-back {
@@ -241,17 +241,121 @@
   padding: 4px 8px;
   font-size: 12px;
   font-weight: 600;
-  color: #FF0915;
+  color: #ff0915;
   background: rgba(255, 9, 21, 0.06);
-  border: 1.5px dashed #FF0915;
+  border: 1.5px dashed #ff0915;
   border-radius: 4px;
   cursor: grab;
   user-select: none;
   touch-action: none;
 }
 
+.template-editor-placed-widget-label {
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .template-editor-placed-widget:active {
   cursor: grabbing;
+}
+
+.template-editor-widget-input {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: #FF0915;
+  text-align: center;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: text;
+}
+
+.template-editor-widget-input::placeholder {
+  color: rgba(255, 9, 21, 0.6);
+}
+
+.template-editor-placed-widget--selected {
+  z-index: 5;
+  border-color: #b30000;
+  box-shadow: 0 0 0 2px rgba(255, 9, 21, 0.2);
+}
+
+.template-editor-widget-toolbar {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 10;
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  cursor: default;
+}
+
+.template-editor-widget-toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.template-editor-widget-toolbar-btn:hover {
+  color: #111827;
+  background: #f3f4f6;
+}
+
+.template-editor-widget-toolbar-btn--danger:hover {
+  color: #e22a2a;
+  background: #ffe2e2;
+}
+
+.template-editor-widget-resize-handle {
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  width: 10px;
+  height: 10px;
+  background: #ff0915;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  cursor: nwse-resize;
+}
+
+.dark-mode .template-editor-widget-toolbar {
+  background: #1f1f24;
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .template-editor-widget-toolbar-btn {
+  color: #b8b8be;
+}
+
+.dark-mode .template-editor-widget-toolbar-btn:hover {
+  color: #f5f5f5;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dark-mode .template-editor-widget-resize-handle {
+  border-color: #1a1a1e;
 }
 
 .template-editor-quill {
@@ -271,7 +375,7 @@
 
 .template-editor-save {
   color: #fff;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
 }
 
 .template-editor-save,
@@ -287,7 +391,7 @@
 }
 
 .template-editor-save:hover {
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
   opacity: 0.9;
 }
 
@@ -299,7 +403,7 @@
 
 .template-editor-share {
   color: #fff;
-  background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
 }
 
 .template-editor-title {
@@ -375,7 +479,7 @@
   font-size: 14px;
   color: #111827;
   background: #fff;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   border-radius: 10px;
   outline: none;
   cursor: text;
@@ -386,7 +490,7 @@
 }
 
 .template-editor-role-select:focus {
-  border-color: #FF0915;
+  border-color: #ff0915;
 }
 
 .template-editor-roles-content .template-editor-section-label {
@@ -490,7 +594,7 @@
   width: 92vw;
   height: 88vh;
   max-width: 1100px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
@@ -687,7 +791,7 @@
     justify-content: center;
     width: 40px;
     height: 40px;
-    background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+    background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -705,7 +809,7 @@
     font-size: 13px;
     font-weight: 600;
     color: #fff;
-    background: linear-gradient(90deg, #F5000F 0%, #D10008 55%, #B30000 100%);
+    background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
     border: none;
     border-radius: 18px;
     cursor: pointer;
