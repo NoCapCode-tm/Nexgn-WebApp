@@ -20,7 +20,6 @@ const stats = [
     value: "32",
     trend: "8%",
     trendUp: true,
-    trendColor: "green",
   },
   {
     label: "Signed",
@@ -108,6 +107,7 @@ export default function Dashboard() {
             <button
               className="mobile-page-header__upload-btn"
               aria-label="Upload document"
+              onClick={() => navigate("/admin-sign-yourself")}
             >
               <svg
                 width="44"
@@ -180,13 +180,9 @@ export default function Dashboard() {
         </div>
 
         <section className="stats-grid">
-          {stats.slice(0, isMobile ? 2 : 4).map((s, idx) => {
-            const displayTrendColor =
-              isMobile && idx === 0 ? "red" : s.trendColor;
-            return (
-              <StatCard key={s.label} {...s} trendColor={displayTrendColor} />
-            );
-          })}
+          {stats.slice(0, isMobile ? 2 : 4).map((s) => (
+            <StatCard key={s.label} {...s} />
+          ))}
         </section>
 
         <div className="mobile-cta-row">

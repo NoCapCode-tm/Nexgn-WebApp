@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Sun, Moon } from 'lucide-react';
 import './LandingPage.css';
 
@@ -14,6 +15,7 @@ import lockGraphicDark from '../assets/lock-graphic-dark.png';
 import lockGraphicLight from '../assets/lock-graphic-light.png';
 
 export default function LandingPage() {
+  const navigate = useNavigate();
   const [isSystemDark, setIsSystemDark] = useState(() => {
     if (typeof window !== 'undefined' && window.matchMedia) {
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -81,7 +83,7 @@ export default function LandingPage() {
           <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle theme">
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-          <a href="#login" className="landing-nav__login">Log in</a>
+          <Link to="/login" className="landing-nav__login">Log in</Link>
           <button className="btn-primary">Get Started</button>
         </div>
       </nav>
@@ -450,7 +452,7 @@ export default function LandingPage() {
           <p className="cta-description">
             Join modern businesses sending and signing documents securely with Nexgn.
           </p>
-          <button className="btn-primary cta-btn">Create your free account</button>
+          <button className="btn-primary cta-btn" onClick={() => navigate('/signup')}>Create your free account</button>
         </div>
       </section>
 

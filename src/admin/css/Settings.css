@@ -3102,7 +3102,12 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
   }
 
   .admin-settings-page .ms-mobile-detail {
-    padding: 16px 8px !important;
+    padding: 16px 24px !important;
+  }
+
+  .admin-settings-page .ms-mobile-detail .admin-settings-card {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
   }
 
   .admin-settings-page p.admin-integration-description {
@@ -3132,7 +3137,7 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
   .ms-mobile-detail-header {
     position: relative;
     margin: 0 !important;
-    padding: 12px 24px 24px 24px !important;
+    padding: 0px 24px 10px 24px !important;
   }
 
   .ms-mobile-detail-header::after {
@@ -4402,5 +4407,13 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
 
   body.dark-mode .ms-mobile-menu-item__icon {
     background: rgba(255, 255, 255, 0.08);
+  }
+
+  .ms-mobile-header--settings .mobile-topbar__hamburger {
+    display: flex !important;
+  }
+
+  .ms-mobile-header--settings {
+    justify-content: space-between !important;
   }
 }
