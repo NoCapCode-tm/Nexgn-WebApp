@@ -428,6 +428,12 @@ export default function TemplateEditor({ templateName, templateFile, onBack }) {
     });
   }
 
+  function updateWidgetValue(id, value) {
+    setPlacedWidgets((prev) =>
+      prev.map((w) => (w.id === id ? { ...w, value } : w)),
+    );
+  }
+
   function handleResizePointerDown(e, widget) {
     e.stopPropagation();
     setSelectedWidgetId(widget.id);
@@ -653,8 +659,57 @@ export default function TemplateEditor({ templateName, templateFile, onBack }) {
                     }}
                     onPointerDown={(e) => handleWidgetPointerDown(e, w)}
                   >
-                    {WIDGETS.find((widget) => widget.id === w.type)?.label ||
-                      w.type}
+                    {w.type === "name" ||
+                    w.type === "number" ||
+                    w.type === "text" ||
+                    w.type === "email" ||
+                    w.type === "date" ? (
+                      <input
+                        type={
+                          w.type === "number"
+                            ? "number"
+                            : w.type === "email"
+                              ? "email"
+                              : w.type === "date"
+                                ? "date"
+                                : "text"
+                        }
+                        className="template-editor-widget-input"
+                        placeholder={
+                          w.type === "number"
+                            ? "Number"
+                            : w.type === "text"
+                              ? "Text"
+                              : w.type === "email"
+                                ? "Email"
+                                : w.type === "date"
+                                  ? "Date"
+                                  : "Full Name"
+                        }
+                        value={w.value || ""}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          if (
+                            w.type === "number" &&
+                            val !== "" &&
+                            !/^-?\d*\.?\d*$/.test(val)
+                          ) {
+                            return;
+                          }
+                          updateWidgetValue(w.id, val);
+                        }}
+                        onPointerDown={(e) => {
+                          e.stopPropagation();
+                          setSelectedWidgetId(w.id);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                    ) : (
+                      <span className="template-editor-placed-widget-label">
+                        {WIDGETS.find((widget) => widget.id === w.type)
+                          ?.label || w.type}
+                      </span>
+                    )}
 
                     {selectedWidgetId === w.id && (
                       <div
