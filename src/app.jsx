@@ -21,6 +21,7 @@ export default function App() {
   return (
     <Routes>
       {/* LANDING PAGE */}
+      <Route path="/" element={<LandingPage />} />
       <Route path="/landing" element={<LandingPage />} />
 
       {/* AUTH ROUTES */}
@@ -29,7 +30,7 @@ export default function App() {
       <Route path="/mail-invite" element={<Invite />} />
 
       {/* ADMIN ROUTES */}
-      <Route path="/" element={<Dashboard />} />
+      
       <Route path="/admin" element={<Dashboard />} />
       <Route path="/admin-dashboard" element={<Dashboard />} />
       <Route path="/admin-documents" element={<Documents />} />
