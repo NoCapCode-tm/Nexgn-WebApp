@@ -637,6 +637,18 @@ svg,
 }
 
 .notification-item__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-item__text,
+.notification-item__text * {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.notification-item__text {
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -1628,6 +1640,16 @@ body.dark-mode .sidebar__inner {
 
   .profile-dropdown__settings-btn {
     display: flex;
+  }
+
+  .notification-dropdown {
+    right: -16px;
+    width: 280px;
+  }
+
+  .profile-dropdown {
+    right: 0;
+    width: 220px;
   }
 
   .badge {
