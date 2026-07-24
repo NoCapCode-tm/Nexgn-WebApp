@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import Topbar from "../components/Topbar";
 import TopbarIcons from "../components/TopbarIcons";
@@ -59,6 +59,7 @@ function useIsMobile() {
 }
 
 export default function Settings() {
+  const navigate = useNavigate();
   const isMobile = useIsMobile();
   const [searchParams] = useSearchParams();
   const tabParam = searchParams.get("tab");
@@ -1135,12 +1136,18 @@ export default function Settings() {
       >
         {/* ── Custom mobile header — same classes as global mobile-topbar ── */}
         <header className="mobile-topbar ms-mobile-header--settings">
-          {/* Left: back arrow (detail) or hamburger (menu) */}
-          {mobileView !== "menu" ? (
+          {/* Left: back arrow to go back to previous view/page */}
+          {mobileView !== "menu" || viewingPermissions ? (
             <button
               type="button"
               className="mobile-topbar__hamburger"
-              onClick={() => setMobileView("menu")}
+              onClick={() => {
+                if (viewingPermissions) {
+                  setViewingPermissions(null);
+                } else {
+                  setMobileView("menu");
+                }
+              }}
               aria-label="Go back"
             >
               <ChevronLeft size={22} color="#1a1a2e" strokeWidth={2} />
@@ -1149,31 +1156,26 @@ export default function Settings() {
             <button
               type="button"
               className="mobile-topbar__hamburger"
-              aria-label="Open menu"
-              onClick={() => sidebarOpenerRef.current?.()}
+              onClick={() => navigate("/admin")}
+              aria-label="Go back"
             >
-              <Menu size={22} color="#1a1a2e" />
+              <ChevronLeft size={22} color="#1a1a2e" strokeWidth={2} />
             </button>
           )}
 
-          {/* Right: same TopbarIcons used by every other page */}
-          <TopbarIcons iconSize={18} className="mobile-topbar__icons" />
+          {/* Right: same TopbarIcons used by every other page (only on menu page) */}
+          {mobileView === "menu" && !viewingPermissions && (
+            <TopbarIcons iconSize={18} className="mobile-topbar__icons" />
+          )}
         </header>
 
-        {/* ── Detail sub-header (Settings title + search) ── */}
+        {/* ── Detail sub-header (Settings title) ── */}
         {mobileView !== "menu" && (
           <div className="mobile-page-header ms-mobile-detail-header">
             <div className="ms-mobile-detail-header__row">
               <span className="ms-mobile-detail-header__title">
                 {viewingPermissions ? "Permission Settings" : "Settings"}
               </span>
-              <button
-                type="button"
-                className="ms-mobile-detail-header__search-btn"
-                aria-label="Search"
-              >
-                <Search size={32} color="#8A949F" strokeWidth={2} />
-              </button>
             </div>
             <p className="ms-mobile-detail-header__sub">
               Manage and track all your signed and&nbsp;pending document
@@ -1372,7 +1374,7 @@ export default function Settings() {
           <div className="ms-mobile-detail">{profileCard}</div>
         )}
         {mobileView === "account" && (
-          <div className="ms-mobile-detail">{accountCard}</div>
+          <div className="ms-mobile-detail ms-mobile-detail--account">{accountCard}</div>
         )}
         {mobileView === "notifications" && (
           <div className="ms-mobile-detail">{notificationCard}</div>

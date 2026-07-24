@@ -135,6 +135,13 @@ body {
   height: 26px !important;
 }
 
+/* Show dark mode toggle only on mobile (≤768px), NOT on tablet */
+@media (max-width: 768px) {
+  .mobile-topbar__icons .topbar__dark-toggle {
+    display: flex;
+  }
+}
+
 .profile-dropdown__settings-btn {
   display: none;
   align-items: center;
@@ -792,6 +799,17 @@ body.dark-mode,
 
 .topbar__icon-wrapper .topbar__icon-btn:hover {
   background: transparent;
+}
+
+/* Dark mode toggle — hidden on desktop, visible on mobile only */
+.topbar__dark-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin-top: -3px;
+  padding: 0;
+  cursor: pointer;
 }
 
 button {

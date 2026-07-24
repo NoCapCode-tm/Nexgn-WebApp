@@ -375,6 +375,7 @@ body.dark-mode
   flex-shrink: 0;
   width: 13px;
   height: 13px;
+  color: inherit;
 }
 
 body.dark-mode .admin-theme.admin-dashboard-page .stat-card {
@@ -895,7 +896,7 @@ body.dark-mode .admin-theme.admin-dashboard-page .stat-card:hover * {
   .admin-theme .stat-card__trend-icon {
     width: var(--font-xs) !important;
     height: var(--font-xs) !important;
-    color: #ff0000 !important;
+    color: inherit !important;
   }
 
   .admin-theme .stat-card__value {
