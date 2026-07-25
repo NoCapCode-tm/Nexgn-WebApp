@@ -103,7 +103,7 @@ export default function LandingPage() {
           </p>
           <div className="hero-content__actions">
             <button className="btn-primary">Get Started</button>
-            <button className="btn-secondary">See how it works</button>
+            <button className="btn-secondary" onClick={() => navigate('/about')}>See how it works</button>
           </div>
         </div>
 
@@ -487,21 +487,21 @@ export default function LandingPage() {
             <div className="footer-links-container">
               <div className="footer-link-column">
                 <h4>COMPANY</h4>
-                <a href="#">About Us</a>
-                <a href="#">Contact Us</a>
-                <a href="#">Blog</a>
+                <Link to="/about">About Us</Link>
+                <Link to="/contact">Contact Us</Link>
+                <Link to="/blog">Blog</Link>
               </div>
               <div className="footer-link-column">
                 <h4>RESOURCES</h4>
-                <a href="#">Help center</a>
+                <Link to="/help">Help center</Link>
                 <a href="#">System Status</a>
-                <a href="#">Security</a>
+                <Link to="/security">Security</Link>
               </div>
               <div className="footer-link-column">
                 <h4>LEGAL &amp; TRUST</h4>
-                <a href="#">Trust &amp; Compliance</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms &amp; Services</a>
+                <Link to="/security">Trust &amp; Compliance</Link>
+                <Link to="/privacy">Privacy Policy</Link>
+                <Link to="/term">Terms &amp; Services</Link>
               </div>
             </div>
 
