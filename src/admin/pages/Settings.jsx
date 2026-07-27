@@ -201,10 +201,11 @@ const handleAvatarUpload = (e) => {
 
   const handleupdate = async(e)=>{
       e.preventDefault();
+      
 
     try {
       const response = await axios.put("https://nexgn-backend.onrender.com/api/v1/admin/update",{
-        name:formData.name,
+        name:formData.fullName,
         phone_no:formData.phone,
         profile_picture:profileFile,
         time_zone:accountData.timeZone,
