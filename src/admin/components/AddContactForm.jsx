@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import "../css/ContactBook.css";
+import axios from "axios";
 
-export default function AddContactForm({ onSave, onClose }) {
+export default function AddContactForm({ onClose }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -13,7 +14,8 @@ export default function AddContactForm({ onSave, onClose }) {
   const [jobTitle, setJobTitle] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleSave = (e) => {
+
+  const handleSave = async(e) => {
     if (e) e.preventDefault();
     const newErrors = {};
     if (!name.trim()) newErrors.name = "Full name is required";
@@ -22,18 +24,23 @@ export default function AddContactForm({ onSave, onClose }) {
       setErrors(newErrors);
       return;
     }
-    setErrors({});
-    onSave({
-      name,
-      email,
-      phone,
-      language,
-      gender,
-      emergencyContact,
-      address,
-      department: jobTitle,
-    });
-    onClose();
+   try {
+     const response = await axios.post("http://localhost:5000/api/v1/admin/addcontact",{
+       name:name,
+       email:email,
+       contact:phone,
+       emergency:emergencyContact,
+       gender:gender,
+       job:jobTitle,
+       language:language,
+       address:address,
+     },{withCredentials:true})
+     console.log(response.data.message)
+     setErrors({})
+     onClose()
+   } catch (error) {
+    console.log("Something went wrong",error.message)
+   }
   };
 
   return (

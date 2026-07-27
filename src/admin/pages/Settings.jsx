@@ -16,7 +16,6 @@ import {
   FileText,
   LogOut,
   AlertCircle,
-  Menu,
   PauseCircle,
   Trash2,
   MoreVertical,
@@ -33,6 +32,7 @@ import "../css/Settings.css";
 import "../css/ContactBook.css";
 
 import AvatarImg from "../../assets/Avatar.png";
+import axios from "axios";
 const DEFAULT_AVATAR = AvatarImg;
 
 const settingsNavItems = [
@@ -83,6 +83,27 @@ export default function Settings() {
 
   /* Mobile only: "menu" | "profile" | "account" | "security" */
   const [mobileView, setMobileView] = useState("menu");
+  const[user,setUser]=useState({})
+
+   useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/v1/admin/me",
+          {
+            withCredentials: true,
+          }
+        );
+
+        setUser(response.data.message);
+      } catch (err) {
+        console.log(err.message)
+      }
+    };
+
+    verifyUser();
+  }, []);
+
 
   useEffect(() => {
     if (tabParam) {
@@ -97,17 +118,25 @@ export default function Settings() {
 
   /* Shared form state */
   const [avatar, setAvatar] = useState(DEFAULT_AVATAR);
-  const [formData, setFormData] = useState({
-    fullName: "John Doe",
-    email: "John.doe@example.com",
-    phone: "+1 (555) 123-4567",
+  const [formData, setFormData]=useState({})
+   const [accountData, setAccountData] = useState({})
+
+  useEffect(() => {
+  if (!user || Object.keys(user).length === 0) return;
+
+  setFormData({
+    fullName: user.name || "",
+    email: user.email || "",
+    phone: user.phone_no || "NA",
   });
-  const [accountData, setAccountData] = useState({
-    companyName: "Acme Corp",
-    organizationId: "org-123abc456",
-    timeZone: "Pacific Time (US & Canada)",
-    language: "English (united States)",
+
+  setAccountData({
+    companyName: user.professional_details?.company_name || "",
+    organizationId: user.professional_details?.org_id || "",
+    timeZone: user.time_zone || "",
+    language: user.language || "",
   });
+}, [user]);
   const [securityData, setSecurityData] = useState({
     currentPassword: "",
     newPassword: "",
@@ -115,36 +144,7 @@ export default function Settings() {
     enable2FA: true,
   });
 
-  const [teamMembers, setTeamMembers] = useState([
-    {
-      id: 1,
-      name: "Alice Smith",
-      email: "alice.smith@example.com",
-      role: "Sub-admin",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Bob Jones",
-      email: "bob.jones@example.com",
-      role: "Sub-admin",
-      status: "Active",
-    },
-    {
-      id: 3,
-      name: "Charlie Brown",
-      email: "charlie.brown@example.com",
-      role: "Sub-admin",
-      status: "Active",
-    },
-    {
-      id: 4,
-      name: "Diana prince",
-      email: "diana.prince@example.com",
-      role: "Sub-admin",
-      status: "Not Active",
-    },
-  ]);
+  const [teamMembers, setTeamMembers] = useState([]);
   const [teamActionOpen, setTeamActionOpen] = useState(null);
   const teamActionRef = useRef(null);
 
@@ -182,18 +182,44 @@ export default function Settings() {
   const handleTabClick = (item) => {
     if (item.active) setActiveTab(item.key);
   };
-  const handleAvatarUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => setAvatar(ev.target.result);
-    reader.readAsDataURL(file);
-  };
+  const [profileFile, setProfileFile] = useState(null);
+
+const handleAvatarUpload = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  setProfileFile(file);
+
+  const reader = new FileReader();
+  reader.onload = (ev) => setAvatar(ev.target.result);
+  reader.readAsDataURL(file);
+};
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleupdate = async(e)=>{
+      e.preventDefault();
+
+    try {
+      const response = await axios.put("http://localhost:5000/api/v1/admin/update",{
+        name:formData.name,
+        phone_no:formData.phone,
+        profile_picture:profileFile,
+        time_zone:accountData.timeZone,
+        language:accountData.language,
+        companyname:accountData.companyName,
+        currentpass:securityData.currentPassword,
+        updatepass:securityData.confirmPassword,
+      },{withCredentials:true})
+      console.log(response.data.message)
+    } catch (error) {
+      console.log("Something went wrong",error.message)
+    }
+  }
+
+  
   /* ── Card fragments (defined once, reused in both shells) ─────────────── */
   const profileCard = (
     <div className="admin-settings-card admin-settings-card--profile">
@@ -202,7 +228,7 @@ export default function Settings() {
       <div className="admin-settings-avatar-row">
         <div className="admin-settings-avatar">
           <img
-            src={avatar}
+            src={user?.profile_picture || avatar}
             alt="User avatar"
             className="admin-settings-avatar__img"
             id="admin-settings-avatar-preview"
@@ -232,7 +258,7 @@ export default function Settings() {
       </div>
       <form
         className="admin-settings-form"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleupdate}
         id="admin-settings-profile-form"
       >
         <div className="admin-settings-form__group">
@@ -308,7 +334,7 @@ export default function Settings() {
       <div className="admin-settings-card__divider" />
       <form
         className="admin-settings-form"
-        onSubmit={(e) => e.preventDefault()}
+      onSubmit={handleupdate}
       >
         <div className="admin-settings-form__group">
           <label
@@ -394,7 +420,7 @@ export default function Settings() {
       <div className="admin-settings-card__divider" />
       <form
         className="admin-settings-form"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleupdate}
         id="admin-settings-security-form"
       >
         <h3 className="admin-settings-section-title">Change Password</h3>
@@ -481,6 +507,7 @@ export default function Settings() {
             type="submit"
             className="admin-settings-form__submit"
             id="admin-settings-update-security-btn"
+            
           >
             Update Password
           </button>
@@ -489,6 +516,26 @@ export default function Settings() {
     </div>
   );
 
+   useEffect(() => {
+  (async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/v1/admin/getsubadmin",
+        {
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data);
+
+      setTeamMembers(response.data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  })();
+}, []);
+
+ 
   const teamCard = (
     <div className="admin-settings-card admin-settings-card--team">
       <h2 className="admin-settings-card__title">Team Management</h2>
@@ -516,25 +563,25 @@ export default function Settings() {
         </div>
 
         <div className="admin-settings-team-list">
-          {teamMembers.map((admin) => (
+          {teamMembers?.map((sub) => (
             <div
               className="admin-settings-team-row"
-              key={admin.id}
-              style={{ zIndex: teamActionOpen === admin.id ? 10 : 1 }}
+              key={sub?._id}
+              style={{ zIndex: teamActionOpen === sub?._id ? 10 : 1 }}
             >
               <div className="team-col-name">
-                <div className="team-admin-name">{admin.name}</div>
-                <div className="team-admin-email">{admin.email}</div>
+                <div className="team-admin-name">{sub?.name}</div>
+                <div className="team-admin-email">{sub?.email}</div>
               </div>
               <div className="team-right-controls">
                 <div className="team-col-role">
-                  <span className="team-role-badge">{admin.role}</span>
+                  <span className="team-role-badge">{sub?.role}</span>
                 </div>
                 <div className="team-col-status">
                   <span
-                    className={`team-status-badge ${admin.status === "Active" ? "active" : "inactive"}`}
+                    className={`team-status-badge ${sub.invitestatus === "Active" ? "active" : "inactive"}`}
                   >
-                    {admin.status}
+                    {sub.invitestatus}
                   </span>
                 </div>
                 <div className="team-col-action">
@@ -542,18 +589,18 @@ export default function Settings() {
                     className="team-action-btn"
                     onClick={() =>
                       setTeamActionOpen(
-                        teamActionOpen === admin.id ? null : admin.id,
+                        teamActionOpen === sub._id ? null : sub._id,
                       )
                     }
                   >
                     <MoreVertical size={20} color="#666" />
                   </button>
-                  {teamActionOpen === admin.id && (
+                  {teamActionOpen === sub._id && (
                     <div className="team-action-dropdown" ref={teamActionRef}>
                       <button
                         className="team-dropdown-item permissions"
                         onClick={() => {
-                          setViewingPermissions(admin.id);
+                          setViewingPermissions(sub._id);
                           setTeamActionOpen(null);
                         }}
                       >
@@ -563,7 +610,7 @@ export default function Settings() {
                         className="team-dropdown-item delete"
                         onClick={() => {
                           setTeamMembers((prev) =>
-                            prev.filter((m) => m.id !== admin.id),
+                            prev.filter((m) => m.id !== sub._id),
                           );
                           setTeamActionOpen(null);
                         }}
@@ -589,7 +636,9 @@ export default function Settings() {
     </div>
   );
 
-  const handleAddSubAdmin = (e) => {
+
+
+  const handleAddSubAdmin = async(e) => {
     if (e) e.preventDefault();
     const errors = {};
     if (!newSubAdmin.name.trim()) errors.name = "Full name is required";
@@ -598,6 +647,11 @@ export default function Settings() {
       setSubAdminErrors(errors);
       return;
     }
+    const response = await axios.post("http://localhost:5000/api/v1/admin/invite",{
+      name:newSubAdmin.name,
+      email:newSubAdmin.email
+    },{withCredentials:true})
+    console.log(response.data.message)
     setSubAdminErrors({});
     setTeamMembers((prev) => [
       ...prev,
@@ -866,6 +920,66 @@ export default function Settings() {
     </div>
   );
 
+  useEffect(()=>{
+
+    const getStatus = async()=>{
+
+        const res = await axios.get(
+
+            "http://localhost:5000/api/v1/google/status",
+
+            {
+
+                withCredentials:true
+
+            }
+
+        );
+
+        setIsDriveConnected(res.data.message.connected);
+
+    }
+
+    getStatus();
+
+},[]);
+
+  const handledriveconnect = async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:5000/api/v1/google/auth-url",
+      {
+        withCredentials: true,
+      }
+    );
+
+    window.location.assign(response.data.message);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const handledisconnect = async()=>{
+  try {
+    await axios.get(
+  
+      "http://localhost:5000/api/v1/google/disconnect",
+  
+      {
+  
+          withCredentials:true
+  
+      }
+  
+  );
+  
+  setIsDriveConnected(false);
+  setShowDisconnectModal(false)
+  } catch (error) {
+    console.log("Could not disconnect",error.message)
+  }
+}
+
   const integrationsCard = (
     <div className="admin-settings-card admin-settings-card--integrations">
       <h2 className="admin-settings-card__title">Integration</h2>
@@ -930,7 +1044,7 @@ export default function Settings() {
               <button
                 className="admin-integration-action-btn disconnect"
                 type="button"
-                onClick={() => setShowDisconnectModal(true)}
+                onClick={()=>setShowDisconnectModal(true)}
               >
                 DISCONNECT
               </button>
@@ -938,7 +1052,7 @@ export default function Settings() {
               <button
                 className="admin-integration-action-btn connect"
                 type="button"
-                onClick={() => setIsDriveConnected(true)}
+                onClick={() => handledriveconnect()}  
               >
                 CONNECT
               </button>
@@ -1539,10 +1653,7 @@ export default function Settings() {
               </button>
               <button
                 className="integration-modal-btn disconnect-btn"
-                onClick={() => {
-                  setIsDriveConnected(false);
-                  setShowDisconnectModal(false);
-                }}
+                onClick={() => {handledisconnect()}}
               >
                 Disconnect
               </button>
