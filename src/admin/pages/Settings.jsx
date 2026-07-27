@@ -89,7 +89,7 @@ export default function Settings() {
     const verifyUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/admin/me",
+          "https://nexgn-backend.onrender.com/api/v1/admin/me",
           {
             withCredentials: true,
           }
@@ -203,7 +203,7 @@ const handleAvatarUpload = (e) => {
       e.preventDefault();
 
     try {
-      const response = await axios.put("http://localhost:5000/api/v1/admin/update",{
+      const response = await axios.put("https://nexgn-backend.onrender.com/api/v1/admin/update",{
         name:formData.name,
         phone_no:formData.phone,
         profile_picture:profileFile,
@@ -520,7 +520,7 @@ const handleAvatarUpload = (e) => {
   (async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/v1/admin/getsubadmin",
+        "https://nexgn-backend.onrender.com/api/v1/admin/getsubadmin",
         {
           withCredentials: true,
         }
@@ -647,7 +647,7 @@ const handleAvatarUpload = (e) => {
       setSubAdminErrors(errors);
       return;
     }
-    const response = await axios.post("http://localhost:5000/api/v1/admin/invite",{
+    const response = await axios.post("https://nexgn-backend.onrender.com/api/v1/admin/invite",{
       name:newSubAdmin.name,
       email:newSubAdmin.email
     },{withCredentials:true})
@@ -926,7 +926,7 @@ const handleAvatarUpload = (e) => {
 
         const res = await axios.get(
 
-            "http://localhost:5000/api/v1/google/status",
+            "https://nexgn-backend.onrender.com/api/v1/google/status",
 
             {
 
@@ -947,7 +947,7 @@ const handleAvatarUpload = (e) => {
   const handledriveconnect = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/v1/google/auth-url",
+      "https://nexgn-backend.onrender.com/api/v1/google/auth-url",
       {
         withCredentials: true,
       }
@@ -963,7 +963,7 @@ const handledisconnect = async()=>{
   try {
     await axios.get(
   
-      "http://localhost:5000/api/v1/google/disconnect",
+      "https://nexgn-backend.onrender.com/api/v1/google/disconnect",
   
       {
   

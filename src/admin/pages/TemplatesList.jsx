@@ -36,7 +36,7 @@ export default function TemplatesList({ onAddTemplate }) {
 
   useEffect(()=>{
     (async()=>{
-      const response = await axios.get("http://localhost:5000/api/v1/template/gettemplate",{withCredentials:true})
+      const response = await axios.get("https://nexgn-backend.onrender.com/api/v1/template/gettemplate",{withCredentials:true})
       console.log(response.data.message)
       const templates = response.data.message
       setTemplates(templates)
