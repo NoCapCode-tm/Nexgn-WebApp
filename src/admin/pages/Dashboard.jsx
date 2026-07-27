@@ -7,6 +7,8 @@ import DocumentRow from "../components/DocumentRow";
 import useWindowWidth from "../components/useWindowWidth";
 import "../css/BaseLayout.css";
 import "../css/Dashboard.css";
+import { useEffect } from "react";
+import axios from "axios";
 
 const stats = [
   {

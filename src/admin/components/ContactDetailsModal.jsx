@@ -1,31 +1,37 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Mail, Phone, Pencil, ChevronLeft } from "lucide-react";
 import "../css/ContactBook.css";
+import axios from "axios";
 
 export default function ContactDetailsModal({ contact, onUpdateContact, onClose }) {
   if (!contact) return null;
 
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState(contact.name || "");
-  const [email, setEmail] = useState(contact.email || "");
-  const [phone, setPhone] = useState(contact.phone || "+1 98765 43210");
-  const [language, setLanguage] = useState(contact.language || "English");
-  const [gender, setGender] = useState(contact.gender || "Female");
-  const [emergencyContact, setEmergencyContact] = useState(contact.emergencyContact || "+1 912-345-6789");
-  const [address, setAddress] = useState(contact.address || "New York, United States");
+  const [name, setName] = useState(contact?.name || "");
+  const [email, setEmail] = useState(contact?.email || "");
+  const [phone, setPhone] = useState(contact?.phone_no || "+1 98765 43210");
+  const [language, setLanguage] = useState(contact?.language || "Hindi");
+  const [gender, setGender] = useState(contact?.gender || "Female");
+  const [emergencyContact, setEmergencyContact] = useState(contact?.emergency_contact || "+1 912-345-6789");
+  const [address, setAddress] = useState(contact?.address || "New York, United States");
 
-  const handleSave = () => {
-    onUpdateContact({
-      name,
-      email,
-      phone,
-      language,
-      gender,
-      emergencyContact,
-      address
-    });
+  const handleSave = async() => {
+    console.log("u clicked")
+    try {
+      const response = await axios.put("http://localhost:5000/api/v1/admin/update",{
+        name:name,
+        phone_no:phone,
+        emergency:emergencyContact,
+        language:language,
+        address:address,
+        gender:gender
+      },{withCredentials:true})
+      console.log(response.data.message)
     setIsEditing(false);
     onClose();
+    }catch(error){
+      console.log("Something went wrong",error.message)
+    }
   };
 
   return (
@@ -86,7 +92,7 @@ export default function ContactDetailsModal({ contact, onUpdateContact, onClose 
                     className="contact-details-quick-input"
                   />
                 ) : (
-                  <span className="quick-info-val">{contact.phone || "+1 98765 43210"}</span>
+                  <span className="quick-info-val">{contact.phone_no || "+1 98765 43210"}</span>
                 )}
               </div>
             </div>
@@ -127,7 +133,7 @@ export default function ContactDetailsModal({ contact, onUpdateContact, onClose 
                 {isEditing ? (
                   <input type="text" className="contact-detail-field__input" value={emergencyContact} onChange={e => setEmergencyContact(e.target.value)} />
                 ) : (
-                  <div className="detail-val">{contact.emergencyContact || "+1 912-345-6789"}</div>
+                  <div className="detail-val">{contact.emergency_contact || "+1 912-345-6789"}</div>
                 )}
               </div>
               <div className="contact-detail-field add-contact-field-full">

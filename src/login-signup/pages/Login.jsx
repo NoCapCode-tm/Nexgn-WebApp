@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LeftPanel from "../components/LeftPanel";
 import RightPanelCard from "../components/RightPanelCard";
 import useSystemTheme from "../hooks/useSystemTheme";
 import "../css/LoginSignup.css";
+import axios from "axios";
 
 export default function Login() {
   useSystemTheme();
@@ -11,9 +12,19 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    navigate("/admin");
+      try {
+      const response = await axios.post("http://localhost:5000/api/v1/admin/login",{
+        email,
+        password,
+      },{withCredentials:true})
+      console.log(response.data.message)
+      navigate("/admin");
+    } catch (error) {
+      console.log("Something went wrong",error.message)
+    }
+   
   };
 
   return (

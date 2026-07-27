@@ -186,7 +186,7 @@ export default function Templates({ onCreate }) {
               onClick={() =>
                 onCreate &&
                 onCreate(
-                  docTitle || uploadedFile || "Untitled Template",
+                  docTitle,
                   uploadedFileObj,
                 )
               }

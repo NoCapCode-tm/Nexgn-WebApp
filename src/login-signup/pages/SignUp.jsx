@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LeftPanel from "../components/LeftPanel";
 import RightPanelCard from "../components/RightPanelCard";
 import { UserPlus, Building2, ArrowDown, PartyPopper } from "lucide-react";
 import useSystemTheme from "../hooks/useSystemTheme";
 import "../css/LoginSignup.css";
+import axios from "axios";
 
 export default function SignUp() {
   useSystemTheme();
@@ -25,9 +26,22 @@ export default function SignUp() {
     setStep(2);
   };
 
-  const handleStep2Submit = (e) => {
+  const handleStep2Submit = async(e) => {
     e.preventDefault();
-    setStep(3);
+    try {
+      const response = await axios.post("http://localhost:5000/api/v1/admin/signup",{
+        name,
+        email,
+        password,
+        companyname:companyName,
+        industry,
+        team_size:teamSize
+      },{withCredentials:true})
+      console.log(response.data.message)
+      setStep(3);
+    } catch (error) {
+      console.log("Something went wrong",error.message)
+    }
   };
 
   const handleStep3Submit = (e) => {

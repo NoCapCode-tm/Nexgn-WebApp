@@ -1,16 +1,48 @@
 import { useNavigate } from "react-router-dom";
 import { Bell, UserCircle, Settings, FileClock, UserPen, Crown, LogOut, Sun, Moon } from "lucide-react";
 import useDarkMode from "./useDarkMode";
+import { useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 
 export default function TopbarIcons({ 
   iconSize = 24, 
-  className = "topbar__icons",
-  fullName = "Jane Doe",
-  email = "jane.doe@example.com",
-  onSearchClick
+  className = "topbar__icons"
 }) {
   const navigate = useNavigate();
   const [isDark, toggleDark] = useDarkMode();
+  const[user,setUser]=useState({})
+
+   useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/v1/admin/me",
+          {
+            withCredentials: true,
+          }
+        );
+
+        setUser(response.data.message);
+      } catch (err) {
+        console.log(err.message)
+      }
+    };
+
+    verifyUser();
+  }, []);
+
+  const handlelogout = async()=>{
+   try {
+     await axios.post(`http://localhost:5000/api/v1/admin/logout`,{
+      id:user?._id 
+     },{withCredentials:true})
+     navigate("/login")
+   } catch (error) {
+    console.log("Something went wrong in logging out",error.message)
+   }
+
+  }
 
   return (
     <div className={className}>
@@ -80,8 +112,8 @@ export default function TopbarIcons({
           </div>
           <div className="profile-dropdown__body">
             <div className="profile-dropdown__info">
-              <div className="profile-dropdown__name">{fullName}</div>
-              <div className="profile-dropdown__email">{email}</div>
+              <div className="profile-dropdown__name">{user?.name}</div>
+              <div className="profile-dropdown__email">{user?.email}</div>
             </div>
             <div className="profile-dropdown__menu">
               <button className="profile-dropdown__item" onClick={() => navigate("/admin-settings?tab=profile")}>
@@ -93,7 +125,7 @@ export default function TopbarIcons({
                 <span>Upgrade Plan</span>
               </button>
               <div className="profile-dropdown__divider" />
-              <button className="profile-dropdown__item" onClick={() => navigate("/login")}>
+              <button className="profile-dropdown__item" onClick={()=>handlelogout()}>
                 <LogOut size={16} color="#000000" strokeWidth={2} />
                 <span>Log Out</span>
               </button>

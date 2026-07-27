@@ -27,6 +27,7 @@ import Settings from "./admin/pages/Settings";
 import TemplatesPage from "./admin/pages/TemplatesPage";
 
 import useSystemTheme from "./login-signup/hooks/useSystemTheme";
+import ProtectedRoute from "./ProtectedRoute";
 
 export default function App() {
   useSystemTheme();
@@ -56,16 +57,17 @@ export default function App() {
       <Route path="/mail-invite" element={<Invite />} />
 
       {/* ADMIN ROUTES */}
-
-      <Route path="/admin" element={<Dashboard />} />
-      <Route path="/admin-dashboard" element={<Dashboard />} />
-      <Route path="/admin-documents" element={<Documents />} />
-      <Route path="/admin-sign-yourself" element={<SignYourself />} />
-      <Route path="/admin-request-signature" element={<SignYourself />} />
-      <Route path="/admin-settings" element={<Settings />} />
-      <Route path="/admin-contact-book" element={<ContactBook />} />
-      <Route path="/admin-templates" element={<TemplatesPage />} />
-
+      
+      <Route element={<ProtectedRoute />}>
+    <Route path="/admin" element={<Dashboard />} />
+    <Route path="/admin-dashboard" element={<Dashboard />} />
+    <Route path="/admin-documents" element={<Documents />} />
+    <Route path="/admin-sign-yourself" element={<SignYourself />} />
+    <Route path="/admin-request-signature" element={<SignYourself />} />
+    <Route path="/admin-settings" element={<Settings />} />
+    <Route path="/admin-contact-book" element={<ContactBook />} />
+    <Route path="/admin-templates" element={<TemplatesPage />} />
+  </Route>
       {/* Redirect unknown routes */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

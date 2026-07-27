@@ -5,6 +5,7 @@ import ReactQuill, { Quill } from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import "../css/BaseLayout.css";
 import "../css/TemplateEditor.css";
+import axios from "axios";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -319,7 +320,7 @@ const WIDGET_DEFAULT_SIZE = {
   date: { width: 120, height: 32 },
 };
 
-export default function TemplateEditor({ templateName, templateFile, onBack }) {
+export default function TemplateEditor({ docTitle ,templateName, templateFile, onBack }) {
   const [pages, setPages] = useState([1, 2]);
   const [saveStatus, setSaveStatus] = useState(""); // "", "saved"
   const [activePage, setActivePage] = useState(1);
@@ -353,49 +354,83 @@ export default function TemplateEditor({ templateName, templateFile, onBack }) {
   }
 
   function addWidget(type) {
-    const size = WIDGET_DEFAULT_SIZE[type] || { width: 140, height: 32 };
-    const newWidget = {
-      id: `${type}-${Date.now()}`,
-      type,
-      x: 40,
-      y: 40,
-      width: size.width,
-      height: size.height,
-      page: activePage,
-    };
-    setPlacedWidgets((prev) => [...prev, newWidget]);
-  }
+  const size = WIDGET_DEFAULT_SIZE[type];
+
+ const newWidget = {
+    id: `${type}-${Date.now()}`,
+    type,
+    widgetname: type,
+    page: activePage,
+    x: 40,
+    y: 40,
+    width: size.width,
+    height: size.height,
+};
+
+  setPlacedWidgets((prev) => [...prev, newWidget]);
+}
   /* ADD after addWidget() */
-  function handleSave() {
-    const storageKey = `template-layout:${templateName || "untitled"}`;
-    const payload = {
-      templateName,
-      docContent,
-      placedWidgets,
-      savedAt: new Date().toISOString(),
-    };
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(payload));
-      setSaveStatus("saved");
-      setTimeout(() => setSaveStatus(""), 2000);
-    } catch (err) {
-      console.error("Failed to save template layout:", err);
-    }
+ const handleSave = async () => {
+  try {
+
+   const formData = new FormData();
+formData.append("title", templateName);
+formData.append("role", role);
+formData.append("content", docContent);
+
+const widgets = placedWidgets.map(
+  ({ widgetname, page, x, y, width, height }) => ({
+    widgetname,
+    page,
+    x,
+    y,
+    width,
+    height,
+  })
+);
+formData.append("widget", JSON.stringify(widgets));
+
+if (templateFile) {
+  formData.append("file", templateFile);
+}
+
+   const response = await axios.post(
+  "http://localhost:5000/api/v1/template/create",
+  formData,
+  {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
   }
+);
+
+    console.log(response.data.message);
+
+    setSaveStatus("saved");
+
+    setTimeout(() => {
+      setSaveStatus("");
+    }, 2000);
+
+  } catch (err) {
+    console.error(err);
+  }
+};
   /* ADD near your other useEffects */
-  useEffect(() => {
-    const storageKey = `template-layout:${templateName || "untitled"}`;
-    try {
-      const saved = localStorage.getItem(storageKey);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.placedWidgets) setPlacedWidgets(parsed.placedWidgets);
-        if (parsed.docContent) setDocContent(parsed.docContent);
-      }
-    } catch (err) {
-      console.error("Failed to load saved template layout:", err);
-    }
-  }, [templateName]);
+  // useEffect(() => {
+  //   const storageKey = `template-layout:${templateName || "untitled"}`;
+  //   try {
+  //     const saved = localStorage.getItem(storageKey);
+  //     if (saved) {
+  //       const parsed = JSON.parse(saved);
+  //       if (parsed.placedWidgets) setPlacedWidgets(parsed.placedWidgets);
+  //       if (parsed.docContent) setDocContent(parsed.docContent);
+  //     }
+  //   } catch (err) {
+  //     console.error("Failed to load saved template layout:", err);
+  //   }
+  // }, [templateName]);
   function handleWidgetPointerDown(e, widget) {
     e.stopPropagation();
     setSelectedWidgetId(widget.id);
@@ -419,7 +454,7 @@ export default function TemplateEditor({ templateName, templateFile, onBack }) {
       if (!original) return prev;
       const copy = {
         ...original,
-        id: `${original.type}-${Date.now()}`,
+        id: `${original.widgetname}-${Date.now()}`,
         x: original.x + 16,
         y: original.y + 16,
       };
@@ -589,6 +624,7 @@ export default function TemplateEditor({ templateName, templateFile, onBack }) {
       <canvas ref={thumbRef} className="template-editor-page-thumb-canvas" />
     );
   }
+  const [role, setRole] = useState("");
 
   return (
     <div className="template-editor-overlay">
@@ -918,10 +954,12 @@ export default function TemplateEditor({ templateName, templateFile, onBack }) {
                 <div className="template-editor-roles-content">
                   <span className="template-editor-section-label">Roles</span>
                   <input
-                    type="text"
-                    className="template-editor-role-select"
-                    placeholder="Enter Role"
-                  />
+  type="text"
+  className="template-editor-role-select"
+  placeholder="Enter Role"
+  value={role}
+  onChange={(e) => setRole(e.target.value)}
+/>
                   <button className="template-editor-add-role">Add Role</button>
                 </div>
               </div>

@@ -8,88 +8,90 @@ import AddContactForm from "../components/AddContactForm";
 
 import "../css/BaseLayout.css";
 import "../css/ContactBook.css";
+import { useEffect } from "react";
+import axios from "axios";
 
-const INITIAL_CONTACTS = [
-  {
-    name: "Alice Smith",
-    email: "alice.smith@example.com",
-    department: "Legal",
-    status: "Active",
-    phone: "+1 98765 43210",
-    language: "English",
-    gender: "Female",
-    emergencyContact: "+1 912-345-6789",
-    address: "New York, United States",
-  },
-  {
-    name: "Bob Jones",
-    email: "bob.jones@example.com",
-    department: "Engineering",
-    status: "Active",
-    phone: "+1 98765 43211",
-    language: "English",
-    gender: "Male",
-    emergencyContact: "+1 912-345-6780",
-    address: "San Francisco, United States",
-  },
-  {
-    name: "Charlie Brown",
-    email: "charlie.brown@example.com",
-    department: "Marketing",
-    status: "Inactive",
-    phone: "+1 98765 43212",
-    language: "English",
-    gender: "Male",
-    emergencyContact: "+1 912-345-6781",
-    address: "Chicago, United States",
-  },
-  {
-    name: "Diana Prince",
-    email: "diana.prince@example.com",
-    department: "Finance",
-    status: "Active",
-    phone: "+1 98765 43213",
-    language: "English",
-    gender: "Female",
-    emergencyContact: "+1 912-345-6782",
-    address: "Boston, United States",
-  },
-  {
-    name: "Blair Croft",
-    email: "blair.croft@example.com",
-    department: "HR",
-    status: "Active",
-    phone: "+1 98765 43214",
-    language: "English",
-    gender: "Female",
-    emergencyContact: "+1 912-345-6783",
-    address: "Austin, United States",
-  },
-];
+// const INITIAL_CONTACTS = [
+//   {
+//     name: "Alice Smith",
+//     email: "alice.smith@example.com",
+//     department: "Legal",
+//     status: "Active",
+//     phone: "+1 98765 43210",
+//     language: "English",
+//     gender: "Female",
+//     emergencyContact: "+1 912-345-6789",
+//     address: "New York, United States",
+//   },
+//   {
+//     name: "Bob Jones",
+//     email: "bob.jones@example.com",
+//     department: "Engineering",
+//     status: "Active",
+//     phone: "+1 98765 43211",
+//     language: "English",
+//     gender: "Male",
+//     emergencyContact: "+1 912-345-6780",
+//     address: "San Francisco, United States",
+//   },
+//   {
+//     name: "Charlie Brown",
+//     email: "charlie.brown@example.com",
+//     department: "Marketing",
+//     status: "Inactive",
+//     phone: "+1 98765 43212",
+//     language: "English",
+//     gender: "Male",
+//     emergencyContact: "+1 912-345-6781",
+//     address: "Chicago, United States",
+//   },
+//   {
+//     name: "Diana Prince",
+//     email: "diana.prince@example.com",
+//     department: "Finance",
+//     status: "Active",
+//     phone: "+1 98765 43213",
+//     language: "English",
+//     gender: "Female",
+//     emergencyContact: "+1 912-345-6782",
+//     address: "Boston, United States",
+//   },
+//   {
+//     name: "Blair Croft",
+//     email: "blair.croft@example.com",
+//     department: "HR",
+//     status: "Active",
+//     phone: "+1 98765 43214",
+//     language: "English",
+//     gender: "Female",
+//     emergencyContact: "+1 912-345-6783",
+//     address: "Austin, United States",
+//   },
+// ];
 
 function MemberContactActions({
   search,
   setSearch,
-  selectedStatus,
-  setSelectedStatus,
-  selectedDepartment,
-  setSelectedDepartment,
+  // selectedStatus,
+  // setSelectedStatus,
+  // selectedDepartment,
+  // setSelectedDepartment,
   onAddClick,
-  contacts,
+  // contacts,
 }) {
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  // const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const departments = [
-    "All",
-    ...new Set(contacts.map((c) => c.department).filter(Boolean)),
-  ];
-  const statuses = [
-    "All",
-    ...new Set(contacts.map((c) => c.status).filter(Boolean)),
-  ];
+  // const departments = [
+  //   "All",
+  //   ...new Set(contacts.map((c) => c.department).filter(Boolean)),
+  // ];
+  // const statuses = [
+  //   "All",
+  //   ...new Set(contacts.map((c) => c.status).filter(Boolean)),
+  // ];
 
-  const hasActiveFilter =
-    selectedStatus !== "All" || selectedDepartment !== "All";
+  // const hasActiveFilter =
+  //   selectedStatus !== "All" || selectedDepartment !== "All";
 
   return (
     <div className="admin-contact-topbar-actions">
@@ -136,23 +138,47 @@ function MemberContactActions({
 }
 
 export default function ContactBook() {
-  const [contacts, setContacts] = useState(INITIAL_CONTACTS);
+  const [contacts, setContacts] = useState([]);
   const [search, setSearch] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("All");
-  const [selectedDepartment, setSelectedDepartment] = useState("All");
+  // const [selectedStatus, setSelectedStatus] = useState("All");
+  // const [selectedDepartment, setSelectedDepartment] = useState("All");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
+
+  useEffect(() => {
+  const fetchContacts = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/v1/admin/getuser",
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response.data.message)
+
+      const contact = response.data.message.filter(
+        (c) => c.role === "Member"
+      );
+
+      setContacts(contact);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchContacts();
+}, []);
 
   const filteredContacts = contacts.filter((c) => {
     const cleanSearch = search.trim().toLowerCase();
     const matchesSearch =
       c.name.toLowerCase().includes(cleanSearch) ||
       c.email.toLowerCase().includes(cleanSearch);
-    const matchesStatus =
-      selectedStatus === "All" || c.status === selectedStatus;
-    const matchesDept =
-      selectedDepartment === "All" || c.department === selectedDepartment;
-    return matchesSearch && matchesStatus && matchesDept;
+    // const matchesStatus =
+    //   selectedStatus === "All" || c.status === selectedStatus;
+    // const matchesDept =
+    //   selectedDepartment === "All" || c.department === selectedDepartment;
+    return matchesSearch ;
   });
 
   const focusSearchInput = () => {
@@ -192,18 +218,24 @@ export default function ContactBook() {
     setSelectedContact((prev) => ({ ...prev, ...updatedContact }));
   };
 
-  const handleDeleteContact = (email) => {
-    setContacts((prev) => prev.filter((c) => c.email !== email));
+  const handleDeleteContact = async(id) => {
+   try {
+     setContacts((prev) => prev.filter((c) => c._id !== id));
+     await axios.post("http://localhost:5000/api/v1/admin/delete",{id},{withCredentials:true})
+   } catch (error) {
+      console.log("Something went wrong in deleting contact",error.message)
+   }
+
   };
 
   const contactActions = (
     <MemberContactActions
       search={search}
       setSearch={setSearch}
-      selectedStatus={selectedStatus}
-      setSelectedStatus={setSelectedStatus}
-      selectedDepartment={selectedDepartment}
-      setSelectedDepartment={setSelectedDepartment}
+      // selectedStatus={selectedStatus}
+      // setSelectedStatus={setSelectedStatus}
+      // selectedDepartment={selectedDepartment}
+      // setSelectedDepartment={setSelectedDepartment}
       onAddClick={() => setIsAddModalOpen(true)}
       contacts={contacts}
     />
@@ -235,16 +267,16 @@ export default function ContactBook() {
         {/* Table Section */}
         <div className="admin-contact-section">
           <div className="admin-contact-table">
-            {filteredContacts.map((c, i) => (
+            {contacts.map((c, i) => (
               <ContactCard
                 key={i}
                 name={c.name}
                 email={c.email}
                 onClick={() => setSelectedContact(c)}
-                onDelete={() => handleDeleteContact(c.email)}
+                onDelete={() => handleDeleteContact(c._id)}
               />
             ))}
-            {filteredContacts.length === 0 && (
+            {contacts.length === 0 && (
               <div className="admin-contact-empty-state">
                 No contacts found.
               </div>
