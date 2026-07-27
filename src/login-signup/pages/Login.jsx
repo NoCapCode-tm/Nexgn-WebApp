@@ -15,7 +15,7 @@ export default function Login() {
   const handleSubmit = async(e) => {
     e.preventDefault();
       try {
-      const response = await axios.post("http://localhost:5000/api/v1/admin/login",{
+      const response = await axios.post("https://nexgn-backend.onrender.com/api/v1/admin/login",{
         email,
         password,
       },{withCredentials:true})
