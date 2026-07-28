@@ -320,7 +320,7 @@ const WIDGET_DEFAULT_SIZE = {
   date: { width: 120, height: 32 },
 };
 
-export default function TemplateEditor({ docTitle ,templateName, templateFile, onBack }) {
+export default function TemplateEditor({ templateName, templateFile, onBack }) {
   const [pages, setPages] = useState([1, 2]);
   const [saveStatus, setSaveStatus] = useState(""); // "", "saved"
   const [activePage, setActivePage] = useState(1);
@@ -393,6 +393,15 @@ formData.append("widget", JSON.stringify(widgets));
 if (templateFile) {
   formData.append("file", templateFile);
 }
+console.log(formData)
+console.log({
+  templateName,
+  role,
+  docContent,
+  widgets,
+  templateFile,
+});
+
 
    const response = await axios.post(
   "https://nexgn-backend.onrender.com/api/v1/template/create",
@@ -549,6 +558,7 @@ if (templateFile) {
 
   useEffect(() => {
     if (!templateFile) return;
+    console.log(templateFile);
 
     let cancelled = false;
 

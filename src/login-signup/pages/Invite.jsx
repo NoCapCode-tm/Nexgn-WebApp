@@ -1,23 +1,34 @@
 import React, { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import LeftPanel from "../components/LeftPanel";
 import RightPanelCard from "../components/RightPanelCard";
 import { Users, PartyPopper } from "lucide-react";
 import useSystemTheme from "../hooks/useSystemTheme";
 import "../css/LoginSignup.css";
+import axios from "axios";
 
 export default function Invite() {
   useSystemTheme();
+  const {email} = useParams()
   const [step, setStep] = useState(1);
-  const [searchParams] = useSearchParams();
-  const email = searchParams.get("email") || "alex@acmecorp.com";
-  const company = searchParams.get("company") || "acme Corp";
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleJoin = (e) => {
+  const handleJoin = async(e) => {
     e.preventDefault();
-    setStep(2);
+   try {
+     const response = await axios.post("http://localhost:5000/api/v1/admin/setpassword",{
+       email,
+       password
+     },{withCredentials:true})
+     console.log(response.data.message)
+     
+     
+   } catch (error) {
+      console.log("Something Went Wrong in setting password",error.message)
+   }finally{
+   setStep(2);
+   }
   };
 
   const handleGoToDashboard = (e) => {
@@ -32,7 +43,7 @@ export default function Invite() {
       {step === 1 ? (
         <RightPanelCard
           title="You’ve been invited to Nexgn"
-          subtitle={`Set a password to join ${company}’s Workspace`}
+          subtitle={`Set a password to join Workspace`}
           icon={<Users size={28} className="form-card__icon" />}
         >
           <form onSubmit={handleJoin}>

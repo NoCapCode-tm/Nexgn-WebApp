@@ -28,6 +28,7 @@ import TemplatesPage from "./admin/pages/TemplatesPage";
 
 import useSystemTheme from "./login-signup/hooks/useSystemTheme";
 import ProtectedRoute from "./ProtectedRoute";
+import TemplateView from "./admin/pages/Templateview";
 
 export default function App() {
   useSystemTheme();
@@ -54,7 +55,7 @@ export default function App() {
       {/* AUTH ROUTES */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/mail-invite" element={<Invite />} />
+      <Route path="/mail-invite/:email" element={<Invite />} />
 
       {/* ADMIN ROUTES */}
       
@@ -67,6 +68,7 @@ export default function App() {
     <Route path="/admin-settings" element={<Settings />} />
     <Route path="/admin-contact-book" element={<ContactBook />} />
     <Route path="/admin-templates" element={<TemplatesPage />} />
+    <Route path="/admin-templates-view" element={<TemplateView/>} />
   </Route>
       {/* Redirect unknown routes */}
       <Route path="*" element={<Navigate to="/" replace />} />

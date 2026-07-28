@@ -536,7 +536,18 @@ const handleAvatarUpload = (e) => {
   })();
 }, []);
 
- 
+const handleremove = async(id) =>{
+ try {
+   await axios.post("https://nexgn-backend.onrender.com/api/v1/admin/delete",{id},{withCredentials:true})
+   setTeamMembers((prev) =>
+                             prev.filter((m) => m.id !== id),
+                           );
+                           setTeamActionOpen(null);
+ } catch (error) {
+   console.log("something went wrong",error.message)
+ }
+
+}
   const teamCard = (
     <div className="admin-settings-card admin-settings-card--team">
       <h2 className="admin-settings-card__title">Team Management</h2>
@@ -609,12 +620,7 @@ const handleAvatarUpload = (e) => {
                       </button>
                       <button
                         className="team-dropdown-item delete"
-                        onClick={() => {
-                          setTeamMembers((prev) =>
-                            prev.filter((m) => m.id !== sub._id),
-                          );
-                          setTeamActionOpen(null);
-                        }}
+                        onClick={()=>{handleremove(sub._id)}}
                       >
                         <span className="team-x-icon">×</span> Remove
                       </button>

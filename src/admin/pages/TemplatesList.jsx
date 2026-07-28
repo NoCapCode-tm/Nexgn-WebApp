@@ -21,7 +21,7 @@ import axios from "axios";
 //   { id: 10, title: "Vendor Contract", note: "Contact pending", owner: "Me" },
 // ];
 
-export default function TemplatesList({ onAddTemplate }) {
+export default function TemplatesList({ onAddTemplate ,onView }) {
   const [templates, setTemplates] = useState([]);
   const [search, setSearch] = useState("");
   const [openMenuId, setOpenMenuId] = useState(null);
@@ -181,9 +181,12 @@ export default function TemplatesList({ onAddTemplate }) {
                   {openMenuId === t.templateid._id && (
                     <div className="action-menu">
                       <button
-                        className="action-menu__item"
-                        onClick={() => setOpenMenuId(null)}
-                      >
+  className="action-menu__item"
+  onClick={() => {
+    setOpenMenuId(null);
+    onView(t);
+  }}
+>
                         View
                       </button>
                       <button
