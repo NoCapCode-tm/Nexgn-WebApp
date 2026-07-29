@@ -7,7 +7,7 @@ export default function DocumentsTable({ documents, onRevoke }) {
         <span>TITLE</span>
         <span>NOTE</span>
         <span>SIGNERS</span>
-        <span>SIGNED AT</span>
+       
         <span>OWNER</span>
         <span>STATUS</span>
         <span>Action</span>
@@ -18,7 +18,7 @@ export default function DocumentsTable({ documents, onRevoke }) {
           {documents.map((doc, idx) => (
             <DocumentsRow
               key={idx}
-              {...doc}
+              doc={doc}
               onRevoke={() => onRevoke && onRevoke(doc.id)}
             />
           ))}

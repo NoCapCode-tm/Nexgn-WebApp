@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Topbar from "../components/Topbar";
 import DocumentsFilter from "../components/DocumentsFilter";
@@ -6,6 +6,7 @@ import DocumentsTable from "../components/DocumentsTable";
 
 import "../css/BaseLayout.css";
 import "../css/Documents.css";
+import axios from "axios";
 
 const ALL_DOCS = [
   {
@@ -100,8 +101,10 @@ const ALL_DOCS = [
   },
 ];
 
+
+
 export default function Documents() {
-  const [documents, setDocuments] = useState(ALL_DOCS);
+  const [documents, setDocuments] = useState([]);
   const [activeTab, setActiveTab] = useState("all");
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
@@ -109,6 +112,16 @@ export default function Documents() {
   const handleRevoke = (id) => {
     setDocuments((prev) => prev.filter((doc) => doc.id !== id));
   };
+
+  useEffect(()=>{
+  (async()=>{
+     const response = await axios.get("https://nexgn-backend.onrender.com/api/v1/document/getdocument",{withCredentials:true})
+     console.log(response.data.message)
+     const docs= response.data.message
+     setDocuments(docs)
+     
+  })()
+},[])
 
   const filteredDocs = documents.filter((doc) => {
     const matchSearch =
