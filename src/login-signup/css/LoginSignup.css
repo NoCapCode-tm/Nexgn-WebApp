@@ -1,7 +1,6 @@
 /* ==========================================================
    1. CSS Variables & Imports
 ========================================================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
@@ -48,7 +47,6 @@
 /* ==========================================================
    2. Page / Root Container
 ========================================================== */
-
 .login-signup-container {
   display: flex;
   flex-direction: row;
@@ -69,22 +67,13 @@
   background-attachment: fixed;
 }
 
-.brand-logo-img--dark {
-  display: none;
-}
-
-[data-theme="dark"] .brand-logo-img--light {
-  display: none;
-}
-
-[data-theme="dark"] .brand-logo-img--dark {
-  display: block;
-}
+.brand-logo-img--dark { display: none; }
+[data-theme="dark"] .brand-logo-img--light { display: none; }
+[data-theme="dark"] .brand-logo-img--dark { display: block; }
 
 /* ==========================================================
    3. Layout Split
 ========================================================== */
-
 .login-signup-left {
   display: flex;
   flex: 1;
@@ -114,7 +103,6 @@
 /* ==========================================================
    4. Navigation / Brand Header
 ========================================================== */
-
 .brand-header {
   display: flex;
   align-items: center;
@@ -131,7 +119,6 @@
 /* ==========================================================
    5. Shared Layout Components
 ========================================================== */
-
 .brand-hero {
   display: flex;
   flex-direction: column;
@@ -148,13 +135,8 @@
   color: var(--color-text-primary);
 }
 
-[data-theme="dark"] .brand-hero__title {
-  color: #FFFFFF;
-}
-
-.brand-hero__title--red {
-  color: var(--color-brand-red);
-}
+[data-theme="dark"] .brand-hero__title { color: #FFFFFF; }
+.brand-hero__title--red { color: var(--color-brand-red); }
 
 .brand-hero__subtext {
   max-width: 30.56vw;
@@ -164,9 +146,7 @@
   color: var(--color-text-secondary);
 }
 
-[data-theme="dark"] .brand-hero__subtext {
-  color: #B3B3B3;
-}
+[data-theme="dark"] .brand-hero__subtext { color: #B3B3B3; }
 
 .brand-hero__divider {
   width: 3.33vw;
@@ -220,9 +200,7 @@
   color: var(--color-text-primary);
 }
 
-[data-theme="dark"] .brand-feature-item__title {
-  color: #FFFFFF;
-}
+[data-theme="dark"] .brand-feature-item__title { color: #FFFFFF; }
 
 .brand-feature-item__desc {
   margin: 0;
@@ -231,14 +209,11 @@
   color: var(--color-text-muted);
 }
 
-[data-theme="dark"] .brand-feature-item__desc {
-  color: #999999;
-}
+[data-theme="dark"] .brand-feature-item__desc { color: #999999; }
 
 /* ==========================================================
    6. Card Component
 ========================================================== */
-
 .form-card {
   box-sizing: border-box;
   width: 34.72vw;
@@ -274,21 +249,8 @@
   stroke-width: 0.16vw !important;
 }
 
-.login-signup-container .form-card__icon {
-  color: #111111;
-}
-
-[data-theme="dark"] .login-signup-container .form-card__icon {
-  color: #FFFFFF;
-}
-
-.login-signup-container .form-card__icon-header svg.success-icon {
-  width: 3.8vw !important;
-  height: 3.8vw !important;
-  stroke-width: 0.14vw !important;
-  margin-top: 0.83vw;
-  margin-bottom: 0.56vw;
-}
+.login-signup-container .form-card__icon { color: #111111; }
+[data-theme="dark"] .login-signup-container .form-card__icon { color: #FFFFFF; }
 
 .login-signup-container .form-card__title {
   margin: 0 0 0.83vw 0;
@@ -297,9 +259,7 @@
   color: #000000;
 }
 
-[data-theme="dark"] .login-signup-container .form-card__title {
-  color: #FFFFFF;
-}
+[data-theme="dark"] .login-signup-container .form-card__title { color: #FFFFFF; }
 
 .login-signup-container .form-card__subtitle {
   margin: 0 0 1.67vw 0;
@@ -308,14 +268,11 @@
   color: #666666;
 }
 
-[data-theme="dark"] .login-signup-container .form-card__subtitle {
-  color: #A3A3A3;
-}
+[data-theme="dark"] .login-signup-container .form-card__subtitle { color: #A3A3A3; }
 
 /* ==========================================================
    7. Forms & Inputs
 ========================================================== */
-
 .login-signup-container .form-group {
   display: flex;
   flex-direction: column;
@@ -336,9 +293,7 @@
   color: #333333;
 }
 
-[data-theme="dark"] .login-signup-container .form-label {
-  color: #E5E5E5;
-}
+[data-theme="dark"] .login-signup-container .form-label { color: #E5E5E5; }
 
 .login-signup-container .forgot-password-link {
   font-size: 0.83vw;
@@ -348,13 +303,8 @@
   cursor: pointer;
 }
 
-[data-theme="dark"] .login-signup-container .forgot-password-link {
-  color: #B3B3B3;
-}
-
-.login-signup-container .forgot-password-link:hover {
-  text-decoration: underline;
-}
+[data-theme="dark"] .login-signup-container .forgot-password-link { color: #B3B3B3; }
+.login-signup-container .forgot-password-link:hover { text-decoration: underline; }
 
 .login-signup-container .form-input {
   box-sizing: border-box;
@@ -376,13 +326,8 @@
   border-color: #3A3A3A;
 }
 
-.login-signup-container .form-input::placeholder {
-  color: #9CA3AF;
-}
-
-[data-theme="dark"] .login-signup-container .form-input::placeholder {
-  color: #6B6B6B;
-}
+.login-signup-container .form-input::placeholder { color: #9CA3AF; }
+[data-theme="dark"] .login-signup-container .form-input::placeholder { color: #6B6B6B; }
 
 .login-signup-container .form-input:focus {
   border-color: var(--color-brand-red);
@@ -406,18 +351,12 @@
   transition: background 0.2s, transform 0.1s;
 }
 
-.login-signup-container .form-submit-btn:hover {
-  background: var(--color-brand-red-hover);
-}
-
-.form-submit-btn:active {
-  transform: scale(0.98);
-}
+.login-signup-container .form-submit-btn:hover { background: var(--color-brand-red-hover); }
+.form-submit-btn:active { transform: scale(0.98); }
 
 /* ==========================================================
    8. Form Footer Links
 ========================================================== */
-
 .form-card-footer {
   margin-top: 1.39vw;
   font-size: 0.83vw;
@@ -425,9 +364,7 @@
   color: #000000;
 }
 
-[data-theme="dark"] .form-card-footer {
-  color: #FFFFFF;
-}
+[data-theme="dark"] .form-card-footer { color: #FFFFFF; }
 
 .form-footer-link {
   font-weight: 600;
@@ -436,162 +373,80 @@
   cursor: pointer;
 }
 
-.form-footer-link:hover {
-  text-decoration: underline;
-}
-
-.form-select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background: #FFFFFF;
-  cursor: pointer;
-}
-
-.form-select option {
-  color: #000000;
-  background: #FFFFFF;
-}
-
-[data-theme="dark"] .form-select option {
-  color: #FFFFFF;
-  background: #1A1A1A;
-}
-
-.login-signup-container .form-input--readonly {
-  background: var(--color-readonly-bg);
-  color: var(--color-text-primary);
-}
+.form-footer-link:hover { text-decoration: underline; }
 
 /* ==========================================================
-   9. Tablet (769px–1179px)
+   9. Tablet (769px–1179px) & Mobile Responsive Fixes
 ========================================================== */
-
-@media (min-width: 769px) and (max-width: 1179px) {
-  .login-signup-left,
-  .login-signup-right {
-    padding: clamp(24px, 4vw, 48px);
-  }
-
-  .brand-hero__title {
-    font-size: clamp(28px, 4.5vw, 44px);
-  }
-
-  .brand-hero__subtext {
-    max-width: 100%;
-    font-size: clamp(13px, 1.4vw, 16px);
-  }
-
-  .brand-features {
-    gap: clamp(16px, 2vw, 28px);
-  }
-
-  .form-card {
-    width: 90%;
-    height: auto;
-    padding: clamp(24px, 4vw, 48px);
-  }
-
-  .login-signup-container .form-card__title {
-    font-size: clamp(20px, 2.2vw, 26px);
-  }
-
-  .login-signup-container .form-input,
-  .login-signup-container .form-submit-btn {
-    height: clamp(40px, 5vw, 52px);
-    font-size: clamp(13px, 1.3vw, 15px);
-  }
-}
-
-/* ==========================================================
-   10. Mobile (0px–768px)
-========================================================== */
-
-@media (max-width: 768px) {
-  .login-signup-container {
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  .login-signup-left,
-  .login-signup-right {
-    width: 100%;
-    padding: 24px 20px;
-  }
-
+@media (max-width: 1179px) {
   .login-signup-left {
-    order: 1;
+    display: none; /* Hides the left panel content on tablet and mobile */
   }
 
   .login-signup-right {
-    order: 2;
-    flex: 1;
-  }
-
-  .brand-header {
-    margin-top: 0;
-    margin-left: 0;
-  }
-
-  .brand-logo-img {
-    height: 32px;
-  }
-
-  .brand-hero {
-    margin-top: 24px;
-    margin-bottom: 24px;
-  }
-
-  .brand-hero__title {
-    font-size: 28px;
-  }
-
-  .brand-hero__subtext {
-    max-width: 100%;
-    font-size: 14px;
-  }
-
-  .brand-features {
-    flex-direction: column;
-    gap: 20px;
+    width: 100%;
+    padding: 24px;
+    align-items: center; 
   }
 
   .form-card {
     width: 100%;
+    max-width: 480px; 
     height: auto;
-    padding: 28px 20px;
-    box-sizing: border-box;
+    padding: 40px 32px;
+    border-radius: 12px; 
   }
 
   .login-signup-container .form-card__icon-header svg {
-    width: 28px !important;
-    height: 28px !important;
+    width: 32px !important;
+    height: 32px !important;
   }
 
   .login-signup-container .form-card__title {
-    font-size: 20px;
+    font-size: 24px;
+    margin-bottom: 8px;
   }
 
   .login-signup-container .form-card__subtitle {
-    font-size: 13px;
+    font-size: 15px;
+    margin-bottom: 24px;
   }
 
   .login-signup-container .form-label,
   .login-signup-container .forgot-password-link {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .login-signup-container .form-input {
-    height: 44px;
-    font-size: 14px;
+    height: 48px;
+    font-size: 15px;
+    padding: 0 16px;
+    border-radius: 8px;
   }
 
   .login-signup-container .form-submit-btn {
-    height: 46px;
-    font-size: 14px;
+    height: 48px;
+    font-size: 15px;
+    margin-top: 24px;
+    border-radius: 8px;
   }
 
   .form-card-footer {
-    font-size: 13px;
+    font-size: 14px;
+    margin-top: 24px;
+  }
+}
+
+/* ==========================================================
+   10. Mobile Specific (0px–768px)
+========================================================== */
+@media (max-width: 768px) {
+  .form-card {
+    padding: 32px 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  }
+
+  .login-signup-container .form-card__title {
+    font-size: 22px;
   }
 }

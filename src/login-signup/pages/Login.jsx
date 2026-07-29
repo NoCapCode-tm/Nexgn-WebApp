@@ -12,19 +12,22 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-      try {
-      const response = await axios.post("https://nexgn-backend.onrender.com/api/v1/admin/login",{
-        email,
-        password,
-      },{withCredentials:true})
-      console.log(response.data.message)
+    try {
+      const response = await axios.post(
+        "https://nexgn-backend.onrender.com/api/v1/admin/login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
+      console.log(response.data.message);
       navigate("/admin");
     } catch (error) {
-      console.log("Something went wrong",error.message)
+      console.log("Something went wrong", error.message);
     }
-   
   };
 
   return (
