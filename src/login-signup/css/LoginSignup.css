@@ -107,15 +107,17 @@
   display: flex;
   align-items: center;
   margin-top: 0;
-  margin-left: -2.56vw;
+  margin-left: -0.5vw; /* Adjusted alignment offset for SVGs */
   margin-bottom: 2vw;
 }
 
 .brand-logo-img {
-  height: 2.78vw;
+  width: 11vw;          /* Increase size on desktop (adjust between 10vw - 14vw to taste) */
+  height: auto;         /* Automatically calculates height based on SVG aspect ratio */
+  max-width: 220px;     /* Prevents logo from growing too large on ultra-wide screens */
+  min-width: 140px;     /* Keeps logo readable on smaller desktop screens */
   object-fit: contain;
 }
-
 /* ==========================================================
    5. Shared Layout Components
 ========================================================== */
@@ -376,9 +378,9 @@
 .form-footer-link:hover { text-decoration: underline; }
 
 /* ==========================================================
-   9. Tablet (769px–1179px) & Mobile Responsive Fixes
+   9. Tablet (769px–1023px) & Mobile Responsive Fixes
 ========================================================== */
-@media (max-width: 1179px) {
+@media (max-width: 1023px) {
   .login-signup-left {
     display: none; /* Hides the left panel content on tablet and mobile */
   }
