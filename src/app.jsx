@@ -29,6 +29,7 @@ import TemplatesPage from "./admin/pages/TemplatesPage";
 import useSystemTheme from "./login-signup/hooks/useSystemTheme";
 import ProtectedRoute from "./ProtectedRoute";
 import TemplateView from "./admin/pages/Templateview";
+import SignDocument from "./admin/pages/SignDocument";
 
 export default function App() {
   useSystemTheme();
@@ -69,7 +70,9 @@ export default function App() {
     <Route path="/admin-contact-book" element={<ContactBook />} />
     <Route path="/admin-templates" element={<TemplatesPage />} />
     <Route path="/admin-templates-view" element={<TemplateView/>} />
+    
   </Route>
+  <Route path="/document/:id" element={<SignDocument/>} />
       {/* Redirect unknown routes */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
