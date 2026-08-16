@@ -17,7 +17,7 @@ export default function TopbarIcons({
     const verifyUser = async () => {
       try {
         const response = await axios.get(
-          "https://nexgn-backend.onrender.com/api/v1/admin/me",
+          "http://localhost:5000/api/v1/admin/me",
           {
             withCredentials: true,
           }
@@ -34,7 +34,7 @@ export default function TopbarIcons({
 
   const handlelogout = async()=>{
    try {
-     await axios.post(`https://nexgn-backend.onrender.com/api/v1/admin/logout`,{
+     await axios.post(`http://localhost:5000/api/v1/admin/logout`,{
       id:user?._id 
      },{withCredentials:true})
      navigate("/login")
@@ -96,8 +96,8 @@ export default function TopbarIcons({
       </div>
 
       <div className="topbar__icon-wrapper">
-        <button className="topbar__icon-btn">
-          <UserCircle size={iconSize} color="#FF0915" strokeWidth={1.5} />
+        <button style={{width:"40px",height:"40px", borderRadius:"50%", overflow:"hidden",border:"1px solid red"}}>
+          {user?.profile_picture ?<img src ={user?.profile_picture}  width="100%" height="100%" />:<UserCircle size={iconSize} color="#FF0915" strokeWidth={1.5} />}
         </button>
         <div className="notification-dropdown profile-dropdown">
           <div className="notification-dropdown__header profile-dropdown__header">

@@ -7,13 +7,14 @@ import SignatureCanvas from "react-signature-canvas";
 import "react-quill-new/dist/quill.bubble.css";
 import "../css/BaseLayout.css";
 import "../css/TemplateEditor.css";
+import axios from "axios";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-const BASE_URL = "https://nexgn-backend.onrender.com/api/v1";
+const BASE_URL = "http://localhost:5000/api/v1";
 
 function SignDocument() {
-  const { id} = useParams();
+  const {id} = useParams();
 
   const [request, setRequest] = useState(null);
   const [document, setDocument] = useState(null);
@@ -43,13 +44,16 @@ function SignDocument() {
         if (!reqRes.ok) throw new Error(reqJson.message || "Failed to load request");
 
         const req = reqJson.message;
-         console.log(reqJson.message)
         setRequest(req);
 
         if (req.overallStatus === "completed") {
           setSuccess(true);
           setLoading(false);
           return;
+        }
+
+        if(req.overallStatus === "pending"){
+          await axios.post(`${BASE_URL}/sign/statuschange`,{id},{withCredentials:true})
         }
 
         const docId = req.documentId._id;
@@ -61,6 +65,7 @@ function SignDocument() {
         if (!widgetRes.ok) throw new Error(widgetJson.message || "Failed to load fields");
 
         setDocument(widgetJson.message.document);
+      
         setWidgets(widgetJson.message.widgets || []);
       } catch (err) {
         setError(err.message);
@@ -179,6 +184,8 @@ function allFieldsFilled() {
     }
   }
 
+
+
   if (loading) {
     return (
       <div className="template-editor-overlay">
@@ -208,12 +215,14 @@ function allFieldsFilled() {
     );
   }
 
+  console.log(widgets);
+
   return (
     <div className="template-editor-overlay">
       <div className="template-editor-modal">
         <div className="template-editor-topbar">
           <span className="template-editor-title">
-            {document.templateId?.name || document.title}
+            {document.title}
           </span>
         </div>
 
@@ -233,7 +242,7 @@ function allFieldsFilled() {
           </div>
 
           <div className="template-editor-canvas">
-            {document.templateId?.file ? (
+            {document?.templateId?.file?.fileId ? (
               <>
                 <canvas ref={canvasRef} className="template-editor-pdf-canvas" />
 
@@ -310,7 +319,80 @@ function allFieldsFilled() {
                   ))}
               </>
             ) : (
-              <ReactQuill value={document.htmlcontent} readOnly theme="bubble" />
+              <>
+              <ReactQuill value={document?.templateId?.htmlcontent} readOnly theme="bubble" />
+               {widgets
+                  .map((w, index) => ({ ...w, index }))
+                  .filter((w) => w.page === activePage)
+                  .map((w) => (
+                    <div
+                      key={w.index}
+                      className="template-editor-placed-widget"
+                      style={{
+                        left: w.x,
+                        top: w.y,
+                        width: w.width,
+                        height: w.height,
+                      }}
+                    >
+                      {w.widgetname === "signature" ? (
+                        <div
+    style={{
+      border: "1px solid #d1d5db",
+      borderRadius: 6,
+      background: "#fff",
+      position: "relative",
+      width: "100%",
+      height: "100%",
+    }}
+  >
+    <SignatureCanvas
+      ref={(ref) => (sigCanvasRefs.current[w.index] = ref)}
+      penColor="black"
+      canvasProps={{
+        width: w.width,
+        height: w.height,
+        style: { width: "100%", height: "100%" },
+      }}
+      onEnd={() => handleSignatureEnd(w.index)}
+    />
+    <button
+      type="button"
+      onClick={() => clearSignature(w.index)}
+      style={{
+        position: "absolute",
+        top: 2,
+        right: 2,
+        fontSize: 10,
+        border: "none",
+        background: "transparent",
+        color: "#6b7280",
+        cursor: "pointer",
+      }}
+    >
+      Clear
+    </button>
+  </div>
+                      ) : (
+                        <input
+                          className="template-editor-widget-input"
+                          type={
+                            w.widgetname === "date"
+                              ? "date"
+                              : w.widgetname === "number"
+                              ? "number"
+                              : w.widgetname === "email"
+                              ? "email"
+                              : "text"
+                          }
+                          placeholder={w.widgetname}
+                          value={values[w.index] || ""}
+                          onChange={(e) => handleChange(w.index, e.target.value)}
+                        />
+                      )}
+                    </div>
+                  ))}
+                  </>
             )}
           </div>
 

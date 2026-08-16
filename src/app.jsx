@@ -1,21 +1,7 @@
 import { Navigate, Routes, Route } from "react-router-dom";
 
-import LandingPage from "./landing_page/LandingPage";
-import Login from "./login-signup/pages/Login";
 
-/* COMPANY */
-import AboutUs from "./Company/AboutUs";
-import Blog from "./Company/Blog";
-import ContactUs from "./Company/ContactUs";
 
-/* LEGAL & TRUST */
-import PrivacyPolicy from "./Legal & Trust/PrivacyPolicy";
-import Security from "./Legal & Trust/Security";
-import TermsServices from "./Legal & Trust/TermsServices";
-
-/* RESOURCES */
-import HelpCenter from "./Resources/HelpCenter";
-import SignUp from "./login-signup/pages/SignUp";
 import Invite from "./login-signup/pages/Invite";
 
 /* ADMIN MODULE */
@@ -36,26 +22,6 @@ export default function App() {
 
   return (
     <Routes>
-      {/* LANDING PAGE */}
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/landing" element={<LandingPage />} />
-
-      {/* COMPANY */}
-      <Route path="/about" element={<AboutUs />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/contact" element={<ContactUs />} />
-
-      {/* LEGAL & TRUST */}
-      <Route path="/privacy" element={<PrivacyPolicy />} />
-      <Route path="/security" element={<Security />} />
-      <Route path="/term" element={<TermsServices />} />
-
-      {/* RESOURCES */}
-      <Route path="/help" element={<HelpCenter />} />
-
-      {/* AUTH ROUTES */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
       <Route path="/mail-invite/:email" element={<Invite />} />
 
       {/* ADMIN ROUTES */}

@@ -29,7 +29,7 @@ export default function SignUp() {
   const handleStep2Submit = async(e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://nexgn-backend.onrender.com/api/v1/admin/signup",{
+      const response = await axios.post("http://localhost:5000/api/v1/admin/signup",{
         name,
         email,
         password,

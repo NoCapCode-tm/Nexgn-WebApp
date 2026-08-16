@@ -11,8 +11,16 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 // Register custom font + size formats once at module load
 // (matches the classes styled in TemplateEditor.css: ql-font-inter, ql-font-outfit, etc.)
-const Font = Quill.import("formats/font");
-Font.whitelist = ["inter", "outfit", "serif", "monospace"];
+ const Font = Quill.import("formats/font");
+
+Font.whitelist = [
+  "inter",
+  "poppins",
+  "roboto",
+  "serif",
+  "monospace",
+];
+
 Quill.register(Font, true);
 
 const Size = Quill.import("formats/size");
@@ -404,7 +412,7 @@ console.log({
 
 
    const response = await axios.post(
-  "https://nexgn-backend.onrender.com/api/v1/template/create",
+  "http://localhost:5000/api/v1/template/create",
   formData,
   {
     withCredentials: true,
