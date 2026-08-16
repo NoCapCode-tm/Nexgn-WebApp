@@ -18,7 +18,7 @@ export default function ContactDetailsModal({ contact, onUpdateContact, onClose 
   const handleSave = async() => {
     console.log("u clicked")
     try {
-      const response = await axios.put("https://nexgn-backend.onrender.com/api/v1/admin/update",{
+      const response = await axios.put("http://localhost:5000/api/v1/admin/update",{
         name:name,
         phone_no:phone,
         emergency:emergencyContact,

@@ -8,18 +8,6 @@ import "../css/Documents.css";
 import "../css/Templates.css";
 import axios from "axios";
 
-// const MOCK_TEMPLATES = [
-//   { id: 1, title: "Project Proposal", note: "Send it to client", owner: "Me" },
-//   { id: 2, title: "Policy Acknowledgement", note: "Please sign before 12th", owner: "Me" },
-//   { id: 3, title: "NDA Agreement", note: "Review and approve", owner: "Me" },
-//   { id: 4, title: "NDA Agreement", note: "Review and approve", owner: "Me" },
-//   { id: 5, title: "NDA Agreement", note: "NDA with vendor", owner: "Me" },
-//   { id: 6, title: "Employment Offer Letter", note: "Final offer shared", owner: "Me" },
-//   { id: 7, title: "Vendor Contract", note: "Contact pending", owner: "Me" },
-//   { id: 8, title: "Freelancer Agreement", note: "Yearly freelance", owner: "Me" },
-//   { id: 9, title: "Shareholder Resolution", note: "Internal resolution", owner: "Me" },
-//   { id: 10, title: "Vendor Contract", note: "Contact pending", owner: "Me" },
-// ];
 
 export default function TemplatesList({ onAddTemplate ,onView }) {
   const [templates, setTemplates] = useState([]);
@@ -31,12 +19,12 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
   };
 
   const filtered = templates.filter((t) =>
-    t.templateid.name.toLowerCase().includes(search.toLowerCase())
+    t?.templateid?.name?.toLowerCase().includes(search.toLowerCase())
   );
 
   useEffect(()=>{
     (async()=>{
-      const response = await axios.get("https://nexgn-backend.onrender.com/api/v1/template/gettemplate",{withCredentials:true})
+      const response = await axios.get("http://localhost:5000/api/v1/template/gettemplate",{withCredentials:true})
       console.log(response.data.message)
       const templates = response.data.message
       setTemplates(templates)

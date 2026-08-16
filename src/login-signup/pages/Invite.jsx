@@ -17,7 +17,7 @@ export default function Invite() {
   const handleJoin = async(e) => {
     e.preventDefault();
    try {
-     const response = await axios.post("https://nexgn-backend.onrender.com/api/v1/admin/setpassword",{
+     const response = await axios.post("http://localhost:5000/api/v1/admin/setpassword",{
        email,
        password
      },{withCredentials:true})

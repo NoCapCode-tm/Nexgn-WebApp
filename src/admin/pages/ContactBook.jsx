@@ -149,7 +149,7 @@ export default function ContactBook() {
   const fetchContacts = async () => {
     try {
       const response = await axios.get(
-        "https://nexgn-backend.onrender.com/api/v1/admin/getuser",
+        "http://localhost:5000/api/v1/admin/getuser",
         {
           withCredentials: true,
         }
@@ -221,7 +221,7 @@ export default function ContactBook() {
   const handleDeleteContact = async(id) => {
    try {
      setContacts((prev) => prev.filter((c) => c._id !== id));
-     await axios.post("https://nexgn-backend.onrender.com/api/v1/admin/delete",{id},{withCredentials:true})
+     await axios.post("http://localhost:5000/api/v1/admin/delete",{id},{withCredentials:true})
    } catch (error) {
       console.log("Something went wrong in deleting contact",error.message)
    }

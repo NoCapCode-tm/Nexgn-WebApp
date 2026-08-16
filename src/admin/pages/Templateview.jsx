@@ -28,7 +28,7 @@ useEffect(() => {
   async function loadPdf() {
     try {
      const loadingTask = pdfjsLib.getDocument(
-  "https://nexgn-backend.onrender.com/api/v1/template/template/" +
+  "http://localhost:5000/api/v1/template/template/" +
     template.templateid._id +
     "/pdf"
 );

@@ -10,7 +10,7 @@ const ProtectedRoute = () => {
     const verifyUser = async () => {
       try {
         await axios.get(
-          "https://nexgn-backend.onrender.com/api/v1/admin/me",
+          "http://localhost:5000/api/v1/admin/me",
           {
             withCredentials: true,
           }

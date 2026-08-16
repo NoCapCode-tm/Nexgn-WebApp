@@ -89,7 +89,7 @@ export default function Settings() {
     const verifyUser = async () => {
       try {
         const response = await axios.get(
-          "https://nexgn-backend.onrender.com/api/v1/admin/me",
+          "http://localhost:5000/api/v1/admin/me",
           {
             withCredentials: true,
           }
@@ -147,6 +147,7 @@ export default function Settings() {
   const [teamMembers, setTeamMembers] = useState([]);
   const [teamActionOpen, setTeamActionOpen] = useState(null);
   const teamActionRef = useRef(null);
+  const[auditLogsData,setauditLogsData] =useState([])
 
   const [notificationData, setNotificationData] = useState({
     email_document_signed: false,
@@ -204,7 +205,7 @@ const handleAvatarUpload = (e) => {
       
 
     try {
-      const response = await axios.put("https://nexgn-backend.onrender.com/api/v1/admin/update",{
+      const response = await axios.put("http://localhost:5000/api/v1/admin/update",{
         name:formData.fullName,
         phone_no:formData.phone,
         profile_picture:profileFile,
@@ -521,7 +522,7 @@ const handleAvatarUpload = (e) => {
   (async () => {
     try {
       const response = await axios.get(
-        "https://nexgn-backend.onrender.com/api/v1/admin/getsubadmin",
+        "http://localhost:5000/api/v1/admin/getsubadmin",
         {
           withCredentials: true,
         }
@@ -538,7 +539,7 @@ const handleAvatarUpload = (e) => {
 
 const handleremove = async(id) =>{
  try {
-   await axios.post("https://nexgn-backend.onrender.com/api/v1/admin/delete",{id},{withCredentials:true})
+   await axios.post("http://localhost:5000/api/v1/admin/delete",{id},{withCredentials:true})
    setTeamMembers((prev) =>
                              prev.filter((m) => m.id !== id),
                            );
@@ -654,7 +655,7 @@ const handleremove = async(id) =>{
       setSubAdminErrors(errors);
       return;
     }
-    const response = await axios.post("https://nexgn-backend.onrender.com/api/v1/admin/invite",{
+    const response = await axios.post("http://localhost:5000/api/v1/admin/invite",{
       name:newSubAdmin.name,
       email:newSubAdmin.email
     },{withCredentials:true})
@@ -933,7 +934,7 @@ const handleremove = async(id) =>{
 
         const res = await axios.get(
 
-            "https://nexgn-backend.onrender.com/api/v1/google/status",
+            "http://localhost:5000/api/v1/google/status",
 
             {
 
@@ -954,7 +955,7 @@ const handleremove = async(id) =>{
   const handledriveconnect = async () => {
   try {
     const response = await axios.get(
-      "https://nexgn-backend.onrender.com/api/v1/google/auth-url",
+      "http://localhost:5000/api/v1/google/auth-url",
       {
         withCredentials: true,
       }
@@ -970,7 +971,7 @@ const handledisconnect = async()=>{
   try {
     await axios.get(
   
-      "https://nexgn-backend.onrender.com/api/v1/google/disconnect",
+      "http://localhost:5000/api/v1/google/disconnect",
   
       {
   
@@ -1070,51 +1071,72 @@ const handledisconnect = async()=>{
     </div>
   );
 
-  const auditLogsData = [
-    {
-      id: 1,
-      date: "Mar 24, 10:45 AM",
-      name: "Alice Smith",
-      action: "Signed Document",
-      document: "NDA_V2.pdf",
-      status: "Success",
-    },
-    {
-      id: 2,
-      date: "Mar 23, 2:15 PM",
-      name: "Bob Jones",
-      action: "Created Template",
-      document: "Emploement_Offer",
-      status: "Success",
-    },
-    {
-      id: 3,
-      date: "Mar 23, 11:00 AM",
-      name: "System",
-      action: "Auto- Archieved",
-      document: "Project_Spec.pdf",
-      status: "Success",
-    },
-    {
-      id: 4,
-      date: "Mar 23, 11:00 AM",
-      name: "Charlie Brown",
-      action: "Failed Logined Attempt",
-      document: "-",
-      status: "Failed",
-    },
-  ];
+  // const auditLogsData = [
+  //   {
+  //     id: 1,
+  //     date: "Mar 24, 10:45 AM",
+  //     name: "Alice Smith",
+  //     action: "Signed Document",
+  //     document: "NDA_V2.pdf",
+  //     status: "Success",
+  //   },
+  //   {
+  //     id: 2,
+  //     date: "Mar 23, 2:15 PM",
+  //     name: "Bob Jones",
+  //     action: "Created Template",
+  //     document: "Emploement_Offer",
+  //     status: "Success",
+  //   },
+  //   {
+  //     id: 3,
+  //     date: "Mar 23, 11:00 AM",
+  //     name: "System",
+  //     action: "Auto- Archieved",
+  //     document: "Project_Spec.pdf",
+  //     status: "Success",
+  //   },
+  //   {
+  //     id: 4,
+  //     date: "Mar 23, 11:00 AM",
+  //     name: "Charlie Brown",
+  //     action: "Failed Logined Attempt",
+  //     document: "-",
+  //     status: "Failed",
+  //   },
+  // ];
+
+  useEffect(()=>{
+    (async()=>{
+       const response = await axios.get("http://localhost:5000/api/v1/activity/getactivity",{withCredentials:true})
+       console.log(response.data.message)
+       setauditLogsData(response.data.message)
+
+    })()
+  },[])
 
   const filteredAuditLogs = auditLogsData.filter((log) => {
-    const q = auditSearchQuery.toLowerCase();
-    return (
-      log.date.toLowerCase().includes(q) ||
-      log.name.toLowerCase().includes(q) ||
-      log.action.toLowerCase().includes(q) ||
-      log.document.toLowerCase().includes(q) ||
-      log.status.toLowerCase().includes(q)
-    );
-  });
+  const q = auditSearchQuery.toLowerCase();
+
+  const formattedDate = new Date(log.createdAt)
+    .toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })
+    .toLowerCase();
+
+  return (
+    formattedDate.includes(q) ||
+    log?.userId?.name?.toLowerCase()?.includes(q) ||
+    log?.action?.toLowerCase()?.includes(q) ||
+    log?.refId?.title?.toLowerCase()?.includes(q) ||
+    log?.refId?.name?.toLowerCase()?.includes(q) ||
+    log?.status?.toLowerCase()?.includes(q)
+  );
+});
 
   const auditCard = (
     <div className="admin-settings-card admin-settings-card--audit">
@@ -1146,17 +1168,25 @@ const handledisconnect = async()=>{
           <div className="admin-audit-table-body">
             {filteredAuditLogs.map((log) => (
               <div key={log.id} className="admin-audit-row">
-                <div className="audit-col audit-col-date">{log.date}</div>
-                <div className="audit-col audit-col-name">{log.name}</div>
-                <div className="audit-col audit-col-action">{log.action}</div>
+                <div className="audit-col audit-col-date">{
+  new Date(log?.createdAt).toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  })
+}</div>
+                <div className="audit-col audit-col-name">{log?.userId?.name}</div>
+                <div className="audit-col audit-col-action">{log?.action}</div>
                 <div className="audit-col audit-col-document">
-                  {log.document}
+                  {log?.refId?.title || log?.refId?.name || "NA"}
                 </div>
                 <div className="audit-col audit-col-status">
                   <span
-                    className={`audit-status-badge audit-status-${log.status.toLowerCase()}`}
+                    className={`audit-status-badge audit-status-${log?.status?.toLowerCase()}`}
                   >
-                    {log.status}
+                    {log?.status}
                   </span>
                 </div>
               </div>
@@ -1217,23 +1247,23 @@ const handledisconnect = async()=>{
                     className="admin-audit-mobile-icon-file"
                   />
                   <span className="admin-audit-mobile-filename">
-                    {log.document}
+                    {log?.refId?.title}
                   </span>
                 </div>
                 <span
                   className={`audit-status-badge audit-status-${log.status.toLowerCase()}`}
                 >
-                  {log.status}
+                  {log?.status}
                 </span>
               </div>
               <div className="admin-audit-mobile-card-row admin-audit-mobile-card-row--bottom">
                 <div className="admin-audit-mobile-user">
                   <User size={16} className="admin-audit-mobile-icon-user" />
                   <span className="admin-audit-mobile-username">
-                    {log.name}
+                    {log?.userId?.name}
                   </span>
                 </div>
-                <span className="admin-audit-mobile-date">{log.date}</span>
+                <span className="admin-audit-mobile-date">{log?.createdAt}</span>
               </div>
             </div>
           ))}
