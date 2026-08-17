@@ -24,7 +24,7 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
 
   useEffect(()=>{
     (async()=>{
-      const response = await axios.get("http://localhost:5000/api/v1/template/gettemplate",{withCredentials:true})
+      const response = await axios.get(`${API_URL}template/gettemplate`,{withCredentials:true})
       console.log(response.data.message)
       const templates = response.data.message
       setTemplates(templates)

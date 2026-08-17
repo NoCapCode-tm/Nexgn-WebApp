@@ -10,7 +10,7 @@ const ProtectedRoute = () => {
     const verifyUser = async () => {
       try {
         await axios.get(
-          "http://localhost:5000/api/v1/admin/me",
+          `${API_URL}admin/me`,
           {
             withCredentials: true,
           }
