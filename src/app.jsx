@@ -3,6 +3,8 @@ import { Navigate, Routes, Route } from "react-router-dom";
 
 
 import Invite from "./login-signup/pages/Invite";
+import Login from "./login-signup/pages/Login";
+import SignUp from "./login-signup/pages/SignUp";
 
 /* ADMIN MODULE */
 import Dashboard from "./admin/pages/Dashboard";
@@ -23,6 +25,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/mail-invite/:email" element={<Invite />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
 
       {/* ADMIN ROUTES */}
       
