@@ -5,6 +5,7 @@ import ContactCard from "../components/ContactCard";
 import ContactDetailsModal from "../components/ContactDetailsModal";
 
 import AddContactForm from "../components/AddContactForm";
+import { API_URL } from "../../../config";
 
 import "../css/BaseLayout.css";
 import "../css/ContactBook.css";

@@ -6,6 +6,7 @@ import { Users, PartyPopper } from "lucide-react";
 import useSystemTheme from "../hooks/useSystemTheme";
 import "../css/LoginSignup.css";
 import axios from "axios";
+import { API_URL } from "../../../config";
 
 export default function Invite() {
   useSystemTheme();

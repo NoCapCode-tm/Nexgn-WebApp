@@ -7,6 +7,7 @@ import "../css/BaseLayout.css";
 import "../css/Documents.css";
 import "../css/Templates.css";
 import axios from "axios";
+import { API_URL } from "../../../config";
 
 
 export default function TemplatesList({ onAddTemplate ,onView }) {
