@@ -28,7 +28,7 @@ useEffect(() => {
   async function loadPdf() {
     try {
      const loadingTask = pdfjsLib.getDocument(
-  `${API_URL}template/template/` +
+  `template/template/` +
     template.templateid._id +
     "/pdf"
 );

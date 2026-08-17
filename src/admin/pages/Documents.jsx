@@ -7,6 +7,7 @@ import DocumentsTable from "../components/DocumentsTable";
 import "../css/BaseLayout.css";
 import "../css/Documents.css";
 import axios from "axios";
+import { API_URL } from "../../../config";
 
 
 

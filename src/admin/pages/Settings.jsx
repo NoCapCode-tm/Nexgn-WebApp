@@ -30,6 +30,7 @@ import {
 import "../css/BaseLayout.css";
 import "../css/Settings.css";
 import "../css/ContactBook.css";
+import { API_URL } from "../../../config";
 
 import AvatarImg from "../../assets/Avatar.png";
 import axios from "axios";

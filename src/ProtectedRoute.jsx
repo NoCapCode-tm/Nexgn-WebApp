@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 
 const ProtectedRoute = () => {
   const [loading, setLoading] = useState(true);

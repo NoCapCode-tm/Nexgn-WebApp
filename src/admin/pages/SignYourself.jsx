@@ -4,6 +4,7 @@
   import Topbar from "../components/Topbar";
   import useWindowWidth from "../components/useWindowWidth";
   import TemplateEditor from "./TemplateEditor";
+import { API_URL } from "../../../config";
 
   import "../css/BaseLayout.css";
   import "../css/Dashboard.css";

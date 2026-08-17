@@ -2,6 +2,7 @@ import  { useState } from "react";
 import { Mail, Phone, Pencil, ChevronLeft } from "lucide-react";
 import "../css/ContactBook.css";
 import axios from "axios";
+import { API_URL } from "../../../config";
 
 export default function ContactDetailsModal({ contact, onUpdateContact, onClose }) {
   if (!contact) return null;

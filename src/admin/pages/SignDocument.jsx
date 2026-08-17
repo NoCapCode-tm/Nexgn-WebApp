@@ -8,10 +8,10 @@ import "react-quill-new/dist/quill.bubble.css";
 import "../css/BaseLayout.css";
 import "../css/TemplateEditor.css";
 import axios from "axios";
+import { API_URL } from "../../../config";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-const BASE_URL = `http://localhost:5000/api/v1`;
 
 function SignDocument() {
   const {id} = useParams();
@@ -37,7 +37,7 @@ function SignDocument() {
   useEffect(() => {
     async function load() {
       try {
-        const reqRes = await fetch(`${BASE_URL}/sign/getrequest/${id}`, {
+        const reqRes = await fetch(`${API_URL}/sign/getrequest/${id}`, {
           credentials: "include",
         });
         const reqJson = await reqRes.json();
@@ -53,12 +53,12 @@ function SignDocument() {
         }
 
         if(req.overallStatus === "pending"){
-          await axios.post(`${BASE_URL}/sign/statuschange`,{id},{withCredentials:true})
+          await axios.post(`${API_URL}/sign/statuschange`,{id},{withCredentials:true})
         }
 
         const docId = req.documentId._id;
        
-        const widgetRes = await fetch(`${BASE_URL}/document/widgets/${docId}`, {
+        const widgetRes = await fetch(`${API_URL}/document/widgets/${docId}`, {
           credentials: "include",
         });
         const widgetJson = await widgetRes.json();
@@ -102,7 +102,7 @@ function handleSignatureEnd(index) {
     async function loadPdf() {
       try {
         const loadingTask = pdfjsLib.getDocument(
-          `${BASE_URL}/template/template/${document.templateId._id}/pdf`
+          `${API_URL}/template/template/${document.templateId._id}/pdf`
         );
         const pdf = await loadingTask.promise;
         setPdfDoc(pdf);
@@ -162,7 +162,7 @@ function allFieldsFilled() {
         value: values[i],
       }));
       console.log(filledWidgets)
-      const res = await fetch(`${BASE_URL}/sign/requestsubmit`, {
+      const res = await fetch(`${API_URL}/sign/requestsubmit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

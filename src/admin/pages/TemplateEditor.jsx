@@ -6,6 +6,7 @@ import "react-quill-new/dist/quill.snow.css";
 import "../css/BaseLayout.css";
 import "../css/TemplateEditor.css";
 import axios from "axios";
+import { API_URL } from "../../../config";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
