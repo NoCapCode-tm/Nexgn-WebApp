@@ -412,7 +412,7 @@ console.log({
 
 
    const response = await axios.post(
-  "http://localhost:5000/api/v1/template/create",
+  `${API_URL}template/create`,
   formData,
   {
     withCredentials: true,

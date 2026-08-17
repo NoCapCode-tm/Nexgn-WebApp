@@ -11,7 +11,7 @@ import axios from "axios";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-const BASE_URL = "http://localhost:5000/api/v1";
+const BASE_URL = `http://localhost:5000/api/v1`;
 
 function SignDocument() {
   const {id} = useParams();

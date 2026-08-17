@@ -23,7 +23,7 @@ export default function Documents() {
 
   useEffect(()=>{
   (async()=>{
-     const response = await axios.get("http://localhost:5000/api/v1/document/getdocument",{withCredentials:true})
+     const response = await axios.get(`${API_URL}document/getdocument`,{withCredentials:true})
      console.log(response.data.message)
      const docs= response.data.message
      setDocuments(docs)

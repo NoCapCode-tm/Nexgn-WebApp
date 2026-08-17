@@ -17,7 +17,7 @@ export default function TopbarIcons({
     const verifyUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/admin/me",
+          `${API_URL}admin/me`,
           {
             withCredentials: true,
           }
@@ -34,7 +34,7 @@ export default function TopbarIcons({
 
   const handlelogout = async()=>{
    try {
-     await axios.post(`http://localhost:5000/api/v1/admin/logout`,{
+     await axios.post(`${API_URL}admin/logout`,{
       id:user?._id 
      },{withCredentials:true})
      navigate("/login")

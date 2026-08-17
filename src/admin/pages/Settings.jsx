@@ -89,7 +89,7 @@ export default function Settings() {
     const verifyUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/admin/me",
+          `${API_URL}admin/me`,
           {
             withCredentials: true,
           }
@@ -205,7 +205,7 @@ const handleAvatarUpload = (e) => {
       
 
     try {
-      const response = await axios.put("http://localhost:5000/api/v1/admin/update",{
+      const response = await axios.put(`${API_URL}admin/update`,{
         name:formData.fullName,
         phone_no:formData.phone,
         profile_picture:profileFile,
@@ -522,7 +522,7 @@ const handleAvatarUpload = (e) => {
   (async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/v1/admin/getsubadmin",
+        `${API_URL}admin/getsubadmin`,
         {
           withCredentials: true,
         }
@@ -539,7 +539,7 @@ const handleAvatarUpload = (e) => {
 
 const handleremove = async(id) =>{
  try {
-   await axios.post("http://localhost:5000/api/v1/admin/delete",{id},{withCredentials:true})
+   await axios.post(`${API_URL}admin/delete`,{id},{withCredentials:true})
    setTeamMembers((prev) =>
                              prev.filter((m) => m.id !== id),
                            );
@@ -655,7 +655,7 @@ const handleremove = async(id) =>{
       setSubAdminErrors(errors);
       return;
     }
-    const response = await axios.post("http://localhost:5000/api/v1/admin/invite",{
+    const response = await axios.post(`${API_URL}admin/invite`,{
       name:newSubAdmin.name,
       email:newSubAdmin.email
     },{withCredentials:true})
@@ -934,7 +934,7 @@ const handleremove = async(id) =>{
 
         const res = await axios.get(
 
-            "http://localhost:5000/api/v1/google/status",
+            `${API_URL}google/status`,
 
             {
 
@@ -955,7 +955,7 @@ const handleremove = async(id) =>{
   const handledriveconnect = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/v1/google/auth-url",
+      `${API_URL}google/auth-url`,
       {
         withCredentials: true,
       }
@@ -971,7 +971,7 @@ const handledisconnect = async()=>{
   try {
     await axios.get(
   
-      "http://localhost:5000/api/v1/google/disconnect",
+      `${API_URL}google/disconnect`,
   
       {
   
@@ -1108,7 +1108,7 @@ const handledisconnect = async()=>{
 
   useEffect(()=>{
     (async()=>{
-       const response = await axios.get("http://localhost:5000/api/v1/activity/getactivity",{withCredentials:true})
+       const response = await axios.get(`${API_URL}activity/getactivity`,{withCredentials:true})
        console.log(response.data.message)
        setauditLogsData(response.data.message)
 

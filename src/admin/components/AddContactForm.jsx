@@ -25,7 +25,7 @@ export default function AddContactForm({ onClose }) {
       return;
     }
    try {
-     const response = await axios.post("http://localhost:5000/api/v1/admin/addcontact",{
+     const response = await axios.post(`${API_URL}admin/addcontact`,{
        name:name,
        email:email,
        contact:phone,
