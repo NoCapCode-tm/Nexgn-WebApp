@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logoLight from "../../assets/logo-light.png";
-import logoDark from "../../assets/logo-dark.png";
+
 import useWindowWidth from "./useWindowWidth";
 import useDarkMode from "./useDarkMode";
 import {
@@ -12,6 +11,8 @@ import {
   SettingsIcon,
   HelpIcon,
   NexgnLogo,
+  NexgnLogoLight, 
+  NexgnLogoDark,  
   ToggleBtn,
 } from "./navItems";
 
@@ -73,15 +74,15 @@ function TemplateIcon({ color = "#8A949F" }) {
 }
 
 const navItems = [
-  { label: "Dashboard", path: "/admin-dashboard", icon: HomeIcon },
-  { label: "Signers", path: "/admin-sign-yourself", icon: ClipboardIcon },
-  { label: "Documents", path: "/admin-documents", icon: FileIcon },
-  { label: "Contact Book", path: "/admin-contact-book", icon: ContactIcon },
-  { label: "Templates", path: "/admin-templates", icon: TemplateIcon },
+  { label: "Dashboard", path: "/dashboard", icon: HomeIcon },
+  { label: "Signers", path: "/sign-yourself", icon: ClipboardIcon },
+  { label: "Documents", path: "/documents", icon: FileIcon },
+  { label: "Contact Book", path: "/contact-book", icon: ContactIcon },
+  { label: "Templates", path: "/templates", icon: TemplateIcon },
 ];
 
 const bottomItems = [
-  { label: "Settings", path: "/admin-settings", icon: SettingsIcon },
+  { label: "Settings", path: "/settings", icon: SettingsIcon },
   { label: "Help", path: "/help", icon: HelpIcon },
 ];
 
@@ -108,17 +109,17 @@ export default function Sidebar() {
   const renderItem = ({ icon: Icon, label, path }) => {
     const active =
       location.pathname === path ||
-      (path === "/admin-sign-yourself" &&
-        location.pathname === "/admin-request-signature");
+      (path === "/sign-yourself" &&
+        location.pathname === "/request-signature");
 
     const handleClick = (e) => {
       if (
-        path !== "/admin-dashboard" &&
-        path !== "/admin-sign-yourself" &&
-        path !== "/admin-documents" &&
-        path !== "/admin-contact-book" &&
-        path !== "/admin-settings" &&
-        path !== "/admin-templates" &&
+        path !== "/dashboard" &&
+        path !== "/sign-yourself" &&
+        path !== "/documents" &&
+        path !== "/contact-book" &&
+        path !== "/settings" &&
+        path !== "/templates" &&
         path !== "/help"
       ) {
         e.preventDefault();
@@ -129,12 +130,12 @@ export default function Sidebar() {
       <Link
         key={path}
         to={
-          path === "/admin-dashboard" ||
-          path === "/admin-sign-yourself" ||
-          path === "/admin-documents" ||
-          path === "/admin-contact-book" ||
-          path === "/admin-settings" ||
-          path === "/admin-templates" ||
+          path === "/dashboard" ||
+          path === "/sign-yourself" ||
+          path === "/documents" ||
+          path === "/contact-book" ||
+          path === "/settings" ||
+          path === "/templates" ||
           path === "/help"
             ? path
             : "#"
@@ -168,11 +169,8 @@ export default function Sidebar() {
       <div className="sidebar__inner">
         <div className="sidebar__logo">
           {effectiveExpanded ? (
-            <img
-              src={isDark ? logoDark : logoLight}
-              alt="Nexgn"
-              className="admin-sidebar__logo-img"
-            />
+            /* ✅ Replace the <img> tag with the conditional SVG components */
+            isDark ? <NexgnLogoDark /> : <NexgnLogoLight />
           ) : (
             <NexgnLogo />
           )}

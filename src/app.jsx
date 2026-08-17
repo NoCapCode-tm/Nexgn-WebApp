@@ -32,14 +32,14 @@ export default function App() {
       
       <Route element={<ProtectedRoute />}>
     <Route path="/admin" element={<Dashboard />} />
-    <Route path="/admin-dashboard" element={<Dashboard />} />
-    <Route path="/admin-documents" element={<Documents />} />
-    <Route path="/admin-sign-yourself" element={<SignYourself />} />
-    <Route path="/admin-request-signature" element={<SignYourself />} />
-    <Route path="/admin-settings" element={<Settings />} />
-    <Route path="/admin-contact-book" element={<ContactBook />} />
-    <Route path="/admin-templates" element={<TemplatesPage />} />
-    <Route path="/admin-templates-view" element={<TemplateView/>} />
+    <Route path="/dashboard" element={<Dashboard />} />
+    <Route path="/documents" element={<Documents />} />
+    <Route path="/sign-yourself" element={<SignYourself />} />
+    <Route path="/request-signature" element={<SignYourself />} />
+    <Route path="/settings" element={<Settings />} />
+    <Route path="/contact-book" element={<ContactBook />} />
+    <Route path="/templates" element={<TemplatesPage />} />
+    <Route path="/templates-view" element={<TemplateView/>} />
     
   </Route>
   <Route path="/document/:id" element={<SignDocument/>} />
