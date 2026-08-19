@@ -1,4 +1,4 @@
-import {  Routes, Route } from "react-router-dom";
+import {  Routes, Route, Navigate } from "react-router-dom";
 
 
 
@@ -43,8 +43,7 @@ export default function App() {
     
   </Route>
   <Route path="/document/:id" element={<SignDocument/>} />
-      {/* Redirect unknown routes
-      <Route path="*" element={<Navigate to="/" replace />} /> */}
+      <Route path="*" element={<Navigate to="/" replace />} /> 
     </Routes>
   );
 }
