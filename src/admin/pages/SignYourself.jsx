@@ -2,7 +2,7 @@
   import { useLocation, useNavigate } from "react-router-dom";
   import Layout from "../components/Layout";
   import Topbar from "../components/Topbar";
-  import useWindowWidth from "../components/useWindowWidth";
+  // import useWindowWidth from "../components/useWindowWidth";
   import TemplateEditor from "./TemplateEditor";
 import { API_URL } from "../../../config";
 
@@ -70,10 +70,10 @@ import { API_URL } from "../../../config";
   export default function SignYourself() {
     const location = useLocation();
     const navigate = useNavigate();
-    const width = useWindowWidth();
+    // const width = useWindowWidth();
 
     const activeTab =
-      location.pathname === "/admin-request-signature" ? "request" : "sign";
+      location.pathname === "/request-signature" ? "request" : "sign";
     const [view, setView] = useState("form");
 
     const [zoom, setZoom] = useState(100);
@@ -83,21 +83,21 @@ import { API_URL } from "../../../config";
     const [note, setNote] = useState("");
     const [required, setRequired] = useState(true);
     const [fieldType, setFieldType] = useState("Signature");
-    const [assignedTo, setAssignedTo] = useState("You");
+    // const [assignedTo, setAssignedTo] = useState("You");
     const [selectedTemplate, setSelectedTemplate] = useState("");
     const fileInputRef = useRef(null);
     const[allTemplates, setAllTemplates]=useState([])
 
     // Request Signature specific states
-    const [systemRole, setSystemRole] = useState("Member / Employee");
-    const [assignedToRole, setAssignedToRole] = useState(
-      "Client / External signer",
-    );
+    // const [systemRole, setSystemRole] = useState("Member / Employee");
+    // const [assignedToRole, setAssignedToRole] = useState(
+    //   "Client / External signer",
+    // );
     const [expiresIn, setExpiresIn] = useState("");
     const [signers, setSigners] = useState([{ name: "", email: "" }]);
-    const [fieldAssignedTo, setFieldAssignedTo] = useState(
-      "Fresher / Freelancer / Intern",
-    );
+    // const [fieldAssignedTo, setFieldAssignedTo] = useState(
+    //   "Fresher / Freelancer / Intern",
+    // );
 
     useEffect(()=>{
       (async()=>{
@@ -108,6 +108,25 @@ import { API_URL } from "../../../config";
       })()
     },[])
 
+    async function getClientIPs() {
+  const [ipv4Res, ipv6Res] = await Promise.allSettled([
+    fetch("https://api.ipify.org?format=json"),
+    fetch("https://api6.ipify.org?format=json"),
+  ]);
+
+  const ipv4 =
+    ipv4Res.status === "fulfilled"
+      ? (await ipv4Res.value.json()).ip
+      : null;
+
+  const ipv6 =
+    ipv6Res.status === "fulfilled"
+      ? (await ipv6Res.value.json()).ip
+      : null;
+
+  return { ipv4, ipv6 };
+}
+
     const handleNext = async (e) => {
   e.preventDefault();
 
@@ -117,14 +136,19 @@ import { API_URL } from "../../../config";
       const template = allTemplates.find(
         (t) => t.templateid.name === selectedTemplate
       );
+       const { ipv4, ipv6 } = await getClientIPs();
+      console.log("IPv4:", ipv4);
+      console.log("IPv6:", ipv6);
 
       await axios.post(
         `${API_URL}document/create`,
         {
           title: docTitle,
           templateid:  selectedTemplate.templateid._id,
+          senderip:ipv4,
           applicants: signers,
           expiry: expiresIn,
+          note:note
         },
         {
           withCredentials: true,
@@ -151,7 +175,7 @@ import { API_URL } from "../../../config";
 
     const handleTabChange = (tab) => {
       navigate(
-        tab === "request" ? "/admin-request-signature" : "/admin-sign-yourself",
+        tab === "request" ? "/request-signature" : "/sign-yourself",
       );
       if (tab === "request") {
         setDocTitle("");

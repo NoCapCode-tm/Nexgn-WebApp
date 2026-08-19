@@ -18,7 +18,7 @@ export default function Topbar({
   const navigate = useNavigate();
 
   const defaultActionButton = (
-    <button className="topbar__upload" onClick={() => navigate("/admin-sign-yourself")}>
+    <button className="topbar__upload" onClick={() => navigate("/sign-yourself")}>
       <UploadIcon />
       Upload Document
     </button>

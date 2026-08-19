@@ -15,12 +15,12 @@ const TemplateIcon = ({ color = "#8A949F", size = 24 }) => (
 );
 
 const navItems = [
-  { label: "Dashboard", path: "/admin-dashboard", icon: HomeIcon },
-  { label: "Signers", path: "/admin-sign-yourself", icon: ClipboardIcon },
-  { label: "Documents", path: "/admin-documents", icon: FileIcon },
-  { label: "Contact Book", path: "/admin-contact-book", icon: ContactIcon },
-  { label: "Templates", path: "/admin-templates", icon: TemplateIcon },
-  { label: "Settings", path: "/admin-settings", icon: SettingsIcon },
+  { label: "Dashboard", path: "/dashboard", icon: HomeIcon },
+  { label: "Signers", path: "/sign-yourself", icon: ClipboardIcon },
+  { label: "Documents", path: "/documents", icon: FileIcon },
+  { label: "Contact Book", path: "/contact-book", icon: ContactIcon },
+  { label: "Templates", path: "/templates", icon: TemplateIcon },
+  { label: "Settings", path: "/settings", icon: SettingsIcon },
 ];
 
 export default function MobileNavbar() {
@@ -31,12 +31,12 @@ export default function MobileNavbar() {
       {navItems.map((item) => {
         const isActive =
           location.pathname === item.path ||
-          (item.path === "/admin-sign-yourself" &&
-            location.pathname === "/admin-request-signature");
+          (item.path === "/sign-yourself" &&
+            location.pathname === "/request-signature");
 
         const Icon = item.icon;
 
-        const validPaths = ["/admin-dashboard", "/admin-sign-yourself", "/admin-documents", "/admin-templates", "/admin-contact-book", "/admin-settings"];
+        const validPaths = ["/dashboard", "/sign-yourself", "/documents", "/templates", "/contact-book", "/settings"];
         const handleClick = (e) => {
           if (!validPaths.includes(item.path)) {
             e.preventDefault();

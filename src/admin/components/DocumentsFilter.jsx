@@ -59,7 +59,7 @@ export default function DocumentsFilter({ search, setSearch, selectedStatus, set
           </div>
         )}
       </div>
-      <button className="admin-docs-add-btn" onClick={() => navigate("/admin-request-signature")}>
+      <button className="admin-docs-add-btn" onClick={() => navigate("/request-signature")}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/>
         </svg>

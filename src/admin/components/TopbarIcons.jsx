@@ -78,7 +78,7 @@ export default function TopbarIcons({
                 You have 1 document pending to sign.<br />
                 <span 
                   className="notification-item__text--red"
-                  onClick={() => navigate("/admin-documents")}
+                  onClick={() => navigate("/documents")}
                   style={{ cursor: "pointer" }}
                 >
                   Take Action.
@@ -88,7 +88,7 @@ export default function TopbarIcons({
           </div>
           <div 
             className="notification-dropdown__footer"
-            onClick={() => navigate("/admin-settings?tab=notifications")}
+            onClick={() => navigate("/settings?tab=notifications")}
             style={{ cursor: "pointer" }}
           >
             See all recent activity
@@ -105,7 +105,7 @@ export default function TopbarIcons({
             <span>Profile</span>
             <button
               className="profile-dropdown__settings-btn"
-              onClick={() => navigate("/admin-settings")}
+              onClick={() => navigate("/settings")}
               aria-label="Settings"
             >
               <Settings size={16} color="#FFFFFF" strokeWidth={2} />
@@ -117,7 +117,7 @@ export default function TopbarIcons({
               <div className="profile-dropdown__email">{user?.email}</div>
             </div>
             <div className="profile-dropdown__menu">
-              <button className="profile-dropdown__item" onClick={() => navigate("/admin-settings?tab=profile")}>
+              <button className="profile-dropdown__item" onClick={() => navigate("/settings?tab=profile")}>
                 <UserPen size={16} color="#000000" strokeWidth={2} />
                 <span>Edit Profile</span>
               </button>
