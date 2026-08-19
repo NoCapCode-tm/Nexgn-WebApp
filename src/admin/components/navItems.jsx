@@ -47,25 +47,25 @@ export const HelpIcon = ({ color, size = 24 }) => (
 export function isNavItemActive(itemPath, currentPathname) {
   return (
     currentPathname === itemPath ||
-    (itemPath === "/admin-sign-yourself" && currentPathname === "/admin-request-signature")
+    (itemPath === "/sign-yourself" && currentPathname === "/request-signature")
   );
 }
 
 export const ADMIN_NAV_ITEMS = [
-  { label: "Dashboard",    path: "/admin-dashboard",    icon: HomeIcon },
-  { label: "Signers",      path: "/admin-sign-yourself", icon: ClipboardIcon },
-  { label: "Documents",    path: "/admin-documents",    icon: FileIcon },
-  { label: "Contact Book", path: "/admin-contact-book", icon: ContactIcon },
+  { label: "Dashboard",    path: "/dashboard",    icon: HomeIcon },
+  { label: "Signers",      path: "/sign-yourself", icon: ClipboardIcon },
+  { label: "Documents",    path: "/documents",    icon: FileIcon },
+  { label: "Contact Book", path: "/contact-book", icon: ContactIcon },
 ];
 
 export const ADMIN_BOTTOM_ITEMS = [
-  { label: "Settings", path: "/admin-settings", icon: SettingsIcon },
+  { label: "Settings", path: "/settings", icon: SettingsIcon },
   { label: "Help",     path: "/help",            icon: HelpIcon },
 ];
 
 export const ADMIN_MOBILE_NAV_ITEMS = [
   ...ADMIN_NAV_ITEMS,
-  { label: "Settings", path: "/admin-settings", icon: SettingsIcon },
+  { label: "Settings", path: "/settings", icon: SettingsIcon },
 ];
 
 export const NexgnLogo = () => (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import Topbar from "../components/Topbar";
@@ -9,23 +9,103 @@ import "../css/BaseLayout.css";
 import "../css/Dashboard.css";
 import { useEffect } from "react";
 import axios from "axios";
+import { API_URL } from "../../../config";
+// import axios from "axios";
+
+
+
+
+
+// const INITIAL_DOCS = [
+//   {
+//     title: "Project Proposal",
+//     note: "Send it to client",
+//     signers: "Jane Doe",
+//     signedAt: "—",
+//     owner: "Me",
+//     status: "Pending",
+//   },
+//   {
+//     title: "Policy Acknowledgement Form",
+//     note: "Please sign before 12th",
+//     signers: "Charlie Brown",
+//     signedAt: "April 10, 2026",
+//     owner: "Me",
+//     status: "Signed",
+//   },
+//   {
+//     title: "NDA Agreement",
+//     note: "Review and approve",
+//     signers: "Bob Jones",
+//     signedAt: "April 08, 2026",
+//     owner: "Me",
+//     status: "Signed",
+//   },
+//   {
+//     title: "NDA Agreement",
+//     note: "Review and approve",
+//     signers: "Bob Jones",
+//     signedAt: "—",
+//     owner: "Me",
+//     status: "Expired",
+//   },
+//   {
+//     title: "NDA Agreement",
+//     note: "NDA with vendor...",
+//     signers: "Alice Smith",
+//     signedAt: "—",
+//     owner: "Me",
+//     status: "Pending",
+//   },
+// ];
+
+export default function Dashboard() {
+  const [documents, setDocuments] = useState([]);
+  const width = useWindowWidth();
+  const isMobile = width <= 768;
+  const navigate = useNavigate();
+  useEffect(()=>{
+  (async()=>{
+      const response = await axios.get(`${API_URL}document/getdocument`,{withCredentials:true})
+      console.log(response.data.message)
+      setDocuments(response.data.message)
+    })()
+},[])
+
+const { completed, total, pending } = useMemo(() => {
+  const completed = documents?.filter(
+    (d) => d.status === "completed"
+  ).length;
+
+  const total = documents?.length;
+
+  const pending = documents?.filter(
+    (d) => d.status === "sent" || d.status === "partially_signed"
+  ).length;
+
+  return {
+    completed,
+    total,
+    pending,
+  };
+}, [documents]);
 
 const stats = [
   {
     label: "Total Documents",
-    value: "128",
+    value: total,
     trend: "12%",
     trendUp: true,
   },
   {
     label: "Pending",
-    value: "32",
+    value:pending,
     trend: "8%",
     trendUp: true,
   },
   {
     label: "Signed",
-    value: "84",
+    value: completed,
     trend: "18%",
     trendUp: true,
   },
@@ -37,54 +117,6 @@ const stats = [
   },
 ];
 
-const INITIAL_DOCS = [
-  {
-    title: "Project Proposal",
-    note: "Send it to client",
-    signers: "Jane Doe",
-    signedAt: "—",
-    owner: "Me",
-    status: "Pending",
-  },
-  {
-    title: "Policy Acknowledgement Form",
-    note: "Please sign before 12th",
-    signers: "Charlie Brown",
-    signedAt: "April 10, 2026",
-    owner: "Me",
-    status: "Signed",
-  },
-  {
-    title: "NDA Agreement",
-    note: "Review and approve",
-    signers: "Bob Jones",
-    signedAt: "April 08, 2026",
-    owner: "Me",
-    status: "Signed",
-  },
-  {
-    title: "NDA Agreement",
-    note: "Review and approve",
-    signers: "Bob Jones",
-    signedAt: "—",
-    owner: "Me",
-    status: "Expired",
-  },
-  {
-    title: "NDA Agreement",
-    note: "NDA with vendor...",
-    signers: "Alice Smith",
-    signedAt: "—",
-    owner: "Me",
-    status: "Pending",
-  },
-];
-
-export default function Dashboard() {
-  const [documents, setDocuments] = useState(INITIAL_DOCS);
-  const width = useWindowWidth();
-  const isMobile = width <= 768;
-  const navigate = useNavigate();
 
   const handleRevoke = (title) => {
     setDocuments((prev) => prev.filter((doc) => doc.title !== title));
@@ -109,7 +141,7 @@ export default function Dashboard() {
             <button
               className="mobile-page-header__upload-btn"
               aria-label="Upload document"
-              onClick={() => navigate("/admin-sign-yourself")}
+              onClick={() => navigate("/sign-yourself")}
             >
               <svg
                 width="44"
@@ -145,7 +177,7 @@ export default function Dashboard() {
             </button>
             <button
               className="tablet-upload-btn"
-              onClick={() => navigate("/admin-sign-yourself")}
+              onClick={() => navigate("/sign-yourself")}
             >
               <svg
                 width="18"
@@ -190,13 +222,13 @@ export default function Dashboard() {
         <div className="mobile-cta-row">
           <button
             className="mobile-cta mobile-cta--primary"
-            onClick={() => navigate("/admin-sign-yourself")}
+            onClick={() => navigate("/sign-yourself")}
           >
             Sign Yourself
           </button>
           <button
             className="mobile-cta mobile-cta--outline"
-            onClick={() => navigate("/admin-request-signature")}
+            onClick={() => navigate("/request-signature")}
           >
             Request Signature
           </button>

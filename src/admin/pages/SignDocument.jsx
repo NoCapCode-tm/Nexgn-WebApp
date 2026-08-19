@@ -37,7 +37,7 @@ function SignDocument() {
   useEffect(() => {
     async function load() {
       try {
-        const reqRes = await fetch(`${API_URL}/sign/getrequest/${id}`, {
+        const reqRes = await fetch(`${API_URL}sign/getrequest/${id}`, {
           credentials: "include",
         });
         const reqJson = await reqRes.json();
@@ -53,12 +53,12 @@ function SignDocument() {
         }
 
         if(req.overallStatus === "pending"){
-          await axios.post(`${API_URL}/sign/statuschange`,{id},{withCredentials:true})
+          await axios.post(`${API_URL}sign/statuschange`,{id},{withCredentials:true})
         }
 
         const docId = req.documentId._id;
        
-        const widgetRes = await fetch(`${API_URL}/document/widgets/${docId}`, {
+        const widgetRes = await fetch(`${API_URL}document/widgets/${docId}`, {
           credentials: "include",
         });
         const widgetJson = await widgetRes.json();
@@ -102,7 +102,7 @@ function handleSignatureEnd(index) {
     async function loadPdf() {
       try {
         const loadingTask = pdfjsLib.getDocument(
-          `${API_URL}/template/template/${document.templateId._id}/pdf`
+          `${API_URL}template/template/${document.templateId._id}/pdf`
         );
         const pdf = await loadingTask.promise;
         setPdfDoc(pdf);
@@ -144,6 +144,25 @@ function allFieldsFilled() {
   return getMissingFields().length === 0;
 }
 
+async function getClientIPs() {
+  const [ipv4Res, ipv6Res] = await Promise.allSettled([
+    fetch("https://api.ipify.org?format=json"),
+    fetch("https://api6.ipify.org?format=json"),
+  ]);
+
+  const ipv4 =
+    ipv4Res.status === "fulfilled"
+      ? (await ipv4Res.value.json()).ip
+      : null;
+
+  const ipv6 =
+    ipv6Res.status === "fulfilled"
+      ? (await ipv6Res.value.json()).ip
+      : null;
+
+  return { ipv4, ipv6 };
+}
+
   async function handleSubmit() {
     setError(null);
 
@@ -161,15 +180,18 @@ function allFieldsFilled() {
         widgetname: w.widgetname,
         value: values[i],
       }));
-      console.log(filledWidgets)
-      const res = await fetch(`${API_URL}/sign/requestsubmit`, {
+      const { ipv4, ipv6 } = await getClientIPs();
+      console.log("IPv4:", ipv4);
+      console.log("IPv6:", ipv6);
+      const res = await fetch(`${API_URL}sign/requestsubmit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({
           sign: id,
           widget: filledWidgets,
-          ip: "client", // backend actually uses req.ip; this just satisfies validation
+          ipv4: ipv4,
+          ipv6:ipv6 // backend actually uses req.ip; this just satisfies validation
         }),
       });
 

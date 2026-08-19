@@ -7,7 +7,7 @@ const statusClass = {
   Expired: "badge--expired",
 };
 
-export default function DocumentRow({ title, note, signers, signedAt, owner, status, onRevoke }) {
+export default function DocumentRow({ title, note, assignedto, createdBy, status, onRevoke }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -28,9 +28,8 @@ export default function DocumentRow({ title, note, signers, signedAt, owner, sta
         <span>{title}</span>
       </div>
       <div className="doc-row__note">{note || "—"}</div>
-      <div className="doc-row__cell">{signers || "—"}</div>
-      <div className="doc-row__cell">{signedAt || "—"}</div>
-      <div className="doc-row__cell">{owner}</div>
+      <div className="doc-row__cell">{assignedto.length|| "—"}</div>
+      <div className="doc-row__cell">{createdBy?.name}</div>
       <div className="doc-row__cell">
         <span className={`badge ${statusClass[status]}`}>{status}</span>
       </div>
