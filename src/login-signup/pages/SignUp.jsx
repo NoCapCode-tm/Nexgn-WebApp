@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../../config";
-import { Building2, ArrowDown, PartyPopper } from "lucide-react";
+// import { Building2, ArrowDown, PartyPopper } from "lucide-react";
 import styles from "../css/Signup.module.css";
 
 export default function SignUp() {
@@ -244,21 +244,22 @@ export default function SignUp() {
           )}
         </div>
 
-        <div className={styles.faceGraphic}>
-          <img src="./Intersect.png" alt="" />
-        </div>
-
-        <p className={styles.tagline} style={{marginTop:"65px"}}>Smart Signing</p>
-
-        <span className={styles.wordmarkRed} aria-hidden="true">
-          Nexgn
-        </span>
-      </div>
-
-      {/* ---------------- Right panel ---------------- */}
-      <div className={styles.rightPanel}>
-        <span className={styles.wordmarkWhite}>Nexgn</span>
-      </div>
+          <div className={styles.faceGraphic}>
+                  <img src = "./Intersect.png" />
+                </div>
+        
+                <p className={styles.tagline}>Smart Signing</p>
+        
+                <div className={styles.wordmarkSlot} aria-hidden="true">
+                  <span className={styles.wordmarkRed}>Nexgn</span>
+                </div>
+              </div>
+        
+              <div className={styles.rightPanel}>
+                <div className={styles.wordmarkSlot} aria-hidden="true">
+                  <span className={styles.wordmarkWhite}>Nexgn</span>
+                </div>
+              </div>
     </div>
   );
 }
