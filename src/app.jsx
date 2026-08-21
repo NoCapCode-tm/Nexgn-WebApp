@@ -28,7 +28,7 @@ export default function App() {
       <Route path="/mail-invite/:email" element={<Invite />} />
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/forgot" element={<ForgotPassword />} />
+      <Route path="/reset" element={<ForgotPassword />} />
 
       {/* ADMIN ROUTES */}
       
