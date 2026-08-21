@@ -5,6 +5,7 @@ import {  Routes, Route, Navigate } from "react-router-dom";
 import Invite from "./login-signup/pages/Invite";
 import Login from "./login-signup/pages/Login";
 import SignUp from "./login-signup/pages/SignUp";
+import ForgotPassword from "./login-signup/pages/ForgotPassword";
 
 /* ADMIN MODULE */
 import Dashboard from "./admin/pages/Dashboard";
@@ -27,6 +28,7 @@ export default function App() {
       <Route path="/mail-invite/:email" element={<Invite />} />
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/forgot" element={<ForgotPassword />} />
 
       {/* ADMIN ROUTES */}
       
