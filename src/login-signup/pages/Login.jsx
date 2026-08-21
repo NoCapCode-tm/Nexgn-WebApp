@@ -95,15 +95,15 @@ export default function LoginPage() {
 
         <p className={styles.tagline}>Smart Signing</p>
 
-        
-        <span className={styles.wordmarkRed} aria-hidden="true">
-          Nexgn
-        </span>
+        <div className={styles.wordmarkSlot} aria-hidden="true">
+          <span className={styles.wordmarkRed}>Nexgn</span>
+        </div>
       </div>
 
-      
       <div className={styles.rightPanel}>
-        <span className={styles.wordmarkWhite}>Nexgn</span>
+        <div className={styles.wordmarkSlot} aria-hidden="true">
+          <span className={styles.wordmarkWhite}>Nexgn</span>
+        </div>
       </div>
     </div>
   );
