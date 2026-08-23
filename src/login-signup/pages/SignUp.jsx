@@ -4,6 +4,7 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 // import { Building2, ArrowDown, PartyPopper } from "lucide-react";
 import styles from "../css/Signup.module.css";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   const [step, setStep] = useState(1);
@@ -22,6 +23,7 @@ export default function SignUp() {
 
   const handleStep1Submit = (e) => {
     e.preventDefault();
+    toast.success("Step 1 Completed Successfully")
     setStep(2);
   };
 
@@ -41,6 +43,7 @@ export default function SignUp() {
         { withCredentials: true }
       );
       console.log(response.data.message);
+      toast.success("Step 2 Completed Successfully")
       setStep(3);
     } catch (error) {
       console.log("Something went wrong", error.message);
@@ -50,6 +53,7 @@ export default function SignUp() {
   const handleStep3Submit = (e) => {
     e.preventDefault();
     localStorage.setItem("theme", "light");
+    toast.success("Account Created Successfully")
     navigate("/");
   };
 

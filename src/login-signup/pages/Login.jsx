@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../css/LoginPage.module.css";
 import { API_URL } from "../../../config";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("noar@nexgn.cloud");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {id} = useParams()
 
    const navigate = useNavigate();
 
@@ -22,11 +24,23 @@ export default function LoginPage() {
         { withCredentials: true }
       );
       console.log(response.data.message);
-      navigate("/admin");
+      navigate("/dashboard");
+      toast.success("Login Successfull")
     } catch (error) {
       console.log("Something went wrong", error.message);
     }
   };
+
+  useEffect(()=>{
+    (async()=>{
+        if(!id)return;
+
+          const response = await axios.post(`${API_URL}admin/verify`,{status:"Active",id:id},{withCredentials:true})
+          console.log(response.data.message)
+          toast.success("Your Account is Activated")
+        
+    })()
+  },[id])
   return (
     <div className={styles.page}>
 

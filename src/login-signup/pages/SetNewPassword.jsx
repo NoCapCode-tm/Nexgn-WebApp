@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "../css/SetNewPassword.module.css";
 import axios from "axios";
 import { API_URL } from "../../../config"; // Adjust path as necessary
+import { toast } from "react-toastify";
 
 export default function SetNewPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const {id} = useParams()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,11 +21,12 @@ export default function SetNewPassword() {
 
     try {
       const response = await axios.post(
-        `${API_URL}admin/set-new-password`, // Adjust endpoint as needed
-        { password },
+        `${API_URL}admin/resetpassword`, 
+        { id,password },
         { withCredentials: true }
       );
       console.log(response.data.message);
+      toast.success("Password changed successfully")
       navigate("/login");
     } catch (error) {
       console.log("Something went wrong", error.message);
