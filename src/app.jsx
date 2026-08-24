@@ -20,22 +20,24 @@ import useSystemTheme from "./login-signup/hooks/useSystemTheme";
 import ProtectedRoute from "./ProtectedRoute";
 import TemplateView from "./admin/pages/Templateview";
 import SignDocument from "./admin/pages/SignDocument";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   useSystemTheme();
 
   return (
+    <>
     <Routes>
       <Route path="/mail-invite/:email" element={<Invite />} />
       <Route path="/" element={<Login />} />
+      <Route path="/verify/:id" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot" element={<ForgotPassword />} />
-      <Route path="/reset" element={<SetNewPassword />} />
+      <Route path="/reset/:id" element={<SetNewPassword />} />
 
       {/* ADMIN ROUTES */}
       
       <Route element={<ProtectedRoute />}>
-    <Route path="/admin" element={<Dashboard />} />
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/documents" element={<Documents />} />
     <Route path="/sign-yourself" element={<SignYourself />} />
@@ -49,5 +51,17 @@ export default function App() {
   <Route path="/document/:id" element={<SignDocument/>} />
       <Route path="*" element={<Navigate to="/" replace />} /> 
     </Routes>
+
+
+    <ToastContainer
+            position="top-center" 
+            autoClose={2500}
+            hideProgressBar={true}       /* Removes the colored bar at the bottom */
+            closeButton={false}          /* Removes the 'X' icon */
+            theme="dark"
+            pauseOnHover={false}
+            limit={3}                    /* Prevents screen clutter */
+          />
+    </>
   );
 }

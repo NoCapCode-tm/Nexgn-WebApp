@@ -595,7 +595,7 @@ const handleremove = async(id) =>{
                   <span
                     className={`team-status-badge ${sub.invitestatus === "Active" ? "active" : "inactive"}`}
                   >
-                    {sub.invitestatus}
+                    {sub.status}
                   </span>
                 </div>
                 <div className="team-col-action">
