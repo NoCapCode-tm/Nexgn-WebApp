@@ -16,8 +16,7 @@ const ProtectedRoute = () => {
             withCredentials: true,
           }
         );
-
-        setAuthenticated(true);
+     setAuthenticated(true);
       } catch (err) {
         console.log(err.message)
         setAuthenticated(false);

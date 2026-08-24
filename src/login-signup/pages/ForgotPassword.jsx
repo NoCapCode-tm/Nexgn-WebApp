@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../css/ForgotPassword.module.css";
 import axios from "axios";
 import { API_URL } from "../../../config"; // Adjust the path as per your folder structure
+import { toast } from "react-toastify";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
+const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +18,8 @@ export default function ForgotPassword() {
         { withCredentials: true }
       );
       console.log(response.data.message);
-      // Optional: Add a success state or toast notification here
+      toast.success("Resent link sent successfully")
+      navigate("/")
     } catch (error) {
       console.log("Something went wrong", error.message);
     }
