@@ -100,8 +100,9 @@ font-family: "Plus Jakarta Sans", sans-serif;
 
 .input {
   height: 44px;
-  width:100%;
+  /* width: 100%; Note: Keep this if you are updating Signup.module.css */
   padding: 0 14px;
+  background: #ffffff; /* <-- Add this line to force a white background */
   border: 1px solid #d9d9d9;
   border-radius: 6px;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -114,6 +115,19 @@ font-family: "Plus Jakarta Sans", sans-serif;
 
 .input:focus {
   border-color: #FF0915;
+}
+
+/* Add this to your global CSS or bottom of your module CSS */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    /* Forces the background to be white */
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+    /* Forces the text color to stay dark */
+    -webkit-text-fill-color: #1a1a1a !important;
+    /* A hack to remove the background color transition */
+    transition: background-color 5000s ease-in-out 0s !important;
 }
 
 .loginButton {
