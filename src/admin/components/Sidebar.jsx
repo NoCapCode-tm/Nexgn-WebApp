@@ -120,7 +120,7 @@ export default function Sidebar() {
         path !== "/contact-book" &&
         path !== "/settings" &&
         path !== "/templates" &&
-        path !== "/help"
+        path !== "https://nexgn.cloud/help"
       ) {
         e.preventDefault();
       }
@@ -136,7 +136,7 @@ export default function Sidebar() {
           path === "/contact-book" ||
           path === "/settings" ||
           path === "/templates" ||
-          path === "/help"
+          path === "https://nexgn.cloud/help"
             ? path
             : "#"
         }
