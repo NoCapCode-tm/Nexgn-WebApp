@@ -97,7 +97,7 @@ export default function SetNewPassword() {
           <img src="./Intersect.png" alt="Nexgn Graphic" />
         </div>
 
-        <p className={styles.tagline}>Smart Signing</p>
+        {/* <p className={styles.tagline}>Smart Signing</p> */}
 
         <div className={styles.wordmarkSlot} aria-hidden="true">
           <span className={styles.wordmarkRed}>Nexgn</span>
