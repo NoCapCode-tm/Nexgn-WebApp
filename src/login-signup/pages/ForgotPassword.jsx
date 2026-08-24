@@ -4,6 +4,7 @@ import styles from "../css/ForgotPassword.module.css";
 import axios from "axios";
 import { API_URL } from "../../../config"; // Adjust the path as per your folder structure
 import { toast } from "react-toastify";
+import Intersect from '../../assets/Intersect.png'; 
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -70,10 +71,10 @@ const navigate = useNavigate()
         </div>
 
         <div className={styles.faceGraphic}>
-          <img src="./Intersect.png" alt="Nexgn Graphic" />
+          <img src = {Intersect} alt="Nexgn Graphic" />
         </div>
-
-        <p className={styles.tagline}>Smart Signing</p>
+{/* 
+        <p className={styles.tagline}>Smart Signing</p> */}
 
         <div className={styles.wordmarkSlot} aria-hidden="true">
           <span className={styles.wordmarkRed}>Nexgn</span>

@@ -5,6 +5,7 @@ import { API_URL } from "../../../config";
 // import { Building2, ArrowDown, PartyPopper } from "lucide-react";
 import styles from "../css/Signup.module.css";
 import { toast } from "react-toastify";
+import Intersect from '../../assets/Intersect.png'; 
 
 export default function SignUp() {
   const [step, setStep] = useState(1);
@@ -249,7 +250,7 @@ export default function SignUp() {
         </div>
 
           <div className={styles.faceGraphic}>
-                  <img src = "./Intersect.png" />
+                  <img src = {Intersect} alt="Nexgn Graphic" />
                 </div>
         
                 {/* <p className={styles.tagline}>Smart Signing</p> */}

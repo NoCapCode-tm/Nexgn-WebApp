@@ -85,13 +85,13 @@ export default function Invite() {
                     <label htmlFor="password" className={styles.label}>
                       Password
                     </label>
-                    <a
+                    {/* <a
                       href="#forgot"
                       className={styles.forgotLink}
                       onClick={(e) => e.preventDefault()}
                     >
                       Forgot password?
-                    </a>
+                    </a> */}
                   </div>
                   <input
                     id="password"
@@ -130,7 +130,7 @@ export default function Invite() {
         </div>
 
         <div className={styles.faceGraphic}>
-          <img src = {Intersect} />
+          <img src = {Intersect} alt="Nexgn Graphic" />
         </div>
 
         {/* <p className={styles.tagline}>Smart Signing</p> */}

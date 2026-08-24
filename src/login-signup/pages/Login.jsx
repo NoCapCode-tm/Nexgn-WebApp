@@ -4,6 +4,7 @@ import { API_URL } from "../../../config";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
+import Intersect from '../../assets/Intersect.png'; 
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -104,7 +105,7 @@ export default function LoginPage() {
         </div>
 
         <div className={styles.faceGraphic}>
-          <img src = "./Intersect.png" />
+          <img src = {Intersect} alt="Nexgn Graphic" />
         </div>
 
         {/* <p className={styles.tagline}>Smart Signing</p> */}
