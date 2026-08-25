@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../config";
-// import { Building2, ArrowDown, PartyPopper } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react"; // <-- Import icons
 import styles from "./Signup.module.css";
 import { toast } from "react-toastify";
 import Intersect from '../../assets/Intersect.png'; 
@@ -15,6 +15,7 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // <-- Add state
 
   // Step 2 state
   const [companyName, setCompanyName] = useState("");
@@ -84,7 +85,6 @@ export default function SignUp() {
           {step === 1 && (
             <>
               <div className={styles.titleRow} >
-                {/* <UserPlus size={28} className={styles.titleIcon} /> */}
                 <h1 className={styles.title}>Create an account</h1>
               </div>
               <p className={styles.subtitle}>Sign up to get started with Nexgn</p>
@@ -125,16 +125,28 @@ export default function SignUp() {
                   <label htmlFor="password" className={styles.label}>
                     Password
                   </label>
-                  <input
-                    id="password"
-                    type="password"
-                    className={styles.input}
-                    placeholder="Create a strong password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="new-password"
-                    required
-                  />
+                  {/* <-- Wrap input and toggle button --> */}
+                  <div className={styles.passwordWrap}>
+                    <input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      className={`${styles.input} ${styles.passwordInput}`}
+                      placeholder="Create a strong password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      autoComplete="new-password"
+                      required
+                    />
+                    <button
+                      type="button"
+                      className={styles.passwordToggleBtn}
+                      onClick={() => setShowPassword(!showPassword)}
+                      aria-label={showPassword ? "Hide password" : "Show password"}
+                      tabIndex="-1" // keeps it out of standard tab flow if desired
+                    >
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
                 </div>
 
                 {/* DROP THE METER HERE */}
@@ -158,7 +170,6 @@ export default function SignUp() {
           {step === 2 && (
             <>
               <div className={styles.titleRow}>
-                {/* <Building2 size={28} className={styles.titleIcon} /> */}
                 <h1 className={styles.title}>Your company</h1>
               </div>
               <p className={styles.subtitle}>Tell us about your company</p>
@@ -200,7 +211,6 @@ export default function SignUp() {
                       <option value="Real Estate">Real Estate</option>
                       <option value="Other">Other</option>
                     </select>
-                    {/* <ArrowDown size={16} className={styles.selectArrow} /> */}
                   </div>
                 </div>
 
@@ -222,7 +232,6 @@ export default function SignUp() {
                       <option value="11-50">11-50 employees</option>
                       <option value="50+">50+ employees</option>
                     </select>
-                    {/* <ArrowDown size={16} className={styles.selectArrow} /> */}
                   </div>
                 </div>
 
@@ -265,22 +274,20 @@ export default function SignUp() {
           )}
         </div>
 
-          <div className={styles.faceGraphic}>
-                  <img src = {Intersect} alt="Nexgn Graphic" />
-                </div>
+        <div className={styles.faceGraphic}>
+          <img src={Intersect} alt="Nexgn Graphic" />
+        </div>
         
-                {/* <p className={styles.tagline}>Smart Signing</p> */}
+        <div className={styles.wordmarkSlot} aria-hidden="true">
+          <span className={styles.wordmarkRed}>Nexgn</span>
+        </div>
+      </div>
         
-                <div className={styles.wordmarkSlot} aria-hidden="true">
-                  <span className={styles.wordmarkRed}>Nexgn</span>
-                </div>
-              </div>
-        
-              <div className={styles.rightPanel}>
-                <div className={styles.wordmarkSlot} aria-hidden="true">
-                  <span className={styles.wordmarkWhite}>Nexgn</span>
-                </div>
-              </div>
+      <div className={styles.rightPanel}>
+        <div className={styles.wordmarkSlot} aria-hidden="true">
+          <span className={styles.wordmarkWhite}>Nexgn</span>
+        </div>
+      </div>
     </div>
   );
 }

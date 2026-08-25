@@ -54,11 +54,11 @@ export default function App() {
 
 
     <ToastContainer
-            position="top-center" 
+            position="top-left" 
             autoClose={2500}
             hideProgressBar={true}       /* Removes the colored bar at the bottom */
             closeButton={false}          /* Removes the 'X' icon */
-            theme="dark"
+            theme="light"
             pauseOnHover={false}
             limit={3}                    /* Prevents screen clutter */
           />
