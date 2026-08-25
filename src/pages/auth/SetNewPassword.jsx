@@ -72,7 +72,7 @@ export default function SetNewPassword() {
                 id="confirmPassword"
                 type="password"
                 className={styles.input}
-                placeholder="Re-enter new password"
+                placeholder="Confirm new password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 autoComplete="new-password"

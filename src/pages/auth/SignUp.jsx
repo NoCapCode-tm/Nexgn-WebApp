@@ -97,7 +97,7 @@ export default function SignUp() {
                     id="name"
                     type="text"
                     className={styles.input}
-                    placeholder="Your Name"
+                    placeholder="Noar Zi"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -128,7 +128,7 @@ export default function SignUp() {
                     id="password"
                     type="password"
                     className={styles.input}
-                    placeholder="Enter your password"
+                    placeholder="Create a strong password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="new-password"

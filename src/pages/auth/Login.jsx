@@ -69,6 +69,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
+                placeholder="noar@nexgn.cloud"
               />
             </div>
 
@@ -88,6 +89,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
+                placeholder="Enter your password"
               />
             </div>
 

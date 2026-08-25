@@ -49,7 +49,7 @@ const navigate = useNavigate()
                 id="email"
                 type="email"
                 className={styles.input}
-                placeholder="noar@nexgn.cloud"
+                placeholder="sofia.mart@nexgn.cloud"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
