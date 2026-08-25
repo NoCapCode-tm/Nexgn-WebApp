@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Invite-Deny.module.css";
-import AuthLayout from "../../components/layout/AuthLayout";
+import AuthLayout from "../../components/Layout/AuthLayout";
 
 export default function InviteDeny() {
   return (

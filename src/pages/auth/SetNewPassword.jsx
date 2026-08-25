@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { Eye, EyeOff } from "lucide-react"; 
 
 import styles from "./SetNewPassword.module.css";
-import AuthLayout from "../../components/layout/AuthLayout";
+import AuthLayout from "../../components/Layout/AuthLayout";
 import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
 
 export default function SetNewPassword() {

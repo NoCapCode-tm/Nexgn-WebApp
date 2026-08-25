@@ -6,7 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { API_URL } from "../../config";
 
 import styles from "./Signup.module.css";
-import AuthLayout from "../../components/layout/AuthLayout";
+import AuthLayout from "../../components/Layout/AuthLayout";
 import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
 
 export default function SignUp() {
