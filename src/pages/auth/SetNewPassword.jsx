@@ -2,15 +2,18 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./SetNewPassword.module.css";
 import axios from "axios";
-import { API_URL } from "../../config"; // Adjust path as necessary
+import { API_URL } from "../../config"; 
 import { toast } from "react-toastify";
+import { Eye, EyeOff } from "lucide-react"; // <-- Import icons
 import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
 
 export default function SetNewPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // <-- Visibility state 1
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // <-- Visibility state 2
   const navigate = useNavigate();
-  const {id} = useParams()
+  const {id} = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +39,6 @@ export default function SetNewPassword() {
 
   return (
     <div className={styles.page}>
-      {/* ---------------- Left panel ---------------- */}
       <div className={styles.leftPanel}>
         <div className={styles.logo}>
           <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,32 +55,52 @@ export default function SetNewPassword() {
               <label htmlFor="password" className={styles.label}>
                 New Password
               </label>
-              <input
-                id="password"
-                type="password"
-                className={styles.input}
-                placeholder="Enter new password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="new-password"
-                required
-              />
+              <div className={styles.passwordWrap}>
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  className={`${styles.input} ${styles.passwordInput}`}
+                  placeholder="Enter new password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="new-password"
+                  required
+                />
+                <button
+                  type="button"
+                  className={styles.passwordToggleBtn}
+                  onClick={() => setShowPassword(!showPassword)}
+                  tabIndex="-1"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
 
             <div className={styles.field}>
               <label htmlFor="confirmPassword" className={styles.label}>
                 Confirm Password
               </label>
-              <input
-                id="confirmPassword"
-                type="password"
-                className={styles.input}
-                placeholder="Confirm new password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                autoComplete="new-password"
-                required
-              />
+              <div className={styles.passwordWrap}>
+                <input
+                  id="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  className={`${styles.input} ${styles.passwordInput}`}
+                  placeholder="Confirm new password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  autoComplete="new-password"
+                  required
+                />
+                <button
+                  type="button"
+                  className={styles.passwordToggleBtn}
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  tabIndex="-1"
+                >
+                  {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
 
             <PasswordStrengthMeter password={password} />
@@ -100,14 +122,11 @@ export default function SetNewPassword() {
           <img src="./Intersect.png" alt="Nexgn Graphic" />
         </div>
 
-        {/* <p className={styles.tagline}>Smart Signing</p> */}
-
         <div className={styles.wordmarkSlot} aria-hidden="true">
           <span className={styles.wordmarkRed}>Nexgn</span>
         </div>
       </div>
 
-      {/* ---------------- Right panel ---------------- */}
       <div className={styles.rightPanel}>
         <div className={styles.wordmarkSlot} aria-hidden="true">
           <span className={styles.wordmarkWhite}>Nexgn</span>

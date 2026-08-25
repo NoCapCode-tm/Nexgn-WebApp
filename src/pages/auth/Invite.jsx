@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../config";
-import { PartyPopper } from "lucide-react";
+import { PartyPopper, Eye, EyeOff } from "lucide-react"; // <-- Import icons
 import styles from "./LoginPage.module.css";
 import Intersect from '../../assets/Intersect.png'; 
 import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
@@ -11,6 +11,7 @@ export default function Invite() {
   const { email } = useParams();
   const [step, setStep] = useState(1);
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // <-- Visibility state
   const navigate = useNavigate();
 
   const handleJoin = async (e) => {
@@ -39,7 +40,6 @@ export default function Invite() {
 
   return (
     <div className={styles.page}>
-      {/* ---------------- Left panel ---------------- */}
       <div className={styles.leftPanel}>
         <div className={styles.logo}>
           <svg
@@ -61,7 +61,6 @@ export default function Invite() {
           {step === 1 ? (
             <>
               <div className={styles.titleRow}>
-                {/* <Users size={28} className={styles.titleIcon} /> */}
                 <h1 className={styles.title}>You've been invited</h1>
               </div>
               <p className={styles.subtitle}>Set a password to join Workspace</p>
@@ -86,27 +85,29 @@ export default function Invite() {
                     <label htmlFor="password" className={styles.label}>
                       Password
                     </label>
-                    {/* <a
-                      href="#forgot"
-                      className={styles.forgotLink}
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Forgot password?
-                    </a> */}
                   </div>
-                  <input
-                    id="password"
-                    type="password"
-                    className={styles.input}
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="new-password"
-                    required
-                  />
+                  <div className={styles.passwordWrap}>
+                    <input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      className={`${styles.input} ${styles.passwordInput}`}
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      autoComplete="new-password"
+                      required
+                    />
+                    <button
+                      type="button"
+                      className={styles.passwordToggleBtn}
+                      onClick={() => setShowPassword(!showPassword)}
+                      tabIndex="-1"
+                    >
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
                 </div>
 
-                {/* DROP THE METER HERE */}
                 <PasswordStrengthMeter password={password} />
 
                 <button type="submit" className={styles.loginButton}>
@@ -134,10 +135,8 @@ export default function Invite() {
         </div>
 
         <div className={styles.faceGraphic}>
-          <img src = {Intersect} alt="Nexgn Graphic" />
+          <img src={Intersect} alt="Nexgn Graphic" />
         </div>
-
-        {/* <p className={styles.tagline}>Smart Signing</p> */}
 
         <div className={styles.wordmarkSlot} aria-hidden="true">
           <span className={styles.wordmarkRed}>Nexgn</span>
