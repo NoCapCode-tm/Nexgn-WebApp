@@ -233,22 +233,34 @@ export default function SignUp() {
             </>
           )}
 
-          {/* ---------------- Step 3: success ---------------- */}
+          {/* ---------------- Step 3: success ---------------- */}   
           {step === 3 && (
             <>
               <div className={styles.titleRow}>
-                {/* <PartyPopper size={28} className={styles.successIcon} /> */}
-                <h1 className={styles.title}>Account created</h1>
+                <h1 
+                  className={styles.title} 
+                  style={{ lineHeight: "1.2", marginBottom: "16px" }}
+                >
+                  Your sign-in has been completed successfully.
+                </h1>
               </div>
-              <p className={styles.subtitle}>
-                You're now the admin of your Nexgn workspace
+              <p 
+                className={styles.subtitle} 
+                style={{ lineHeight: "1.5", fontSize: "20px", fontWeight: "400" }}
+              >
+                Please check your registered email inbox to verify your email address. Once verified, your dashboard will be activated and ready for use.
               </p>
 
-              <form className={styles.form} onSubmit={handleStep3Submit}>
-                <button type="submit" className={styles.loginButton}>
-                  Go to Dashboard
+              <div className={styles.form}>
+                <button 
+                  type="button" 
+                  className={styles.outlineButton}
+                  onClick={() => navigate("/login")}
+                >
+                  <span className={styles.btnTextBlack}>Back to</span> 
+                  <span className={styles.btnTextRed}>Login</span>
                 </button>
-              </form>
+              </div>
             </>
           )}
         </div>
