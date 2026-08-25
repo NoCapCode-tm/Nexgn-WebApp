@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../../config";
-import { Eye, EyeOff } from "lucide-react"; // <-- Import icons
-import styles from "./Signup.module.css";
 import { toast } from "react-toastify";
-import Intersect from '../../assets/Intersect.png'; 
+import { Eye, EyeOff } from "lucide-react"; 
+import { API_URL } from "../../config";
+
+import styles from "./Signup.module.css";
+import AuthLayout from "../../components/layout/AuthLayout";
 import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
 
 export default function SignUp() {
@@ -15,7 +16,7 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // <-- Add state
+  const [showPassword, setShowPassword] = useState(false);
 
   // Step 2 state
   const [companyName, setCompanyName] = useState("");
@@ -26,7 +27,7 @@ export default function SignUp() {
 
   const handleStep1Submit = (e) => {
     e.preventDefault();
-    toast.success("Step 1 Completed Successfully")
+    toast.success("Step 1 Completed Successfully");
     setStep(2);
   };
 
@@ -46,7 +47,7 @@ export default function SignUp() {
         { withCredentials: true }
       );
       console.log(response.data.message);
-      toast.success("Step 2 Completed Successfully")
+      toast.success("Step 2 Completed Successfully");
       setStep(3);
     } catch (error) {
       console.log("Something went wrong", error.message);
@@ -56,238 +57,206 @@ export default function SignUp() {
   const handleStep3Submit = (e) => {
     e.preventDefault();
     localStorage.setItem("theme", "light");
-    toast.success("Account Created Successfully")
+    toast.success("Account Created Successfully");
     navigate("/");
   };
 
   return (
-    <div className={styles.page}>
-      {/* ---------------- Left panel ---------------- */}
-      <div className={styles.leftPanel}>
-        <div className={styles.logo}>
-          <svg
-            width="51"
-            height="51"
-            viewBox="0 0 51 51"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className={styles.logoMark}
-          >
-            <path
-              d="M41 0C46.5228 0 51 4.47715 51 10V41C51 41.7841 50.906 42.5462 50.7354 43.2783L39.0234 31.8213C37.0495 29.8907 33.8666 29.908 31.9141 31.8604L30.5977 33.1777C28.6453 35.1302 28.6622 38.278 30.6357 40.209L41.6436 50.9766C41.4307 50.9901 41.2163 51 41 51H10C9.49485 51 8.99869 50.961 8.51367 50.8887L40.1865 19.9062C42.1604 17.9754 42.1777 14.8277 40.2256 12.875L38.9092 11.5576C36.9566 9.60506 33.7728 9.58757 31.7988 11.5186L0.113281 42.5127C0.0384312 42.0194 8.24792e-09 41.5142 0 41V10C0 9.76522 0.0104491 9.53249 0.0263672 9.30176L11.9219 20.9385C13.8959 22.8689 17.0788 22.8517 19.0312 20.8994L20.3477 19.583C22.3001 17.6306 22.283 14.4818 20.3096 12.5508L7.74316 0.257812C8.46859 0.0904411 9.22373 1.24512e-08 10 0H41Z"
-              fill="#FF0915"
-            />
-          </svg>
-        </div>
+    <AuthLayout>
+      <div className={styles.formWrap} style={{ marginTop: "30px" }}>
+        
+        {/* ---------------- Step 1: account details ---------------- */}
+        {step === 1 && (
+          <>
+            <div className={styles.titleRow}>
+              <h1 className={styles.title}>Create an account</h1>
+            </div>
+            <p className={styles.subtitle}>Sign up to get started with Nexgn</p>
 
-        <div className={styles.formWrap} style={{marginTop:"30px"}}>
-          {/* ---------------- Step 1: account details ---------------- */}
-          {step === 1 && (
-            <>
-              <div className={styles.titleRow} >
-                <h1 className={styles.title}>Create an account</h1>
+            <form className={styles.form} onSubmit={handleStep1Submit}>
+              <div className={styles.field}>
+                <label htmlFor="name" className={styles.label}>
+                  Full Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  className={styles.input}
+                  placeholder="Noar Zi"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
               </div>
-              <p className={styles.subtitle}>Sign up to get started with Nexgn</p>
 
-              <form className={styles.form} onSubmit={handleStep1Submit}>
-                <div className={styles.field}>
-                  <label htmlFor="name" className={styles.label}>
-                    Full Name
-                  </label>
+              <div className={styles.field}>
+                <label htmlFor="email" className={styles.label}>
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  className={styles.input}
+                  placeholder="martin@acme.corp"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="email"
+                  required
+                />
+              </div>
+
+              <div className={styles.field}>
+                <label htmlFor="password" className={styles.label}>
+                  Password
+                </label>
+                <div className={styles.passwordWrap}>
                   <input
-                    id="name"
-                    type="text"
-                    className={styles.input}
-                    placeholder="Noar Zi"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    className={`${styles.input} ${styles.passwordInput}`}
+                    placeholder="Create a strong password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="new-password"
                     required
                   />
+                  <button
+                    type="button"
+                    className={styles.passwordToggleBtn}
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    tabIndex="-1"
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
                 </div>
-
-                <div className={styles.field}>
-                  <label htmlFor="email" className={styles.label}>
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    className={styles.input}
-                    placeholder="martin@acme.corp"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="email"
-                    required
-                  />
-                </div>
-
-                <div className={styles.field}>
-                  <label htmlFor="password" className={styles.label}>
-                    Password
-                  </label>
-                  {/* <-- Wrap input and toggle button --> */}
-                  <div className={styles.passwordWrap}>
-                    <input
-                      id="password"
-                      type={showPassword ? "text" : "password"}
-                      className={`${styles.input} ${styles.passwordInput}`}
-                      placeholder="Create a strong password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      autoComplete="new-password"
-                      required
-                    />
-                    <button
-                      type="button"
-                      className={styles.passwordToggleBtn}
-                      onClick={() => setShowPassword(!showPassword)}
-                      aria-label={showPassword ? "Hide password" : "Show password"}
-                      tabIndex="-1" // keeps it out of standard tab flow if desired
-                    >
-                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                  </div>
-                </div>
-
-                {/* DROP THE METER HERE */}
-                <PasswordStrengthMeter password={password} />
-
-                <button type="submit" className={styles.loginButton}>
-                  Sign Up
-                </button>
-
-                <p className={styles.signupText}>
-                  Have an account?{" "}
-                  <Link to="/login" className={styles.signupLink}>
-                    Log in
-                  </Link>
-                </p>
-              </form>
-            </>
-          )}
-
-          {/* ---------------- Step 2: company details ---------------- */}
-          {step === 2 && (
-            <>
-              <div className={styles.titleRow}>
-                <h1 className={styles.title}>Your company</h1>
               </div>
-              <p className={styles.subtitle}>Tell us about your company</p>
 
-              <form className={styles.form} onSubmit={handleStep2Submit}>
-                <div className={styles.field}>
-                  <label htmlFor="companyName" className={styles.label}>
-                    Company Name
-                  </label>
-                  <input
-                    id="companyName"
-                    type="text"
-                    className={styles.input}
-                    placeholder="Acme Corp"
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
-                    required
-                  />
-                </div>
+              <PasswordStrengthMeter password={password} />
 
-                <div className={styles.field}>
-                  <label htmlFor="industry" className={styles.label}>
-                    Industry (Optional)
-                  </label>
-                  <div className={styles.selectWrap}>
-                    <select
-                      id="industry"
-                      className={`${styles.input} ${styles.select}`}
-                      value={industry}
-                      onChange={(e) => setIndustry(e.target.value)}
-                    >
-                      <option value="" disabled hidden>
-                        Select industry
-                      </option>
-                      <option value="Technology">Technology</option>
-                      <option value="Finance">Finance</option>
-                      <option value="Healthcare">Healthcare</option>
-                      <option value="Education">Education</option>
-                      <option value="Real Estate">Real Estate</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                </div>
+              <button type="submit" className={styles.loginButton}>
+                Sign Up
+              </button>
 
-                <div className={styles.field}>
-                  <label htmlFor="teamSize" className={styles.label}>
-                    Team Size (Optional)
-                  </label>
-                  <div className={styles.selectWrap}>
-                    <select
-                      id="teamSize"
-                      className={`${styles.input} ${styles.select}`}
-                      value={teamSize}
-                      onChange={(e) => setTeamSize(e.target.value)}
-                    >
-                      <option value="" disabled hidden>
-                        Select team size
-                      </option>
-                      <option value="1-10">1-10 employees</option>
-                      <option value="11-50">11-50 employees</option>
-                      <option value="50+">50+ employees</option>
-                    </select>
-                  </div>
-                </div>
-
-                <button type="submit" className={styles.loginButton}>
-                  Continue Dashboard
-                </button>
-              </form>
-            </>
-          )}
-
-          {/* ---------------- Step 3: success ---------------- */}   
-          {step === 3 && (
-            <>
-              <div className={styles.titleRow}>
-                <h1 
-                  className={styles.title} 
-                  style={{ lineHeight: "1.2", marginBottom: "16px" }}
-                >
-                  Your sign-in has been completed successfully.
-                </h1>
-              </div>
-              <p 
-                className={styles.subtitle} 
-                style={{ lineHeight: "1.5", fontSize: "20px", fontWeight: "400" }}
-              >
-                Please check your registered email inbox to verify your email address. Once verified, your dashboard will be activated and ready for use.
+              <p className={styles.signupText}>
+                Have an account?{" "}
+                <Link to="/login" className={styles.signupLink}>
+                  Log in
+                </Link>
               </p>
+            </form>
+          </>
+        )}
 
-              <div className={styles.form}>
-                <button 
-                  type="button" 
-                  className={styles.outlineButton}
-                  onClick={() => navigate("/login")}
-                >
-                  <span className={styles.btnTextBlack}>Back to</span> 
-                  <span className={styles.btnTextRed}>Login</span>
-                </button>
+        {/* ---------------- Step 2: company details ---------------- */}
+        {step === 2 && (
+          <>
+            <div className={styles.titleRow}>
+              <h1 className={styles.title}>Your company</h1>
+            </div>
+            <p className={styles.subtitle}>Tell us about your company</p>
+
+            <form className={styles.form} onSubmit={handleStep2Submit}>
+              <div className={styles.field}>
+                <label htmlFor="companyName" className={styles.label}>
+                  Company Name
+                </label>
+                <input
+                  id="companyName"
+                  type="text"
+                  className={styles.input}
+                  placeholder="Acme Corp"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  required
+                />
               </div>
-            </>
-          )}
-        </div>
 
-        <div className={styles.faceGraphic}>
-          <img src={Intersect} alt="Nexgn Graphic" />
-        </div>
-        
-        <div className={styles.wordmarkSlot} aria-hidden="true">
-          <span className={styles.wordmarkRed}>Nexgn</span>
-        </div>
+              <div className={styles.field}>
+                <label htmlFor="industry" className={styles.label}>
+                  Industry (Optional)
+                </label>
+                <div className={styles.selectWrap}>
+                  <select
+                    id="industry"
+                    className={`${styles.input} ${styles.select}`}
+                    value={industry}
+                    onChange={(e) => setIndustry(e.target.value)}
+                  >
+                    <option value="" disabled hidden>
+                      Select industry
+                    </option>
+                    <option value="Technology">Technology</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Education">Education</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className={styles.field}>
+                <label htmlFor="teamSize" className={styles.label}>
+                  Team Size (Optional)
+                </label>
+                <div className={styles.selectWrap}>
+                  <select
+                    id="teamSize"
+                    className={`${styles.input} ${styles.select}`}
+                    value={teamSize}
+                    onChange={(e) => setTeamSize(e.target.value)}
+                  >
+                    <option value="" disabled hidden>
+                      Select team size
+                    </option>
+                    <option value="1-10">1-10 employees</option>
+                    <option value="11-50">11-50 employees</option>
+                    <option value="50+">50+ employees</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" className={styles.loginButton}>
+                Continue Dashboard
+              </button>
+            </form>
+          </>
+        )}
+
+        {/* ---------------- Step 3: success ---------------- */}   
+        {step === 3 && (
+          <>
+            <div className={styles.titleRow}>
+              <h1 
+                className={styles.title} 
+                style={{ lineHeight: "1.2", marginBottom: "16px" }}
+              >
+                Locked and loaded.
+              </h1>
+            </div>
+            <p 
+              className={styles.subtitle} 
+              style={{ lineHeight: "1.5", fontSize: "20px", fontWeight: "400" }}
+            >
+              Your Nexgn workspace is ready. We just sent a quick verification<br />
+              link to your inbox. Give it a click to activate your<br />
+              dashboard. See you on the inside.
+            </p>
+
+            <div className={styles.form}>
+              <button 
+                type="button" 
+                className={styles.outlineButton}
+                onClick={() => navigate("/login")}
+              >
+                <span className={styles.btnTextBlack}>Back to</span> 
+                <span className={styles.btnTextRed}>Login</span>
+              </button>
+            </div>
+          </>
+        )}
       </div>
-        
-      <div className={styles.rightPanel}>
-        <div className={styles.wordmarkSlot} aria-hidden="true">
-          <span className={styles.wordmarkWhite}>Nexgn</span>
-        </div>
-      </div>
-    </div>
+    </AuthLayout>
   );
 }
