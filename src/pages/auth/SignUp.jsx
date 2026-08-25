@@ -112,7 +112,7 @@ export default function SignUp() {
                     id="email"
                     type="email"
                     className={styles.input}
-                    placeholder="name@company.com"
+                    placeholder="martin@acme.corp"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     autoComplete="email"
