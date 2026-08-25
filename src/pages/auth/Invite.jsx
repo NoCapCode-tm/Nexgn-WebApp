@@ -5,6 +5,7 @@ import { API_URL } from "../../config";
 import { PartyPopper } from "lucide-react";
 import styles from "./LoginPage.module.css";
 import Intersect from '../../assets/Intersect.png'; 
+import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
 
 export default function Invite() {
   const { email } = useParams();
@@ -104,6 +105,9 @@ export default function Invite() {
                     required
                   />
                 </div>
+
+                {/* DROP THE METER HERE */}
+                <PasswordStrengthMeter password={password} />
 
                 <button type="submit" className={styles.loginButton}>
                   Join Workspace

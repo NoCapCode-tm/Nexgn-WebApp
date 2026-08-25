@@ -4,6 +4,7 @@ import styles from "./SetNewPassword.module.css";
 import axios from "axios";
 import { API_URL } from "../../config"; // Adjust path as necessary
 import { toast } from "react-toastify";
+import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
 
 export default function SetNewPassword() {
   const [password, setPassword] = useState("");
@@ -79,6 +80,8 @@ export default function SetNewPassword() {
                 required
               />
             </div>
+
+            <PasswordStrengthMeter password={password} />
 
             <button type="submit" className={styles.loginButton}>
               Update Password
