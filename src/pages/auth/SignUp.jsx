@@ -6,6 +6,7 @@ import { API_URL } from "../../config";
 import styles from "./Signup.module.css";
 import { toast } from "react-toastify";
 import Intersect from '../../assets/Intersect.png'; 
+import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
 
 export default function SignUp() {
   const [step, setStep] = useState(1);
@@ -135,6 +136,9 @@ export default function SignUp() {
                     required
                   />
                 </div>
+
+                {/* DROP THE METER HERE */}
+                <PasswordStrengthMeter password={password} />
 
                 <button type="submit" className={styles.loginButton}>
                   Sign Up
