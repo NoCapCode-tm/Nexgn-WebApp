@@ -2,24 +2,24 @@ import {  Routes, Route, Navigate } from "react-router-dom";
 
 
 
-import Invite from "./login-signup/pages/Invite";
-import Login from "./login-signup/pages/Login";
-import SignUp from "./login-signup/pages/SignUp";
-import ForgotPassword from "./login-signup/pages/ForgotPassword";
-import SetNewPassword from "./login-signup/pages/SetNewPassword";
+import Invite from "./pages/auth/Invite";
+import Login from "./pages/auth/Login";
+import SignUp from "./pages/auth/SignUp";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import SetNewPassword from "./pages/auth/SetNewPassword";
 
 /* ADMIN MODULE */
-import Dashboard from "./admin/pages/Dashboard";
-import SignYourself from "./admin/pages/SignYourself";
-import Documents from "./admin/pages/Documents";
-import ContactBook from "./admin/pages/ContactBook";
-import Settings from "./admin/pages/Settings";
-import TemplatesPage from "./admin/pages/TemplatesPage";
+import Dashboard from "./pages/dashboard/Dashboard";
+import SignYourself from "./pages/documents/SignYourself";
+import Documents from "./pages/documents/Documents";
+import ContactBook from "./pages/contacts/ContactBook";
+import Settings from "./pages/settings/Settings";
+import TemplatesPage from "./pages/templates/TemplatesPage";
 
-import useSystemTheme from "./login-signup/hooks/useSystemTheme";
-import ProtectedRoute from "./ProtectedRoute";
-import TemplateView from "./admin/pages/Templateview";
-import SignDocument from "./admin/pages/SignDocument";
+import useSystemTheme from "./hooks/useSystemTheme";
+import ProtectedRoute from "./components/routing/ProtectedRoute";
+import TemplateView from "./pages/templates/Templateview";
+import SignDocument from "./pages/documents/SignDocument";
 import { ToastContainer } from "react-toastify";
 
 export default function App() {
