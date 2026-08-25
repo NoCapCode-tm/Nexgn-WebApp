@@ -7,6 +7,7 @@ import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import SetNewPassword from "./pages/auth/SetNewPassword";
+import InviteDeny from "./pages/auth/Invite-Deny";
 
 /* ADMIN MODULE */
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -33,6 +34,7 @@ export default function App() {
       <Route path="/verify/:id" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot" element={<ForgotPassword />} />
+      <Route path="/invite-deny" element={<InviteDeny />} />
       <Route path="/reset/:id" element={<SetNewPassword />} />
 
       {/* ADMIN ROUTES */}
