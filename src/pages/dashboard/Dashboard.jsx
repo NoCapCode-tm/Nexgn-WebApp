@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import Topbar from "../../components/Layout/Topbar";
 import StatCard from "../../components/ui/StatCard";
-import DocumentRow from "../../components/ui/DocumentsRow";
+import DocumentRow from "../documents/DocumentRow";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import "../../styles/BaseLayout.css";
 import "./Dashboard.css";
