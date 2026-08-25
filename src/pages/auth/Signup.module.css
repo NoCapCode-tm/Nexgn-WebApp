@@ -1,54 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
-
-.page {
-  --rp-width: 200px;
-  --rp-height: 100%;
-  --wm-size: clamp(80px, 30vh, 220px);
-
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;
-  background: #ffffff;
-  overflow: hidden;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-}
-
-.leftPanel {
-  position: relative;
-  flex: 1;
-  min-width: 0;
-  min-height: 100%;
-  overflow: hidden;
-  background: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.logo {
-  margin-top: 40px;
-  color: #FF0915;
-  margin-left: 200px;
-}
-
-.logoMark {
-  width: 44px;
-  height: 44px;
-}
 
 .formWrap {
   width: 100%;
   max-width: 440px;
   margin-top: 56px;
-  /* margin-right: 150px; */
   z-index: 2;
 }
 
 .title {
-font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 45px;
   font-weight: 700;
   color: #FF0915;
@@ -100,9 +60,8 @@ font-family: "Plus Jakarta Sans", sans-serif;
 
 .input {
   height: 44px;
-  /* width: 100%; Note: Keep this if you are updating Signup.module.css */
   padding: 0 14px;
-  background: #ffffff; /* <-- Add this line to force a white background */
+  background: #ffffff; 
   border: 1px solid #d9d9d9;
   border-radius: 6px;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -117,19 +76,62 @@ font-family: "Plus Jakarta Sans", sans-serif;
   border-color: #FF0915;
 }
 
-/* Add this to your global CSS or bottom of your module CSS */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active {
-    /* Forces the background to be white */
-    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
-    /* Forces the text color to stay dark */
-    -webkit-text-fill-color: #1a1a1a !important;
-    /* A hack to remove the background color transition */
-    transition: background-color 5000s ease-in-out 0s !important;
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  transition: background-color 5000s ease-in-out 0s !important;
 }
 
+/* ---------------- Password Toggle ---------------- */
+.passwordWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.passwordInput {
+  width: 100%;
+  padding-right: 44px; 
+}
+
+.passwordToggleBtn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8A949F;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.passwordToggleBtn:hover {
+  color: #FF0915;
+}
+
+/* ---------------- Select Box ---------------- */
+.selectWrap {
+  position: relative;
+  width: 100%;
+}
+
+.select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  background: #ffffff;
+}
+
+/* ---------------- Buttons & Links ---------------- */
 .loginButton {
   margin-top: 8px;
   height: 48px;
@@ -170,174 +172,7 @@ input:-webkit-autofill:active {
   text-decoration: underline;
 }
 
-/* ---------------- Face / visor graphic ---------------- */
-
-.faceGraphic {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 35%;
-  /* max-width: 380px; */
-  pointer-events: none;
-}
-
-.faceGraphic img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.tagline {
-  font-size: 40px;
-  letter-spacing: 1px;
-  font-weight: 400;
-  font-family: "MuseoModerno", sans-serif;
-  color: #FF0915;
-  margin-top: 120px;
-  margin-left: 200px;
-  z-index: 2;
-}
-
-/* ---------------- Right panel ---------------- */
-
-.rightPanel {
-  position: relative;
-  flex-shrink: 0;
-  width: var(--rp-width);
-  min-height: 100%;
-  background: #FF0915;
-  overflow: hidden;
-}
-
-/*
-  Vertical "nexgn" wordmark that straddles the leftPanel/rightPanel
-  seam. Each panel hosts a 0×0 slot pinned to that shared edge; both
-  copies then use the identical transform so they stay locked together
-  at any viewport size. overflow: hidden on each panel clips its copy
-  to its own side, producing the red/white split.
-*/
-.wordmarkSlot {
-  position: absolute;
-  top: 50%;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.leftPanel > .wordmarkSlot {
-  right: 0;
-}
-
-.rightPanel > .wordmarkSlot {
-  left: 0;
-}
-
-.wordmarkRed,
-.wordmarkWhite {
-  position: absolute;
-  top: 0;
-  left: -14px;
-  margin: 0;
-  padding: 0;
-  font-family: "MuseoModerno", sans-serif;
-  font-size: var(--wm-size);
-  font-weight: 400;
-  letter-spacing: 0.027em;
-  line-height: 1;
-  white-space: nowrap;
-  user-select: none;
-  transform: translate(-50%, -50%) rotate(-90deg);
-  transform-origin: center;
-}
-
-.wordmarkRed {
-  color: #FF0915;
-}
-
-.wordmarkWhite {
-  color: #ffffff;
-}
-
-
-@media (max-width: 972px){
-  .formWrap{
-    margin-right: 0px;
-  }
-  .tagline{
-    margin-left: 100px;
-  }
-}
-
-@media (max-width: 768px){
-  .formWrap{
-    width:70%;
-  }
-  .tagline{
-    display:none;
-  }
-}
-@media (max-width: 768px){
-  .page {
-    --rp-width: 65px;
-    --rp-height: 220px;
-    --wm-size: 60px;
-  }
-  .wordmarkRed,
-.wordmarkWhite{
-  left:-4px;
-}
-
-  .rightPanel{
-    width: var(--rp-width);
-    height: var(--rp-height);
-    align-self: flex-end;
-    min-height: 0;
-  }
-
-  .leftPanel > .wordmarkSlot {
-    top: auto;
-    bottom: calc(var(--rp-height) / 2);
-  }
-
-  .leftPanel{
-    padding-left:20px;
-    padding-right:10px;
-  }
-  .formWrap{
-    width:100%;
-  }
-  .tagline{
-    display: none;
-  }
-  .logo{
-    margin-left: 65px;
-  }
-  .title{
-    font-size: 36px;
-  }
-  .subtitle{
-    font-size: 16px;
-  }
-}
-@media (max-width: 425px){
-  .faceGraphic{
-    width:48%;
-  }
-  .title{
-    font-size: 30px;
-  }
-  .subtitle{
-    font-size: 16px;
-    margin: 6px 0 22px;
-  }
-  .formWrap{
-    margin-top: 20px;
-  }
-}
-
 /* ---------------- Outline Button (Step 3) ---------------- */
-
 .outlineButton {
   margin-top: 8px;
   height: 48px;
@@ -370,34 +205,34 @@ input:-webkit-autofill:active {
   color: #FF0915;
 }
 
-/* ---------------- Password Toggle ---------------- */
-
-.passwordWrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
+/* ---------------- Responsive Rules ---------------- */
+@media (max-width: 972px){
+  .formWrap{
+    margin-right: 0px;
+  }
 }
 
-.passwordInput {
-  width: 100%;
-  padding-right: 44px; /* Ensure text doesn't overlap the eye icon */
+@media (max-width: 768px){
+  .formWrap{
+    width:70%;
+  }
 }
 
-.passwordToggleBtn {
-  position: absolute;
-  right: 12px;
-  background: none;
-  border: none;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #8A949F;
-  cursor: pointer;
-  transition: color 0.15s ease;
+@media (max-width: 660px){
+  .formWrap{
+    width:100%;
+  }
 }
 
-.passwordToggleBtn:hover {
-  color: #FF0915;
+@media (max-width: 425px){
+  .title{
+    font-size: 30px;
+  }
+  .subtitle{
+    font-size: 16px;
+    margin: 6px 0 22px;
+  }
+  .formWrap{
+    margin-top: 20px;
+  }
 }
