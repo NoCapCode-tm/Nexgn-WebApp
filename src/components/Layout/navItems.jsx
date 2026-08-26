@@ -79,8 +79,8 @@ export const NexgnLogo = () => (
 export const NexgnLogoLight = () => (
         <svg 
           className="brand-logo-img brand-logo-img--dark" 
-            width="100%" 
-            height="100%" 
+            width="240" 
+            height="70" 
             viewBox="0 0 194 67" 
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
@@ -94,8 +94,8 @@ export const NexgnLogoLight = () => (
 export const NexgnLogoDark = () => (
         <svg 
           className="brand-logo-img brand-logo-img--dark" 
-            width="100%" 
-            height="100%" 
+            width="240" 
+            height="70" 
             viewBox="0 0 194 67" 
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
