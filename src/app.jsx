@@ -38,12 +38,12 @@ export default function App() {
       <Route path="/invite-deny" element={<InviteDeny />} />
       <Route path="/reset/:id" element={<SetNewPassword />} />
 
+    <Route path="/pricing" element={<Pricing />} />
       {/* ADMIN ROUTES */}
       
       <Route element={<ProtectedRoute />}>
     <Route path="/dashboard" element={<Dashboard />} />
-    <Route path="/pricing" element={<Pricing />}
-/>
+    
     <Route path="/documents" element={<Documents />} />
     <Route path="/sign-yourself" element={<SignYourself />} />
     <Route path="/request-signature" element={<SignYourself />} />
@@ -53,7 +53,7 @@ export default function App() {
     <Route path="/templates-view" element={<TemplateView/>} />
     
   </Route>
-  <Route path="/document/:id" element={<SignDocument/>} />
+      <Route path="/document/:id" element={<SignDocument/>} />
       <Route path="*" element={<Navigate to="/" replace />} /> 
     </Routes>
 
