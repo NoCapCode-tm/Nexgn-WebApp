@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { API_URL } from "../../config"; 
 
 import styles from "./ForgotPassword.module.css";
-import AuthLayout from "../../components/layout/AuthLayout";
+import AuthLayout from "../../components/Layout/AuthLayout";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");

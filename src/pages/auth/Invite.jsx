@@ -4,7 +4,7 @@ import axios from "axios";
 import { API_URL } from "../../config";
 import { PartyPopper, Eye, EyeOff } from "lucide-react"; 
 import styles from "./LoginPage.module.css";
-import AuthLayout from "../../components/layout/AuthLayout";
+import AuthLayout from "../../components/Layout/AuthLayout";
 import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
 
 export default function Invite() {

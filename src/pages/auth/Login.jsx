@@ -6,7 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { API_URL } from "../../config";
 
 import styles from "./LoginPage.module.css";
-import AuthLayout from "../../components/layout/AuthLayout";
+import AuthLayout from "../../components/Layout/AuthLayout";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
