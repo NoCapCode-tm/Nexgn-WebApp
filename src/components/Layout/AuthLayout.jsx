@@ -8,6 +8,7 @@ export default function AuthLayout({ children }) {
       {/* ---------------- Left panel ---------------- */}
       <div className={styles.leftPanel}>
         <div className={styles.logo}>
+          <a href="https://nexgn.cloud">
           <svg
             width="51"
             height="51"
@@ -21,6 +22,7 @@ export default function AuthLayout({ children }) {
               fill="#FF0915"
             />
           </svg>
+          </a>
         </div>
 
         {/* ---------------- Injected Form Content ---------------- */}
