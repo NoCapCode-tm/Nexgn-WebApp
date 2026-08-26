@@ -98,7 +98,9 @@ export default function TopbarIcons({
 
       <div className="topbar__icon-wrapper">
         <button style={{width:"40px",height:"40px", borderRadius:"50%", overflow:"hidden",border:"1px solid red"}}>
-          {user?.profile_picture ?<img src ={user?.profile_picture}  width="100%" height="100%" />:<UserCircle size={iconSize} color="#FF0915" strokeWidth={1.5} />}
+          {user?.profile_picture ?<img src ={user?.profile_picture}  width="100%" height="100%" />:<UserCircle width="100%" 
+            height="100%" color="#FF0915" strokeWidth={1} />}
+          
         </button>
         <div className="notification-dropdown profile-dropdown">
           <div className="notification-dropdown__header profile-dropdown__header">
