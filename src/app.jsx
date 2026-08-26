@@ -22,6 +22,7 @@ import ProtectedRoute from "./components/routing/ProtectedRoute";
 import TemplateView from "./pages/templates/Templateview";
 import SignDocument from "./pages/documents/SignDocument";
 import { ToastContainer } from "react-toastify";
+import Pricing from "./pages/pricing/pricing";
 
 export default function App() {
   useSystemTheme();
@@ -41,6 +42,8 @@ export default function App() {
       
       <Route element={<ProtectedRoute />}>
     <Route path="/dashboard" element={<Dashboard />} />
+    <Route path="/pricing" element={<Pricing />}
+/>
     <Route path="/documents" element={<Documents />} />
     <Route path="/sign-yourself" element={<SignYourself />} />
     <Route path="/request-signature" element={<SignYourself />} />
