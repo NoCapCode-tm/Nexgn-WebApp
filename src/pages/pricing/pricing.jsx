@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 import { API_URL, RAZORPAY_ID } from "../../config";
-import "./Pricing.css";
+import "./pricing.css";
 
 const loadRazorpay = () => {
   return new Promise((resolve) => {
