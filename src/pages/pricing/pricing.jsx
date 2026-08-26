@@ -155,7 +155,7 @@ export default function Pricing() {
         },
 
         theme: {
-          color: "#FF0915",
+          color: "#FEDFDD",
         },
 
         handler: async function (razorpayResponse) {
