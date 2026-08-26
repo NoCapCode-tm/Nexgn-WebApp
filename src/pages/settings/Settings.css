@@ -4417,3 +4417,100 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
     justify-content: space-between !important;
   }
 }
+
+
+/* 2fa */
+.admin-2fa-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+}
+
+.admin-2fa-modal {
+  width: min(440px, calc(100% - 32px));
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+
+  text-align: center;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.admin-2fa-modal h2 {
+  margin: 0 0 10px;
+}
+
+.admin-2fa-modal p {
+  color: #666;
+  line-height: 1.5;
+}
+
+.admin-2fa-qr {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.admin-2fa-qr img {
+  width: 220px;
+  height: 220px;
+}
+
+.admin-2fa-helper {
+  font-size: 13px;
+}
+
+.admin-2fa-manual {
+  margin-top: 20px;
+  padding: 12px;
+
+  background: #f5f5f5;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-2fa-manual code {
+  word-break: break-all;
+  font-size: 12px;
+}
+
+.admin-2fa-modal input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 14px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  font-size: 24px;
+  letter-spacing: 8px;
+  text-align: center;
+
+  margin: 25px 0;
+}
+
+.admin-2fa-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 25px;
+}
+
+.admin-2fa-actions button {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

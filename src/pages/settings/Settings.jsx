@@ -34,6 +34,7 @@ import { API_URL } from "../../config";
 
 import AvatarImg from "../../assets/Avatar.png";
 import axios from "axios";
+import { toast } from "react-toastify";
 const DEFAULT_AVATAR = AvatarImg;
 
 const settingsNavItems = [
@@ -142,7 +143,7 @@ export default function Settings() {
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
-    enable2FA: true,
+    enable2FA:false,
   });
 
   const [teamMembers, setTeamMembers] = useState([]);
@@ -221,6 +222,80 @@ const handleAvatarUpload = (e) => {
       console.log("Something went wrong",error.message)
     }
   }
+
+  // 2fa
+  const [show2FAOverlay, setShow2FAOverlay] = useState(false);
+const [qrCode, setQrCode] = useState("");
+const [twoFASecret, setTwoFASecret] = useState("");
+const [showOTPInput, setShowOTPInput] = useState(false);
+const [otp, setOtp] = useState("");
+const [twoFALoading, setTwoFALoading] = useState(false);
+
+const handle2FAToggle = async (e) => {
+  const enabled = e.target.checked;
+
+  // If user is trying to enable 2FA
+  if (enabled) {
+    try {
+      setTwoFALoading(true);
+
+      const response = await axios.get(
+        `${API_URL}admin/twofa`,{withCredentials:true}
+      );
+
+      const data = response.data.message;
+
+      setQrCode(data.qrCode);
+      setTwoFASecret(data.secret);
+
+      setShow2FAOverlay(true);
+      setShowOTPInput(false);
+
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ||
+        "Failed to start 2FA setup"
+      );
+    } finally {
+      setTwoFALoading(false);
+    }
+
+    return;
+  }
+};
+const verify2FA = async () => {
+  try {
+    setTwoFALoading(true);
+
+    const response = await axios.post(
+      `${API_URL}admin/twofaverify`,
+      {
+        token: otp
+      },{withCredentials:true}
+    );
+
+    toast.success("Two-factor authentication enabled!");
+
+    setSecurityData((prev) => ({
+      ...prev,
+      enable2FA: true,
+    }));
+
+    setShow2FAOverlay(false);
+    setShowOTPInput(false);
+    setQrCode("");
+    setTwoFASecret("");
+    setOtp("");
+
+  } catch (error) {
+    toast.error(
+      error.response?.data?.message ||
+      "Invalid authentication code"
+    );
+  } finally {
+    setTwoFALoading(false);
+  }
+};
 
   
   /* ── Card fragments (defined once, reused in both shells) ─────────────── */
@@ -418,6 +493,7 @@ const handleAvatarUpload = (e) => {
   );
 
   const securityCard = (
+    <>
     <div className="admin-settings-card admin-settings-card--security">
       <h2 className="admin-settings-card__title">Security</h2>
       <div className="admin-settings-card__divider" />
@@ -492,18 +568,14 @@ const handleAvatarUpload = (e) => {
             </div>
           </div>
           <label className="admin-settings-toggle">
-            <input
-              type="checkbox"
-              checked={securityData.enable2FA}
-              onChange={(e) =>
-                setSecurityData({
-                  ...securityData,
-                  enable2FA: e.target.checked,
-                })
-              }
-            />
-            <span className="admin-settings-toggle-slider" />
-          </label>
+  <input
+    type="checkbox"
+    checked={securityData.enable2FA}
+    onChange={handle2FAToggle}
+  />
+
+  <span className="admin-settings-toggle-slider" />
+</label>
         </div>
         <div className="admin-settings-form__footer">
           <button
@@ -517,6 +589,109 @@ const handleAvatarUpload = (e) => {
         </div>
       </form>
     </div>
+    {show2FAOverlay && (
+  <div className="admin-2fa-overlay">
+
+    <div className="admin-2fa-modal">
+
+      {!showOTPInput ? (
+        <>
+          <h2>Set up Two-Factor Authentication</h2>
+
+          <p>
+            Scan this QR code using your authenticator app.
+          </p>
+
+          <div className="admin-2fa-qr">
+            <img
+              src={qrCode}
+              alt="2FA QR Code"
+            />
+          </div>
+
+          <p className="admin-2fa-helper">
+            You can use Google Authenticator,
+            Microsoft Authenticator, Authy, etc.
+          </p>
+
+          <div className="admin-2fa-manual">
+            <span>Can't scan?</span>
+
+            <code>{twoFASecret}</code>
+          </div>
+
+          <div className="admin-2fa-actions">
+
+            <button
+              type="button"
+              onClick={() => {
+                setShow2FAOverlay(false);
+                setQrCode("");
+                setTwoFASecret("");
+              }}
+            >
+              Cancel
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowOTPInput(true)}
+            >
+              I've Scanned It
+            </button>
+
+          </div>
+        </>
+      ) : (
+        <>
+          <h2>Verify Authenticator</h2>
+
+          <p>
+            Enter the 6-digit code shown in your
+            authenticator app.
+          </p>
+
+          <input
+            type="text"
+            inputMode="numeric"
+            maxLength={6}
+            value={otp}
+            onChange={(e) => {
+              const value = e.target.value
+                .replace(/\D/g, "");
+
+              setOtp(value);
+            }}
+            placeholder="000000"
+          />
+
+          <div className="admin-2fa-actions">
+
+            <button
+              type="button"
+              onClick={() => setShowOTPInput(false)}
+            >
+              Back
+            </button>
+
+            <button
+              type="button"
+              disabled={otp.length !== 6 || twoFALoading}
+              onClick={verify2FA}
+            >
+              {twoFALoading
+                ? "Verifying..."
+                : "Verify"}
+            </button>
+
+          </div>
+        </>
+      )}
+
+    </div>
+  </div>
+)}
+    </>
   );
 
    useEffect(() => {
