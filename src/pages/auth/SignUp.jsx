@@ -239,9 +239,9 @@ export default function SignUp() {
               className={styles.subtitle} 
               style={{ lineHeight: "1.5", fontSize: "20px", fontWeight: "400" }}
             >
-              Your Nexgn workspace is ready. We just sent a quick verification<br />
-              link to your inbox. Give it a click to activate your<br />
-              dashboard. See you on the inside.
+              Your Nexgn workspace is ready. We just sent a quick verification
+              link to your inbox. Give it a click to activate your dashboard.
+              See you on the inside.
             </p>
 
             <div className={styles.form}>
