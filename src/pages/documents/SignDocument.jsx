@@ -203,10 +203,32 @@ async function getClientIPs() {
 
     setSubmitting(true);
     try {
-      const filledWidgets = widgets.map((w, i) => ({
-        widgetname: w.widgetname,
-        value: values[i],
-      }));
+      const filledWidgets = widgets.map(
+    (w, i) => ({
+        index: i,
+
+        widgetname:
+            w.widgetname,
+
+        page:
+            w.page,
+
+        x:
+            w.x,
+
+        y:
+            w.y,
+
+        width:
+            w.width,
+
+        height:
+            w.height,
+
+        value:
+            values[i] || ""
+    })
+);
       const { ipv4, ipv6 } = await getClientIPs();
       console.log("IPv4:", ipv4);
       console.log("IPv6:", ipv6);
