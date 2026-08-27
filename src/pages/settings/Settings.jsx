@@ -263,6 +263,7 @@ const handle2FAToggle = async (e) => {
     return;
   }
 };
+const otpInputRef = useRef(null);
 const verify2FA = async () => {
   try {
     setTwoFALoading(true);
@@ -590,107 +591,108 @@ const verify2FA = async () => {
       </form>
     </div>
     {show2FAOverlay && (
-  <div className="admin-2fa-overlay">
+    <div className="admin-2fa-overlay">
+      <div className="admin-2fa-modal">
 
-    <div className="admin-2fa-modal">
+        {!showOTPInput ? (
+          <>
+            <h2>Set up Two-Factor authentication</h2>
+            <p>Scan the QR code using your authenticator app</p>
 
-      {!showOTPInput ? (
-        <>
-          <h2>Set up Two-Factor Authentication</h2>
+            <div className="admin-2fa-qr-wrapper">
+              <div className="admin-2fa-corner tl" />
+              <div className="admin-2fa-corner tr" />
+              <div className="admin-2fa-corner bl" />
+              <div className="admin-2fa-corner br" />
+              <div className="admin-2fa-qr">
+                <img src={qrCode} alt="2FA QR Code" />
+              </div>
+            </div>
 
-          <p>
-            Scan this QR code using your authenticator app.
-          </p>
+            <div className="admin-2fa-or">
+              <span>OR</span>
+            </div>
+            <p className="admin-2fa-manual-label">Enter code manually.</p>
 
-          <div className="admin-2fa-qr">
-            <img
-              src={qrCode}
-              alt="2FA QR Code"
-            />
-          </div>
-
-          <p className="admin-2fa-helper">
-            You can use Google Authenticator,
-            Microsoft Authenticator, Authy, etc.
-          </p>
-
-          <div className="admin-2fa-manual">
-            <span>Can't scan?</span>
-
-            <code>{twoFASecret}</code>
-          </div>
-
-          <div className="admin-2fa-actions">
-
-            <button
-              type="button"
-              onClick={() => {
-                setShow2FAOverlay(false);
-                setQrCode("");
-                setTwoFASecret("");
-              }}
-            >
-              Cancel
-            </button>
+            <div className="admin-2fa-input-wrapper">
+              <div className="admin-2fa-corner tl" />
+              <div className="admin-2fa-corner tr" />
+              <div className="admin-2fa-corner bl" />
+              <div className="admin-2fa-corner br" />
+              <input
+                type="text"
+                className="admin-2fa-manual-input"
+                value={twoFASecret}
+                readOnly
+              />
+            </div>
 
             <button
               type="button"
+              className="admin-2fa-btn-primary"
               onClick={() => setShowOTPInput(true)}
             >
-              I've Scanned It
+              Verify
             </button>
+          </>
 
-          </div>
-        </>
-      ) : (
-        <>
-          <h2>Verify Authenticator</h2>
-
-          <p>
-            Enter the 6-digit code shown in your
-            authenticator app.
-          </p>
-
-          <input
-            type="text"
-            inputMode="numeric"
-            maxLength={6}
-            value={otp}
-            onChange={(e) => {
-              const value = e.target.value
-                .replace(/\D/g, "");
-
-              setOtp(value);
-            }}
-            placeholder="000000"
-          />
-
-          <div className="admin-2fa-actions">
-
-            <button
-              type="button"
-              onClick={() => setShowOTPInput(false)}
-            >
-              Back
-            </button>
-
-            <button
-              type="button"
-              disabled={otp.length !== 6 || twoFALoading}
-              onClick={verify2FA}
-            >
-              {twoFALoading
-                ? "Verifying..."
-                : "Verify"}
-            </button>
-
-          </div>
-        </>
-      )}
-
+        ) : (
+          <>
+            <h2>Verify Authenticator</h2>
+            <p>Enter 6-digit code shown in your authenticator app</p>
+  <div
+    className="admin-2fa-otp-wrapper"
+    onClick={() => otpInputRef.current?.focus()}
+  >
+    <div className="admin-2fa-corner tl" />
+    <div className="admin-2fa-corner tr" />
+    <div className="admin-otp-boxes">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div
+          key={i}
+          className={`admin-otp-box ${otp[i] ? "filled" : ""}`}
+        >
+          {otp[i] || ""}
+        </div>
+      ))}
     </div>
+    <div className="admin-2fa-corner bl" />
+    <div className="admin-2fa-corner br" />
+    <input
+      ref={otpInputRef}
+      type="text"
+      inputMode="numeric"
+      maxLength={6}
+      value={otp}
+      onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
+      className="admin-otp-hidden-input"
+      autoFocus
+    />
   </div>
-)}
+
+            <div className="admin-2fa-actions">
+              <button
+                type="button"
+                className="admin-2fa-btn-primary"
+                disabled={otp.length !== 6 || twoFALoading}
+                onClick={verify2FA}
+              >
+                {twoFALoading ? "Verifying..." : "Verify"}
+              </button>
+              <button
+                type="button"
+                className="admin-2fa-btn-outline"
+                onClick={() => setShowOTPInput(false)}
+              >
+                Back
+              </button>
+            </div>
+          </>
+        )}
+
+      </div>
+    </div>
+  )}
     </>
   );
 
