@@ -1028,6 +1028,19 @@ const handleremove = async(id) =>{
     </div>
   );
 
+  const[subscription,setsubscription]=useState({})
+  const[reciept,setReciept]=useState()
+
+  useEffect(()=>{
+    (async()=>{
+       const response = await axios.get(`${API_URL}subscription/mysubscription`,{withCredentials:true})
+       console.log(response.data.message)
+       setsubscription(response.data.message)
+       setReciept(`https://invoices.razorpay.com/v1/t/${response?.data?.message?.lastInvoiceId}`)
+
+    })()
+  },[subscription])
+
   const billingCard = (
     <div className="admin-settings-card admin-settings-card--billing">
       <h2 className="admin-settings-card__title">Billing</h2>
@@ -1038,23 +1051,32 @@ const handleremove = async(id) =>{
         <div className="admin-billing-plan-card">
           <div className="admin-billing-plan-header">
             <div className="admin-billing-plan-info">
-              <h4 className="admin-billing-plan-name">Plans</h4>
-              <p className="admin-billing-plan-billed">Billed annually</p>
+              <h4 className="admin-billing-plan-name">{subscription?.planId?.name} Plan</h4>
+              <p className="admin-billing-plan-billed">Billed {subscription?.planId?.billingPeriod}</p>
             </div>
             <div className="admin-billing-plan-price">
-              <span className="price-amount">$49</span>
+              <span className="price-amount">{subscription?.planId?.amount}</span>
               <span className="price-period">/month</span>
             </div>
           </div>
           <div className="admin-billing-plan-divider" />
           <ul className="admin-billing-plan-features">
-            <li>Unlimited Document Signing</li>
+            {subscription?.planId?.features?.map((f,index)=>{
+              return(
+                  <li key={index}>{f}</li>
+              )
+            })}
+            {/* <li>Unlimited Document Signing</li>
             <li>Up to 10 Team Members</li>
-            <li>Advance Templates</li>
+            <li>Advance Templates</li> */}
           </ul>
           <div className="admin-billing-plan-footer">
             <span className="admin-billing-next-date">
-              Next billing date : 24 Jan 2027
+              Next billing date :{new Date(subscription?.chargeAt).toLocaleDateString("en-IN", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+})}
             </span>
             <button className="admin-billing-upgrade-btn">Upgrade Plan</button>
           </div>
@@ -1087,7 +1109,7 @@ const handleremove = async(id) =>{
           </div>
           <div className="admin-billing-invoice-actions">
             <button className="icon-btn">
-              <Download size={16} color="#666" />
+              <a href ={reciept}><Download size={16} color="#666" /></a>
             </button>
             <div className="tooltip-container">
               <button className="icon-btn">
