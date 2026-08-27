@@ -70,7 +70,7 @@ export default function Dashboard() {
       console.log(response.data.message)
       setDocuments(response.data.message)
 
-      const signrequest = await axios.get(`${API_URL}sign/signrequests`,{withCredentials:true})
+      const signrequest = await axios.get(`${API_URL}sign/getrequests`,{withCredentials:true})
       console.log(signrequest.data.message)
       setRequests(signrequest?.data?.message?.filter((r)=>r.overallStatus === "Expired")?.length)
     })()
