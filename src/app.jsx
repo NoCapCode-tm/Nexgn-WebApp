@@ -23,6 +23,7 @@ import TemplateView from "./pages/templates/Templateview";
 import SignDocument from "./pages/documents/SignDocument";
 import { ToastContainer } from "react-toastify";
 import Pricing from "./pages/pricing/pricing";
+import Verify2FA from "./pages/auth/Verify2FA";
 
 export default function App() {
   useSystemTheme();
@@ -32,6 +33,7 @@ export default function App() {
     <Routes>
       <Route path="/mail-invite/:email" element={<Invite />} />
       <Route path="/" element={<Login />} />
+      <Route path="/2fa" element={<Verify2FA />} />
       <Route path="/verify/:id" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot" element={<ForgotPassword />} />

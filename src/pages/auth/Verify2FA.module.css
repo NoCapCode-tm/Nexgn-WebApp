@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+.formWrap {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 56px;
+  z-index: 2;
+}
+
+.title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 45px;
+  font-weight: 700;
+  color: #FF0915;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.subtitle {
+  margin: 6px 0 32px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  color: #FF0915;
+  font-weight: 400;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+/* ---------------- OTP Inputs & Brackets ---------------- */
+.otpOuterWrapper {
+  position: relative;
+  padding: 10px;
+  display: inline-block; /* Hugs the inner content */
+}
+
+/* Red Corner Brackets */
+.cornerTopLeft, .cornerTopRight, .cornerBottomLeft, .cornerBottomRight {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: #FF0915;
+  border-style: solid;
+}
+
+.cornerTopLeft {
+  top: 0;
+  left: 0;
+  border-width: 3px 0 0 3px;
+  border-top-left-radius: 6px;
+}
+
+.cornerTopRight {
+  top: 0;
+  right: 0;
+  border-width: 3px 3px 0 0;
+  border-top-right-radius: 6px;
+}
+
+.cornerBottomLeft {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 3px 3px;
+  border-bottom-left-radius: 6px;
+}
+
+.cornerBottomRight {
+  bottom: 0;
+  right: 0;
+  border-width: 0 3px 3px 0;
+  border-bottom-right-radius: 6px;
+}
+
+.otpContainer {
+  display: flex;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.otpInput {
+  width: 52px;
+  height: 58px;
+  border: none;
+  border-radius: 6px;
+  background-color: #cccccc;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-align: center;
+  outline: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* The light red background for active/focused state */
+.otpInput:focus {
+  background-color: #ffb3b8; 
+  transform: scale(1.05);
+}
+
+/* ---------------- Buttons ---------------- */
+.loginButton {
+  height: 48px;
+  width: 200px;
+  border: none;
+  border-radius: 6px;
+  background: #FF0915;
+  color: #ffffff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.loginButton:hover {
+  background: #e50813;
+}
+
+/* ---------------- Responsive Rules ---------------- */
+@media (max-width: 972px) {
+  .formWrap {
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  .formWrap {
+    width: 80%;
+  }
+}
+
+@media (max-width: 660px) {
+  .formWrap {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 34px;
+  }
+  .subtitle {
+    font-size: 16px;
+  }
+  .otpContainer {
+    gap: 8px;
+  }
+  .otpInput {
+    width: 42px;
+    height: 48px;
+    font-size: 20px;
+  }
+  .loginButton {
+    width: 100%; /* Make button full width on small mobile */
+  }
+}
