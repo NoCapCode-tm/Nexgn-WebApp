@@ -60,6 +60,7 @@ import { API_URL } from "../../config";
 
 export default function Dashboard() {
   const [documents, setDocuments] = useState([]);
+  const[requests,setRequests]=useState([])
   const width = useWindowWidth();
   const isMobile = width <= 768;
   const navigate = useNavigate();
@@ -68,6 +69,10 @@ export default function Dashboard() {
       const response = await axios.get(`${API_URL}document/getdocument`,{withCredentials:true})
       console.log(response.data.message)
       setDocuments(response.data.message)
+
+      const signrequest = await axios.get(`${API_URL}sign/getrequests`,{withCredentials:true})
+      console.log(signrequest.data.message)
+      setRequests(signrequest?.data?.message?.filter((r)=>r.overallStatus === "Expired")?.length)
     })()
 },[])
 
@@ -110,7 +115,7 @@ const stats = [
   },
   {
     label: "Expired",
-    value: "12",
+    value: requests,
     trend: "3%",
     trendUp: false,
   },
