@@ -4419,98 +4419,215 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
 }
 
 
-/* 2fa */
+/* 2 fa overly */
 .admin-2fa-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
-
   z-index: 9999;
 }
 
 .admin-2fa-modal {
-  width: min(440px, calc(100% - 32px));
+  width: min(420px, calc(100% - 32px));
   background: #fff;
-  border-radius: 16px;
-  padding: 30px;
-
+  border-radius: 20px;
+  padding: 36px 28px 28px;
   text-align: center;
-
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
 .admin-2fa-modal h2 {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
 }
 
 .admin-2fa-modal p {
-  color: #666;
+  color: #888;
+  font-size: 14px;
+  margin: 0 0 24px;
   line-height: 1.5;
 }
 
-.admin-2fa-qr {
-  display: flex;
-  justify-content: center;
-  margin: 25px 0;
+/* ── Corner bracket utility ── */
+.admin-2fa-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: #FF0915;
+  border-style: solid;
+  border-width: 0;
+  border-radius: 4px;
+}
+.admin-2fa-corner.tl { top: 0;    left: 0;  border-top-width: 3px; border-left-width: 3px;  border-top-left-radius: 6px; }
+.admin-2fa-corner.tr { top: 0;    right: 0; border-top-width: 3px; border-right-width: 3px; border-top-right-radius: 6px; }
+.admin-2fa-corner.bl { bottom: 0; left: 0;  border-bottom-width: 3px; border-left-width: 3px;  border-bottom-left-radius: 6px; }
+.admin-2fa-corner.br { bottom: 0; right: 0; border-bottom-width: 3px; border-right-width: 3px; border-bottom-right-radius: 6px; }
+
+/* ── QR section ── */
+.admin-2fa-qr-wrapper {
+  position: relative;
+  display: inline-block;
+  padding: 12px;
+  margin-bottom: 20px;
 }
 
 .admin-2fa-qr img {
-  width: 220px;
-  height: 220px;
+  display: block;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  background: #e0e0e0; /* placeholder bg if img missing */
 }
 
-.admin-2fa-helper {
+/* ── OR divider ── */
+.admin-2fa-or {
+  color: #aaa;
   font-size: 13px;
+  margin-bottom: 6px;
 }
 
-.admin-2fa-manual {
-  margin-top: 20px;
-  padding: 12px;
-
-  background: #f5f5f5;
-  border-radius: 8px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.admin-2fa-manual-label {
+  color: #555;
+  font-size: 14px;
+  margin: 0 0 12px !important;
 }
 
-.admin-2fa-manual code {
-  word-break: break-all;
-  font-size: 12px;
+/* ── Manual input ── */
+.admin-2fa-input-wrapper {
+  position: relative;
+  display: block;
+  padding: 8px;
+  margin: 0 auto 24px;
 }
 
-.admin-2fa-modal input {
+.admin-2fa-manual-input {
   width: 100%;
   box-sizing: border-box;
-
-  padding: 14px;
-
-  border: 1px solid #ddd;
+  padding: 12px 16px;
+  background: #ffe5e5;
+  border: 1.5px solid #FF0915;
   border-radius: 8px;
-
-  font-size: 24px;
-  letter-spacing: 8px;
+  font-size: 14px;
+  letter-spacing: 2px;
   text-align: center;
-
-  margin: 25px 0;
+  color: #333;
+  outline: none;
 }
 
+/* ── OTP digit boxes ── */
+.admin-2fa-otp-wrapper {
+  position: relative;
+  display: inline-flex;
+  padding: 12px 8px;
+  margin-bottom: 32px;
+  cursor: text;
+}
+
+.admin-otp-hidden-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  opacity: 0.01;        /* not 0 — some browsers block input at exactly 0 */
+  font-size: 1px;       /* not 0 — prevents browser blocking */
+  color: transparent;
+  caret-color: transparent;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: text;
+}
+.admin-otp-boxes {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-otp-box {
+  width: 48px;
+  height: 56px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111;
+}
+
+.admin-otp-box.filled {
+  background: #FF0915;
+  color: #fff;
+}
+
+/* Hidden real input captures keystrokes */
+/* .admin-otp-hidden-input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: text;
+  font-size: 0;
+  border: none;
+  background: transparent;
+} */
+
+/* ── Buttons ── */
+.admin-2fa-btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: #FF0915;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.admin-2fa-btn-primary:hover {
+  background: #d9000f;
+}
+
+.admin-2fa-btn-primary:disabled {
+  background: #f5a0a5;
+  cursor: not-allowed;
+}
+
+.admin-2fa-btn-outline {
+  padding: 13px 28px;
+  background: #fff;
+  color: #FF0915;
+  border: 1.5px solid #FF0915;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.admin-2fa-btn-outline:hover {
+  background: #fff5f5;
+}
+
+/* ── Actions row (screen 2) ── */
 .admin-2fa-actions {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-
-  margin-top: 25px;
+  gap: 12px;
+  justify-content: center;
 }
 
-.admin-2fa-actions button {
-  padding: 11px 18px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+.admin-2fa-actions .admin-2fa-btn-primary {
+  width: auto;
+  padding: 13px 32px;
 }
