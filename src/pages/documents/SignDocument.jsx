@@ -47,7 +47,7 @@ function SignDocument() {
       );
 
       // Axios already parses JSON
-      const req = reqRes.data.data || reqRes.data.message;
+      const req = reqRes.data.message;
 
       setRequest(req);
 
@@ -79,8 +79,7 @@ function SignDocument() {
         }
       );
 
-      const widgetData =
-        widgetRes.data.data || widgetRes.data.message;
+      const widgetData = widgetRes.data.message;
 
       setDocument(widgetData.document);
       setWidgets(widgetData.widgets || []);
