@@ -1105,7 +1105,11 @@ const handleremove = async(id) =>{
         <div className="admin-billing-address-card">
           <div className="admin-billing-invoice-info">
             <span className="invoice-title">Invoice</span>
-            <span className="invoice-date">24 Jan 2026</span>
+            <span className="invoice-date">{new Date(subscription?.startDate).toLocaleDateString("en-IN", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+})}</span>
           </div>
           <div className="admin-billing-invoice-actions">
             <button className="icon-btn">
