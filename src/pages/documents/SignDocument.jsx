@@ -9,6 +9,7 @@ import "../../styles/BaseLayout.css";
 import "../templates/TemplateEditor.css";
 import axios from "axios";
 import { API_URL } from "../../config";
+import { toast } from "react-toastify";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -35,46 +36,72 @@ function SignDocument() {
 
   // Load the signature request + widgets
   useEffect(() => {
-    async function load() {
-      try {
-        const reqRes = await fetch(`${API_URL}sign/getrequest/${id}`, {
-          credentials: "include",
-        });
-        const reqJson = await reqRes.json();
-        if (!reqRes.ok) throw new Error(reqJson.message || "Failed to load request");
-
-        const req = reqJson.message;
-        setRequest(req);
-
-        if (req.overallStatus === "completed") {
-          setSuccess(true);
-          setLoading(false);
-          return;
+  async function load() {
+    try {
+      // 1. Get signature request
+      const reqRes = await axios.get(
+        `${API_URL}sign/getrequest/${id}`,
+        {
+          withCredentials: true,
         }
+      );
 
-        if(req.overallStatus === "pending"){
-          await axios.post(`${API_URL}sign/statuschange`,{id},{withCredentials:true})
-        }
+      // Axios already parses JSON
+      const req = reqRes.data.message;
 
-        const docId = req.documentId._id;
-       
-        const widgetRes = await fetch(`${API_URL}document/widgets/${docId}`, {
-          credentials: "include",
-        });
-        const widgetJson = await widgetRes.json();
-        if (!widgetRes.ok) throw new Error(widgetJson.message || "Failed to load fields");
+      setRequest(req);
 
-        setDocument(widgetJson.message.document);
-      
-        setWidgets(widgetJson.message.widgets || []);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+      // 2. Completed
+      if (req.overallStatus === "completed") {
+        setSuccess(true);
+        return;
       }
+
+      // 3. Update/check request status
+      if (req.overallStatus === "pending") {
+        await axios.post(
+          `${API_URL}sign/statuschange`,
+          { id },
+          {
+            withCredentials: true,
+          }
+        );
+      }
+
+      // 4. Get document ID
+      const docId = req.documentId._id;
+
+      // 5. Get document widgets
+      const widgetRes = await axios.get(
+        `${API_URL}document/widgets/${docId}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      const widgetData = widgetRes.data.message;
+
+      setDocument(widgetData.document);
+      setWidgets(widgetData.widgets || []);
+
+    } catch (err) {
+      console.error("API ERROR:", err);
+
+      // Exact backend message
+      const message =
+        err.response?.data?.message ||
+        err.message ||
+        "Something went wrong";
+
+      setError(message);
+      toast.error(message)
+    } finally {
+      setLoading(false);
     }
-    load();
-  }, [id]);
+  }
+
+  load();
+}, [id]);
 
   const sigCanvasRefs = useRef({}); // { [widgetIndex]: SignatureCanvas instance }
 
