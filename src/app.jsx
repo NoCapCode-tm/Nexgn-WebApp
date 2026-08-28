@@ -37,7 +37,7 @@ useSystemTheme();
       <Route path="/verify/:id" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot" element={<ForgotPassword />} />
-      <Route path="/invite-deny" element={<InviteDeny />} />
+      <Route path="/invite-deny/:email" element={<InviteDeny />} />
       <Route path="/reset/:id" element={<SetNewPassword />} />
 
     <Route path="/pricing" element={<Pricing />} />
