@@ -74,9 +74,7 @@ export default function Settings() {
 
   const [auditSearchQuery, setAuditSearchQuery] = useState("");
   const [viewingPermissions, setViewingPermissions] = useState(null);
-  const [permissionsState, setPermissionsState] = useState({
-    "Documents-View Documents": true,
-  });
+  const [permissionsState, setPermissionsState] = useState({});
   const [showDisconnectModal, setShowDisconnectModal] = useState(false);
   const [isDriveConnected, setIsDriveConnected] = useState(true);
   const [showAddSubAdminModal, setShowAddSubAdminModal] = useState(false);
@@ -138,6 +136,22 @@ export default function Settings() {
     timeZone: user.time_zone || "",
     language: user.language || "",
   });
+
+  const savedPermissions =
+    user.permissions || [];
+
+  const permissionObject =
+    savedPermissions.reduce(
+      (acc, permission) => {
+        acc[permission] = true;
+        return acc;
+      },
+      {}
+    );
+
+  setPermissionsState(
+    permissionObject
+  );
 }, [user]);
   const [securityData, setSecurityData] = useState({
     currentPassword: "",
@@ -727,6 +741,22 @@ const handleremove = async(id) =>{
  }
 
 }
+
+const handleViewPermissions = (sub) => {
+  const savedPermissions = sub.permissions || [];
+
+  const permissionObject = savedPermissions.reduce(
+    (acc, permission) => {
+      acc[permission] = true;
+      return acc;
+    },
+    {}
+  );
+
+  setPermissionsState(permissionObject);
+  setViewingPermissions(sub._id);
+  setTeamActionOpen(null);
+};
   const teamCard = (
     <div className="admin-settings-card admin-settings-card--team">
       <h2 className="admin-settings-card__title">Team Management</h2>
@@ -790,10 +820,7 @@ const handleremove = async(id) =>{
                     <div className="team-action-dropdown" ref={teamActionRef}>
                       <button
                         className="team-dropdown-item permissions"
-                        onClick={() => {
-                          setViewingPermissions(sub._id);
-                          setTeamActionOpen(null);
-                        }}
+                       onClick={() => handleViewPermissions(sub)}
                       >
                         Permissions
                       </button>
@@ -852,6 +879,55 @@ const handleremove = async(id) =>{
     setNewSubAdmin({ name: "", email: "" });
     setShowAddSubAdminModal(false);
   };
+  const handleSavePermissions = async () => {
+  try {
+    const selectedPermissions = Object.entries(
+      permissionsState
+    )
+      .filter(([_, checked]) => checked)
+      .map(([permission]) => permission);
+
+      console.log(viewingPermissions)
+      console.log(selectedPermissions)
+    const response = await axios.post(
+    `${API_URL}admin/addpermissions`,
+    {
+        id: viewingPermissions,
+        permissions: selectedPermissions
+    },
+    {
+        withCredentials: true
+    }
+);
+    console.log(
+      "Permissions saved:",
+      response.data
+    );
+
+    toast.success(
+      response.data.message ||
+      "Permissions saved successfully"
+    );
+
+    // setUser((prev) => ({
+    //   ...prev,
+    //   permissions: selectedPermissions,
+    // }));
+
+  } catch (error) {
+    console.error(
+      "Permission save error:",
+      error
+    );
+
+    toast.error(
+      error.response?.data?.message ||
+      error.response?.data?.data ||
+      error.message ||
+      "Failed to save permissions"
+    );
+  }
+};
 
   const togglePermission = (key) => {
     setPermissionsState((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -861,13 +937,13 @@ const handleremove = async(id) =>{
     {
       column: "left",
       category: "Dashboard",
-      items: ["View Dashboard", "View Analytics", "Export Reports"],
+      items: ["View", "Analytics", "Reports Export"],
     },
-    {
-      column: "left",
-      category: "signers",
-      items: ["View", "Add", "Edit", "Delete"],
-    },
+    // {
+    //   column: "left",
+    //   category: "signers",
+    //   items: ["View", "Add", "Edit", "Delete"],
+    // },
     {
       column: "left",
       category: "Templates",
@@ -877,13 +953,13 @@ const handleremove = async(id) =>{
       column: "right",
       category: "Documents",
       items: [
-        "View Documents",
-        "Upload Documents",
-        "Edit Documents",
-        "Delete Documents",
+        "View",
+        "Upload",
+        "Edit",
+        "Delete",
         "Send for Signature",
         "Cancel Requests",
-        "Archive Documents",
+        "Archive",
       ],
     },
     {
@@ -929,11 +1005,12 @@ const handleremove = async(id) =>{
 
       <div className="admin-permissions-footer">
         <button
-          className="admin-settings-form__submit"
-          onClick={() => setViewingPermissions(null)}
-        >
-          Save
-        </button>
+  type="button"
+  className="admin-settings-form__submit"
+  onClick={handleSavePermissions}
+>
+  Save
+</button>
       </div>
     </div>
   );
@@ -1036,12 +1113,12 @@ const handleremove = async(id) =>{
   useEffect(()=>{
     (async()=>{
        const response = await axios.get(`${API_URL}subscription/mysubscription`,{withCredentials:true})
-       console.log(response.data.message)
+      //  console.log(response.data.message)
        setsubscription(response.data.message)
        setReciept(`https://invoices.razorpay.com/v1/t/${response?.data?.message?.lastInvoiceId}`)
 
     })()
-  },[subscription])
+  },[])
 
   const billingCard = (
     <div className="admin-settings-card admin-settings-card--billing">
