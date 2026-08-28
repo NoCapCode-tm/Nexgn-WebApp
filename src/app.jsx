@@ -26,7 +26,7 @@ import Pricing from "./pages/pricing/pricing";
 import Verify2FA from "./pages/auth/Verify2FA";
 
 export default function App() {
-  useSystemTheme();
+useSystemTheme();
 
   return (
     <>
