@@ -1,6 +1,6 @@
 import DocumentsRow from "../../components/ui/DocumentsRow";
 
-export default function DocumentsTable({ documents, onRevoke }) {
+export default function DocumentsTable({ documents, onRevoke ,onArchive,onCancel }) {
   return (
     <div className="admin-docs-table-wrapper">
       <div className="admin-docs-table__header">
@@ -19,7 +19,9 @@ export default function DocumentsTable({ documents, onRevoke }) {
             <DocumentsRow
               key={idx}
               doc={doc}
-              onRevoke={() => onRevoke && onRevoke(doc.id)}
+              onRevoke={() => onRevoke && onRevoke(doc._id)}
+              onArchive={()=>onArchive && onArchive(doc._id)}
+              onCancel={()=>onCancel && onCancel(doc._id)}
             />
           ))}
           {documents.length === 0 && (

@@ -18,9 +18,19 @@ export default function Documents() {
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
 
-  const handleRevoke = (id) => {
-    setDocuments((prev) => prev.filter((doc) => doc.id !== id));
+  const handleRevoke = async(id) => {
+    
+    await axios.delete(`${API_URL}document/deletedocument/${id}`,{withCredentials:true})
   };
+  const handleArchive = async(id) => {
+    
+    await axios.get(`${API_URL}document/archivedocument/${id}`,{withCredentials:true})
+  };
+  const handleCancel= async(id) => {
+    
+    await axios.get(`${API_URL}document/cancelrequest/${id}`,{withCredentials:true})
+  };
+
 
   useEffect(()=>{
   (async()=>{
@@ -126,7 +136,7 @@ export default function Documents() {
         <div className="admin-docs-mobile-section-title">Need My Sign</div>
 
         {/* Table Section */}
-        <DocumentsTable documents={filteredDocs} onRevoke={handleRevoke} />
+        <DocumentsTable documents={filteredDocs} onRevoke={handleRevoke} onArchive={handleArchive} onCancel={handleCancel} />
       </>
     </Layout>
   );

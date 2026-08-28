@@ -15,8 +15,8 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
   const [search, setSearch] = useState("");
   const [openMenuId, setOpenMenuId] = useState(null);
 
-  const handleRevoke = (id) => {
-    setTemplates(prev => prev.filter(t => t.id !== id));
+  const handleRevoke = async(id) => {
+    await axios.delete(`${API_URL}template/deletetemplate/${id}`,{withCredentials:true})
   };
 
   const filtered = templates.filter((t) =>
