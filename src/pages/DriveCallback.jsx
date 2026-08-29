@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { API_URL } from "../../config";
+import { API_URL } from "../config";
 
 export default function DriveCallback() {
   const [searchParams] = useSearchParams();
