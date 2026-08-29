@@ -24,6 +24,7 @@ import SignDocument from "./pages/documents/SignDocument";
 import { ToastContainer } from "react-toastify";
 import Pricing from "./pages/pricing/pricing";
 import Verify2FA from "./pages/auth/Verify2FA";
+import DriveCallback from "./pages/DriveCallback";
 
 export default function App() {
 useSystemTheme();
@@ -53,8 +54,9 @@ useSystemTheme();
     <Route path="/contact-book" element={<ContactBook />} />
     <Route path="/templates" element={<TemplatesPage />} />
     <Route path="/templates-view" element={<TemplateView/>} />
+    <Route path="/drive-callback" element={<DriveCallback />} />
     
-  </Route>
+    </Route>
       <Route path="/document/:id" element={<SignDocument/>} />
       <Route path="*" element={<Navigate to="/" replace />} /> 
     </Routes>
