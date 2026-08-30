@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TemplatesList from "./TemplatesList";
 import Templates from "./Templates";
-import TemplateEditor from "./TemplateEditor";
+import TemplateCreate from "./TemplateCreate";
 import Templateview from "./Templateview";
 
 export default function TemplatesPage() {
@@ -12,7 +12,7 @@ export default function TemplatesPage() {
 
   if (view === "editor") {
     return (
-      <TemplateEditor
+      <TemplateCreate
         templateName={templateName}
         templateFile={templateFile}
         onBack={() => setView("list")}
