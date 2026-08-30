@@ -1,5 +1,6 @@
-import {  Routes, Route, Navigate } from "react-router-dom";
-
+import { useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { initAntiInspect } from "./utils/antiInspect";
 
 
 import Invite from "./pages/auth/Invite";
@@ -27,6 +28,11 @@ import Verify2FA from "./pages/auth/Verify2FA";
 
 export default function App() {
 useSystemTheme();
+
+useEffect(() => {
+    initAntiInspect();
+  }, []);
+
 
   return (
     <>
