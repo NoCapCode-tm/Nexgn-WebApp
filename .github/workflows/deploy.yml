@@ -34,6 +34,7 @@ jobs:
         env:
           CI: false 
           VITE_API_URL: ${{ vars.VITE_API_URL }}
+          VITE_DEV_PASSCODE: ${{ secrets.VITE_DEV_PASSCODE }}
 
       # 5. Securely deploy compiled assets to the target gh-pages branch
       - name: Deploy Assets to GitHub Pages
