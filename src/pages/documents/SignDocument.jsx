@@ -16,12 +16,198 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 
 function SignDocument() {
+
+   const DUMMY_MODE = true;
+
+const dummyRequest = {
+  _id: "request_demo_001",
+
+  overallStatus: "pending",
+
+  senderId: {
+    _id: "sender_001",
+    name: "MOHAMMAD ZIYA",
+    email: "ziya@nocapcode.cloud",
+  },
+
+  recipient: {
+    userId: {
+      _id: "recipient_001",
+      name: "Rahul Sharma",
+      email: "rahul@example.com",
+    },
+    signedAt: null,
+  },
+
+  documentId: {
+    _id: "doc_demo_001",
+    title: "Employment Offer Letter",
+  },
+
+  senderip: "49.43.113.165",
+
+  expiresat:
+    "2026-09-04T19:21:52.422Z",
+};
+
+const dummyDocument = {
+  _id: "doc_demo_001",
+
+  title: "Employment Offer Letter",
+
+  status: "sent",
+
+  templateId: {
+    _id: "template_demo_001",
+
+    name: "Employment Offer Letter",
+
+    file: {
+      fileId: "YOUR_FILE_ID",
+
+      fileName:
+        "Employment-Offer-Letter.pdf",
+
+      webViewLink:
+        "https://drive.google.com/file/d/1bUYnZxMVARRu75KzcomQpV-FVbsuNLiW/preview",
+
+      downloadLink:
+        "https://drive.google.com/uc?export=download&id=1bUYnZxMVARRu75KzcomQpV-FVbsuNLiW",
+    },
+
+    htmlcontent: null,
+  },
+
+  assignedto: [
+    {
+      name: "Rahul Sharma",
+      email: "rahul@example.com",
+    },
+  ],
+
+  createdBy: {
+    _id: "sender_001",
+    name: "MOHAMMAD ZIYA",
+    email: "ziya@nocapcode.cloud",
+  },
+
+  note:
+    "Please review and sign the offer letter.",
+};
+
+const dummyWidgets = [
+  {
+    _id: "widget_1",
+    widgetname: "name",
+    page: 1,
+    x: 90,
+    y: 130,
+    width: 0,
+    height: 0,
+  },
+
+  {
+    _id: "widget_2",
+    widgetname: "email",
+    page: 1,
+    x: 90,
+    y: 200,
+    width: 0,
+    height: 0  },
+
+  {
+    _id: "widget_3",
+    widgetname: "date",
+    page: 1,
+    x: 410,
+    y: 200,
+    width: 0,
+    height: 0,
+  },
+
+  {
+    _id: "widget_4",
+    widgetname: "text",
+    page: 1,
+    x: 90,
+    y: 280,
+    width: 0,
+    height: 0,
+  },
+
+  {
+    _id: "widget_5",
+    widgetname: "number",
+    page: 1,
+    x: 90,
+    y: 370,
+    width: 0,
+    height: 0,
+  },
+
+  {
+    _id: "widget_6",
+    widgetname: "signature",
+    page: 1,
+    x: 90,
+    y: 460,
+    width: 0,
+    height: 0,
+  },
+
+  {
+    _id: "widget_7",
+    widgetname: "text",
+    page: 2,
+    x: 90,
+    y: 160,
+    width: 0,
+    height: 0,
+  },
+
+  {
+    _id: "widget_8",
+    widgetname: "signature",
+    page: 2,
+    x: 90,
+    y: 320,
+    width: 0,
+    height: 0,
+  },
+];
+
+const dummyValues = {
+  0: "Rahul Sharma",
+  1: "rahul@example.com",
+  2: "2026-08-30",
+  3: "Software Engineer",
+  4: "75000",
+  5: "",
+  6: "",
+  7: "",
+};
   const {id} = useParams();
 
-  const [request, setRequest] = useState(null);
-  const [document, setDocument] = useState(null);
-  const [widgets, setWidgets] = useState([]);
-  const [values, setValues] = useState({}); // { [index]: value }
+  // const [request, setRequest] = useState(null);
+  // const [document, setDocument] = useState(null);
+  // const [widgets, setWidgets] = useState([]);
+  // const [values, setValues] = useState({}); 
+
+  const [request, setRequest] = useState(
+  DUMMY_MODE ? dummyRequest : null
+);
+
+const [document, setDocument] = useState(
+  DUMMY_MODE ? dummyDocument : null
+);
+
+const [widgets, setWidgets] = useState(
+  DUMMY_MODE ? dummyWidgets : []
+);
+
+const [values, setValues] = useState(
+  DUMMY_MODE ? dummyValues : {}
+);
 
   const [pages, setPages] = useState([]);
   const [activePage, setActivePage] = useState(1);
@@ -35,75 +221,82 @@ function SignDocument() {
 
   const canvasRef = useRef(null);
 
+
+  //dummy data
+
+ 
+
+
+
   // Load the signature request + widgets
-  useEffect(() => {
-  async function load() {
-    setLoading(true)
-    try {
-      // 1. Get signature request
-      const reqRes = await axios.get(
-        `${API_URL}sign/getrequest/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+//   useEffect(() => {
+//   async function load() {
+//     setLoading(true)
+//     try {
+//       // 1. Get signature request
+//       const reqRes = await axios.get(
+//         `${API_URL}sign/getrequest/${id}`,
+//         {
+//           withCredentials: true,
+//         }
+//       );
 
-      // Axios already parses JSON
-      const req = reqRes.data.message;
+//       // Axios already parses JSON
+//       const req = reqRes.data.message;
 
-      setRequest(req);
+//       setRequest(req);
 
-      // 2. Completed
-      if (req.overallStatus === "completed") {
-        setSuccess(true);
-        return;
-      }
+//       // 2. Completed
+//       if (req.overallStatus === "completed") {
+//         setSuccess(true);
+//         return;
+//       }
 
-      // 3. Update/check request status
-      if (req.overallStatus === "pending") {
-        await axios.post(
-          `${API_URL}sign/statuschange`,
-          { id },
-          {
-            withCredentials: true,
-          }
-        );
-      }
+//       // 3. Update/check request status
+//       if (req.overallStatus === "pending") {
+//         await axios.post(
+//           `${API_URL}sign/statuschange`,
+//           { id },
+//           {
+//             withCredentials: true,
+//           }
+//         );
+//       }
 
-      // 4. Get document ID
-      const docId = req.documentId._id;
+//       // 4. Get document ID
+//       const docId = req.documentId._id;
 
-      // 5. Get document widgets
-      const widgetRes = await axios.get(
-        `${API_URL}document/widgets/${docId}`,
-        {
-          withCredentials: true,
-        }
-      );
+//       // 5. Get document widgets
+//       const widgetRes = await axios.get(
+//         `${API_URL}document/widgets/${docId}`,
+//         {
+//           withCredentials: true,
+//         }
+//       );
 
-      const widgetData = widgetRes.data.message;
+//       const widgetData = widgetRes.data.message;
 
-      setDocument(widgetData.document);
-      setWidgets(widgetData.widgets || []);
+//       setDocument(widgetData.document);
+//       setWidgets(widgetData.widgets || []);
 
-    } catch (err) {
-      console.error("API ERROR:", err);
+//     } catch (err) {
+//       console.error("API ERROR:", err);
 
-      // Exact backend message
-      const message =
-        err.response?.data?.message ||
-        err.message ||
-        "Something went wrong";
+//       // Exact backend message
+//       const message =
+//         err.response?.data?.message ||
+//         err.message ||
+//         "Something went wrong";
 
-      setError(message);
-      toast.error(message)
-    } finally {
-      setLoading(false);
-    }
-  }
+//       setError(message);
+//       toast.error(message)
+//     } finally {
+//       setLoading(false);
+//     }
+//   }
 
-  load();
-}, [id]);
+//   load();
+// }, [id]);
 
   const sigCanvasRefs = useRef({}); // { [widgetIndex]: SignatureCanvas instance }
 
@@ -125,44 +318,131 @@ function handleSignatureEnd(index) {
 }
 
   // Load PDF if the underlying template has a file
-  useEffect(() => {
-    if (!document?.templateId?.file) return;
+  // useEffect(() => {
+  //   if (!document?.templateId?.file) return;
 
-    async function loadPdf() {
-      setLoading(true)
-      try {
+  //   async function loadPdf() {
+  //     setLoading(true)
+  //     try {
       
-        const loadingTask = pdfjsLib.getDocument(
-          `${API_URL}template/template/${document.templateId._id}/pdf`
-        );
-        const pdf = await loadingTask.promise;
-        setPdfDoc(pdf);
-        setPages(Array.from({ length: pdf.numPages }, (_, i) => i + 1));
-        setActivePage(1);
-      } catch (err) {
-        console.error("PDF ERROR:", err);
-      }finally{
-        setLoading(false)
-      }
+  //       const loadingTask = pdfjsLib.getDocument(
+  //         `${API_URL}template/template/${document.templateId._id}/pdf`
+  //       );
+  //       const pdf = await loadingTask.promise;
+  //       setPdfDoc(pdf);
+  //       setPages(Array.from({ length: pdf.numPages }, (_, i) => i + 1));
+  //       setActivePage(1);
+  //     } catch (err) {
+  //       console.error("PDF ERROR:", err);
+  //     }finally{
+  //       setLoading(false)
+  //     }
+  //   }
+  //   loadPdf();
+  // }, [document]);
+
+  //dummy
+  useEffect(() => {
+  if (!document?.templateId?.file) return;
+
+  async function loadPdf() {
+    setLoading(true);
+
+    try {
+      const pdfUrl = DUMMY_MODE
+        ? "/dummy/offer.pdf"
+        : `${API_URL}template/template/${document.templateId._id}/pdf`;
+
+      console.log("PDF URL:", pdfUrl);
+
+      const loadingTask = pdfjsLib.getDocument({
+        url: pdfUrl,
+      });
+
+      const pdf = await loadingTask.promise;
+
+      console.log("PDF loaded:", pdf.numPages);
+
+      setPdfDoc(pdf);
+
+      setPages(
+        Array.from(
+          { length: pdf.numPages },
+          (_, i) => i + 1
+        )
+      );
+
+      setActivePage(1);
+    } catch (err) {
+      console.error("PDF ERROR:", err);
+
+      setError(
+        err?.message || "Failed to load PDF"
+      );
+    } finally {
+      setLoading(false);
     }
-    loadPdf();
-  }, [document]);
+  }
+
+  loadPdf();
+}, [document]);
+
+  // useEffect(() => {
+  //   if (!pdfDoc || !canvasRef.current) return;
+
+  //   async function renderPage() {
+  //     const page = await pdfDoc.getPage(activePage);
+  //     const viewport = page.getViewport({ scale: zoom });
+  //     const canvas = canvasRef.current;
+  //     const ctx = canvas.getContext("2d");
+  //     canvas.width = viewport.width;
+  //     canvas.height = viewport.height;
+  //     await page.render({ canvasContext: ctx, viewport }).promise;
+  //   }
+  //   renderPage();
+  // }, [pdfDoc, activePage, zoom]);
+
+  //dummy
 
   useEffect(() => {
-    if (!pdfDoc || !canvasRef.current) return;
+  if (!pdfDoc || !canvasRef.current) return;
 
-    async function renderPage() {
+  async function renderPage() {
+    try {
       const page = await pdfDoc.getPage(activePage);
-      const viewport = page.getViewport({ scale: zoom });
+
+      const viewport = page.getViewport({
+        scale: zoom,
+      });
+
       const canvas = canvasRef.current;
       const ctx = canvas.getContext("2d");
+
       canvas.width = viewport.width;
       canvas.height = viewport.height;
-      await page.render({ canvasContext: ctx, viewport }).promise;
-    }
-    renderPage();
-  }, [pdfDoc, activePage, zoom]);
 
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+      await page.render({
+        canvasContext: ctx,
+        viewport,
+      }).promise;
+
+    } catch (error) {
+      console.error(
+        "PDF PAGE RENDER ERROR:",
+        error
+      );
+    }
+  }
+
+  renderPage();
+}, [pdfDoc, activePage, zoom]);
   function handleChange(index, value) {
     setValues((prev) => ({ ...prev, [index]: value }));
   }
