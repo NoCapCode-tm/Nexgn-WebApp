@@ -54,7 +54,7 @@ useSystemTheme();
     <Route path="/templates" element={<TemplatesPage />} />
     <Route path="/templates-view" element={<TemplateView/>} />
     
-  </Route>
+    </Route>
       <Route path="/document/:id" element={<SignDocument/>} />
       <Route path="*" element={<Navigate to="/" replace />} /> 
     </Routes>
