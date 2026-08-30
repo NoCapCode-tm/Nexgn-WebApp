@@ -7,6 +7,7 @@ import "../../styles/BaseLayout.css";
 import "./TemplateEditor.css";
 import axios from "axios";
 import { API_URL } from "../../config";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -331,6 +332,7 @@ const WIDGET_DEFAULT_SIZE = {
 
 export default function TemplateEditor({ templateName, templateFile, onBack }) {
   const [pages, setPages] = useState([1, 2]);
+  const [loading, setLoading] = useState(false);
   const [saveStatus, setSaveStatus] = useState(""); // "", "saved"
   const [activePage, setActivePage] = useState(1);
   const [pdfDoc, setPdfDoc] = useState(null);
@@ -380,6 +382,7 @@ export default function TemplateEditor({ templateName, templateFile, onBack }) {
 }
   /* ADD after addWidget() */
  const handleSave = async () => {
+  setLoading(true)
   try {
 
    const formData = new FormData();
@@ -433,6 +436,8 @@ console.log({
 
   } catch (err) {
     console.error(err);
+  }finally{
+    setLoading(false)
   }
 };
   /* ADD near your other useEffects */
@@ -646,6 +651,7 @@ console.log({
   const [role, setRole] = useState("");
 
   return (
+    <>
     <div className="template-editor-overlay">
       <div className="template-editor-modal">
         <div className="template-editor-topbar">
@@ -1027,5 +1033,14 @@ console.log({
         </div>
       </div>
     </div>
+     {loading && (
+                            <LoadingScreen
+                              state="listening"
+                              size={64}
+                              theme="dark"
+                              message="Signing Up"
+                            />
+                          )}
+    </>
   );
 }

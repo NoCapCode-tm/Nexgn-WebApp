@@ -10,6 +10,8 @@ import "./Dashboard.css";
 import { useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../config";
+import { toast } from "react-toastify";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 
 
@@ -61,20 +63,108 @@ import { API_URL } from "../../config";
 export default function Dashboard() {
   const [documents, setDocuments] = useState([]);
   const[requests,setRequests]=useState([])
+  const [loading, setLoading] = useState(true);
+  const [authenticated, setAuthenticated] = useState(null);
   const width = useWindowWidth();
   const isMobile = width <= 768;
   const navigate = useNavigate();
-  useEffect(()=>{
-  (async()=>{
-      const response = await axios.get(`${API_URL}document/getdocument`,{withCredentials:true})
-      console.log(response.data.message)
-      setDocuments(response.data.message)
 
-      const signrequest = await axios.get(`${API_URL}sign/getrequests`,{withCredentials:true})
-      console.log(signrequest.data.message)
-      setRequests(signrequest?.data?.message?.filter((r)=>r.overallStatus === "Expired")?.length)
-    })()
-},[])
+   useEffect(() => {
+    const verifyUser = async () => {
+      setLoading(true)
+      try {
+       const response =  await axios.get(
+          `${API_URL}admin/me`,
+          {
+            withCredentials: true,
+          }
+        );
+     setAuthenticated(response.data.message);
+      } catch (err) {
+        console.log(err.message)
+        setAuthenticated(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    verifyUser();
+  }, []);
+
+  // const canViewDashboard =
+  // authenticated?.role === "Admin" ||
+  // authenticated?.permissions?.includes("Dashboard-View");
+
+
+ useEffect(() => {
+  if (!authenticated) return;
+
+  const canView =
+    authenticated.role === "Admin" ||
+    authenticated.permissions?.includes("Dashboard-View");
+
+  if (!canView) return;
+
+  const loadDashboardData = async () => {
+    setLoading(true)
+    try {
+      const response = await axios.get(
+        `${API_URL}document/getdocument`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      setDocuments(
+        response.data.message || []
+      );
+
+      const signrequest =
+        await axios.get(
+          `${API_URL}sign/getrequests`,
+          {
+            withCredentials: true,
+          }
+        );
+
+      const requests =
+        signrequest?.data?.message || [];
+
+      setRequests(
+        requests.filter(
+          (r) =>
+            r.overallStatus === "Expired"
+        ).length
+      );
+
+    } catch (error) {
+      console.error(
+        "Dashboard data error:",
+        error
+      );
+    }finally{
+      setLoading(false)
+    }
+  };
+
+  loadDashboardData();
+
+}, [authenticated]);
+useEffect(() => {
+  if (!authenticated) return;
+
+  const allowed =
+    authenticated.role === "Admin" ||
+    authenticated.permissions?.includes(
+      "Dashboard-View"
+    );
+
+  if (!allowed) {
+    toast.error(
+      "You are not permitted to view the dashboard"
+    );
+  }
+}, [authenticated]);
 
 const { completed, total, pending } = useMemo(() => {
   const completed = documents?.filter(
@@ -217,11 +307,14 @@ const stats = [
           <div className="mobile-page-header__divider" />
         </div>
 
-        <section className="stats-grid">
-          {stats.slice(0, isMobile ? 2 : 4).map((s) => (
-            <StatCard key={s.label} {...s} />
-          ))}
-        </section>
+      {authenticated?.permissions?.includes("Dashboard-Analytics") ||
+ authenticated?.role === "Admin" ? (
+  <section className="stats-grid">
+    {stats.slice(0, isMobile ? 2 : 4).map((s) => (
+      <StatCard key={s.label} {...s} />
+    ))}
+  </section>
+) : null}
 
         <div className="mobile-cta-row">
           <button
@@ -260,6 +353,14 @@ const stats = [
           </div>
         </section>
       </>
+      {loading && (
+                                    <LoadingScreen
+                                      state="listening"
+                                      size={64}
+                                      theme="dark"
+                                      message="Signing Up"
+                                    />
+                                  )}
     </Layout>
   );
 }

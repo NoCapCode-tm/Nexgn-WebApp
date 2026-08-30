@@ -33,7 +33,7 @@ useSystemTheme();
     <Routes>
       <Route path="/mail-invite/:email" element={<Invite />} />
       <Route path="/" element={<Login />} />
-      <Route path="/2fa" element={<Verify2FA />} />
+      <Route path="/2fa/:id" element={<Verify2FA />} />
       <Route path="/verify/:id" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot" element={<ForgotPassword />} />

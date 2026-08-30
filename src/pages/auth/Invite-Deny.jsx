@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Invite-Deny.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../config";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 export default function InviteDeny() {
   const {email} = useParams()
+   const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
     (async()=>{
-      await axios.get(`${API_URL}admin/decline/${email}`,{withCredentials:true})
+      setLoading(true)
+    try {
+        await axios.get(`${API_URL}admin/decline/${email}`,{withCredentials:true})
+    } catch (error) {
+      console.log("Something went wrong in declining Invite",error.message)
+    }finally{
+      setLoading(false)
+    }
     })()
   },[email])
    return (
@@ -24,6 +33,14 @@ export default function InviteDeny() {
           appreciate your consideration.
         </p>
       </div>
+      {loading && (
+                  <LoadingScreen
+                    state="listening"
+                    size={64}
+                    theme="dark"
+                    message="Signing Up"
+                  />
+                )}
     </AuthLayout>
   );
 }

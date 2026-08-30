@@ -6,9 +6,11 @@ import { PartyPopper, Eye, EyeOff } from "lucide-react";
 import styles from "./LoginPage.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 export default function Invite() {
   const { email } = useParams();
+    const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); 
@@ -16,6 +18,7 @@ export default function Invite() {
 
   const handleJoin = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       const response = await axios.post(
         `${API_URL}admin/setpassword`,
@@ -29,6 +32,7 @@ export default function Invite() {
     } catch (error) {
       console.log("Something Went Wrong in setting password", error.message);
     } finally {
+      setLoading(false)
       setStep(2);
     }
   };
@@ -116,6 +120,14 @@ export default function Invite() {
           </>
         )}
       </div>
+      {loading && (
+            <LoadingScreen
+              state="listening"
+              size={64}
+              theme="dark"
+              message="Signing Up"
+            />
+          )}
     </AuthLayout>
   );
 }

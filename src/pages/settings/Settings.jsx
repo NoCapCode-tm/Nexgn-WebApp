@@ -35,6 +35,7 @@ import { API_URL } from "../../config";
 import AvatarImg from "../../assets/Avatar.png";
 import axios from "axios";
 import { toast } from "react-toastify";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 const DEFAULT_AVATAR = AvatarImg;
 
 const settingsNavItems = [
@@ -68,10 +69,9 @@ export default function Settings() {
 
   // Ref to the Layout sidebar-open function (populated via onRegisterMenuOpen)
   const sidebarOpenerRef = useRef(null);
-
   /* Desktop + Tablet */
   const [activeTab, setActiveTab] = useState("profile");
-
+const [loading, setLoading] = useState(false);
   const [auditSearchQuery, setAuditSearchQuery] = useState("");
   const [viewingPermissions, setViewingPermissions] = useState(null);
   const [permissionsState, setPermissionsState] = useState({});
@@ -87,6 +87,7 @@ export default function Settings() {
 
    useEffect(() => {
     const verifyUser = async () => {
+      setLoading(true)
       try {
         const response = await axios.get(
           `${API_URL}admin/me`,
@@ -98,6 +99,8 @@ export default function Settings() {
         setUser(response.data.message);
       } catch (err) {
         console.log(err.message)
+      }finally{
+        setLoading(false)
       }
     };
 
@@ -218,7 +221,7 @@ const handleAvatarUpload = (e) => {
 
   const handleupdate = async(e)=>{
       e.preventDefault();
-      
+      setLoading(true)
 
     try {
       const response = await axios.put(`${API_URL}admin/update`,{
@@ -234,6 +237,8 @@ const handleAvatarUpload = (e) => {
       console.log(response.data.message)
     } catch (error) {
       console.log("Something went wrong",error.message)
+    }finally{
+      setLoading(false)
     }
   }
 
@@ -243,7 +248,7 @@ const [qrCode, setQrCode] = useState("");
 const [twoFASecret, setTwoFASecret] = useState("");
 const [showOTPInput, setShowOTPInput] = useState(false);
 const [otp, setOtp] = useState("");
-const [twoFALoading, setTwoFALoading] = useState(false);
+// const [twoFALoading, setTwoFALoading] = useState(false);
 
 const handle2FAToggle = async (e) => {
   const enabled = e.target.checked;
@@ -251,7 +256,7 @@ const handle2FAToggle = async (e) => {
   // If user is trying to enable 2FA
   if (enabled) {
     try {
-      setTwoFALoading(true);
+      setLoading(true);
 
       const response = await axios.get(
         `${API_URL}admin/twofa`,{withCredentials:true}
@@ -271,7 +276,7 @@ const handle2FAToggle = async (e) => {
         "Failed to start 2FA setup"
       );
     } finally {
-      setTwoFALoading(false);
+      setLoading(false);
     }
 
     return;
@@ -280,9 +285,9 @@ const handle2FAToggle = async (e) => {
 const otpInputRef = useRef(null);
 const verify2FA = async () => {
   try {
-    setTwoFALoading(true);
+    setLoading(true);
 
-    const response = await axios.post(
+    await axios.post(
       `${API_URL}admin/twofaverify`,
       {
         token: otp
@@ -308,13 +313,14 @@ const verify2FA = async () => {
       "Invalid authentication code"
     );
   } finally {
-    setTwoFALoading(false);
+    setLoading(false);
   }
 };
 
   
   /* ── Card fragments (defined once, reused in both shells) ─────────────── */
   const profileCard = (
+    <>
     <div className="admin-settings-card admin-settings-card--profile">
       <h2 className="admin-settings-card__title">Profile</h2>
       <div className="admin-settings-card__divider" />
@@ -419,9 +425,19 @@ const verify2FA = async () => {
         </div>
       </form>
     </div>
+    {loading && (
+                            <LoadingScreen
+                              state="listening"
+                              size={64}
+                              theme="dark"
+                              message="Signing Up"
+                            />
+                          )}
+    </>
   );
 
   const accountCard = (
+    <>
     <div className="admin-settings-card admin-settings-card--account">
       <h2 className="admin-settings-card__title">Account</h2>
       <div className="admin-settings-card__divider" />
@@ -505,6 +521,15 @@ const verify2FA = async () => {
         </div>
       </form>
     </div>
+    {loading && (
+                            <LoadingScreen
+                              state="listening"
+                              size={64}
+                              theme="dark"
+                              message="Signing Up"
+                            />
+                          )}
+    </>
   );
 
   const securityCard = (
@@ -707,6 +732,14 @@ const verify2FA = async () => {
       </div>
     </div>
   )}
+  {loading && (
+                          <LoadingScreen
+                            state="listening"
+                            size={64}
+                            theme="dark"
+                            message="Signing Up"
+                          />
+                        )}
     </>
   );
 
@@ -725,11 +758,14 @@ const verify2FA = async () => {
       setTeamMembers(response.data.message);
     } catch (error) {
       console.error(error);
+    }finally{
+      setLoading(false)
     }
   })();
 }, []);
 
 const handleremove = async(id) =>{
+  setLoading(true)
  try {
    await axios.post(`${API_URL}admin/delete`,{id},{withCredentials:true})
    setTeamMembers((prev) =>
@@ -738,6 +774,8 @@ const handleremove = async(id) =>{
                            setTeamActionOpen(null);
  } catch (error) {
    console.log("something went wrong",error.message)
+ }finally{
+  setLoading(false)
  }
 
 }
@@ -758,6 +796,7 @@ const handleViewPermissions = (sub) => {
   setTeamActionOpen(null);
 };
   const teamCard = (
+    <>
     <div className="admin-settings-card admin-settings-card--team">
       <h2 className="admin-settings-card__title">Team Management</h2>
       <div className="admin-settings-card__divider" />
@@ -847,6 +886,15 @@ const handleViewPermissions = (sub) => {
         </button>
       </div>
     </div>
+    {loading && (
+                            <LoadingScreen
+                              state="listening"
+                              size={64}
+                              theme="dark"
+                              message="Signing Up"
+                            />
+                          )}
+    </>
   );
 
 
@@ -860,26 +908,34 @@ const handleViewPermissions = (sub) => {
       setSubAdminErrors(errors);
       return;
     }
-    const response = await axios.post(`${API_URL}admin/invite`,{
-      name:newSubAdmin.name,
-      email:newSubAdmin.email
-    },{withCredentials:true})
-    console.log(response.data.message)
-    setSubAdminErrors({});
-    setTeamMembers((prev) => [
-      ...prev,
-      {
-        id: Date.now(),
-        name: newSubAdmin.name,
-        email: newSubAdmin.email,
-        role: "Sub-admin",
-        status: "Active",
-      },
-    ]);
-    setNewSubAdmin({ name: "", email: "" });
-    setShowAddSubAdminModal(false);
+    setLoading(true)
+   try {
+     const response = await axios.post(`${API_URL}admin/invite`,{
+       name:newSubAdmin.name,
+       email:newSubAdmin.email
+     },{withCredentials:true})
+     console.log(response.data.message)
+     setSubAdminErrors({});
+     setTeamMembers((prev) => [
+       ...prev,
+       {
+         id: Date.now(),
+         name: newSubAdmin.name,
+         email: newSubAdmin.email,
+         role: "Sub-admin",
+         status: "Active",
+       },
+     ]);
+     setNewSubAdmin({ name: "", email: "" });
+     setShowAddSubAdminModal(false);
+   } catch (error) {
+    console.log(error.message)
+   }finally{
+    setLoading(false)
+   }
   };
   const handleSavePermissions = async () => {
+    setLoading(true)
   try {
     const selectedPermissions = Object.entries(
       permissionsState
@@ -926,6 +982,8 @@ const handleViewPermissions = (sub) => {
       error.message ||
       "Failed to save permissions"
     );
+  }finally{
+    setLoading(false)
   }
 };
 
@@ -970,6 +1028,7 @@ const handleViewPermissions = (sub) => {
   ];
 
   const permissionsViewComponent = (
+    <>
     <div className="admin-permissions-card">
       <h2 className="admin-permissions-card__title">Permission Settings</h2>
       <div className="admin-permissions-card__divider" />
@@ -1013,9 +1072,19 @@ const handleViewPermissions = (sub) => {
 </button>
       </div>
     </div>
+    {loading && (
+                            <LoadingScreen
+                              state="listening"
+                              size={64}
+                              theme="dark"
+                              message="Signing Up"
+                            />
+                          )}
+                          </>
   );
 
   const notificationCard = (
+    <>
     <div className="admin-settings-card admin-settings-card--notifications">
       <h2 className="admin-settings-card__title">Notification</h2>
       <div className="admin-settings-card__divider" />
@@ -1105,6 +1174,15 @@ const handleViewPermissions = (sub) => {
         <button className="admin-settings-form__submit">Save</button>
       </div>
     </div>
+    {loading && (
+                            <LoadingScreen
+                              state="listening"
+                              size={64}
+                              theme="dark"
+                              message="Signing Up"
+                            />
+                          )}
+    </>
   );
 
   const[subscription,setsubscription]=useState({})
@@ -1112,15 +1190,23 @@ const handleViewPermissions = (sub) => {
 
   useEffect(()=>{
     (async()=>{
-       const response = await axios.get(`${API_URL}subscription/mysubscription`,{withCredentials:true})
-      //  console.log(response.data.message)
-       setsubscription(response.data.message)
-       setReciept(`https://invoices.razorpay.com/v1/t/${response?.data?.message?.lastInvoiceId}`)
+      setLoading(true)
+      try {
+         const response = await axios.get(`${API_URL}subscription/mysubscription`,{withCredentials:true})
+        //  console.log(response.data.message)
+         setsubscription(response.data.message)
+         setReciept(`https://invoices.razorpay.com/v1/t/${response?.data?.message?.lastInvoiceId}`)
+      } catch (error) {
+        console.log(error.message)
+      }finally{
+        setLoading(false)
+      }
 
     })()
   },[])
 
   const billingCard = (
+    <>
     <div className="admin-settings-card admin-settings-card--billing">
       <h2 className="admin-settings-card__title">Billing</h2>
       <div className="admin-settings-card__divider" />
@@ -1207,25 +1293,40 @@ const handleViewPermissions = (sub) => {
         </div>
       </div>
     </div>
+    {loading && (
+                            <LoadingScreen
+                              state="listening"
+                              size={64}
+                              theme="dark"
+                              message="Signing Up"
+                            />
+                          )}
+    </>
   );
 
   useEffect(()=>{
 
     const getStatus = async()=>{
-
-        const res = await axios.get(
-
-            `${API_URL}google/status`,
-
-            {
-
-                withCredentials:true
-
-            }
-
-        );
-
-        setIsDriveConnected(res.data.message.connected);
+   setLoading(true)
+        try {
+          const res = await axios.get(
+  
+              `${API_URL}google/status`,
+  
+              {
+  
+                  withCredentials:true
+  
+              }
+  
+          );
+  
+          setIsDriveConnected(res.data.message.connected);
+        } catch (error) {
+          console.log(error.message)
+        }finally{
+          setLoading(false)
+        }
 
     }
 
@@ -1234,6 +1335,7 @@ const handleViewPermissions = (sub) => {
 },[]);
 
   const handledriveconnect = async () => {
+    setLoading(true)
   try {
     const response = await axios.get(
       `${API_URL}google/auth-url`,
@@ -1245,10 +1347,13 @@ const handleViewPermissions = (sub) => {
     window.location.assign(response.data.message);
   } catch (error) {
     console.error(error);
+  }finally{
+    setLoading(false)
   }
 };
 
 const handledisconnect = async()=>{
+  setLoading(true)
   try {
     await axios.get(
   
@@ -1266,10 +1371,13 @@ const handledisconnect = async()=>{
   setShowDisconnectModal(false)
   } catch (error) {
     console.log("Could not disconnect",error.message)
+  }finally{
+    setLoading(false)
   }
 }
 
   const integrationsCard = (
+    <>
     <div className="admin-settings-card admin-settings-card--integrations">
       <h2 className="admin-settings-card__title">Integration</h2>
       <div className="admin-settings-card__divider" />
@@ -1350,48 +1458,30 @@ const handledisconnect = async()=>{
         </div>
       </div>
     </div>
+    {loading && (
+                            <LoadingScreen
+                              state="listening"
+                              size={64}
+                              theme="dark"
+                              message="Signing Up"
+                            />
+                          )}
+    </>
   );
 
-  // const auditLogsData = [
-  //   {
-  //     id: 1,
-  //     date: "Mar 24, 10:45 AM",
-  //     name: "Alice Smith",
-  //     action: "Signed Document",
-  //     document: "NDA_V2.pdf",
-  //     status: "Success",
-  //   },
-  //   {
-  //     id: 2,
-  //     date: "Mar 23, 2:15 PM",
-  //     name: "Bob Jones",
-  //     action: "Created Template",
-  //     document: "Emploement_Offer",
-  //     status: "Success",
-  //   },
-  //   {
-  //     id: 3,
-  //     date: "Mar 23, 11:00 AM",
-  //     name: "System",
-  //     action: "Auto- Archieved",
-  //     document: "Project_Spec.pdf",
-  //     status: "Success",
-  //   },
-  //   {
-  //     id: 4,
-  //     date: "Mar 23, 11:00 AM",
-  //     name: "Charlie Brown",
-  //     action: "Failed Logined Attempt",
-  //     document: "-",
-  //     status: "Failed",
-  //   },
-  // ];
 
   useEffect(()=>{
     (async()=>{
-       const response = await axios.get(`${API_URL}activity/getactivity`,{withCredentials:true})
-       console.log(response.data.message)
-       setauditLogsData(response.data.message)
+      setLoading(true)
+       try {
+        const response = await axios.get(`${API_URL}activity/getactivity`,{withCredentials:true})
+        console.log(response.data.message)
+        setauditLogsData(response.data.message)
+       } catch (error) {
+         console.log(error.message)
+       }finally{
+        setLoading(false)
+       }
 
     })()
   },[])

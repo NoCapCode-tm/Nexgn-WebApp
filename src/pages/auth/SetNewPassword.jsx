@@ -8,9 +8,11 @@ import { Eye, EyeOff } from "lucide-react";
 import styles from "./SetNewPassword.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 export default function SetNewPassword() {
   const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); 
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); 
@@ -19,6 +21,7 @@ export default function SetNewPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     if (password !== confirmPassword) {
       console.log("Passwords do not match");
@@ -36,6 +39,8 @@ export default function SetNewPassword() {
       navigate("/login");
     } catch (error) {
       console.log("Something went wrong", error.message);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -112,6 +117,14 @@ export default function SetNewPassword() {
           </p>
         </form>
       </div>
+      {loading && (
+            <LoadingScreen
+              state="listening"
+              size={64}
+              theme="dark"
+              message="Signing Up"
+            />
+          )}
     </AuthLayout>
   );
 }

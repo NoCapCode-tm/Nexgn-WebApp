@@ -1,12 +1,18 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./Verify2FA.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
+import axios from "axios";
+import { API_URL } from "../../config";
+import { toast } from "react-toastify";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 export default function Verify2FA() {
   const [code, setCode] = useState(new Array(6).fill(""));
+     const [loading, setLoading] = useState(false);
   const inputRefs = useRef([]);
   const navigate = useNavigate();
+  const {id} = useParams()
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -46,13 +52,33 @@ export default function Verify2FA() {
     inputRefs.current[focusIndex].focus();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const finalCode = code.join("");
     console.log("Submitting 2FA Code:", finalCode);
-    
-    // Add your verification API logic here
-    // ...
+    try {
+    setLoading(true);
+
+    await axios.post(
+      `${API_URL}admin/twofaverifylogin`,
+      {
+        token: finalCode,
+        id
+      },{withCredentials:true}
+    );
+
+    toast.success("User Verified Successfully");
+    setCode("");
+    navigate("/dashboard")
+
+  } catch (error) {
+    toast.error(
+      error.response?.data?.message ||
+      "Invalid authentication code"
+    );
+  } finally {
+    setLoading(false);
+  }
   };
 
   return (
@@ -94,6 +120,13 @@ export default function Verify2FA() {
           </button>
         </form>
       </div>
+      {loading && (
+                  <LoadingScreen
+                    state="listening"
+                    size={64}
+                    message="Signing In"
+                  />
+                )}
     </AuthLayout>
   );
 }

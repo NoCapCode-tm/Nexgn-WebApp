@@ -10,6 +10,8 @@
   import "../dashboard/Dashboard.css";
   import "./SignYourself.css";
   import axios from "axios";
+import { toast } from "react-toastify";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
   function TemplateDropdown({ value, onChange, options }) {
     const [open, setOpen] = useState(false);
@@ -75,7 +77,7 @@
     const activeTab =
       location.pathname === "/request-signature" ? "request" : "sign";
     const [view, setView] = useState("form");
-
+    const [authenticated, setAuthenticated] = useState(null);
     const [zoom, setZoom] = useState(100);
     const [uploadedFile, setUploadedFile] = useState(null);
     const [uploadedFileObj, setUploadedFileObj] = useState(null);
@@ -87,7 +89,7 @@
     const [selectedTemplate, setSelectedTemplate] = useState("");
     const fileInputRef = useRef(null);
     const[allTemplates, setAllTemplates]=useState([])
-
+    const [loading, setLoading] = useState(false);
     // Request Signature specific states
     // const [systemRole, setSystemRole] = useState("Member / Employee");
     // const [assignedToRole, setAssignedToRole] = useState(
@@ -101,12 +103,41 @@
 
     useEffect(()=>{
       (async()=>{
-        const response = await axios.get(`${API_URL}template/gettemplate`,{withCredentials:true})
-        console.log(response.data.message)
-        const templates = response.data.message
-        setAllTemplates(templates)
+        setLoading(true)
+       try {
+         const response = await axios.get(`${API_URL}template/gettemplate`,{withCredentials:true})
+         console.log(response.data.message)
+         const templates = response.data.message
+         setAllTemplates(templates)
+       } catch (error) {
+        console.log("Something Went Wrong in fetchinf templates",error.message)
+       }finally{
+        setLoading(false)
+       }
       })()
     },[])
+    useEffect(() => {
+    const verifyUser = async () => {
+      setLoading(true)
+      try {
+       const response =  await axios.get(
+          `${API_URL}admin/me`,
+          {
+            withCredentials: true,
+          }
+        );
+     setAuthenticated(response.data.message);
+      } catch (err) {
+        console.log(err.message)
+        setAuthenticated(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    verifyUser();
+  }, []);
+
 
     async function getClientIPs() {
   const [ipv4Res, ipv6Res] = await Promise.allSettled([
@@ -129,6 +160,7 @@
 
     const handleNext = async (e) => {
   e.preventDefault();
+  setLoading(true)
 
   // Template selected
   if (selectedTemplate) {
@@ -159,6 +191,8 @@
       // or success toast
     } catch (err) {
       console.log(err);
+    }finally{
+      setLoading(false)
     }
 
     return;
@@ -197,11 +231,17 @@
     };
 
     function handleFile(e) {
-      const file = e.target.files[0];
+
+      if(authenticated.role==="Admin" || authenticated?.permissions?.includes("Documents-Upload")){
+        const file = e.target.files[0];
       if (file) {
         setUploadedFile(file.name);
         setUploadedFileObj(file);
       }
+      }else{
+        toast.error("You do not have permission to Upload any documents")
+      }
+      
     }
 
     function zoomIn() {
@@ -228,7 +268,12 @@
         <div className="section-label">Upload Document (PDF Only)</div>
         <div
           className="upload-zone"
-          onClick={() => fileInputRef.current.click()}
+          onClick={() => {
+             if(authenticated.role==="Admin" || authenticated?.permissions?.includes("Documents-Upload")){
+               fileInputRef.current.click()
+      }else{
+        toast.error("You do not have permission to Upload any documents")
+      }}}
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {
             e.preventDefault();
@@ -583,6 +628,14 @@
             )}
           </div>
         </>
+        {loading && (
+                                <LoadingScreen
+                                  state="listening"
+                                  size={64}
+                                  theme="dark"
+                                  message="Signing Up"
+                                />
+                              )}
       </Layout>
     );
   }
