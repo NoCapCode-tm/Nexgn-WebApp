@@ -216,7 +216,7 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
         </div>
       </>
       {loading && (
-                              <LoadingScreen
+                          <LoadingScreen
                                 state="listening"
                                 size={64}
                                 theme="dark"
