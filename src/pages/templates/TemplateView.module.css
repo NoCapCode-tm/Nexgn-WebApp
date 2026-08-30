@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #F8F9FA;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow: hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  height: 60px;
+  padding: 0 24px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E5E7EB;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.navGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6B7280;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.iconButton:hover {
+  color: #111827;
+  background: #F3F4F6;
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+.mainContent {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* =========================
+   LEFT SIDEBAR (Thumbnails)
+========================= */
+.leftSidebar {
+  width: 240px;
+  background-color: #F8F9FA;
+  border-right: 1px solid #E5E7EB;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.sidebarTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.thumbnailCard {
+  background: #FFFFFF;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.thumbnailCardActive {
+  border-color: #E22A2A;
+  box-shadow: 0 0 0 2px rgba(226, 42, 42, 0.1);
+}
+
+.thumbnailCard:hover:not(.thumbnailCardActive) {
+  border-color: #D1D5DB;
+}
+
+.thumbnailCanvas {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #F3F4F6;
+  margin-bottom: 8px;
+  border-radius: 2px;
+}
+
+.thumbnailLabel {
+  font-size: 13px;
+  color: #6B7280;
+  font-weight: 500;
+}
+
+/* =========================
+   CENTER (PDF Canvas)
+========================= */
+.centerCanvasArea {
+  flex: 1;
+  padding: 32px;
+  overflow: auto; 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #F3F4F6;
+}
+
+.pdfWrapper {
+  position: relative;
+  background: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+}
+
+.pdfCanvas {
+  display: block;
+}
+
+/* Placed Widget - Read Only */
+.placedWidget {
+  position: absolute;
+  background: rgba(255, 9, 21, 0.05);
+  border: 1.5px dashed #FF0915;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  pointer-events: none; /* Prevents interaction in view mode */
+}
+
+.widgetLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #FF0915;
+}
+
+/* =========================
+   RIGHT SIDEBAR (Details)
+========================= */
+.rightSidebar {
+  width: 320px;
+  background-color: #FFFFFF;
+  border-left: 1px solid #E5E7EB;
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.readOnlyInput {
+  width: 100%;
+  padding: 10px 14px;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #4B5563;
+  outline: none;
+  margin-bottom: 24px;
+  box-sizing: border-box;
+}
+
+.readOnlyInput:read-only {
+  background: #F9FAFB;
+  cursor: default;
+}
+
+.signeeList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: auto; /* Pushes Edit button to the bottom */
+}
+
+.signeeCard {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  background: #FFFFFF;
+}
+
+.signeeAvatar {
+  width: 32px;
+  height: 32px;
+  background: #F3F4F6;
+  border-radius: 50%;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9CA3AF;
+}
+
+.signeeRole {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  margin: 0;
+}
+
+/* Edit Button */
+.editBtn {
+  width: 100%;
+  padding: 13px;
+  background: #E22A2A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 32px;
+}
+
+.editBtn:hover {
+  background: #C81E1E;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+@media (max-width: 1024px) {
+  .leftSidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column;
+  }
+  
+  .centerCanvasArea {
+    padding: 16px;
+  }
+
+  .rightSidebar {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #E5E7EB;
+    padding: 20px;
+  }
+}
