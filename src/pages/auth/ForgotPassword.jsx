@@ -6,13 +6,16 @@ import { API_URL } from "../../config";
 
 import styles from "./ForgotPassword.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 export default function ForgotPassword() {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       const response = await axios.post(
         `${API_URL}admin/forgot-password`,
@@ -24,6 +27,8 @@ export default function ForgotPassword() {
       navigate("/");
     } catch (error) {
       console.log("Something went wrong", error.message);
+    }finally{
+       setLoading(false)
     }
   };
 
@@ -62,6 +67,14 @@ export default function ForgotPassword() {
           </p>
         </form>
       </div>
+       {loading && (
+                        <LoadingScreen
+                          state="listening"
+                          size={64}
+                          theme="dark"
+                          message="Signing Up"
+                        />
+                      )}
     </AuthLayout>
   );
 }

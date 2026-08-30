@@ -8,15 +8,24 @@ import "../documents/Documents.css";
 import "../templates/Templates.css";
 import axios from "axios";
 import { API_URL } from "../../config";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 
 export default function TemplatesList({ onAddTemplate ,onView }) {
   const [templates, setTemplates] = useState([]);
   const [search, setSearch] = useState("");
   const [openMenuId, setOpenMenuId] = useState(null);
+   const [loading, setLoading] = useState(false);
 
   const handleRevoke = async(id) => {
-    await axios.delete(`${API_URL}template/deletetemplate/${id}`,{withCredentials:true})
+    setLoading(true)
+    try {
+      await axios.delete(`${API_URL}template/deletetemplate/${id}`,{withCredentials:true})
+    } catch (error) {
+      console.log(error.message)
+    }finally{
+      setLoading(false)
+    }
   };
 
   const filtered = templates.filter((t) =>
@@ -25,10 +34,17 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
 
   useEffect(()=>{
     (async()=>{
-      const response = await axios.get(`${API_URL}template/gettemplate`,{withCredentials:true})
-      console.log(response.data.message)
-      const templates = response.data.message
-      setTemplates(templates)
+      setLoading(true)
+     try {
+       const response = await axios.get(`${API_URL}template/gettemplate`,{withCredentials:true})
+       console.log(response.data.message)
+       const templates = response.data.message
+       setTemplates(templates)
+     } catch (error) {
+      console.log(error.message)
+     }finally{
+      setLoading(false)
+     }
     })()
   },[])
 
@@ -199,6 +215,14 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
           </div>
         </div>
       </>
+      {loading && (
+                              <LoadingScreen
+                                state="listening"
+                                size={64}
+                                theme="dark"
+                                message="Signing Up"
+                              />
+                            )}
     </Layout>
   );
 }

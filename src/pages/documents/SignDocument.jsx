@@ -10,6 +10,7 @@ import "../templates/TemplateEditor.css";
 import axios from "axios";
 import { API_URL } from "../../config";
 import { toast } from "react-toastify";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -37,6 +38,7 @@ function SignDocument() {
   // Load the signature request + widgets
   useEffect(() => {
   async function load() {
+    setLoading(true)
     try {
       // 1. Get signature request
       const reqRes = await axios.get(
@@ -127,7 +129,9 @@ function handleSignatureEnd(index) {
     if (!document?.templateId?.file) return;
 
     async function loadPdf() {
+      setLoading(true)
       try {
+      
         const loadingTask = pdfjsLib.getDocument(
           `${API_URL}template/template/${document.templateId._id}/pdf`
         );
@@ -137,6 +141,8 @@ function handleSignatureEnd(index) {
         setActivePage(1);
       } catch (err) {
         console.error("PDF ERROR:", err);
+      }finally{
+        setLoading(false)
       }
     }
     loadPdf();
@@ -202,6 +208,7 @@ async function getClientIPs() {
 }
 
     setSubmitting(true);
+    setLoading(true)
     try {
       const filledWidgets = widgets.map(
     (w, i) => ({
@@ -251,19 +258,20 @@ async function getClientIPs() {
     } catch (err) {
       setError(err.message);
     } finally {
+      setLoading(false)
       setSubmitting(false);
     }
   }
 
 
 
-  if (loading) {
-    return (
-      <div className="template-editor-overlay">
-        <div className="template-editor-modal">Loading document…</div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="template-editor-overlay">
+  //       <div className="template-editor-modal">Loading document…</div>
+  //     </div>
+  //   );
+  // }
 
   if (success) {
     return (
@@ -289,6 +297,7 @@ async function getClientIPs() {
   console.log(widgets);
 
   return (
+    <>
     <div className="template-editor-overlay">
       <div className="template-editor-modal">
         <div className="template-editor-topbar">
@@ -501,6 +510,15 @@ async function getClientIPs() {
         </div>
       </div>
     </div>
+     {loading && (
+                            <LoadingScreen
+                              state="listening"
+                              size={64}
+                              theme="dark"
+                              message="Signing Up"
+                            />
+                          )}
+    </>
   );
 }
 

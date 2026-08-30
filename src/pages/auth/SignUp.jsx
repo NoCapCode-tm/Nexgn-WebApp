@@ -8,9 +8,14 @@ import { API_URL } from "../../config";
 import styles from "./Signup.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
+import { ThinkingOrb } from 'thinking-orbs';
+import LoadingScreen from "../../components/Layout/LoadingScreen";
+
+
 
 export default function SignUp() {
   const [step, setStep] = useState(1);
+   const [loading, setLoading] = useState(false);
 
   // Step 1 state
   const [name, setName] = useState("");
@@ -34,6 +39,7 @@ export default function SignUp() {
   const handleStep2Submit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true)
       const response = await axios.post(
         `${API_URL}admin/signup`,
         {
@@ -51,6 +57,8 @@ export default function SignUp() {
       setStep(3);
     } catch (error) {
       console.log("Something went wrong", error.message);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -60,6 +68,10 @@ export default function SignUp() {
     toast.success("Account Created Successfully");
     navigate("/");
   };
+
+  //  if (loading) {
+  //   return <div><ThinkingOrb state="listening" size={64} /></div>;
+  // }
 
   return (
     <AuthLayout>
@@ -257,6 +269,15 @@ export default function SignUp() {
           </>
         )}
       </div>
+       {loading && (
+      <LoadingScreen
+        state="listening"
+        size={64}
+        theme="dark"
+        message="Signing Up"
+      />
+    )}
+
     </AuthLayout>
   );
 }

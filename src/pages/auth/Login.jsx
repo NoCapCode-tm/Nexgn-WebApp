@@ -7,10 +7,12 @@ import { API_URL } from "../../config";
 
 import styles from "./LoginPage.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { id } = useParams();
 
@@ -18,6 +20,7 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       const response = await axios.post(
         `${API_URL}admin/login`,
@@ -25,10 +28,17 @@ export default function LoginPage() {
         { withCredentials: true }
       );
       console.log(response.data.message);
-      navigate("/dashboard");
+      if(response?.data?.message?.twoFAenabled === true){
+        navigate(`/2fa/${response?.data?.message?._id}`);
+      }else{
+        navigate("/dashboard");
+      }
+      
       toast.success("Login Successful");
     } catch (error) {
       console.log("Something went wrong", error.message);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -116,6 +126,13 @@ export default function LoginPage() {
           </p>
         </form>
       </div>
+      {loading && (
+            <LoadingScreen
+              state="listening"
+              size={64}
+              message="Signing In"
+            />
+          )}
     </AuthLayout>
   );
 }

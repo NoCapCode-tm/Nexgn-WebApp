@@ -3,9 +3,11 @@ import { ChevronLeft } from "lucide-react";
 import "./ContactBook.css";
 import axios from "axios";
 import { API_URL } from "../../config";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 export default function AddContactForm({ onClose }) {
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [language, setLanguage] = useState("");
@@ -25,6 +27,7 @@ export default function AddContactForm({ onClose }) {
       setErrors(newErrors);
       return;
     }
+    setLoading(true)
    try {
      const response = await axios.post(`${API_URL}admin/addcontact`,{
        name:name,
@@ -41,10 +44,13 @@ export default function AddContactForm({ onClose }) {
      onClose()
    } catch (error) {
     console.log("Something went wrong",error.message)
+   }finally{
+    setLoading(false)
    }
   };
 
   return (
+    <>
     <div className="add-contact-modal-overlay" onClick={onClose}>
       <form
         className="add-contact-modal add-contact-modal--compact"
@@ -156,5 +162,14 @@ export default function AddContactForm({ onClose }) {
         </div>
       </form>
     </div>
+     {loading && (
+                            <LoadingScreen
+                              state="listening"
+                              size={64}
+                              theme="dark"
+                              message="Signing Up"
+                            />
+                          )}
+    </>
   );
 }

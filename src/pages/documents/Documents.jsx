@@ -8,36 +8,63 @@ import "../../styles/BaseLayout.css";
 import "./Documents.css";
 import axios from "axios";
 import { API_URL } from "../../config";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 
 
 
 export default function Documents() {
   const [documents, setDocuments] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
 
   const handleRevoke = async(id) => {
     
-    await axios.delete(`${API_URL}document/deletedocument/${id}`,{withCredentials:true})
+    try {
+      await axios.delete(`${API_URL}document/deletedocument/${id}`,{withCredentials:true})
+    } catch (error) {
+      console.log("Something went wrong in deleting Document",error.message)
+    }finally{
+      setLoading(false)
+    }
   };
   const handleArchive = async(id) => {
     
-    await axios.get(`${API_URL}document/archivedocument/${id}`,{withCredentials:true})
+   try {
+     await axios.get(`${API_URL}document/archivedocument/${id}`,{withCredentials:true})
+   } catch (error) {
+    console.log("Something went wrong in deleting Document",error.message)
+   }finally{
+      setLoading(false)
+    }
   };
   const handleCancel= async(id) => {
     
-    await axios.get(`${API_URL}document/cancelrequest/${id}`,{withCredentials:true})
+   try {
+     await axios.get(`${API_URL}document/cancelrequest/${id}`,{withCredentials:true})
+   } catch (error) {
+    console.log("Something went wrong in Cancelling Request",error.message)
+   }finally{
+      setLoading(false)
+    }
   };
 
 
   useEffect(()=>{
   (async()=>{
-     const response = await axios.get(`${API_URL}document/getdocument`,{withCredentials:true})
-     console.log(response.data.message)
-     const docs= response.data.message
-     setDocuments(docs)
+    setLoading(true)
+     try {
+      const response = await axios.get(`${API_URL}document/getdocument`,{withCredentials:true})
+      console.log(response.data.message)
+      const docs= response.data.message
+      setDocuments(docs)
+     } catch (error) {
+      console.log("Something went wrong in Fetching Document",error.message)
+     }finally{
+      setLoading(false)
+     }
      
   })()
 },[])
@@ -138,6 +165,14 @@ export default function Documents() {
         {/* Table Section */}
         <DocumentsTable documents={filteredDocs} onRevoke={handleRevoke} onArchive={handleArchive} onCancel={handleCancel} />
       </>
+       {loading && (
+                              <LoadingScreen
+                                state="listening"
+                                size={64}
+                                theme="dark"
+                                message="Signing Up"
+                              />
+                            )}
     </Layout>
   );
 }
