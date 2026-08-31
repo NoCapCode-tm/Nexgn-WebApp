@@ -272,14 +272,8 @@ export default function ContactBook() {
         />
       )}
 
-      {loading && (
-                              <LoadingScreen
-                                state="listening"
-                                size={64}
-                                theme="dark"
-                                message="Signing Up"
-                              />
-                            )}
+    {loading && <LoadingScreen state="connecting" size={64} theme="dark" message="Rounding up your network" />}
+    
     </Layout>
   );
 }

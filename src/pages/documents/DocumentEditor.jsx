@@ -380,7 +380,7 @@ export default function DocumentEditor({ file, documentId }) {
         </aside>
       </div>
 
-      {loading && <LoadingScreen message="Processing Document..." />}
+    {loading && <LoadingScreen state="working" size={64} theme="dark" message="Locking your widgets in place" />}
     </div>
   );
 }

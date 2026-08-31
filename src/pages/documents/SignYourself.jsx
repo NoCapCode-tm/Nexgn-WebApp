@@ -628,14 +628,7 @@ import LoadingScreen from "../../components/Layout/LoadingScreen";
             )}
           </div>
         </>
-        {loading && (
-                                <LoadingScreen
-                                  state="listening"
-                                  size={64}
-                                  theme="dark"
-                                  message="Signing Up"
-                                />
-                              )}
+      {loading && <LoadingScreen state="working" size={64} theme="dark" message="Setting the stage" />}
       </Layout>
     );
   }

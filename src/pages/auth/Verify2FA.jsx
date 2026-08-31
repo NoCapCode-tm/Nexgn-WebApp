@@ -120,13 +120,7 @@ export default function Verify2FA() {
           </button>
         </form>
       </div>
-      {loading && (
-                  <LoadingScreen
-                    state="listening"
-                    size={64}
-                    message="Signing In"
-                  />
-                )}
+      {loading && <LoadingScreen state="connecting" size={64} message="Double-checking the locks" />}
     </AuthLayout>
   );
 }

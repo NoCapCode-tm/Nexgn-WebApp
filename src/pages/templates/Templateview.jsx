@@ -203,7 +203,7 @@ export default function TemplateView({ template, onBack, onEdit }) {
         </aside>
       </div>
 
-      {loading && <LoadingScreen message="Loading Template View..." />}
+      {loading && <LoadingScreen state="working" size={64} theme="dark" message="Unveiling your masterpiece" />}
     </div>
   );
 }

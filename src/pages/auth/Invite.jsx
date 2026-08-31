@@ -122,10 +122,10 @@ export default function Invite() {
       </div>
       {loading && (
             <LoadingScreen
-              state="listening"
+              state="working"
               size={64}
               theme="dark"
-              message="Signing Up"
+              message="Rolling out the red carpet"
             />
           )}
     </AuthLayout>

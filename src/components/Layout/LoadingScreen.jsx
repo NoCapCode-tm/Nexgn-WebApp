@@ -3,21 +3,23 @@ import { ThinkingOrb } from "thinking-orbs";
 import styles from "./LoadingScreen.module.css";
 
 export default function LoadingScreen({
-  state = "listening",
+  state = "working",
   size = 64,
   speed,
- //   theme="dark",
+  theme = "light",
   message
 }) {
   return (
     <div className={styles.overlay}>
       <div className={styles.loader}>
-        <ThinkingOrb
-          state={state}
-          size={size}
-        //   theme={theme}
-          {...(speed !== undefined ? { speed } : {})}
-        />
+        <div className={styles.orbWrapper}>
+          <ThinkingOrb
+            state={state}
+            size={size}
+            theme={theme}
+            {...(speed !== undefined ? { speed } : {})}
+          />
+        </div>
 
         {message && (
           <p className={styles.message}>

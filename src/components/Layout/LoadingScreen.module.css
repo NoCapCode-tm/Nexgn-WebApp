@@ -1,17 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 .overlay {
   position: fixed;
   inset: 0;
   z-index: 99999;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: rgba(255, 255, 255, 0.45);
-
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -21,11 +17,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   min-width: 120px;
   min-height: 120px;
-
   padding: 24px;
+}
+
+/* Colorize the canvas dots to #FF0915 using CSS filters */
+.orbWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 4px 12px rgba(255, 9, 21, 0.2));
+  
+  /* This filter string transforms standard black/monochrome pixels to #FF0915 */
+  filter: brightness(0) saturate(100%) invert(18%) sepia(99%) saturate(7432%) hue-rotate(356deg) brightness(98%) contrast(118%);
 }
 
 .message {
@@ -34,8 +39,6 @@
   font-size: 22px;
   letter-spacing: 1px;
   font-weight: 400;
-
-  color: red;
-
+  color: #FF0915;
   text-align: center;
 }

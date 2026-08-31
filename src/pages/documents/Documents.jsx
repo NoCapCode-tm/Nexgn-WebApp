@@ -165,14 +165,7 @@ export default function Documents() {
         {/* Table Section */}
         <DocumentsTable documents={filteredDocs} onRevoke={handleRevoke} onArchive={handleArchive} onCancel={handleCancel} />
       </>
-       {loading && (
-                              <LoadingScreen
-                                state="listening"
-                                size={64}
-                                theme="dark"
-                                message="Signing Up"
-                              />
-                            )}
+      {loading && <LoadingScreen state="connecting" size={64} theme="dark" message="Gathering your paperwork" />}
     </Layout>
   );
 }

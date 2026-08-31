@@ -35,10 +35,10 @@ export default function InviteDeny() {
       </div>
       {loading && (
                   <LoadingScreen
-                    state="listening"
+                    state="composing"
                     size={64}
                     theme="dark"
-                    message="Signing Up"
+                    message="Wrapping things up gracefully"
                   />
                 )}
     </AuthLayout>
