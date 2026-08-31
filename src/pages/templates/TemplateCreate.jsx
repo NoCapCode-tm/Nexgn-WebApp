@@ -428,7 +428,7 @@ export default function TemplateCreate({ templateName, templateFile, onBack }) {
         </aside>
       </div>
 
-      {loading && <LoadingScreen message="Processing Template..." />}
+      {loading && <LoadingScreen state="working" size={64} theme="dark" message="Forging your new blueprint" />}
     </div>
   );
 }

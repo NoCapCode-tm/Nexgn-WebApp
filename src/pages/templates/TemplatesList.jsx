@@ -215,14 +215,7 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
           </div>
         </div>
       </>
-      {loading && (
-                          <LoadingScreen
-                                state="listening"
-                                size={64}
-                                theme="dark"
-                                message="Signing Up"
-                              />
-                            )}
+      {loading && <LoadingScreen state="connecting" size={64} theme="dark" message="Dusting off your blueprints" />}
     </Layout>
   );
 }

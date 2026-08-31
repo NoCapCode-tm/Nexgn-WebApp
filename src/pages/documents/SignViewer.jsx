@@ -168,7 +168,7 @@ export default function SignViewer() {
     }
   };
 
-  if (loading) return <LoadingScreen message="Loading Document..." />;
+  if (loading) return <LoadingScreen state="working" size={64} theme="dark" message="Unfurling the digital scroll" />;
 
   // Mocks for Sidebar data (Map this to actual `request.recipient` data in production)
   const signees = request?.documentId?.assignedto || [];

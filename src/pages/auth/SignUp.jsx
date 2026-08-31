@@ -271,10 +271,10 @@ export default function SignUp() {
       </div>
        {loading && (
       <LoadingScreen
-        state="listening"
+        state="connecting"
         size={64}
         theme="dark"
-        message="Signing Up"
+        message="Crafting your Nexgn workspace"
       />
     )}
 
