@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { initAntiInspect } from "./utils/antiInspect";
+// import { initAntiInspect } from "./utils/antiInspect";
+
 
 
 import Invite from "./pages/auth/Invite";
@@ -21,17 +22,20 @@ import TemplatesPage from "./pages/templates/TemplatesPage";
 import useSystemTheme from "./hooks/useSystemTheme";
 import ProtectedRoute from "./components/routing/ProtectedRoute";
 import TemplateView from "./pages/templates/Templateview";
-import SignDocument from "./pages/documents/SignDocument";
+// import SignDocument from "./pages/documents/SignDocument";
 import { ToastContainer } from "react-toastify";
 import Pricing from "./pages/pricing/pricing";
 import Verify2FA from "./pages/auth/Verify2FA";
+import SignViewer from "./pages/documents/SignViewer";
+import DocumentEditor from "./pages/documents/DocumentEditor";
+import TemplateCreate from "./pages/templates/TemplateCreate";
 
 export default function App() {
 useSystemTheme();
 
-useEffect(() => {
-    initAntiInspect();
-  }, []);
+// useEffect(() => {
+//     initAntiInspect();
+//   }, []);
 
 
   return (
@@ -59,9 +63,12 @@ useEffect(() => {
     <Route path="/contact-book" element={<ContactBook />} />
     <Route path="/templates" element={<TemplatesPage />} />
     <Route path="/templates-view" element={<TemplateView/>} />
+    <Route path="/document-editor" element={<DocumentEditor/>} />       {/*DocumentEditor where we add widget make ready to sign doc and send it to signee*/}
+    <Route path="/template-creator" element={<TemplateCreate/>} />       {/*Templatecreator work when we have to make reusable document for signature*/}
+
     
     </Route>
-      <Route path="/document/:id" element={<SignDocument/>} />
+      <Route path="/document/:id" element={<SignViewer/>} />
       <Route path="*" element={<Navigate to="/" replace />} /> 
     </Routes>
 
