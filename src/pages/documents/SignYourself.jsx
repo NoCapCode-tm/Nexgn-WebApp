@@ -176,7 +176,7 @@ import LoadingScreen from "../../components/Layout/LoadingScreen";
         `${API_URL}document/create`,
         {
           title: docTitle,
-          templateid:  selectedTemplate.templateid._id,
+          templateid : selectedTemplate.templateid._id,
           senderip:ipv4,
           applicants: signers,
           expiry: expiresIn,
@@ -244,19 +244,21 @@ import LoadingScreen from "../../components/Layout/LoadingScreen";
       
     }
 
-    function zoomIn() {
-      setZoom((z) => Math.min(z + 10, 200));
-    }
-    function zoomOut() {
-      setZoom((z) => Math.max(z - 10, 50));
-    }
+    // function zoomIn() {
+    //   setZoom((z) => Math.min(z + 10, 200));
+    // }
+    // function zoomOut() {
+    //   setZoom((z) => Math.max(z - 10, 50));
+    // }
 
     if (view === "editor") {
       return (
         <div className="sign-yourself-editor-no-roles">
           <DocumentEditor
-            templateName={docTitle || uploadedFile || "Untitled Document"}
-            templateFile={uploadedFileObj}
+            title={docTitle || uploadedFile || "Untitled Document"}
+            file={uploadedFileObj}
+            signers={signers}
+            expiresIn={expiresIn}
             onBack={() => setView("form")}
           />
         </div>

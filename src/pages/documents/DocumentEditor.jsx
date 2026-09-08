@@ -30,7 +30,7 @@ const DEFAULT_WIDGET_SIZES = {
   date: { width: 120, height: 32 },
 };
 
-export default function DocumentEditor({ file, documentId }) {
+export default function DocumentEditor({title, file ,signers,expiresIn}) {
   const navigate = useNavigate();
 
   // PDF State
@@ -228,25 +228,64 @@ export default function DocumentEditor({ file, documentId }) {
 
   // --- Submit to Backend ---
 
+      async function getClientIPs() {
+  const [ipv4Res, ipv6Res] = await Promise.allSettled([
+    fetch("https://api.ipify.org?format=json"),
+    fetch("https://api6.ipify.org?format=json"),
+  ]);
+
+  const ipv4 =
+    ipv4Res.status === "fulfilled"
+      ? (await ipv4Res.value.json()).ip
+      : null;
+
+  const ipv6 =
+    ipv6Res.status === "fulfilled"
+      ? (await ipv6Res.value.json()).ip
+      : null;
+
+  return { ipv4, ipv6 };
+}
+
   const handleSend = async () => {
     setLoading(true);
     try {
-      // Structure matches TemplateWidgets.js schema
-      const payload = {
-        role: roles.length > 0 ? roles[0] : "Default Signer",
-        templateid: documentId, // Make sure this is passed down
-        widget: widgets.map((w) => ({
-          widgetname: w.widgetname,
-          page: w.page,
-          x: w.x,
-          y: w.y,
-          width: w.width,
-          height: w.height,
-        }))
-      };
+       const { ipv4, ipv6 } = await getClientIPs();
 
-      console.log("Submitting Payload:", payload);
-      // await axios.post(`${API_URL}document/fields`, payload, { withCredentials: true });
+     const formData = new FormData();
+
+    // File
+    formData.append("file", file);
+
+    // Normal fields
+    formData.append("title", title);
+    formData.append("senderip", ipv4);
+    formData.append("expiry", expiresIn);
+
+    // Arrays/objects must be JSON strings in FormData
+    formData.append(
+  "documentwidgets",
+  JSON.stringify(
+    widgets.map((w) => ({
+      widgetname: w.widgetname,
+      page: w.page,
+      x: w.x,
+      y: w.y,
+      width: w.width,
+      height: w.height,
+    }))
+  )
+);
+    formData.append("applicants", JSON.stringify(signers));
+        console.log("Submitting FormData:", {
+      title,
+      file,
+      documentwidgets: widgets,
+      applicants: signers,
+      senderip: ipv4,
+      expiry: expiresIn,
+    });
+      await axios.post(`${API_URL}document/create`, formData, { withCredentials: true });
       
       toast.success("Document and fields saved successfully!");
       navigate("/documents");
@@ -264,6 +303,7 @@ export default function DocumentEditor({ file, documentId }) {
       <header className={styles.header}>
         <button className={styles.backButton} onClick={() => navigate(-1)}>
           <ChevronLeft size={24} strokeWidth={2.5} />
+          {title}
         </button>
       </header>
 
@@ -330,7 +370,7 @@ export default function DocumentEditor({ file, documentId }) {
 
         {/* RIGHT SIDEBAR: Tools */}
         <aside className={styles.rightSidebar}>
-          <div>
+          {/* <div>
             <div className={styles.sectionLabel}>Roles</div>
             <input 
               type="text" 
@@ -342,7 +382,7 @@ export default function DocumentEditor({ file, documentId }) {
             <button className={styles.addRoleBtn} onClick={handleAddRole}>
               Add Role
             </button>
-          </div>
+          </div> */}
 
           <div>
             <div className={styles.sectionLabel}>Widgets</div>

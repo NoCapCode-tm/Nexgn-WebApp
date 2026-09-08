@@ -319,3 +319,253 @@
     margin-top: 24px;
   }
 }
+
+/* sign modal */
+.signatureWidgetPreview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px dashed #cfcfcf;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.signaturePlaceholder {
+  color: #777;
+  font-size: 13px;
+}
+
+.signaturePreviewImage {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+}
+
+
+/* =========================
+   SIGNATURE MODAL
+========================= */
+
+.signatureModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.signatureModal {
+  width: min(680px, calc(100vw - 32px));
+  min-height: 460px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+.signatureModalHeader {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  border-bottom: 1px solid #ddd;
+}
+
+.signatureModalHeader h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: #151515;
+}
+
+.signatureTabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 64px;
+  border-bottom: 1px solid #ccc;
+}
+
+.signatureTab {
+  border: none;
+  background: white;
+  font-size: 16px;
+  color: #c5c5c5;
+  cursor: pointer;
+  position: relative;
+}
+
+.signatureTabActive {
+  color: #111;
+}
+
+.signatureTabActive::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ef4444;
+}
+
+.signatureModalContent {
+  min-height: 245px;
+  background: #f6f6f6;
+  padding: 24px;
+}
+
+
+/* DRAW */
+
+.drawSignatureArea {
+  width: 100%;
+  height: 245px;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawCanvas {
+  width: 100%;
+  height: 190px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #dedede;
+  cursor: crosshair;
+}
+
+.drawHint {
+  text-align: center;
+  margin-top: 14px;
+  color: #888;
+  font-size: 13px;
+}
+
+
+/* TYPE */
+
+.typeSignatureArea {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.signatureNameInput {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 0 15px;
+  font-size: 16px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.signatureSuggestions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.signatureSuggestion {
+  height: 80px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 30px;
+  overflow: hidden;
+}
+
+.signatureSuggestion:hover {
+  border-color: #111;
+}
+
+
+/* UPLOAD */
+
+.uploadSignatureArea {
+  width: 100%;
+  height: 245px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px dashed #ddd;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.uploadIcon {
+  font-size: 40px;
+  color: #cfcfcf;
+  margin-bottom: 10px;
+}
+
+.uploadText {
+  color: #777;
+  font-size: 15px;
+}
+
+.uploadSubtext {
+  color: #aaa;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.uploadedSignaturePreview {
+  max-width: 80%;
+  max-height: 170px;
+  object-fit: contain;
+}
+
+
+/* FOOTER */
+
+.signatureModalFooter {
+  height: 86px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 0 28px;
+  box-sizing: border-box;
+}
+
+.signatureClearButton {
+  height: 56px;
+  min-width: 118px;
+  padding: 0 25px;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid #d4d4d4;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.signatureApplyButton {
+  height: 56px;
+  padding: 0 30px;
+  border: none;
+  border-radius: 12px;
+  background: #e50909;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.signatureApplyButton:hover {
+  background: #d40808;
+}
+
+.signatureApplyButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
