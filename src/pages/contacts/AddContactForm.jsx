@@ -162,14 +162,7 @@ export default function AddContactForm({ onClose }) {
         </div>
       </form>
     </div>
-     {loading && (
-                            <LoadingScreen
-                              state="listening"
-                              size={64}
-                              theme="dark"
-                              message="Signing Up"
-                            />
-                          )}
+    {loading && <LoadingScreen state="working" size={64} theme="dark" message="Welcoming a new connection" />}
     </>
   );
 }

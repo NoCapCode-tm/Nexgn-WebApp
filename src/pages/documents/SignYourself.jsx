@@ -3,7 +3,7 @@
   import Layout from "../../components/Layout/Layout";
   import Topbar from "../../components/Layout/Topbar";
   // import useWindowWidth from "../components/useWindowWidth";
-  import TemplateEditor from "../templates/TemplateEditor";
+  import DocumentEditor from "../documents/DocumentEditor";
   import { API_URL } from "../../config";
 
   import "../../styles/BaseLayout.css";
@@ -254,7 +254,7 @@ import LoadingScreen from "../../components/Layout/LoadingScreen";
     if (view === "editor") {
       return (
         <div className="sign-yourself-editor-no-roles">
-          <TemplateEditor
+          <DocumentEditor
             templateName={docTitle || uploadedFile || "Untitled Document"}
             templateFile={uploadedFileObj}
             onBack={() => setView("form")}
@@ -628,14 +628,7 @@ import LoadingScreen from "../../components/Layout/LoadingScreen";
             )}
           </div>
         </>
-        {loading && (
-                                <LoadingScreen
-                                  state="listening"
-                                  size={64}
-                                  theme="dark"
-                                  message="Signing Up"
-                                />
-                              )}
+      {loading && <LoadingScreen state="working" size={64} theme="dark" message="Setting the stage" />}
       </Layout>
     );
   }

@@ -67,14 +67,7 @@ export default function ForgotPassword() {
           </p>
         </form>
       </div>
-       {loading && (
-                        <LoadingScreen
-                          state="listening"
-                          size={64}
-                          theme="dark"
-                          message="Signing Up"
-                        />
-                      )}
+      {loading && <LoadingScreen state="working" size={64} theme="dark" message="Sending a digital lifeline" />}
     </AuthLayout>
   );
 }

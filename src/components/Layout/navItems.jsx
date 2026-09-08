@@ -60,7 +60,7 @@ export const ADMIN_NAV_ITEMS = [
 
 export const ADMIN_BOTTOM_ITEMS = [
   { label: "Settings", path: "/settings", icon: SettingsIcon },
-  { label: "Help",     path: "/help",            icon: HelpIcon },
+  { label: "Help",     path: "https://prod.nexgn.cloud/help",            icon: HelpIcon },
 ];
 
 export const ADMIN_MOBILE_NAV_ITEMS = [
