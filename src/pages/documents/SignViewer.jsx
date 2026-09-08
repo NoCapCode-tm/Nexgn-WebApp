@@ -9,7 +9,6 @@ import { API_URL } from "../../config";
 import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 import styles from "./SignViewer.module.css";
-
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 export default function SignViewer() {
@@ -34,6 +33,20 @@ export default function SignViewer() {
 
   const canvasRef = useRef(null);
   const sigCanvasRefs = useRef({});
+  const [signatureModalOpen, setSignatureModalOpen] = useState(false);
+const [activeSignatureWidget, setActiveSignatureWidget] = useState(null);
+
+const [signatureTab, setSignatureTab] = useState("draw");
+
+const [typedName, setTypedName] = useState("");
+const [selectedSignatureFont, setSelectedSignatureFont] = useState(
+  "cursive"
+);
+
+const [tempSignature, setTempSignature] = useState(null);
+
+const modalSignatureCanvasRef = useRef(null);
+const uploadInputRef = useRef(null);
 
   // 1. Fetch Document and Signature Request Data
   useEffect(() => {
@@ -46,6 +59,7 @@ export default function SignViewer() {
         });
         const reqData = reqRes.data.message;
         setRequest(reqData);
+        console.log(reqData)
 
         if (reqData.overallStatus === "completed") {
           toast.info("This document is already completed.");
@@ -72,24 +86,50 @@ export default function SignViewer() {
   }, [id]);
 
   // 2. Load PDF Document from Template ID
-  useEffect(() => {
-    if (!documentDetails?.templateId?.file) return;
+ useEffect(() => {
+  if (!documentDetails) return;
 
-    async function loadPdf() {
-      try {
-        const loadingTask = pdfjsLib.getDocument(
-          `${API_URL}template/template/${documentDetails.templateId._id}/pdf`
-        );
-        const pdf = await loadingTask.promise;
-        setPdfDoc(pdf);
-        setPages(Array.from({ length: pdf.numPages }, (_, i) => i + 1));
-      } catch (err) {
-        console.error("PDF Loading Error:", err);
+  async function loadPdf() {
+    try {
+      let pdfUrl;
+
+      if (documentDetails.driveFileId) {
+        pdfUrl = `${API_URL}document/${documentDetails._id}/pdf`;
+      } else if (documentDetails.templateId?.file) {
+        pdfUrl =
+          `${API_URL}template/template/${documentDetails.templateId._id}/pdf`;
+      } else {
+        console.error("No PDF source:", documentDetails);
+        return;
       }
-    }
-    loadPdf();
-  }, [documentDetails]);
 
+      console.log("PDF URL:", pdfUrl);
+
+      const loadingTask = pdfjsLib.getDocument({
+        url: pdfUrl,
+        withCredentials: true,
+      });
+
+      const pdf = await loadingTask.promise;
+
+      console.log("PDF successfully loaded:", pdf);
+
+      setPdfDoc(pdf);
+      setPages(
+        Array.from(
+          { length: pdf.numPages },
+          (_, i) => i + 1
+        )
+      );
+
+    } catch (err) {
+      console.error("PDF Loading Error:", err);
+      toast.error("Failed to load PDF.");
+    }
+  }
+
+  loadPdf();
+}, [documentDetails]);
   // 3. Render the Active PDF Page & Capture Original Dimensions
   useEffect(() => {
     if (!pdfDoc || !canvasRef.current) return;
@@ -130,6 +170,152 @@ export default function SignViewer() {
     if (!canvas || canvas.isEmpty()) return;
     setValues((prev) => ({ ...prev, [index]: canvas.toDataURL("image/png") }));
   };
+  const signatureStyles = [
+  {
+    id: "style-1",
+    fontFamily: "cursive",
+    fontStyle: "italic",
+    fontWeight: "500",
+  },
+  {
+    id: "style-2",
+    fontFamily: "'Brush Script MT', cursive",
+    fontStyle: "italic",
+    fontWeight: "400",
+  },
+  {
+    id: "style-3",
+    fontFamily: "'Lucida Handwriting', cursive",
+    fontStyle: "italic",
+    fontWeight: "400",
+  },
+  {
+    id: "style-4",
+    fontFamily: "'Segoe Script', cursive",
+    fontStyle: "italic",
+    fontWeight: "500",
+  },
+];
+const generateTypedSignature = (style) => {
+  if (!typedName.trim()) {
+    toast.error("Please enter your name first.");
+    return;
+  }
+
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = 900;
+  canvas.height = 250;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#111";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  ctx.font = `${style.fontStyle || "normal"} ${style.fontWeight || "400"} 82px ${
+    style.fontFamily
+  }`;
+
+  ctx.fillText(
+    typedName.trim(),
+    canvas.width / 2,
+    canvas.height / 2
+  );
+
+  setSelectedSignatureFont(style.fontFamily);
+  setTempSignature(canvas.toDataURL("image/png"));
+};
+  const openSignatureModal = (widgetIndex) => {
+  const existingValue = values[widgetIndex] || "";
+
+  setActiveSignatureWidget(widgetIndex);
+  setTempSignature(existingValue || null);
+
+  setSignatureTab("draw");
+  setTypedName("");
+  setSelectedSignatureFont("cursive");
+
+  setSignatureModalOpen(true);
+};
+
+const closeSignatureModal = () => {
+  setSignatureModalOpen(false);
+  setActiveSignatureWidget(null);
+  setTempSignature(null);
+};
+
+const clearDrawSignature = () => {
+  modalSignatureCanvasRef.current?.clear();
+  setTempSignature(null);
+};
+
+const saveDrawSignature = () => {
+  const canvas = modalSignatureCanvasRef.current;
+
+  if (!canvas || canvas.isEmpty()) {
+    setTempSignature(null);
+    return;
+  }
+
+  const dataUrl = canvas.toDataURL("image/png");
+  setTempSignature(dataUrl);
+};
+
+const handleSignatureUpload = (e) => {
+  const file = e.target.files?.[0];
+
+  if (!file) return;
+
+  if (!["image/png", "image/jpeg", "image/jpg"].includes(file.type)) {
+    toast.error("Please upload a PNG or JPG signature.");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const img = new Image();
+
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      const ctx = canvas.getContext("2d");
+
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+      ctx.drawImage(
+        img,
+        0,
+        0,
+        img.width,
+        img.height
+      );
+
+      // ALWAYS convert uploaded signatures to PNG
+      const pngDataUrl = canvas.toDataURL("image/png");
+
+      setTempSignature(pngDataUrl);
+    };
+
+    img.onerror = () => {
+      toast.error("Unable to read signature image.");
+    };
+
+    img.src = reader.result;
+  };
+
+  reader.readAsDataURL(file);
+};
 
   // Submit Handler
   const handleSubmit = async () => {
@@ -175,6 +361,7 @@ export default function SignViewer() {
   const senderName = request?.senderId?.name || "System Admin";
 
   return (
+    <>
     <div className={styles.pageWrapper}>
       {/* Header */}
       <header className={styles.header}>
@@ -225,16 +412,27 @@ export default function SignViewer() {
                       height: `${heightPercent}%`,
                     }}
                   >
-                    {w.widgetname === "signature" ? (
-                      <SignatureCanvas
-                        ref={(ref) => (sigCanvasRefs.current[w.index] = ref)}
-                        penColor="black"
-                        canvasProps={{
-                          style: { width: "100%", height: "100%", cursor: "crosshair" },
-                        }}
-                        onEnd={() => handleSignatureEnd(w.index)}
-                      />
-                    ) : (
+                   {w.widgetname === "signature" ? (
+  <div
+    className={styles.signatureWidgetPreview}
+    onClick={(e) => {
+      e.stopPropagation();
+      openSignatureModal(w.index);
+    }}
+  >
+    {values[w.index] ? (
+      <img
+        src={values[w.index]}
+        alt="Signature"
+        className={styles.signaturePreviewImage}
+      />
+    ) : (
+      <span className={styles.signaturePlaceholder}>
+        Click to sign
+      </span>
+    )}
+  </div>
+) : (
                       <input
                         className={styles.widgetInput}
                         type={w.widgetname === "date" ? "date" : "text"}
@@ -297,6 +495,208 @@ export default function SignViewer() {
         </aside>
       </div>
     </div>
+    
+    {signatureModalOpen && (
+  <div
+    className={styles.signatureModalOverlay}
+    onMouseDown={(e) => {
+      if (e.target === e.currentTarget) {
+        closeSignatureModal();
+      }
+    }}
+  >
+    <div className={styles.signatureModal}>
+
+      {/* Header */}
+      <div className={styles.signatureModalHeader}>
+        <h2>Sign Document</h2>
+      </div>
+
+      {/* Tabs */}
+      <div className={styles.signatureTabs}>
+
+        <button
+          className={`${styles.signatureTab} ${
+            signatureTab === "draw"
+              ? styles.signatureTabActive
+              : ""
+          }`}
+          onClick={() => setSignatureTab("draw")}
+        >
+          Draw
+        </button>
+
+        <button
+          className={`${styles.signatureTab} ${
+            signatureTab === "type"
+              ? styles.signatureTabActive
+              : ""
+          }`}
+          onClick={() => setSignatureTab("type")}
+        >
+          Type
+        </button>
+
+        <button
+          className={`${styles.signatureTab} ${
+            signatureTab === "upload"
+              ? styles.signatureTabActive
+              : ""
+          }`}
+          onClick={() => setSignatureTab("upload")}
+        >
+          Upload
+        </button>
+
+      </div>
+
+      {/* Content */}
+      <div className={styles.signatureModalContent}>
+
+        {/* DRAW */}
+        {signatureTab === "draw" && (
+          <div className={styles.drawSignatureArea}>
+
+            <SignatureCanvas
+              ref={modalSignatureCanvasRef}
+              penColor="black"
+              canvasProps={{
+                className: styles.drawCanvas,
+              }}
+              onEnd={saveDrawSignature}
+            />
+
+            <div className={styles.drawHint}>
+              Draw your signature above
+            </div>
+
+          </div>
+        )}
+
+        {/* TYPE */}
+        {signatureTab === "type" && (
+          <div className={styles.typeSignatureArea}>
+
+            <input
+              type="text"
+              value={typedName}
+              onChange={(e) => setTypedName(e.target.value)}
+              placeholder="Enter your name"
+              className={styles.signatureNameInput}
+            />
+
+            <div className={styles.signatureSuggestions}>
+
+              {signatureStyles.map((style) => (
+                <button
+                  key={style.id}
+                  className={styles.signatureSuggestion}
+                  onClick={() => generateTypedSignature(style)}
+                >
+                  <span
+                    style={{
+                      fontFamily: style.fontFamily,
+                      fontStyle: style.fontStyle,
+                      fontWeight: style.fontWeight,
+                    }}
+                  >
+                    {typedName || "Your Name"}
+                  </span>
+                </button>
+              ))}
+
+            </div>
+
+          </div>
+        )}
+
+        {/* UPLOAD */}
+        {signatureTab === "upload" && (
+          <div
+            className={styles.uploadSignatureArea}
+            onClick={() => uploadInputRef.current?.click()}
+          >
+
+            <input
+              ref={uploadInputRef}
+              type="file"
+              accept="image/png,image/jpeg"
+              hidden
+              onChange={handleSignatureUpload}
+            />
+
+            {tempSignature ? (
+              <img
+                src={tempSignature}
+                alt="Uploaded signature"
+                className={styles.uploadedSignaturePreview}
+              />
+            ) : (
+              <>
+                <div className={styles.uploadIcon}>
+                  ↑
+                </div>
+
+                <div className={styles.uploadText}>
+                  Click to upload signature
+                </div>
+
+                <div className={styles.uploadSubtext}>
+                  PNG or JPG
+                </div>
+              </>
+            )}
+
+          </div>
+        )}
+
+      </div>
+
+      {/* Footer */}
+      <div className={styles.signatureModalFooter}>
+
+        <button
+          className={styles.signatureClearButton}
+          onClick={() => {
+            if (signatureTab === "draw") {
+              clearDrawSignature();
+            } else {
+              setTempSignature(null);
+            }
+          }}
+        >
+          Clear
+        </button>
+
+        <button
+          className={styles.signatureApplyButton}
+          disabled={!tempSignature}
+          onClick={() => {
+
+            if (!tempSignature) {
+              toast.error("Please create or upload a signature.");
+              return;
+            }
+
+            setValues((prev) => ({
+              ...prev,
+              [activeSignatureWidget]: tempSignature,
+            }));
+
+            closeSignatureModal();
+          }}
+        >
+          Apply Signature
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+)}
+    </>
+
+    
   );
 }
 
