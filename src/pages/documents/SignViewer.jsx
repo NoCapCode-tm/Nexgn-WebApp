@@ -470,7 +470,7 @@ const handleSignatureUpload = (e) => {
                     <p className={styles.signeeEmail}>{signee.email}</p>
                   </div>
                   <span className={`${styles.statusBadge} ${request?.overallStatus === 'completed' ? styles.statusCompleted : styles.statusPending}`}>
-                    {request?.overallStatus === 'completed' ? 'Signed' : 'Pending'}
+                    {request?.overallStatus}
                   </span>
                 </div>
               ))}
