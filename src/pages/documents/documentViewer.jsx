@@ -53,13 +53,12 @@ export default function DocumentViewer() {
     async function loadData() {
       setLoading(true);
       try {
-        // // Fetch the signature request
-        // const reqRes = await axios.get(`${API_URL}document/${id}`, {
-        //   withCredentials: true,
-        // });
-        // const reqData = reqRes.data.message;
-        // setRequest(reqData);
-        // console.log(reqData)
+        // Fetch the signature request
+        const reqRes = await axios.get(`${API_URL}sign/getrequests`, {
+          withCredentials: true,
+        });
+        const reqData = reqRes.data.message.filter((s)=>s?.documentId === id);
+        setRequest(reqData);
 
         // if (reqData.status === "completed") {
         //   toast.info("This document is already completed.");
@@ -455,15 +454,15 @@ export default function DocumentViewer() {
           <div>
             <div className={styles.sectionLabel}>Signee</div>
             <div className={styles.signeeList}>
-              {signees.map((signee, idx) => (
+              {request.map((signee, idx) => (
                 <div key={idx} className={styles.signeeCard}>
                   <div className={styles.signeeAvatar} />
                   <div className={styles.signeeInfo}>
-                    <h4 className={styles.signeeName}>{signee.name}</h4>
-                    <p className={styles.signeeEmail}>{signee.email}</p>
+                    <h4 className={styles.signeeName}>{signee?.recipient?.userId?.name}</h4>
+                    <p className={styles.signeeEmail}>{signee?.recipient?.userId?.email}</p>
                   </div>
-                  <span className={`${styles.statusBadge} ${request?.overallStatus === 'completed' ? styles.statusCompleted : styles.statusPending}`}>
-                    {request?.overallStatus === 'completed' ? 'Signed' : 'Pending'}
+                  <span className={`${styles.statusBadge} ${signee?.overallStatus === 'completed' ? styles.statusCompleted : styles.statusPending}`}>
+                    {signee?.overallStatus}
                   </span>
                 </div>
               ))}
