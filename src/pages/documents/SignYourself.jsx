@@ -138,6 +138,8 @@ import LoadingScreen from "../../components/Layout/LoadingScreen";
     verifyUser();
   }, []);
 
+  
+
 
     async function getClientIPs() {
   const [ipv4Res, ipv6Res] = await Promise.allSettled([
@@ -158,6 +160,15 @@ import LoadingScreen from "../../components/Layout/LoadingScreen";
   return { ipv4, ipv6 };
 }
 
+const applicants =
+  activeTab === "/sign-yourself"
+    ? [
+        {
+          name: authenticated?.name || "",
+          email: authenticated?.email || "",
+        },
+      ]
+    : signers;
     const handleNext = async (e) => {
   e.preventDefault();
   setLoading(true)
@@ -172,22 +183,27 @@ import LoadingScreen from "../../components/Layout/LoadingScreen";
       console.log("IPv4:", ipv4);
       console.log("IPv6:", ipv6);
 
-      await axios.post(
-        `${API_URL}document/create`,
-        {
-          title: docTitle,
-          templateid : selectedTemplate.templateid._id,
-          senderip:ipv4,
-          applicants: signers,
-          expiry: expiresIn,
-          note:note
-        },
-        {
-          withCredentials: true,
-        }
-      );
+    const response =  await axios.post(
+  `${API_URL}document/create`,
+  {
+    title: docTitle,
+    templateid: selectedTemplate.templateid._id,
+    senderip: ipv4,
+   pathname : location.pathname,
+    applicants:applicants,
 
-      navigate("/documents");
+    expiry: activeTab === "request" ? expiresIn : undefined,
+    note: note
+  },
+  {
+    withCredentials: true
+  }
+);
+if(location.pathname === "/sign-yourself"){
+        navigate(`/document/${response.data.message}`);
+      }else{
+        navigate("/documents");
+      }
       // or success toast
     } catch (err) {
       console.log(err);
@@ -223,6 +239,7 @@ import LoadingScreen from "../../components/Layout/LoadingScreen";
         setNote("");
         setFieldType("Signature");
         setRequired(true);
+        setSigners([{name:authenticated?.name , email:authenticated?.email}])
       }
     };
 
@@ -251,12 +268,22 @@ import LoadingScreen from "../../components/Layout/LoadingScreen";
     //   setZoom((z) => Math.max(z - 10, 50));
     // }
 
+    const currentSigner =
+  activeTab === "sign"
+    ? {
+        name: authenticated?.name || "",
+        email: authenticated?.email || "",
+      }
+    : null;
+
     if (view === "editor") {
       return (
         <div className="sign-yourself-editor-no-roles">
           <DocumentEditor
+            // page ={location.pathname}
             title={docTitle || uploadedFile || "Untitled Document"}
             file={uploadedFileObj}
+            currentSigners ={currentSigner}
             signers={signers}
             expiresIn={expiresIn}
             onBack={() => setView("form")}
@@ -407,8 +434,9 @@ import LoadingScreen from "../../components/Layout/LoadingScreen";
                       <label className="form-label">Signer</label>
                       <input
                         type="text"
+                        value={authenticated?.name||""}
                         className="form-input"
-                        placeholder="You (Auto-filled)"
+                        placeholder={signers[0]?.name}
                         readOnly
                       />
                     </div>

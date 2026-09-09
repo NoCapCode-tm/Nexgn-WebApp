@@ -1,13 +1,17 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 export default function DocumentsRow({
  doc,
+ id,
   onRevoke,
   onArchive,
   onCancel
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const navigate = useNavigate();
+ 
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -213,11 +217,15 @@ export default function DocumentsRow({
         </button>
         {menuOpen && (
           <div className="action-menu">
-            <button className="action-menu__item">View</button>
+            <button className="action-menu__item" onClick={() => {
+                setMenuOpen(false);
+                navigate(`/document/view/${id}`)
+              }}>View</button>
             <button
               className="action-menu__item action-menu__item--danger"
               onClick={() => {
                 setMenuOpen(false);
+                navigate(`/document/view/${id}`)
                 if (onRevoke) onRevoke();
               }}
             >

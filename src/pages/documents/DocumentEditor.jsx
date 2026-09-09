@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import { 
@@ -30,8 +30,11 @@ const DEFAULT_WIDGET_SIZES = {
   date: { width: 120, height: 32 },
 };
 
-export default function DocumentEditor({title, file ,signers,expiresIn}) {
+export default function DocumentEditor({title, file ,signers,currentSigners,expiresIn}) {
   const navigate = useNavigate();
+   const location = useLocation();
+    const activeTab =
+      location.pathname
 
   // PDF State
   const [pdfDoc, setPdfDoc] = useState(null);
@@ -54,6 +57,16 @@ export default function DocumentEditor({title, file ,signers,expiresIn}) {
   const pdfWrapperRef = useRef(null);
   const dragOffsetRef = useRef({ x: 0, y: 0 });
   const resizeStartRef = useRef({ x: 0, y: 0, width: 0, height: 0 });
+
+  const applicants =
+  activeTab === "/sign-yourself"
+    ? [
+        {
+          name: currentSigners?.name || "",
+          email: currentSigners?.email || "",
+        },
+      ]
+    : signers;
 
   // 1. Load PDF from File Prop (or fetch by ID if modifying existing logic)
   useEffect(() => {
@@ -254,16 +267,12 @@ export default function DocumentEditor({title, file ,signers,expiresIn}) {
 
      const formData = new FormData();
 
-    // File
-    formData.append("file", file);
-
-    // Normal fields
-    formData.append("title", title);
-    formData.append("senderip", ipv4);
-    formData.append("expiry", expiresIn);
-
-    // Arrays/objects must be JSON strings in FormData
-    formData.append(
+     if(activeTab === "/sign-yourself"){
+      formData.append("file", file);
+      formData.append("title", title);
+      formData.append("senderip", ipv4);
+      formData.append("pathname",activeTab)
+      formData.append(
   "documentwidgets",
   JSON.stringify(
     widgets.map((w) => ({
@@ -276,7 +285,29 @@ export default function DocumentEditor({title, file ,signers,expiresIn}) {
     }))
   )
 );
-    formData.append("applicants", JSON.stringify(signers));
+    formData.append("applicants", JSON.stringify(applicants));
+     }else{
+      formData.append("file", file);
+      formData.append("pathname",activeTab)
+      formData.append("title", title);
+      formData.append("senderip", ipv4);
+      formData.append("expiry", expiresIn);
+      formData.append(
+  "documentwidgets",
+  JSON.stringify(
+    widgets.map((w) => ({
+      widgetname: w.widgetname,
+      page: w.page,
+      x: w.x,
+      y: w.y,
+      width: w.width,
+      height: w.height,
+    }))
+  )
+);
+    formData.append("applicants", JSON.stringify(applicants));
+     }
+    
         console.log("Submitting FormData:", {
       title,
       file,
@@ -285,10 +316,15 @@ export default function DocumentEditor({title, file ,signers,expiresIn}) {
       senderip: ipv4,
       expiry: expiresIn,
     });
-      await axios.post(`${API_URL}document/create`, formData, { withCredentials: true });
+      const response = await axios.post(`${API_URL}document/create`, formData, { withCredentials: true });
       
       toast.success("Document and fields saved successfully!");
-      navigate("/documents");
+      if(activeTab === "/sign-yourself"){
+        navigate(`/document/${response.data.message}`);
+      }else{
+        navigate("/documents");
+      }
+      
     } catch (error) {
       console.error(error);
       toast.error("Failed to save document fields.");
@@ -415,7 +451,7 @@ export default function DocumentEditor({title, file ,signers,expiresIn}) {
           </div>
 
           <button className={styles.sendBtn} onClick={handleSend}>
-            Send
+            {activeTab === "/sign-yourself" ? "Save" :"Send"}
           </button>
         </aside>
       </div>

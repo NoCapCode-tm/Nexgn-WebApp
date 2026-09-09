@@ -29,6 +29,7 @@ import Verify2FA from "./pages/auth/Verify2FA";
 import SignViewer from "./pages/documents/SignViewer";
 import DocumentEditor from "./pages/documents/DocumentEditor";
 import TemplateCreate from "./pages/templates/TemplateCreate";
+import DocumentViewer from "./pages/documents/documentViewer";
 
 export default function App() {
 useSystemTheme();
@@ -64,7 +65,8 @@ useSystemTheme();
     <Route path="/templates" element={<TemplatesPage />} />
     <Route path="/templates-view" element={<TemplateView/>} />
     <Route path="/document-editor" element={<DocumentEditor/>} />       {/*DocumentEditor where we add widget make ready to sign doc and send it to signee*/}
-    <Route path="/template-creator" element={<TemplateCreate/>} />       {/*Templatecreator work when we have to make reusable document for signature*/}
+    <Route path="/template-creator" element={<TemplateCreate/>} /> 
+    <Route path="/document/view/:id" element={<DocumentViewer/>} />
 
     
     </Route>

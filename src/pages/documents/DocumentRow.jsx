@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { FileText, MoreHorizontal, X } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const statusClass = {
   Pending: "badge--pending",
@@ -7,9 +8,10 @@ const statusClass = {
   Expired: "badge--expired",
 };
 
-export default function DocumentRow({ title, note, assignedto, createdBy, status, onRevoke }) {
+export default function DocumentRow({_id, title, note, assignedto, createdBy, status, onRevoke }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -45,7 +47,9 @@ export default function DocumentRow({ title, note, assignedto, createdBy, status
           <div className="doc-row__dropdown">
             <button
               className="doc-row__dropdown-item"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {setMenuOpen(false)
+                navigate(`/document/view/${_id}`)
+              }}
             >
               View
             </button>
