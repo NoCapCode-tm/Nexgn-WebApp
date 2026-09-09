@@ -19,6 +19,7 @@ export default function DocumentsTable({ documents, onRevoke ,onArchive,onCancel
             <DocumentsRow
               key={idx}
               doc={doc}
+              id={doc._id}
               onRevoke={() => onRevoke && onRevoke(doc._id)}
               onArchive={()=>onArchive && onArchive(doc._id)}
               onCancel={()=>onCancel && onCancel(doc._id)}
