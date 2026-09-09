@@ -85,6 +85,14 @@ const uploadInputRef = useRef(null);
     loadData();
   }, [id]);
 
+  // useEffect(()=>{
+  //   (async()=>{
+  //      await axios.post(`${API_URL}sign/statuschange`,{
+  //       id:id
+  //      },{withCredentials:true})
+  //   })()
+  // },[])
+
   // 2. Load PDF Document from Template ID
  useEffect(() => {
   if (!documentDetails) return;
