@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MoreHorizontal, X, Plus } from "lucide-react";
+import { MoreHorizontal, X, Plus, Recycle } from "lucide-react";
 import Layout from "../../components/Layout/Layout";
 import Topbar from "../../components/Layout/Topbar";
 
@@ -27,9 +27,26 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
       setLoading(false)
     }
   };
+  const handleArchive = async (id) => {
+  setLoading(true);
+
+  try {
+    await axios.post(
+      `${API_URL}template/archivetemplate/${id}`,
+      {}, // request body
+      {
+        withCredentials: true, // Axios config
+      }
+    );
+  } catch (error) {
+    console.log(error.response?.data || error.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const filtered = templates.filter((t) =>
-    t?.templateid?.name?.toLowerCase().includes(search.toLowerCase())
+    (t?.templateid?.name?.toLowerCase().includes(search.toLowerCase())) && (t?.templateid?.isDeleted === false)
   );
 
   useEffect(()=>{
@@ -203,6 +220,16 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
                       >
                         <X size={13} />
                         Revoke
+                      </button>
+                      <button
+                        className="action-menu__item action-menu__item--danger"
+                        onClick={() => {
+                          setOpenMenuId(null);
+                          handleArchive(t.templateid._id);
+                        }}
+                      >
+                        <Recycle size={13} />
+                        Archive
                       </button>
                     </div>
                   )}

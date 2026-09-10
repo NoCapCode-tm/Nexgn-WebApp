@@ -4631,3 +4631,54 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
   width: auto;
   padding: 13px 32px;
 }
+
+/* ==========================================================
+   Recycle Bin
+========================================================== */
+.admin-settings-card--recycle-bin { width: 100%; max-width: 1110px !important; padding: 24px 28px; background: #ffffff; border: 1px solid #E4E4E4; border-radius: 12px; box-shadow: 0px 0px 14.5px 1px rgba(131, 131, 131, 0.10); }
+.admin-settings-card--recycle-bin .admin-settings-card__title { margin-bottom: 0; }
+.admin-settings-card--recycle-bin, .admin-settings-card--recycle-bin * { white-space: normal !important; }
+.recycle-bin-toolbar { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 24px; }
+.recycle-bin-toggle-group { display: inline-flex; align-items: center; gap: 4px; padding: 4px; background: #F5F5F5; border: 1px solid #E4E4E4; border-radius: 10px; }
+.recycle-bin-toggle { min-width: 104px; height: 36px; padding: 8px 16px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; color: #666666; background: transparent; border: 1px solid transparent; border-radius: 7px; cursor: pointer; transition: all 0.2s ease; }
+.recycle-bin-toggle:hover { color: #111111; background: #FFFFFF; }
+.recycle-bin-toggle--active { color: #E5252A; background: #FFFFFF; border-color: #E5252A; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06); }
+.recycle-bin-list { display: flex; flex-direction: column; gap: 12px; }
+.recycle-bin-item { display: flex; align-items: center; gap: 14px; min-height: 70px; padding: 14px 16px; background: #FBFBFB; border: 1px solid #E4E4E4; border-radius: 12px; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.recycle-bin-item:hover { border-color: #D4D4D4; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04); }
+.recycle-bin-item__icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 42px; height: 42px; color: #E5252A; background: #FFF0F0; border-radius: 10px; }
+.recycle-bin-item__info { flex: 1; min-width: 0; }
+.recycle-bin-item__info h3 { margin: 0 0 4px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: #111111; overflow: hidden; text-overflow: ellipsis; }
+.recycle-bin-item__info p { margin: 0; font-family: 'Inter', sans-serif; font-size: 11px; color: #8A949F; }
+.recycle-bin-item__actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.recycle-bin-action { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 34px; padding: 7px 12px; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; border-radius: 7px; cursor: pointer; transition: all 0.2s ease; }
+.recycle-bin-action--restore { color: #4B9B66; background: #FFFFFF; border: 1px solid #B9DEC5; }
+.recycle-bin-action--restore:hover { background: #EFFAF2; border-color: #4B9B66; }
+.recycle-bin-action--delete { color: #E5252A; background: #FFFFFF; border: 1px solid #E5252A; }
+.recycle-bin-action--delete:hover { background: #FFF0F0; }
+.recycle-bin-empty { display: flex; align-items: center; justify-content: center; flex-direction: column; min-height: 240px; padding: 32px; text-align: center; background: #FBFBFB; border: 1px dashed #D8D8D8; border-radius: 12px; }
+.recycle-bin-empty__icon { display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; margin-bottom: 12px; color: #8A949F; background: #F2F2F2; border-radius: 50%; }
+.recycle-bin-empty h3 { margin: 0 0 6px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: #333333; }
+.recycle-bin-empty p { max-width: 380px; margin: 0; font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1.5; color: #8A949F; }
+body.dark-mode .admin-settings-page .recycle-bin-toggle-group { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.15) !important; }
+body.dark-mode .admin-settings-page .recycle-bin-toggle { color: #b8b8be !important; }
+body.dark-mode .admin-settings-page .recycle-bin-toggle:hover { color: #ffffff !important; background: rgba(255,255,255,0.06) !important; }
+body.dark-mode .admin-settings-page .recycle-bin-toggle--active { color: #E5252A !important; background: transparent !important; border-color: #E5252A !important; }
+body.dark-mode .admin-settings-page .recycle-bin-item { background: rgb(17 17 17 / 15%) !important; border-color: #746b6b !important; }
+body.dark-mode .admin-settings-page .recycle-bin-item__icon { color: #E5252A !important; background: rgba(229,37,42,0.10) !important; }
+body.dark-mode .admin-settings-page .recycle-bin-item__info h3 { color: #ffffff !important; }
+body.dark-mode .admin-settings-page .recycle-bin-item__info p, body.dark-mode .admin-settings-page .recycle-bin-empty p { color: #9a9a9a !important; }
+body.dark-mode .admin-settings-page .recycle-bin-action--restore { color: #2ECC71 !important; background: transparent !important; border-color: #2ECC71 !important; }
+body.dark-mode .admin-settings-page .recycle-bin-action--delete { color: #E5252A !important; background: transparent !important; border-color: #E5252A !important; }
+body.dark-mode .admin-settings-page .recycle-bin-empty { background: rgba(255,255,255,0.02) !important; border-color: rgba(255,255,255,0.15) !important; }
+body.dark-mode .admin-settings-page .recycle-bin-empty h3 { color: #e5e5e5 !important; }
+@media (max-width: 768px) {
+  .admin-settings-page .admin-settings-card--recycle-bin { padding-left: 24px !important; padding-right: 24px !important; }
+  .recycle-bin-toolbar { margin-bottom: 16px; overflow-x: auto; }
+  .recycle-bin-toggle-group { width: 100%; }
+  .recycle-bin-toggle { flex: 1; min-width: 0; padding: 8px 10px; }
+  .recycle-bin-item { align-items: flex-start; flex-wrap: wrap; padding: 14px; }
+  .recycle-bin-item__info { padding-top: 3px; max-width: calc(100% - 60px); }
+  .recycle-bin-item__actions { width: 100%; padding-left: 56px; }
+  .recycle-bin-action { flex: 1; }
+}

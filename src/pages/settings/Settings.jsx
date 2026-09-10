@@ -18,6 +18,8 @@ import {
   AlertCircle,
   PauseCircle,
   Trash2,
+  Archive,
+  RotateCcw,
   MoreVertical,
   Filter,
   Plus,
@@ -47,6 +49,7 @@ const settingsNavItems = [
   { key: "billing", label: "Billing", active: true },
   { key: "integrations", label: "Integrations", active: true },
   { key: "audit", label: "Audit Logs", active: true },
+  { key: "recycle-bin", label: "Recycle Bin", active: true },
 ];
 
 /* ── Hook: true when viewport is ≤ 768 px ─────────────────────────────── */
@@ -77,6 +80,14 @@ const [loading, setLoading] = useState(false);
   const [permissionsState, setPermissionsState] = useState({});
   const [showDisconnectModal, setShowDisconnectModal] = useState(false);
   const [isDriveConnected, setIsDriveConnected] = useState(true);
+
+  // Recycle Bin
+  const [recycleBinFilter, setRecycleBinFilter] = useState("all");
+  const [recycleBinItems, setRecycleBinItems] = useState({
+    documents: [],
+    templates: [],
+  });
+  const [recycleBinDeleteTarget, setRecycleBinDeleteTarget] = useState(null);
   const [showAddSubAdminModal, setShowAddSubAdminModal] = useState(false);
   const [newSubAdmin, setNewSubAdmin] = useState({ name: "", email: "" });
   const [subAdminErrors, setSubAdminErrors] = useState({});
@@ -1369,6 +1380,212 @@ const handledisconnect = async()=>{
   }
 }
 
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const [templateRes, documentRes] = await Promise.all([
+        axios.get(`${API_URL}template/gettemplate`,{
+          withCredentials: true,
+        }),
+        axios.get(`${API_URL}document/getdocument`, {
+          withCredentials: true,
+        }),
+      ]);
+
+      const templates = templateRes?.data?.message.filter(
+        (t) => t?.templateid?.isDeleted === true
+      );
+
+      const documents = documentRes?.data?.message.filter(
+        (d) => d.isDeleted === true
+      );
+
+      setRecycleBinItems({
+        templates,
+        documents,
+      });
+      console.log("recycleitem" ,templates)
+    } catch (error) {
+      console.error("Error fetching recycle bin data:", error);
+    }
+  };
+
+  fetchData();
+}, []);
+
+  const handleRecycleBinRestore = async(item) => {
+  try {
+      const collection = item.type === "template" ? "templates" : "documents";
+      setRecycleBinItems((prev) => ({
+        ...prev,
+        [collection]: prev[collection].filter((entry) => entry._id !== item._id),
+      }));
+      // Connect this action to your backend restore endpoint.
+        if(item.type==="template"){
+        
+       try {
+         await axios.get(`${API_URL}template/restore/${item?.templateid?._id}`,{withCredentials:true})
+       } catch (error) {
+         console.log(error.message)
+       }
+       }else{
+          try {
+               await axios.get(`${API_URL}document/restore/${item._id}`,{withCredentials:true})
+             } catch (error) {
+               console.log("Something went wrong in restoring Document",error.message)
+             }
+       }
+      toast.success(`${item.type === "template" ? "Template" : "Document"} restored successfully`);
+  } catch (error) {
+   console.log("Something went wrong in deleting Document",error.message)
+ }finally{
+  setLoading(false)
+ }
+  };
+
+  const handleRecycleBinDelete = async() => {
+
+ try {
+   setLoading(true)
+     if (!recycleBinDeleteTarget) return;
+     const { item } = recycleBinDeleteTarget;
+     const collection = item.type === "template" ? "templates" : "documents";
+     setRecycleBinItems((prev) => ({
+       ...prev,
+       [collection]: prev[collection].filter((entry) => entry._id !== item._id),
+     }));
+ 
+     if(item.type==="template"){
+      
+     try {
+       await axios.delete(`${API_URL}template/deletetemplate/${item.templateid?._id}`,{withCredentials:true})
+     } catch (error) {
+       console.log(error.message)
+     }
+     }else{
+        try {
+             await axios.delete(`${API_URL}document/deletedocument/${item._id}`,{withCredentials:true})
+           } catch (error) {
+             console.log("Something went wrong in deleting Document",error.message)
+           }
+     }
+     toast.success(`${item.type === "template" ? "Template" : "Document"} permanently deleted`);
+     setRecycleBinDeleteTarget(null);
+ } catch (error) {
+   console.log("Something went wrong in deleting Document",error.message)
+ }finally{
+  setLoading(false)
+ }
+  };
+
+  const recycleBinVisibleItems = [
+    ...(recycleBinFilter === "all" || recycleBinFilter === "documents"
+      ? recycleBinItems.documents.map((item) => ({ ...item, type: "document" }))
+      : []),
+    ...(recycleBinFilter === "all" || recycleBinFilter === "templates"
+      ? recycleBinItems.templates.map((item) => ({ ...item, type: "template" }))
+      : []),
+  ];
+
+  const recycleBinCard = (
+    <>
+      <div className="admin-settings-card admin-settings-card--recycle-bin">
+        <h2 className="admin-settings-card__title">Recycle Bin</h2>
+        <div className="admin-settings-card__divider" />
+
+        <div className="recycle-bin-toolbar">
+          <div className="recycle-bin-toggle-group" role="tablist" aria-label="Recycle Bin filter">
+            {[
+              { key: "all", label: "All" },
+              { key: "documents", label: "Documents" },
+              { key: "templates", label: "Templates" },
+            ].map((filter) => (
+              <button
+                key={filter.key}
+                type="button"
+                role="tab"
+                aria-selected={recycleBinFilter === filter.key}
+                className={`recycle-bin-toggle ${
+                  recycleBinFilter === filter.key ? "recycle-bin-toggle--active" : ""
+                }`}
+                onClick={() => setRecycleBinFilter(filter.key)}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="recycle-bin-list">
+          {recycleBinVisibleItems.length > 0 ? (
+            recycleBinVisibleItems.map((item) => (
+              <div className="recycle-bin-item" key={`${item.type}-${item._id}`}>
+                <div className="recycle-bin-item__icon">
+                  {item.type === "template" ? (
+                    <FileText size={20} strokeWidth={1.6} />
+                  ) : (
+                    <Archive size={20} strokeWidth={1.6} />
+                  )}
+                </div>
+                <div className="recycle-bin-item__info">
+                  <h3>{(item.type === "template" ? item?.templateid?.name: item?.title) || (item.type === "template" ? "Untitled Template" : "Untitled Document")}</h3>
+                  <p>
+                    {item.archivedAt
+                      ? `Archived ${new Date(item.archivedAt).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}`
+                      : "Archived"}
+                  </p>
+                </div>
+                <div className="recycle-bin-item__actions">
+                  <button type="button" className="recycle-bin-action recycle-bin-action--restore" onClick={() => handleRecycleBinRestore(item)}>
+                    <RotateCcw size={15} /> Restore
+                  </button>
+                  <button type="button" className="recycle-bin-action recycle-bin-action--delete" onClick={() => setRecycleBinDeleteTarget({ item })}>
+                    <Trash2 size={15} /> Delete
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="recycle-bin-empty">
+              <div className="recycle-bin-empty__icon"><Archive size={22} strokeWidth={1.5} /></div>
+              <h3>
+                {recycleBinFilter === "all" ? "Recycle Bin is empty" : recycleBinFilter === "documents" ? "No archived documents" : "No archived templates"}
+              </h3>
+              <p>Archived {recycleBinFilter === "documents" ? "documents" : recycleBinFilter === "templates" ? "templates" : "documents and templates"} will appear here.</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {recycleBinDeleteTarget && (
+        <div className="integration-modal-backdrop" onClick={() => setRecycleBinDeleteTarget(null)}>
+          <div className="integration-modal-container" onClick={(e) => e.stopPropagation()}>
+            <div className="integration-modal-content">
+              <div className="integration-modal-header-row">
+                <svg viewBox="0 0 24 24" className="integration-modal-warning-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#E5252A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <h3 className="integration-modal-title">Delete {recycleBinDeleteTarget.item.type === "template" ? "Template" : "Document"}?</h3>
+              </div>
+              <p className="integration-modal-description">
+                This action will permanently delete this {recycleBinDeleteTarget.item.type === "template" ? "template" : "document"}. You will not be able to restore it afterwards.
+              </p>
+              <ul className="integration-modal-list">
+                <li>The item will be permanently removed</li>
+                <li>This action cannot be undone</li>
+                <li>Make sure you no longer need this item</li>
+              </ul>
+            </div>
+            <div className="integration-modal-footer">
+              <button className="integration-modal-btn cancel-btn" onClick={() => setRecycleBinDeleteTarget(null)}>Cancel</button>
+              <button className="integration-modal-btn disconnect-btn" onClick={handleRecycleBinDelete}>Delete Permanently</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+
   const integrationsCard = (
     <>
     <div className="admin-settings-card admin-settings-card--integrations">
@@ -1837,6 +2054,14 @@ const handledisconnect = async()=>{
               </div>
             </div>
 
+            <button type="button" className="ms-mobile-menu-item" onClick={() => { setActiveTab("recycle-bin"); setMobileView("recycle-bin"); }}>
+              <div className="ms-mobile-menu-item__left">
+                <span className="ms-mobile-menu-item__icon"><Archive size={18} /></span>
+                <span className="ms-mobile-menu-item__label">Recycle Bin</span>
+              </div>
+              <ChevronRight size={18} color="#9CA3AF" />
+            </button>
+
             {/* Account Management group */}
             <p className="ms-mobile-group-title">Account Management</p>
             <div className="ms-mobile-group-items">
@@ -1911,6 +2136,9 @@ const handledisconnect = async()=>{
         )}
         {mobileView === "integrations" && (
           <div className="ms-mobile-detail">{integrationsCard}</div>
+        )}
+        {mobileView === "recycle-bin" && (
+          <div className="ms-mobile-detail">{recycleBinCard}</div>
         )}
         {viewingPermissions && (
           <div className="ms-mobile-detail ms-mobile-permissions">
@@ -1999,6 +2227,7 @@ const handledisconnect = async()=>{
               {activeTab === "billing" && billingCard}
               {activeTab === "integrations" && integrationsCard}
               {activeTab === "audit" && auditCard}
+              {activeTab === "recycle-bin" && recycleBinCard}
             </div>
           </div>
         )}
