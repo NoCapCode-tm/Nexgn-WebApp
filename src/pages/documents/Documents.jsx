@@ -58,7 +58,7 @@ export default function Documents() {
      try {
       const response = await axios.get(`${API_URL}document/getdocument`,{withCredentials:true})
       console.log(response.data.message)
-      const docs= response.data.message
+      const docs= response.data.message.filter((d)=>d.isDeleted === false)
       setDocuments(docs)
      } catch (error) {
       console.log("Something went wrong in Fetching Document",error.message)
