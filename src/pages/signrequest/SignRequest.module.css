@@ -1,0 +1,804 @@
+
+.signRequestPage {
+  width: 100%;
+  min-height: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+.topbarActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 300px;
+  height: 36px;
+  padding: 0 12px;
+  background: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.18);
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s,
+    border-color 0.2s;
+}
+
+.searchWrap:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.searchWrap:focus-within {
+  border-color: #ff0915;
+}
+
+.searchInput {
+  width: 100%;
+  min-width: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  color: #1a1a2e;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #9ca3af;
+}
+
+.filterWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  background: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.filterButton:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.filterButton:active {
+  transform: translateY(1px);
+}
+
+.filterDropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 220px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filterLabel {
+  font-size: 10px;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filterSelect {
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+  color: #374151;
+  background: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+}
+
+.filterDivider {
+  border-top: 1px solid #f3f4f6;
+}
+
+.resetButton {
+  width: 100%;
+  padding: 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ff0915;
+  text-align: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.mobilePageHeader {
+  display: none;
+}
+
+.mobileHeaderTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobileTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.mobileSubtitle {
+  margin-top: 7px;
+  font-size: 13px;
+  color: #8a949f;
+}
+
+.mobileDivider {
+  width: 100%;
+  margin: 20px 0 0;
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mobileSectionTitle {
+  display: none;
+}
+
+.section {
+  width: 100%;
+  flex: 1;
+}
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.signRequestTable {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+.signRequestTable thead th {
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #1a1a2e;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.tableRow td {
+  height: 60px;
+  padding: 0 16px;
+  font-size: 12px;
+  color: #8a949f;
+  background: #fff;
+  border-top: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.tableRow td:first-child {
+  border-left: 1px solid #e4e4e4;
+  border-radius: 16px 0 0 16px;
+}
+
+.tableRow td:last-child {
+  border-right: 1px solid #e4e4e4;
+  border-radius: 0 16px 16px 0;
+}
+
+.tableRow:hover td {
+  background: #fafafa;
+}
+
+.documentCell {
+  width: 28%;
+}
+
+.documentInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.documentIcon {
+  flex-shrink: 0;
+  color: #e53935;
+}
+
+.documentTitle {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  font-weight: 500;
+  color: #111827;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.signerCell {
+  width: 29%;
+}
+
+.signerValue {
+  display: block;
+  overflow: hidden;
+  color: #8a949f;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statusCell {
+  width: 15%;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
+  padding: 4px 11px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.statusPending {
+  color: #b45309;
+  background: #fef3c7;
+}
+
+.statusViewed {
+  color: #2563eb;
+  background: #dbeafe;
+}
+
+.statusCompleted {
+  color: #15803d;
+  background: #dcfce7;
+}
+
+.statusExpired {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+
+.statusCancelled {
+  color: #6b7280;
+  background: #f3f4f6;
+}
+
+.expiryCell {
+  width: 15%;
+  white-space: nowrap;
+}
+
+.expiryValue {
+  color: #8a949f;
+}
+
+.actionCell {
+  position: relative;
+  width: 80px;
+  text-align: center;
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  color: #9ca3af;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    background 0.15s;
+}
+
+.menuButton:hover {
+  color: #374151;
+  background: #f3f4f6;
+}
+
+.actionMenu {
+  position: absolute;
+  top: calc(100% + 2px);
+  right: 8px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  min-width: 205px;
+  padding: 5px 0;
+  text-align: left;
+  background: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 10px 13px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+  text-decoration: none;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.actionItem:hover {
+  background: #f5f5f5;
+}
+
+.dangerItem {
+  color: #e53935;
+}
+
+.dangerItem:hover {
+  background: #fff2f2;
+}
+
+.emptyState {
+  padding: 40px;
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.mobileLabel,
+.mobileStatus {
+  display: none;
+}
+
+@media (min-width: 1180px) {
+  .searchWrap {
+    width: clamp(200px, 13.88vw, 355px);
+    height: clamp(36px, 2.5vw, 64px);
+    padding: 0 clamp(12px, 0.83vw, 21px);
+    border-radius: clamp(20px, 1.38vw, 35px);
+  }
+
+  .topbarActions {
+    gap: clamp(10px, 0.69vw, 17px);
+  }
+
+  .filterButton {
+    height: clamp(36px, 2.5vw, 64px);
+    padding: 0 clamp(14px, 0.97vw, 25px);
+    font-size: clamp(12px, 0.83vw, 21px);
+    border-radius: clamp(20px, 1.38vw, 35px);
+  }
+
+  .searchInput {
+    font-size: clamp(12px, 0.83vw, 21px);
+  }
+
+  .signRequestTable thead th {
+    padding:
+      clamp(10px, 0.69vw, 17px)
+      clamp(16px, 1.11vw, 28px);
+    font-size: clamp(11px, 0.76vw, 19px);
+  }
+
+  .tableRow td {
+    height: clamp(60px, 4.16vw, 106px);
+    padding: 0 clamp(16px, 1.11vw, 28px);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1179px) {
+  .mobilePageHeader {
+    display: block;
+    padding-top: 20px;
+  }
+
+  .mobileSectionTitle {
+    display: none;
+  }
+
+  .searchWrap {
+    width: 210px;
+    height: 42px;
+  }
+
+  .filterButton {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .filterText {
+    display: none;
+  }
+
+  .signRequestTable {
+    min-width: 760px;
+  }
+
+  .signRequestTable thead th {
+    padding: 10px 20px;
+  }
+
+  .tableRow td {
+    height: 72px;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobilePageHeader {
+    display: block;
+    padding: 12px 20px;
+  }
+
+  .mobileHeaderTop {
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .mobileTitle {
+    font-size: 22px;
+  }
+
+  .mobileSubtitle {
+    font-size: 12px;
+  }
+
+  .mobileSectionTitle {
+    display: none;
+    padding: 16px 5vw 8px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .topbarActions {
+    width: auto;
+    gap: 10px;
+  }
+
+  .searchWrap {
+    width: 210px;
+    max-width: none;
+    height: 42px;
+   
+  }
+
+  .searchInput {
+    font-size: 12px;
+  }
+
+  .filterButton {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .filterText {
+    display: none;
+  }
+
+  .filterDropdown {
+    top: 12vw;
+    right: 0;
+    width: 60vw;
+  }
+
+  .tableContainer {
+    width: 100%;
+    padding: 0 5vw 24px;
+    overflow: visible;
+  }
+
+  .signRequestTable {
+    width: 100%;
+    min-width: 0;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+  }
+
+  .signRequestTable thead {
+    display: none;
+  }
+
+  .signRequestTable tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tableRow {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    width: 100%;
+    min-height: 0;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #eeeeee;
+    border-radius: 16px;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.05);
+  }
+
+  .tableRow td {
+    display: block;
+    width: auto;
+    height: auto;
+    padding: 0;
+    font-size: inherit;
+    background: transparent;
+    border: none !important;
+  }
+
+  .tableRow:hover td {
+    background: transparent;
+  }
+
+  .documentCell {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    width: 100%;
+    margin-bottom: 14px;
+  }
+
+  .documentInfo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+  }
+
+  .documentIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .documentTitle {
+    min-width: 0;
+    max-width: calc(100vw - 130px);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .mobileStatus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: auto;
+    padding: 5px 9px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .statusCell {
+    display: none !important;
+  }
+
+  .signerCell {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+    padding-right: 10px !important;
+    font-size: 12px !important;
+    color: #4b5563 !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .signerCell::before {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 10px;
+    color: #9ca3af;
+    content: "Assigned to / Signer";
+  }
+
+  .signerValue {
+    color: #4b5563;
+  }
+
+  .expiryCell {
+    grid-column: 1;
+    grid-row: 3;
+    width: 100%;
+    margin-top: 14px;
+    padding: 0 !important;
+    font-size: 11px !important;
+    color: #4b5563 !important;
+  }
+
+  .expiryCell::before {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 10px;
+    color: #9ca3af;
+    content: "Expiry";
+  }
+
+  .expiryValue {
+    color: #4b5563;
+  }
+
+  .actionCell {
+    grid-column: 2;
+    grid-row: 3;
+    width: auto;
+    justify-self: end;
+    align-self: end;
+    margin-top: 10px;
+  }
+
+  .menuButton {
+    width: 36px;
+    height: 34px;
+    border-radius: 7px;
+  }
+
+  .actionMenu {
+    top: auto;
+    right: 0;
+    bottom: calc(100% + 7px);
+    min-width: 190px;
+  }
+
+  .actionItem {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .emptyState {
+    padding: 30px 15px;
+  }
+
+  body.dark-mode .mobileTitle,
+  body.dark-mode .mobileSectionTitle {
+    color: #fff;
+  }
+
+  body.dark-mode .mobileSubtitle {
+    color: #9ca3af;
+  }
+
+  body.dark-mode .tableRow {
+    background: rgba(17, 17, 17, 0.65);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  body.dark-mode .documentTitle {
+    color: #f3f4f6;
+  }
+
+  body.dark-mode .signerCell,
+  body.dark-mode .expiryCell {
+    color: #d1d5db !important;
+  }
+
+  body.dark-mode .signerValue,
+  body.dark-mode .expiryValue {
+    color: #d1d5db;
+  }
+
+  body.dark-mode .signerCell::before,
+  body.dark-mode .expiryCell::before {
+    color: #9ca3af;
+  }
+
+  body.dark-mode .menuButton {
+    color: #9a9a9a;
+  }
+
+  body.dark-mode .menuButton:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  body.dark-mode .actionMenu {
+    background: rgba(17, 17, 17, 0.96);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  body.dark-mode .actionItem {
+    color: #d7d7d7;
+  }
+
+  body.dark-mode .actionItem:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  body.dark-mode .dangerItem {
+    color: #f87171;
+  }
+
+  body.dark-mode .statusViewed {
+    color: #60a5fa;
+    background: rgba(37, 99, 235, 0.15);
+  }
+
+  body.dark-mode .statusPending {
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.12);
+  }
+
+  body.dark-mode .statusCompleted {
+    color: #34d399;
+    background: rgba(52, 211, 153, 0.12);
+  }
+
+  body.dark-mode .statusExpired {
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.12);
+  }
+
+  body.dark-mode .statusCancelled {
+    color: #9ca3af;
+    background: rgba(156, 163, 175, 0.12);
+  }
+}
+
+.tableContainer{
+    min-height: 100vh;
+}
+
