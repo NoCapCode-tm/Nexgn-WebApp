@@ -30,6 +30,7 @@ import SignViewer from "./pages/documents/SignViewer";
 import DocumentEditor from "./pages/documents/DocumentEditor";
 import TemplateCreate from "./pages/templates/TemplateCreate";
 import DocumentViewer from "./pages/documents/documentViewer";
+import SignRequest from "./pages/signrequest/SignRequest";
 
 export default function App() {
 useSystemTheme();
@@ -59,6 +60,7 @@ useSystemTheme();
     
     <Route path="/documents" element={<Documents />} />
     <Route path="/sign-yourself" element={<SignYourself />} />
+    <Route path="/sign-request" element={<SignRequest/>} />
     <Route path="/request-signature" element={<SignYourself />} />
     <Route path="/settings" element={<Settings />} />
     <Route path="/contact-book" element={<ContactBook />} />

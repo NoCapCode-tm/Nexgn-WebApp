@@ -54,10 +54,11 @@ const uploadInputRef = useRef(null);
       setLoading(true);
       try {
         // Fetch the signature request
+        console.log(id)
         const reqRes = await axios.get(`${API_URL}sign/getrequest/${id}`, {
           withCredentials: true,
         });
-        const reqData = reqRes.data.message;
+        const reqData = reqRes?.data?.message;
         setRequest(reqData);
         console.log(reqData)
 
@@ -66,6 +67,7 @@ const uploadInputRef = useRef(null);
         }
 
         const docId = reqData.documentId._id;
+        console.log("docid",docId)
 
         // Fetch the document and its placed widgets
         const widgetRes = await axios.get(`${API_URL}document/widgets/${docId}`, {

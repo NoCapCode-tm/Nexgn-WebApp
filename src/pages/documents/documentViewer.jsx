@@ -462,7 +462,7 @@ export default function DocumentViewer() {
                     <p className={styles.signeeEmail}>{signee?.recipient?.userId?.email}</p>
                   </div>
                   <span className={`${styles.statusBadge} ${signee?.overallStatus === 'completed' ? styles.statusCompleted : styles.statusPending}`}>
-                    {signee?.overallStatus}
+                    {signee?.overallStatus}-{signee?.viewcount}
                   </span>
                 </div>
               ))}

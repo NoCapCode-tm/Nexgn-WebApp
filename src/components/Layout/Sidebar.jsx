@@ -43,7 +43,7 @@ function TemplateIcon({ color = "#8A949F" }) {
 
 const navItems = [
   { label: "Dashboard", path: "/dashboard", icon: HomeIcon },
-  { label: "Signers", path: "/sign-yourself", icon: ClipboardIcon },
+  { label: "Signers", path: "/sign-request", icon: ClipboardIcon },
   { label: "Documents", path: "/documents", icon: FileIcon },
   { label: "Contact Book", path: "/contact-book", icon: ContactIcon },
   { label: "Templates", path: "/templates", icon: TemplateIcon },
@@ -77,14 +77,14 @@ export default function Sidebar() {
   const renderItem = ({ icon: Icon, label, path, external }) => {
     const active =
       location.pathname === path ||
-      (path === "/sign-yourself" && location.pathname === "/request-signature");
+      (path === "/sign-request" && location.pathname === "/request-signature");
 
     const handleClick = (e) => {
       if (external) return; // Allow normal link navigation for external URLs
 
       if (
         path !== "/dashboard" &&
-        path !== "/sign-yourself" &&
+        path !== "/sign-request" &&
         path !== "/documents" &&
         path !== "/contact-book" &&
         path !== "/settings" &&
@@ -125,7 +125,7 @@ export default function Sidebar() {
         key={label}
         to={
           path === "/dashboard" ||
-          path === "/sign-yourself" ||
+          path === "/sign-request" ||
           path === "/documents" ||
           path === "/contact-book" ||
           path === "/settings" ||
