@@ -56,7 +56,8 @@ export default function DocumentViewer() {
         const reqRes = await axios.get(`${API_URL}sign/getrequests`, {
           withCredentials: true,
         });
-        const reqData = reqRes.data.message.filter((s)=>s?.documentId === id);
+        const reqData = reqRes.data.message.filter((s)=>s?.documentId._id === id);
+        console.log("request",reqData)
         setRequest(reqData);
 
         // if (reqData.status === "completed") {
@@ -64,7 +65,7 @@ export default function DocumentViewer() {
         // }
 
         // Fetch the document and its placed widgets
-        const widgetRes = await axios.get(`${API_URL}document/widgets/${id}`, {
+        const widgetRes = await axios.get(`${API_URL}document/internal/widgets/${id}`, {
           withCredentials: true,
         });
         
@@ -83,13 +84,13 @@ export default function DocumentViewer() {
 
  useEffect(() => {
   if (!documentDetails) return;
-
+  
   async function loadPdf() {
     try {
       let pdfUrl;
 
       if (documentDetails.driveFileId) {
-        pdfUrl = `${API_URL}document/${documentDetails._id}/pdf`;
+        pdfUrl = `${API_URL}document/internal/${documentDetails._id}/pdf`;
       } else if (documentDetails.templateId?.file) {
         pdfUrl =
           `${API_URL}template/template/${documentDetails.templateId._id}/pdf`;
@@ -359,7 +360,7 @@ export default function DocumentViewer() {
 
   // Mocks for Sidebar data (Map this to actual `request.recipient` data in production)
   const signees = documentDetails?.assignedto || [];
-  const senderName = documentDetails?.createdBy?.name || "System Admin";
+  const senderName = request?.senderId?.name || "System Admin";
 
   return (
     <>
@@ -451,7 +452,7 @@ export default function DocumentViewer() {
             <input 
               type="text" 
               className={styles.raisedByInput} 
-              value={senderName} 
+              value={request?.senderId?.name} 
               readOnly 
             />
           </div>
