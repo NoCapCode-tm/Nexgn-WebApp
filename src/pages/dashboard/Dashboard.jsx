@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../config";
 import { toast } from "react-toastify";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+import { StatCardSkeleton, TableRowSkeleton } from "../../components/common/Skeleton";
 
 
 
@@ -308,13 +308,15 @@ const stats = [
         </div>
 
       {authenticated?.permissions?.includes("Dashboard-Analytics") ||
- authenticated?.role === "Admin" ? (
-  <section className="stats-grid">
-    {stats.slice(0, isMobile ? 2 : 4).map((s) => (
-      <StatCard key={s.label} {...s} />
-    ))}
-  </section>
-) : null}
+      authenticated?.role === "Admin" ? (
+            <section className="stats-grid">
+              {loading ? (
+                Array.from({ length: isMobile ? 2 : 4 }).map((_, i) => <StatCardSkeleton key={i} />)
+              ) : (
+                stats.slice(0, isMobile ? 2 : 4).map((s) => <StatCard key={s.label} {...s} />)
+              )}
+            </section>
+        ) : null}
 
         <div className="mobile-cta-row">
           <button
@@ -342,18 +344,19 @@ const stats = [
             <span>Status</span>
             <span>Action</span>
           </div>
-          <div className="docs-table">
-            {documents.map((doc, idx) => (
-              <DocumentRow
-                key={idx}
-                {...doc}
-                onRevoke={() => handleRevoke(doc.title)}
-              />
-            ))}
-          </div>
+            <div className="docs-table">
+              {loading ? (
+                <TableRowSkeleton count={5} />
+              ) : documents.length > 0 ? (
+                documents.map((doc, idx) => (
+                  <DocumentRow key={idx} {...doc} onRevoke={() => handleRevoke(doc.title)} />
+                ))
+              ) : (
+                <p style={{ textAlign: "center", color: "#6b7280", padding: "20px" }}>No recent documents found.</p>
+              )}
+            </div>
         </section>
       </>
-      {loading && <LoadingScreen state="connecting" size={64} theme="dark" message="Orchestrating your insights" />}
     </Layout>
   );
 }

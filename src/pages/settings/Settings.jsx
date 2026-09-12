@@ -736,14 +736,7 @@ const verify2FA = async () => {
       </div>
     </div>
   )}
-  {loading && (
-                          <LoadingScreen
-                            state="listening"
-                            size={64}
-                            theme="dark"
-                            message="Signing Up"
-                          />
-                        )}
+
     </>
   );
 
