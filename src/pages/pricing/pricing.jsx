@@ -34,6 +34,7 @@ export default function Pricing() {
 
   const pricingCarouselRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [billingCycle, setBillingCycle] = useState("monthly");
 
   useEffect(() => {
     const fetchPlans = async () => {
@@ -71,6 +72,60 @@ export default function Pricing() {
         (order[b.slug] || 99)
     );
   }, [plans]);
+
+  // Only show the free plan plus whichever paid plans
+  // match the selected billing cycle.
+  const filteredPlans = useMemo(() => {
+    return visiblePlans.filter(
+      (plan) =>
+        plan.billingPeriod === "free" ||
+        plan.billingPeriod === billingCycle
+    );
+  }, [visiblePlans, billingCycle]);
+
+  // Work out real savings for each yearly plan by
+  // comparing it against its monthly counterpart.
+  const yearlySavingsBySlug = useMemo(() => {
+    const savings = {};
+
+    visiblePlans.forEach((plan) => {
+      if (plan.billingPeriod !== "yearly") return;
+
+      const monthlyCounterpart = visiblePlans.find(
+        (p) =>
+          p.slug === plan.slug &&
+          p.billingPeriod === "monthly"
+      );
+
+      if (!monthlyCounterpart) return;
+
+      const yearlyCost = plan.amount || 0;
+      const monthlyCostAnnualized =
+        (monthlyCounterpart.amount || 0) * 12;
+
+      if (monthlyCostAnnualized <= 0) return;
+
+      const percent = Math.round(
+        ((monthlyCostAnnualized - yearlyCost) /
+          monthlyCostAnnualized) *
+          100
+      );
+
+      if (percent > 0) {
+        savings[plan.slug] = percent;
+      }
+    });
+
+    return savings;
+  }, [visiblePlans]);
+
+  const maxYearlySavings = useMemo(() => {
+    const values = Object.values(
+      yearlySavingsBySlug
+    );
+
+    return values.length ? Math.max(...values) : 0;
+  }, [yearlySavingsBySlug]);
 
   const handleSelectPlan = async (plan) => {
     try {
@@ -114,8 +169,6 @@ export default function Pricing() {
             ? "Annual"
             : "Monthly"
         } Subscription`,
-        image:
-          "https://prod.nexgn.cloud/template/logo.png",
         prefill: {
           name: data.user?.name || "",
           email: data.user?.email || "",
@@ -206,6 +259,16 @@ export default function Pricing() {
       setLoadingPlan(null);
     }
   };
+
+  useEffect(() => {
+    setCurrentSlide(0);
+
+    const carousel = pricingCarouselRef.current;
+
+    if (carousel) {
+      carousel.scrollTo({ left: 0, behavior: "smooth" });
+    }
+  }, [billingCycle]);
 
   const handleDotClick = (index) => {
     const carousel = pricingCarouselRef.current;
@@ -322,7 +385,9 @@ export default function Pricing() {
         <button
           type="button"
           className="pricing-logo"
-          onClick={() => navigate("https://nexgn.cloud")}
+          onClick={() =>
+            (window.location.href = "https://nexgn.cloud")
+          }
         >
                   <svg width="145" height="36" viewBox="0 0 180 46" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M38.6523 0C42.489 0.000225655 45.5996 3.11055 45.5996 6.94727V38.6523C45.5996 38.7397 45.595 38.8265 45.5918 38.9131L34.1758 27.7461C32.8045 26.4047 30.5929 26.4164 29.2363 27.7725L26.6494 30.3604C25.2931 31.7169 25.3054 33.9037 26.6768 35.2451L37.2617 45.5996H7.50293L36.6445 17.0938C38.0155 15.7522 38.0272 13.5644 36.6709 12.208L34.084 9.62109C32.7276 8.2648 30.5159 8.25267 29.1445 9.59375L0 38.1035V8.29199L11.3721 19.416C12.7434 20.7574 14.955 20.7461 16.3115 19.3896L18.8984 16.8018C20.2543 15.4452 20.2422 13.2583 18.8711 11.917L6.69531 0.00585938C6.77894 0.00287788 6.86291 0 6.94727 0H38.6523Z" fill="#E22A2A"/>
@@ -353,6 +418,65 @@ export default function Pricing() {
             <h1>Simple Pricing .</h1>
           </div>
 
+          <div className="billingToggleWrap">
+            <div
+              className="billingToggle"
+              role="tablist"
+              aria-label="Billing period"
+            >
+              <span
+                className="billingToggleThumb"
+                style={{
+                  transform:
+                    billingCycle === "yearly"
+                      ? "translateX(100%)"
+                      : "translateX(0)",
+                }}
+              />
+
+              <button
+                type="button"
+                role="tab"
+                aria-selected={
+                  billingCycle === "monthly"
+                }
+                className={`billingToggleBtn ${
+                  billingCycle === "monthly"
+                    ? "active"
+                    : ""
+                }`}
+                onClick={() =>
+                  setBillingCycle("monthly")
+                }
+              >
+                Monthly
+              </button>
+
+              <button
+                type="button"
+                role="tab"
+                aria-selected={
+                  billingCycle === "yearly"
+                }
+                className={`billingToggleBtn ${
+                  billingCycle === "yearly"
+                    ? "active"
+                    : ""
+                }`}
+                onClick={() =>
+                  setBillingCycle("yearly")
+                }
+              >
+                Yearly
+                {maxYearlySavings > 0 && (
+                  <span className="billingSaveBadge">
+                    Save up to {maxYearlySavings}%
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+
           <div
             className="pricingCarousel"
             ref={pricingCarouselRef}
@@ -365,7 +489,7 @@ export default function Pricing() {
                 <PricingCardSkeleton />
               </>
             ) : (
-              visiblePlans.map(
+              filteredPlans.map(
                 (plan, index) => {
                   const isFree =
                     plan.billingPeriod ===
@@ -414,6 +538,7 @@ export default function Pricing() {
                           }}
                         >
                           <h3
+                            key={`${plan._id}-${billingCycle}`}
                             className="price"
                             style={{
                               color:
@@ -442,6 +567,23 @@ export default function Pricing() {
                                 : "month"}
                             </span>
                           </h3>
+
+                          {!isFree &&
+                            plan.billingPeriod ===
+                              "yearly" &&
+                            yearlySavingsBySlug[
+                              plan.slug
+                            ] > 0 && (
+                              <span className="savingsBadge">
+                                Save{" "}
+                                {
+                                  yearlySavingsBySlug[
+                                    plan.slug
+                                  ]
+                                }
+                                % vs monthly
+                              </span>
+                            )}
 
                           {isStarter ? (
                             <div className="tagRow">
@@ -509,7 +651,7 @@ export default function Pricing() {
             <h1>Powerful Signing.</h1>
 
             <div className="carouselDots">
-              {visiblePlans.map(
+              {filteredPlans.map(
                 (_, index) => (
                   <button
                     key={index}
