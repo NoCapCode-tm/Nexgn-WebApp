@@ -65,7 +65,7 @@ useEffect(() => {
             withCredentials: true,
           }
         );
-
+        
         setSignRequests(response?.data?.message || []);
       } catch (error) {
         console.log(
@@ -480,13 +480,13 @@ const SignRequestRow = ({
                 </a>
               </>
             )}
-
-            <button
+            {request?.signerToken && (
+               <button
               type="button"
               className={`${styles.actionItem} ${styles.dangerItem}`}
               onClick={() => {
                 setMenuOpen(false);
-                onCancel(request._id);
+                onCancel(request?.signerToken);
               }}
             >
               <XCircle size={14} />
@@ -495,6 +495,8 @@ const SignRequestRow = ({
                 Cancel Request
               </span>
             </button>
+            )}
+           
           </div>
         )}
       </td>
