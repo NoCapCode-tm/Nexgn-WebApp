@@ -10,8 +10,8 @@
   import "../dashboard/Dashboard.css";
   import "./SignYourself.css";
   import axios from "axios";
-import { toast } from "react-toastify";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+  import { toast } from "react-toastify";
+  import { TableRowSkeleton } from "../../components/common/Skeleton";
 
   function TemplateDropdown({ value, onChange, options }) {
     const [open, setOpen] = useState(false);
@@ -462,12 +462,14 @@ if(location.pathname === "/sign-yourself"){
                     />
                   </div>
 
-                  <button
-  className="btn-share btn-share--compact"
-  onClick={handleNext}
->
-  Next
-</button>
+                      <button
+                        className="btn-share btn-share--compact"
+                        onClick={handleNext}
+                        disabled={loading}
+                        style={{ opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+                        >
+                        {loading ? "Processing..." : "Next"}
+                      </button>
                 </>
               ) : (
                 <>
@@ -649,16 +651,17 @@ if(location.pathname === "/sign-yourself"){
             </div>
 
             {activeTab !== "sign" && (
-             <button
-  className="btn-share btn-share--compact"
-  onClick={handleNext}
->
-  Next
-</button>
+            <button
+                className="btn-share btn-share--compact"
+                onClick={handleNext}
+                disabled={loading}
+                style={{ opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+              >
+              {loading ? "Processing..." : "Next"}
+            </button>
             )}
           </div>
         </>
-      {loading && <LoadingScreen state="working" size={64} theme="dark" message="Setting the stage" />}
       </Layout>
     );
   }

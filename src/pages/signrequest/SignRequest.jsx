@@ -13,10 +13,11 @@ import {
 
 import Layout from "../../components/Layout/Layout";
 import Topbar from "../../components/Layout/Topbar";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+
 
 import "../../styles/BaseLayout.css";
 import styles from "./SignRequest.module.css";
+import { TableRowSkeleton } from "../../components/common/Skeleton";
 
 import { API_URL } from "../../config";
 
@@ -274,54 +275,42 @@ useEffect(() => {
 
         <section className={styles.section}>
           <div className={styles.tableContainer}>
-            <table className={styles.signRequestTable}>
-              <thead>
-                <tr>
-                  <th>DOCUMENT</th>
-                  <th>ASSIGNED TO / SIGNER</th>
-                  <th>STATUS</th>
-                  <th>EXPIRY</th>
-                  <th>ACTION</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {filteredRequests.map((request) => {
-                  const sign = signature.find(
-                    (item) =>
-                      item?.requestId?._id === request._id ||
-                      item?.requestId === request._id
-                  );
-
-                  return (
-                    <SignRequestRow
-                      key={request._id}
-                      request={request}
-                      sign={sign}
-                      onCancel={handleCancelRequest}
-                    />
-                  );
-                })}
-              </tbody>
-            </table>
-
-            {filteredRequests.length === 0 && (
-              <div className={styles.emptyState}>
-                No sign requests found.
+            {loading ? (
+              <div style={{ padding: "20px" }}>
+                <TableRowSkeleton count={5} />
               </div>
+            ) : (
+              <>
+                <table className={styles.signRequestTable}>
+                  <thead>
+                    <tr>
+                      <th>DOCUMENT</th>
+                      <th>ASSIGNED TO / SIGNER</th>
+                      <th>STATUS</th>
+                      <th>EXPIRY</th>
+                      <th>ACTION</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredRequests.map((request) => {
+                      const sign = signature.find(
+                        (item) => item?.requestId?._id === request._id || item?.requestId === request._id
+                      );
+                      return (
+                        <SignRequestRow key={request._id} request={request} sign={sign} onCancel={handleCancelRequest} />
+                      );
+                    })}
+                  </tbody>
+                </table>
+                {filteredRequests.length === 0 && (
+                  <div className={styles.emptyState}>No sign requests found.</div>
+                )}
+              </>
             )}
           </div>
         </section>
       </>
 
-      {loading && (
-        <LoadingScreen
-          state="connecting"
-          size={64}
-          theme="dark"
-          message="Gathering your signature requests"
-        />
-      )}
     </Layout>
   );
 };

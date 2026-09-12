@@ -8,7 +8,7 @@ import "../documents/Documents.css";
 import "../templates/Templates.css";
 import axios from "axios";
 import { API_URL } from "../../config";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+import { TableRowSkeleton } from "../../components/common/Skeleton";
 
 
 export default function TemplatesList({ onAddTemplate ,onView }) {
@@ -203,12 +203,12 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
                   {openMenuId === t.templateid._id && (
                     <div className="action-menu">
                       <button
-  className="action-menu__item"
-  onClick={() => {
-    setOpenMenuId(null);
-    onView(t);
-  }}
->
+                          className="action-menu__item"
+                          onClick={() => {
+                            setOpenMenuId(null);
+                            onView(t);
+                          }}
+                        >
                         View
                       </button>
                       <button
@@ -242,7 +242,7 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
           </div>
         </div>
       </>
-      {loading && <LoadingScreen state="connecting" size={64} theme="dark" message="Dusting off your blueprints" />}
+
     </Layout>
   );
 }
