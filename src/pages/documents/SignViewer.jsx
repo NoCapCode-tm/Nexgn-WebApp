@@ -6,7 +6,7 @@ import SignatureCanvas from "react-signature-canvas";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { API_URL } from "../../config";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+
 
 import styles from "./SignViewer.module.css";
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
@@ -367,7 +367,13 @@ const handleSignatureUpload = (e) => {
     }
   };
 
-  if (loading) return <LoadingScreen state="working" size={64} theme="dark" message="Unfurling the digital scroll" />;
+  if (loading) {
+    return (
+      <div className={styles.pageWrapper} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#6b7280' }}>
+        <h3>Loading Document...</h3>
+      </div>
+    );
+  }
 
   // Mocks for Sidebar data (Map this to actual `request.recipient` data in production)
   const signees = request?.documentId?.assignedto || [];

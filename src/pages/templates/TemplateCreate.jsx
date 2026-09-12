@@ -14,7 +14,7 @@ import {
 import axios from "axios";
 import { toast } from "react-toastify";
 import { API_URL } from "../../config";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+
 
 import styles from "./TemplateCreate.module.css";
 

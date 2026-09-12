@@ -126,7 +126,7 @@ export default function LoginPage() {
           </p>
         </form>
       </div>
-      {loading && <LoadingScreen state="working" size={64} message="Unlocking your digital desk" />}
+      {loading && <LoadingScreen state="connecting" size={64} message="Unlocking your digital desk" />}
     </AuthLayout>
   );
 }

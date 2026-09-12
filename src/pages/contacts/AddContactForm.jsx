@@ -3,7 +3,7 @@ import { ChevronLeft } from "lucide-react";
 import "./ContactBook.css";
 import axios from "axios";
 import { API_URL } from "../../config";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+import { TableRowSkeleton } from "../../components/common/Skeleton";
 
 export default function AddContactForm({ onClose }) {
   const [name, setName] = useState("");
@@ -156,13 +156,17 @@ export default function AddContactForm({ onClose }) {
         </div>
 
         <div className="add-contact-save-row">
-          <button type="submit" className="add-contact-save-btn">
-            Save
+          <button 
+            type="submit" 
+            className="add-contact-save-btn"
+            disabled={loading}
+            style={{ opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+          >
+            {loading ? "Saving..." : "Save"}
           </button>
         </div>
       </form>
     </div>
-    {loading && <LoadingScreen state="working" size={64} theme="dark" message="Welcoming a new connection" />}
     </>
   );
 }

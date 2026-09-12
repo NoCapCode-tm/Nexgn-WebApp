@@ -117,7 +117,7 @@ export default function SetNewPassword() {
           </p>
         </form>
       </div>
-      {loading && <LoadingScreen state="working" size={64} theme="dark" message="Forging your new keys" />}
+      {loading && <LoadingScreen state="connecting" size={64} theme="dark" message="Forging your new keys" />}
     </AuthLayout>
   );
 }

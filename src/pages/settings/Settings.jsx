@@ -1,66 +1,67 @@
-import { useState, useRef, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Archive,
+  Bell,
+  Building,
+  ChevronLeft,
+  ChevronRight,
+  CreditCard,
+  FileText,
+  LogOut,
+  PauseCircle,
+  Share2,
+  Shield,
+  Trash2,
+  Users,
+} from "lucide-react";
+import axios from "axios";
+
 import Layout from "../../components/Layout/Layout";
 import Topbar from "../../components/Layout/Topbar";
 import TopbarIcons from "../../components/Layout/TopbarIcons";
-import {
-  Search,
-  ChevronLeft,
-  ChevronRight,
-  Building,
-  Bell,
-  CreditCard,
-  Shield,
-  Users,
-  Share2,
-  FileText,
-  LogOut,
-  AlertCircle,
-  PauseCircle,
-  Trash2,
-  Archive,
-  RotateCcw,
-  MoreVertical,
-  Filter,
-  Plus,
-  Download,
-  RefreshCw,
-  CheckCircle2,
-  Clock,
-  User,
-} from "lucide-react";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
+import { API_URL } from "../../config";
+
 import "../../styles/BaseLayout.css";
 import "./Settings.css";
 import "../contacts/ContactBook.css";
-import { API_URL } from "../../config";
 
-import AvatarImg from "../../assets/Avatar.png";
-import axios from "axios";
-import { toast } from "react-toastify";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
-const DEFAULT_AVATAR = AvatarImg;
+import Profile from "./sections/Profile";
+import Account from "./sections/Account";
+import Security from "./sections/Security";
+import TeamManagement from "./sections/TeamManagement";
+import Notifications from "./sections/Notifications";
+import Billing from "./sections/Billing";
+import Integrations from "./sections/Integrations";
+import AuditLogs from "./sections/AuditLogs";
+import RecycleBin from "./sections/RecycleBin";
 
 const settingsNavItems = [
-  { key: "profile", label: "Profile", active: true },
-  { key: "account", label: "Account", active: true },
-  { key: "security", label: "Security", active: true },
-  { key: "team", label: "Team Management", active: true },
-  { key: "notifications", label: "Notifications", active: true },
-  { key: "billing", label: "Billing", active: true },
-  { key: "integrations", label: "Integrations", active: true },
-  { key: "audit", label: "Audit Logs", active: true },
-  { key: "recycle-bin", label: "Recycle Bin", active: true },
+  { key: "profile", label: "Profile" },
+  { key: "account", label: "Account" },
+  { key: "security", label: "Security" },
+  { key: "team", label: "Team Management" },
+  { key: "notifications", label: "Notifications" },
+  { key: "billing", label: "Billing" },
+  { key: "integrations", label: "Integrations" },
+  { key: "audit", label: "Audit Logs" },
+  { key: "recycle-bin", label: "Recycle Bin" },
 ];
 
-/* ── Hook: true when viewport is ≤ 768 px ─────────────────────────────── */
 function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(
+    () => window.innerWidth <= 768
+  );
+
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
-    const handler = (e) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    const handler = (event) => setIsMobile(event.matches);
+
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
   }, []);
+
   return isMobile;
 }
 
@@ -70,54 +71,25 @@ export default function Settings() {
   const [searchParams] = useSearchParams();
   const tabParam = searchParams.get("tab");
 
-  // Ref to the Layout sidebar-open function (populated via onRegisterMenuOpen)
   const sidebarOpenerRef = useRef(null);
-  /* Desktop + Tablet */
+
   const [activeTab, setActiveTab] = useState("profile");
-const [loading, setLoading] = useState(false);
-  const [auditSearchQuery, setAuditSearchQuery] = useState("");
-  const [viewingPermissions, setViewingPermissions] = useState(null);
-  const [permissionsState, setPermissionsState] = useState({});
-  const [showDisconnectModal, setShowDisconnectModal] = useState(false);
-  const [isDriveConnected, setIsDriveConnected] = useState(true);
-
-  // Recycle Bin
-  const [recycleBinFilter, setRecycleBinFilter] = useState("all");
-  const [recycleBinItems, setRecycleBinItems] = useState({
-    documents: [],
-    templates: [],
-  });
-  const [recycleBinDeleteTarget, setRecycleBinDeleteTarget] = useState(null);
-  const [showAddSubAdminModal, setShowAddSubAdminModal] = useState(false);
-  const [newSubAdmin, setNewSubAdmin] = useState({ name: "", email: "" });
-  const [subAdminErrors, setSubAdminErrors] = useState({});
-
-  /* Mobile only: "menu" | "profile" | "account" | "security" */
   const [mobileView, setMobileView] = useState("menu");
-  const[user,setUser]=useState({})
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [viewingPermissions, setViewingPermissions] = useState(false);
+  const [teamResetKey, setTeamResetKey] = useState(0);
 
-   useEffect(() => {
-    const verifyUser = async () => {
-      setLoading(true)
-      try {
-        const response = await axios.get(
-          `${API_URL}admin/me`,
-          {
-            withCredentials: true,
-          }
-        );
-
-        setUser(response.data.message);
-      } catch (err) {
-        console.log(err.message)
-      }finally{
-        setLoading(false)
-      }
-    };
-
-    verifyUser();
-  }, []);
-
+  const refreshUser = async () => {
+    try {
+      const response = await axios.get(`${API_URL}admin/me`, {
+        withCredentials: true,
+      });
+      setUser(response.data.message || {});
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   useEffect(() => {
     if (tabParam) {
@@ -128,1737 +100,348 @@ const [loading, setLoading] = useState(false);
     }
   }, [tabParam, isMobile]);
 
-
-
-  /* Shared form state */
-  const [avatar, setAvatar] = useState(DEFAULT_AVATAR);
-  const [formData, setFormData]=useState({})
-   const [accountData, setAccountData] = useState({})
-
   useEffect(() => {
-  if (!user || Object.keys(user).length === 0) return;
-
-  setFormData({
-    fullName: user.name || "",
-    email: user.email || "",
-    phone: user.phone_no || "NA",
-  });
-
-  setAccountData({
-    companyName: user.professional_details?.company_name || "",
-    organizationId: user.professional_details?.org_id || "",
-    timeZone: user.time_zone || "",
-    language: user.language || "",
-  });
-
-  const savedPermissions =
-    user.permissions || [];
-
-  const permissionObject =
-    savedPermissions.reduce(
-      (acc, permission) => {
-        acc[permission] = true;
-        return acc;
-      },
-      {}
-    );
-
-  setPermissionsState(
-    permissionObject
-  );
-}, [user]);
-  const [securityData, setSecurityData] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
-    enable2FA:false,
-  });
-
-  const [teamMembers, setTeamMembers] = useState([]);
-  const [teamActionOpen, setTeamActionOpen] = useState(null);
-  const teamActionRef = useRef(null);
-  const[auditLogsData,setauditLogsData] =useState([])
-
-  const [notificationData, setNotificationData] = useState({
-    email_document_signed: false,
-    email_signature_request: false,
-    email_document_expired: false,
-    system_updates: false,
-    system_security: false,
-  });
-
-  const handleNotificationChange = (key) => {
-    setNotificationData((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        teamActionRef.current &&
-        !teamActionRef.current.contains(event.target)
-      ) {
-        setTeamActionOpen(null);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const fileInputRef = useRef(null);
-
-  const handleSecurityChange = (e) => {
-    const { name, value } = e.target;
-    setSecurityData((prev) => ({ ...prev, [name]: value }));
-  };
-  const handleTabClick = (item) => {
-    if (item.active) setActiveTab(item.key);
-  };
-  const [profileFile, setProfileFile] = useState(null);
-
-const handleAvatarUpload = (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  setProfileFile(file);
-
-  const reader = new FileReader();
-  reader.onload = (ev) => setAvatar(ev.target.result);
-  reader.readAsDataURL(file);
-};
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleupdate = async(e)=>{
-      e.preventDefault();
-      setLoading(true)
-
-    try {
-      const response = await axios.put(`${API_URL}admin/update`,{
-        name:formData.fullName,
-        phone_no:formData.phone,
-        profile_picture:profileFile,
-        time_zone:accountData.timeZone,
-        language:accountData.language,
-        companyname:accountData.companyName,
-        currentpass:securityData.currentPassword,
-        updatepass:securityData.confirmPassword,
-      },{withCredentials:true})
-      console.log(response.data.message)
-    } catch (error) {
-      console.log("Something went wrong",error.message)
-    }finally{
-      setLoading(false)
-    }
-  }
-
-  // 2fa
-  const [show2FAOverlay, setShow2FAOverlay] = useState(false);
-const [qrCode, setQrCode] = useState("");
-const [twoFASecret, setTwoFASecret] = useState("");
-const [showOTPInput, setShowOTPInput] = useState(false);
-const [otp, setOtp] = useState("");
-// const [twoFALoading, setTwoFALoading] = useState(false);
-
-const handle2FAToggle = async (e) => {
-  const enabled = e.target.checked;
-
-  // If user is trying to enable 2FA
-  if (enabled) {
-    try {
+    const verifyUser = async () => {
       setLoading(true);
 
-      const response = await axios.get(
-        `${API_URL}admin/twofa`,{withCredentials:true}
-      );
-
-      const data = response.data.message;
-
-      setQrCode(data.qrCode);
-      setTwoFASecret(data.secret);
-
-      setShow2FAOverlay(true);
-      setShowOTPInput(false);
-
-    } catch (error) {
-      toast.error(
-        error.response?.data?.message ||
-        "Failed to start 2FA setup"
-      );
-    } finally {
-      setLoading(false);
-    }
-
-    return;
-  }
-};
-const otpInputRef = useRef(null);
-const verify2FA = async () => {
-  try {
-    setLoading(true);
-
-    await axios.post(
-      `${API_URL}admin/twofaverify`,
-      {
-        token: otp
-      },{withCredentials:true}
-    );
-
-    toast.success("Two-factor authentication enabled!");
-
-    setSecurityData((prev) => ({
-      ...prev,
-      enable2FA: true,
-    }));
-
-    setShow2FAOverlay(false);
-    setShowOTPInput(false);
-    setQrCode("");
-    setTwoFASecret("");
-    setOtp("");
-
-  } catch (error) {
-    toast.error(
-      error.response?.data?.message ||
-      "Invalid authentication code"
-    );
-  } finally {
-    setLoading(false);
-  }
-};
-
-  
-  /* ── Card fragments (defined once, reused in both shells) ─────────────── */
-  const profileCard = (
-    <>
-    <div className="admin-settings-card admin-settings-card--profile">
-      <h2 className="admin-settings-card__title">Profile</h2>
-      <div className="admin-settings-card__divider" />
-      <div className="admin-settings-avatar-row">
-        <div className="admin-settings-avatar">
-          <img
-            src={user?.profile_picture || avatar}
-            alt="User avatar"
-            className="admin-settings-avatar__img"
-            id="admin-settings-avatar-preview"
-          />
-        </div>
-        <div className="admin-settings-avatar-info">
-          <input
-            type="file"
-            accept="image/jpeg,image/gif,image/png"
-            ref={fileInputRef}
-            className="admin-settings-avatar__file-input"
-            id="admin-settings-avatar-upload-input"
-            onChange={handleAvatarUpload}
-          />
-          <button
-            className="admin-settings-avatar__upload-btn"
-            id="admin-settings-avatar-upload-btn"
-            onClick={() => fileInputRef.current && fileInputRef.current.click()}
-            type="button"
-          >
-            Upload Avatar
-          </button>
-          <p className="admin-settings-avatar__helper">
-            JPG, GIF or PNG. Max size of 800K
-          </p>
-        </div>
-      </div>
-      <form
-        className="admin-settings-form"
-        onSubmit={handleupdate}
-        id="admin-settings-profile-form"
-      >
-        <div className="admin-settings-form__group">
-          <label
-            className="admin-settings-form__label"
-            htmlFor="admin-settings-full-name"
-          >
-            Full Name
-          </label>
-          <input
-            type="text"
-            id="admin-settings-full-name"
-            name="fullName"
-            className="admin-settings-form__input"
-            value={formData.fullName}
-            onChange={handleFormChange}
-            autoComplete="name"
-          />
-        </div>
-        <div className="admin-settings-form__group">
-          <label
-            className="admin-settings-form__label"
-            htmlFor="admin-settings-email"
-          >
-            Email Address
-          </label>
-          <input
-            type="email"
-            id="admin-settings-email"
-            name="email"
-            className="admin-settings-form__input admin-settings-form__input--readonly"
-            value={formData.email}
-            readOnly
-            aria-readonly="true"
-          />
-          <p className="admin-settings-form__helper">
-            Email address cannot be changed here
-          </p>
-        </div>
-        <div className="admin-settings-form__group">
-          <label
-            className="admin-settings-form__label"
-            htmlFor="admin-settings-phone"
-          >
-            Phone Number
-          </label>
-          <input
-            type="tel"
-            id="admin-settings-phone"
-            name="phone"
-            className="admin-settings-form__input"
-            value={formData.phone}
-            onChange={handleFormChange}
-            autoComplete="tel"
-          />
-        </div>
-        <div className="admin-settings-form__footer">
-          <button
-            type="submit"
-            className="admin-settings-form__submit"
-            id="admin-settings-update-profile-btn"
-          >
-            Update Profile
-          </button>
-        </div>
-      </form>
-    </div>
-    {loading && <LoadingScreen state="working" size={64} theme="dark" message="Applying your master plan" />}
-    </>
-  );
-
-  const accountCard = (
-    <>
-    <div className="admin-settings-card admin-settings-card--account">
-      <h2 className="admin-settings-card__title">Account</h2>
-      <div className="admin-settings-card__divider" />
-      <form
-        className="admin-settings-form"
-      onSubmit={handleupdate}
-      >
-        <div className="admin-settings-form__group">
-          <label
-            className="admin-settings-form__label"
-            htmlFor="admin-settings-company"
-          >
-            Company Name
-          </label>
-          <input
-            type="text"
-            id="admin-settings-company"
-            className="admin-settings-form__input"
-            value={accountData.companyName}
-            onChange={(e) =>
-              setAccountData({ ...accountData, companyName: e.target.value })
-            }
-          />
-        </div>
-        <div className="admin-settings-form__group">
-          <label
-            className="admin-settings-form__label"
-            htmlFor="admin-settings-org-id"
-          >
-            Organization ID
-          </label>
-          <input
-            type="text"
-            id="admin-settings-org-id"
-            className="admin-settings-form__input admin-settings-form__input--readonly"
-            value={accountData.organizationId}
-            readOnly
-          />
-          <p className="admin-settings-form__helper">
-            Used for API integrations
-          </p>
-        </div>
-        <div className="admin-settings-form__group">
-          <label
-            className="admin-settings-form__label"
-            htmlFor="admin-settings-timezone"
-          >
-            Time Zone
-          </label>
-          <input
-            type="text"
-            id="admin-settings-timezone"
-            className="admin-settings-form__input"
-            value={accountData.timeZone}
-            onChange={(e) =>
-              setAccountData({ ...accountData, timeZone: e.target.value })
-            }
-          />
-        </div>
-        <div className="admin-settings-form__group">
-          <label
-            className="admin-settings-form__label"
-            htmlFor="admin-settings-language"
-          >
-            Language
-          </label>
-          <input
-            type="text"
-            id="admin-settings-language"
-            className="admin-settings-form__input"
-            value={accountData.language}
-            onChange={(e) =>
-              setAccountData({ ...accountData, language: e.target.value })
-            }
-          />
-        </div>
-        <div className="admin-settings-form__footer">
-          <button type="submit" className="admin-settings-form__submit">
-            Update Account
-          </button>
-        </div>
-      </form>
-    </div>
-    {loading && (
-                            <LoadingScreen
-                              state="listening"
-                              size={64}
-                              theme="dark"
-                              message="Signing Up"
-                            />
-                          )}
-    </>
-  );
-
-  const securityCard = (
-    <>
-    <div className="admin-settings-card admin-settings-card--security">
-      <h2 className="admin-settings-card__title">Security</h2>
-      <div className="admin-settings-card__divider" />
-      <form
-        className="admin-settings-form"
-        onSubmit={handleupdate}
-        id="admin-settings-security-form"
-      >
-        <h3 className="admin-settings-section-title">Change Password</h3>
-        <div className="admin-settings-section-divider" />
-        <div className="admin-settings-form__group">
-          <label
-            className="admin-settings-form__label"
-            htmlFor="admin-settings-current-password"
-          >
-            Current Password
-          </label>
-          <input
-            type="password"
-            id="admin-settings-current-password"
-            name="currentPassword"
-            className="admin-settings-form__input"
-            placeholder="Enter current password"
-            value={securityData.currentPassword}
-            onChange={handleSecurityChange}
-          />
-        </div>
-        <div className="admin-settings-form__group">
-          <label
-            className="admin-settings-form__label"
-            htmlFor="admin-settings-new-password"
-          >
-            New Password
-          </label>
-          <input
-            type="password"
-            id="admin-settings-new-password"
-            name="newPassword"
-            className="admin-settings-form__input"
-            placeholder="Enter new password"
-            value={securityData.newPassword}
-            onChange={handleSecurityChange}
-          />
-        </div>
-        <div className="admin-settings-form__group">
-          <label
-            className="admin-settings-form__label"
-            htmlFor="admin-settings-confirm-password"
-          >
-            Confirm New Password
-          </label>
-          <input
-            type="password"
-            id="admin-settings-confirm-password"
-            name="confirmPassword"
-            className="admin-settings-form__input"
-            placeholder="Confirm new password"
-            value={securityData.confirmPassword}
-            onChange={handleSecurityChange}
-          />
-        </div>
-        <h3 className="admin-settings-section-title">
-          Two - Factor Authentication
-        </h3>
-        <div className="admin-settings-section-divider" />
-        <div className="admin-settings-2fa-row">
-          <div className="admin-settings-2fa-info">
-            <div className="admin-settings-2fa-label">Enable 2FA</div>
-            <div className="admin-settings-2fa-helper">
-              Add and extra layer of security to your account by enabling
-              two-factor authentication
-            </div>
-          </div>
-          <label className="admin-settings-toggle">
-  <input
-    type="checkbox"
-    checked={securityData.enable2FA}
-    onChange={handle2FAToggle}
-  />
-
-  <span className="admin-settings-toggle-slider" />
-</label>
-        </div>
-        <div className="admin-settings-form__footer">
-          <button
-            type="submit"
-            className="admin-settings-form__submit"
-            id="admin-settings-update-security-btn"
-            
-          >
-            Update Password
-          </button>
-        </div>
-      </form>
-    </div>
-    {show2FAOverlay && (
-    <div className="admin-2fa-overlay">
-      <div className="admin-2fa-modal">
-
-        {!showOTPInput ? (
-          <>
-            <h2>Set up Two-Factor authentication</h2>
-            <p>Scan the QR code using your authenticator app</p>
-
-            <div className="admin-2fa-qr-wrapper">
-              <div className="admin-2fa-corner tl" />
-              <div className="admin-2fa-corner tr" />
-              <div className="admin-2fa-corner bl" />
-              <div className="admin-2fa-corner br" />
-              <div className="admin-2fa-qr">
-                <img src={qrCode} alt="2FA QR Code" />
-              </div>
-            </div>
-
-            <div className="admin-2fa-or">
-              <span>OR</span>
-            </div>
-            <p className="admin-2fa-manual-label">Enter code manually.</p>
-
-            <div className="admin-2fa-input-wrapper">
-              <div className="admin-2fa-corner tl" />
-              <div className="admin-2fa-corner tr" />
-              <div className="admin-2fa-corner bl" />
-              <div className="admin-2fa-corner br" />
-              <input
-                type="text"
-                className="admin-2fa-manual-input"
-                value={twoFASecret}
-                readOnly
-              />
-            </div>
-
-            <button
-              type="button"
-              className="admin-2fa-btn-primary"
-              onClick={() => setShowOTPInput(true)}
-            >
-              Verify
-            </button>
-          </>
-
-        ) : (
-          <>
-            <h2>Verify Authenticator</h2>
-            <p>Enter 6-digit code shown in your authenticator app</p>
-  <div
-    className="admin-2fa-otp-wrapper"
-    onClick={() => otpInputRef.current?.focus()}
-  >
-    <div className="admin-2fa-corner tl" />
-    <div className="admin-2fa-corner tr" />
-    <div className="admin-otp-boxes">
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div
-          key={i}
-          className={`admin-otp-box ${otp[i] ? "filled" : ""}`}
-        >
-          {otp[i] || ""}
-        </div>
-      ))}
-    </div>
-    <div className="admin-2fa-corner bl" />
-    <div className="admin-2fa-corner br" />
-    <input
-      ref={otpInputRef}
-      type="text"
-      inputMode="numeric"
-      maxLength={6}
-      value={otp}
-      onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
-      className="admin-otp-hidden-input"
-      autoFocus
-    />
-  </div>
-
-            <div className="admin-2fa-actions">
-              <button
-                type="button"
-                className="admin-2fa-btn-primary"
-                disabled={otp.length !== 6 || twoFALoading}
-                onClick={verify2FA}
-              >
-                {twoFALoading ? "Verifying..." : "Verify"}
-              </button>
-              <button
-                type="button"
-                className="admin-2fa-btn-outline"
-                onClick={() => setShowOTPInput(false)}
-              >
-                Back
-              </button>
-            </div>
-          </>
-        )}
-
-      </div>
-    </div>
-  )}
-  {loading && (
-                          <LoadingScreen
-                            state="listening"
-                            size={64}
-                            theme="dark"
-                            message="Signing Up"
-                          />
-                        )}
-    </>
-  );
-
-   useEffect(() => {
-  (async () => {
-    try {
-      const response = await axios.get(
-        `${API_URL}admin/getsubadmin`,
-        {
-          withCredentials: true,
-        }
-      );
-
-      console.log(response.data);
-
-      setTeamMembers(response.data.message);
-    } catch (error) {
-      console.error(error);
-    }finally{
-      setLoading(false)
-    }
-  })();
-}, []);
-
-const handleremove = async(id) =>{
-  setLoading(true)
- try {
-   await axios.post(`${API_URL}admin/delete`,{id},{withCredentials:true})
-   setTeamMembers((prev) =>
-                             prev.filter((m) => m.id !== id),
-                           );
-                           setTeamActionOpen(null);
- } catch (error) {
-   console.log("something went wrong",error.message)
- }finally{
-  setLoading(false)
- }
-
-}
-
-const handleViewPermissions = (sub) => {
-  const savedPermissions = sub.permissions || [];
-
-  const permissionObject = savedPermissions.reduce(
-    (acc, permission) => {
-      acc[permission] = true;
-      return acc;
-    },
-    {}
-  );
-
-  setPermissionsState(permissionObject);
-  setViewingPermissions(sub._id);
-  setTeamActionOpen(null);
-};
-  const teamCard = (
-    <>
-    <div className="admin-settings-card admin-settings-card--team">
-      <h2 className="admin-settings-card__title">Team Management</h2>
-      <div className="admin-settings-card__divider" />
-
-      {/* Mobile Team Filter Row */}
-      <div className="ms-mobile-team-filter-row">
-        <div className="ms-mobile-team-search">
-          <input type="text" placeholder="Search" />
-        </div>
-        <button className="ms-mobile-team-icon-btn">
-          <Filter size={18} strokeWidth={1.5} color="#4B5563" />
-        </button>
-        <button className="ms-mobile-team-icon-btn">
-          <Plus size={18} strokeWidth={1.5} color="#4B5563" />
-        </button>
-      </div>
-
-      <div className="admin-settings-team-table">
-        <div className="admin-settings-team-header">
-          <div className="team-col-name">Name</div>
-          <div className="team-col-role">Role</div>
-          <div className="team-col-status">Status</div>
-          <div className="team-col-action">Action</div>
-        </div>
-
-        <div className="admin-settings-team-list">
-          {teamMembers?.map((sub) => (
-            <div
-              className="admin-settings-team-row"
-              key={sub?._id}
-              style={{ zIndex: teamActionOpen === sub?._id ? 10 : 1 }}
-            >
-              <div className="team-col-name">
-                <div className="team-admin-name">{sub?.name}</div>
-                <div className="team-admin-email">{sub?.email}</div>
-              </div>
-              <div className="team-right-controls">
-                <div className="team-col-role">
-                  <span className="team-role-badge">{sub?.role}</span>
-                </div>
-                <div className="team-col-status">
-                  <span
-                    className={`team-status-badge ${sub.invitestatus === "Active" ? "active" : "inactive"}`}
-                  >
-                    {sub.status}
-                  </span>
-                </div>
-                <div className="team-col-action">
-                  <button
-                    className="team-action-btn"
-                    onClick={() =>
-                      setTeamActionOpen(
-                        teamActionOpen === sub._id ? null : sub._id,
-                      )
-                    }
-                  >
-                    <MoreVertical size={20} color="#666" />
-                  </button>
-                  {teamActionOpen === sub._id && (
-                    <div className="team-action-dropdown" ref={teamActionRef}>
-                      <button
-                        className="team-dropdown-item permissions"
-                       onClick={() => handleViewPermissions(sub)}
-                      >
-                        Permissions
-                      </button>
-                      <button
-                        className="team-dropdown-item delete"
-                        onClick={()=>{handleremove(sub._id)}}
-                      >
-                        <span className="team-x-icon">×</span> Remove
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="admin-settings-team-footer">
-        <button
-          className="admin-settings-form__submit"
-          onClick={() => setShowAddSubAdminModal(true)}
-        >
-          Add Sub-admin
-        </button>
-      </div>
-    </div>
-    {loading && (
-                            <LoadingScreen
-                              state="listening"
-                              size={64}
-                              theme="dark"
-                              message="Signing Up"
-                            />
-                          )}
-    </>
-  );
-
-
-
-  const handleAddSubAdmin = async(e) => {
-    if (e) e.preventDefault();
-    const errors = {};
-    if (!newSubAdmin.name.trim()) errors.name = "Full name is required";
-    if (!newSubAdmin.email.trim()) errors.email = "Email address is required";
-    if (Object.keys(errors).length > 0) {
-      setSubAdminErrors(errors);
-      return;
-    }
-    setLoading(true)
-   try {
-     const response = await axios.post(`${API_URL}admin/invite`,{
-       name:newSubAdmin.name,
-       email:newSubAdmin.email
-     },{withCredentials:true})
-     console.log(response.data.message)
-     setSubAdminErrors({});
-     setTeamMembers((prev) => [
-       ...prev,
-       {
-         id: Date.now(),
-         name: newSubAdmin.name,
-         email: newSubAdmin.email,
-         role: "Sub-admin",
-         status: "Active",
-       },
-     ]);
-     setNewSubAdmin({ name: "", email: "" });
-     setShowAddSubAdminModal(false);
-   } catch (error) {
-    console.log(error.message)
-   }finally{
-    setLoading(false)
-   }
-  };
-  const handleSavePermissions = async () => {
-    setLoading(true)
-  try {
-    const selectedPermissions = Object.entries(
-      permissionsState
-    )
-      .filter(([_, checked]) => checked)
-      .map(([permission]) => permission);
-
-      console.log(viewingPermissions)
-      console.log(selectedPermissions)
-    const response = await axios.post(
-    `${API_URL}admin/addpermissions`,
-    {
-        id: viewingPermissions,
-        permissions: selectedPermissions
-    },
-    {
-        withCredentials: true
-    }
-);
-    console.log(
-      "Permissions saved:",
-      response.data
-    );
-
-    toast.success(
-      response.data.message ||
-      "Permissions saved successfully"
-    );
-
-    // setUser((prev) => ({
-    //   ...prev,
-    //   permissions: selectedPermissions,
-    // }));
-
-  } catch (error) {
-    console.error(
-      "Permission save error:",
-      error
-    );
-
-    toast.error(
-      error.response?.data?.message ||
-      error.response?.data?.data ||
-      error.message ||
-      "Failed to save permissions"
-    );
-  }finally{
-    setLoading(false)
-  }
-};
-
-  const togglePermission = (key) => {
-    setPermissionsState((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const permissionCategories = [
-    {
-      column: "left",
-      category: "Dashboard",
-      items: ["View", "Analytics", "Reports Export"],
-    },
-    // {
-    //   column: "left",
-    //   category: "signers",
-    //   items: ["View", "Add", "Edit", "Delete"],
-    // },
-    {
-      column: "left",
-      category: "Templates",
-      items: ["View", "Create", "Delete"],
-    },
-    {
-      column: "right",
-      category: "Documents",
-      items: [
-        "View",
-        "Upload",
-        "Edit",
-        "Delete",
-        "Send for Signature",
-        "Cancel Requests",
-        "Archive",
-      ],
-    },
-    {
-      column: "right",
-      category: "Contact Books",
-      items: ["View", "Add", "Edit", "Delete"],
-    },
-  ];
-
-  const permissionsViewComponent = (
-    <>
-    <div className="admin-permissions-card">
-      <h2 className="admin-permissions-card__title">Permission Settings</h2>
-      <div className="admin-permissions-card__divider" />
-
-      <div className="admin-permissions-container">
-        {permissionCategories.map((cat) => (
-          <div
-            key={cat.category}
-            className={`admin-permissions-group group-${cat.category.replace(/\s+/g, "-")}`}
-          >
-            <h3 className="admin-permissions-group-title">{cat.category}</h3>
-            <div className="admin-permissions-group-items">
-              {cat.items.map((item) => {
-                const key = `${cat.category}-${item}`;
-                const isChecked = permissionsState[key] || false;
-                return (
-                  <label key={item} className="admin-permission-item">
-                    <span className="admin-permission-item-label">{item}</span>
-                    <input
-                      type="checkbox"
-                      checked={isChecked}
-                      onChange={() => togglePermission(key)}
-                      className="admin-permission-checkbox-input"
-                    />
-                    <span className="admin-permission-custom-checkbox"></span>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="admin-permissions-footer">
-        <button
-  type="button"
-  className="admin-settings-form__submit"
-  onClick={handleSavePermissions}
->
-  Save
-</button>
-      </div>
-    </div>
-    {loading && (
-                            <LoadingScreen
-                              state="listening"
-                              size={64}
-                              theme="dark"
-                              message="Signing Up"
-                            />
-                          )}
-                          </>
-  );
-
-  const notificationCard = (
-    <>
-    <div className="admin-settings-card admin-settings-card--notifications">
-      <h2 className="admin-settings-card__title">Notification</h2>
-      <div className="admin-settings-card__divider" />
-
-      <div className="admin-notification-section">
-        <h3 className="admin-notification-section-title">Email Notification</h3>
-        <div className="admin-notification-list">
-          <label className="admin-notification-item">
-            <div className="admin-notification-item-text">
-              <h4>Document Signed</h4>
-              <p>Receive an email when someone signs your document</p>
-            </div>
-            <input
-              type="checkbox"
-              checked={notificationData.email_document_signed}
-              onChange={() => handleNotificationChange("email_document_signed")}
-              className="admin-permission-checkbox-input"
-            />
-            <span className="admin-permission-custom-checkbox"></span>
-          </label>
-          <label className="admin-notification-item">
-            <div className="admin-notification-item-text">
-              <h4>Signature Request Received</h4>
-              <p>Get notified when you receive a new signature request</p>
-            </div>
-            <input
-              type="checkbox"
-              checked={notificationData.email_signature_request}
-              onChange={() =>
-                handleNotificationChange("email_signature_request")
-              }
-              className="admin-permission-checkbox-input"
-            />
-            <span className="admin-permission-custom-checkbox"></span>
-          </label>
-          <label className="admin-notification-item">
-            <div className="admin-notification-item-text">
-              <h4>Document Expired</h4>
-              <p>Alert me when a pending document passes its expiration date</p>
-            </div>
-            <input
-              type="checkbox"
-              checked={notificationData.email_document_expired}
-              onChange={() =>
-                handleNotificationChange("email_document_expired")
-              }
-              className="admin-permission-checkbox-input"
-            />
-            <span className="admin-permission-custom-checkbox"></span>
-          </label>
-        </div>
-      </div>
-
-      <div className="admin-notification-section">
-        <h3 className="admin-notification-section-title">System Alert</h3>
-        <div className="admin-notification-list">
-          <label className="admin-notification-item">
-            <div className="admin-notification-item-text">
-              <h4>System Updates</h4>
-              <p>News about product and feature updates</p>
-            </div>
-            <input
-              type="checkbox"
-              checked={notificationData.system_updates}
-              onChange={() => handleNotificationChange("system_updates")}
-              className="admin-permission-checkbox-input"
-            />
-            <span className="admin-permission-custom-checkbox"></span>
-          </label>
-          <label className="admin-notification-item">
-            <div className="admin-notification-item-text">
-              <h4>Security Alerts</h4>
-              <p>Important notifications about your account security</p>
-            </div>
-            <input
-              type="checkbox"
-              checked={notificationData.system_security}
-              onChange={() => handleNotificationChange("system_security")}
-              className="admin-permission-checkbox-input"
-            />
-            <span className="admin-permission-custom-checkbox"></span>
-          </label>
-        </div>
-      </div>
-
-      <div className="admin-settings-form__footer">
-        <button className="admin-settings-form__submit">Save</button>
-      </div>
-    </div>
-    {loading && (
-                            <LoadingScreen
-                              state="listening"
-                              size={64}
-                              theme="dark"
-                              message="Signing Up"
-                            />
-                          )}
-    </>
-  );
-
-  const[subscription,setsubscription]=useState({})
-  const[reciept,setReciept]=useState()
-
-  useEffect(()=>{
-    (async()=>{
-      setLoading(true)
       try {
-         const response = await axios.get(`${API_URL}subscription/mysubscription`,{withCredentials:true})
-        //  console.log(response.data.message)
-         setsubscription(response.data.message)
-         setReciept(`https://invoices.razorpay.com/v1/t/${response?.data?.message?.lastInvoiceId}`)
+        const response = await axios.get(`${API_URL}admin/me`, {
+          withCredentials: true,
+        });
+
+        setUser(response.data.message || {});
       } catch (error) {
-        console.log(error.message)
-      }finally{
-        setLoading(false)
+        console.error(error.message);
+      } finally {
+        setLoading(false);
       }
+    };
 
-    })()
-  },[])
+    verifyUser();
+  }, []);
 
-  const billingCard = (
-    <>
-    <div className="admin-settings-card admin-settings-card--billing">
-      <h2 className="admin-settings-card__title">Billing</h2>
-      <div className="admin-settings-card__divider" />
+  const handleTabClick = (item) => {
+    if (!item.key) return;
 
-      <div className="admin-billing-section">
-        <h3 className="admin-billing-section-title">Current Plan</h3>
-        <div className="admin-billing-plan-card">
-          <div className="admin-billing-plan-header">
-            <div className="admin-billing-plan-info">
-              <h4 className="admin-billing-plan-name">{subscription?.planId?.name} Plan</h4>
-              <p className="admin-billing-plan-billed">Billed {subscription?.planId?.billingPeriod}</p>
-            </div>
-            <div className="admin-billing-plan-price">
-              <span className="price-amount">{subscription?.planId?.amount}</span>
-              <span className="price-period">/month</span>
-            </div>
-          </div>
-          <div className="admin-billing-plan-divider" />
-          <ul className="admin-billing-plan-features">
-            {subscription?.planId?.features?.map((f,index)=>{
-              return(
-                  <li key={index}>{f}</li>
-              )
-            })}
-            {/* <li>Unlimited Document Signing</li>
-            <li>Up to 10 Team Members</li>
-            <li>Advance Templates</li> */}
-          </ul>
-          <div className="admin-billing-plan-footer">
-            <span className="admin-billing-next-date">
-              Next billing date :{new Date(subscription?.chargeAt).toLocaleDateString("en-IN", {
-  day: "2-digit",
-  month: "short",
-  year: "numeric",
-})}
+    setActiveTab(item.key);
+    setViewingPermissions(false);
+
+    if (isMobile) {
+      setMobileView(item.key);
+    }
+  };
+
+  const handleTeamPermissionMode = (isViewing) => {
+    setViewingPermissions(isViewing);
+  };
+
+  const exitTeamPermissions = () => {
+    setTeamResetKey((value) => value + 1);
+    setViewingPermissions(false);
+    setActiveTab("team");
+    setMobileView("team");
+  };
+
+  const renderSection = (tab = activeTab) => {
+    switch (tab) {
+      case "profile":
+        return (
+          <Profile
+            user={user}
+            onUserUpdated={refreshUser}
+          />
+        );
+
+      case "account":
+        return (
+          <Account
+            user={user}
+            onUserUpdated={refreshUser}
+          />
+        );
+
+      case "security":
+        return <Security />;
+
+      case "team":
+        return (
+          <TeamManagement
+            resetPermissionsKey={teamResetKey}
+            onPermissionModeChange={handleTeamPermissionMode}
+          />
+        );
+
+      case "notifications":
+        return <Notifications />;
+
+      case "billing":
+        return <Billing />;
+
+      case "integrations":
+        return <Integrations />;
+
+      case "audit":
+        return <AuditLogs />;
+
+      case "recycle-bin":
+        return <RecycleBin />;
+
+      default:
+        return <Profile user={user} />;
+    }
+  };
+
+  const renderMobileMenu = () => (
+    <div className="ms-mobile-menu">
+      <button
+        type="button"
+        className="ms-mobile-profile-card"
+        onClick={() => setMobileView("profile")}
+      >
+        <div className="ms-mobile-profile-card__avatar">
+          <img
+            src={user?.profile_picture}
+            alt="Avatar"
+          />
+        </div>
+
+        <div className="ms-mobile-profile-card__info">
+          <span className="ms-mobile-profile-card__name">
+            {user?.name || ""}
+          </span>
+          <span className="ms-mobile-profile-card__email">
+            {user?.email || ""}
+          </span>
+          <span className="ms-mobile-profile-card__role">Admin</span>
+        </div>
+
+        <ChevronRight size={20} color="#9CA3AF" />
+      </button>
+
+      <p className="ms-mobile-group-title">General</p>
+      <div className="ms-mobile-group-items">
+        <button
+          type="button"
+          className="ms-mobile-menu-item"
+          onClick={() => setMobileView("account")}
+        >
+          <div className="ms-mobile-menu-item__left">
+            <span className="ms-mobile-menu-item__icon">
+              <Building size={18} />
             </span>
-            <button className="admin-billing-upgrade-btn">Upgrade Plan</button>
+            <span className="ms-mobile-menu-item__label">Account</span>
           </div>
-        </div>
+          <ChevronRight size={18} color="#9CA3AF" />
+        </button>
+
+        <button
+          type="button"
+          className="ms-mobile-menu-item"
+          onClick={() => setMobileView("notifications")}
+        >
+          <div className="ms-mobile-menu-item__left">
+            <span className="ms-mobile-menu-item__icon">
+              <Bell size={18} />
+            </span>
+            <span className="ms-mobile-menu-item__label">Notification</span>
+          </div>
+          <ChevronRight size={18} color="#9CA3AF" />
+        </button>
+
+        <button
+          type="button"
+          className="ms-mobile-menu-item"
+          onClick={() => setMobileView("billing")}
+        >
+          <div className="ms-mobile-menu-item__left">
+            <span className="ms-mobile-menu-item__icon">
+              <CreditCard size={18} />
+            </span>
+            <span className="ms-mobile-menu-item__label">Billing</span>
+          </div>
+          <ChevronRight size={18} color="#9CA3AF" />
+        </button>
       </div>
 
-      <div className="admin-billing-section">
-        <h3 className="admin-billing-section-title">Payment Method</h3>
-        <div className="admin-billing-payment-card">
-          <div className="admin-billing-card-info">
-            <div className="admin-billing-card-icon-wrapper">
-              <CreditCard size={16} color="#666" />
-              <span className="admin-billing-card-brand">Visa</span>
-            </div>
-            <div className="admin-billing-card-details">
-              <span className="card-number">Visa ending in 4242</span>
-              <span className="card-expiry">Expired in 2028</span>
-            </div>
+      <p className="ms-mobile-group-title">Security &amp; Organization</p>
+      <div className="ms-mobile-group-items">
+        <button
+          type="button"
+          className="ms-mobile-menu-item"
+          onClick={() => setMobileView("security")}
+        >
+          <div className="ms-mobile-menu-item__left">
+            <span className="ms-mobile-menu-item__icon">
+              <Shield size={18} />
+            </span>
+            <span className="ms-mobile-menu-item__label">Security</span>
           </div>
-          <button className="admin-billing-edit-btn">Edit</button>
-        </div>
+          <ChevronRight size={18} color="#9CA3AF" />
+        </button>
+
+        <button
+          type="button"
+          className="ms-mobile-menu-item"
+          onClick={() => setMobileView("team")}
+        >
+          <div className="ms-mobile-menu-item__left">
+            <span className="ms-mobile-menu-item__icon">
+              <Users size={18} />
+            </span>
+            <span className="ms-mobile-menu-item__label">
+              Team Management
+            </span>
+          </div>
+          <ChevronRight size={18} color="#9CA3AF" />
+        </button>
+
+        <button
+          type="button"
+          className="ms-mobile-menu-item"
+          onClick={() => {
+            setActiveTab("integrations");
+            setMobileView("integrations");
+          }}
+        >
+          <div className="ms-mobile-menu-item__left">
+            <span className="ms-mobile-menu-item__icon">
+              <Share2 size={18} />
+            </span>
+            <span className="ms-mobile-menu-item__label">
+              Integrations
+            </span>
+          </div>
+          <ChevronRight size={18} color="#9CA3AF" />
+        </button>
+
+        <button
+          type="button"
+          className="ms-mobile-menu-item"
+          onClick={() => {
+            setActiveTab("audit");
+            setMobileView("audit");
+          }}
+        >
+          <div className="ms-mobile-menu-item__left">
+            <span className="ms-mobile-menu-item__icon">
+              <FileText size={18} />
+            </span>
+            <span className="ms-mobile-menu-item__label">Audit Logs</span>
+          </div>
+          <ChevronRight size={18} color="#9CA3AF" />
+        </button>
       </div>
 
-      <div className="admin-billing-section">
-        <h3 className="admin-billing-section-title">Billing Address</h3>
-        <div className="admin-billing-address-card">
-          <div className="admin-billing-invoice-info">
-            <span className="invoice-title">Invoice</span>
-            <span className="invoice-date">{new Date(subscription?.startDate).toLocaleDateString("en-IN", {
-  day: "2-digit",
-  month: "short",
-  year: "numeric",
-})}</span>
+      <button
+        type="button"
+        className="ms-mobile-menu-item"
+        onClick={() => {
+          setActiveTab("recycle-bin");
+          setMobileView("recycle-bin");
+        }}
+      >
+        <div className="ms-mobile-menu-item__left">
+          <span className="ms-mobile-menu-item__icon">
+            <Archive size={18} />
+          </span>
+          <span className="ms-mobile-menu-item__label">
+            Recycle Bin
+          </span>
+        </div>
+        <ChevronRight size={18} color="#9CA3AF" />
+      </button>
+
+      <p className="ms-mobile-group-title">Account Management</p>
+      <div className="ms-mobile-group-items">
+        <div className="ms-mobile-menu-item">
+          <div className="ms-mobile-menu-item__left">
+            <span className="ms-mobile-menu-item__icon">
+              <LogOut size={18} />
+            </span>
+            <span className="ms-mobile-menu-item__label">Logout</span>
           </div>
-          <div className="admin-billing-invoice-actions">
-            <button className="icon-btn">
-              <a href ={reciept}><Download size={16} color="#666" /></a>
-            </button>
-            <div className="tooltip-container">
-              <button className="icon-btn">
-                <RefreshCw size={16} color="#666" />
-              </button>
-              <div className="invoice-error-tooltip">
-                <AlertCircle size={14} color="#666" />
-                <span>Unable to download. Refresh and try again</span>
-              </div>
-            </div>
+          <ChevronRight size={18} color="#9CA3AF" />
+        </div>
+
+        <div className="ms-mobile-menu-item ms-mobile-menu-item--disabled">
+          <div className="ms-mobile-menu-item__left">
+            <span
+              className="ms-mobile-menu-item__icon"
+              style={{ color: "#DC2626" }}
+            >
+              <PauseCircle size={18} />
+            </span>
+            <span
+              className="ms-mobile-menu-item__label"
+              style={{ color: "#DC2626" }}
+            >
+              Deactivate Account
+            </span>
           </div>
+          <ChevronRight size={18} color="#111111" />
+        </div>
+
+        <div className="ms-mobile-menu-item ms-mobile-menu-item--disabled">
+          <div className="ms-mobile-menu-item__left">
+            <span
+              className="ms-mobile-menu-item__icon"
+              style={{ color: "#DC2626" }}
+            >
+              <Trash2 size={18} />
+            </span>
+            <span
+              className="ms-mobile-menu-item__label"
+              style={{ color: "#DC2626" }}
+            >
+              Delete Account
+            </span>
+          </div>
+          <ChevronRight size={18} color="#111111" />
         </div>
       </div>
     </div>
-    {loading && (
-                            <LoadingScreen
-                              state="listening"
-                              size={64}
-                              theme="dark"
-                              message="Signing Up"
-                            />
-                          )}
-    </>
   );
 
-  useEffect(()=>{
-
-    const getStatus = async()=>{
-   setLoading(true)
-        try {
-          const res = await axios.get(
-  
-              `${API_URL}google/status`,
-  
-              {
-  
-                  withCredentials:true
-  
-              }
-  
-          );
-  
-          setIsDriveConnected(res.data.message.connected);
-        } catch (error) {
-          console.log(error.message)
-        }finally{
-          setLoading(false)
-        }
-
-    }
-
-    getStatus();
-
-},[]);
-
-  const handledriveconnect = async () => {
-    setLoading(true)
-  try {
-    const response = await axios.get(
-      `${API_URL}google/auth-url`,
-      {
-        withCredentials: true,
-      }
-    );
-
-    window.location.assign(response.data.message);
-  } catch (error) {
-    console.error(error);
-  }finally{
-    setLoading(false)
-  }
-};
-
-const handledisconnect = async()=>{
-  setLoading(true)
-  try {
-    await axios.get(
-  
-      `${API_URL}google/disconnect`,
-  
-      {
-  
-          withCredentials:true
-  
-      }
-  
-  );
-  
-  setIsDriveConnected(false);
-  setShowDisconnectModal(false)
-  } catch (error) {
-    console.log("Could not disconnect",error.message)
-  }finally{
-    setLoading(false)
-  }
-}
-
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const [templateRes, documentRes] = await Promise.all([
-        axios.get(`${API_URL}template/gettemplate`,{
-          withCredentials: true,
-        }),
-        axios.get(`${API_URL}document/getdocument`, {
-          withCredentials: true,
-        }),
-      ]);
-
-      const templates = templateRes?.data?.message.filter(
-        (t) => t?.templateid?.isDeleted === true
-      );
-
-      const documents = documentRes?.data?.message.filter(
-        (d) => d.isDeleted === true
-      );
-
-      setRecycleBinItems({
-        templates,
-        documents,
-      });
-      console.log("recycleitem" ,templates)
-    } catch (error) {
-      console.error("Error fetching recycle bin data:", error);
-    }
-  };
-
-  fetchData();
-}, []);
-
-  const handleRecycleBinRestore = async(item) => {
-  try {
-      const collection = item.type === "template" ? "templates" : "documents";
-      setRecycleBinItems((prev) => ({
-        ...prev,
-        [collection]: prev[collection].filter((entry) => entry._id !== item._id),
-      }));
-      // Connect this action to your backend restore endpoint.
-        if(item.type==="template"){
-        
-       try {
-         await axios.get(`${API_URL}template/restore/${item?.templateid?._id}`,{withCredentials:true})
-       } catch (error) {
-         console.log(error.message)
-       }
-       }else{
-          try {
-               await axios.get(`${API_URL}document/restore/${item._id}`,{withCredentials:true})
-             } catch (error) {
-               console.log("Something went wrong in restoring Document",error.message)
-             }
-       }
-      toast.success(`${item.type === "template" ? "Template" : "Document"} restored successfully`);
-  } catch (error) {
-   console.log("Something went wrong in deleting Document",error.message)
- }finally{
-  setLoading(false)
- }
-  };
-
-  const handleRecycleBinDelete = async() => {
-
- try {
-   setLoading(true)
-     if (!recycleBinDeleteTarget) return;
-     const { item } = recycleBinDeleteTarget;
-     const collection = item.type === "template" ? "templates" : "documents";
-     setRecycleBinItems((prev) => ({
-       ...prev,
-       [collection]: prev[collection].filter((entry) => entry._id !== item._id),
-     }));
- 
-     if(item.type==="template"){
-      
-     try {
-       await axios.delete(`${API_URL}template/deletetemplate/${item.templateid?._id}`,{withCredentials:true})
-     } catch (error) {
-       console.log(error.message)
-     }
-     }else{
-        try {
-             await axios.delete(`${API_URL}document/deletedocument/${item._id}`,{withCredentials:true})
-           } catch (error) {
-             console.log("Something went wrong in deleting Document",error.message)
-           }
-     }
-     toast.success(`${item.type === "template" ? "Template" : "Document"} permanently deleted`);
-     setRecycleBinDeleteTarget(null);
- } catch (error) {
-   console.log("Something went wrong in deleting Document",error.message)
- }finally{
-  setLoading(false)
- }
-  };
-
-  const recycleBinVisibleItems = [
-    ...(recycleBinFilter === "all" || recycleBinFilter === "documents"
-      ? recycleBinItems.documents.map((item) => ({ ...item, type: "document" }))
-      : []),
-    ...(recycleBinFilter === "all" || recycleBinFilter === "templates"
-      ? recycleBinItems.templates.map((item) => ({ ...item, type: "template" }))
-      : []),
-  ];
-
-  const recycleBinCard = (
+  const mobileDetail = (
     <>
-      <div className="admin-settings-card admin-settings-card--recycle-bin">
-        <h2 className="admin-settings-card__title">Recycle Bin</h2>
-        <div className="admin-settings-card__divider" />
-
-        <div className="recycle-bin-toolbar">
-          <div className="recycle-bin-toggle-group" role="tablist" aria-label="Recycle Bin filter">
-            {[
-              { key: "all", label: "All" },
-              { key: "documents", label: "Documents" },
-              { key: "templates", label: "Templates" },
-            ].map((filter) => (
-              <button
-                key={filter.key}
-                type="button"
-                role="tab"
-                aria-selected={recycleBinFilter === filter.key}
-                className={`recycle-bin-toggle ${
-                  recycleBinFilter === filter.key ? "recycle-bin-toggle--active" : ""
-                }`}
-                onClick={() => setRecycleBinFilter(filter.key)}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div>
+      {mobileView === "profile" && (
+        <div className="ms-mobile-detail">{renderSection("profile")}</div>
+      )}
+      {mobileView === "account" && (
+        <div className="ms-mobile-detail ms-mobile-detail--account">
+          {renderSection("account")}
         </div>
-
-        <div className="recycle-bin-list">
-          {recycleBinVisibleItems.length > 0 ? (
-            recycleBinVisibleItems.map((item) => (
-              <div className="recycle-bin-item" key={`${item.type}-${item._id}`}>
-                <div className="recycle-bin-item__icon">
-                  {item.type === "template" ? (
-                    <FileText size={20} strokeWidth={1.6} />
-                  ) : (
-                    <Archive size={20} strokeWidth={1.6} />
-                  )}
-                </div>
-                <div className="recycle-bin-item__info">
-                  <h3>{(item.type === "template" ? item?.templateid?.name: item?.title) || (item.type === "template" ? "Untitled Template" : "Untitled Document")}</h3>
-                  <p>
-                    {item.archivedAt
-                      ? `Archived ${new Date(item.archivedAt).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}`
-                      : "Archived"}
-                  </p>
-                </div>
-                <div className="recycle-bin-item__actions">
-                  <button type="button" className="recycle-bin-action recycle-bin-action--restore" onClick={() => handleRecycleBinRestore(item)}>
-                    <RotateCcw size={15} /> Restore
-                  </button>
-                  <button type="button" className="recycle-bin-action recycle-bin-action--delete" onClick={() => setRecycleBinDeleteTarget({ item })}>
-                    <Trash2 size={15} /> Delete
-                  </button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="recycle-bin-empty">
-              <div className="recycle-bin-empty__icon"><Archive size={22} strokeWidth={1.5} /></div>
-              <h3>
-                {recycleBinFilter === "all" ? "Recycle Bin is empty" : recycleBinFilter === "documents" ? "No archived documents" : "No archived templates"}
-              </h3>
-              <p>Archived {recycleBinFilter === "documents" ? "documents" : recycleBinFilter === "templates" ? "templates" : "documents and templates"} will appear here.</p>
-            </div>
-          )}
+      )}
+      {mobileView === "notifications" && (
+        <div className="ms-mobile-detail">
+          {renderSection("notifications")}
         </div>
-      </div>
-
-      {recycleBinDeleteTarget && (
-        <div className="integration-modal-backdrop" onClick={() => setRecycleBinDeleteTarget(null)}>
-          <div className="integration-modal-container" onClick={(e) => e.stopPropagation()}>
-            <div className="integration-modal-content">
-              <div className="integration-modal-header-row">
-                <svg viewBox="0 0 24 24" className="integration-modal-warning-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#E5252A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <h3 className="integration-modal-title">Delete {recycleBinDeleteTarget.item.type === "template" ? "Template" : "Document"}?</h3>
-              </div>
-              <p className="integration-modal-description">
-                This action will permanently delete this {recycleBinDeleteTarget.item.type === "template" ? "template" : "document"}. You will not be able to restore it afterwards.
-              </p>
-              <ul className="integration-modal-list">
-                <li>The item will be permanently removed</li>
-                <li>This action cannot be undone</li>
-                <li>Make sure you no longer need this item</li>
-              </ul>
-            </div>
-            <div className="integration-modal-footer">
-              <button className="integration-modal-btn cancel-btn" onClick={() => setRecycleBinDeleteTarget(null)}>Cancel</button>
-              <button className="integration-modal-btn disconnect-btn" onClick={handleRecycleBinDelete}>Delete Permanently</button>
-            </div>
-          </div>
+      )}
+      {mobileView === "security" && (
+        <div className="ms-mobile-detail">{renderSection("security")}</div>
+      )}
+      {mobileView === "team" && (
+        <div className="ms-mobile-detail">{renderSection("team")}</div>
+      )}
+      {mobileView === "billing" && (
+        <div className="ms-mobile-detail">{renderSection("billing")}</div>
+      )}
+      {mobileView === "audit" && (
+        <div className="ms-mobile-detail">{renderSection("audit")}</div>
+      )}
+      {mobileView === "integrations" && (
+        <div className="ms-mobile-detail">
+          {renderSection("integrations")}
+        </div>
+      )}
+      {mobileView === "recycle-bin" && (
+        <div className="ms-mobile-detail">
+          {renderSection("recycle-bin")}
         </div>
       )}
     </>
   );
 
-  const integrationsCard = (
-    <>
-    <div className="admin-settings-card admin-settings-card--integrations">
-      <h2 className="admin-settings-card__title">Integration</h2>
-      <div className="admin-settings-card__divider" />
-
-      <p className="admin-integrations-description">
-        Connect Sign App to your favourite tools to streamline your document
-        workflow.
-      </p>
-
-      <div className="admin-integrations-list">
-        <div className="admin-integration-item">
-          <div className="admin-integration-item-left">
-            <div className="admin-integration-item-header">
-              <svg
-                viewBox="0 0 87.3 78"
-                className="admin-integration-logo"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z"
-                  fill="#0066da"
-                />
-                <path
-                  d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z"
-                  fill="#00ac47"
-                />
-                <path
-                  d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z"
-                  fill="#ea4335"
-                />
-                <path
-                  d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z"
-                  fill="#00832d"
-                />
-                <path
-                  d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z"
-                  fill="#2684fc"
-                />
-                <path
-                  d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z"
-                  fill="#ffba00"
-                />
-              </svg>
-              <div className="admin-integration-info">
-                <h3 className="admin-integration-title">Google Drive</h3>
-                <span className="admin-integration-status">
-                  {isDriveConnected ? "CONNECTED" : "DISCONNECTED"}
-                </span>
-              </div>
-            </div>
-            <p className="admin-integration-description">
-              Sync your signed documents directly to Sync your signed documents
-              directly to Google Drive for instant access and secure storage.
-              Enjoy seamless organization, real-time backup, and effortless
-              sharing with your team.Google drive
-            </p>
-          </div>
-          <div className="admin-integration-item-right">
-            {isDriveConnected ? (
-              <button
-                className="admin-integration-action-btn disconnect"
-                type="button"
-                onClick={()=>setShowDisconnectModal(true)}
-              >
-                DISCONNECT
-              </button>
-            ) : (
-              <button
-                className="admin-integration-action-btn connect"
-                type="button"
-                onClick={() => handledriveconnect()}  
-              >
-                CONNECT
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-    {loading && (
-                            <LoadingScreen
-                              state="listening"
-                              size={64}
-                              theme="dark"
-                              message="Signing Up"
-                            />
-                          )}
-    </>
-  );
-
-
-  useEffect(()=>{
-    (async()=>{
-      setLoading(true)
-       try {
-        const response = await axios.get(`${API_URL}activity/getactivity`,{withCredentials:true})
-        console.log(response.data.message)
-        setauditLogsData(response.data.message)
-       } catch (error) {
-         console.log(error.message)
-       }finally{
-        setLoading(false)
-       }
-
-    })()
-  },[])
-
-  const filteredAuditLogs = auditLogsData.filter((log) => {
-  const q = auditSearchQuery.toLowerCase();
-
-  const formattedDate = new Date(log.createdAt)
-    .toLocaleString("en-US", {
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    })
-    .toLowerCase();
-
-  return (
-    formattedDate.includes(q) ||
-    log?.userId?.name?.toLowerCase()?.includes(q) ||
-    log?.action?.toLowerCase()?.includes(q) ||
-    log?.refId?.title?.toLowerCase()?.includes(q) ||
-    log?.refId?.name?.toLowerCase()?.includes(q) ||
-    log?.status?.toLowerCase()?.includes(q)
-  );
-});
-
-  const auditCard = (
-    <div className="admin-settings-card admin-settings-card--audit">
-      {/* ── Desktop & Tablet Layout (Hidden on Mobile) ── */}
-      <div className="admin-audit-desktop-layout">
-        <div className="admin-audit-header">
-          <h2 className="admin-settings-card__title">Audit Logs</h2>
-          <div className="admin-audit-search">
-            <input
-              type="text"
-              placeholder="Search Logs....."
-              className="admin-audit-search-input"
-              value={auditSearchQuery}
-              onChange={(e) => setAuditSearchQuery(e.target.value)}
-            />
-            <Search size={16} className="admin-audit-search-icon" />
-          </div>
-        </div>
-        <div className="admin-settings-card__divider" />
-
-        <div className="admin-audit-table">
-          <div className="admin-audit-table-header">
-            <div className="audit-col audit-col-date">DATE</div>
-            <div className="audit-col audit-col-name">NAME</div>
-            <div className="audit-col audit-col-action">ACTION</div>
-            <div className="audit-col audit-col-document">DOCUMENT</div>
-            <div className="audit-col audit-col-status">STATUS</div>
-          </div>
-          <div className="admin-audit-table-body">
-            {filteredAuditLogs.map((log) => (
-              <div key={log.id} className="admin-audit-row">
-                <div className="audit-col audit-col-date">{
-  new Date(log?.createdAt).toLocaleString("en-US", {
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-  })
-}</div>
-                <div className="audit-col audit-col-name">{log?.userId?.name}</div>
-                <div className="audit-col audit-col-action">{log?.action}</div>
-                <div className="audit-col audit-col-document">
-                  {log?.refId?.title || log?.refId?.name || "NA"}
-                </div>
-                <div className="audit-col audit-col-status">
-                  <span
-                    className={`audit-status-badge audit-status-${log?.status?.toLowerCase()}`}
-                  >
-                    {log?.status}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── Mobile Layout (Hidden on Desktop & Tablet) ── */}
-      <div className="admin-audit-mobile-layout">
-        <h2 className="admin-settings-card__title">Audit Logs</h2>
-        <div className="admin-settings-card__divider" />
-
-        {/* Mobile Search & Filter */}
-        <div className="admin-audit-mobile-controls">
-          <div className="admin-audit-mobile-search-wrapper">
-            <Search size={16} className="admin-audit-mobile-search-icon" />
-            <input
-              type="text"
-              placeholder="Search"
-              className="admin-audit-mobile-search-input"
-              value={auditSearchQuery}
-              onChange={(e) => setAuditSearchQuery(e.target.value)}
-            />
-          </div>
-          <button className="admin-audit-mobile-filter-btn" type="button">
-            <Filter size={18} />
-          </button>
-        </div>
-
-        {/* Mobile Filter Tabs */}
-        <div className="admin-audit-mobile-tabs">
-          <button
-            className="admin-audit-mobile-tab admin-audit-mobile-tab--active"
-            type="button"
-          >
-            <FileText size={18} />
-          </button>
-          <button className="admin-audit-mobile-tab" type="button">
-            <CheckCircle2 size={18} />
-          </button>
-          <button className="admin-audit-mobile-tab" type="button">
-            <AlertCircle size={18} />
-          </button>
-          <button className="admin-audit-mobile-tab" type="button">
-            <Clock size={18} />
-          </button>
-        </div>
-
-        {/* Mobile Cards List */}
-        <div className="admin-audit-mobile-list">
-          {filteredAuditLogs.map((log) => (
-            <div key={log.id} className="admin-audit-mobile-card">
-              <div className="admin-audit-mobile-card-row admin-audit-mobile-card-row--top">
-                <div className="admin-audit-mobile-file">
-                  <FileText
-                    size={18}
-                    className="admin-audit-mobile-icon-file"
-                  />
-                  <span className="admin-audit-mobile-filename">
-                    {log?.refId?.title}
-                  </span>
-                </div>
-                <span
-                  className={`audit-status-badge audit-status-${log.status.toLowerCase()}`}
-                >
-                  {log?.status}
-                </span>
-              </div>
-              <div className="admin-audit-mobile-card-row admin-audit-mobile-card-row--bottom">
-                <div className="admin-audit-mobile-user">
-                  <User size={16} className="admin-audit-mobile-icon-user" />
-                  <span className="admin-audit-mobile-username">
-                    {log?.userId?.name}
-                  </span>
-                </div>
-                <span className="admin-audit-mobile-date">{log?.createdAt}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
-  /* ════════════════════════════════════════════════════════════════════════
-     MOBILE — completely separate render tree.
-     hideMobileTopbar suppresses the global mobile-topbar from Layout.
-     The custom header here reuses the identical CSS classes and structure
-     as the global mobile-topbar so it matches every other mobile page.
-     ════════════════════════════════════════════════════════════════════════ */
   if (isMobile) {
     return (
       <Layout
@@ -1869,16 +452,14 @@ useEffect(() => {
           sidebarOpenerRef.current = openFn;
         }}
       >
-        {/* ── Custom mobile header — same classes as global mobile-topbar ── */}
         <header className="mobile-topbar ms-mobile-header--settings">
-          {/* Left: back arrow to go back to previous view/page */}
           {mobileView !== "menu" || viewingPermissions ? (
             <button
               type="button"
               className="mobile-topbar__hamburger"
               onClick={() => {
                 if (viewingPermissions) {
-                  setViewingPermissions(null);
+                  exitTeamPermissions();
                 } else {
                   setMobileView("menu");
                 }
@@ -1891,25 +472,28 @@ useEffect(() => {
             <button
               type="button"
               className="mobile-topbar__hamburger"
-              onClick={() => navigate("/admin")}
+              onClick={() => navigate("/dashboard")}
               aria-label="Go back"
             >
               <ChevronLeft size={22} color="#1a1a2e" strokeWidth={2} />
             </button>
           )}
 
-          {/* Right: same TopbarIcons used by every other page (only on menu page) */}
           {mobileView === "menu" && !viewingPermissions && (
-            <TopbarIcons iconSize={18} className="mobile-topbar__icons" />
+            <TopbarIcons
+              iconSize={18}
+              className="mobile-topbar__icons"
+            />
           )}
         </header>
 
-        {/* ── Detail sub-header (Settings title) ── */}
         {mobileView !== "menu" && (
           <div className="mobile-page-header ms-mobile-detail-header">
             <div className="ms-mobile-detail-header__row">
               <span className="ms-mobile-detail-header__title">
-                {viewingPermissions ? "Permission Settings" : "Settings"}
+                {viewingPermissions
+                  ? "Permission Settings"
+                  : "Settings"}
               </span>
             </div>
             <p className="ms-mobile-detail-header__sub">
@@ -1918,447 +502,86 @@ useEffect(() => {
           </div>
         )}
 
-        {/* ── Menu screen ── */}
-        {mobileView === "menu" && (
-          <div className="ms-mobile-menu">
-            {/* Profile shortcut card */}
-            <button
-              type="button"
-              className="ms-mobile-profile-card"
-              onClick={() => setMobileView("profile")}
-            >
-              <div className="ms-mobile-profile-card__avatar">
-                <img src={avatar} alt="Avatar" />
-              </div>
-              <div className="ms-mobile-profile-card__info">
-                <span className="ms-mobile-profile-card__name">
-                  {formData.fullName}
-                </span>
-                <span className="ms-mobile-profile-card__email">
-                  {formData.email}
-                </span>
-                <span className="ms-mobile-profile-card__role">Admin</span>
-              </div>
-              <ChevronRight size={20} color="#9CA3AF" />
-            </button>
-
-            {/* General group */}
-            <p className="ms-mobile-group-title">General</p>
-            <div className="ms-mobile-group-items">
-              <button
-                type="button"
-                className="ms-mobile-menu-item"
-                onClick={() => setMobileView("account")}
-              >
-                <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon">
-                    <Building size={18} />
-                  </span>
-                  <span className="ms-mobile-menu-item__label">Account</span>
-                </div>
-                <ChevronRight size={18} color="#9CA3AF" />
-              </button>
-              <button
-                type="button"
-                className="ms-mobile-menu-item"
-                onClick={() => setMobileView("notifications")}
-              >
-                <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon">
-                    <Bell size={18} />
-                  </span>
-                  <span className="ms-mobile-menu-item__label">
-                    Notification
-                  </span>
-                </div>
-                <ChevronRight size={18} color="#9CA3AF" />
-              </button>
-              <button
-                type="button"
-                className="ms-mobile-menu-item"
-                onClick={() => setMobileView("billing")}
-              >
-                <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon">
-                    <CreditCard size={18} />
-                  </span>
-                  <span className="ms-mobile-menu-item__label">Billing</span>
-                </div>
-                <ChevronRight size={18} color="#9CA3AF" />
-              </button>
-            </div>
-
-            {/* Security & Organization group */}
-            <p className="ms-mobile-group-title">Security &amp; Organization</p>
-            <div className="ms-mobile-group-items">
-              <button
-                type="button"
-                className="ms-mobile-menu-item"
-                onClick={() => setMobileView("security")}
-              >
-                <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon">
-                    <Shield size={18} />
-                  </span>
-                  <span className="ms-mobile-menu-item__label">Security</span>
-                </div>
-                <ChevronRight size={18} color="#9CA3AF" />
-              </button>
-              <button
-                type="button"
-                className="ms-mobile-menu-item"
-                onClick={() => setMobileView("team")}
-              >
-                <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon">
-                    <Users size={18} />
-                  </span>
-                  <span className="ms-mobile-menu-item__label">
-                    Team Management
-                  </span>
-                </div>
-                <ChevronRight size={18} color="#9CA3AF" />
-              </button>
-              <button
-                type="button"
-                className="ms-mobile-menu-item"
-                onClick={() => {
-                  setActiveTab("integrations");
-                  setMobileView("integrations");
-                }}
-              >
-                <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon">
-                    <Share2 size={18} />
-                  </span>
-                  <span className="ms-mobile-menu-item__label">
-                    Integrations
-                  </span>
-                </div>
-                <ChevronRight size={18} color="#9CA3AF" />
-              </button>
-              <div
-                className="ms-mobile-menu-item"
-                onClick={() => {
-                  setActiveTab("audit");
-                  setMobileView("audit");
-                }}
-              >
-                <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon">
-                    <FileText size={18} />
-                  </span>
-                  <span className="ms-mobile-menu-item__label">Audit Logs</span>
-                </div>
-                <ChevronRight size={18} color="#9CA3AF" />
-              </div>
-            </div>
-
-            <button type="button" className="ms-mobile-menu-item" onClick={() => { setActiveTab("recycle-bin"); setMobileView("recycle-bin"); }}>
-              <div className="ms-mobile-menu-item__left">
-                <span className="ms-mobile-menu-item__icon"><Archive size={18} /></span>
-                <span className="ms-mobile-menu-item__label">Recycle Bin</span>
-              </div>
-              <ChevronRight size={18} color="#9CA3AF" />
-            </button>
-
-            {/* Account Management group */}
-            <p className="ms-mobile-group-title">Account Management</p>
-            <div className="ms-mobile-group-items">
-              <div className="ms-mobile-menu-item">
-                <div className="ms-mobile-menu-item__left">
-                  <span className="ms-mobile-menu-item__icon">
-                    <LogOut size={18} />
-                  </span>
-                  <span className="ms-mobile-menu-item__label">Logout</span>
-                </div>
-                <ChevronRight size={18} color="#9CA3AF" />
-              </div>
-              <div className="ms-mobile-menu-item ms-mobile-menu-item--disabled">
-                <div className="ms-mobile-menu-item__left">
-                  <span
-                    className="ms-mobile-menu-item__icon"
-                    style={{ color: "#DC2626" }}
-                  >
-                    <PauseCircle size={18} />
-                  </span>
-                  <span
-                    className="ms-mobile-menu-item__label"
-                    style={{ color: "#DC2626" }}
-                  >
-                    Deactivate Account
-                  </span>
-                </div>
-                <ChevronRight size={18} color="#111111" />
-              </div>
-              <div className="ms-mobile-menu-item ms-mobile-menu-item--disabled">
-                <div className="ms-mobile-menu-item__left">
-                  <span
-                    className="ms-mobile-menu-item__icon"
-                    style={{ color: "#DC2626" }}
-                  >
-                    <Trash2 size={18} />
-                  </span>
-                  <span
-                    className="ms-mobile-menu-item__label"
-                    style={{ color: "#DC2626" }}
-                  >
-                    Delete Account
-                  </span>
-                </div>
-                <ChevronRight size={18} color="#111111" />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ── Detail screens ── */}
-        {mobileView === "profile" && (
-          <div className="ms-mobile-detail">{profileCard}</div>
-        )}
-        {mobileView === "account" && (
-          <div className="ms-mobile-detail ms-mobile-detail--account">{accountCard}</div>
-        )}
-        {mobileView === "notifications" && (
-          <div className="ms-mobile-detail">{notificationCard}</div>
-        )}
-        {mobileView === "security" && (
-          <div className="ms-mobile-detail">{securityCard}</div>
-        )}
-        {mobileView === "team" && !viewingPermissions && (
-          <div className="ms-mobile-detail">{teamCard}</div>
-        )}
-        {mobileView === "billing" && (
-          <div className="ms-mobile-detail">{billingCard}</div>
-        )}
-        {mobileView === "audit" && (
-          <div className="ms-mobile-detail">{auditCard}</div>
-        )}
-        {mobileView === "integrations" && (
-          <div className="ms-mobile-detail">{integrationsCard}</div>
-        )}
-        {mobileView === "recycle-bin" && (
-          <div className="ms-mobile-detail">{recycleBinCard}</div>
-        )}
-        {viewingPermissions && (
-          <div className="ms-mobile-detail ms-mobile-permissions">
-            {permissionsViewComponent}
-          </div>
-        )}
+        {mobileView === "menu" && renderMobileMenu()}
+        {mobileView !== "menu" && mobileDetail}
       </Layout>
     );
   }
 
-  /* ════════════════════════════════════════════════════════════════════════
-     DESKTOP + TABLET — original layout, unchanged.
-     Topbar is only mounted here; never on mobile.
-     ════════════════════════════════════════════════════════════════════════ */
   return (
     <Layout
       className="admin-settings-page"
-      hideMobileNavbar={mobileView === "detail"}
+      hideMobileNavbar
     >
-      <>
-        {/* Desktop topbar */}
-        <Topbar
-          title={viewingPermissions ? "Permission Settings" : "Settings"}
-          subtitle={
-            viewingPermissions
-              ? "Manage your permissions."
-              : "Manage your account preferences and configurations"
-          }
-          actionButton={null}
-        />
+      <Topbar
+        title={viewingPermissions ? "Permission Settings" : "Settings"}
+        subtitle={
+          viewingPermissions
+            ? "Manage your permissions."
+            : "Manage your account preferences and configurations"
+        }
+        actionButton={null}
+      />
 
-        {/* Tablet page header */}
-        <div className="mobile-page-header admin-settings-mobile-header">
-          <div className="admin-settings-mobile-header__top-row">
-            <div className="admin-settings-mobile-header__titles">
-              <div className="topbar__title">
-                {viewingPermissions ? "Permission Settings" : "Settings"}
-              </div>
-              <div className="topbar__sub">
-                {viewingPermissions
-                  ? "Manage your permissions."
-                  : "Manage your account preferences and configurations"}
-              </div>
+      <div className="mobile-page-header admin-settings-mobile-header">
+        <div className="admin-settings-mobile-header__top-row">
+          <div className="admin-settings-mobile-header__titles">
+            <div className="topbar__title">
+              {viewingPermissions ? "Permission Settings" : "Settings"}
+            </div>
+            <div className="topbar__sub">
+              {viewingPermissions
+                ? "Manage your permissions."
+                : "Manage your account preferences and configurations"}
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Settings body */}
-        {viewingPermissions ? (
-          <div className="admin-settings-permissions-view">
-            {permissionsViewComponent}
-          </div>
-        ) : (
-          <div className="admin-settings-body">
-            <nav
-              className="admin-settings-nav"
-              aria-label="Member settings navigation"
-            >
-              {settingsNavItems.map((item) => (
-                <button
-                  key={item.key}
-                  id={`admin-settings-nav-${item.key}`}
-                  className={`admin-settings-nav__item${
-                    activeTab === item.key
-                      ? " admin-settings-nav__item--active"
-                      : ""
-                  }${!item.active ? " admin-settings-nav__item--disabled" : ""}`}
-                  onClick={() => handleTabClick(item)}
-                  disabled={!item.active}
-                  aria-current={activeTab === item.key ? "page" : undefined}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </nav>
-
-            <div className="admin-settings-content">
-              {activeTab === "profile" && profileCard}
-              {activeTab === "account" && accountCard}
-              {activeTab === "notifications" && notificationCard}
-              {activeTab === "security" && securityCard}
-              {activeTab === "team" && !viewingPermissions && teamCard}
-              {activeTab === "team" &&
-                viewingPermissions &&
-                permissionsViewComponent}
-              {activeTab === "billing" && billingCard}
-              {activeTab === "integrations" && integrationsCard}
-              {activeTab === "audit" && auditCard}
-              {activeTab === "recycle-bin" && recycleBinCard}
-            </div>
-          </div>
-        )}
-      </>
-      {showDisconnectModal && (
-        <div
-          className="integration-modal-backdrop"
-          onClick={() => setShowDisconnectModal(false)}
-        >
-          <div
-            className="integration-modal-container"
-            onClick={(e) => e.stopPropagation()}
+      {viewingPermissions ? (
+        <div className="admin-settings-permissions-view">
+          {renderSection("team")}
+        </div>
+      ) : (
+        <div className="admin-settings-body">
+          <nav
+            className="admin-settings-nav"
+            aria-label="Member settings navigation"
           >
-            <div className="integration-modal-content">
-              <div className="integration-modal-header-row">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="integration-modal-warning-icon"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
-                    stroke="#E5252A"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <h3 className="integration-modal-title">
-                  Disconnect Integration?
-                </h3>
-              </div>
-
-              <p className="integration-modal-description">
-                Disconnecting will stop data sync and disable related work
-                flows. Existing Documents will not be affected.
-              </p>
-
-              <ul className="integration-modal-list">
-                <li>No new document will sync</li>
-                <li>Automations using this integrations will stop</li>
-                <li>You can reconnect anytime</li>
-              </ul>
-            </div>
-
-            <div className="integration-modal-footer">
+            {settingsNavItems.map((item) => (
               <button
-                className="integration-modal-btn cancel-btn"
-                onClick={() => setShowDisconnectModal(false)}
+                key={item.key}
+                id={`admin-settings-nav-${item.key}`}
+                className={`admin-settings-nav__item${
+                  activeTab === item.key
+                    ? " admin-settings-nav__item--active"
+                    : ""
+                }`}
+                onClick={() => handleTabClick(item)}
+                type="button"
+                aria-current={
+                  activeTab === item.key ? "page" : undefined
+                }
               >
-                Cancel
+                {item.label}
               </button>
-              <button
-                className="integration-modal-btn disconnect-btn"
-                onClick={() => {handledisconnect()}}
-              >
-                Disconnect
-              </button>
-            </div>
+            ))}
+          </nav>
+
+          <div className="admin-settings-content">
+            {renderSection()}
           </div>
         </div>
       )}
-      {showAddSubAdminModal && (
-        <div
-          className="add-contact-modal-overlay"
-          onClick={() => {
-            setShowAddSubAdminModal(false);
-            setSubAdminErrors({});
-          }}
-        >
-          <form
-            className="add-contact-modal add-contact-modal--compact"
-            onClick={(e) => e.stopPropagation()}
-            onSubmit={handleAddSubAdmin}
-            noValidate
-          >
-            <h3 className="add-contact-heading">Add Sub-admin</h3>
-            <div className="add-contact-grid">
-              <div className="add-contact-field">
-                <label htmlFor="subadmin-name">
-                  Full Name <span className="required-asterisk">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="subadmin-name"
-                  value={newSubAdmin.name}
-                  onChange={(e) => {
-                    setNewSubAdmin({ ...newSubAdmin, name: e.target.value });
-                    if (subAdminErrors.name) {
-                      setSubAdminErrors((prev) => ({ ...prev, name: undefined }));
-                    }
-                  }}
-                  className={subAdminErrors.name ? "field-error" : ""}
-                  required
-                />
-                {subAdminErrors.name && (
-                  <span className="field-error-msg">{subAdminErrors.name}</span>
-                )}
-              </div>
-              <div className="add-contact-field">
-                <label htmlFor="subadmin-email">
-                  Email Address <span className="required-asterisk">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="subadmin-email"
-                  value={newSubAdmin.email}
-                  onChange={(e) => {
-                    setNewSubAdmin({ ...newSubAdmin, email: e.target.value });
-                    if (subAdminErrors.email) {
-                      setSubAdminErrors((prev) => ({ ...prev, email: undefined }));
-                    }
-                  }}
-                  className={subAdminErrors.email ? "field-error" : ""}
-                  required
-                />
-                {subAdminErrors.email && (
-                  <span className="field-error-msg">{subAdminErrors.email}</span>
-                )}
-              </div>
-            </div>
-            <div className="add-contact-save-row">
-              <button type="submit" className="add-contact-save-btn">
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
+
+      {loading && (
+        <LoadingScreen
+          state="working"
+          size={64}
+          theme="dark"
+          message="Applying your master plan"
+        />
       )}
     </Layout>
-    //checking
   );
 }
