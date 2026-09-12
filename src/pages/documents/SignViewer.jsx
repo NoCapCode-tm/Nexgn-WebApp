@@ -70,7 +70,7 @@ const uploadInputRef = useRef(null);
         console.log("docid",docId)
 
         // Fetch the document and its placed widgets
-        const widgetRes = await axios.get(`${API_URL}document/widgets/${docId}`, {
+        const widgetRes = await axios.get(`${API_URL}document/widgets/${id}`, {
           withCredentials: true,
         });
         
@@ -98,16 +98,19 @@ const uploadInputRef = useRef(null);
   // 2. Load PDF Document from Template ID
  useEffect(() => {
   if (!documentDetails) return;
+  console.log(documentDetails)
 
   async function loadPdf() {
     try {
       let pdfUrl;
 
       if (documentDetails.driveFileId) {
-        pdfUrl = `${API_URL}document/${documentDetails._id}/pdf`;
+        pdfUrl = `${API_URL}document/external/${id}/pdf`;
+        console.log("pdfurl",pdfUrl)
       } else if (documentDetails.templateId?.file) {
         pdfUrl =
-          `${API_URL}template/template/${documentDetails.templateId._id}/pdf`;
+          `${API_URL}template/external/${id}/pdf`;
+          console.log("pdfurl",pdfUrl)
       } else {
         console.error("No PDF source:", documentDetails);
         return;
