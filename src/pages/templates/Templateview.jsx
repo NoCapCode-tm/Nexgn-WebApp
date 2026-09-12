@@ -6,7 +6,7 @@ import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.bubble.css";
 
 import { API_URL } from "../../config";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+import { TableRowSkeleton } from "../../components/common/Skeleton";
 
 import styles from "./TemplateView.module.css";
 
@@ -96,6 +96,14 @@ export default function TemplateView({ template, onBack, onEdit }) {
       cancelled = true;
     };
   }, [pdfDoc, activePage]);
+
+  if (loading) {
+    return (
+      <div className={styles.pageWrapper} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#6b7280' }}>
+        <h3>Loading Template...</h3>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.pageWrapper}>
@@ -203,7 +211,6 @@ export default function TemplateView({ template, onBack, onEdit }) {
         </aside>
       </div>
 
-      {loading && <LoadingScreen state="working" size={64} theme="dark" message="Unveiling your masterpiece" />}
     </div>
   );
 }

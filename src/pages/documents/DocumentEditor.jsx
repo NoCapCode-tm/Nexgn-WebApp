@@ -14,7 +14,7 @@ import {
 import axios from "axios";
 import { toast } from "react-toastify";
 import { API_URL } from "../../config";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+import { TableRowSkeleton } from "../../components/common/Skeleton";
 
 import styles from "./DocumentEditor.module.css";
 
@@ -450,13 +450,18 @@ export default function DocumentEditor({title, file ,signers,currentSigners,expi
             </div>
           </div>
 
-          <button className={styles.sendBtn} onClick={handleSend}>
-            {activeTab === "/sign-yourself" ? "Save" :"Send"}
+          <button 
+              className={styles.sendBtn} 
+              onClick={handleSend}
+              disabled={loading}
+              style={{ opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+            >
+            {loading ? "Saving..." : activeTab === "/sign-yourself" ? "Save" : "Send"}
           </button>
         </aside>
       </div>
 
-    {loading && <LoadingScreen state="working" size={64} theme="dark" message="Locking your widgets in place" />}
+
     </div>
   );
 }

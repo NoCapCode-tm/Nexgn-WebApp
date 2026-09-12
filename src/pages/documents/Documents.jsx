@@ -8,7 +8,7 @@ import "../../styles/BaseLayout.css";
 import "./Documents.css";
 import axios from "axios";
 import { API_URL } from "../../config";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+import { TableRowSkeleton } from "../../components/common/Skeleton";
 
 
 
@@ -162,10 +162,15 @@ export default function Documents() {
         {/* Mobile "Need My Sign" Section Title */}
         <div className="admin-docs-mobile-section-title">Need My Sign</div>
 
-        {/* Table Section */}
-        <DocumentsTable documents={filteredDocs} onRevoke={handleRevoke} onArchive={handleArchive} onCancel={handleCancel} />
+      {/* Table Section */}
+        {loading ? (
+          <div style={{ padding: "0 24px", marginTop: "20px" }}>
+             <TableRowSkeleton count={6} />
+          </div>
+        ) : (
+          <DocumentsTable documents={filteredDocs} onRevoke={handleRevoke} onArchive={handleArchive} onCancel={handleCancel} />
+        )}
       </>
-      {loading && <LoadingScreen state="connecting" size={64} theme="dark" message="Gathering your paperwork" />}
     </Layout>
   );
 }

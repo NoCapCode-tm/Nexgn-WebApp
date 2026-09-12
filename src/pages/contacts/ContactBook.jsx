@@ -11,7 +11,7 @@ import "../../styles/BaseLayout.css";
 import "./ContactBook.css";
 import { useEffect } from "react";
 import axios from "axios";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+import { TableRowSkeleton } from "../../components/common/Skeleton";
 
 
 function MemberContactActions({
@@ -195,21 +195,24 @@ export default function ContactBook() {
 
         {/* Table Section */}
         <div className="admin-contact-section">
-          <div className="admin-contact-table">
-            {contacts.map((c, i) => (
-              <ContactCard
-                key={i}
-                name={c.name}
-                email={c.email}
-                onClick={() => setSelectedContact(c)}
-                onDelete={() => handleDeleteContact(c._id)}
-              />
-            ))}
-            {contacts.length === 0 && (
-              <div className="admin-contact-empty-state">
-                No contacts found.
-              </div>
-            )}
+            <div className="admin-contact-table">
+              {loading ? (
+                <TableRowSkeleton count={6} />
+              ) : contacts.length > 0 ? (
+                contacts.map((c, i) => (
+                  <ContactCard
+                    key={i}
+                    name={c.name}
+                    email={c.email}
+                    onClick={() => setSelectedContact(c)}
+                    onDelete={() => handleDeleteContact(c._id)}
+                  />
+                ))
+              ) : (
+                <div className="admin-contact-empty-state">
+                  No contacts found.
+                </div>
+              )}
 
             {/* Mobile Total Contacts Card */}
             <div className="mobile-total-contacts-card">
@@ -272,7 +275,6 @@ export default function ContactBook() {
         />
       )}
 
-    {loading && <LoadingScreen state="connecting" size={64} theme="dark" message="Rounding up your network" />}
     
     </Layout>
   );
