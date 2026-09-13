@@ -10,11 +10,7 @@ export default function AddContactForm({ onClose }) {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [language, setLanguage] = useState("");
   const [gender, setGender] = useState("");
-  const [emergencyContact, setEmergencyContact] = useState("");
-  const [address, setAddress] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
   const [errors, setErrors] = useState({});
 
 
@@ -29,15 +25,11 @@ export default function AddContactForm({ onClose }) {
     }
     setLoading(true)
    try {
-     const response = await axios.post(`${API_URL}admin/addcontact`,{
+     const response = await axios.post(`${API_URL}contact/addcontact`,{
        name:name,
        email:email,
        contact:phone,
-       emergency:emergencyContact,
        gender:gender,
-       job:jobTitle,
-       language:language,
-       address:address,
      },{withCredentials:true})
      console.log(response.data.message)
      setErrors({})
@@ -85,14 +77,14 @@ export default function AddContactForm({ onClose }) {
                 <span className="field-error-msg">{errors.name}</span>
               )}
             </div>
-            <div className="add-contact-field">
+            {/* <div className="add-contact-field">
               <label>Preferred Language</label>
               <input
                 type="text"
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
               />
-            </div>
+            </div> */}
             <div className="add-contact-field">
               <label>Gender</label>
               <input
@@ -128,30 +120,30 @@ export default function AddContactForm({ onClose }) {
                 <span className="field-error-msg">{errors.email}</span>
               )}
             </div>
-            <div className="add-contact-field">
+            {/* <div className="add-contact-field">
               <label>Emergency Contact</label>
               <input
                 type="text"
                 value={emergencyContact}
                 onChange={(e) => setEmergencyContact(e.target.value)}
               />
-            </div>
-            <div className="add-contact-field">
+            </div> */}
+            {/* <div className="add-contact-field">
               <label>Job Title</label>
               <input
                 type="text"
                 value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
               />
-            </div>
-            <div className="add-contact-field add-contact-field-full">
+            </div> */}
+            {/* <div className="add-contact-field add-contact-field-full">
               <label>Address</label>
               <input
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
               />
-            </div>
+            </div> */}
           </div>
         </div>
 

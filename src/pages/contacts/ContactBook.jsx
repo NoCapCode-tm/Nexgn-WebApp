@@ -77,16 +77,13 @@ export default function ContactBook() {
     setLoading(true)
     try {
       const response = await axios.get(
-        `${API_URL}admin/getuser`,
+        `${API_URL}contact/getcontact`,
         {
           withCredentials: true,
         }
       );
-      console.log(response.data.message)
 
-      const contact = response.data.message.filter(
-        (c) => c.role === "Member"
-      );
+      const contact = response.data.message
 
       setContacts(contact);
     } catch (err) {
@@ -128,13 +125,8 @@ export default function ContactBook() {
       ...prev,
       {
         ...newContact,
-        department: newContact.department || "Legal",
-        status: newContact.status || "Active",
         phone: newContact.phone || "+1 98765 43210",
-        language: newContact.language || "English",
         gender: newContact.gender || "Female",
-        emergencyContact: newContact.emergencyContact || "+1 912-345-6789",
-        address: newContact.address || "New York, United States",
       },
     ]);
   };
@@ -152,7 +144,7 @@ export default function ContactBook() {
     setLoading(true)
    try {
      setContacts((prev) => prev.filter((c) => c._id !== id));
-     await axios.post(`${API_URL}admin/delete`,{id},{withCredentials:true})
+     await axios.delete(`${API_URL}contact/deletecontact/${id}`,{withCredentials:true})
    } catch (error) {
       console.log("Something went wrong in deleting contact",error.message)
    }finally{
