@@ -69,102 +69,166 @@ export default function Dashboard() {
   const isMobile = width <= 768;
   const navigate = useNavigate();
 
-   useEffect(() => {
-    const verifyUser = async () => {
-      setLoading(true)
-      try {
-       const response =  await axios.get(
-          `${API_URL}admin/me`,
-          {
-            withCredentials: true,
-          }
+  useEffect(() => {
+  let mounted = true;
+
+  const loadDashboard = async () => {
+    try {
+      setLoading(true);
+
+      // 1. Verify user
+      const authResponse = await axios.get(
+        `${API_URL}admin/me`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (!mounted) return;
+
+      const user = authResponse.data.message;
+      setAuthenticated(user);
+
+      const canView =
+        user?.role === "Admin" ||
+        user?.permissions?.includes("Dashboard-View");
+
+      if (!canView) {
+        toast.error(
+          "You are not permitted to view the dashboard"
         );
-     setAuthenticated(response.data.message);
-      } catch (err) {
-        console.log(err.message)
-        setAuthenticated(false);
-      } finally {
+        setLoading(false);
+        return;
+      }
+
+      // 2. Fetch dashboard data IN PARALLEL
+      const [documentResponse, signRequestResponse] =
+        await Promise.all([
+          axios.get(`${API_URL}document/getdocument`, {
+            withCredentials: true,
+          }),
+
+          axios.get(`${API_URL}sign/getrequests`, {
+            withCredentials: true,
+          }),
+        ]);
+
+      if (!mounted) return;
+
+      const docs = documentResponse?.data?.message || [];
+      const signRequests =
+        signRequestResponse?.data?.message || [];
+
+      setDocuments(docs);
+
+      setRequests(
+        signRequests.filter(
+          (request) =>
+            request.overallStatus === "Expired"
+        ).length
+      );
+    } catch (error) {
+      if (!mounted) return;
+
+      console.error(
+        "Dashboard loading error:",
+        error
+      );
+
+      setAuthenticated(false);
+
+      toast.error(
+        error?.response?.data?.message ||
+          "Failed to load dashboard"
+      );
+    } finally {
+      if (mounted) {
         setLoading(false);
       }
-    };
+    }
+  };
 
-    verifyUser();
-  }, []);
+  loadDashboard();
+
+  return () => {
+    mounted = false;
+  };
+}, []);
 
   // const canViewDashboard =
   // authenticated?.role === "Admin" ||
   // authenticated?.permissions?.includes("Dashboard-View");
 
 
- useEffect(() => {
-  if (!authenticated) return;
+//  useEffect(() => {
+//   if (!authenticated) return;
 
-  const canView =
-    authenticated.role === "Admin" ||
-    authenticated.permissions?.includes("Dashboard-View");
+//   const canView =
+//     authenticated.role === "Admin" ||
+//     authenticated.permissions?.includes("Dashboard-View");
 
-  if (!canView) return;
+//   if (!canView) return;
 
-  const loadDashboardData = async () => {
-    setLoading(true)
-    try {
-      const response = await axios.get(
-        `${API_URL}document/getdocument`,
-        {
-          withCredentials: true,
-        }
-      );
+//   const loadDashboardData = async () => {
+//     setLoading(true)
+//     try {
+//       const response = await axios.get(
+//         `${API_URL}document/getdocument`,
+//         {
+//           withCredentials: true,
+//         }
+//       );
 
-      setDocuments(
-        response.data.message || []
-      );
+//       setDocuments(
+//         response.data.message || []
+//       );
 
-      const signrequest =
-        await axios.get(
-          `${API_URL}sign/getrequests`,
-          {
-            withCredentials: true,
-          }
-        );
+//       const signrequest =
+//         await axios.get(
+//           `${API_URL}sign/getrequests`,
+//           {
+//             withCredentials: true,
+//           }
+//         );
 
-      const requests =
-        signrequest?.data?.message || [];
+//       const requests =
+//         signrequest?.data?.message || [];
 
-      setRequests(
-        requests.filter(
-          (r) =>
-            r.overallStatus === "Expired"
-        ).length
-      );
+//       setRequests(
+//         requests.filter(
+//           (r) =>
+//             r.overallStatus === "Expired"
+//         ).length
+//       );
 
-    } catch (error) {
-      console.error(
-        "Dashboard data error:",
-        error
-      );
-    }finally{
-      setLoading(false)
-    }
-  };
+//     } catch (error) {
+//       console.error(
+//         "Dashboard data error:",
+//         error
+//       );
+//     }finally{
+//       setLoading(false)
+//     }
+//   };
 
-  loadDashboardData();
+//   loadDashboardData();
 
-}, [authenticated]);
-useEffect(() => {
-  if (!authenticated) return;
+// }, [authenticated]);
+// useEffect(() => {
+//   if (!authenticated) return;
 
-  const allowed =
-    authenticated.role === "Admin" ||
-    authenticated.permissions?.includes(
-      "Dashboard-View"
-    );
+//   const allowed =
+//     authenticated.role === "Admin" ||
+//     authenticated.permissions?.includes(
+//       "Dashboard-View"
+//     );
 
-  if (!allowed) {
-    toast.error(
-      "You are not permitted to view the dashboard"
-    );
-  }
-}, [authenticated]);
+//   if (!allowed) {
+//     toast.error(
+//       "You are not permitted to view the dashboard"
+//     );
+//   }
+// }, [authenticated]);
 
 const { completed, total, pending } = useMemo(() => {
   const completed = documents?.filter(
