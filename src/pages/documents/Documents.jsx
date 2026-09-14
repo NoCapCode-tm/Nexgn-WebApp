@@ -92,7 +92,7 @@ export default function Documents() {
   );
 
   return (
-    <Layout className="admin-docs-page">
+    <Layout className="admin-docs-page" data-tour="documents">
       <>
         {/* Hidden shared gradient def used by .admin-doc-row__icon in dark mode */}
         <svg

@@ -1,20 +1,21 @@
 import { useNavigate } from "react-router-dom";
-import { Bell, UserCircle, Settings, FileClock, UserPen, Crown, LogOut, Sun, Moon } from "lucide-react";
+import { Bell, UserCircle, Settings, FileClock, UserPen, Crown, LogOut, Sun, Moon, BookOpen } from "lucide-react";
 import useDarkMode from "../../hooks/useDarkMode";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useEffect } from "react";
 import { API_URL } from "../../config";
+import { useProductTour } from "../tour/ProductTour";
 
-export default function TopbarIcons({ 
-  iconSize = 24, 
+export default function TopbarIcons({
+  iconSize = 24,
   className = "topbar__icons"
 }) {
   const navigate = useNavigate();
   const [isDark, toggleDark] = useDarkMode();
-  const[user,setUser]=useState({})
+  const [user, setUser] = useState({});
+  const { restartTour } = useProductTour();
 
-   useEffect(() => {
+  useEffect(() => {
     const verifyUser = async () => {
       try {
         const response = await axios.get(
@@ -26,24 +27,23 @@ export default function TopbarIcons({
 
         setUser(response.data.message);
       } catch (err) {
-        console.log(err.message)
+        console.log(err.message);
       }
     };
 
     verifyUser();
   }, []);
 
-  const handlelogout = async()=>{
-   try {
-     await axios.post(`${API_URL}admin/logout`,{
-      id:user?._id 
-     },{withCredentials:true})
-     navigate("/login")
-   } catch (error) {
-    console.log("Something went wrong in logging out",error.message)
-   }
-
-  }
+  const handlelogout = async () => {
+    try {
+      await axios.post(`${API_URL}admin/logout`, {
+        id: user?._id
+      }, { withCredentials: true });
+      navigate("/login");
+    } catch (error) {
+      console.log("Something went wrong in logging out", error.message);
+    }
+  };
 
   return (
     <div className={className}>
@@ -76,7 +76,7 @@ export default function TopbarIcons({
               <FileClock color="#FF0915" size={20} className="notification-item__icon" strokeWidth={1.5} />
               <div className="notification-item__text">
                 You have 1 document pending to sign.<br />
-                <span 
+                <span
                   className="notification-item__text--red"
                   onClick={() => navigate("/documents")}
                   style={{ cursor: "pointer" }}
@@ -86,7 +86,7 @@ export default function TopbarIcons({
               </div>
             </div>
           </div>
-          <div 
+          <div
             className="notification-dropdown__footer"
             onClick={() => navigate("/settings?tab=notifications")}
             style={{ cursor: "pointer" }}
@@ -97,10 +97,8 @@ export default function TopbarIcons({
       </div>
 
       <div className="topbar__icon-wrapper">
-        <button style={{width:"40px",height:"40px", borderRadius:"50%", overflow:"hidden",border:"1px solid red"}}>
-          {user?.profile_picture ?<img src ={user?.profile_picture}  width="100%" height="100%" />:<UserCircle width="100%" 
-            height="100%" color="#FF0915" strokeWidth={1} />}
-          
+        <button style={{ width: "40px", height: "40px", borderRadius: "50%", overflow: "hidden", border: "1px solid red" }}>
+          {user?.profile_picture ? <img src={user?.profile_picture} width="100%" height="100%" alt="Profile" /> : <UserCircle width="100%" height="100%" color="#FF0915" strokeWidth={1} />}
         </button>
         <div className="notification-dropdown profile-dropdown">
           <div className="notification-dropdown__header profile-dropdown__header">
@@ -123,12 +121,16 @@ export default function TopbarIcons({
                 <UserPen size={16} color="#000000" strokeWidth={2} />
                 <span>Edit Profile</span>
               </button>
+              <button className="profile-dropdown__item" onClick={() => restartTour()}>
+                <BookOpen size={16} color="#000000" strokeWidth={2} />
+                <span>Take Tour</span>
+              </button>
               <button className="profile-dropdown__item">
                 <Crown size={16} color="#000000" strokeWidth={2} />
                 <span>Upgrade Plan</span>
               </button>
               <div className="profile-dropdown__divider" />
-              <button className="profile-dropdown__item" onClick={()=>handlelogout()}>
+              <button className="profile-dropdown__item" onClick={() => handlelogout()}>
                 <LogOut size={16} color="#000000" strokeWidth={2} />
                 <span>Log Out</span>
               </button>

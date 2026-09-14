@@ -74,83 +74,168 @@ export default function Sidebar() {
     });
   };
 
-  const renderItem = ({ icon: Icon, label, path, external }) => {
-    const active =
-      location.pathname === path ||
-      (path === "/sign-request" && location.pathname === "/request-signature");
+ const renderItem = ({
+  icon: Icon,
+  label,
+  path,
+  external,
+}) => {
+  const active =
+    location.pathname === path ||
+    (
+      path === "/sign-request" &&
+      location.pathname ===
+        "/request-signature"
+    );
 
-    const handleClick = (e) => {
-      if (external) return; // Allow normal link navigation for external URLs
-
-      if (
-        path !== "/dashboard" &&
-        path !== "/sign-request" &&
-        path !== "/documents" &&
-        path !== "/contact-book" &&
-        path !== "/settings" &&
-        path !== "/templates"
-      ) {
-        e.preventDefault();
-      }
-    };
-
-    if (external) {
-      return (
-        <a
-          key={label}
-          href={path}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={handleClick}
-          className={`sidebar__item${active ? " sidebar__item--active" : ""}`}
-          title={!expanded ? label : undefined}
-        >
-          {active && <div className="sidebar__active-pill" />}
-          <span className="sidebar__icon-wrap">
-            <Icon color={active ? "#FF0915" : "#8A949F"} />
-          </span>
-          {effectiveExpanded && (
-            <span
-              className={`sidebar__item-label ${active ? "admin-sidebar__item-label--active" : "admin-sidebar__item-label--inactive"}`}
-            >
-              {label}
-            </span>
-          )}
-        </a>
-      );
+  const getTourAttribute = () => {
+    if (path === "/dashboard") {
+      return "dashboard";
     }
 
+    if (path === "/sign-request") {
+      return "signers";
+    }
+
+    if (path === "/documents") {
+      return "documents";
+    }
+
+    if (path === "/contact-book") {
+      return "contact-book";
+    }
+
+    if (path === "/templates") {
+      return "templates";
+    }
+
+    if (path === "/settings") {
+      return "settings";
+    }
+
+    return undefined;
+  };
+
+  const tourTarget = getTourAttribute();
+
+  const handleClick = (e) => {
+    if (external) return;
+
+    if (
+      path !== "/dashboard" &&
+      path !== "/sign-request" &&
+      path !== "/documents" &&
+      path !== "/contact-book" &&
+      path !== "/settings" &&
+      path !== "/templates"
+    ) {
+      e.preventDefault();
+    }
+  };
+
+  if (external) {
     return (
-      <Link
+      <a
         key={label}
-        to={
-          path === "/dashboard" ||
-          path === "/sign-request" ||
-          path === "/documents" ||
-          path === "/contact-book" ||
-          path === "/settings" ||
-          path === "/templates"
-            ? path
-            : "#"
-        }
+        href={path}
+        target="_blank"
+        rel="noopener noreferrer"
         onClick={handleClick}
-        className={`sidebar__item${active ? " sidebar__item--active" : ""}`}
-        title={!expanded ? label : undefined}
+        className={`sidebar__item${
+          active
+            ? " sidebar__item--active"
+            : ""
+        }`}
+        title={
+          !expanded
+            ? label
+            : undefined
+        }
+        data-tour={tourTarget}
       >
-        {active && <div className="sidebar__active-pill" />}
+        {active && (
+          <div className="sidebar__active-pill" />
+        )}
+
         <span className="sidebar__icon-wrap">
-          <Icon color={active ? "#FF0915" : "#8A949F"} />
+          <Icon
+            color={
+              active
+                ? "#FF0915"
+                : "#8A949F"
+            }
+          />
         </span>
+
         {effectiveExpanded && (
           <span
-            className={`sidebar__item-label ${active ? "admin-sidebar__item-label--active" : "admin-sidebar__item-label--inactive"}`}
+            className={`sidebar__item-label ${
+              active
+                ? "admin-sidebar__item-label--active"
+                : "admin-sidebar__item-label--inactive"
+            }`}
           >
             {label}
           </span>
         )}
-      </Link>
+      </a>
     );
-  };
+  }
+
+  return (
+    <Link
+      key={label}
+      to={
+        path === "/dashboard" ||
+        path === "/sign-request" ||
+        path === "/documents" ||
+        path === "/contact-book" ||
+        path === "/settings" ||
+        path === "/templates"
+          ? path
+          : "#"
+      }
+      onClick={handleClick}
+      className={`sidebar__item${
+        active
+          ? " sidebar__item--active"
+          : ""
+      }`}
+      title={
+        !expanded
+          ? label
+          : undefined
+      }
+      data-tour={tourTarget}
+    >
+      {active && (
+        <div className="sidebar__active-pill" />
+      )}
+
+      <span className="sidebar__icon-wrap">
+        <Icon
+          color={
+            active
+              ? "#FF0915"
+              : "#8A949F"
+          }
+        />
+      </span>
+
+      {effectiveExpanded && (
+        <span
+          className={`sidebar__item-label ${
+            active
+              ? "admin-sidebar__item-label--active"
+              : "admin-sidebar__item-label--inactive"
+          }`}
+        >
+          {label}
+        </span>
+      )}
+    </Link>
+  );
+};
 
   return (
     <aside className={`sidebar ${effectiveExpanded ? "sidebar--expanded" : ""}`}>

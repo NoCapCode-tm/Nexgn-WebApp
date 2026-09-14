@@ -31,6 +31,7 @@ import DocumentEditor from "./pages/documents/DocumentEditor";
 import TemplateCreate from "./pages/templates/TemplateCreate";
 import DocumentViewer from "./pages/documents/documentViewer";
 import SignRequest from "./pages/signrequest/SignRequest";
+import ProductTour from "./components/tour/ProductTour";
 
 export default function App() {
 useSystemTheme();
@@ -56,6 +57,7 @@ useSystemTheme();
       {/* ADMIN ROUTES */}
       
       <Route element={<ProtectedRoute />}>
+      <Route element={<ProductTour />}>
     <Route path="/dashboard" element={<Dashboard />} />
     
     <Route path="/documents" element={<Documents />} />
@@ -70,7 +72,7 @@ useSystemTheme();
     <Route path="/template-creator" element={<TemplateCreate/>} /> 
     <Route path="/document/view/:id" element={<DocumentViewer/>} />
 
-    
+    </Route>
     </Route>
       <Route path="/document/:id" element={<SignViewer/>} />
       <Route path="*" element={<Navigate to="/" replace />} /> 

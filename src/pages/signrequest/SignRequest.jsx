@@ -243,7 +243,7 @@ useEffect(() => {
   );
 
   return (
-    <Layout className={styles.signRequestPage}>
+    <Layout className={styles.signRequestPage} data-tour="signers">
       <>
         <Topbar
           title="Sign Requests"
@@ -347,7 +347,7 @@ const SignRequestRow = ({
   }, []);
 
   return (
-    <tr className={styles.tableRow}>
+    <tr className={styles.tableRow} >
       <td className={styles.documentCell}>
         <div className={styles.documentInfo}>
           <FileText

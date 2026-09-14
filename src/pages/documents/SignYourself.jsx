@@ -392,7 +392,7 @@ if(location.pathname === "/sign-yourself"){
             </button>
           </div>
 
-          <div className="setup-card">
+          <div className="setup-card" >
             <div className="setup-card-top">
               <div className="setup-card__header">
                 <span className="setup-card__title">Document Setup</span>

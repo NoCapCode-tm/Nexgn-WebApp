@@ -48,7 +48,7 @@ export default function Account({ user, onUserUpdated }) {
 
   return (
     <>
-      <div className="admin-settings-card admin-settings-card--account">
+      <div className="admin-settings-card admin-settings-card--account" data-tour="settings">
         <h2 className="admin-settings-card__title">Account</h2>
         <div className="admin-settings-card__divider" />
 
