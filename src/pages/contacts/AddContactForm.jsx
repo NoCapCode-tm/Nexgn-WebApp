@@ -3,7 +3,7 @@ import { ChevronLeft } from "lucide-react";
 import "./ContactBook.css";
 import axios from "axios";
 import { API_URL } from "../../config";
-import { TableRowSkeleton } from "../../components/common/Skeleton";
+// import { TableRowSkeleton } from "../../components/common/Skeleton";
 
 export default function AddContactForm({ onClose }) {
   const [name, setName] = useState("");
