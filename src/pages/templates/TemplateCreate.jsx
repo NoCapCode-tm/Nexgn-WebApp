@@ -17,6 +17,7 @@ import { API_URL } from "../../config";
 
 
 import styles from "./TemplateCreate.module.css";
+import LoadingScreen from "../../components/Layout/LoadingScreen";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 

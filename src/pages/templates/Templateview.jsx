@@ -36,35 +36,50 @@ export default function TemplateView({ template, onBack, onEdit }) {
   const hasFile = Boolean(template?.templateid?.file?.fileId);
 
   // 1. Load the PDF Document from API
-  useEffect(() => {
-    if (!templateId || !hasFile) {
-      setLoading(false);
-      return;
-    }
+ useEffect(() => {
+  if (!templateId || !hasFile) {
+    setLoading(false);
+    return;
+  }
 
-    let cancelled = false;
-    async function loadPdf() {
-      setLoading(true);
-      try {
-        const loadingTask = pdfjsLib.getDocument(`${API_URL}template/template/${templateId}/pdf`);
-        const doc = await loadingTask.promise;
+  let cancelled = false;
 
-        if (cancelled) return;
-        setPdfDoc(doc);
-        setPages(Array.from({ length: doc.numPages }, (_, i) => i + 1));
-        setActivePage(1);
-      } catch (err) {
-        console.error("PDF Loading error:", err);
-      } finally {
+  async function loadPdf() {
+    setLoading(true);
+
+    try {
+      const loadingTask = pdfjsLib.getDocument({
+        url: `${API_URL}template/template/${templateId}/pdf`,
+        withCredentials: true,
+      });
+
+      const doc = await loadingTask.promise;
+
+      if (cancelled) return;
+
+      setPdfDoc(doc);
+      setPages(
+        Array.from(
+          { length: doc.numPages },
+          (_, i) => i + 1
+        )
+      );
+      setActivePage(1);
+    } catch (err) {
+      console.error("PDF Loading error:", err);
+    } finally {
+      if (!cancelled) {
         setLoading(false);
       }
     }
+  }
 
-    loadPdf();
-    return () => {
-      cancelled = true;
-    };
-  }, [templateId, hasFile]);
+  loadPdf();
+
+  return () => {
+    cancelled = true;
+  };
+}, [templateId, hasFile]);
 
   // 2. Render Page at Fixed Scale (1.2) for strict coordinate alignment
   useEffect(() => {

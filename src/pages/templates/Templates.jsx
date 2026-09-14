@@ -24,7 +24,7 @@ export default function Templates({ onCreate }) {
   }
 
   return (
-    <Layout className="admin-templates-page">
+    <Layout className="admin-templates-page" data-tour="templates">
       <>
         <Topbar
           title="Create Template"

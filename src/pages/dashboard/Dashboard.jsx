@@ -281,7 +281,7 @@ const stats = [
   };
 
   return (
-    <Layout className="admin-dashboard-page">
+    <Layout className="admin-dashboard-page" >
       <>
         <Topbar
           title="Dashboard"
@@ -291,7 +291,7 @@ const stats = [
         <div className="mobile-page-header">
           <div className="mobile-page-header__container">
             <div className="mobile-page-header__titles">
-              <h1 className="topbar__title">Dashboard</h1>
+              <h1 className="topbar__title" >Dashboard</h1>
               <p className="topbar__sub">
                 Overview of your document signing activity
               </p>
@@ -382,7 +382,7 @@ const stats = [
             </section>
         ) : null}
 
-        <div className="mobile-cta-row">
+        {/* <div className="mobile-cta-row">
           <button
             className="mobile-cta mobile-cta--primary"
             onClick={() => navigate("/sign-yourself")}
@@ -395,9 +395,9 @@ const stats = [
           >
             Request Signature
           </button>
-        </div>
+        </div> */}
 
-        <section className="docs-section">
+        <section className="docs-section" data-tour="dashboard">
           <h2 className="docs-section__title">Recent Documents</h2>
           <div className="docs-table__header desktop-table-header">
             <span>Title</span>

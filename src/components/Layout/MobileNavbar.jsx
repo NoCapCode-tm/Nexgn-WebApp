@@ -15,12 +15,47 @@ const TemplateIcon = ({ color = "#8A949F" }) => (
 );
 
 const navItems = [
-  { label: "Dashboard", path: "/dashboard", icon: HomeIcon },
-  { label: "Signers", path: "/sign-yourself", icon: ClipboardIcon },
-  { label: "Documents", path: "/documents", icon: FileIcon },
-  { label: "Contact Book", path: "/contact-book", icon: ContactIcon },
-  { label: "Templates", path: "/templates", icon: TemplateIcon },
-  { label: "Settings", path: "/settings", icon: SettingsIcon },
+  {
+    label: "Dashboard",
+    path: "/dashboard",
+    icon: HomeIcon,
+    tour: "dashboard",
+  },
+
+  {
+    label: "Signers",
+    path: "/sign-yourself",
+    icon: ClipboardIcon,
+    tour: "signers",
+  },
+
+  {
+    label: "Documents",
+    path: "/documents",
+    icon: FileIcon,
+    tour: "documents",
+  },
+
+  {
+    label: "Contact Book",
+    path: "/contact-book",
+    icon: ContactIcon,
+    tour: "contact-book",
+  },
+
+  {
+    label: "Templates",
+    path: "/templates",
+    icon: TemplateIcon,
+    tour: "templates",
+  },
+
+  {
+    label: "Settings",
+    path: "/settings",
+    icon: SettingsIcon,
+    tour: "settings",
+  },
 ];
 
 export default function MobileNavbar() {
@@ -45,21 +80,40 @@ export default function MobileNavbar() {
 
         const iconSize = isActive ? 30 : 24;
 
-        return (
-          <Link
-            key={item.path}
-            to={validPaths.includes(item.path) ? item.path : "#"}
-            onClick={handleClick}
-            className={`admin-mobile-navbar__item ${isActive ? "admin-mobile-navbar__item--active" : ""}`}
-          >
-            <div className="admin-mobile-navbar__icon-wrap">
-              <Icon color={isActive ? "#ffffff" : "#8A949F"} size={iconSize} />
-            </div>
-            {isActive && (
-              <span className="admin-mobile-navbar__label">{item.label}</span>
-            )}
-          </Link>
-        );
+       return (
+  <Link
+    key={item.path}
+    to={
+      validPaths.includes(item.path)
+        ? item.path
+        : "#"
+    }
+    onClick={handleClick}
+    className={`admin-mobile-navbar__item ${
+      isActive
+        ? "admin-mobile-navbar__item--active"
+        : ""
+    }`}
+    data-tour={item.tour}
+  >
+    <div className="admin-mobile-navbar__icon-wrap">
+      <Icon
+        color={
+          isActive
+            ? "#ffffff"
+            : "#8A949F"
+        }
+        size={iconSize}
+      />
+    </div>
+
+    {isActive && (
+      <span className="admin-mobile-navbar__label">
+        {item.label}
+      </span>
+    )}
+  </Link>
+);
       })}
     </nav>
   );

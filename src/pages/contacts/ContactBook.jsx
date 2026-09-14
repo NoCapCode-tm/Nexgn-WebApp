@@ -163,7 +163,7 @@ export default function ContactBook() {
   );
 
   return (
-    <Layout className="admin-contact-page" onSearchClick={focusSearchInput}>
+    <Layout className="admin-contact-page" onSearchClick={focusSearchInput} data-tour="contact-book">
       <>
         {/* Desktop Topbar */}
         <Topbar

@@ -28,11 +28,20 @@ export default function LoginPage() {
         { withCredentials: true }
       );
       console.log(response.data.message);
-      if(response?.data?.message?.twoFAenabled === true){
-        navigate(`/2fa/${response?.data?.message?._id}`);
-      }else{
-        navigate("/dashboard");
-      }
+      const user = response?.data?.message;
+
+if (user?._id) {
+  localStorage.setItem(
+    "nexgn_user_id",
+    user._id
+  );
+}
+
+if (user?.twoFAenabled === true) {
+  navigate(`/2fa/${user._id}`);
+} else {
+  navigate("/dashboard");
+}
       
       toast.success("Login Successful");
     } catch (error) {
