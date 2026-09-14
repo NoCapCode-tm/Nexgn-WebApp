@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../config";
+import LoadingScreen from "../Layout/LoadingScreen"; // adjust path as needed
 
 const ProtectedRoute = () => {
   const [loading, setLoading] = useState(true);
@@ -29,9 +30,8 @@ const ProtectedRoute = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen state="working" size={64} theme="light" message="Verifying session" />;
   }
-
   return authenticated ? <Outlet /> : <Navigate to="/" replace />;
 };
 
