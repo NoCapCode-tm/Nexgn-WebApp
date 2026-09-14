@@ -17,7 +17,7 @@ import Topbar from "../../components/Layout/Topbar";
 
 import "../../styles/BaseLayout.css";
 import styles from "./SignRequest.module.css";
-import { TableRowSkeleton } from "../../components/common/Skeleton";
+import { Skeleton } from "../../components/common/Skeleton";
 
 import { API_URL } from "../../config";
 
@@ -275,37 +275,54 @@ useEffect(() => {
 
         <section className={styles.section}>
           <div className={styles.tableContainer}>
-            {loading ? (
-              <div style={{ padding: "20px" }}>
-                <TableRowSkeleton count={5} />
-              </div>
-            ) : (
-              <>
-                <table className={styles.signRequestTable}>
-                  <thead>
-                    <tr>
-                      <th>DOCUMENT</th>
-                      <th>ASSIGNED TO / SIGNER</th>
-                      <th>STATUS</th>
-                      <th>EXPIRY</th>
-                      <th>ACTION</th>
+            <table className={styles.signRequestTable}>
+              <thead>
+                <tr>
+                  <th>DOCUMENT</th>
+                  <th>ASSIGNED TO / SIGNER</th>
+                  <th>STATUS</th>
+                  <th>EXPIRY</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {loading ? (
+                  Array.from({ length: 5 }).map((_, idx) => (
+                    <tr key={idx} className={styles.tableRow}>
+                      <td>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <Skeleton width="20px" height="20px" />
+                          <Skeleton width="180px" height="14px" />
+                        </div>
+                      </td>
+                      <td><Skeleton width="140px" height="14px" /></td>
+                      <td><Skeleton width="80px" height="22px" borderRadius="5px" /></td>
+                      <td><Skeleton width="90px" height="14px" /></td>
+                      <td style={{ textAlign: 'center' }}>
+                        <Skeleton width="34px" height="34px" borderRadius="6px" style={{ display: 'inline-block' }} />
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {filteredRequests.map((request) => {
-                      const sign = signature.find(
-                        (item) => item?.requestId?._id === request._id || item?.requestId === request._id
-                      );
-                      return (
-                        <SignRequestRow key={request._id} request={request} sign={sign} onCancel={handleCancelRequest} />
-                      );
-                    })}
-                  </tbody>
-                </table>
-                {filteredRequests.length === 0 && (
-                  <div className={styles.emptyState}>No sign requests found.</div>
+                  ))
+                ) : (
+                  filteredRequests.map((request) => {
+                    const sign = signature.find(
+                      (item) => item?.requestId?._id === request._id || item?.requestId === request._id
+                    );
+                    return (
+                      <SignRequestRow 
+                        key={request._id} 
+                        request={request} 
+                        sign={sign} 
+                        onCancel={handleCancelRequest} 
+                      />
+                    );
+                  })
                 )}
-              </>
+              </tbody>
+            </table>
+
+            {!loading && filteredRequests.length === 0 && (
+              <div className={styles.emptyState}>No sign requests found.</div>
             )}
           </div>
         </section>

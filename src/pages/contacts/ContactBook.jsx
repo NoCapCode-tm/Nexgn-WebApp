@@ -11,7 +11,7 @@ import "../../styles/BaseLayout.css";
 import "./ContactBook.css";
 import { useEffect } from "react";
 import axios from "axios";
-import { TableRowSkeleton } from "../../components/common/Skeleton";
+import { ContactCardSkeleton } from "../../components/common/Skeleton";
 
 
 function MemberContactActions({
@@ -186,10 +186,10 @@ export default function ContactBook() {
         </div>
 
         {/* Table Section */}
-        <div className="admin-contact-section">
+          <div className="admin-contact-section">
             <div className="admin-contact-table">
               {loading ? (
-                <TableRowSkeleton count={6} />
+                <ContactCardSkeleton count={6} />
               ) : contacts.length > 0 ? (
                 contacts.map((c, i) => (
                   <ContactCard
