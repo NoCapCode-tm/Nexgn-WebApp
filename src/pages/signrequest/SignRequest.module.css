@@ -802,3 +802,65 @@
     min-height: 100vh;
 }
 
+
+
+/* ==========================================================
+   Sign Request Empty State
+========================================================== */
+
+.emptyStateContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 240px;
+  padding: 32px;
+  text-align: center;
+  background: #FBFBFB;
+  border: 1px dashed #D8D8D8;
+  border-radius: 12px;
+  margin-top: 12px;
+}
+
+.emptyStateIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 12px;
+  color: #8A949F;
+  background: #F2F2F2;
+  border-radius: 50%;
+}
+
+.emptyStateContainer h3 {
+  margin: 0 0 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.emptyStateContainer p {
+  max-width: 380px;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #8A949F;
+}
+
+/* Dark Mode Overrides for Empty State */
+body.dark-mode .emptyStateContainer {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .emptyStateIcon {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .emptyStateContainer h3 {
+  color: #e5e5e5;
+}

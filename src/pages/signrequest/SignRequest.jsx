@@ -349,7 +349,15 @@ useEffect(() => {
             </table>
 
             {!loading && filteredRequests.length === 0 && (
-              <div className={styles.emptyState}>No sign requests found.</div>
+              <div className={styles.emptyStateContainer}>
+                <div className={styles.emptyStateIcon}>
+                  <FileText size={22} strokeWidth={1.5} />
+                </div>
+                <h3>No sign requests found</h3>
+                <p>
+                  There are no signature requests matching your current filters.
+                </p>
+              </div>
             )}
           </div>
         </section>
