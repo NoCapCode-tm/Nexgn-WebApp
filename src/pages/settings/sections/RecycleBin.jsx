@@ -78,15 +78,13 @@ export default function RecycleBin() {
       }));
 
       if (item.type === "template") {
-        await axios.put(
+        await axios.get(
           `${API_URL}template/restoretemplate/${item.templateid?._id}`,
-          {},
           { withCredentials: true }
         );
       } else {
-        await axios.put(
+        await axios.get(
           `${API_URL}document/restoredocument/${item._id}`,
-          {},
           { withCredentials: true }
         );
       }
