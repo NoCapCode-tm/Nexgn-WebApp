@@ -347,7 +347,7 @@ export default function Security({ onUserUpdated }) {
 
       {loading && (
         <LoadingScreen
-          state="solving"
+          state="connecting"
           size={64}
           theme="dark"
           message="Applying your master plan"

@@ -133,7 +133,7 @@ export default function Account({ user, onUserUpdated }) {
 
       {loading && (
         <LoadingScreen
-          state="listening"
+          state="connecting"
           size={64}
           theme="dark"
           message="Signing Up"

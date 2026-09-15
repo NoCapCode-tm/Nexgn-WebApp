@@ -126,7 +126,7 @@ function Permissions({ subAdminId, onBack }) {
 
       {loading && (
         <LoadingScreen
-          state="working"
+          state="connecting"
           size={64}
           theme="dark"
           message="Saving permissions"
