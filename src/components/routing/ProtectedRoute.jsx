@@ -30,7 +30,7 @@ const ProtectedRoute = () => {
   }, []);
 
   if (loading) {
-    return <LoadingScreen state="working" size={64} theme="light" message="Verifying session" />;
+    return <LoadingScreen state="solving" size={64} theme="light" message="Verifying session" />;
   }
   return authenticated ? <Outlet /> : <Navigate to="/" replace />;
 };
