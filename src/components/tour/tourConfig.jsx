@@ -1,17 +1,6 @@
 // src/components/tour/tourConfig.js
 
 export const TOUR_STEPS = [
-  
-  {
-    id: "signers",
-    route: "/sign-request",
-    target: '[data-tour="signers"]',
-    title: "Signers",
-    description:
-    "This is where you manage your signing workflow and work with documents that need signatures.",
-    placement: "right",
-  },
-  
   {
     id: "dashboard",
     route: "/dashboard",
@@ -19,6 +8,16 @@ export const TOUR_STEPS = [
     title: "Your Dashboard",
     description:
       "This is your Nexgn workspace. Here you can see your document activity, pending signatures, signed documents, and recent activity.",
+    placement: "right",
+  },
+
+  {
+    id: "signers",
+    route: "/sign-request",
+    target: '[data-tour="signers"]',
+    title: "Signers",
+    description:
+      "This is where you manage your signing workflow and work with documents that need signatures.",
     placement: "right",
   },
 

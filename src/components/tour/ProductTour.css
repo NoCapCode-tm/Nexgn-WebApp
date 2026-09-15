@@ -8,7 +8,6 @@
   pointer-events: none;
 }
 
-/* Captures clicks outside the tour card so users don't accidentally click the app */
 .tour-backdrop {
   position: fixed;
   inset: 0;
@@ -18,48 +17,61 @@
 }
 
 /* =========================================
-   TARGET HIGHLIGHT (The Magic Mask)
+   TARGET HIGHLIGHT (Breathing Spotlight)
 ========================================= */
 .tour-target-highlight {
   position: fixed;
   z-index: 1000000;
-  border: 2px solid #ff0915;
-  border-radius: 12px;
+  border: 2px solid #FF0915;
+  border-radius: 8px; /* Sharper, modern radius */
   background: transparent;
-  
-  /* The 9999px shadow creates the dark overlay over the rest of the screen */
-  box-shadow:
-    0 0 0 4px rgba(255, 9, 21, 0.15),
-    0 0 0 9999px rgba(15, 23, 42, 0.65);
-    
   pointer-events: none;
   
-  /* Premium spring physics transition */
+  /* Smooth glide between steps */
   transition: 
     top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     left 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    
+  animation: spotlightBreathe 3s ease-in-out infinite alternate;
+}
+
+/* Creates the dark mask AND a subtle glowing pulse */
+@keyframes spotlightBreathe {
+  0% { 
+    box-shadow: 
+      0 0 0 4px rgba(255, 9, 21, 0.15), 
+      0 0 0 9999px rgba(9, 9, 11, 0.75); 
+  }
+  100% { 
+    box-shadow: 
+      0 0 0 8px rgba(255, 9, 21, 0.05), 
+      0 0 0 9999px rgba(9, 9, 11, 0.75); 
+  }
 }
 
 /* =========================================
-   TOUR CARD
+   TOUR CARD (Deep Elevation)
 ========================================= */
 .tour-card {
   position: fixed;
   z-index: 1000001;
-  width: 380px;
+  width: 340px;
   max-width: calc(100vw - 32px);
-  padding: 28px;
+  padding: 24px;
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  
+  /* Multi-layered SaaS shadow for realistic depth */
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.12), 
-    0 1px 3px rgba(0, 0, 0, 0.05);
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 10px 15px -3px rgba(0, 0, 0, 0.05),
+    0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    
   pointer-events: auto;
   
-  /* Glides smoothly alongside the highlight */
   transition: 
     top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -70,7 +82,7 @@
 @keyframes tourCardIn {
   from {
     opacity: 0;
-    transform: translateY(16px) scale(0.96);
+    transform: translateY(12px) scale(0.97);
   }
   to {
     opacity: 1;
@@ -85,51 +97,74 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
-.tour-step {
-  font-size: 12px;
-  font-weight: 700;
-  color: #ff0915;
-  letter-spacing: 0.06em;
+.tour-step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: #FFF0F0;
+  border: 1px solid #FFE2E2;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #E22A2A;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
+.tour-step-dot {
+  width: 6px;
+  height: 6px;
+  background: #FF0915;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 9, 21, 0.5);
+  animation: dotPulse 2s infinite;
+}
+
+@keyframes dotPulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
 .tour-close {
-  width: 32px;
-  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 28px;
+  height: 28px;
   border: none;
-  border-radius: 50%;
+  border-radius: 6px;
   background: transparent;
-  color: #9ca3af;
-  font-size: 20px;
+  color: #9CA3AF;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin: -8px -8px 0 0;
+  margin: -4px -4px 0 0;
 }
 
 .tour-close:hover {
-  background: #f3f4f6;
+  background: #F3F4F6;
   color: #111827;
 }
 
 .tour-card h3 {
-  margin: 0 0 10px 0;
-  font-size: 22px;
-  font-weight: 700;
+  margin: 0 0 8px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
   color: #111827;
   letter-spacing: -0.01em;
 }
 
 .tour-card p {
   margin: 0;
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: #4b5563;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #6B7280;
 }
 
 /* =========================================
@@ -137,20 +172,20 @@
 ========================================= */
 .tour-progress {
   display: flex;
-  gap: 6px;
-  margin-top: 28px;
+  gap: 4px;
+  margin-top: 24px;
 }
 
 .tour-progress span {
-  height: 4px;
+  height: 3px;
   flex: 1;
-  border-radius: 4px;
-  background: #e5e7eb;
+  border-radius: 3px;
+  background: #E5E7EB;
   transition: background 0.3s ease;
 }
 
 .tour-progress span.active {
-  background: #ff0915;
+  background: #FF0915;
 }
 
 /* =========================================
@@ -160,13 +195,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
 .tour-navigation {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .tour-skip,
@@ -174,99 +209,110 @@
 .tour-next {
   border: none;
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
   transition: all 0.2s ease;
 }
 
 .tour-skip {
-  padding: 8px 0;
+  padding: 6px 0;
   background: transparent;
-  color: #6b7280;
+  color: #9CA3AF;
 }
 
 .tour-skip:hover {
-  color: #111827;
+  color: #4B5563;
 }
 
 .tour-back {
-  padding: 10px 16px;
-  border-radius: 10px;
-  background: #f3f4f6;
-  color: #374151;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: transparent;
+  color: #6B7280;
 }
 
 .tour-back:hover {
-  background: #e5e7eb;
+  background: #F3F4F6;
+  color: #111827;
 }
 
 .tour-next {
-  padding: 10px 20px;
-  border-radius: 10px;
-  background: #ff0915;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  /* Gradient and inner shadow for that premium button feel */
+  background: linear-gradient(180deg, #FF2A34 0%, #E6000C 100%);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.2), 
+    0 1px 2px rgba(0, 0, 0, 0.1);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(255, 9, 21, 0.2);
+  font-weight: 600;
 }
 
 .tour-next:hover {
-  background: #d9000f;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(255, 9, 21, 0.25);
+  background: linear-gradient(180deg, #FF3D46 0%, #D9000B 100%);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.3), 
+    0 2px 4px rgba(255, 9, 21, 0.2);
 }
 
 .tour-next:active {
-  transform: translateY(0);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(1px);
 }
 
 /* =========================================
    DARK MODE OVERRIDES
 ========================================= */
 body.dark-mode .tour-card {
-  background: #111111;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  background: #18181B; /* Zinc 900 */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .tour-step-badge {
+  background: rgba(255, 9, 21, 0.1);
+  border-color: rgba(255, 9, 21, 0.2);
+  color: #FF6B72;
 }
 
 body.dark-mode .tour-close {
-  color: #6b7280;
+  color: #9CA3AF;
 }
 
 body.dark-mode .tour-close:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  color: #FFFFFF;
 }
 
 body.dark-mode .tour-card h3 {
-  color: #ffffff;
+  color: #F9FAFB;
 }
 
 body.dark-mode .tour-card p {
-  color: #9ca3af;
+  color: #9CA3AF;
 }
 
 body.dark-mode .tour-progress span {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 body.dark-mode .tour-progress span.active {
-  background: #ff0915;
+  background: #FF0915;
 }
 
-body.dark-mode .tour-skip {
-  color: #9ca3af;
-}
-
-body.dark-mode .tour-skip:hover {
-  color: #ffffff;
-}
-
+body.dark-mode .tour-skip,
 body.dark-mode .tour-back {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
+  color: #9CA3AF;
 }
 
+body.dark-mode .tour-skip:hover,
 body.dark-mode .tour-back:hover {
-  background: rgba(255, 255, 255, 0.15);
+  color: #F9FAFB;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* =========================================
@@ -280,6 +326,6 @@ body.dark-mode .tour-back:hover {
     right: 16px;
     top: auto !important;
     bottom: 24px;
-    padding: 24px;
+    padding: 20px;
   }
 }

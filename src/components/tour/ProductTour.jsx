@@ -1,17 +1,6 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-
-import {
-  Outlet,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
-
+import { ArrowRight, X } from "lucide-react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { TOUR_STEPS } from "./tourConfig";
 import "./ProductTour.css";
 
@@ -568,11 +557,11 @@ return (
       {/* Invisible backdrop to block clicks outside the tour */}
       <div className="tour-backdrop" onClick={(e) => e.stopPropagation()} />
 
-      {/* The target highlight with the massive box-shadow mask */}
+      {/* The target highlight with the breathing box-shadow mask */}
       <div
         className="tour-target-highlight"
         style={{
-          top: targetRect.top - 8,    /* Generous 8px padding around element */
+          top: targetRect.top - 8,
           left: targetRect.left - 8,
           width: targetRect.width + 16,
           height: targetRect.height + 16,
@@ -588,9 +577,10 @@ return (
         }}
       >
         <div className="tour-card__top">
-          <span className="tour-step">
+          <div className="tour-step-badge">
+            <span className="tour-step-dot" />
             Step {currentStep + 1} of {totalSteps}
-          </span>
+          </div>
 
           <button
             type="button"
@@ -598,7 +588,7 @@ return (
             onClick={onSkip}
             aria-label="Close tour"
           >
-            ×
+            <X size={18} strokeWidth={2.5} />
           </button>
         </div>
 
@@ -632,6 +622,7 @@ return (
 
             <button type="button" className="tour-next" onClick={onNext}>
               {currentStep === totalSteps - 1 ? "Finish" : "Next"}
+              {currentStep !== totalSteps - 1 && <ArrowRight size={14} strokeWidth={2.5} />}
             </button>
           </div>
         </div>
