@@ -3,6 +3,7 @@ import Layout from "../../components/Layout/Layout";
 import Topbar from "../../components/Layout/Topbar";
 import ContactCard from "../../components/ui/ContactCard";
 import ContactDetailsModal from "./ContactDetailsModal";
+import { Users } from "lucide-react";
 
 import AddContactForm from "./AddContactForm";
 import { API_URL } from "../../config";
@@ -201,8 +202,14 @@ export default function ContactBook() {
                   />
                 ))
               ) : (
-                <div className="admin-contact-empty-state">
-                  No contacts found.
+                <div className="admin-contact-empty-state contact-empty-styled">
+                  <div className="contact-empty-icon">
+                    <Users size={22} strokeWidth={1.5} />
+                  </div>
+                  <h3>Contact Book is empty</h3>
+                  <p>
+                    Added contacts will appear here. Click "Add Contact" to get started.
+                  </p>
                 </div>
               )}
 
