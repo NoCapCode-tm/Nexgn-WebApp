@@ -1,4 +1,5 @@
 import DocumentsRow from "../../components/ui/DocumentsRow";
+import { FileText } from "lucide-react"; // 1. Import the icon
 
 export default function DocumentsTable({ documents, onRevoke ,onArchive,onCancel }) {
   return (
@@ -25,9 +26,20 @@ export default function DocumentsTable({ documents, onRevoke ,onArchive,onCancel
               onCancel={()=>onCancel && onCancel(doc._id)}
             />
           ))}
+          
+          {/* 2. Replace the old plain div with the new premium empty state */}
           {documents.length === 0 && (
-            <div className="admin-docs-empty-state">No documents found.</div>
+            <div className="admin-docs-empty-state docs-empty-styled">
+              <div className="docs-empty-icon">
+                <FileText size={22} strokeWidth={1.5} />
+              </div>
+              <h3>No documents found</h3>
+              <p>
+                There are no documents matching your current filters.
+              </p>
+            </div>
           )}
+
         </div>
       </div>
     </div>
