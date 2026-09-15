@@ -563,24 +563,23 @@ function TourOverlay({
     return null;
   }
 
-  return (
+return (
     <>
-      {/* ONLY the target highlight */}
+      {/* Invisible backdrop to block clicks outside the tour */}
+      <div className="tour-backdrop" onClick={(e) => e.stopPropagation()} />
+
+      {/* The target highlight with the massive box-shadow mask */}
       <div
         className="tour-target-highlight"
         style={{
-          top:
-            targetRect.top - 6,
-          left:
-            targetRect.left - 6,
-          width:
-            targetRect.width + 12,
-          height:
-            targetRect.height + 12,
+          top: targetRect.top - 8,    /* Generous 8px padding around element */
+          left: targetRect.left - 8,
+          width: targetRect.width + 16,
+          height: targetRect.height + 16,
         }}
       />
 
-      {/* Tooltip */}
+      {/* Tooltip Card */}
       <div
         className="tour-card"
         style={{
@@ -590,8 +589,7 @@ function TourOverlay({
       >
         <div className="tour-card__top">
           <span className="tour-step">
-            Step {currentStep + 1} of{" "}
-            {totalSteps}
+            Step {currentStep + 1} of {totalSteps}
           </span>
 
           <button
@@ -605,33 +603,19 @@ function TourOverlay({
         </div>
 
         <h3>{step.title}</h3>
-
         <p>{step.description}</p>
 
         <div className="tour-progress">
-          {Array.from({
-            length: totalSteps,
-          }).map(
-            (_, index) => (
-              <span
-                key={index}
-                className={
-                  index <=
-                  currentStep
-                    ? "active"
-                    : ""
-                }
-              />
-            )
-          )}
+          {Array.from({ length: totalSteps }).map((_, index) => (
+            <span
+              key={index}
+              className={index <= currentStep ? "active" : ""}
+            />
+          ))}
         </div>
 
         <div className="tour-actions">
-          <button
-            type="button"
-            className="tour-skip"
-            onClick={onSkip}
-          >
+          <button type="button" className="tour-skip" onClick={onSkip}>
             Skip Tour
           </button>
 
@@ -646,15 +630,8 @@ function TourOverlay({
               </button>
             )}
 
-            <button
-              type="button"
-              className="tour-next"
-              onClick={onNext}
-            >
-              {currentStep ===
-              totalSteps - 1
-                ? "Finish"
-                : "Next"}
+            <button type="button" className="tour-next" onClick={onNext}>
+              {currentStep === totalSteps - 1 ? "Finish" : "Next"}
             </button>
           </div>
         </div>

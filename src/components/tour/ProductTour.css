@@ -1,357 +1,285 @@
+/* =========================================
+   TOUR CONTAINER & BACKDROP
+========================================= */
 .product-tour {
   position: fixed;
   inset: 0;
-
   z-index: 999999;
-
   pointer-events: none;
 }
 
+/* Captures clicks outside the tour card so users don't accidentally click the app */
+.tour-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999998;
+  background: transparent;
+  pointer-events: auto;
+}
 
 /* =========================================
-   TARGET HIGHLIGHT
+   TARGET HIGHLIGHT (The Magic Mask)
 ========================================= */
-
 .tour-target-highlight {
   position: fixed;
-
   z-index: 1000000;
-
   border: 2px solid #ff0915;
-
-  border-radius: 10px;
-
-  background: rgba(255, 9, 21, 0.05);
-
+  border-radius: 12px;
+  background: transparent;
+  
+  /* The 9999px shadow creates the dark overlay over the rest of the screen */
   box-shadow:
-    0 0 0 4px rgba(255, 9, 21, 0.08),
-    0 4px 16px rgba(255, 9, 21, 0.12);
-
+    0 0 0 4px rgba(255, 9, 21, 0.15),
+    0 0 0 9999px rgba(15, 23, 42, 0.65);
+    
   pointer-events: none;
-
-  transition:
-    top 0.3s ease,
-    left 0.3s ease,
-    width 0.3s ease,
-    height 0.3s ease;
-
-  animation: targetPulse 2s ease-in-out infinite;
+  
+  /* Premium spring physics transition */
+  transition: 
+    top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    left 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-
-@keyframes targetPulse {
-  0% {
-    box-shadow:
-      0 0 0 4px rgba(255, 9, 21, 0.08),
-      0 4px 16px rgba(255, 9, 21, 0.12);
-  }
-
-  50% {
-    box-shadow:
-      0 0 0 7px rgba(255, 9, 21, 0.04),
-      0 6px 22px rgba(255, 9, 21, 0.16);
-  }
-
-  100% {
-    box-shadow:
-      0 0 0 4px rgba(255, 9, 21, 0.08),
-      0 4px 16px rgba(255, 9, 21, 0.12);
-  }
-}
-
 
 /* =========================================
    TOUR CARD
 ========================================= */
-
 .tour-card {
   position: fixed;
-
   z-index: 1000001;
-
-  width: 370px;
-
-  max-width:
-    calc(100vw - 32px);
-
-  padding: 22px;
-
+  width: 380px;
+  max-width: calc(100vw - 32px);
+  padding: 28px;
   background: #ffffff;
-
-  border: 1px solid #e5e7eb;
-
-  border-radius: 16px;
-
-  box-shadow:
-    0 12px 35px rgba(0, 0, 0, 0.16);
-
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.12), 
+    0 1px 3px rgba(0, 0, 0, 0.05);
   pointer-events: auto;
-
-  transition:
-    top 0.3s ease,
-    left 0.3s ease;
-
-  animation: tourCardIn 0.25s ease;
+  
+  /* Glides smoothly alongside the highlight */
+  transition: 
+    top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    
+  animation: tourCardIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-
 
 @keyframes tourCardIn {
   from {
     opacity: 0;
-
-    transform:
-      translateY(8px)
-      scale(0.98);
+    transform: translateY(16px) scale(0.96);
   }
-
   to {
     opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
-
 /* =========================================
-   HEADER
+   HEADER & TYPOGRAPHY
 ========================================= */
-
 .tour-card__top {
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
+  margin-bottom: 16px;
 }
-
 
 .tour-step {
   font-size: 12px;
-
   font-weight: 700;
-
   color: #ff0915;
-
-  letter-spacing: 0.05em;
-
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-
 .tour-close {
-  width: 30px;
-
-  height: 30px;
-
+  width: 32px;
+  height: 32px;
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   border: none;
-
   border-radius: 50%;
-
   background: transparent;
-
-  color: #6b7280;
-
-  font-size: 23px;
-
-  line-height: 1;
-
+  color: #9ca3af;
+  font-size: 20px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  margin: -8px -8px 0 0;
 }
-
 
 .tour-close:hover {
   background: #f3f4f6;
-
   color: #111827;
 }
-
-
-/* =========================================
-   CONTENT
-========================================= */
 
 .tour-card h3 {
-  margin:
-    18px 0 8px;
-
-  font-size: 21px;
-
-  line-height: 1.3;
-
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  font-weight: 700;
   color: #111827;
+  letter-spacing: -0.01em;
 }
-
 
 .tour-card p {
   margin: 0;
-
-  font-size: 14px;
-
+  font-size: 14.5px;
   line-height: 1.6;
-
-  color: #6b7280;
+  color: #4b5563;
 }
-
 
 /* =========================================
-   PROGRESS
+   PROGRESS BAR
 ========================================= */
-
 .tour-progress {
   display: flex;
-
-  gap: 5px;
-
-  margin-top: 22px;
+  gap: 6px;
+  margin-top: 28px;
 }
-
 
 .tour-progress span {
   height: 4px;
-
   flex: 1;
-
-  border-radius: 999px;
-
+  border-radius: 4px;
   background: #e5e7eb;
-
-  transition:
-    background 0.2s ease;
+  transition: background 0.3s ease;
 }
-
 
 .tour-progress span.active {
   background: #ff0915;
 }
 
-
 /* =========================================
    ACTIONS
 ========================================= */
-
 .tour-actions {
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
-  margin-top: 22px;
+  margin-top: 28px;
 }
-
 
 .tour-navigation {
   display: flex;
-
   align-items: center;
-
-  gap: 8px;
+  gap: 10px;
 }
-
 
 .tour-skip,
 .tour-back,
 .tour-next {
   border: none;
-
   cursor: pointer;
-
   font-size: 14px;
-
   font-weight: 600;
+  transition: all 0.2s ease;
 }
-
 
 .tour-skip {
   padding: 8px 0;
-
   background: transparent;
-
   color: #6b7280;
 }
-
 
 .tour-skip:hover {
   color: #111827;
 }
 
-
 .tour-back {
-  padding:
-    10px 15px;
-
-  border-radius: 8px;
-
+  padding: 10px 16px;
+  border-radius: 10px;
   background: #f3f4f6;
-
   color: #374151;
 }
-
 
 .tour-back:hover {
   background: #e5e7eb;
 }
 
-
 .tour-next {
-  padding:
-    10px 19px;
-
-  border-radius: 8px;
-
+  padding: 10px 20px;
+  border-radius: 10px;
   background: #ff0915;
-
   color: #ffffff;
-
-  box-shadow:
-    0 4px 10px
-    rgba(255, 9, 21, 0.18);
+  box-shadow: 0 4px 12px rgba(255, 9, 21, 0.2);
 }
-
 
 .tour-next:hover {
-  background: #e6000c;
+  background: #d9000f;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(255, 9, 21, 0.25);
 }
 
+.tour-next:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   DARK MODE OVERRIDES
+========================================= */
+body.dark-mode .tour-card {
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .tour-close {
+  color: #6b7280;
+}
+
+body.dark-mode .tour-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+body.dark-mode .tour-card h3 {
+  color: #ffffff;
+}
+
+body.dark-mode .tour-card p {
+  color: #9ca3af;
+}
+
+body.dark-mode .tour-progress span {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .tour-progress span.active {
+  background: #ff0915;
+}
+
+body.dark-mode .tour-skip {
+  color: #9ca3af;
+}
+
+body.dark-mode .tour-skip:hover {
+  color: #ffffff;
+}
+
+body.dark-mode .tour-back {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+body.dark-mode .tour-back:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
 
 /* =========================================
    MOBILE
 ========================================= */
-
 @media (max-width: 768px) {
   .tour-card {
-    width:
-      calc(100vw - 32px);
-
-    max-width:
-      calc(100vw - 32px);
-
-    left:
-      16px !important;
-
-    right:
-      16px;
-
-    top:
-      auto !important;
-
-    bottom:
-      16px;
-  }
-
-  .tour-card h3 {
-    font-size: 19px;
-  }
-
-  .tour-card p {
-    font-size: 13px;
+    width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+    left: 16px !important;
+    right: 16px;
+    top: auto !important;
+    bottom: 24px;
+    padding: 24px;
   }
 }
