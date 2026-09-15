@@ -93,10 +93,42 @@
   user-select: none;
   transform: translate(-50%, -50%) rotate(-90deg);
   transform-origin: center;
+  will-change: transform, opacity;
 }
 
-.wordmarkRed { color: #FF0915; }
-.wordmarkWhite { color: #ffffff; }
+/* ---------------- Wordmark Slide-Out Animations ---------------- */
+
+@keyframes slideLeftRed {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + 50px), -50%) rotate(-90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-90deg);
+  }
+}
+
+@keyframes slideRightWhite {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% - 50px), -50%) rotate(-90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-90deg);
+  }
+}
+
+.wordmarkRed { 
+  color: #FF0915; 
+  animation: slideLeftRed 750ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.wordmarkWhite { 
+  color: #ffffff; 
+  animation: slideRightWhite 750ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 
 /* ---------------- Responsive Rules for Layout ---------------- */
 
@@ -134,4 +166,49 @@
 
 @media (max-width: 425px){
   .faceGraphic{ width: 48%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordmarkRed,
+  .wordmarkWhite {
+    animation: none !important;
+    transform: translate(-50%, -50%) rotate(-90deg) !important;
+    opacity: 1 !important;
+  }
+}
+
+
+
+/* ---------------- Face Graphic Animation ---------------- */
+
+@keyframes faceGraphicEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(-30px, 30px, 0) scale(0.96);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.faceGraphic {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 35%;
+  pointer-events: none;
+  /* Enterprise-grade entrance animation */
+  animation: faceGraphicEntrance 900ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
+  will-change: opacity, transform, filter;
+}
+
+.faceGraphic img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Subtle transition safety net */
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -162,7 +162,7 @@ export default function Profile({ user, onUserUpdated }) {
 
       {loading && (
         <LoadingScreen
-          state="working"
+          state="connecting"
           size={64}
           theme="dark"
           message="Applying your master plan"

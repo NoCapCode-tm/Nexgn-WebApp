@@ -3,7 +3,7 @@ import axios from "axios";
 import { Archive, FileText, RotateCcw, Trash2 } from "lucide-react";
 import { API_URL } from "../../../config";
 import { toast } from "react-toastify";
-import LoadingScreen from "../../../components/Layout/LoadingScreen";
+import { Skeleton } from "../../../components/common/Skeleton";
 
 export default function RecycleBin() {
   const [loading, setLoading] = useState(false);
@@ -15,32 +15,35 @@ export default function RecycleBin() {
   const [recycleBinDeleteTarget, setRecycleBinDeleteTarget] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [templateRes, documentRes] = await Promise.all([
-          axios.get(`${API_URL}template/gettemplate`, {
-            withCredentials: true,
-          }),
-          axios.get(`${API_URL}document/getdocument`, {
-            withCredentials: true,
-          }),
-        ]);
+      const fetchData = async () => {
+        setLoading(true); // <-- 1. Set loading to true when fetch starts
+        try {
+          const [templateRes, documentRes] = await Promise.all([
+            axios.get(`${API_URL}template/gettemplate`, {
+              withCredentials: true,
+            }),
+            axios.get(`${API_URL}document/getdocument`, {
+              withCredentials: true,
+            }),
+          ]);
 
-        const templates = (templateRes?.data?.message || []).filter(
-          (template) => template?.templateid?.isDeleted === true
-        );
-        const documents = (documentRes?.data?.message || []).filter(
-          (document) => document.isDeleted === true
-        );
+          const templates = (templateRes?.data?.message || []).filter(
+            (template) => template?.templateid?.isDeleted === true
+          );
+          const documents = (documentRes?.data?.message || []).filter(
+            (document) => document.isDeleted === true
+          );
 
-        setRecycleBinItems({ templates, documents });
-      } catch (error) {
-        console.error("Error fetching recycle bin data:", error);
-      }
-    };
+          setRecycleBinItems({ templates, documents });
+        } catch (error) {
+          console.error("Error fetching recycle bin data:", error);
+        } finally {
+          setLoading(false); // <-- 2. Set loading to false once data arrives
+        }
+      };
 
-    fetchData();
-  }, []);
+      fetchData();
+    }, []);
 
   const visibleItems = useMemo(
     () => [
@@ -173,7 +176,25 @@ export default function RecycleBin() {
         </div>
 
         <div className="recycle-bin-list">
-          {visibleItems.length > 0 ? (
+          {loading && visibleItems.length === 0 ? (
+            // Render Skeletons on initial load
+            Array.from({ length: 4 }).map((_, idx) => (
+              <div className="recycle-bin-item" key={idx}>
+                <div className="recycle-bin-item__icon">
+                  <Skeleton width="42px" height="42px" borderRadius="10px" />
+                </div>
+                <div className="recycle-bin-item__info" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <Skeleton width="180px" height="14px" />
+                    <Skeleton width="120px" height="12px" />
+                </div>
+                <div className="recycle-bin-item__actions">
+                    <Skeleton width="80px" height="34px" borderRadius="7px" />
+                    <Skeleton width="80px" height="34px" borderRadius="7px" />
+                </div>
+              </div>
+            ))
+          ) : visibleItems.length > 0 ? (
+            // Render actual items once loaded
             visibleItems.map((item) => (
               <div
                 className="recycle-bin-item"
@@ -229,6 +250,7 @@ export default function RecycleBin() {
               </div>
             ))
           ) : (
+            // Render empty state if nothing exists
             <div className="recycle-bin-empty">
               <div className="recycle-bin-empty__icon">
                 <Archive size={22} strokeWidth={1.5} />
@@ -321,14 +343,6 @@ export default function RecycleBin() {
         </div>
       )}
 
-      {loading && (
-        <LoadingScreen
-          state="listening"
-          size={64}
-          theme="dark"
-          message="Signing Up"
-        />
-      )}
     </>
   );
 }

@@ -424,7 +424,7 @@ export default function TemplateCreate({ templateName, templateFile, onBack }) {
           </div>
 
           <button className={styles.sendBtn} onClick={handleSaveTemplate}>
-            Send
+            Save Template
           </button>
         </aside>
       </div>
