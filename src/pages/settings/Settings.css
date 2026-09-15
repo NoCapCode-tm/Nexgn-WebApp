@@ -4443,6 +4443,7 @@ body.dark-mode .admin-settings-page .ms-mobile-detail .admin-settings-card {
   margin: 0 0 8px;
   font-size: 20px;
   font-weight: 600;
+  text-wrap: auto;
   color: #111;
 }
 
