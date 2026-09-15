@@ -137,6 +137,32 @@ useEffect(() => {
     }
   };
 
+
+  const handleDeleteRequest = async (id) => {
+    try {
+      setLoading(true);
+
+      await axios.get(
+        `${API_URL}sign/requestdelete/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      // Filter ka use karke matching ID wali request ko array se hata rahe hain
+      setSignRequests((previous) =>
+        previous.filter((request) => request._id !== id)
+      );
+    } catch (error) {
+      console.log(
+        "Something went wrong while deleting sign request",
+        error?.response?.data || error.message
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const filteredRequests = signRequests.filter((request) => {
     const title = request?.documentId?.title || "";
 
@@ -314,6 +340,7 @@ useEffect(() => {
                         request={request} 
                         sign={sign} 
                         onCancel={handleCancelRequest} 
+                        onDelete={handleDeleteRequest}
                       />
                     );
                   })
@@ -336,6 +363,7 @@ const SignRequestRow = ({
   request,
   sign,
   onCancel,
+  onDelete,
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
@@ -510,6 +538,23 @@ const SignRequestRow = ({
 
               <span>
                 Cancel Request
+              </span>
+            </button>
+            )}
+
+            {request?.overallStatus === "cancelled" && (
+               <button
+              type="button"
+              className={`${styles.actionItem} ${styles.dangerItem}`}
+              onClick={() => {
+                setMenuOpen(false);
+                onDelete(request?._id);
+              }}
+            >
+              <XCircle size={14} />
+
+              <span>
+                Delete Request
               </span>
             </button>
             )}
