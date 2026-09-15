@@ -176,3 +176,39 @@
     opacity: 1 !important;
   }
 }
+
+
+
+/* ---------------- Face Graphic Animation ---------------- */
+
+@keyframes faceGraphicEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(-30px, 30px, 0) scale(0.96);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.faceGraphic {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 35%;
+  pointer-events: none;
+  /* Enterprise-grade entrance animation */
+  animation: faceGraphicEntrance 900ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
+  will-change: opacity, transform, filter;
+}
+
+.faceGraphic img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Subtle transition safety net */
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
