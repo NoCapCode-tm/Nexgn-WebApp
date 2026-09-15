@@ -95,3 +95,39 @@ export function DocumentViewerSkeleton() {
     </div>
   );
 }
+
+
+export function SettingsFormSkeleton() {
+  return (
+    <div className="admin-settings-card" style={{ maxWidth: '950px' }}>
+      <Skeleton width="120px" height="24px" style={{ marginBottom: '16px' }} />
+      <div style={{ width: '100%', height: '1px', backgroundColor: '#e4e4e4', marginBottom: '24px' }} />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '8px' }}>
+            <Skeleton width="84px" height="84px" borderRadius="50%" />
+            <Skeleton width="140px" height="32px" borderRadius="4px" />
+        </div>
+        {Array.from({ length: 3 }).map((_, idx) => (
+          <div key={idx}>
+            <Skeleton width="100px" height="14px" style={{ marginBottom: '8px' }} />
+            <Skeleton width="100%" maxWidth="537px" height="40px" borderRadius="8px" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function BillingSkeleton() {
+  return (
+    <div className="admin-settings-card admin-settings-card--billing">
+      <Skeleton width="120px" height="24px" style={{ marginBottom: '16px' }} />
+      <div style={{ width: '100%', height: '1px', backgroundColor: '#e4e4e4', marginBottom: '24px' }} />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <Skeleton width="100%" height="280px" borderRadius="8px" />
+        <Skeleton width="100%" height="80px" borderRadius="8px" />
+        <Skeleton width="100%" height="80px" borderRadius="8px" />
+      </div>
+    </div>
+  );
+}

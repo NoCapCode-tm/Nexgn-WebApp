@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { CreditCard, Download, RefreshCw, AlertCircle } from "lucide-react";
 import { API_URL } from "../../../config";
-import LoadingScreen from "../../../components/Layout/LoadingScreen";
+import { BillingSkeleton } from "../../../components/common/Skeleton";
 
 export default function Billing() {
   const [subscription, setSubscription] = useState({});
@@ -30,6 +30,10 @@ export default function Billing() {
       }
     })();
   }, []);
+
+  if (loading) {
+  return <BillingSkeleton />;
+}
 
   return (
     <>
@@ -140,7 +144,7 @@ export default function Billing() {
 
       {loading && (
         <LoadingScreen
-          state="listening"
+          state="connecting"
           size={64}
           theme="dark"
           message="Signing Up"

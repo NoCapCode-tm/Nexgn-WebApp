@@ -3,6 +3,7 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import { toast } from "react-toastify";
 import LoadingScreen from "../../../components/Layout/LoadingScreen";
+import { X } from "lucide-react";
 
 export default function Security({ onUserUpdated }) {
   const otpInputRef = useRef(null);
@@ -49,6 +50,15 @@ export default function Security({ onUserUpdated }) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const close2FAOverlay = () => {
+    setShow2FAOverlay(false);
+    setShowOTPInput(false);
+    setQrCode("");
+    setTwoFASecret("");
+    setOtp("");
+    setTwoFALoading(false);
   };
 
   const handle2FAToggle = async (e) => {
@@ -98,11 +108,7 @@ export default function Security({ onUserUpdated }) {
         enable2FA: true,
       }));
 
-      setShow2FAOverlay(false);
-      setShowOTPInput(false);
-      setQrCode("");
-      setTwoFASecret("");
-      setOtp("");
+      close2FAOverlay();
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Invalid authentication code"
@@ -217,8 +223,27 @@ export default function Security({ onUserUpdated }) {
       </div>
 
       {show2FAOverlay && (
-        <div className="admin-2fa-overlay">
-          <div className="admin-2fa-modal">
+        <div
+          className="admin-2fa-overlay"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) {
+              close2FAOverlay();
+            }
+          }}
+        >
+          <div
+            className="admin-2fa-modal"
+            onMouseDown={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="admin-2fa-close-btn"
+              onClick={close2FAOverlay}
+              aria-label="Close two-factor authentication setup"
+              title="Close"
+            >
+              <X size={20} strokeWidth={2} />
+            </button>
             {!showOTPInput ? (
               <>
                 <h2>Set up Two-Factor authentication</h2>
@@ -322,7 +347,7 @@ export default function Security({ onUserUpdated }) {
 
       {loading && (
         <LoadingScreen
-          state="working"
+          state="connecting"
           size={64}
           theme="dark"
           message="Applying your master plan"

@@ -167,7 +167,7 @@ export default function Integrations() {
 
       {loading && (
         <LoadingScreen
-          state="listening"
+          state="connecting"
           size={64}
           theme="dark"
           message="Signing Up"

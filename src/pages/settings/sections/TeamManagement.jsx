@@ -3,7 +3,7 @@ import axios from "axios";
 import { Filter, MoreVertical, Plus } from "lucide-react";
 import { API_URL } from "../../../config";
 import { toast } from "react-toastify";
-import LoadingScreen from "../../../components/Layout/LoadingScreen";
+import { Skeleton } from "../../../components/common/Skeleton";
 
 const permissionCategories = [
   { category: "Dashboard", items: ["View", "Analytics", "Reports Export"] },
@@ -126,10 +126,10 @@ function Permissions({ subAdminId, onBack }) {
 
       {loading && (
         <LoadingScreen
-          state="listening"
+          state="connecting"
           size={64}
           theme="dark"
-          message="Signing Up"
+          message="Saving permissions"
         />
       )}
     </>
@@ -289,69 +289,89 @@ export default function TeamManagement({ onPermissionModeChange, resetPermission
           </div>
 
           <div className="admin-settings-team-list">
-            {teamMembers?.map((sub) => (
-              <div
-                className="admin-settings-team-row"
-                key={sub?._id}
-                style={{
-                  zIndex: teamActionOpen === sub?._id ? 10 : 1,
-                }}
-              >
-                <div className="team-col-name">
-                  <div className="team-admin-name">{sub?.name}</div>
-                  <div className="team-admin-email">{sub?.email}</div>
-                </div>
-
-                <div className="team-right-controls">
-                  <div className="team-col-role">
-                    <span className="team-role-badge">{sub?.role}</span>
+            {loading && teamMembers.length === 0 ? (
+              Array.from({ length: 4 }).map((_, idx) => (
+                <div className="admin-settings-team-row" key={idx}>
+                  <div className="team-col-name" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <Skeleton width="140px" height="16px" />
+                      <Skeleton width="180px" height="12px" />
                   </div>
-
-                  <div className="team-col-status">
-                    <span
-                      className={`team-status-badge ${
-                        sub.invitestatus === "Active" ? "active" : "inactive"
-                      }`}
-                    >
-                      {sub.status}
-                    </span>
-                  </div>
-
-                  <div className="team-col-action">
-                    <button
-                      className="team-action-btn"
-                      type="button"
-                      onClick={() =>
-                        setTeamActionOpen(
-                          teamActionOpen === sub._id ? null : sub._id
-                        )
-                      }
-                    >
-                      <MoreVertical size={20} color="#666" />
-                    </button>
-
-                    {teamActionOpen === sub._id && (
-                      <div className="team-action-dropdown" ref={teamActionRef}>
-                        <button
-                          className="team-dropdown-item permissions"
-                          type="button"
-                          onClick={() => handleViewPermissions(sub)}
-                        >
-                          Permissions
-                        </button>
-                        <button
-                          className="team-dropdown-item delete"
-                          type="button"
-                          onClick={() => handleRemove(sub._id)}
-                        >
-                          <span className="team-x-icon">×</span> Remove
-                        </button>
-                      </div>
-                    )}
+                  <div className="team-right-controls">
+                      <div className="team-col-role"><Skeleton width="70px" height="24px" borderRadius="6px" /></div>
+                      <div className="team-col-status"><Skeleton width="70px" height="24px" borderRadius="4px" /></div>
+                      <div className="team-col-action"><Skeleton width="24px" height="24px" borderRadius="50%" /></div>
                   </div>
                 </div>
+              ))
+            ) : teamMembers.length > 0 ? (
+              teamMembers.map((sub) => (
+                <div
+                  className="admin-settings-team-row"
+                  key={sub?._id}
+                  style={{
+                    zIndex: teamActionOpen === sub?._id ? 10 : 1,
+                  }}
+                >
+                  <div className="team-col-name">
+                    <div className="team-admin-name">{sub?.name}</div>
+                    <div className="team-admin-email">{sub?.email}</div>
+                  </div>
+
+                  <div className="team-right-controls">
+                    <div className="team-col-role">
+                      <span className="team-role-badge">{sub?.role}</span>
+                    </div>
+
+                    <div className="team-col-status">
+                      <span
+                        className={`team-status-badge ${
+                          sub.invitestatus === "Active" ? "active" : "inactive"
+                        }`}
+                      >
+                        {sub.status}
+                      </span>
+                    </div>
+
+                    <div className="team-col-action">
+                      <button
+                        className="team-action-btn"
+                        type="button"
+                        onClick={() =>
+                          setTeamActionOpen(
+                            teamActionOpen === sub._id ? null : sub._id
+                          )
+                        }
+                      >
+                        <MoreVertical size={20} color="#666" />
+                      </button>
+
+                      {teamActionOpen === sub._id && (
+                        <div className="team-action-dropdown" ref={teamActionRef}>
+                          <button
+                            className="team-dropdown-item permissions"
+                            type="button"
+                            onClick={() => handleViewPermissions(sub)}
+                          >
+                            Permissions
+                          </button>
+                          <button
+                            className="team-dropdown-item delete"
+                            type="button"
+                            onClick={() => handleRemove(sub._id)}
+                          >
+                            <span className="team-x-icon">×</span> Remove
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div style={{ padding: "24px", textAlign: "center", color: "#666" }}>
+                No team members found.
               </div>
-            ))}
+            )}
           </div>
         </div>
 
@@ -448,15 +468,7 @@ export default function TeamManagement({ onPermissionModeChange, resetPermission
           </form>
         </div>
       )}
-
-      {loading && (
-        <LoadingScreen
-          state="listening"
-          size={64}
-          theme="dark"
-          message="Signing Up"
-        />
-      )}
+  
     </>
   );
 }

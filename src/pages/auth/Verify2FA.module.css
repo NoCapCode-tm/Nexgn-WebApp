@@ -147,18 +147,244 @@
   .title {
     font-size: 34px;
   }
+
   .subtitle {
     font-size: 16px;
   }
+
   .otpContainer {
     gap: 8px;
   }
+
   .otpInput {
     width: 42px;
     height: 48px;
     font-size: 20px;
   }
+
   .loginButton {
     width: 100%; /* Make button full width on small mobile */
+  }
+}
+
+
+/* ==========================================================
+   NEXGN MNC SAAS MOTION SYSTEM — VERIFY 2FA
+   CSS-only enhancement. No JSX / logic changes.
+========================================================== */
+
+@keyframes verifyPanelEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes verifyTextEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes verifyCornerReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.65);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes verifyOtpReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes verifyButtonReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes verifyFocusPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 9, 21, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(255, 9, 21, 0.08);
+  }
+}
+
+.formWrap {
+  animation: verifyPanelEnter 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+
+.title {
+  animation: verifyTextEnter 470ms cubic-bezier(0.22, 1, 0.36, 1) 70ms both;
+}
+
+.subtitle {
+  animation: verifyTextEnter 470ms cubic-bezier(0.22, 1, 0.36, 1) 125ms both;
+}
+
+.otpOuterWrapper {
+  animation: verifyOtpReveal 500ms cubic-bezier(0.22, 1, 0.36, 1) 190ms both;
+  will-change: opacity, transform;
+}
+
+.cornerTopLeft,
+.cornerTopRight,
+.cornerBottomLeft,
+.cornerBottomRight {
+  animation: verifyCornerReveal 360ms cubic-bezier(0.22, 1, 0.36, 1) 270ms both;
+  transform-origin: center;
+}
+
+.otpInput {
+  animation: verifyOtpReveal 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition:
+    background-color 180ms ease,
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms ease,
+    color 180ms ease;
+}
+
+.otpInput:nth-child(1) { animation-delay: 250ms; }
+.otpInput:nth-child(2) { animation-delay: 285ms; }
+.otpInput:nth-child(3) { animation-delay: 320ms; }
+.otpInput:nth-child(4) { animation-delay: 355ms; }
+.otpInput:nth-child(5) { animation-delay: 390ms; }
+.otpInput:nth-child(6) { animation-delay: 425ms; }
+
+.otpInput:hover {
+  background-color: #ffb3b8;
+  transform: translateY(-2px);
+}
+
+.otpInput:focus {
+  background-color: #ffb3b8;
+  transform: scale(1.05);
+  box-shadow:
+    0 0 0 3px rgba(255, 9, 21, 0.08),
+    0 5px 14px rgba(255, 9, 21, 0.10);
+}
+
+.otpInput:focus:first-child {
+  animation: verifyFocusPulse 900ms ease-in-out 1;
+}
+
+.loginButton {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  animation: verifyButtonReveal 460ms cubic-bezier(0.22, 1, 0.36, 1) 510ms both;
+  transition:
+    background 180ms ease,
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms ease;
+}
+
+.loginButton::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 40%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.16),
+    transparent
+  );
+  transform: translateX(-150%);
+}
+
+.loginButton:hover {
+  background: #e50813;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 9, 21, 0.16);
+}
+
+.loginButton:hover::after {
+  animation: verifyButtonSheen 620ms ease-out;
+}
+
+.loginButton:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(255, 9, 21, 0.12);
+}
+
+@keyframes verifyButtonSheen {
+  0% {
+    transform: translateX(-150%);
+  }
+  100% {
+    transform: translateX(170%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .formWrap,
+  .title,
+  .subtitle,
+  .otpOuterWrapper,
+  .cornerTopLeft,
+  .cornerTopRight,
+  .cornerBottomLeft,
+  .cornerBottomRight,
+  .otpInput,
+  .loginButton {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .loginButton::after {
+    display: none !important;
+  }
+
+  .otpInput,
+  .loginButton {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .formWrap {
+    animation-duration: 480ms;
+  }
+
+  .otpInput:nth-child(1) { animation-delay: 190ms; }
+  .otpInput:nth-child(2) { animation-delay: 220ms; }
+  .otpInput:nth-child(3) { animation-delay: 250ms; }
+  .otpInput:nth-child(4) { animation-delay: 280ms; }
+  .otpInput:nth-child(5) { animation-delay: 310ms; }
+  .otpInput:nth-child(6) { animation-delay: 340ms; }
+
+  .loginButton {
+    animation-delay: 400ms;
   }
 }
