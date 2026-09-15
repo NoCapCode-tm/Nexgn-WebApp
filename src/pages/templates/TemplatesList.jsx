@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { MoreHorizontal, X, Plus, Recycle } from "lucide-react";
 import Layout from "../../components/Layout/Layout";
 import Topbar from "../../components/Layout/Topbar";
+import { MoreHorizontal, X, Plus, Recycle, FileText } from "lucide-react";
 
 import "../../styles/BaseLayout.css";
 import "../documents/Documents.css";
@@ -237,7 +237,15 @@ export default function TemplatesList({ onAddTemplate ,onView }) {
               </div>
             ))}
             {filtered.length === 0 && (
-              <div className="admin-docs-empty-state">No templates found.</div>
+              <div className="admin-docs-empty-state template-empty-styled">
+                <div className="template-empty-icon">
+                  <FileText size={22} strokeWidth={1.5} />
+                </div>
+                <h3>No templates found</h3>
+                <p>
+                  There are no templates matching your search. Click "Add Template" to create a new one.
+                </p>
+              </div>
             )}
           </div>
         </div>
