@@ -162,7 +162,8 @@ export default function Settings() {
         );
 
       case "security":
-        return <Security />;
+        return <Security user={user}
+            onUserUpdated={refreshUser}/>;
 
       case "team":
         return (
