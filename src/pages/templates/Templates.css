@@ -549,3 +549,65 @@
     box-shadow: none;
   }
 }
+
+
+/* ==========================================================
+   Templates Empty State
+========================================================== */
+
+.template-empty-styled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 240px;
+  padding: 32px;
+  text-align: center;
+  background: #FBFBFB;
+  border: 1px dashed #D8D8D8;
+  border-radius: 12px;
+  margin-top: 12px;
+}
+
+.template-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 12px;
+  color: #8A949F;
+  background: #F2F2F2;
+  border-radius: 50%;
+}
+
+.template-empty-styled h3 {
+  margin: 0 0 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.template-empty-styled p {
+  max-width: 380px;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #8A949F;
+}
+
+/* Dark Mode Overrides for Empty State */
+body.dark-mode .template-empty-styled {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .template-empty-icon {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+body.dark-mode .template-empty-styled h3 {
+  color: #e5e5e5 !important;
+}
