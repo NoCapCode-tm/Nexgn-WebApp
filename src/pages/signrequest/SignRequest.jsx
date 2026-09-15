@@ -111,7 +111,7 @@ useEffect(() => {
       setLoading(true);
 
       await axios.get(
-        `${API_URL}document/requestcancel/${id}`,
+        `${API_URL}sign/requestcancel/${id}`,
         {
           withCredentials: true,
         }
