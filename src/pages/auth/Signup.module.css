@@ -236,3 +236,349 @@ input:-webkit-autofill:active {
     margin-top: 20px;
   }
 }
+
+/* ==========================================================
+   NEXGN MNC SAAS MOTION SYSTEM — SIGN UP
+   CSS-only enhancement. No JSX / logic changes.
+========================================================== */
+
+@keyframes signupPanelEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes signupTitleEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 9px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes signupFieldEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes signupButtonEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 7px, 0) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes signupSuccessIcon {
+  0% {
+    opacity: 0;
+    transform: scale(0.72) rotate(-10deg);
+  }
+  70% {
+    transform: scale(1.06) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes signupButtonSheen {
+  0% {
+    transform: translateX(-150%);
+  }
+  100% {
+    transform: translateX(170%);
+  }
+}
+
+/* Base page entrance */
+.formWrap {
+  animation: signupPanelEnter 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+
+/* Every step uses the same visual rhythm */
+.titleRow {
+  animation: signupTitleEnter 480ms cubic-bezier(0.22, 1, 0.36, 1) 70ms both;
+}
+
+.title {
+  animation: signupTitleEnter 480ms cubic-bezier(0.22, 1, 0.36, 1) 90ms both;
+}
+
+.subtitle {
+  animation: signupTitleEnter 480ms cubic-bezier(0.22, 1, 0.36, 1) 135ms both;
+}
+
+/* Step 1 + Step 2 form fields */
+.field {
+  animation: signupFieldEnter 430ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.field:nth-child(1) {
+  animation-delay: 190ms;
+}
+
+.field:nth-child(2) {
+  animation-delay: 240ms;
+}
+
+.field:nth-child(3) {
+  animation-delay: 290ms;
+}
+
+.selectWrap {
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.selectWrap:hover {
+  transform: translateY(-1px);
+}
+
+/* Inputs / selects */
+.input {
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 180ms ease;
+}
+
+.input:hover {
+  border-color: #c7c7c7;
+}
+
+.input:focus {
+  border-color: #FF0915;
+  box-shadow: 0 0 0 3px rgba(255, 9, 21, 0.08);
+  transform: translateY(-1px);
+}
+
+.select {
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 180ms ease;
+}
+
+/* Password eye */
+.passwordToggleBtn {
+  transition:
+    color 180ms ease,
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.passwordToggleBtn:hover {
+  color: #FF0915;
+  transform: scale(1.08);
+}
+
+/* Primary CTA */
+.loginButton {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  animation: signupButtonEnter 460ms cubic-bezier(0.22, 1, 0.36, 1) 350ms both;
+  transition:
+    background 180ms ease,
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms ease;
+}
+
+.loginButton::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 42%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.16),
+    transparent
+  );
+  transform: translateX(-150%);
+}
+
+.loginButton:hover {
+  background: #e50813;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 9, 21, 0.16);
+}
+
+.loginButton:hover::after {
+  animation: signupButtonSheen 620ms ease-out;
+}
+
+.loginButton:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(255, 9, 21, 0.12);
+}
+
+/* Footer links */
+.signupText {
+  animation: signupTitleEnter 420ms cubic-bezier(0.22, 1, 0.36, 1) 430ms both;
+}
+
+.signupLink {
+  position: relative;
+  text-decoration: none;
+}
+
+.signupLink::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -2px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.signupLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Step 3 success state */
+.successIcon {
+  animation: signupSuccessIcon 620ms cubic-bezier(0.22, 1, 0.36, 1) 90ms both;
+}
+
+.outlineButton {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  animation: signupButtonEnter 460ms cubic-bezier(0.22, 1, 0.36, 1) 300ms both;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms ease;
+}
+
+.outlineButton::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 40%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 9, 21, 0.06),
+    transparent
+  );
+  transform: translateX(-150%);
+}
+
+.outlineButton:hover {
+  background: #fff7f7;
+  border-color: #FF0915;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(255, 9, 21, 0.09);
+}
+
+.outlineButton:hover::after {
+  animation: signupButtonSheen 620ms ease-out;
+}
+
+.outlineButton:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 7px rgba(255, 9, 21, 0.07);
+}
+
+/* Keep success-state text calm and readable */
+.btnTextBlack,
+.btnTextRed {
+  position: relative;
+  z-index: 1;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .formWrap,
+  .titleRow,
+  .title,
+  .subtitle,
+  .field,
+  .loginButton,
+  .signupText,
+  .successIcon,
+  .outlineButton {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .loginButton::after,
+  .outlineButton::after {
+    display: none !important;
+  }
+
+  .input,
+  .select,
+  .passwordToggleBtn,
+  .loginButton,
+  .outlineButton,
+  .signupLink::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Responsive choreography */
+@media (max-width: 425px) {
+  .formWrap {
+    animation-duration: 480ms;
+  }
+
+  .titleRow {
+    animation-delay: 50ms;
+  }
+
+  .subtitle {
+    animation-delay: 95ms;
+  }
+
+  .field:nth-child(1) {
+    animation-delay: 135ms;
+  }
+
+  .field:nth-child(2) {
+    animation-delay: 180ms;
+  }
+
+  .field:nth-child(3) {
+    animation-delay: 225ms;
+  }
+
+  .loginButton {
+    animation-delay: 275ms;
+  }
+
+  .signupText {
+    animation-delay: 345ms;
+  }
+}
