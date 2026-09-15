@@ -20,7 +20,8 @@ import axios from "axios";
 import Layout from "../../components/Layout/Layout";
 import Topbar from "../../components/Layout/Topbar";
 import TopbarIcons from "../../components/Layout/TopbarIcons";
-import LoadingScreen from "../../components/Layout/LoadingScreen";
+// import LoadingScreen from "../../components/Layout/LoadingScreen";
+import { SettingsFormSkeleton } from "../../components/common/Skeleton";
 import { API_URL } from "../../config";
 
 import "../../styles/BaseLayout.css";
@@ -568,19 +569,10 @@ export default function Settings() {
             ))}
           </nav>
 
-          <div className="admin-settings-content">
-            {renderSection()}
-          </div>
+        <div className="admin-settings-content">
+          {loading ? <SettingsFormSkeleton /> : renderSection()}
         </div>
-      )}
-
-      {loading && (
-        <LoadingScreen
-          state="working"
-          size={64}
-          theme="dark"
-          message="Applying your master plan"
-        />
+        </div>
       )}
     </Layout>
   );
