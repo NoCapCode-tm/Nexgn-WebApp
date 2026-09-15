@@ -15,6 +15,17 @@ export default function Security({ onUserUpdated }) {
     enable2FA: false,
   });
 
+  useEffect(() => {
+    if (user) {
+      // Replace with your exact user model boolean field:
+      // e.g. user.isTwoFactorEnabled, user.twoFAEnabled, or Boolean(user.twoFAsecret)
+      const isEnabled = Boolean(
+        user.isTwoFactorEnabled ?? user.twoFAEnabled ?? user.is2FAEnabled
+      );
+      setSecurityData((prev) => ({ ...prev, enable2FA: isEnabled }));
+    }
+  }, [user]);
+
   const [show2FAOverlay, setShow2FAOverlay] = useState(false);
   const [qrCode, setQrCode] = useState("");
   const [twoFASecret, setTwoFASecret] = useState("");
@@ -62,34 +73,62 @@ export default function Security({ onUserUpdated }) {
   };
 
   const handle2FAToggle = async (e) => {
-    const enabled = e.target.checked;
+      const enabled = e.target.checked;
 
-    if (!enabled) {
-      setSecurityData((prev) => ({ ...prev, enable2FA: false }));
-      return;
-    }
+      // --- NEW: Logic to disable 2FA ---
+      if (!enabled) {
+        try {
+          setLoading(true);
+          
+          // Note: Check if your backend expects a POST, PUT, or DELETE request here. 
+          // I am using POST as a standard for this type of action.
+          await axios.post(
+            `${API_URL}admin/disabletwofa`, 
+            {}, 
+            { withCredentials: true }
+          );
 
-    try {
-      setLoading(true);
+          setSecurityData((prev) => ({ ...prev, enable2FA: false }));
+          toast.success("Two-factor authentication disabled successfully");
+          
+          // Notify parent component so app-wide user state refreshes
+          onUserUpdated?.(); 
+        } catch (error) {
+          toast.error(
+            error.response?.data?.message || "Failed to disable 2FA"
+          );
+          // If the API fails, keep the toggle visually ON so it doesn't get out of sync
+          setSecurityData((prev) => ({ ...prev, enable2FA: true }));
+        } finally {
+          setLoading(false);
+        }
+        return;
+      }
 
-      const response = await axios.get(`${API_URL}admin/twofa`, {
-        withCredentials: true,
-      });
+      // --- EXISTING: Logic to start 2FA setup ---
+      try {
+        setLoading(true);
 
-      const data = response.data.message;
+        const response = await axios.get(`${API_URL}admin/twofa`, {
+          withCredentials: true,
+        });
 
-      setQrCode(data.qrCode);
-      setTwoFASecret(data.secret);
-      setShow2FAOverlay(true);
-      setShowOTPInput(false);
-    } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Failed to start 2FA setup"
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+        const data = response.data.message;
+
+        setQrCode(data.qrCode);
+        setTwoFASecret(data.secret);
+        setShow2FAOverlay(true);
+        setShowOTPInput(false);
+      } catch (error) {
+        toast.error(
+          error.response?.data?.message || "Failed to start 2FA setup"
+        );
+        // Revert toggle visually if starting setup failed
+        setSecurityData((prev) => ({ ...prev, enable2FA: false }));
+      } finally {
+        setLoading(false);
+      }
+    };
 
   const verify2FA = async () => {
     try {
