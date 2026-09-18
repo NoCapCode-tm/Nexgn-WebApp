@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as pdfjsLib from "pdfjs-dist";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+// Fallback to a reliable CDN for the worker to prevent Vite build chunk errors
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+
 import SignatureCanvas from "react-signature-canvas";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -9,7 +11,6 @@ import { API_URL } from "../../config";
 import { DocumentViewerSkeleton } from "../../components/common/Skeleton";
 
 import styles from "./SignViewer.module.css";
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 export default function SignViewer() {
   const { id } = useParams();
@@ -25,6 +26,9 @@ export default function SignViewer() {
 
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  
+  // LOCK: Prevents the component from re-fetching data after successful submission
+  const [isComplete, setIsComplete] = useState(false);
 
   const [signatureModalOpen, setSignatureModalOpen] = useState(false);
   const [activeSignatureWidget, setActiveSignatureWidget] = useState(null);
@@ -37,39 +41,64 @@ export default function SignViewer() {
   const uploadInputRef = useRef(null);
 
   useEffect(() => {
+    // If the document has already been submitted successfully in this session, halt all fetches.
+    if (isComplete) return;
+
+    let isMounted = true;
+
     async function loadData() {
       setLoading(true);
       try {
         const reqRes = await axios.get(`${API_URL}sign/getrequest/${id}`, {
           withCredentials: true,
         });
+        
+        if (!isMounted) return;
+        
         const reqData = reqRes?.data?.message;
         setRequest(reqData);
 
-        if (reqData.overallStatus === "completed") {
-          toast.info("This document is already completed.");
+        if (reqData.overallStatus === "completed" || reqData.overallStatus === "cancelled" || reqData.overallStatus === "Expired") {
+          toast.info(`This document is ${reqData.overallStatus}.`);
+          navigate("/documents"); // Kick them out if it's already done
+          return;
         }
 
         const widgetRes = await axios.get(`${API_URL}document/widgets/${id}`, {
           withCredentials: true,
         });
         
+        if (!isMounted) return;
+
         const widgetData = widgetRes.data.message;
         setDocumentDetails(widgetData.document);
-        // Pre-map widgets with their absolute index so we don't lose track across pages
         setWidgets((widgetData.widgets || []).map((w, index) => ({ ...w, index })));
       } catch (err) {
         console.error("Failed to load document:", err);
-        toast.error("Failed to load document details.");
+        if (isMounted) {
+            // Gracefully handle the 404 Invalid Token error
+            if (err.response && err.response.status === 404) {
+                toast.error("This signing link is invalid or has expired.");
+                navigate("/"); 
+            } else {
+                toast.error("Failed to load document details.");
+            }
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     }
     loadData();
-  }, [id]);
+
+    return () => {
+        isMounted = false;
+    };
+  }, [id, navigate, isComplete]);
 
   useEffect(() => {
-    if (!documentDetails) return;
+    if (!documentDetails || isComplete) return;
+
+    let isMounted = true;
 
     async function loadPdf() {
       try {
@@ -88,15 +117,22 @@ export default function SignViewer() {
         });
 
         const pdf = await loadingTask.promise;
+        
+        if (!isMounted) return;
+        
         setPdfDoc(pdf);
         setPages(Array.from({ length: pdf.numPages }, (_, i) => i + 1));
       } catch (err) {
         console.error("PDF Loading Error:", err);
-        toast.error("Failed to load PDF.");
+        if (isMounted) toast.error("Failed to load PDF.");
       }
     }
     loadPdf();
-  }, [documentDetails]);
+
+    return () => {
+        isMounted = false;
+    };
+  }, [documentDetails, id, isComplete]);
 
   const handleInputChange = (index, val) => {
     setValues((prev) => ({ ...prev, [index]: val }));
@@ -181,7 +217,10 @@ export default function SignViewer() {
   };
 
   const handleSubmit = async () => {
+    if (submitting || isComplete) return; // Hard lock against double-clicks
+    
     setSubmitting(true);
+    
     try {
       const filledWidgets = widgets.map((w) => ({
         index: w.index,
@@ -206,12 +245,17 @@ export default function SignViewer() {
       );
 
       toast.success("Document Signed & Submitted!");
-      navigate("/documents");
+      
+      // Engage the lock so useEffect doesn't trigger when we navigate
+      setIsComplete(true);
+      
+      // Use replace: true so they can't hit the back button into a dead token
+      navigate("/documents", { replace: true });
+      
     } catch (error) {
       console.error(error);
       toast.error("Failed to submit document.");
-    } finally {
-      setSubmitting(false);
+      setSubmitting(false); // Only unlock if it failed
     }
   };
 
@@ -229,7 +273,6 @@ export default function SignViewer() {
         </header>
 
         <div className={styles.mainContent}>
-          {/* Left Sidebar: Navigates to pages seamlessly */}
           <aside className={styles.leftSidebar}>
             <div className={styles.sidebarTitle}>Preview</div>
             {pages.map((pageNum) => (
@@ -246,7 +289,6 @@ export default function SignViewer() {
             ))}
           </aside>
 
-          {/* Center: Continuous Scroll Canvas Area */}
           <main className={styles.centerCanvasArea}>
             {pages.map((pageNum) => (
               <PdfPage 
@@ -261,7 +303,6 @@ export default function SignViewer() {
             ))}
           </main>
 
-          {/* Right Sidebar: Actions */}
           <aside className={styles.rightSidebar}>
             <div>
               <div className={styles.sectionLabel}>Raised by</div>
@@ -287,7 +328,11 @@ export default function SignViewer() {
             </div>
 
             <div className={styles.actionButtons}>
-              <button className={styles.btnPrimary} onClick={handleSubmit} disabled={submitting}>
+              <button 
+                className={styles.btnPrimary} 
+                onClick={handleSubmit} 
+                disabled={submitting || isComplete}
+              >
                 {submitting ? "Submitting..." : "Sign & Submit"}
               </button>
               <button className={styles.btnOutline} onClick={() => navigate("/documents")}>
@@ -298,7 +343,6 @@ export default function SignViewer() {
         </div>
       </div>
       
-      {/* Signature Modal Logic Remains Exactly The Same */}
       {signatureModalOpen && (
         <div
           className={styles.signatureModalOverlay}
@@ -364,9 +408,6 @@ export default function SignViewer() {
   );
 }
 
-// ---------------------------------------------------------
-// Sub-Component: Individual PDF Page for Continuous Scroll
-// ---------------------------------------------------------
 function PdfPage({ pdfDoc, pageNum, widgets, values, handleInputChange, openSignatureModal }) {
   const canvasRef = useRef(null);
   const [baseDim, setBaseDim] = useState({ width: 1, height: 1 });
@@ -439,16 +480,31 @@ function ThumbnailRenderer({ pdfDoc, pageNum }) {
   const thumbRef = useRef(null);
   useEffect(() => {
     if (!pdfDoc || !thumbRef.current) return;
+    let renderTask = null;
+    
     async function renderThumb() {
-      const page = await pdfDoc.getPage(pageNum);
-      const viewport = page.getViewport({ scale: 0.3 });
-      const canvas = thumbRef.current;
-      const ctx = canvas.getContext("2d");
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      await page.render({ canvasContext: ctx, viewport }).promise;
+      try {
+        const page = await pdfDoc.getPage(pageNum);
+        const viewport = page.getViewport({ scale: 0.3 });
+        const canvas = thumbRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        
+        renderTask = page.render({ canvasContext: ctx, viewport });
+        await renderTask.promise;
+      } catch (err) {
+        if (err.name !== "RenderingCancelledException") {
+            console.error("Thumbnail rendering error:", err);
+        }
+      }
     }
     renderThumb();
+    
+    return () => {
+        if (renderTask) renderTask.cancel();
+    }
   }, [pdfDoc, pageNum]);
   return <canvas ref={thumbRef} className={styles.thumbnailCanvas} />;
 }
