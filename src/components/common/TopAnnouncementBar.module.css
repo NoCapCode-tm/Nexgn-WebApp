@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.banner {
+  position: relative; 
+  z-index: 999999;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 48px 10px 24px;
+  
+  /* Nexgn Official Brand Gradient */
+  background: linear-gradient(90deg, #f5000f 0%, #d10008 55%, #b30000 100%);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  
+  box-shadow: 0 2px 10px rgba(255, 9, 21, 0.2);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.highlight {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.icon {
+  margin: 0 2px;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 28px;
+  height: 28px;
+  
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 50%;
+  color: #ffffff;
+  
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.closeBtn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* =========================================
+   DARK MODE OVERRIDES
+========================================= */
+:global(.dark-mode) .banner {
+  /* Slightly darker red for dark mode to reduce eye strain */
+  background: linear-gradient(90deg, #d10008 0%, #b30000 55%, #8a0000 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+========================================= */
+@media (max-width: 768px) {
+  .banner {
+    padding: 12px 40px 12px 16px;
+    min-height: auto;
+  }
+  
+  .content {
+    font-size: 12px;
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  .highlight {
+    padding: 2px 6px;
+  }
+  
+  .closeBtn {
+    right: 8px;
+    width: 26px;
+    height: 26px;
+  }
+}
