@@ -101,18 +101,19 @@
   padding: 32px;
   overflow-y: auto;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column; /* Stacks pages vertically */
+  align-items: center;
+  gap: 32px; /* Space between pages */
+  background-color: #E5E7EB; /* Contrast background similar to Adobe */
 }
 
 .pdfWrapper {
   position: relative;
   width: 100%;
-  max-width: 800px; /* Constrains max size on large screens */
+  max-width: 850px; /* Constrains width so it doesn't stretch huge on ultrawides */
   background: #FFFFFF;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
-  overflow: hidden; /* Keeps widgets inside */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  /* Removed overflow: hidden so custom focus rings on widgets don't get clipped */
 }
 
 .pdfCanvas {
@@ -305,9 +306,9 @@
   }
   
   .centerCanvasArea {
-    padding: 16px;
-    overflow-y: visible;
-  }
+      padding: 16px;
+      gap: 16px; /* Less space between pages on mobile */
+    }
 
   .rightSidebar {
     width: 100%;
@@ -317,6 +318,10 @@
   
   .actionButtons {
     margin-top: 24px;
+  }
+
+  .pdfWrapper {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 }
 
