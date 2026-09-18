@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 // import { initAntiInspect } from "./utils/antiInspect";
-
+import TopAnnouncementBar from "./components/common/TopAnnouncementBar";
 
 
 import Invite from "./pages/auth/Invite";
@@ -43,6 +43,8 @@ useSystemTheme();
 
   return (
     <>
+    <TopAnnouncementBar />
+    
     <Routes>
       <Route path="/mail-invite/:email" element={<Invite />} />
       <Route path="/" element={<Login />} />
