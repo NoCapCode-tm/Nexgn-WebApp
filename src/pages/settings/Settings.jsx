@@ -43,7 +43,7 @@ const settingsNavItems = [
   { key: "account", label: "Account" },
   { key: "security", label: "Security" },
   { key: "team", label: "Team Management" },
-  { key: "notifications", label: "Notifications" },
+  // { key: "notifications", label: "Notifications" },
   { key: "billing", label: "Billing" },
   { key: "integrations", label: "Integrations" },
   { key: "audit", label: "Audit Logs" },
@@ -80,17 +80,18 @@ export default function Settings() {
   const [loading, setLoading] = useState(false);
   const [viewingPermissions, setViewingPermissions] = useState(false);
   const [teamResetKey, setTeamResetKey] = useState(0);
+  const [team,setTeam] = useState([]);
 
-  const refreshUser = async () => {
-    try {
-      const response = await axios.get(`${API_URL}admin/me`, {
-        withCredentials: true,
-      });
-      setUser(response.data.message || {});
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  // const refreshUser = async () => {
+  //   try {
+  //     const response = await axios.get(`${API_URL}admin/me`, {
+  //       withCredentials: true,
+  //     });
+  //     setUser(response.data.message || {});
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // };
 
   useEffect(() => {
     if (tabParam) {
@@ -101,25 +102,63 @@ export default function Settings() {
     }
   }, [tabParam, isMobile]);
 
-  useEffect(() => {
-    const verifyUser = async () => {
-      setLoading(true);
+  const fetchUserAndTeam = async () => {
+  try {
+    const [userResponse, teamResponse] = await Promise.all([
+      axios.get(`${API_URL}admin/me`, {
+        withCredentials: true,
+      }),
+      axios.get(`${API_URL}admin/teams`, {
+        withCredentials: true,
+      }),
+    ]);
 
-      try {
-        const response = await axios.get(`${API_URL}admin/me`, {
-          withCredentials: true,
-        });
+    const userData = userResponse.data.message || {};
+    const teams = teamResponse.data.message || [];
 
-        setUser(response.data.message || {});
-      } catch (error) {
-        console.error(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const currentTeam =
+      teams.find((team) => team._id === userData.teamid) || {};
 
-    verifyUser();
-  }, []);
+    setUser(userData);
+    setTeam(currentTeam);
+  } catch (error) {
+    console.error("Failed to fetch settings data:", error);
+  }
+};
+
+const refreshUser = async () => {
+  try {
+    const [userResponse, teamResponse] = await Promise.all([
+      axios.get(`${API_URL}admin/me`, {
+        withCredentials: true,
+      }),
+      axios.get(`${API_URL}admin/teams`, {
+        withCredentials: true,
+      }),
+    ]);
+
+    const userData = userResponse.data.message || {};
+    const teams = teamResponse.data.message || [];
+
+    const currentTeam =
+      teams.filter((team) => team._id === userResponse.data.message.teamid) || {};
+    console.log(userData)
+    setUser(userData);
+    setTeam(currentTeam);
+  } catch (error) {
+    console.error("Failed to refresh user:", error);
+  }
+};
+
+useEffect(() => {
+  const loadSettings = async () => {
+    setLoading(true);
+    await fetchUserAndTeam();
+    setLoading(false);
+  };
+
+  loadSettings();
+}, []);
 
   const handleTabClick = (item) => {
     if (!item.key) return;
@@ -158,6 +197,7 @@ export default function Settings() {
           <Account
             user={user}
             onUserUpdated={refreshUser}
+            team={team}
           />
         );
 
