@@ -194,7 +194,7 @@
   width: 100%;
   min-width: 850px;
   border-collapse: separate;
-  border-spacing: 0 8px;
+  border-spacing: 0 6px; /* Reduced from 8px for a tighter list */
 }
 
 .signRequestTable thead th {
@@ -209,7 +209,7 @@
 }
 
 .tableRow td {
-  height: 60px;
+  height: 48px; /* Reduced from 60px */
   padding: 0 16px;
   font-size: 12px;
   color: #8a949f;
@@ -436,7 +436,7 @@
   }
 
   .tableRow td {
-    height: clamp(60px, 4.16vw, 106px);
+    height: 52px; /* Replaced clamp(60px, 4.16vw, 106px) for a crisp, fixed height */
     padding: 0 clamp(16px, 1.11vw, 28px);
   }
 }
@@ -476,7 +476,7 @@
   }
 
   .tableRow td {
-    height: 72px;
+    height: 52px; /* Reduced from 72px */
     padding: 0 20px;
   }
 }
