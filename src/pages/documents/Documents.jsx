@@ -10,9 +10,6 @@ import axios from "axios";
 import { API_URL } from "../../config";
 import { TableRowSkeleton } from "../../components/common/Skeleton";
 
-
-
-
 export default function Documents() {
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,59 +17,55 @@ export default function Documents() {
   const [search, setSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
 
+  // Pagination States
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+
   const handleRevoke = async(id) => {
-    
     try {
-      await axios.delete(`${API_URL}document/deletedocument/${id}`,{withCredentials:true})
+      await axios.delete(`${API_URL}document/deletedocument/${id}`, { withCredentials: true });
+      // Immediately update local state to reflect deletion
+      setDocuments(prev => prev.filter(doc => doc._id !== id));
     } catch (error) {
-      console.log("Something went wrong in deleting Document",error.message)
-    }finally{
-      setLoading(false)
+      console.log("Something went wrong in deleting Document", error.message);
     }
   };
+
   const handleArchive = async(id) => {
-    
-   try {
-     await axios.get(`${API_URL}document/archivedocument/${id}`,{withCredentials:true})
-   } catch (error) {
-    console.log("Something went wrong in deleting Document",error.message)
-   }finally{
-      setLoading(false)
-    }
-  };
-  const handleCancel= async(id) => {
-    
-   try {
-     await axios.get(`${API_URL}document/cancelrequest/${id}`,{withCredentials:true})
-   } catch (error) {
-    console.log("Something went wrong in Cancelling Request",error.message)
-   }finally{
-      setLoading(false)
+    try {
+      await axios.get(`${API_URL}document/archivedocument/${id}`, { withCredentials: true });
+    } catch (error) {
+      console.log("Something went wrong in archiving Document", error.message);
     }
   };
 
+  const handleCancel = async(id) => {
+    try {
+      await axios.get(`${API_URL}document/cancelrequest/${id}`, { withCredentials: true });
+    } catch (error) {
+      console.log("Something went wrong in Cancelling Request", error.message);
+    }
+  };
 
-  useEffect(()=>{
-  (async()=>{
-    setLoading(true)
-     try {
-      const response = await axios.get(`${API_URL}document/getdocument`,{withCredentials:true})
-      console.log(response.data.message)
-      const docs= response.data.message.filter((d)=>d.isDeleted === false)
-      setDocuments(docs)
-     } catch (error) {
-      console.log("Something went wrong in Fetching Document",error.message)
-     }finally{
-      setLoading(false)
-     }
-     
-  })()
-},[])
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(`${API_URL}document/getdocument`, { withCredentials: true });
+        const docs = response.data.message.filter((d) => d.isDeleted === false);
+        setDocuments(docs);
+      } catch (error) {
+        console.log("Something went wrong in Fetching Document", error.message);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
 
   const filteredDocs = documents.filter((doc) => {
     const matchSearch =
       doc.title.toLowerCase().includes(search.toLowerCase()) ||
-      doc.signers.toLowerCase().includes(search.toLowerCase());
+      (doc.signers && doc.signers.toLowerCase().includes(search.toLowerCase()));
     const matchesStatus =
       selectedStatus === "All" ||
       (doc.status && doc.status.toLowerCase() === selectedStatus.toLowerCase());
@@ -81,6 +74,18 @@ export default function Documents() {
     if (activeTab === "assigned") matchesTab = doc.owner !== "Me";
     return matchSearch && matchesStatus && matchesTab;
   });
+
+  // Reset pagination when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, selectedStatus, activeTab]);
+
+  // Pagination Logic
+  const totalItems = filteredDocs.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredDocs.slice(indexOfFirstItem, indexOfLastItem);
 
   const filterComponent = (
     <DocumentsFilter
@@ -162,13 +167,27 @@ export default function Documents() {
         {/* Mobile "Need My Sign" Section Title */}
         <div className="admin-docs-mobile-section-title">Need My Sign</div>
 
-      {/* Table Section */}
+        {/* Table Section */}
         {loading ? (
           <div style={{ padding: "0 24px", marginTop: "20px" }}>
-             <TableRowSkeleton count={6} />
+             <TableRowSkeleton count={Math.min(itemsPerPage, 6)} />
           </div>
         ) : (
-          <DocumentsTable documents={filteredDocs} onRevoke={handleRevoke} onArchive={handleArchive} onCancel={handleCancel} />
+          <DocumentsTable 
+            documents={currentItems} 
+            onRevoke={handleRevoke} 
+            onArchive={handleArchive} 
+            onCancel={handleCancel}
+            // Pagination Props
+            totalItems={totalItems}
+            itemsPerPage={itemsPerPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            setItemsPerPage={setItemsPerPage}
+            totalPages={totalPages}
+            indexOfFirstItem={indexOfFirstItem}
+            indexOfLastItem={indexOfLastItem}
+          />
         )}
       </>
     </Layout>
