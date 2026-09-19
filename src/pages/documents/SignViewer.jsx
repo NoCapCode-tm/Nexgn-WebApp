@@ -8,6 +8,10 @@ import { toast } from "react-toastify";
 import { API_URL } from "../../config";
 import { DocumentViewerSkeleton } from "../../components/common/Skeleton";
 
+import SignerConsentOverlay from "../../components/overlays/SignerConsentOverlay";
+import AlreadySignedOverlay from "../../components/overlays/AlreadySignedOverlay";
+import RevokedOverlay from "../../components/overlays/RevokedOverlay";
+
 import styles from "./SignViewer.module.css";
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -30,8 +34,20 @@ export default function SignViewer() {
   const [activeSignatureWidget, setActiveSignatureWidget] = useState(null);
   const [signatureTab, setSignatureTab] = useState("draw");
   const [typedName, setTypedName] = useState("");
-  const [selectedSignatureFont, setSelectedSignatureFont] = useState("cursive");
+  const [selectedSignatureFont, setSelectedSignatureFont] = useState("'Caveat', cursive");
   const [tempSignature, setTempSignature] = useState(null);
+
+  // --- Ink Color State ---
+  const [signatureColor, setSignatureColor] = useState("#111827"); // Default Black
+  const signatureColors = [
+    { name: "Black", hex: "#111827" },
+    { name: "Navy Blue", hex: "#1D4ED8" },
+    { name: "Red", hex: "#DC2626" },
+  ];
+
+  // Overlay State
+  const [consentGiven, setConsentGiven] = useState(false);
+  const [overlayType, setOverlayType] = useState(null);
 
   const modalSignatureCanvasRef = useRef(null);
   const uploadInputRef = useRef(null);
@@ -47,7 +63,12 @@ export default function SignViewer() {
         setRequest(reqData);
 
         if (reqData.overallStatus === "completed") {
+          setOverlayType("signed");
           toast.info("This document is already completed.");
+        } else if (reqData.overallStatus === "cancelled" || reqData.overallStatus === "revoked") {
+          setOverlayType("revoked");
+        } else if (!consentGiven) {
+          setOverlayType("consent");
         }
 
         const widgetRes = await axios.get(`${API_URL}document/widgets/${id}`, {
@@ -66,7 +87,7 @@ export default function SignViewer() {
       }
     }
     loadData();
-  }, [id]);
+  }, [id, consentGiven]);
 
   useEffect(() => {
     if (!documentDetails) return;
@@ -102,14 +123,15 @@ export default function SignViewer() {
     setValues((prev) => ({ ...prev, [index]: val }));
   };
 
+  // --- Premium Signature Fonts ---
   const signatureStyles = [
-    { id: "style-1", fontFamily: "cursive", fontStyle: "italic", fontWeight: "500" },
-    { id: "style-2", fontFamily: "'Brush Script MT', cursive", fontStyle: "italic", fontWeight: "400" },
-    { id: "style-3", fontFamily: "'Lucida Handwriting', cursive", fontStyle: "italic", fontWeight: "400" },
-    { id: "style-4", fontFamily: "'Segoe Script', cursive", fontStyle: "italic", fontWeight: "500" },
+    { id: "style-1", fontFamily: "'Caveat', 'Segoe Script', cursive", fontStyle: "normal", fontWeight: "500" },
+    { id: "style-2", fontFamily: "'Dancing Script', 'Lucida Handwriting', cursive", fontStyle: "normal", fontWeight: "400" },
+    { id: "style-3", fontFamily: "'Great Vibes', 'Brush Script MT', cursive", fontStyle: "normal", fontWeight: "400" },
+    { id: "style-4", fontFamily: "'Pacifico', 'Apple Chancery', cursive", fontStyle: "normal", fontWeight: "400" },
   ];
 
-  const generateTypedSignature = (style) => {
+  const generateTypedSignature = (style, color = signatureColor) => {
     if (!typedName.trim()) {
       toast.error("Please enter your name first.");
       return;
@@ -119,10 +141,13 @@ export default function SignViewer() {
     canvas.width = 900;
     canvas.height = 250;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#111";
+    
+    // Apply selected ink color
+    ctx.fillStyle = color;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.font = `${style.fontStyle || "normal"} ${style.fontWeight || "400"} 82px ${style.fontFamily}`;
+    
     ctx.fillText(typedName.trim(), canvas.width / 2, canvas.height / 2);
     setSelectedSignatureFont(style.fontFamily);
     setTempSignature(canvas.toDataURL("image/png"));
@@ -133,7 +158,7 @@ export default function SignViewer() {
     setTempSignature(values[widgetIndex] || null);
     setSignatureTab("draw");
     setTypedName("");
-    setSelectedSignatureFont("cursive");
+    setSelectedSignatureFont("'Caveat', 'Segoe Script', cursive");
     setSignatureModalOpen(true);
   };
 
@@ -298,7 +323,6 @@ export default function SignViewer() {
         </div>
       </div>
       
-      {/* Signature Modal Logic Remains Exactly The Same */}
       {signatureModalOpen && (
         <div
           className={styles.signatureModalOverlay}
@@ -313,20 +337,66 @@ export default function SignViewer() {
               <button className={`${styles.signatureTab} ${signatureTab === "type" ? styles.signatureTabActive : ""}`} onClick={() => setSignatureTab("type")}>Type</button>
               <button className={`${styles.signatureTab} ${signatureTab === "upload" ? styles.signatureTabActive : ""}`} onClick={() => setSignatureTab("upload")}>Upload</button>
             </div>
+
+            {/* --- Ink Color Picker --- */}
+            {(signatureTab === "draw" || signatureTab === "type") && (
+              <div className={styles.colorPickerContainer}>
+                <span className={styles.colorPickerLabel}>Ink Color:</span>
+                <div className={styles.colorOptions}>
+                  {signatureColors.map((color) => (
+                    <button
+                      key={color.hex}
+                      type="button"
+                      aria-label={`Select ${color.name} ink`}
+                      className={`${styles.colorSwatch} ${signatureColor === color.hex ? styles.colorSwatchActive : ""}`}
+                      style={{ backgroundColor: color.hex }}
+                      onClick={() => {
+                        setSignatureColor(color.hex);
+                        if (signatureTab === "type" && typedName) {
+                          const activeStyle = signatureStyles.find(s => s.fontFamily === selectedSignatureFont) || signatureStyles[0];
+                          generateTypedSignature(activeStyle, color.hex);
+                        }
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className={styles.signatureModalContent}>
               {signatureTab === "draw" && (
                 <div className={styles.drawSignatureArea}>
-                  <SignatureCanvas ref={modalSignatureCanvasRef} penColor="black" canvasProps={{ className: styles.drawCanvas }} onEnd={saveDrawSignature} />
+                  <SignatureCanvas 
+                    ref={modalSignatureCanvasRef} 
+                    penColor={signatureColor} 
+                    canvasProps={{ className: styles.drawCanvas }} 
+                    onEnd={saveDrawSignature} 
+                  />
                   <div className={styles.drawHint}>Draw your signature above</div>
                 </div>
               )}
               {signatureTab === "type" && (
                 <div className={styles.typeSignatureArea}>
-                  <input type="text" value={typedName} onChange={(e) => setTypedName(e.target.value)} placeholder="Enter your name" className={styles.signatureNameInput} />
+                  <input 
+                    type="text" 
+                    value={typedName} 
+                    onChange={(e) => setTypedName(e.target.value)} 
+                    placeholder="Enter your name" 
+                    className={styles.signatureNameInput} 
+                  />
                   <div className={styles.signatureSuggestions}>
                     {signatureStyles.map((style) => (
-                      <button key={style.id} className={styles.signatureSuggestion} onClick={() => generateTypedSignature(style)}>
-                        <span style={{ fontFamily: style.fontFamily, fontStyle: style.fontStyle, fontWeight: style.fontWeight }}>
+                      <button 
+                        key={style.id} 
+                        className={styles.signatureSuggestion} 
+                        onClick={() => generateTypedSignature(style, signatureColor)}
+                      >
+                        <span style={{ 
+                          fontFamily: style.fontFamily, 
+                          fontStyle: style.fontStyle, 
+                          fontWeight: style.fontWeight,
+                          color: signatureColor
+                        }}>
                           {typedName || "Your Name"}
                         </span>
                       </button>
@@ -359,6 +429,29 @@ export default function SignViewer() {
             </div>
           </div>
         </div>
+      )}
+
+      {overlayType === "consent" && (
+        <SignerConsentOverlay 
+          onAccept={() => {
+            setConsentGiven(true);
+            setOverlayType(null);
+          }} 
+          onDecline={() => navigate("/")} 
+        />
+      )}
+      
+      {overlayType === "signed" && (
+        <AlreadySignedOverlay 
+          onViewDocument={() => setOverlayType(null)} 
+          onReturnHome={() => navigate("/")} 
+        />
+      )}
+      
+      {overlayType === "revoked" && (
+        <RevokedOverlay 
+          onReturnHome={() => navigate("/")} 
+        />
       )}
     </>
   );
