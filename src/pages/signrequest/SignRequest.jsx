@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import {
@@ -9,11 +8,12 @@ import {
   Award,
   XCircle,
   FileText,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 
 import Layout from "../../components/Layout/Layout";
 import Topbar from "../../components/Layout/Topbar";
-
 
 import "../../styles/BaseLayout.css";
 import styles from "./SignRequest.module.css";
@@ -29,54 +29,41 @@ const SignRequest = () => {
   const [filterOpen, setFilterOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
- const filterRefs = useRef([]);
+  // Pagination States
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    const clickedInside = filterRefs.current.some(
-      (ref) =>
-        ref &&
-        ref.contains(event.target)
-    );
+  const filterRefs = useRef([]);
 
-    if (!clickedInside) {
-      setFilterOpen(false);
-    }
-  };
-
-  document.addEventListener("mousedown", handleClickOutside);
-
-  return () => {
-    document.removeEventListener(
-      "mousedown",
-      handleClickOutside
-    );
-  };
-}, []);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const clickedInside = filterRefs.current.some(
+        (ref) => ref && ref.contains(event.target)
+      );
+      if (!clickedInside) {
+        setFilterOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchSignRequests = async () => {
       try {
         setLoading(true);
-
-        const response = await axios.get(
-          `${API_URL}sign/getrequests`,
-          {
-            withCredentials: true,
-          }
-        );
-        
+        const response = await axios.get(`${API_URL}sign/getrequests`, {
+          withCredentials: true,
+        });
         setSignRequests(response?.data?.message || []);
       } catch (error) {
-        console.log(
-          "Something went wrong while fetching sign requests",
-          error?.response?.data || error.message
-        );
+        console.log("Something went wrong while fetching sign requests", error?.response?.data || error.message);
       } finally {
         setLoading(false);
       }
     };
-
     fetchSignRequests();
   }, []);
 
@@ -84,116 +71,79 @@ useEffect(() => {
     const fetchSignature = async () => {
       try {
         setLoading(true);
-
-        const response = await axios.get(
-          `${API_URL}sign/getsignature`,
-          {
-            withCredentials: true,
-          }
-        );
-
+        const response = await axios.get(`${API_URL}sign/getsignature`, {
+          withCredentials: true,
+        });
         setSignatures(response?.data?.message || []);
       } catch (error) {
-        console.log(
-          "Something went wrong while fetching signatures",
-          error?.response?.data || error.message
-        );
+        console.log("Something went wrong while fetching signatures", error?.response?.data || error.message);
       } finally {
         setLoading(false);
       }
     };
-
     fetchSignature();
   }, []);
 
   const handleCancelRequest = async (id) => {
     try {
       setLoading(true);
-
-      await axios.get(
-        `${API_URL}sign/requestcancel/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
-
+      await axios.get(`${API_URL}sign/requestcancel/${id}`, {
+        withCredentials: true,
+      });
       setSignRequests((previous) =>
         previous.map((request) =>
-          request._id === id
-            ? {
-                ...request,
-                overallStatus: "cancelled",
-              }
-            : request
+          request._id === id ? { ...request, overallStatus: "cancelled" } : request
         )
       );
     } catch (error) {
-      console.log(
-        "Something went wrong while cancelling sign request",
-        error?.response?.data || error.message
-      );
+      console.log("Something went wrong while cancelling sign request", error?.response?.data || error.message);
     } finally {
       setLoading(false);
     }
   };
-
 
   const handleDeleteRequest = async (id) => {
     try {
       setLoading(true);
-
-      await axios.get(
-        `${API_URL}sign/requestdelete/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
-
-      // Filter ka use karke matching ID wali request ko array se hata rahe hain
-      setSignRequests((previous) =>
-        previous.filter((request) => request._id !== id)
-      );
+      await axios.get(`${API_URL}sign/requestdelete/${id}`, {
+        withCredentials: true,
+      });
+      setSignRequests((previous) => previous.filter((request) => request._id !== id));
     } catch (error) {
-      console.log(
-        "Something went wrong while deleting sign request",
-        error?.response?.data || error.message
-      );
+      console.log("Something went wrong while deleting sign request", error?.response?.data || error.message);
     } finally {
       setLoading(false);
     }
   };
 
+  // 1. Filter Data
   const filteredRequests = signRequests.filter((request) => {
     const title = request?.documentId?.title || "";
-
-    const signer =
-      request?.recipient?.userId?.name ||
-      request?.recipient?.userId?.email ||
-      "";
-
+    const signer = request?.recipient?.userId?.name || request?.recipient?.userId?.email || "";
     const searchValue = search.toLowerCase().trim();
 
-    const matchesSearch =
-      title.toLowerCase().includes(searchValue) ||
-      signer.toLowerCase().includes(searchValue);
-
-    const matchesStatus =
-      selectedStatus === "All" ||
-      request?.overallStatus?.toLowerCase() ===
-        selectedStatus.toLowerCase();
+    const matchesSearch = title.toLowerCase().includes(searchValue) || signer.toLowerCase().includes(searchValue);
+    const matchesStatus = selectedStatus === "All" || request?.overallStatus?.toLowerCase() === selectedStatus.toLowerCase();
 
     return matchesSearch && matchesStatus;
   });
 
+  // Reset to page 1 whenever filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, selectedStatus]);
+
+  // 2. Pagination Logic
+  const totalItems = filteredRequests.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredRequests.slice(indexOfFirstItem, indexOfLastItem);
+
   const filterComponent = (
     <div className={styles.topbarActions}>
       <div className={styles.searchWrap}>
-        <Search
-          size={16}
-          color="#9ca3af"
-          strokeWidth={2}
-        />
-
+        <Search size={16} color="#9ca3af" strokeWidth={2} />
         <input
           className={styles.searchInput}
           placeholder="Search"
@@ -202,44 +152,31 @@ useEffect(() => {
         />
       </div>
 
-     <div
-  className={styles.filterWrapper}
-  ref={(element) => {
-    if (element && !filterRefs.current.includes(element)) {
-      filterRefs.current.push(element);
-    }
-  }}
->
+      <div
+        className={styles.filterWrapper}
+        ref={(element) => {
+          if (element && !filterRefs.current.includes(element)) {
+            filterRefs.current.push(element);
+          }
+        }}
+      >
         <button
           type="button"
           className={styles.filterButton}
-          onClick={() =>
-            setFilterOpen((previous) => !previous)
-          }
+          onClick={() => setFilterOpen((previous) => !previous)}
         >
-          <SlidersHorizontal
-            size={17}
-            strokeWidth={1.8}
-          />
-
-          <span className={styles.filterText}>
-            Filter
-          </span>
+          <SlidersHorizontal size={17} strokeWidth={1.8} />
+          <span className={styles.filterText}>Filter</span>
         </button>
 
         {filterOpen && (
           <div className={styles.filterDropdown}>
             <div className={styles.filterGroup}>
-              <label className={styles.filterLabel}>
-                Status
-              </label>
-
+              <label className={styles.filterLabel}>Status</label>
               <select
                 className={styles.filterSelect}
                 value={selectedStatus}
-                onChange={(e) =>
-                  setSelectedStatus(e.target.value)
-                }
+                onChange={(e) => setSelectedStatus(e.target.value)}
               >
                 <option value="All">All</option>
                 <option value="pending">Pending</option>
@@ -249,9 +186,7 @@ useEffect(() => {
                 <option value="cancelled">Cancelled</option>
               </select>
             </div>
-
             <div className={styles.filterDivider} />
-
             <button
               type="button"
               className={styles.resetButton}
@@ -280,24 +215,15 @@ useEffect(() => {
         <div className={styles.mobilePageHeader}>
           <div className={styles.mobileHeaderTop}>
             <div>
-              <div className={styles.mobileTitle}>
-                Sign Requests
-              </div>
-
-              <div className={styles.mobileSubtitle}>
-                Manage and track all your signature requests
-              </div>
+              <div className={styles.mobileTitle}>Sign Requests</div>
+              <div className={styles.mobileSubtitle}>Manage and track all your signature requests</div>
             </div>
-
             {filterComponent}
           </div>
-
           <hr className={styles.mobileDivider} />
         </div>
 
-        <div className={styles.mobileSectionTitle}>
-          Sign Requests
-        </div>
+        <div className={styles.mobileSectionTitle}>Sign Requests</div>
 
         <section className={styles.section}>
           <div className={styles.tableContainer}>
@@ -313,7 +239,7 @@ useEffect(() => {
               </thead>
               <tbody>
                 {loading ? (
-                  Array.from({ length: 5 }).map((_, idx) => (
+                  Array.from({ length: Math.min(itemsPerPage, 5) }).map((_, idx) => (
                     <tr key={idx} className={styles.tableRow}>
                       <td>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -330,7 +256,7 @@ useEffect(() => {
                     </tr>
                   ))
                 ) : (
-                  filteredRequests.map((request) => {
+                  currentItems.map((request) => {
                     const sign = signature.find(
                       (item) => item?.requestId?._id === request._id || item?.requestId === request._id
                     );
@@ -348,82 +274,91 @@ useEffect(() => {
               </tbody>
             </table>
 
-            {!loading && filteredRequests.length === 0 && (
+            {!loading && totalItems === 0 && (
               <div className={styles.emptyStateContainer}>
                 <div className={styles.emptyStateIcon}>
                   <FileText size={22} strokeWidth={1.5} />
                 </div>
                 <h3>No sign requests found</h3>
-                <p>
-                  There are no signature requests matching your current filters.
-                </p>
+                <p>There are no signature requests matching your current filters.</p>
+              </div>
+            )}
+
+            {/* Pagination Footer */}
+            {!loading && totalItems > 0 && (
+              <div className={styles.paginationWrapper}>
+                <div className={styles.paginationLeft}>
+                  <span className={styles.paginationLabel}>Rows per page:</span>
+                  <select 
+                    className={styles.paginationSelect}
+                    value={itemsPerPage}
+                    onChange={(e) => {
+                      setItemsPerPage(Number(e.target.value));
+                      setCurrentPage(1);
+                    }}
+                  >
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                    <option value={50}>50</option>
+                  </select>
+                </div>
+                
+                <div className={styles.paginationRight}>
+                  <span className={styles.paginationInfo}>
+                    {indexOfFirstItem + 1} - {Math.min(indexOfLastItem, totalItems)} of {totalItems}
+                  </span>
+                  <div className={styles.paginationControls}>
+                    <button 
+                      className={styles.pageButton} 
+                      disabled={currentPage === 1}
+                      onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                    >
+                      <ChevronLeft size={18} />
+                    </button>
+                    <button 
+                      className={styles.pageButton} 
+                      disabled={currentPage === totalPages}
+                      onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                    >
+                      <ChevronRight size={18} />
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </div>
         </section>
       </>
-
     </Layout>
   );
 };
 
-const SignRequestRow = ({
-  request,
-  sign,
-  onCancel,
-  onDelete,
-}) => {
+const SignRequestRow = ({ request, sign, onCancel, onDelete }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target)
-      ) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
         setMenuOpen(false);
       }
     };
-
-    document.addEventListener(
-      "mousedown",
-      handleClickOutside
-    );
-
-    return () => {
-      document.removeEventListener(
-        "mousedown",
-        handleClickOutside
-      );
-    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
     <tr className={styles.tableRow} >
       <td className={styles.documentCell}>
         <div className={styles.documentInfo}>
-          <FileText
-            size={21}
-            strokeWidth={1.8}
-            className={styles.documentIcon}
-          />
-
-          <span className={styles.documentTitle}>
-            {request?.documentId?.title ||
-              "Untitled Document"}
-          </span>
-
-          <span
-            className={`${styles.mobileStatus} ${
-              request?.overallStatus === "completed"
-                ? styles.statusCompleted
-                : request?.overallStatus === "Expired"
-                ? styles.statusExpired
-                : request?.overallStatus === "cancelled"
-                ? styles.statusCancelled
-                : request?.overallStatus === "Viewed"
-                ? styles.statusViewed
+          <FileText size={21} strokeWidth={1.8} className={styles.documentIcon} />
+          <span className={styles.documentTitle}>{request?.documentId?.title || "Untitled Document"}</span>
+          <span className={`${styles.mobileStatus} ${
+              request?.overallStatus === "completed" ? styles.statusCompleted
+                : request?.overallStatus === "Expired" ? styles.statusExpired
+                : request?.overallStatus === "cancelled" ? styles.statusCancelled
+                : request?.overallStatus === "Viewed" ? styles.statusViewed
                 : styles.statusPending
             }`}
           >
@@ -431,142 +366,54 @@ const SignRequestRow = ({
           </span>
         </div>
       </td>
-
       <td className={styles.signerCell}>
-        <span className={styles.mobileLabel}>
-          Assigned to / Signer
-        </span>
-
-        <span className={styles.signerValue}>
-          {request?.recipient?.userId?.name ||
-            request?.recipient?.userId?.email ||
-            "—"}
-        </span>
+        <span className={styles.mobileLabel}>Assigned to / Signer</span>
+        <span className={styles.signerValue}>{request?.recipient?.userId?.name || request?.recipient?.userId?.email || "—"}</span>
       </td>
-
       <td className={styles.statusCell}>
-        <span
-          className={`${styles.statusBadge} ${
-            request?.overallStatus === "completed"
-              ? styles.statusCompleted
-              : request?.overallStatus === "Expired"
-              ? styles.statusExpired
-              : request?.overallStatus === "cancelled"
-              ? styles.statusCancelled
-              : request?.overallStatus === "Viewed"
-              ? styles.statusViewed
+        <span className={`${styles.statusBadge} ${
+            request?.overallStatus === "completed" ? styles.statusCompleted
+              : request?.overallStatus === "Expired" ? styles.statusExpired
+              : request?.overallStatus === "cancelled" ? styles.statusCancelled
+              : request?.overallStatus === "Viewed" ? styles.statusViewed
               : styles.statusPending
           }`}
         >
           {request?.overallStatus || "pending"}
         </span>
       </td>
-
       <td className={styles.expiryCell}>
-        <span className={styles.mobileLabel}>
-          Expiry
-        </span>
-
+        <span className={styles.mobileLabel}>Expiry</span>
         <span className={styles.expiryValue}>
-          {request?.expiresat
-            ? new Date(
-                request.expiresat
-              ).toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              })
-            : "—"}
+          {request?.expiresat ? new Date(request.expiresat).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }) : "—"}
         </span>
       </td>
-
-      <td
-        className={styles.actionCell}
-        ref={menuRef}
-      >
-        <button
-          type="button"
-          className={styles.menuButton}
-          onClick={() =>
-            setMenuOpen((previous) => !previous)
-          }
-          aria-label="Sign request actions"
-          aria-expanded={menuOpen}
-        >
+      <td className={styles.actionCell} ref={menuRef}>
+        <button type="button" className={styles.menuButton} onClick={() => setMenuOpen(!menuOpen)}>
           <MoreHorizontal size={18} />
         </button>
-
         {menuOpen && (
           <div className={styles.actionMenu}>
             {request?.overallStatus === "completed" && (
               <>
-                <a
-                  href={sign?.certificateId?.signeddoc || "#"}
-                  className={styles.actionItem}
-                  onClick={() =>
-                    setMenuOpen(false)
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Download size={14} />
-
-                  <span>
-                    Download Signed Doc
-                  </span>
+                <a href={sign?.certificateId?.signeddoc || "#"} className={styles.actionItem} onClick={() => setMenuOpen(false)} target="_blank" rel="noopener noreferrer">
+                  <Download size={14} /><span>Download Signed Doc</span>
                 </a>
-
-                <a
-                  href={sign?.certificateId?.pdfUrl || "#"}
-                  className={styles.actionItem}
-                  onClick={() =>
-                    setMenuOpen(false)
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Award size={14} />
-
-                  <span>
-                    Download Certificate
-                  </span>
+                <a href={sign?.certificateId?.pdfUrl || "#"} className={styles.actionItem} onClick={() => setMenuOpen(false)} target="_blank" rel="noopener noreferrer">
+                  <Award size={14} /><span>Download Certificate</span>
                 </a>
               </>
             )}
             {request?.signerToken && (
-               <button
-              type="button"
-              className={`${styles.actionItem} ${styles.dangerItem}`}
-              onClick={() => {
-                setMenuOpen(false);
-                onCancel(request?.signerToken);
-              }}
-            >
-              <XCircle size={14} />
-
-              <span>
-                Cancel Request
-              </span>
-            </button>
+               <button type="button" className={`${styles.actionItem} ${styles.dangerItem}`} onClick={() => { setMenuOpen(false); onCancel(request?.signerToken); }}>
+                 <XCircle size={14} /><span>Cancel Request</span>
+               </button>
             )}
-
             {request?.overallStatus === "cancelled" && (
-               <button
-              type="button"
-              className={`${styles.actionItem} ${styles.dangerItem}`}
-              onClick={() => {
-                setMenuOpen(false);
-                onDelete(request?._id);
-              }}
-            >
-              <XCircle size={14} />
-
-              <span>
-                Delete Request
-              </span>
-            </button>
+               <button type="button" className={`${styles.actionItem} ${styles.dangerItem}`} onClick={() => { setMenuOpen(false); onDelete(request?._id); }}>
+                 <XCircle size={14} /><span>Delete Request</span>
+               </button>
             )}
-           
           </div>
         )}
       </td>
@@ -575,4 +422,3 @@ const SignRequestRow = ({
 };
 
 export default SignRequest;
-
