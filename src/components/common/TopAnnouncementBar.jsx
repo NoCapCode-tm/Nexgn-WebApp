@@ -5,31 +5,32 @@ import styles from "./TopAnnouncementBar.module.css";
 
 export default function TopAnnouncementBar() {
   const [isVisible, setIsVisible] = useState(false);
+  // Track closure in memory instead of localStorage so it resets on refresh
+  const [isClosed, setIsClosed] = useState(false); 
   const location = useLocation();
 
   useEffect(() => {
     // 1. Check if the user is actually logged in
     const userId = localStorage.getItem("nexgn_user_id");
     
-    // 2. Check if the user has already dismissed it
-    const dismissed = localStorage.getItem("nexgn_beta_banner_dismissed");
-    
-    // 3. Ensure we are not on public auth pages
+    // 2. Ensure we are not on public auth pages
     const isAuthPage = 
       location.pathname === "/" || 
       location.pathname === "/login" || 
       location.pathname === "/signup" ||
       location.pathname === "/forgot";
 
-    if (userId && !dismissed && !isAuthPage) {
+    // 3. Show if logged in, not on auth page, and hasn't been closed THIS session
+    if (userId && !isAuthPage && !isClosed) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
     }
-  }, [location.pathname]);
+  }, [location.pathname, isClosed]);
 
   const handleDismiss = () => {
-    localStorage.setItem("nexgn_beta_banner_dismissed", "true");
+    // Setting this in state hides it immediately, but will reset to false on a hard refresh
+    setIsClosed(true);
     setIsVisible(false);
   };
 
