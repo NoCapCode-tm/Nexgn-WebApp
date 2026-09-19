@@ -33,6 +33,7 @@ const DEFAULT_WIDGET_SIZES = {
 export default function DocumentEditor({title, file ,signers,currentSigners,expiresIn}) {
   const navigate = useNavigate();
    const location = useLocation();
+   const sendingRef = useRef(false);
     const activeTab =
       location.pathname
 
@@ -261,7 +262,9 @@ export default function DocumentEditor({title, file ,signers,currentSigners,expi
 }
 
   const handleSend = async () => {
-    setLoading(true);
+     if (sendingRef.current) return;
+
+  sendingRef.current = true;
     try {
        const { ipv4, ipv6 } = await getClientIPs();
 
@@ -327,9 +330,11 @@ export default function DocumentEditor({title, file ,signers,currentSigners,expi
       
     } catch (error) {
       console.error(error);
-      toast.error("Failed to save document fields.");
+       toast.error(
+      error?.response?.data?.message || "Failed to send document.")
     } finally {
-      setLoading(false);
+       sendingRef.current = false;
+    setLoading(false);
     }
   };
 
