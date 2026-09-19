@@ -345,7 +345,7 @@ body.dark-mode .admin-docs-page .admin-badge--expired {
   display: grid;
   align-items: center;
   grid-template-columns: 2fr 1.5fr 1fr 1.2fr 0.6fr 0.8fr 0.4fr;
-  height: 60px;
+  height: 48px; /* Reduced from 60px */
   padding: 0 16px;
   font-size: 13px;
   color: #8a949f;
@@ -421,7 +421,7 @@ body.dark-mode .admin-docs-page .admin-badge--expired {
 
 .admin-docs-table {
   display: flex;
-  gap: 8px;
+  gap: 6px; /* Reduced from 8px */
   flex-direction: column;
   width: 100%;
 }
@@ -500,7 +500,7 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
   }
 
   .admin-docs-page .admin-doc-row {
-    height: clamp(60px, 4.16vw, 106px);
+    height: 52px; /* Replaced clamp(60px, 4.16vw, 106px) for a crisp, fixed height */
     padding: 0 clamp(16px, 1.11vw, 28px);
     font-size: clamp(13px, 0.9vw, 23px);
     border-radius: clamp(16px, 1.11vw, 28px);
@@ -719,9 +719,9 @@ body.dark-mode .admin-docs-page .admin-doc-row__menu:hover {
     grid-template-rows: 1fr;
     width: 100%;
     height: auto;
-    min-height: 72px;
+    min-height: 52px; /* Reduced from 72px */
     box-sizing: border-box;
-    margin: 0 0 14px 0;
+    margin: 0 0 6px 0; /* Reduced from 14px for a tighter list */
     padding: 0 20px;
     border-radius: 14px;
   }
