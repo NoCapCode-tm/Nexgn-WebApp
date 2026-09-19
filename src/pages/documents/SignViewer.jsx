@@ -8,6 +8,11 @@ import { toast } from "react-toastify";
 import { API_URL } from "../../config";
 import { DocumentViewerSkeleton } from "../../components/common/Skeleton";
 
+// 1. Import the new overlays
+import SignerConsentOverlay from "../../components/overlays/SignerConsentOverlay";
+import AlreadySignedOverlay from "../../components/overlays/AlreadySignedOverlay";
+import RevokedOverlay from "../../components/overlays/RevokedOverlay";
+
 import styles from "./SignViewer.module.css";
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -33,6 +38,10 @@ export default function SignViewer() {
   const [selectedSignatureFont, setSelectedSignatureFont] = useState("cursive");
   const [tempSignature, setTempSignature] = useState(null);
 
+  // 2. Overlay State
+  const [consentGiven, setConsentGiven] = useState(false);
+  const [overlayType, setOverlayType] = useState(null);
+
   const modalSignatureCanvasRef = useRef(null);
   const uploadInputRef = useRef(null);
 
@@ -46,8 +55,14 @@ export default function SignViewer() {
         const reqData = reqRes?.data?.message;
         setRequest(reqData);
 
-        if (reqData.overallStatus === "completed") {
+        // 3. Logic to determine which overlay to show
+        if (reqData.overallStatus === "cancelled" || reqData.overallStatus === "revoked") {
+          setOverlayType("revoked");
+        } else if (reqData.overallStatus === "completed") {
+          setOverlayType("signed");
           toast.info("This document is already completed.");
+        } else if (!consentGiven) {
+          setOverlayType("consent");
         }
 
         const widgetRes = await axios.get(`${API_URL}document/widgets/${id}`, {
@@ -56,7 +71,6 @@ export default function SignViewer() {
         
         const widgetData = widgetRes.data.message;
         setDocumentDetails(widgetData.document);
-        // Pre-map widgets with their absolute index so we don't lose track across pages
         setWidgets((widgetData.widgets || []).map((w, index) => ({ ...w, index })));
       } catch (err) {
         console.error("Failed to load document:", err);
@@ -66,7 +80,7 @@ export default function SignViewer() {
       }
     }
     loadData();
-  }, [id]);
+  }, [id, consentGiven]); // Added consentGiven to dependencies
 
   useEffect(() => {
     if (!documentDetails) return;
@@ -229,7 +243,6 @@ export default function SignViewer() {
         </header>
 
         <div className={styles.mainContent}>
-          {/* Left Sidebar: Navigates to pages seamlessly */}
           <aside className={styles.leftSidebar}>
             <div className={styles.sidebarTitle}>Preview</div>
             {pages.map((pageNum) => (
@@ -246,7 +259,6 @@ export default function SignViewer() {
             ))}
           </aside>
 
-          {/* Center: Continuous Scroll Canvas Area */}
           <main className={styles.centerCanvasArea}>
             {pages.map((pageNum) => (
               <PdfPage 
@@ -261,7 +273,6 @@ export default function SignViewer() {
             ))}
           </main>
 
-          {/* Right Sidebar: Actions */}
           <aside className={styles.rightSidebar}>
             <div>
               <div className={styles.sectionLabel}>Raised by</div>
@@ -298,7 +309,6 @@ export default function SignViewer() {
         </div>
       </div>
       
-      {/* Signature Modal Logic Remains Exactly The Same */}
       {signatureModalOpen && (
         <div
           className={styles.signatureModalOverlay}
@@ -360,6 +370,31 @@ export default function SignViewer() {
           </div>
         </div>
       )}
+
+      {/* 4. Render the appropriate overlay based on the state */}
+      {overlayType === "consent" && (
+        <SignerConsentOverlay 
+          onAccept={() => {
+            setConsentGiven(true);
+            setOverlayType(null);
+          }} 
+          onDecline={() => navigate("/")} 
+        />
+      )}
+      
+      {overlayType === "signed" && (
+        <AlreadySignedOverlay 
+          onViewDocument={() => setOverlayType(null)} 
+          onReturnHome={() => navigate("/")} 
+        />
+      )}
+      
+      {overlayType === "revoked" && (
+        <RevokedOverlay 
+          onReturnHome={() => navigate("/")} 
+        />
+      )}
+
     </>
   );
 }
