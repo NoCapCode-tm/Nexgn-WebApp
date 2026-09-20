@@ -9,7 +9,7 @@ import styles from "./LoginPage.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import LoadingScreen from "../../components/Layout/LoadingScreen";
 
-export default function LoginPage() {
+export default function Firstlogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
    const [loading, setLoading] = useState(false);
@@ -59,23 +59,23 @@ if (user?.twoFAenabled === true) {
     }
   };
 
-  // useEffect(() => {
-  //   (async () => {
-  //     if (!id) return;
+  useEffect(() => {
+    (async () => {
+      if (!id) return;
       
-  //     try {
-  //       const response = await axios.post(
-  //         `${API_URL}admin/verify`,
-  //         { status: "Active", id: id },
-  //         { withCredentials: true }
-  //       );
-  //       console.log(response.data.message);
-  //       toast.success("Your Account is Activated");
-  //     } catch (error) {
-  //       console.log("Verification failed", error.message);
-  //     }
-  //   })();
-  // }, [id]);
+      try {
+        const response = await axios.post(
+          `${API_URL}admin/verify`,
+          { status: "Active", id: id },
+          { withCredentials: true }
+        );
+        console.log(response.data.message);
+        toast.success("Your Account is Activated");
+      } catch (error) {
+        console.log("Verification failed", error.message);
+      }
+    })();
+  }, [id]);
 
   return (
     <AuthLayout>
