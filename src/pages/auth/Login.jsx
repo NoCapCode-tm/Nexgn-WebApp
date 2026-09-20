@@ -40,7 +40,7 @@ if (user?._id) {
 if (user?.twoFAenabled === true) {
   navigate(`/2fa/${user._id}`);
 } else {
-  navigate("/pricing");
+  navigate("/dashboard");
 }
       
       toast.success("Login Successful");
