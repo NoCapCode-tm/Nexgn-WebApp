@@ -1,12 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../../config";
 import LoadingScreen from "../../../components/Layout/LoadingScreen";
+import { toast } from "react-toastify";
 
 export default function Integrations() {
   const [loading, setLoading] = useState(false);
   const [isDriveConnected, setIsDriveConnected] = useState(true);
   const [showDisconnectModal, setShowDisconnectModal] = useState(false);
+
+  useEffect(()=>{
+    (async()=>{
+        setLoading(true);
+    try {
+      const response = await axios.get(`${API_URL}google/status`, {
+        withCredentials: true,
+      });
+    
+      setIsDriveConnected(response?.data?.message?.connected)
+    } catch (error) {
+      console.error(error);
+      toast.error(
+          error.response?.data?.message ||
+          "Something Went Wrong"
+        );
+    } finally {
+      setLoading(false);
+    }
+    })()
+  },[])
 
   const handleDriveConnect = async () => {
     setLoading(true);
@@ -17,6 +39,10 @@ export default function Integrations() {
       window.location.assign(response.data.message);
     } catch (error) {
       console.error(error);
+      toast.error(
+          error.response?.data?.message ||
+          "Something Went Wrong"
+        );
     } finally {
       setLoading(false);
     }
@@ -32,6 +58,10 @@ export default function Integrations() {
       setShowDisconnectModal(false);
     } catch (error) {
       console.error("Could not disconnect", error.message);
+       toast.error(
+          error.response?.data?.message ||
+          "Something Went Wrong"
+        );
     } finally {
       setLoading(false);
     }

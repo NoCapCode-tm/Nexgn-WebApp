@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../config";
 import LoadingScreen from "../../components/Layout/LoadingScreen";
+import { toast } from "react-toastify";
 
 export default function InviteDeny() {
   const {email} = useParams()
@@ -17,7 +18,10 @@ export default function InviteDeny() {
     try {
         await axios.get(`${API_URL}admin/decline/${email}`,{withCredentials:true})
     } catch (error) {
-      console.log("Something went wrong in declining Invite",error.message)
+      toast.error(
+          error.response?.data?.message ||
+          "Something Went Wrong"
+        );
     }finally{
       setLoading(false)
     }

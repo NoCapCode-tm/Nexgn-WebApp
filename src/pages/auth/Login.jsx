@@ -40,13 +40,21 @@ if (user?._id) {
 if (user?.twoFAenabled === true) {
   navigate(`/2fa/${user._id}`);
 } else {
-  navigate("/dashboard");
+  navigate("/pricing");
 }
       
       toast.success("Login Successful");
     } catch (error) {
-      console.log("Something went wrong", error.message);
-    }finally{
+  console.log(
+    "Login error:",
+    error.response?.data?.message
+  );
+
+  toast.error(
+    error.response?.data?.message ||
+    "Login unsuccessful"
+  );
+}finally{
       setLoading(false)
     }
   };

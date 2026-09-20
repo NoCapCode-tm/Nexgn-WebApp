@@ -13,6 +13,7 @@ import "./ContactBook.css";
 import { useEffect } from "react";
 import axios from "axios";
 import { ContactCardSkeleton } from "../../components/common/Skeleton";
+import { toast } from "react-toastify";
 
 
 function MemberContactActions({
@@ -169,6 +170,10 @@ const handleContactSaved = async () => {
      await axios.delete(`${API_URL}contact/deletecontact/${id}`,{withCredentials:true})
    } catch (error) {
       console.log("Something went wrong in deleting contact",error.message)
+      toast.error(
+          error.response?.data?.message ||
+          "Something Went Wrong"
+        );
    }finally{
     setLoading(false)
    }

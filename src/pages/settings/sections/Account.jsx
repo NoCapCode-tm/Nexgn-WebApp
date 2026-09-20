@@ -44,7 +44,7 @@ export default function Account({ user, onUserUpdated ,team }) {
   } catch (error) {
     console.error(
       "Failed to update account:",
-      error.response?.data || error.message
+      error.response?.data?.message || error.message
     );
   } finally {
     setLoading(false);
