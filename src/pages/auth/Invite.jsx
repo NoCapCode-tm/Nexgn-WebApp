@@ -7,6 +7,7 @@ import styles from "./LoginPage.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import PasswordStrengthMeter from "../../components/ui/PasswordStrengthMeter";
 import LoadingScreen from "../../components/Layout/LoadingScreen";
+import { toast } from "react-toastify";
 
 export default function Invite() {
   const { email } = useParams();
@@ -31,6 +32,10 @@ export default function Invite() {
       console.log(response.data.message);
     } catch (error) {
       console.log("Something Went Wrong in setting password", error.message);
+      toast.error(
+          error.response?.data?.message ||
+          "Something Went Wrong"
+        );
     } finally {
       setLoading(false)
       setStep(2);

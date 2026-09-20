@@ -20,6 +20,7 @@ import styles from "./SignRequest.module.css";
 import { Skeleton } from "../../components/common/Skeleton";
 
 import { API_URL } from "../../config";
+import { toast } from "react-toastify";
 
 const SignRequest = () => {
   const [signRequests, setSignRequests] = useState([]);
@@ -59,7 +60,10 @@ const SignRequest = () => {
         });
         setSignRequests(response?.data?.message || []);
       } catch (error) {
-        console.log("Something went wrong while fetching sign requests", error?.response?.data || error.message);
+ toast.error(
+          error.response?.data?.message ||
+          "Something Went Wrong"
+        );
       } finally {
         setLoading(false);
       }
@@ -76,7 +80,10 @@ const SignRequest = () => {
         });
         setSignatures(response?.data?.message || []);
       } catch (error) {
-        console.log("Something went wrong while fetching signatures", error?.response?.data || error.message);
+         toast.error(
+                  error.response?.data?.message ||
+                  "Something Went Wrong"
+                );
       } finally {
         setLoading(false);
       }
@@ -97,6 +104,10 @@ const SignRequest = () => {
       );
     } catch (error) {
       console.log("Something went wrong while cancelling sign request", error?.response?.data || error.message);
+       toast.error(
+                error.response?.data?.message ||
+                "Something Went Wrong"
+              );
     } finally {
       setLoading(false);
     }
@@ -111,6 +122,10 @@ const SignRequest = () => {
       setSignRequests((previous) => previous.filter((request) => request._id !== id));
     } catch (error) {
       console.log("Something went wrong while deleting sign request", error?.response?.data || error.message);
+       toast.error(
+                error.response?.data?.message ||
+                "Something Went Wrong"
+              );
     } finally {
       setLoading(false);
     }

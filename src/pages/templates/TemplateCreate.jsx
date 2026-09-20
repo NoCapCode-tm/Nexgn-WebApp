@@ -71,7 +71,10 @@ export default function TemplateCreate({ templateName, templateFile, onBack }) {
         setActivePage(1);
       } catch (err) {
         console.error("PDF Parsing error:", err);
-        toast.error("Failed to load PDF document.");
+         toast.error(
+                  err.response?.data?.message ||
+                  "Something Went Wrong"
+                );
       } finally {
         setLoading(false);
       }

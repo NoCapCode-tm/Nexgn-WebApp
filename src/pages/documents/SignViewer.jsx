@@ -81,7 +81,10 @@ export default function SignViewer() {
         setWidgets((widgetData.widgets || []).map((w, index) => ({ ...w, index })));
       } catch (err) {
         console.error("Failed to load document:", err);
-        toast.error("Failed to load document details.");
+        toast.error(
+    err.response?.data?.message ||
+    "Something Went Wrong"
+  );
       } finally {
         setLoading(false);
       }
@@ -113,7 +116,10 @@ export default function SignViewer() {
         setPages(Array.from({ length: pdf.numPages }, (_, i) => i + 1));
       } catch (err) {
         console.error("PDF Loading Error:", err);
-        toast.error("Failed to load PDF.");
+        toast.error(
+    err.response?.data?.message ||
+    "Something Went Wrong"
+  );
       }
     }
     loadPdf();
@@ -234,7 +240,10 @@ export default function SignViewer() {
       navigate("/documents");
     } catch (error) {
       console.error(error);
-      toast.error("Failed to submit document.");
+      toast.error(
+    error.response?.data?.message ||
+    "Something Went Wrong"
+  );
     } finally {
       setSubmitting(false);
     }

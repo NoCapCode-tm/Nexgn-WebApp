@@ -9,6 +9,7 @@ import "./Documents.css";
 import axios from "axios";
 import { API_URL } from "../../config";
 import { TableRowSkeleton } from "../../components/common/Skeleton";
+import { toast } from "react-toastify";
 
 export default function Documents() {
   const [documents, setDocuments] = useState([]);
@@ -28,6 +29,10 @@ export default function Documents() {
       setDocuments(prev => prev.filter(doc => doc._id !== id));
     } catch (error) {
       console.log("Something went wrong in deleting Document", error.message);
+      toast.error(
+    error.response?.data?.message ||
+    "Something Went Wrong"
+  );
     }
   };
 
@@ -36,6 +41,10 @@ export default function Documents() {
       await axios.get(`${API_URL}document/archivedocument/${id}`, { withCredentials: true });
     } catch (error) {
       console.log("Something went wrong in archiving Document", error.message);
+      toast.error(
+    error.response?.data?.message ||
+    "Something Went Wrong"
+  );
     }
   };
 
@@ -44,6 +53,10 @@ export default function Documents() {
       await axios.get(`${API_URL}document/cancelrequest/${id}`, { withCredentials: true });
     } catch (error) {
       console.log("Something went wrong in Cancelling Request", error.message);
+      toast.error(
+          error.response?.data?.message ||
+          "Something Went Wrong"
+        );
     }
   };
 

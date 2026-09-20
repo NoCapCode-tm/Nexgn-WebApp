@@ -60,9 +60,9 @@ export default function TopbarIcons({
       </button>
 
       <div className="topbar__icon-wrapper">
-        <button className="topbar__icon-btn">
+        {/* <button className="topbar__icon-btn">
           <Bell size={iconSize} color="#FF0915" strokeWidth={1.5} />
-        </button>
+        </button> */}
         <div className="notification-dropdown">
           <div className="notification-dropdown__header">
             <span>Notifications</span>

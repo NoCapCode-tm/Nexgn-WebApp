@@ -125,6 +125,10 @@ export default function SignYourself() {
         setAllTemplates(response.data.message);
       } catch (error) {
         console.log("Something Went Wrong in fetching templates", error.message);
+        toast.error(
+    error.response?.data?.message ||
+    "Something Went Wrong"
+  );
       } finally {
         setLoading(false);
       }
@@ -140,6 +144,10 @@ export default function SignYourself() {
       } catch (err) {
         console.log(err.message);
         setAuthenticated(false);
+        toast.error(
+    err.response?.data?.message ||
+    "Something Went Wrong"
+  );
       } finally {
         setLoading(false);
       }
@@ -193,6 +201,10 @@ export default function SignYourself() {
         }
       } catch (err) {
         console.log(err);
+        toast.error(
+    err.response?.data?.message ||
+    "Something Went Wrong"
+  );
       } finally {
         setLoading(false);
       }

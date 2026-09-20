@@ -43,27 +43,38 @@ export default function Profile({ user, onUserUpdated }) {
   };
 
   const handleUpdate = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const response = await axios.put(
-        `${API_URL}admin/update`,
-        {
-          name: formData.fullName,
-          phone_no: formData.phone,
-          profile_picture: profileFile,
-        },
-        { withCredentials: true }
-      );
+  try {
+    const data = new FormData();
 
-      onUserUpdated?.(response.data?.message);
-    } catch (error) {
-      console.error("Failed to update profile:", error);
-    } finally {
-      setLoading(false);
+    data.append("name", formData.fullName);
+    data.append("phone_no", formData.phone);
+
+    if (profileFile) {
+      data.append("profile_picture", profileFile);
     }
-  };
+
+    const response = await axios.put(
+      `${API_URL}admin/update`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+
+    onUserUpdated?.();
+    setProfileFile(null);
+  } catch (error) {
+    console.error(
+      "Failed to update profile:",
+      error.response?.data?.message || error.message
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>
