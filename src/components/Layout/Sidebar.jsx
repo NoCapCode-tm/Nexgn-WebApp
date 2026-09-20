@@ -51,7 +51,7 @@ const navItems = [
 
 const bottomItems = [
   { label: "Settings", path: "/settings", icon: SettingsIcon },
-  { label: "Help", path: "https://prod.nexgn.cloud/help", icon: HelpIcon, external: true },
+  { label: "Help", path: "https://nexgn.cloud/help", icon: HelpIcon, external: true },
 ];
 
 export default function Sidebar() {
