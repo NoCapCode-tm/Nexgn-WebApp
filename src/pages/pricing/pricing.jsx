@@ -139,7 +139,7 @@ export default function Pricing() {
         );
 
         toast.success("Free plan activated!");
-        navigate("/admin");
+        navigate("/dashboard");
         return;
       }
 
@@ -205,7 +205,7 @@ export default function Pricing() {
               );
 
               setTimeout(() => {
-                navigate("/admin");
+                navigate("/dashboard");
               }, 1200);
             }
           } catch (error) {

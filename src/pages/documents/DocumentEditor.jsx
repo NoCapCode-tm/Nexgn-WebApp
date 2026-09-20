@@ -86,6 +86,10 @@ export default function DocumentEditor({title, file ,signers,currentSigners,expi
       } catch (error) {
         console.error("Failed to load PDF", error);
         toast.error("Could not read PDF file.");
+        toast.error(
+    error.response?.data?.message ||
+    "Something Went Wrong"
+  );
       } finally {
         setLoading(false);
       }

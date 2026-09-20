@@ -3,6 +3,7 @@ import { ChevronLeft } from "lucide-react";
 import "./ContactBook.css";
 import axios from "axios";
 import { API_URL } from "../../config";
+import { toast } from "react-toastify";
 
 export default function AddContactForm({
   onClose,
@@ -78,6 +79,10 @@ export default function AddContactForm({
           error?.response?.data?.message ||
           `Failed to ${isEditing ? "update" : "add"} contact`
       });
+      toast.error(
+          error.response?.data?.message ||
+          "Something Went Wrong"
+        );
     } finally {
       setLoading(false);
     }

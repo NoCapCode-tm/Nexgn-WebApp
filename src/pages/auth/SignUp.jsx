@@ -57,6 +57,10 @@ export default function SignUp() {
       setStep(3);
     } catch (error) {
       console.log("Something went wrong", error.message);
+      toast.error(
+    error.response?.data?.message ||
+    "Something Went Wrong"
+  );
     }finally{
       setLoading(false)
     }

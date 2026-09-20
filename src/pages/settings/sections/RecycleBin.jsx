@@ -37,6 +37,10 @@ export default function RecycleBin() {
           setRecycleBinItems({ templates, documents });
         } catch (error) {
           console.error("Error fetching recycle bin data:", error);
+           toast.error(
+                    error.response?.data?.message ||
+                    "Something Went Wrong"
+                  );
         } finally {
           setLoading(false); // <-- 2. Set loading to false once data arrives
         }
@@ -94,6 +98,10 @@ export default function RecycleBin() {
       );
     } catch (error) {
       console.error("Something went wrong while restoring", error.message);
+       toast.error(
+                error.response?.data?.message ||
+                "Something Went Wrong"
+              );
     } finally {
       setLoading(false);
     }
@@ -133,6 +141,10 @@ export default function RecycleBin() {
       setRecycleBinDeleteTarget(null);
     } catch (error) {
       console.error("Something went wrong in deleting Document", error.message);
+       toast.error(
+                error.response?.data?.message ||
+                "Something Went Wrong"
+              );
     } finally {
       setLoading(false);
     }
