@@ -9,6 +9,7 @@ import { API_URL } from "../../config";
 import { TableRowSkeleton } from "../../components/common/Skeleton";
 
 import styles from "./TemplateView.module.css";
+import { toast } from "react-toastify";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -67,6 +68,10 @@ export default function TemplateView({ template, onBack, onEdit }) {
       setActivePage(1);
     } catch (err) {
       console.error("PDF Loading error:", err);
+       toast.error(
+                err.response?.data?.message ||
+                "Something Went Wrong"
+              );
     } finally {
       if (!cancelled) {
         setLoading(false);

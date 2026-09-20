@@ -13,6 +13,7 @@ import "./ContactBook.css";
 import { useEffect } from "react";
 import axios from "axios";
 import { ContactCardSkeleton } from "../../components/common/Skeleton";
+import { toast } from "react-toastify";
 
 
 function MemberContactActions({
@@ -72,6 +73,7 @@ export default function ContactBook() {
   const [search, setSearch] = useState("");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
+  const [editContact, setEditContact] = useState(null);
 
   useEffect(() => {
   const fetchContacts = async () => {
@@ -96,6 +98,33 @@ export default function ContactBook() {
 
   fetchContacts();
 }, []);
+const refreshContacts = async () => {
+  try {
+    const response = await axios.get(
+      `${API_URL}contact/getcontact`,
+      {
+        withCredentials: true
+      }
+    );
+
+    setContacts(response.data.message || []);
+  } catch (error) {
+    console.error("Failed to fetch contacts", error);
+  }
+};
+
+const handleAddContact = async () => {
+  await refreshContacts();
+};
+
+const handleEditContact = (contact) => {
+  setSelectedContact(null);
+  setEditContact(contact);
+};
+
+const handleContactSaved = async () => {
+  await refreshContacts();
+};
 
   const filteredContacts = contacts.filter((c) => {
     const cleanSearch = search.trim().toLowerCase();
@@ -121,25 +150,18 @@ export default function ContactBook() {
     }
   };
 
-  const handleAddContact = (newContact) => {
-    setContacts((prev) => [
-      ...prev,
-      {
-        ...newContact,
-        phone: newContact.phone || "+1 98765 43210",
-        gender: newContact.gender || "Female",
-      },
-    ]);
-  };
+//   const handleAddContact = async () => {
+//   await refreshContacts();
+// };
 
-  const handleUpdateContact = (updatedContact) => {
-    setContacts((prev) =>
-      prev.map((c) =>
-        c.email === selectedContact.email ? { ...c, ...updatedContact } : c,
-      ),
-    );
-    setSelectedContact((prev) => ({ ...prev, ...updatedContact }));
-  };
+  // const handleUpdateContact = (updatedContact) => {
+  //   setContacts((prev) =>
+  //     prev.map((c) =>
+  //       c.email === selectedContact.email ? { ...c, ...updatedContact } : c,
+  //     ),
+  //   );
+  //   setSelectedContact((prev) => ({ ...prev, ...updatedContact }));
+  // };
 
   const handleDeleteContact = async(id) => {
     setLoading(true)
@@ -148,6 +170,10 @@ export default function ContactBook() {
      await axios.delete(`${API_URL}contact/deletecontact/${id}`,{withCredentials:true})
    } catch (error) {
       console.log("Something went wrong in deleting contact",error.message)
+      toast.error(
+          error.response?.data?.message ||
+          "Something Went Wrong"
+        );
    }finally{
     setLoading(false)
    }
@@ -259,21 +285,28 @@ export default function ContactBook() {
         </div>
       </>
 
-      {isAddModalOpen && (
-        <AddContactForm
-          onSave={handleAddContact}
-          onClose={() => setIsAddModalOpen(false)}
-        />
-      )}
+    {isAddModalOpen && (
+  <AddContactForm
+    onClose={() => setIsAddModalOpen(false)}
+    onSaved={handleAddContact}
+  />
+)}
 
-      {selectedContact && (
-        <ContactDetailsModal
-          contact={selectedContact}
-          onUpdateContact={handleUpdateContact}
-          onClose={() => setSelectedContact(null)}
-        />
-      )}
+{selectedContact && (
+  <ContactDetailsModal
+    contact={selectedContact}
+    onEdit={handleEditContact}
+    onClose={() => setSelectedContact(null)}
+  />
+)}
 
+{editContact && (
+  <AddContactForm
+    contact={editContact}
+    onSaved={handleContactSaved}
+    onClose={() => setEditContact(null)}
+  />
+)}
     
     </Layout>
   );

@@ -3,11 +3,14 @@ import axios from "axios";
 import { CreditCard, Download, RefreshCw, AlertCircle } from "lucide-react";
 import { API_URL } from "../../../config";
 import { BillingSkeleton } from "../../../components/common/Skeleton";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function Billing() {
   const [subscription, setSubscription] = useState({});
   const [receipt, setReceipt] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     (async () => {
@@ -25,6 +28,10 @@ export default function Billing() {
         );
       } catch (error) {
         console.error(error.message);
+        toast.error(
+            error.response?.data?.message ||
+            "Something Went Wrong"
+          );
       } finally {
         setLoading(false);
       }
@@ -56,7 +63,7 @@ export default function Billing() {
 
               <div className="admin-billing-plan-price">
                 <span className="price-amount">
-                  {subscription?.planId?.amount}
+                  {subscription?.planId?.amount/100}
                 </span>
                 <span className="price-period">/month</span>
               </div>
@@ -73,14 +80,14 @@ export default function Billing() {
             <div className="admin-billing-plan-footer">
               <span className="admin-billing-next-date">
                 Next billing date :
-                {subscription?.chargeAt &&
-                  new Date(subscription.chargeAt).toLocaleDateString("en-IN", {
+                {subscription?.currentPeriodEnd &&
+                  new Date(subscription?.currentPeriodEnd).toLocaleDateString("en-IN", {
                     day: "2-digit",
                     month: "short",
                     year: "numeric",
                   })}
               </span>
-              <button type="button" className="admin-billing-upgrade-btn">
+              <button type="button" className="admin-billing-upgrade-btn" onClick={()=>{navigate("/pricing")}}>
                 Upgrade Plan
               </button>
             </div>

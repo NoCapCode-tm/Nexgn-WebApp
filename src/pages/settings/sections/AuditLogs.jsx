@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { API_URL } from "../../../config";
 import { Skeleton } from "../../../components/common/Skeleton";
+import { toast } from "react-toastify";
 
 export default function AuditLogs() {
   const [loading, setLoading] = useState(false);
@@ -33,6 +34,10 @@ export default function AuditLogs() {
         setAuditLogsData(response.data.message || []);
       } catch (error) {
         console.error(error.message);
+        toast.error(
+            error.response?.data?.message ||
+            "Something Went Wrong"
+          );
       } finally {
         setLoading(false);
       }

@@ -3,7 +3,7 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import LoadingScreen from "../../../components/Layout/LoadingScreen";
 
-export default function Account({ user, onUserUpdated }) {
+export default function Account({ user, onUserUpdated ,team }) {
   const [loading, setLoading] = useState(false);
   const [accountData, setAccountData] = useState({
     companyName: "",
@@ -16,35 +16,40 @@ export default function Account({ user, onUserUpdated }) {
     if (!user || Object.keys(user).length === 0) return;
 
     setAccountData({
-      companyName: user.professional_details?.company_name || "",
-      organizationId: user.professional_details?.org_id || "",
+      companyName: team.company_name || "",
+      organizationId: team.org_id || "",
       timeZone: user.time_zone || "",
       language: user.language || "",
     });
   }, [user]);
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+ const handleUpdate = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const response = await axios.put(
-        `${API_URL}admin/update`,
-        {
-          time_zone: accountData.timeZone,
-          language: accountData.language,
-          companyname: accountData.companyName,
-        },
-        { withCredentials: true }
-      );
+  try {
+    await axios.put(
+      `${API_URL}admin/update`,
+      {
+        time_zone: accountData.timeZone,
+        language: accountData.language,
+        companyname: accountData.companyName,
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
-      onUserUpdated?.(response.data?.message);
-    } catch (error) {
-      console.error("Failed to update account:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    onUserUpdated?.();
+  } catch (error) {
+    console.error(
+      "Failed to update account:",
+      error.response?.data?.message || error.message
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>

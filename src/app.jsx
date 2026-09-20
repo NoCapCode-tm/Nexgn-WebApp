@@ -32,6 +32,7 @@ import TemplateCreate from "./pages/templates/TemplateCreate";
 import DocumentViewer from "./pages/documents/documentViewer";
 import SignRequest from "./pages/signrequest/SignRequest";
 import ProductTour from "./components/tour/ProductTour";
+import Firstlogin from "./pages/auth/Firstlogin";
 
 export default function App() {
 useSystemTheme();
@@ -49,7 +50,7 @@ useSystemTheme();
       <Route path="/mail-invite/:email" element={<Invite />} />
       <Route path="/" element={<Login />} />
       <Route path="/2fa/:id" element={<Verify2FA />} />
-      <Route path="/verify/:id" element={<Login />} />
+      <Route path="/verify/:id" element={<Firstlogin />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot" element={<ForgotPassword />} />
       <Route path="/invite-deny/:email" element={<InviteDeny />} />

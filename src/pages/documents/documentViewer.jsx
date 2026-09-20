@@ -39,9 +39,12 @@ export default function DocumentViewer() {
         const widgetData = widgetRes.data.message;
         setDocumentDetails(widgetData.document);
         setWidgets((widgetData.widgets || []).map((w, index) => ({ ...w, index })));
-      } catch (err) {
-        console.error("Failed to load document:", err);
-        toast.error("Failed to load document details.");
+      } catch (error) {
+        console.error("Failed to load document:", error);
+        toast.error(
+    error.response?.data?.message ||
+    "Something Went Wrong"
+  );
       } finally {
         setLoading(false);
       }
@@ -73,7 +76,10 @@ export default function DocumentViewer() {
         setPages(Array.from({ length: pdf.numPages }, (_, i) => i + 1));
       } catch (err) {
         console.error("PDF Loading Error:", err);
-        toast.error("Failed to load PDF.");
+        toast.error(
+    err.response?.data?.message ||
+    "Something Went Wrong"
+  );
       }
     }
     loadPdf();
