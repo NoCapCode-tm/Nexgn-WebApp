@@ -913,3 +913,61 @@ body.dark-mode .admin-theme.admin-dashboard-page .stat-card:hover * {
   }
 }
 
+
+
+.admin-theme .badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
+  padding: 4px 11px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 5px;
+  white-space: nowrap;
+  border: none;
+}
+
+.admin-theme .badge--pending {
+  color: #b45309;
+  background-color: #fef3c7;
+}
+
+.admin-theme .badge--signed {
+  color: #15803d;
+  background-color: #dcfce7;
+}
+
+.admin-theme .badge--expired {
+  color: #b91c1c;
+  background-color: #fee2e2;
+}
+
+.admin-theme .badge--viewed {
+  color: #2563eb;
+  background-color: #dbeafe;
+}
+
+body.dark-mode .admin-theme.admin-dashboard-page .badge--pending {
+  color: #fbbf24 !important;
+  background: rgba(251, 191, 36, 0.12) !important;
+  border: none !important;
+}
+
+body.dark-mode .admin-theme.admin-dashboard-page .badge--signed {
+  color: #34d399 !important;
+  background: rgba(52, 211, 153, 0.12) !important;
+  border: none !important;
+}
+
+body.dark-mode .admin-theme.admin-dashboard-page .badge--expired {
+  color: #f87171 !important;
+  background: rgba(248, 113, 113, 0.12) !important;
+  border: none !important;
+}
+
+body.dark-mode .admin-theme.admin-dashboard-page .badge--viewed {
+  color: #60a5fa !important;
+  background: rgba(37, 99, 235, 0.15) !important;
+  border: none !important;
+}

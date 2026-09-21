@@ -2,16 +2,19 @@ import { useState, useRef, useEffect } from "react";
 import { FileText, MoreHorizontal, X } from "lucide-react";
 import { useNavigate } from "react-router";
 
-const statusClass = {
-  Pending: "badge--pending",
-  Signed: "badge--signed",
-  Expired: "badge--expired",
+const getStatusClass = (status) => {
+  if (!status) return "badge--pending";
+  const s = status.toLowerCase();
+  if (s === "completed" || s === "signed") return "badge--signed";
+  if (s === "expired") return "badge--expired";
+  if (s === "viewed" || s === "sent") return "badge--viewed";
+  return "badge--pending"; // default for pending, partially_signed, etc.
 };
 
 export default function DocumentRow({_id, title, note, assignedto, createdBy, status, onRevoke }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -30,10 +33,10 @@ export default function DocumentRow({_id, title, note, assignedto, createdBy, st
         <span>{title}</span>
       </div>
       <div className="doc-row__note">{note || "—"}</div>
-      <div className="doc-row__cell">{assignedto.length|| "—"}</div>
-      <div className="doc-row__cell">{createdBy?.name}</div>
+      <div className="doc-row__cell">{assignedto?.length || "—"}</div>
+      <div className="doc-row__cell">{createdBy?.name || "—"}</div>
       <div className="doc-row__cell">
-        <span className={`badge ${statusClass[status]}`}>{status}</span>
+        <span className={`badge ${getStatusClass(status)}`}>{status || "Pending"}</span>
       </div>
       <div className="doc-row__cell doc-row__action" ref={menuRef}>
         <button
@@ -47,8 +50,9 @@ export default function DocumentRow({_id, title, note, assignedto, createdBy, st
           <div className="doc-row__dropdown">
             <button
               className="doc-row__dropdown-item"
-              onClick={() => {setMenuOpen(false)
-                navigate(`/document/view/${_id}`)
+              onClick={() => {
+                setMenuOpen(false);
+                navigate(`/document/view/${_id}`);
               }}
             >
               View
