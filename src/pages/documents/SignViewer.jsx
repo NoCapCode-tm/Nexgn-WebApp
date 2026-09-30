@@ -434,20 +434,20 @@ export default function SignViewer() {
             setConsentGiven(true);
             setOverlayType(null);
           }} 
-          onDecline={() => navigate("/")} 
+          onDecline={() => navigate("https://nexgn.cloud")} 
         />
       )}
       
       {overlayType === "signed" && (
         <AlreadySignedOverlay 
           onViewDocument={() => setOverlayType(null)} 
-          onReturnHome={() => navigate("/")} 
+          onReturnHome={() => navigate("https://nexgn.cloud")} 
         />
       )}
       
       {overlayType === "revoked" && (
         <RevokedOverlay 
-          onReturnHome={() => navigate("/")} 
+          onReturnHome={() => navigate("https://nexgn.cloud")} 
         />
       )}
 
