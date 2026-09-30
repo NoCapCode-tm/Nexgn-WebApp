@@ -1,0 +1,54 @@
+.dsa-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: Inter, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.dsa-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Blurred background only (no solid fill) */
+.dsa-blur {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.35);
+  -webkit-backdrop-filter: blur(28px) saturate(1.2);
+  backdrop-filter: blur(28px) saturate(1.2);
+}
+.dsa-blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.55; }
+.dsa-blob-a { width: 60vmax; height: 60vmax; left: -20vmax; top: -15vmax; background: #334155; }
+.dsa-blob-b { width: 50vmax; height: 50vmax; right: -15vmax; bottom: -15vmax; background: #1e293b; }
+.dsa-blob-c { width: 30vmax; height: 30vmax; left: 35%; top: 55%; background: #e11d48; opacity: 0.25; }
+
+.dsa-stage { position: relative; width: min(320px, 86vw); height: 320px; }
+
+.dsa-doc, .dsa-ring, .dsa-shield, .dsa-pulse { position: absolute; left: 50%; top: 50%; }
+.dsa-doc { width: 200px; height: 260px; margin: -130px 0 0 -100px; }
+
+.dsa-strip { position: absolute; left: 0; width: 200px; height: 20px; overflow: hidden; will-change: transform, opacity; }
+.dsa-page {
+  position: absolute; left: 0; width: 200px; height: 260px; box-sizing: border-box;
+  background: #1e293b; border: 1px solid #334155; padding: 22px 20px;
+}
+.dsa-page h4 { margin: 0 0 14px; font-size: 11px; letter-spacing: 0.18em; font-weight: 600; color: #fff; }
+.dsa-page i { display: block; height: 5px; border-radius: 3px; background: #fff; opacity: 0.85; margin-bottom: 11px; }
+.dsa-sig { margin-top: 34px; font: italic 22px Georgia, serif; color: #fff; }
+
+.dsa-ring { width: 120px; height: 120px; margin: -60px 0 0 -60px; opacity: 0; }
+.dsa-shield {
+  width: 88px; height: 88px; margin: -44px 0 0 -44px; opacity: 0;
+  filter: drop-shadow(0 0 14px rgba(225, 29, 72, 0.55));
+}
+.dsa-pulse { width: 88px; height: 88px; margin: -44px 0 0 -44px; border-radius: 50%; border: 2px solid #e11d48; opacity: 0; }
+
+.dsa-label { margin-top: 8px; height: 24px; font-size: 13px; font-weight: 600; letter-spacing: 0.28em; opacity: 0; }
