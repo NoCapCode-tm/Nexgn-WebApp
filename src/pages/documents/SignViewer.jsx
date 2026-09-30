@@ -53,8 +53,6 @@ export default function SignViewer() {
   // 2. Add state to trigger the full-screen success animation
   const [showSuccessAnim, setShowSuccessAnim] = useState(false);
 
-  const [testPlayId, setTestPlayId] = useState(0);
-
   const modalSignatureCanvasRef = useRef(null);
   const uploadInputRef = useRef(null);
 
@@ -463,21 +461,7 @@ export default function SignViewer() {
         />
       )}
 
-      {/* ---> TEMPORARY DEVELOPER BUTTON FOR LOCALHOST PREVIEW <--- */}
-      <button 
-        onClick={() => {
-          setShowSuccessAnim(true);
-          setTestPlayId(prev => prev + 1); // Increments ID to replay animation
-        }}
-        style={{
-          position: 'fixed', bottom: '20px', left: '20px', zIndex: 9999999,
-          background: '#000', color: '#fff', padding: '12px 20px', 
-          borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
-        }}
-      >
-        Replay Animation
-      </button>
+      
     </>
   );
 }
