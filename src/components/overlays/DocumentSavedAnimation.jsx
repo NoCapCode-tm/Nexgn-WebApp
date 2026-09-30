@@ -19,7 +19,7 @@ export default function DocumentSavedAnimation({
   playId = 0,
   onComplete,
   title = "SERVICE AGREEMENT",
-  signature = "J. Carter",
+  signature = signee.name ,
   label = "DOCUMENT SAVED",
   fullscreen = true,
 }) {
@@ -154,14 +154,14 @@ export default function DocumentSavedAnimation({
         </div>
 
         <svg ref={ringRef} className="dsa-ring" viewBox="0 0 120 120" aria-hidden="true">
-          <circle cx="60" cy="60" r="50" fill="none" stroke="#e11d48" strokeWidth="5" strokeLinecap="round" strokeDasharray="210 105" />
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#FF0915" strokeWidth="5" strokeLinecap="round" strokeDasharray="210 105" />
           <circle cx="60" cy="60" r="38" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeDasharray="40 200" opacity=".8" />
         </svg>
 
         <div ref={pulseRef} className="dsa-pulse" />
 
         <svg ref={shieldRef} className="dsa-shield" viewBox="0 0 64 64" aria-hidden="true">
-          <path d="M32 3 56 12v20c0 15-10 25-24 30C18 57 8 47 8 32V12z" fill="#e11d48" />
+          <path d="M32 3 56 12v20c0 15-10 25-24 30C18 57 8 47 8 32V12z" fill="#C81E1E" />
           <path d="M21 32l8 8 15-16" fill="none" stroke="#fff" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
