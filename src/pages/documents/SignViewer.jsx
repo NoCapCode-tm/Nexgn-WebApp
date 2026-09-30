@@ -11,6 +11,8 @@ import { DocumentViewerSkeleton } from "../../components/common/Skeleton";
 import SignerConsentOverlay from "../../components/overlays/SignerConsentOverlay";
 import AlreadySignedOverlay from "../../components/overlays/AlreadySignedOverlay";
 import RevokedOverlay from "../../components/overlays/RevokedOverlay";
+// 1. Import the Document Saved Animation
+import DocumentSavedAnimation from "../../components/overlays/DocumentSavedAnimation";
 
 import styles from "./SignViewer.module.css";
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
@@ -38,16 +40,20 @@ export default function SignViewer() {
   const [tempSignature, setTempSignature] = useState(null);
 
   // --- Ink Color State ---
-  const [signatureColor, setSignatureColor] = useState("#111827"); // Default Black
+  const [signatureColor, setSignatureColor] = useState("#111827");
   const signatureColors = [
     { name: "Black", hex: "#111827" },
     { name: "Navy Blue", hex: "#1D4ED8" },
     { name: "Red", hex: "#DC2626" },
   ];
 
-  // Overlay State
+  // Overlay & Animation States
   const [consentGiven, setConsentGiven] = useState(false);
   const [overlayType, setOverlayType] = useState(null);
+  // 2. Add state to trigger the full-screen success animation
+  const [showSuccessAnim, setShowSuccessAnim] = useState(false);
+
+  const [testPlayId, setTestPlayId] = useState(0);
 
   const modalSignatureCanvasRef = useRef(null);
   const uploadInputRef = useRef(null);
@@ -77,14 +83,10 @@ export default function SignViewer() {
         
         const widgetData = widgetRes.data.message;
         setDocumentDetails(widgetData.document);
-        // Pre-map widgets with their absolute index so we don't lose track across pages
         setWidgets((widgetData.widgets || []).map((w, index) => ({ ...w, index })));
       } catch (err) {
         console.error("Failed to load document:", err);
-        toast.error(
-    err.response?.data?.message ||
-    "Something Went Wrong"
-  );
+        toast.error(err.response?.data?.message || "Something Went Wrong");
       } finally {
         setLoading(false);
       }
@@ -116,10 +118,7 @@ export default function SignViewer() {
         setPages(Array.from({ length: pdf.numPages }, (_, i) => i + 1));
       } catch (err) {
         console.error("PDF Loading Error:", err);
-        toast.error(
-    err.response?.data?.message ||
-    "Something Went Wrong"
-  );
+        toast.error(err.response?.data?.message || "Something Went Wrong");
       }
     }
     loadPdf();
@@ -129,7 +128,6 @@ export default function SignViewer() {
     setValues((prev) => ({ ...prev, [index]: val }));
   };
 
-  // --- Premium Signature Fonts ---
   const signatureStyles = [
     { id: "style-1", fontFamily: "'Caveat', 'Segoe Script', cursive", fontStyle: "normal", fontWeight: "500" },
     { id: "style-2", fontFamily: "'Dancing Script', 'Lucida Handwriting', cursive", fontStyle: "normal", fontWeight: "400" },
@@ -148,7 +146,6 @@ export default function SignViewer() {
     canvas.height = 250;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Apply selected ink color
     ctx.fillStyle = color;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -236,16 +233,12 @@ export default function SignViewer() {
         { withCredentials: true }
       );
 
-      toast.success("Document Signed & Submitted!");
-      navigate("/documents");
+      // 3. Instead of toasting and navigating immediately, trigger the animation!
+      setShowSuccessAnim(true);
     } catch (error) {
       console.error(error);
-      toast.error(
-    error.response?.data?.message ||
-    "Something Went Wrong"
-  );
-    } finally {
-      setSubmitting(false);
+      toast.error(error.response?.data?.message || "Something Went Wrong");
+      setSubmitting(false); // Only reset submitting if it failed (if successful, animation takes over)
     }
   };
 
@@ -263,7 +256,6 @@ export default function SignViewer() {
         </header>
 
         <div className={styles.mainContent}>
-          {/* Left Sidebar: Navigates to pages seamlessly */}
           <aside className={styles.leftSidebar}>
             <div className={styles.sidebarTitle}>Preview</div>
             {pages.map((pageNum) => (
@@ -280,7 +272,6 @@ export default function SignViewer() {
             ))}
           </aside>
 
-          {/* Center: Continuous Scroll Canvas Area */}
           <main className={styles.centerCanvasArea}>
             {pages.map((pageNum) => (
               <PdfPage 
@@ -295,7 +286,6 @@ export default function SignViewer() {
             ))}
           </main>
 
-          {/* Right Sidebar: Actions */}
           <aside className={styles.rightSidebar}>
             <div>
               <div className={styles.sectionLabel}>Raised by</div>
@@ -347,7 +337,6 @@ export default function SignViewer() {
               <button className={`${styles.signatureTab} ${signatureTab === "upload" ? styles.signatureTabActive : ""}`} onClick={() => setSignatureTab("upload")}>Upload</button>
             </div>
 
-            {/* --- Ink Color Picker --- */}
             {(signatureTab === "draw" || signatureTab === "type") && (
               <div className={styles.colorPickerContainer}>
                 <span className={styles.colorPickerLabel}>Ink Color:</span>
@@ -440,6 +429,7 @@ export default function SignViewer() {
         </div>
       )}
 
+      {/* Overlays */}
       {overlayType === "consent" && (
         <SignerConsentOverlay 
           onAccept={() => {
@@ -462,6 +452,32 @@ export default function SignViewer() {
           onReturnHome={() => navigate("/")} 
         />
       )}
+
+      {/* 4. Document Saved Animation overlays the entire screen when submitted */}
+      {showSuccessAnim && (
+        <DocumentSavedAnimation
+          title={documentDetails?.title?.toUpperCase() || "SIGNED DOCUMENT"}
+          signature={typedName || request?.recipient?.userId?.name || "Signed"}
+          onComplete={() => navigate("https://nexgn.cloud")} 
+          fullscreen={true}
+        />
+      )}
+
+      {/* ---> TEMPORARY DEVELOPER BUTTON FOR LOCALHOST PREVIEW <--- */}
+      <button 
+        onClick={() => {
+          setShowSuccessAnim(true);
+          setTestPlayId(prev => prev + 1); // Increments ID to replay animation
+        }}
+        style={{
+          position: 'fixed', bottom: '20px', left: '20px', zIndex: 9999999,
+          background: '#000', color: '#fff', padding: '12px 20px', 
+          borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
+        }}
+      >
+        Replay Animation
+      </button>
     </>
   );
 }
