@@ -22,7 +22,7 @@ export default function Profile({ user, onUserUpdated }) {
     setFormData({
       fullName: user.name || "",
       email: user.email || "",
-      phone: user.phone_no || "NA",
+      phone: user.phone_no || "+91 8685468545",
     });
   }, [user]);
 
