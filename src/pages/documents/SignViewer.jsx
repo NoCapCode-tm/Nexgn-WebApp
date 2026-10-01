@@ -242,6 +242,10 @@ export default function SignViewer() {
 
   if (loading) return <DocumentViewerSkeleton />;
 
+  if (overlayType === "signed") {return <AlreadySignedOverlay/> }
+  if (overlayType === "revoked") {return <RevokedOverlay/> }
+  
+
   const signees = request?.documentId?.assignedto || [];
   const senderName = request?.senderId?.name || "System Admin";
 
