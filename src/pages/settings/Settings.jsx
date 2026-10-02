@@ -43,7 +43,7 @@ const settingsNavItems = [
   { key: "account", label: "Account" },
   { key: "security", label: "Security" },
   { key: "team", label: "Team Management" },
-  // { key: "notifications", label: "Notifications" },
+  { key: "notifications", label: "Notifications" },
   { key: "billing", label: "Billing" },
   { key: "integrations", label: "Integrations" },
   { key: "audit", label: "Audit Logs" },

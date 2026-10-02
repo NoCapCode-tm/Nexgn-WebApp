@@ -1,10 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import { Bell, UserCircle, Settings, FileClock, UserPen, Crown, LogOut, Sun, Moon, BookOpen } from "lucide-react";
+import { Bell, UserCircle, Settings, FileClock, UserPen, Crown, LogOut, Sun, Moon, BookOpen, Shield } from "lucide-react";
 import useDarkMode from "../../hooks/useDarkMode";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { API_URL } from "../../config";
 import { useProductTour } from "../tour/ProductTour";
+import {
+  useNotifications,
+  markNotificationRead,
+  markAllNotificationsRead,
+} from "../../hooks/useNotifications";
 
 export default function TopbarIcons({
   iconSize = 24,
@@ -14,6 +19,21 @@ export default function TopbarIcons({
   const [isDark, toggleDark] = useDarkMode();
   const [user, setUser] = useState({});
   const { restartTour } = useProductTour();
+  const { notifications } = useNotifications();
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const notificationRef = useRef(null);
+  const unreadCount = notifications.filter((item) => !item.isRead).length;
+
+  useEffect(() => {
+    const handlePointerDown = (event) => {
+      if (!notificationRef.current?.contains(event.target)) {
+        setNotificationsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, []);
 
   useEffect(() => {
     const verifyUser = async () => {
@@ -45,6 +65,44 @@ export default function TopbarIcons({
     }
   };
 
+  const openNotification = async (item) => {
+    setNotificationsOpen(false);
+
+    if (!item.isRead) {
+      try {
+        await markNotificationRead(item._id);
+      } catch (error) {
+        console.error("Failed to mark notification as read:", error?.message);
+      }
+    }
+
+    if (!item.link) return;
+    if (item.link.startsWith("http")) {
+      window.location.href = item.link;
+      return;
+    }
+    navigate(item.link);
+  };
+
+  const markAllRead = async (event) => {
+    event.stopPropagation();
+    try {
+      await markAllNotificationsRead();
+    } catch (error) {
+      console.error("Failed to mark notifications as read:", error?.message);
+    }
+  };
+
+  const formatNotificationTime = (value) => {
+    if (!value) return "";
+    return new Date(value).toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <div className={className}>
       {/* Dark mode toggle — mobile only */}
@@ -59,39 +117,67 @@ export default function TopbarIcons({
         }
       </button>
 
-      <div className="topbar__icon-wrapper">
-        {/* <button className="topbar__icon-btn">
+      <div
+        className={`topbar__icon-wrapper${notificationsOpen ? " is-open" : ""}`}
+        ref={notificationRef}
+      >
+        <button
+          className="topbar__icon-btn topbar__notify-btn"
+          type="button"
+          aria-label="Notifications"
+          onClick={() => setNotificationsOpen((open) => !open)}
+        >
           <Bell size={iconSize} color="#FF0915" strokeWidth={1.5} />
-        </button> */}
+          {unreadCount > 0 && (
+            <span className="notification-badge">
+              {unreadCount > 9 ? "9+" : unreadCount}
+            </span>
+          )}
+        </button>
         <div className="notification-dropdown">
           <div className="notification-dropdown__header">
             <span>Notifications</span>
+            {unreadCount > 0 && (
+              <button
+                type="button"
+                className="notification-dropdown__mark"
+                onClick={markAllRead}
+              >
+                Mark all read
+              </button>
+            )}
           </div>
           <div className="notification-dropdown__body">
-            <div className="notification-item">
-              <div className="notification-item__avatar"></div>
-              <div className="notification-item__text">Alice Smith has updated the document.</div>
-            </div>
-            <div className="notification-item">
-              <FileClock color="#FF0915" size={20} className="notification-item__icon" strokeWidth={1.5} />
-              <div className="notification-item__text">
-                You have 1 document pending to sign.<br />
-                <span
-                  className="notification-item__text--red"
-                  onClick={() => navigate("/documents")}
-                  style={{ cursor: "pointer" }}
-                >
-                  Take Action.
-                </span>
-              </div>
-            </div>
+            {notifications.length === 0 && (
+              <div className="notification-item__text">No notifications yet.</div>
+            )}
+            {notifications.map((item) => (
+              <button
+                type="button"
+                className={`notification-item${item.isRead ? "" : " notification-item--unread"}`}
+                key={item._id}
+                onClick={() => openNotification(item)}
+              >
+                {item.type === "security"
+                  ? <Shield color="#FF0915" size={20} className="notification-item__icon" strokeWidth={1.5} />
+                  : <FileClock color="#FF0915" size={20} className="notification-item__icon" strokeWidth={1.5} />
+                }
+                <div className="notification-item__text">
+                  <div className="notification-item__message">{item.message || item.title}</div>
+                  <div className="notification-item__time">{formatNotificationTime(item.createdAt)}</div>
+                </div>
+              </button>
+            ))}
           </div>
           <div
             className="notification-dropdown__footer"
-            onClick={() => navigate("/settings?tab=notifications")}
+            onClick={() => {
+              setNotificationsOpen(false);
+              navigate("/settings?tab=notifications");
+            }}
             style={{ cursor: "pointer" }}
           >
-            See all recent activity
+            Notification settings
           </div>
         </div>
       </div>
