@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Eye, EyeOff } from "lucide-react"; 
 import { API_URL } from "../../config";
+import { getPostLoginPath } from "../../utils/postLoginPath";
 
 import styles from "./LoginPage.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
@@ -37,11 +38,7 @@ if (user?._id) {
   );
 }
 
-if (user?.twoFAenabled === true) {
-  navigate(`/2fa/${user._id}`);
-} else {
-  navigate("/dashboard");
-}
+navigate(getPostLoginPath(user));
       
       toast.success("Login Successful");
     } catch (error) {

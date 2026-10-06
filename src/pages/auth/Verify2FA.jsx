@@ -4,6 +4,7 @@ import styles from "./Verify2FA.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import axios from "axios";
 import { API_URL } from "../../config";
+import { getPostLoginPath } from "../../utils/postLoginPath";
 import { toast } from "react-toastify";
 import LoadingScreen from "../../components/Layout/LoadingScreen";
 
@@ -59,7 +60,7 @@ export default function Verify2FA() {
     try {
     setLoading(true);
 
-    await axios.post(
+    const response = await axios.post(
       `${API_URL}admin/twofaverifylogin`,
       {
         token: finalCode,
@@ -69,7 +70,8 @@ export default function Verify2FA() {
 
     toast.success("User Verified Successfully");
     setCode("");
-    navigate("/dashboard")
+    const user = response?.data?.message;
+    navigate(getPostLoginPath(user, { twoFactorVerified: true }));
 
   } catch (error) {
     toast.error(

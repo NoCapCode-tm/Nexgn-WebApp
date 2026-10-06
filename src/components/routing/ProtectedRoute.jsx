@@ -7,20 +7,24 @@ import LoadingScreen from "../Layout/LoadingScreen"; // adjust path as needed
 const ProtectedRoute = () => {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
+  const [needsBilling, setNeedsBilling] = useState(false);
 
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        await axios.get(
+        const response = await axios.get(
           `${API_URL}admin/me`,
           {
             withCredentials: true,
           }
         );
-     setAuthenticated(true);
+        const user = response?.data?.message;
+        setAuthenticated(true);
+        setNeedsBilling(user?.hasSeenBilling === false);
       } catch (err) {
         console.log(err.message)
         setAuthenticated(false);
+        setNeedsBilling(false);
       } finally {
         setLoading(false);
       }
@@ -32,7 +36,13 @@ const ProtectedRoute = () => {
   if (loading) {
     return <LoadingScreen state="solving" size={64} theme="light" message="Verifying session" />;
   }
-  return authenticated ? <Outlet /> : <Navigate to="/" replace />;
+  if (!authenticated) {
+    return <Navigate to="/" replace />;
+  }
+  if (needsBilling) {
+    return <Navigate to="/pricing" replace />;
+  }
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

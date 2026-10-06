@@ -1,8 +1,4 @@
-/**
- * Anti-Inspect & DevTools Deterrent Utility
- * Supports Windows, macOS, ChromeOS, and Linux shortcuts.
- * Includes a developer bypass mechanism.
- */
+
 
 const DEV_SECRET_PASSCODE = import.meta.env.VITE_DEV_PASSCODE;
 
