@@ -66,13 +66,19 @@ export default function SignViewer() {
         const reqData = reqRes?.data?.message;
         setRequest(reqData);
 
-        if (reqData.overallStatus === "completed") {
+        const status = reqData?.overallStatus;
+        const isRevoked = status === "cancelled" || status === "revoked" || status === "Expired";
+
+        if (status === "completed") {
           setOverlayType("signed");
-          toast.info("This document is already completed.");
-        } else if (reqData.overallStatus === "cancelled" || reqData.overallStatus === "revoked") {
+        } else if (isRevoked) {
           setOverlayType("revoked");
         } else if (!consentGiven) {
           setOverlayType("consent");
+        }
+
+        if (isRevoked) {
+          return;
         }
 
         const widgetRes = await axios.get(`${API_URL}document/widgets/${id}`, {
@@ -84,7 +90,14 @@ export default function SignViewer() {
         setWidgets((widgetData.widgets || []).map((w, index) => ({ ...w, index })));
       } catch (err) {
         console.error("Failed to load document:", err);
-        toast.error(err.response?.data?.message || "Something Went Wrong");
+        const message = err.response?.data?.message || "";
+        if (/completed/i.test(message)) {
+          setOverlayType("signed");
+        } else if (/cancelled|revoked|expired/i.test(message)) {
+          setOverlayType("revoked");
+        } else {
+          toast.error(message || "Something Went Wrong");
+        }
       } finally {
         setLoading(false);
       }
@@ -242,9 +255,22 @@ export default function SignViewer() {
 
   if (loading) return <DocumentViewerSkeleton />;
 
-  if (overlayType === "signed") {return <AlreadySignedOverlay/> }
-  if (overlayType === "revoked") {return <RevokedOverlay/> }
-  
+  if (overlayType === "signed") {
+    return (
+      <AlreadySignedOverlay
+        onViewDocument={() => setOverlayType(null)}
+        onReturnHome={() => { window.location.href = "https://nexgn.cloud"; }}
+      />
+    );
+  }
+
+  if (overlayType === "revoked") {
+    return (
+      <RevokedOverlay
+        onReturnHome={() => { window.location.href = "https://nexgn.cloud"; }}
+      />
+    );
+  }
 
   const signees = request?.documentId?.assignedto || [];
   const senderName = request?.senderId?.name || "System Admin";
