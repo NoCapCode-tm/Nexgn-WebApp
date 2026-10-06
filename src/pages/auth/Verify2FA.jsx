@@ -4,10 +4,7 @@ import styles from "./Verify2FA.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import axios from "axios";
 import { API_URL } from "../../config";
-<<<<<<< HEAD
 import { getPostLoginPath } from "../../utils/postLoginPath";
-=======
->>>>>>> 825de66632e908a3dae6c746c0d1dea6fa765a4f
 import { toast } from "react-toastify";
 import LoadingScreen from "../../components/Layout/LoadingScreen";
 
@@ -73,12 +70,8 @@ export default function Verify2FA() {
 
     toast.success("User Verified Successfully");
     setCode("");
-<<<<<<< HEAD
     const user = response?.data?.message;
     navigate(getPostLoginPath(user, { twoFactorVerified: true }));
-=======
-    navigate("/dashboard")
->>>>>>> 825de66632e908a3dae6c746c0d1dea6fa765a4f
 
   } catch (error) {
     toast.error(
