@@ -60,7 +60,7 @@ const SignRequest = () => {
         });
         setSignRequests(response?.data?.message || []);
       } catch (error) {
- toast.error(
+        toast.error(
           error.response?.data?.message ||
           "Something Went Wrong"
         );
@@ -409,6 +409,8 @@ const SignRequestRow = ({ request, sign, onCancel, onDelete }) => {
         </button>
         {menuOpen && (
           <div className={styles.actionMenu}>
+            
+            {/* If Completed: Show Downloads ONLY */}
             {request?.overallStatus === "completed" && (
               <>
                 <a href={sign?.certificateId?.signeddoc || "#"} className={styles.actionItem} onClick={() => setMenuOpen(false)} target="_blank" rel="noopener noreferrer">
@@ -419,11 +421,15 @@ const SignRequestRow = ({ request, sign, onCancel, onDelete }) => {
                 </a>
               </>
             )}
-            {request?.signerToken && (
+            
+            {/* If Pending or Viewed: Show Cancel Request */}
+            {request?.signerToken && ["pending", "Viewed"].includes(request?.overallStatus) && (
                <button type="button" className={`${styles.actionItem} ${styles.dangerItem}`} onClick={() => { setMenuOpen(false); onCancel(request?.signerToken); }}>
                  <XCircle size={14} /><span>Cancel Request</span>
                </button>
             )}
+
+            {/* If Cancelled: Show Delete Request */}
             {request?.overallStatus === "cancelled" && (
                <button type="button" className={`${styles.actionItem} ${styles.dangerItem}`} onClick={() => { setMenuOpen(false); onDelete(request?._id); }}>
                  <XCircle size={14} /><span>Delete Request</span>

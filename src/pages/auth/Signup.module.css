@@ -69,11 +69,12 @@
   font-size: 15px;
   color: #1a1a1a;
   outline: none;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .input:focus {
   border-color: #FF0915;
+  box-shadow: 0 0 0 3px rgba(255, 9, 21, 0.08);
 }
 
 input:-webkit-autofill,
@@ -116,19 +117,82 @@ input:-webkit-autofill:active {
   color: #FF0915;
 }
 
-/* ---------------- Select Box ---------------- */
-.selectWrap {
+/* ---------------- CUSTOM SELECT DROPDOWN ---------------- */
+.customSelectContainer {
   position: relative;
   width: 100%;
 }
 
-.select {
-  width: 100%;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.customSelectDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
+  user-select: none;
+}
+
+.customSelectOpen {
+  border-color: #FF0915 !important;
+  box-shadow: 0 0 0 3px rgba(255, 9, 21, 0.08) !important;
+}
+
+.placeholderText {
+  color: #9ca3af;
+}
+
+.selectedValue {
+  color: #1a1a1a;
+}
+
+.selectIcon {
+  color: #8A949F;
+  transition: transform 0.2s ease;
+}
+
+.selectIconOpen {
+  transform: rotate(180deg);
+  color: #FF0915;
+}
+
+.customSelectMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
   background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 6px 0;
+  animation: dropdownEnter 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.customSelectOption {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14.5px;
+  color: #333333;
+  transition: all 0.15s ease;
+}
+
+.customSelectOption:hover {
+  background: #f8f9fa;
+  color: #FF0915;
+}
+
+.customSelectOptionActive {
+  background: rgba(255, 9, 21, 0.05);
+  font-weight: 600;
+  color: #FF0915;
+}
+
+@keyframes dropdownEnter {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ---------------- Buttons & Links ---------------- */
@@ -239,211 +303,108 @@ input:-webkit-autofill:active {
 
 /* ==========================================================
    NEXGN MNC SAAS MOTION SYSTEM — SIGN UP
-   CSS-only enhancement. No JSX / logic changes.
 ========================================================== */
 
 @keyframes signupPanelEnter {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 16px, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+  0% { opacity: 0; transform: translate3d(0, 16px, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes signupTitleEnter {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 9px, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+  0% { opacity: 0; transform: translate3d(0, 9px, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes signupFieldEnter {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 8px, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+  0% { opacity: 0; transform: translate3d(0, 8px, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes signupButtonEnter {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 7px, 0) scale(0.985);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}
-
-@keyframes signupSuccessIcon {
-  0% {
-    opacity: 0;
-    transform: scale(0.72) rotate(-10deg);
-  }
-  70% {
-    transform: scale(1.06) rotate(2deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0);
-  }
+  0% { opacity: 0; transform: translate3d(0, 7px, 0) scale(0.985); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
 @keyframes signupButtonSheen {
-  0% {
-    transform: translateX(-150%);
-  }
-  100% {
-    transform: translateX(170%);
-  }
+  0% { transform: translateX(-150%); }
+  100% { transform: translateX(170%); }
 }
 
-/* Base page entrance */
 .formWrap {
   animation: signupPanelEnter 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
   will-change: opacity, transform;
 }
 
-/* Every step uses the same visual rhythm */
-.titleRow {
-  animation: signupTitleEnter 480ms cubic-bezier(0.22, 1, 0.36, 1) 70ms both;
-}
+.titleRow { animation: signupTitleEnter 480ms cubic-bezier(0.22, 1, 0.36, 1) 70ms both; }
+.title { animation: signupTitleEnter 480ms cubic-bezier(0.22, 1, 0.36, 1) 90ms both; }
+.subtitle { animation: signupTitleEnter 480ms cubic-bezier(0.22, 1, 0.36, 1) 135ms both; }
 
-.title {
-  animation: signupTitleEnter 480ms cubic-bezier(0.22, 1, 0.36, 1) 90ms both;
-}
+.field { animation: signupFieldEnter 430ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.field:nth-child(1) { animation-delay: 190ms; }
+.field:nth-child(2) { animation-delay: 240ms; }
+.field:nth-child(3) { animation-delay: 290ms; }
 
-.subtitle {
-  animation: signupTitleEnter 480ms cubic-bezier(0.22, 1, 0.36, 1) 135ms both;
-}
-
-/* Step 1 + Step 2 form fields */
-.field {
-  animation: signupFieldEnter 430ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.field:nth-child(1) {
-  animation-delay: 190ms;
-}
-
-.field:nth-child(2) {
-  animation-delay: 240ms;
-}
-
-.field:nth-child(3) {
-  animation-delay: 290ms;
-}
-
-.selectWrap {
-  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.selectWrap:hover {
-  transform: translateY(-1px);
-}
-
-/* Inputs / selects */
 .input {
   transition:
     border-color 180ms ease,
     box-shadow 180ms ease,
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
     background-color 180ms ease;
 }
 
-.input:hover {
-  border-color: #c7c7c7;
-}
+.input:hover { border-color: #c7c7c7; }
 
-.input:focus {
-  border-color: #FF0915;
-  box-shadow: 0 0 0 3px rgba(255, 9, 21, 0.08);
-  transform: translateY(-1px);
-}
-
-.select {
-  transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 180ms ease;
-}
-
-/* Password eye */
 .passwordToggleBtn {
-  transition:
-    color 180ms ease,
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: color 180ms ease, transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
+.passwordToggleBtn:hover { color: #FF0915; transform: scale(1.08); }
 
-.passwordToggleBtn:hover {
-  color: #FF0915;
-  transform: scale(1.08);
-}
-
-/* Primary CTA */
-.loginButton {
+.loginButton, .outlineButton {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  animation: signupButtonEnter 460ms cubic-bezier(0.22, 1, 0.36, 1) 350ms both;
-  transition:
-    background 180ms ease,
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 180ms ease;
+  transition: background 180ms ease, transform 180ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease;
 }
 
-.loginButton::after {
+.loginButton::after, .outlineButton::after {
   content: "";
   position: absolute;
   inset: 0 auto 0 0;
   width: 42%;
   pointer-events: none;
-  background: linear-gradient(
-    100deg,
-    transparent,
-    rgba(255, 255, 255, 0.16),
-    transparent
-  );
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.16), transparent);
   transform: translateX(-150%);
 }
+
+.loginButton { animation: signupButtonEnter 460ms cubic-bezier(0.22, 1, 0.36, 1) 350ms both; }
+.outlineButton { animation: signupButtonEnter 460ms cubic-bezier(0.22, 1, 0.36, 1) 300ms both; }
 
 .loginButton:hover {
   background: #e50813;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(255, 9, 21, 0.16);
 }
+.outlineButton:hover {
+  background: #fff7f7;
+  border-color: #FF0915;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(255, 9, 21, 0.09);
+}
 
-.loginButton:hover::after {
+.loginButton:hover::after, .outlineButton:hover::after {
   animation: signupButtonSheen 620ms ease-out;
 }
 
-.loginButton:active {
+.loginButton:active, .outlineButton:active {
   transform: translateY(0);
   box-shadow: 0 3px 8px rgba(255, 9, 21, 0.12);
 }
 
-/* Footer links */
-.signupText {
-  animation: signupTitleEnter 420ms cubic-bezier(0.22, 1, 0.36, 1) 430ms both;
-}
+.signupText { animation: signupTitleEnter 420ms cubic-bezier(0.22, 1, 0.36, 1) 430ms both; }
 
 .signupLink {
   position: relative;
   text-decoration: none;
 }
-
 .signupLink::after {
   content: "";
   position: absolute;
@@ -456,129 +417,15 @@ input:-webkit-autofill:active {
   transform-origin: right;
   transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 .signupLink:hover::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-/* Step 3 success state */
-.successIcon {
-  animation: signupSuccessIcon 620ms cubic-bezier(0.22, 1, 0.36, 1) 90ms both;
-}
-
-.outlineButton {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  animation: signupButtonEnter 460ms cubic-bezier(0.22, 1, 0.36, 1) 300ms both;
-  transition:
-    background 180ms ease,
-    border-color 180ms ease,
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 180ms ease;
-}
-
-.outlineButton::after {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 40%;
-  pointer-events: none;
-  background: linear-gradient(
-    100deg,
-    transparent,
-    rgba(255, 9, 21, 0.06),
-    transparent
-  );
-  transform: translateX(-150%);
-}
-
-.outlineButton:hover {
-  background: #fff7f7;
-  border-color: #FF0915;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(255, 9, 21, 0.09);
-}
-
-.outlineButton:hover::after {
-  animation: signupButtonSheen 620ms ease-out;
-}
-
-.outlineButton:active {
-  transform: translateY(0);
-  box-shadow: 0 3px 7px rgba(255, 9, 21, 0.07);
-}
-
-/* Keep success-state text calm and readable */
-.btnTextBlack,
-.btnTextRed {
-  position: relative;
-  z-index: 1;
-}
-
-/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .formWrap,
-  .titleRow,
-  .title,
-  .subtitle,
-  .field,
-  .loginButton,
-  .signupText,
-  .successIcon,
-  .outlineButton {
+  .formWrap, .titleRow, .title, .subtitle, .field, .loginButton, .signupText, .outlineButton {
     animation: none !important;
     transform: none !important;
     opacity: 1 !important;
-  }
-
-  .loginButton::after,
-  .outlineButton::after {
-    display: none !important;
-  }
-
-  .input,
-  .select,
-  .passwordToggleBtn,
-  .loginButton,
-  .outlineButton,
-  .signupLink::after {
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Responsive choreography */
-@media (max-width: 425px) {
-  .formWrap {
-    animation-duration: 480ms;
-  }
-
-  .titleRow {
-    animation-delay: 50ms;
-  }
-
-  .subtitle {
-    animation-delay: 95ms;
-  }
-
-  .field:nth-child(1) {
-    animation-delay: 135ms;
-  }
-
-  .field:nth-child(2) {
-    animation-delay: 180ms;
-  }
-
-  .field:nth-child(3) {
-    animation-delay: 225ms;
-  }
-
-  .loginButton {
-    animation-delay: 275ms;
-  }
-
-  .signupText {
-    animation-delay: 345ms;
   }
 }
