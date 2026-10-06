@@ -42,6 +42,7 @@
   display: flex;
   flex: 1;
   overflow: hidden;
+  position: relative;
 }
 
 /* LEFT SIDEBAR */
@@ -122,7 +123,7 @@
   display: block;
 }
 
-/* FLOATING LEFT TOOLBAR (Only Zoom/Rotate now) */
+/* FLOATING TOOLBAR */
 .floatingToolbar {
   position: absolute;
   left: 20px;
@@ -194,7 +195,7 @@
 /* MINI TOOLBAR ON SELECTED WIDGET */
 .widgetMiniToolbar {
   position: absolute;
-  top: -42px; /* Hangs directly above the widget */
+  top: -42px;
   left: 0;
   display: flex;
   align-items: center;
@@ -205,7 +206,7 @@
   padding: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 101;
-  pointer-events: auto; /* Re-enable clicks inside the RND box */
+  pointer-events: auto;
 }
 
 .widgetMiniToolbar button {
@@ -268,7 +269,7 @@
   background: #FFFFFF;
   border: 1px solid #E4E4E4;
   border-radius: 8px;
-  cursor: grab; /* Shows it's draggable */
+  cursor: grab;
   color: #6B7280;
   transition: all 0.2s;
   user-select: none;
@@ -320,6 +321,7 @@
 .modalContent {
   background: #FFF;
   width: 400px;
+  max-width: 90vw;
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -333,18 +335,8 @@
   border-bottom: 1px solid #E4E4E4;
 }
 
-.modalHeader h3 {
-  margin: 0;
-  font-size: 16px;
-  color: #111827;
-}
-
-.modalHeader button {
-  background: none;
-  border: none;
-  color: #6B7280;
-  cursor: pointer;
-}
+.modalHeader h3 { margin: 0; font-size: 16px; color: #111827; }
+.modalHeader button { background: none; border: none; color: #6B7280; cursor: pointer; }
 
 .modalBody {
   padding: 20px;
@@ -370,31 +362,62 @@
   gap: 12px;
 }
 
-.btnPrimary {
-  background: #003366; 
-  color: #FFF;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 24px;
-  font-weight: 600;
-  cursor: pointer;
-}
+.btnPrimary { background: #003366; color: #FFF; border: none; border-radius: 6px; padding: 8px 24px; font-weight: 600; cursor: pointer; }
+.btnGhost { background: transparent; color: #374151; border: none; font-weight: 600; cursor: pointer; }
 
-.btnGhost {
-  background: transparent;
-  color: #374151;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* RESPONSIVE DESIGN */
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
 @media (max-width: 1024px) {
   .leftSidebar { display: none; }
 }
 
 @media (max-width: 768px) {
-  .mainContent { flex-direction: column; }
-  .centerCanvasArea { padding: 16px; }
-  .rightSidebar { width: 100%; border-left: none; border-top: 1px solid #E4E4E4; padding: 20px; }
+  .mainContent { 
+    flex-direction: column; 
+  }
+  
+  .centerCanvasArea { 
+    padding: 16px; 
+    height: 60vh; /* Allow scroll within top half */
+  }
+  
+  .floatingToolbar {
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    padding: 4px 8px;
+  }
+
+  .toolbarDivider {
+    width: 1px;
+    height: 24px;
+    margin: 0 8px;
+    align-self: center;
+  }
+
+  /* Make sidebar a bottom sheet */
+  .rightSidebar { 
+    width: 100%; 
+    height: 40vh;
+    border-left: none; 
+    border-top: 1px solid #E4E4E4; 
+    padding: 16px; 
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+  }
+
+  .widgetsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+  }
+
+  .widgetBtn {
+    aspect-ratio: auto;
+    padding: 12px 0;
+  }
+
+  .sendBtn {
+    margin-top: 16px;
+  }
 }

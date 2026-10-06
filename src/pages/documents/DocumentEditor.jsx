@@ -53,7 +53,29 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
     ? [{ name: currentSigners?.name || "", email: currentSigners?.email || "" }]
     : signers;
 
-  // 1. Load PDF Document
+  // Auto-Zoom for Mobile Devices
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setZoom(0.5); // Shrink to fit mobile screens
+    }
+  }, []);
+
+  // Keyboard Shortcuts (Delete & Backspace)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Don't delete if user is typing in an input or textarea somewhere else
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if ((e.key === "Delete" || e.key === "Backspace") && selectedWidgetId) {
+        e.preventDefault();
+        handleDeleteWidget(selectedWidgetId);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedWidgetId]);
+
+  // Load PDF Document
   useEffect(() => {
     if (!file) return;
     async function loadPdf() {
@@ -73,7 +95,7 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
     loadPdf();
   }, [file]);
 
-  // 2. Render PDF Page
+  // Render PDF Page
   useEffect(() => {
     if (!pdfDoc || !canvasRef.current) return;
     async function renderPage() {
@@ -100,7 +122,7 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
   };
 
   const handleDragOver = (e) => {
-    e.preventDefault(); // Necessary to allow dropping
+    e.preventDefault(); 
   };
 
   const handleDrop = (e) => {
@@ -115,7 +137,6 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
 
     const size = DEFAULT_WIDGET_SIZES[type];
     
-    // Center the widget on the mouse drop point
     const newWidget = {
       id: `${type}-${Date.now()}`,
       widgetname: type,
@@ -130,7 +151,7 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
     setSelectedWidgetId(newWidget.id);
   };
 
-  // Fallback for just clicking the sidebar buttons instead of dragging
+  // Fallback for clicking buttons on Mobile devices (which struggle with HTML5 drag)
   const handleAddWidgetClick = (type) => {
     const size = DEFAULT_WIDGET_SIZES[type];
     const newWidget = {
@@ -185,7 +206,6 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
       fetch("https://api.ipify.org?format=json"),
       fetch("https://api6.ipify.org?format=json"),
     ]);
-
     const ipv4 = ipv4Res.status === "fulfilled" ? (await ipv4Res.value.json()).ip : null;
     const ipv6 = ipv6Res.status === "fulfilled" ? (await ipv6Res.value.json()).ip : null;
     return { ipv4, ipv6 };
@@ -232,7 +252,6 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
 
       <div className={styles.mainContent}>
         
-        {/* LEFT SIDEBAR: Thumbnails */}
         <aside className={styles.leftSidebar}>
           <div className={styles.sidebarTitle}>Pages</div>
           {pages.map((pageNum) => (
@@ -247,15 +266,13 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
           ))}
         </aside>
 
-        {/* CENTER: Canvas & Toolbars */}
         <main className={styles.centerCanvasArea} onPointerDown={() => setSelectedWidgetId(null)}>
           
-          {/* FLOATING ACTION TOOLBAR (Zoom & Rotate) */}
           <div className={styles.floatingToolbar}>
             <button title="Zoom In" onClick={() => setZoom(z => Math.min(2, z + 0.1))}>
               <ZoomIn size={20} />
             </button>
-            <button title="Zoom Out" onClick={() => setZoom(z => Math.max(0.5, z - 0.1))}>
+            <button title="Zoom Out" onClick={() => setZoom(z => Math.max(0.3, z - 0.1))}>
               <ZoomOut size={20} />
             </button>
             <div className={styles.toolbarDivider} />
@@ -276,7 +293,6 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
             >
               <canvas ref={canvasRef} className={styles.pdfCanvas} />
 
-              {/* RND WIDGETS */}
               {widgets.filter((w) => w.page === activePage).map((w) => (
                 <Rnd
                   key={w.id}
@@ -300,24 +316,16 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
                     {w.widgetname.charAt(0).toUpperCase() + w.widgetname.slice(1)}
                   </span>
 
-                  {/* WIDGET MINI-TOOLBAR (Visible only when selected) */}
                   {selectedWidgetId === w.id && (
                     <div 
                       className={styles.widgetMiniToolbar} 
-                      onPointerDown={(e) => e.stopPropagation()} // Prevent dragging when clicking buttons
+                      onPointerDown={(e) => e.stopPropagation()} 
                       onMouseDown={(e) => e.stopPropagation()}
                     >
-                      <button 
-                        title="Duplicate Widget" 
-                        onClick={() => setDuplicateModalWidget(w.id)}
-                      >
+                      <button title="Duplicate Widget" onClick={() => setDuplicateModalWidget(w.id)}>
                         <Copy size={14} />
                       </button>
-                      <button 
-                        className={styles.deleteBtn} 
-                        title="Delete Widget" 
-                        onClick={() => handleDeleteWidget(w.id)}
-                      >
+                      <button className={styles.deleteBtn} title="Delete Widget" onClick={() => handleDeleteWidget(w.id)}>
                         <Trash2 size={14} />
                       </button>
                     </div>
@@ -328,11 +336,10 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
           </div>
         </main>
 
-        {/* RIGHT SIDEBAR: Tools */}
         <aside className={styles.rightSidebar}>
           <div>
             <div className={styles.sectionLabel}>Widgets</div>
-            <p style={{fontSize: '12px', color: '#6B7280', margin: '0 0 16px 0'}}>Drag and drop onto the document</p>
+            <p style={{fontSize: '12px', color: '#6B7280', margin: '0 0 16px 0'}}>Drag and drop or click</p>
             
             <div className={styles.widgetsGrid}>
               <div draggable onDragStart={(e) => handleDragStart(e, "signature")} className={styles.widgetBtn} onClick={() => handleAddWidgetClick("signature")}><PenTool size={22} /><span className={styles.widgetBtnText}>Signature</span></div>
