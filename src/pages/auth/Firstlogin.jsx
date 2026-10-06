@@ -4,7 +4,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Eye, EyeOff } from "lucide-react"; 
 import { API_URL } from "../../config";
+<<<<<<< HEAD
 import { getPostLoginPath } from "../../utils/postLoginPath";
+=======
+>>>>>>> 825de66632e908a3dae6c746c0d1dea6fa765a4f
 
 import styles from "./LoginPage.module.css";
 import AuthLayout from "../../components/Layout/AuthLayout";
