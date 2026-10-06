@@ -9,9 +9,7 @@
   overflow: hidden;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 .header {
   height: 60px;
   padding: 0 24px;
@@ -33,24 +31,20 @@
   transition: color 0.2s;
   padding: 8px;
   margin-left: -8px;
+  font-weight: 600;
+  font-size: 15px;
 }
 
-.backButton:hover {
-  color: #111827;
-}
+.backButton:hover { color: #111827; }
 
-/* =========================
-   MAIN LAYOUT
-========================= */
+/* MAIN LAYOUT */
 .mainContent {
   display: flex;
   flex: 1;
   overflow: hidden;
 }
 
-/* =========================
-   LEFT SIDEBAR (Thumbnails)
-========================= */
+/* LEFT SIDEBAR */
 .leftSidebar {
   width: 240px;
   background-color: #F8F9FA;
@@ -100,17 +94,21 @@
   font-weight: 500;
 }
 
-/* =========================
-   CENTER (PDF Canvas)
-========================= */
+/* CENTER AREA */
 .centerCanvasArea {
+  position: relative;
   flex: 1;
   padding: 32px;
-  overflow: auto; /* Allows scrolling around the fixed-size PDF */
+  overflow: auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   background-color: #F3F4F6;
+}
+
+.pdfZoomWrapper {
+  transition: transform 0.2s ease;
+  margin: 0 auto;
 }
 
 .pdfWrapper {
@@ -118,84 +116,123 @@
   background: #FFFFFF;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   border-radius: 4px;
-  /* Width and height are set dynamically by the canvas */
 }
 
 .pdfCanvas {
   display: block;
 }
 
-/* Placed Widget Styling */
-.placedWidget {
+/* FLOATING LEFT TOOLBAR (Only Zoom/Rotate now) */
+.floatingToolbar {
   position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #FFFFFF;
+  border: 1px solid #E4E4E4;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  z-index: 50;
+}
+
+.floatingToolbar button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #6B7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.floatingToolbar button:hover:not(:disabled) {
+  background: #F3F4F6;
+  color: #111827;
+}
+
+.toolbarDivider {
+  width: 100%;
+  height: 1px;
+  background: #E4E4E4;
+  margin: 4px 0;
+}
+
+/* WIDGET RND ELEMENTS */
+.placedWidget {
   background: rgba(255, 9, 21, 0.05);
-  border: 1.5px dashed #FF0915;
+  border: 1.5px dashed #FF0915 !important;
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: grab;
-  user-select: none;
-  touch-action: none;
 }
 
-.placedWidget:active {
-  cursor: grabbing;
-}
+.placedWidget:active { cursor: grabbing; }
 
 .placedWidgetSelected {
-  border: 2px solid #b30000;
-  box-shadow: 0 0 0 3px rgba(255, 9, 21, 0.2);
-  z-index: 10;
+  background: rgba(255, 9, 21, 0.15);
+  border: 2px solid #b30000 !important;
+  box-shadow: 0 0 0 4px rgba(255, 9, 21, 0.2);
+  z-index: 100 !important;
 }
 
 .widgetLabel {
   font-size: 12px;
   font-weight: 600;
   color: #FF0915;
-  pointer-events: none; /* Let drag events pass through */
+  pointer-events: none;
 }
 
-.resizeHandle {
+/* MINI TOOLBAR ON SELECTED WIDGET */
+.widgetMiniToolbar {
   position: absolute;
-  right: -5px;
-  bottom: -5px;
-  width: 12px;
-  height: 12px;
-  background: #FF0915;
-  border: 2px solid #FFF;
-  border-radius: 50%;
-  cursor: nwse-resize;
-  z-index: 11;
-}
-
-/* Toolbar for deleting widgets */
-.widgetToolbar {
-  position: absolute;
-  top: -36px;
-  right: 0;
-  background: #FFF;
+  top: -42px; /* Hangs directly above the widget */
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #FFFFFF;
   border: 1px solid #E4E4E4;
   border-radius: 6px;
   padding: 4px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  z-index: 11;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 101;
+  pointer-events: auto; /* Re-enable clicks inside the RND box */
 }
 
-.deleteBtn {
-  background: #FFF1F1;
-  color: #E22A2A;
+.widgetMiniToolbar button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
   border: none;
   border-radius: 4px;
-  padding: 4px 8px;
+  color: #4B5563;
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
+  transition: background 0.15s;
 }
 
-/* =========================
-   RIGHT SIDEBAR (Tools)
-========================= */
+.widgetMiniToolbar button:hover {
+  background: #F3F4F6;
+  color: #111827;
+}
+
+.widgetMiniToolbar .deleteBtn:hover {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+/* RIGHT SIDEBAR */
 .rightSidebar {
   width: 320px;
   background-color: #FFFFFF;
@@ -211,46 +248,9 @@
   font-size: 15px;
   font-weight: 600;
   color: #111827;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
 }
 
-/* Roles Section */
-.roleInput {
-  width: 100%;
-  padding: 10px 14px;
-  background: #FFFFFF;
-  border: 1px solid #E4E4E4;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #111827;
-  outline: none;
-  margin-bottom: 12px;
-  box-sizing: border-box;
-}
-
-.roleInput:focus {
-  border-color: #E22A2A;
-}
-
-.addRoleBtn {
-  width: 100%;
-  padding: 10px;
-  background: #FFFFFF;
-  color: #E22A2A;
-  border: 1.5px solid #E22A2A;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-  margin-bottom: 32px;
-}
-
-.addRoleBtn:hover {
-  background: #FFF1F1;
-}
-
-/* Widgets Section */
 .widgetsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -268,20 +268,26 @@
   background: #FFFFFF;
   border: 1px solid #E4E4E4;
   border-radius: 8px;
-  cursor: pointer;
+  cursor: grab; /* Shows it's draggable */
   color: #6B7280;
   transition: all 0.2s;
+  user-select: none;
 }
+
+.widgetBtn:active { cursor: grabbing; }
 
 .widgetBtn:hover {
   border-color: #E22A2A;
   color: #E22A2A;
   background: #FFF5F5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
 .widgetBtnText {
   font-size: 12px;
   font-weight: 500;
+  pointer-events: none;
 }
 
 /* Bottom Action */
@@ -298,33 +304,97 @@
   transition: opacity 0.2s;
   margin-top: 32px;
 }
+.sendBtn:hover { background: #C81E1E; }
 
-.sendBtn:hover {
-  background: #C81E1E;
+/* DUPLICATE MODAL */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
-/* =========================
-   RESPONSIVE DESIGN
-========================= */
+.modalContent {
+  background: #FFF;
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #E4E4E4;
+}
+
+.modalHeader h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #111827;
+}
+
+.modalHeader button {
+  background: none;
+  border: none;
+  color: #6B7280;
+  cursor: pointer;
+}
+
+.modalBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.modalFooter {
+  padding: 16px 20px;
+  background: #F8F9FA;
+  border-top: 1px solid #E4E4E4;
+  display: flex;
+  gap: 12px;
+}
+
+.btnPrimary {
+  background: #003366; 
+  color: #FFF;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btnGhost {
+  background: transparent;
+  color: #374151;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* RESPONSIVE DESIGN */
 @media (max-width: 1024px) {
-  .leftSidebar {
-    display: none;
-  }
+  .leftSidebar { display: none; }
 }
 
 @media (max-width: 768px) {
-  .mainContent {
-    flex-direction: column;
-  }
-  
-  .centerCanvasArea {
-    padding: 16px;
-  }
-
-  .rightSidebar {
-    width: 100%;
-    border-left: none;
-    border-top: 1px solid #E4E4E4;
-    padding: 20px;
-  }
+  .mainContent { flex-direction: column; }
+  .centerCanvasArea { padding: 16px; }
+  .rightSidebar { width: 100%; border-left: none; border-top: 1px solid #E4E4E4; padding: 20px; }
 }
