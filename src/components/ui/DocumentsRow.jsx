@@ -192,74 +192,78 @@ export default function DocumentsRow({
                 navigate(`/document/view/${id}`)
               }}>View</button>
 
-            {/* ONLY SHOW THESE BUTTONS IF THE DOCUMENT IS NOT COMPLETED/SIGNED */}
+            {/* REVOKE & CANCEL REQUESTS: Hidden if completed/signed/expired */}
             {!isCompleted && (
-              <>
-                <button
-                  className="action-menu__item action-menu__item--danger"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    navigate(`/document/view/${id}`)
-                    if (onRevoke) onRevoke();
-                  }}
+              <button
+                className="action-menu__item action-menu__item--danger"
+                onClick={() => {
+                  setMenuOpen(false);
+                  navigate(`/document/view/${id}`)
+                  if (onRevoke) onRevoke();
+                }}
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
                 >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                  Revoke
-                </button>
-                <button
-                  className="action-menu__item action-menu__item--danger"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    if (onArchive) onArchive();
-                  }}
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+                Revoke
+              </button>
+            )}
+
+            {/* MOVE TO BIN: Always available even if completed */}
+            <button
+              className="action-menu__item action-menu__item--danger"
+              onClick={() => {
+                setMenuOpen(false);
+                if (onArchive) onArchive();
+              }}
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+               Move to Bin
+            </button>
+
+            {/* CANCEL REQUESTS: Hidden if completed/signed/expired */}
+            {!isCompleted && (
+              <button
+                className="action-menu__item action-menu__item--danger"
+                onClick={() => {
+                  setMenuOpen(false);
+                  if (onCancel) onCancel();
+                }}
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
                 >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                   Move to Bin
-                </button>
-                <button
-                  className="action-menu__item action-menu__item--danger"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    if (onCancel) onCancel();
-                  }}
-                >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                   Cancel Requests
-                </button>
-              </>
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+                 Cancel Requests
+              </button>
             )}
           </div>
         )}
