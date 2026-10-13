@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom"; // FIXED IMPORT
 import * as pdfjsLib from "pdfjs-dist";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+import { PDFDocument } from "pdf-lib"; 
 import { Rnd } from "react-rnd";
 import { 
   ChevronLeft, Type, Hash, User, PenTool, Mail, Calendar,
-  Trash2, Copy, ZoomIn, ZoomOut, RotateCw, X
+  Trash2, Copy, ZoomIn, ZoomOut, RotateCw, X, PlusCircle
 } from "lucide-react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -28,9 +29,10 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
   const navigate = useNavigate();
   const location = useLocation();
   const sendingRef = useRef(false);
+  const appendInputRef = useRef(null); 
   const activeTab = location.pathname;
 
-  // PDF & View State
+  const [currentFile, setCurrentFile] = useState(file);
   const [pdfDoc, setPdfDoc] = useState(null);
   const [pages, setPages] = useState([]);
   const [activePage, setActivePage] = useState(1);
@@ -38,11 +40,9 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);
 
-  // Widget State
   const [widgets, setWidgets] = useState([]);
   const [selectedWidgetId, setSelectedWidgetId] = useState(null);
 
-  // Modal State
   const [duplicateModalWidget, setDuplicateModalWidget] = useState(null);
   const [duplicateOption, setDuplicateOption] = useState("all");
   const [duplicateTargetPage, setDuplicateTargetPage] = useState(1); 
@@ -54,14 +54,10 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
     ? [{ name: currentSigners?.name || "", email: currentSigners?.email || "" }]
     : signers;
 
-  // Auto-Zoom for Mobile Devices
   useEffect(() => {
-    if (window.innerWidth <= 768) {
-      setZoom(0.5); 
-    }
+    if (window.innerWidth <= 768) setZoom(0.5); 
   }, []);
 
-  // Keyboard Shortcuts (Delete & Backspace)
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -74,17 +70,15 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedWidgetId]);
 
-  // Load PDF Document
   useEffect(() => {
-    if (!file) return;
+    if (!currentFile) return;
     async function loadPdf() {
       setLoading(true);
       try {
-        const arrayBuffer = await file.arrayBuffer();
+        const arrayBuffer = await currentFile.arrayBuffer();
         const doc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
         setPdfDoc(doc);
         setPages(Array.from({ length: doc.numPages }, (_, i) => i + 1));
-        setActivePage(1);
       } catch (error) {
         toast.error("Could not read PDF file.");
       } finally {
@@ -92,9 +86,8 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
       }
     }
     loadPdf();
-  }, [file]);
+  }, [currentFile]);
 
-  // Render PDF Page
   useEffect(() => {
     if (!pdfDoc || !canvasRef.current) return;
     async function renderPage() {
@@ -115,14 +108,11 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
     renderPage();
   }, [pdfDoc, activePage, rotation]);
 
-  // --- HTML5 Drag & Drop Logistics ---
   const handleDragStart = (e, type) => {
     e.dataTransfer.setData("widgetType", type);
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault(); 
-  };
+  const handleDragOver = (e) => e.preventDefault(); 
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -154,25 +144,19 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
       id: `${type}-${Date.now()}`,
       widgetname: type,
       page: activePage,
-      x: 100, 
-      y: 100,
-      width: size.width,
-      height: size.height,
+      x: 100, y: 100,
+      width: size.width, height: size.height,
     };
     setWidgets((prev) => [...prev, newWidget]);
     setSelectedWidgetId(newWidget.id);
   };
 
-  const updateWidget = (id, newProps) => {
-    setWidgets(prev => prev.map(w => w.id === id ? { ...w, ...newProps } : w));
-  };
-
+  const updateWidget = (id, newProps) => setWidgets(prev => prev.map(w => w.id === id ? { ...w, ...newProps } : w));
   const handleDeleteWidget = (idToRemove) => {
     setWidgets((prev) => prev.filter((w) => w.id !== idToRemove));
     setSelectedWidgetId(null);
   };
 
-  // --- Duplication Logic ---
   const handleDuplicate = () => {
     const sourceWidget = widgets.find(w => w.id === duplicateModalWidget);
     if (!sourceWidget) return;
@@ -200,7 +184,38 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
     toast.success(`Widget copied to ${newWidgets.length} page(s)`);
   };
 
-  // --- Network Submission ---
+  const handleAppendFile = async (e) => {
+    const appendFile = e.target.files[0];
+    if (!appendFile) return;
+
+    setLoading(true);
+    toast.info("Merging documents...");
+    try {
+      const mergedPdf = await PDFDocument.create();
+      
+      const originalBytes = await currentFile.arrayBuffer();
+      const originalPdf = await PDFDocument.load(originalBytes);
+      const originalPages = await mergedPdf.copyPages(originalPdf, originalPdf.getPageIndices());
+      originalPages.forEach((page) => mergedPdf.addPage(page));
+
+      const newBytes = await appendFile.arrayBuffer();
+      const newPdf = await PDFDocument.load(newBytes);
+      const newPages = await mergedPdf.copyPages(newPdf, newPdf.getPageIndices());
+      newPages.forEach((page) => mergedPdf.addPage(page));
+
+      const mergedPdfBytes = await mergedPdf.save();
+      const finalFile = new File([mergedPdfBytes], "Merged_Document.pdf", { type: "application/pdf" });
+      
+      setCurrentFile(finalFile);
+      toast.success("Document added successfully!");
+    } catch (err) {
+      toast.error("Failed to append PDF.");
+    } finally {
+      setLoading(false);
+      if (appendInputRef.current) appendInputRef.current.value = "";
+    }
+  };
+
   async function getClientIPs() {
     const [ipv4Res, ipv6Res] = await Promise.allSettled([
       fetch("https://api.ipify.org?format=json"),
@@ -220,7 +235,7 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
       const { ipv4 } = await getClientIPs();
       const formData = new FormData();
       
-      formData.append("file", file);
+      formData.append("file", currentFile); 
       formData.append("title", title);
       formData.append("senderip", ipv4);
       formData.append("pathname", activeTab);
@@ -252,7 +267,6 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
 
       <div className={styles.mainContent}>
         
-        {/* LEFT SIDEBAR */}
         <aside className={styles.leftSidebar}>
           <div className={styles.sidebarTitle}>Pages</div>
           {pages.map((pageNum) => (
@@ -265,11 +279,14 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
               <span className={styles.thumbnailLabel}>{pageNum} of {pages.length}</span>
             </div>
           ))}
+
+          <button className={styles.appendPdfBtn} onClick={() => appendInputRef.current?.click()}>
+            <PlusCircle size={16} /> Add Page / PDF
+          </button>
+          <input type="file" accept="application/pdf" ref={appendInputRef} style={{ display: "none" }} onChange={handleAppendFile} />
         </aside>
 
-        {/* CENTER AREA */}
         <main className={styles.centerCanvasArea} onPointerDown={() => setSelectedWidgetId(null)}>
-          
           <div className={styles.floatingToolbar}>
             <button title="Zoom In" onClick={() => setZoom(z => Math.min(2, z + 0.1))}><ZoomIn size={20} /></button>
             <button title="Zoom Out" onClick={() => setZoom(z => Math.max(0.3, z - 0.1))}><ZoomOut size={20} /></button>
@@ -291,11 +308,7 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
                   onDragStop={(e, d) => updateWidget(w.id, { x: d.x, y: d.y })}
                   onResizeStart={(e) => { e.stopPropagation(); setSelectedWidgetId(w.id); }}
                   onResizeStop={(e, direction, ref, delta, position) => {
-                    updateWidget(w.id, {
-                      width: parseInt(ref.style.width, 10),
-                      height: parseInt(ref.style.height, 10),
-                      ...position,
-                    });
+                    updateWidget(w.id, { width: parseInt(ref.style.width, 10), height: parseInt(ref.style.height, 10), ...position });
                   }}
                   bounds="parent"
                   className={`${styles.placedWidget} ${selectedWidgetId === w.id ? styles.placedWidgetSelected : ""}`}
@@ -316,7 +329,6 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
           </div>
         </main>
 
-        {/* RIGHT SIDEBAR */}
         <aside className={styles.rightSidebar}>
           <div>
             <div className={styles.sectionLabel}>Widgets</div>
@@ -338,7 +350,6 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
         </aside>
       </div>
 
-      {/* DUPLICATE MODAL */}
       {duplicateModalWidget && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalContent}>
