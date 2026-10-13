@@ -193,7 +193,7 @@ export default function Dashboard() {
 
             {/* --- Pagination Footer --- */}
             {!loading && totalItems > 0 && (
-              <div className="paginationWrapper" style={{ borderTop: '1px solid #e5e7eb', marginTop: '280px', paddingTop: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div className="paginationWrapper" style={{ borderTop: '1px solid #e5e7eb', paddingTop: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div className="paginationLeft" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                   <span className="paginationLabel" style={{ fontSize: '13px', fontWeight: 500, color: '#6b7280' }}>Rows per page:</span>
                   <select 
