@@ -45,6 +45,7 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
   // Modal State
   const [duplicateModalWidget, setDuplicateModalWidget] = useState(null);
   const [duplicateOption, setDuplicateOption] = useState("all");
+  const [duplicateTargetPage, setDuplicateTargetPage] = useState(1); 
 
   const canvasRef = useRef(null);
   const pdfWrapperRef = useRef(null);
@@ -56,16 +57,14 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
   // Auto-Zoom for Mobile Devices
   useEffect(() => {
     if (window.innerWidth <= 768) {
-      setZoom(0.5); // Shrink to fit mobile screens
+      setZoom(0.5); 
     }
   }, []);
 
   // Keyboard Shortcuts (Delete & Backspace)
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Don't delete if user is typing in an input or textarea somewhere else
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-
       if ((e.key === "Delete" || e.key === "Backspace") && selectedWidgetId) {
         e.preventDefault();
         handleDeleteWidget(selectedWidgetId);
@@ -130,11 +129,9 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
     const type = e.dataTransfer.getData("widgetType");
     if (!type || !DEFAULT_WIDGET_SIZES[type]) return;
 
-    // Calculate drop coordinates relative to the PDF wrapper, adjusting for zoom
     const wrapperRect = pdfWrapperRef.current.getBoundingClientRect();
     const x = (e.clientX - wrapperRect.left) / zoom;
     const y = (e.clientY - wrapperRect.top) / zoom;
-
     const size = DEFAULT_WIDGET_SIZES[type];
     
     const newWidget = {
@@ -151,7 +148,6 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
     setSelectedWidgetId(newWidget.id);
   };
 
-  // Fallback for clicking buttons on Mobile devices (which struggle with HTML5 drag)
   const handleAddWidgetClick = (type) => {
     const size = DEFAULT_WIDGET_SIZES[type];
     const newWidget = {
@@ -186,14 +182,18 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
     if (duplicateOption === "all-but-last") targetPages = pages.slice(0, -1);
     if (duplicateOption === "all-but-first") targetPages = pages.slice(1);
     if (duplicateOption === "next") targetPages = [Math.min(pages.length, sourceWidget.page + 1)];
+    if (duplicateOption === "specific") targetPages = [duplicateTargetPage];
 
-    const newWidgets = targetPages
-      .filter(p => p !== sourceWidget.page)
-      .map(p => ({
+    const newWidgets = targetPages.map(p => {
+      const isSamePage = p === sourceWidget.page;
+      return {
         ...sourceWidget,
         id: `${sourceWidget.widgetname}-${Date.now()}-${p}`,
-        page: p
-      }));
+        page: p,
+        x: isSamePage ? sourceWidget.x + 20 : sourceWidget.x,
+        y: isSamePage ? sourceWidget.y + 20 : sourceWidget.y,
+      };
+    });
     
     setWidgets([...widgets, ...newWidgets]);
     setDuplicateModalWidget(null);
@@ -252,6 +252,7 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
 
       <div className={styles.mainContent}>
         
+        {/* LEFT SIDEBAR */}
         <aside className={styles.leftSidebar}>
           <div className={styles.sidebarTitle}>Pages</div>
           {pages.map((pageNum) => (
@@ -260,37 +261,24 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
               className={`${styles.thumbnailCard} ${activePage === pageNum ? styles.thumbnailCardActive : ""}`}
               onClick={() => setActivePage(pageNum)}
             >
-              <ThumbnailRenderer pdfDoc={pdfDoc} pageNum={pageNum} />
+              <ThumbnailRenderer pdfDoc={pdfDoc} pageNum={pageNum} rotation={rotation} />
               <span className={styles.thumbnailLabel}>{pageNum} of {pages.length}</span>
             </div>
           ))}
         </aside>
 
+        {/* CENTER AREA */}
         <main className={styles.centerCanvasArea} onPointerDown={() => setSelectedWidgetId(null)}>
           
           <div className={styles.floatingToolbar}>
-            <button title="Zoom In" onClick={() => setZoom(z => Math.min(2, z + 0.1))}>
-              <ZoomIn size={20} />
-            </button>
-            <button title="Zoom Out" onClick={() => setZoom(z => Math.max(0.3, z - 0.1))}>
-              <ZoomOut size={20} />
-            </button>
+            <button title="Zoom In" onClick={() => setZoom(z => Math.min(2, z + 0.1))}><ZoomIn size={20} /></button>
+            <button title="Zoom Out" onClick={() => setZoom(z => Math.max(0.3, z - 0.1))}><ZoomOut size={20} /></button>
             <div className={styles.toolbarDivider} />
-            <button title="Rotate Page" onClick={() => setRotation(r => (r + 90) % 360)}>
-              <RotateCw size={20} />
-            </button>
+            <button title="Rotate Page" onClick={() => setRotation(r => (r + 90) % 360)}><RotateCw size={20} /></button>
           </div>
 
-          <div 
-            className={styles.pdfZoomWrapper} 
-            style={{ transform: `scale(${zoom})`, transformOrigin: "top center" }}
-          >
-            <div 
-              className={styles.pdfWrapper} 
-              ref={pdfWrapperRef}
-              onDragOver={handleDragOver}
-              onDrop={handleDrop}
-            >
+          <div className={styles.pdfZoomWrapper} style={{ transform: `scale(${zoom})`, transformOrigin: "top center" }}>
+            <div className={styles.pdfWrapper} ref={pdfWrapperRef} onDragOver={handleDragOver} onDrop={handleDrop}>
               <canvas ref={canvasRef} className={styles.pdfCanvas} />
 
               {widgets.filter((w) => w.page === activePage).map((w) => (
@@ -317,17 +305,9 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
                   </span>
 
                   {selectedWidgetId === w.id && (
-                    <div 
-                      className={styles.widgetMiniToolbar} 
-                      onPointerDown={(e) => e.stopPropagation()} 
-                      onMouseDown={(e) => e.stopPropagation()}
-                    >
-                      <button title="Duplicate Widget" onClick={() => setDuplicateModalWidget(w.id)}>
-                        <Copy size={14} />
-                      </button>
-                      <button className={styles.deleteBtn} title="Delete Widget" onClick={() => handleDeleteWidget(w.id)}>
-                        <Trash2 size={14} />
-                      </button>
+                    <div className={styles.widgetMiniToolbar} onPointerDown={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+                      <button title="Duplicate Widget" onClick={() => setDuplicateModalWidget(w.id)}><Copy size={14} /></button>
+                      <button className={styles.deleteBtn} title="Delete Widget" onClick={() => handleDeleteWidget(w.id)}><Trash2 size={14} /></button>
                     </div>
                   )}
                 </Rnd>
@@ -336,6 +316,7 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
           </div>
         </main>
 
+        {/* RIGHT SIDEBAR */}
         <aside className={styles.rightSidebar}>
           <div>
             <div className={styles.sectionLabel}>Widgets</div>
@@ -366,18 +347,23 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
               <button onClick={() => setDuplicateModalWidget(null)}><X size={20} /></button>
             </div>
             <div className={styles.modalBody}>
-              <label className={styles.radioLabel}>
-                <input type="radio" name="duplicate" checked={duplicateOption === "all"} onChange={() => setDuplicateOption("all")} /> All pages
-              </label>
-              <label className={styles.radioLabel}>
-                <input type="radio" name="duplicate" checked={duplicateOption === "all-but-last"} onChange={() => setDuplicateOption("all-but-last")} /> All pages but last
-              </label>
-              <label className={styles.radioLabel}>
-                <input type="radio" name="duplicate" checked={duplicateOption === "all-but-first"} onChange={() => setDuplicateOption("all-but-first")} /> All pages but first
-              </label>
-              <label className={styles.radioLabel}>
-                <input type="radio" name="duplicate" checked={duplicateOption === "next"} onChange={() => setDuplicateOption("next")} /> Next to current widget
-              </label>
+              <label className={styles.radioLabel}><input type="radio" name="duplicate" checked={duplicateOption === "all"} onChange={() => setDuplicateOption("all")} /> All pages</label>
+              <label className={styles.radioLabel}><input type="radio" name="duplicate" checked={duplicateOption === "all-but-last"} onChange={() => setDuplicateOption("all-but-last")} /> All pages but last</label>
+              <label className={styles.radioLabel}><input type="radio" name="duplicate" checked={duplicateOption === "all-but-first"} onChange={() => setDuplicateOption("all-but-first")} /> All pages but first</label>
+              <label className={styles.radioLabel}><input type="radio" name="duplicate" checked={duplicateOption === "next"} onChange={() => setDuplicateOption("next")} /> Next to current widget</label>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <label className={styles.radioLabel}>
+                  <input type="radio" name="duplicate" checked={duplicateOption === "specific"} onChange={() => setDuplicateOption("specific")} /> 
+                  Specific page
+                </label>
+                {duplicateOption === "specific" && (
+                  <input 
+                    type="number" min="1" max={pages.length} value={duplicateTargetPage}
+                    onChange={(e) => setDuplicateTargetPage(Number(e.target.value))}
+                    style={{ width: '60px', padding: '4px 8px', border: '1px solid #ccc', borderRadius: '4px', outline: 'none' }}
+                  />
+                )}
+              </div>
             </div>
             <div className={styles.modalFooter}>
               <button className={styles.btnPrimary} onClick={handleDuplicate}>Apply</button>
@@ -390,13 +376,13 @@ export default function DocumentEditor({ title, file, signers, currentSigners, e
   );
 }
 
-function ThumbnailRenderer({ pdfDoc, pageNum }) {
+function ThumbnailRenderer({ pdfDoc, pageNum, rotation }) {
   const thumbRef = useRef(null);
   useEffect(() => {
     if (!pdfDoc || !thumbRef.current) return;
     async function renderThumb() {
       const page = await pdfDoc.getPage(pageNum);
-      const viewport = page.getViewport({ scale: 0.25 });
+      const viewport = page.getViewport({ scale: 0.25, rotation });
       const canvas = thumbRef.current;
       const ctx = canvas.getContext("2d");
       canvas.width = viewport.width;
@@ -404,6 +390,6 @@ function ThumbnailRenderer({ pdfDoc, pageNum }) {
       await page.render({ canvasContext: ctx, viewport }).promise;
     }
     renderThumb();
-  }, [pdfDoc, pageNum]);
+  }, [pdfDoc, pageNum, rotation]);
   return <canvas ref={thumbRef} className={styles.thumbnailCanvas} />;
 }

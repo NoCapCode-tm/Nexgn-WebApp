@@ -9,7 +9,8 @@ import {
   XCircle,
   FileText,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Trash2
 } from "lucide-react";
 
 import Layout from "../../components/Layout/Layout";
@@ -30,7 +31,6 @@ const SignRequest = () => {
   const [filterOpen, setFilterOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
@@ -38,32 +38,21 @@ const SignRequest = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      const clickedInside = filterRefs.current.some(
-        (ref) => ref && ref.contains(event.target)
-      );
-      if (!clickedInside) {
-        setFilterOpen(false);
-      }
+      const clickedInside = filterRefs.current.some((ref) => ref && ref.contains(event.target));
+      if (!clickedInside) setFilterOpen(false);
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   useEffect(() => {
     const fetchSignRequests = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${API_URL}sign/getrequests`, {
-          withCredentials: true,
-        });
+        const response = await axios.get(`${API_URL}sign/getrequests`, { withCredentials: true });
         setSignRequests(response?.data?.message || []);
       } catch (error) {
-        toast.error(
-          error.response?.data?.message ||
-          "Something Went Wrong"
-        );
+        toast.error(error.response?.data?.message || "Something Went Wrong");
       } finally {
         setLoading(false);
       }
@@ -75,15 +64,10 @@ const SignRequest = () => {
     const fetchSignature = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${API_URL}sign/getsignature`, {
-          withCredentials: true,
-        });
+        const response = await axios.get(`${API_URL}sign/getsignature`, { withCredentials: true });
         setSignatures(response?.data?.message || []);
       } catch (error) {
-         toast.error(
-                  error.response?.data?.message ||
-                  "Something Went Wrong"
-                );
+        toast.error(error.response?.data?.message || "Something Went Wrong");
       } finally {
         setLoading(false);
       }
@@ -94,20 +78,11 @@ const SignRequest = () => {
   const handleCancelRequest = async (id) => {
     try {
       setLoading(true);
-      await axios.get(`${API_URL}sign/requestcancel/${id}`, {
-        withCredentials: true,
-      });
-      setSignRequests((previous) =>
-        previous.map((request) =>
-          request._id === id ? { ...request, overallStatus: "cancelled" } : request
-        )
-      );
+      await axios.get(`${API_URL}sign/requestcancel/${id}`, { withCredentials: true });
+      setSignRequests((prev) => prev.map((req) => req._id === id ? { ...req, overallStatus: "cancelled" } : req));
+      toast.success("Request cancelled successfully");
     } catch (error) {
-      console.log("Something went wrong while cancelling sign request", error?.response?.data || error.message);
-       toast.error(
-                error.response?.data?.message ||
-                "Something Went Wrong"
-              );
+      toast.error(error.response?.data?.message || "Something Went Wrong");
     } finally {
       setLoading(false);
     }
@@ -116,22 +91,16 @@ const SignRequest = () => {
   const handleDeleteRequest = async (id) => {
     try {
       setLoading(true);
-      await axios.get(`${API_URL}sign/requestdelete/${id}`, {
-        withCredentials: true,
-      });
-      setSignRequests((previous) => previous.filter((request) => request._id !== id));
+      await axios.get(`${API_URL}sign/requestdelete/${id}`, { withCredentials: true });
+      setSignRequests((prev) => prev.filter((req) => req._id !== id));
+      toast.success("Request moved to bin successfully");
     } catch (error) {
-      console.log("Something went wrong while deleting sign request", error?.response?.data || error.message);
-       toast.error(
-                error.response?.data?.message ||
-                "Something Went Wrong"
-              );
+      toast.error(error.response?.data?.message || "Something Went Wrong");
     } finally {
       setLoading(false);
     }
   };
 
-  // 1. Filter Data
   const filteredRequests = signRequests.filter((request) => {
     const title = request?.documentId?.title || "";
     const signer = request?.recipient?.userId?.name || request?.recipient?.userId?.email || "";
@@ -143,12 +112,8 @@ const SignRequest = () => {
     return matchesSearch && matchesStatus;
   });
 
-  // Reset to page 1 whenever filters change
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [search, selectedStatus]);
+  useEffect(() => { setCurrentPage(1); }, [search, selectedStatus]);
 
-  // 2. Pagination Logic
   const totalItems = filteredRequests.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -167,19 +132,8 @@ const SignRequest = () => {
         />
       </div>
 
-      <div
-        className={styles.filterWrapper}
-        ref={(element) => {
-          if (element && !filterRefs.current.includes(element)) {
-            filterRefs.current.push(element);
-          }
-        }}
-      >
-        <button
-          type="button"
-          className={styles.filterButton}
-          onClick={() => setFilterOpen((previous) => !previous)}
-        >
+      <div className={styles.filterWrapper} ref={(el) => { if (el && !filterRefs.current.includes(el)) filterRefs.current.push(el); }}>
+        <button type="button" className={styles.filterButton} onClick={() => setFilterOpen(!filterOpen)}>
           <SlidersHorizontal size={17} strokeWidth={1.8} />
           <span className={styles.filterText}>Filter</span>
         </button>
@@ -188,11 +142,7 @@ const SignRequest = () => {
           <div className={styles.filterDropdown}>
             <div className={styles.filterGroup}>
               <label className={styles.filterLabel}>Status</label>
-              <select
-                className={styles.filterSelect}
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-              >
+              <select className={styles.filterSelect} value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
                 <option value="All">All</option>
                 <option value="pending">Pending</option>
                 <option value="Viewed">Viewed</option>
@@ -202,14 +152,7 @@ const SignRequest = () => {
               </select>
             </div>
             <div className={styles.filterDivider} />
-            <button
-              type="button"
-              className={styles.resetButton}
-              onClick={() => {
-                setSelectedStatus("All");
-                setFilterOpen(false);
-              }}
-            >
+            <button type="button" className={styles.resetButton} onClick={() => { setSelectedStatus("All"); setFilterOpen(false); }}>
               Reset Filters
             </button>
           </div>
@@ -221,11 +164,7 @@ const SignRequest = () => {
   return (
     <Layout className={styles.signRequestPage} data-tour="signers">
       <>
-        <Topbar
-          title="Sign Requests"
-          subtitle="Manage and track all your signature requests"
-          actionButton={filterComponent}
-        />
+        <Topbar title="Sign Requests" subtitle="Manage and track all your signature requests" actionButton={filterComponent} />
 
         <div className={styles.mobilePageHeader}>
           <div className={styles.mobileHeaderTop}>
@@ -237,8 +176,6 @@ const SignRequest = () => {
           </div>
           <hr className={styles.mobileDivider} />
         </div>
-
-        <div className={styles.mobileSectionTitle}>Sign Requests</div>
 
         <section className={styles.section}>
           <div className={styles.tableContainer}>
@@ -256,34 +193,17 @@ const SignRequest = () => {
                 {loading ? (
                   Array.from({ length: Math.min(itemsPerPage, 5) }).map((_, idx) => (
                     <tr key={idx} className={styles.tableRow}>
-                      <td>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                          <Skeleton width="20px" height="20px" />
-                          <Skeleton width="180px" height="14px" />
-                        </div>
-                      </td>
+                      <td><div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><Skeleton width="20px" height="20px" /><Skeleton width="180px" height="14px" /></div></td>
                       <td><Skeleton width="140px" height="14px" /></td>
                       <td><Skeleton width="80px" height="22px" borderRadius="5px" /></td>
                       <td><Skeleton width="90px" height="14px" /></td>
-                      <td style={{ textAlign: 'center' }}>
-                        <Skeleton width="34px" height="34px" borderRadius="6px" style={{ display: 'inline-block' }} />
-                      </td>
+                      <td style={{ textAlign: 'center' }}><Skeleton width="34px" height="34px" borderRadius="6px" style={{ display: 'inline-block' }} /></td>
                     </tr>
                   ))
                 ) : (
                   currentItems.map((request) => {
-                    const sign = signature.find(
-                      (item) => item?.requestId?._id === request._id || item?.requestId === request._id
-                    );
-                    return (
-                      <SignRequestRow 
-                        key={request._id} 
-                        request={request} 
-                        sign={sign} 
-                        onCancel={handleCancelRequest} 
-                        onDelete={handleDeleteRequest}
-                      />
-                    );
+                    const sign = signature.find((item) => item?.requestId?._id === request._id || item?.requestId === request._id);
+                    return <SignRequestRow key={request._id} request={request} sign={sign} onCancel={handleCancelRequest} onDelete={handleDeleteRequest} />;
                   })
                 )}
               </tbody>
@@ -291,53 +211,25 @@ const SignRequest = () => {
 
             {!loading && totalItems === 0 && (
               <div className={styles.emptyStateContainer}>
-                <div className={styles.emptyStateIcon}>
-                  <FileText size={22} strokeWidth={1.5} />
-                </div>
+                <div className={styles.emptyStateIcon}><FileText size={22} strokeWidth={1.5} /></div>
                 <h3>No sign requests found</h3>
                 <p>There are no signature requests matching your current filters.</p>
               </div>
             )}
 
-            {/* Pagination Footer */}
             {!loading && totalItems > 0 && (
               <div className={styles.paginationWrapper}>
                 <div className={styles.paginationLeft}>
                   <span className={styles.paginationLabel}>Rows per page:</span>
-                  <select 
-                    className={styles.paginationSelect}
-                    value={itemsPerPage}
-                    onChange={(e) => {
-                      setItemsPerPage(Number(e.target.value));
-                      setCurrentPage(1);
-                    }}
-                  >
-                    <option value={5}>5</option>
-                    <option value={10}>10</option>
-                    <option value={20}>20</option>
-                    <option value={50}>50</option>
+                  <select className={styles.paginationSelect} value={itemsPerPage} onChange={(e) => { setItemsPerPage(Number(e.target.value)); setCurrentPage(1); }}>
+                    <option value={5}>5</option><option value={10}>10</option><option value={20}>20</option><option value={50}>50</option>
                   </select>
                 </div>
-                
                 <div className={styles.paginationRight}>
-                  <span className={styles.paginationInfo}>
-                    {indexOfFirstItem + 1} - {Math.min(indexOfLastItem, totalItems)} of {totalItems}
-                  </span>
+                  <span className={styles.paginationInfo}>{indexOfFirstItem + 1} - {Math.min(indexOfLastItem, totalItems)} of {totalItems}</span>
                   <div className={styles.paginationControls}>
-                    <button 
-                      className={styles.pageButton} 
-                      disabled={currentPage === 1}
-                      onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                    >
-                      <ChevronLeft size={18} />
-                    </button>
-                    <button 
-                      className={styles.pageButton} 
-                      disabled={currentPage === totalPages}
-                      onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                    >
-                      <ChevronRight size={18} />
-                    </button>
+                    <button className={styles.pageButton} disabled={currentPage === 1} onClick={() => setCurrentPage(p => Math.max(1, p - 1))}><ChevronLeft size={18} /></button>
+                    <button className={styles.pageButton} disabled={currentPage === totalPages} onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}><ChevronRight size={18} /></button>
                   </div>
                 </div>
               </div>
@@ -355,13 +247,13 @@ const SignRequestRow = ({ request, sign, onCancel, onDelete }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setMenuOpen(false);
-      }
+      if (menuRef.current && !menuRef.current.contains(event.target)) setMenuOpen(false);
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const isCompleted = request?.overallStatus && ["completed", "signed", "expired", "cancelled"].includes(request.overallStatus.toLowerCase());
 
   return (
     <tr className={styles.tableRow} >
@@ -369,16 +261,6 @@ const SignRequestRow = ({ request, sign, onCancel, onDelete }) => {
         <div className={styles.documentInfo}>
           <FileText size={21} strokeWidth={1.8} className={styles.documentIcon} />
           <span className={styles.documentTitle}>{request?.documentId?.title || "Untitled Document"}</span>
-          <span className={`${styles.mobileStatus} ${
-              request?.overallStatus === "completed" ? styles.statusCompleted
-                : request?.overallStatus === "Expired" ? styles.statusExpired
-                : request?.overallStatus === "cancelled" ? styles.statusCancelled
-                : request?.overallStatus === "Viewed" ? styles.statusViewed
-                : styles.statusPending
-            }`}
-          >
-            {request?.overallStatus || "pending"}
-          </span>
         </div>
       </td>
       <td className={styles.signerCell}>
@@ -386,22 +268,13 @@ const SignRequestRow = ({ request, sign, onCancel, onDelete }) => {
         <span className={styles.signerValue}>{request?.recipient?.userId?.name || request?.recipient?.userId?.email || "—"}</span>
       </td>
       <td className={styles.statusCell}>
-        <span className={`${styles.statusBadge} ${
-            request?.overallStatus === "completed" ? styles.statusCompleted
-              : request?.overallStatus === "Expired" ? styles.statusExpired
-              : request?.overallStatus === "cancelled" ? styles.statusCancelled
-              : request?.overallStatus === "Viewed" ? styles.statusViewed
-              : styles.statusPending
-          }`}
-        >
+        <span className={`${styles.statusBadge} ${request?.overallStatus === "completed" ? styles.statusCompleted : request?.overallStatus === "Expired" ? styles.statusExpired : request?.overallStatus === "cancelled" ? styles.statusCancelled : request?.overallStatus === "Viewed" ? styles.statusViewed : styles.statusPending}`}>
           {request?.overallStatus || "pending"}
         </span>
       </td>
       <td className={styles.expiryCell}>
         <span className={styles.mobileLabel}>Expiry</span>
-        <span className={styles.expiryValue}>
-          {request?.expiresat ? new Date(request.expiresat).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }) : "—"}
-        </span>
+        <span className={styles.expiryValue}>{request?.expiresat ? new Date(request.expiresat).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }) : "—"}</span>
       </td>
       <td className={styles.actionCell} ref={menuRef}>
         <button type="button" className={styles.menuButton} onClick={() => setMenuOpen(!menuOpen)}>
@@ -410,7 +283,7 @@ const SignRequestRow = ({ request, sign, onCancel, onDelete }) => {
         {menuOpen && (
           <div className={styles.actionMenu}>
             
-            {/* If Completed: Show Downloads ONLY */}
+            {/* Show Downloads ONLY if Completed */}
             {request?.overallStatus === "completed" && (
               <>
                 <a href={sign?.certificateId?.signeddoc || "#"} className={styles.actionItem} onClick={() => setMenuOpen(false)} target="_blank" rel="noopener noreferrer">
@@ -422,19 +295,18 @@ const SignRequestRow = ({ request, sign, onCancel, onDelete }) => {
               </>
             )}
             
-            {/* If Pending or Viewed: Show Cancel Request */}
-            {request?.signerToken && ["pending", "Viewed"].includes(request?.overallStatus) && (
+            {/* Cancel Request - HIDDEN if completed/expired/cancelled */}
+            {!isCompleted && request?.signerToken && (
                <button type="button" className={`${styles.actionItem} ${styles.dangerItem}`} onClick={() => { setMenuOpen(false); onCancel(request?.signerToken); }}>
                  <XCircle size={14} /><span>Cancel Request</span>
                </button>
             )}
 
-            {/* If Cancelled: Show Delete Request */}
-            {request?.overallStatus === "cancelled" && (
-               <button type="button" className={`${styles.actionItem} ${styles.dangerItem}`} onClick={() => { setMenuOpen(false); onDelete(request?._id); }}>
-                 <XCircle size={14} /><span>Delete Request</span>
-               </button>
-            )}
+            {/* Move to Bin - ALWAYS VISIBLE for all states */}
+            <button type="button" className={`${styles.actionItem} ${styles.dangerItem}`} onClick={() => { setMenuOpen(false); onDelete(request?._id); }}>
+              <Trash2 size={14} /><span>Move to Bin</span>
+            </button>
+            
           </div>
         )}
       </td>
